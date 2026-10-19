@@ -61,19 +61,54 @@ def _is_full_mode(q):
     return len(shape) == 2 and shape[0] == shape[1]
 
 
-def _factor(rows, full):
-    """QR-factorise a dense list-of-lists matrix, preserving `full`/economic."""
+def _factor(rows, full, n_cols=None):
+    """QR-factorise a dense list-of-lists matrix, preserving `full`/economic.
+
+    `n_cols` 在调用者已经把行/列删空时尤其重要：原列数仍要传给 R，否则
+    `qr_delete` 把 1xN 删成 0 行时 R 会被错误地当作 0 列。
+    """
     m = len(rows)
-    n = len(rows[0]) if m else 0
-    if m == 0 or n == 0:
-        # Nothing to triangularise; hand back the empty factors with the shapes
-        # the caller's mode implies.
-        empty_q = [[] for _ in range(m)] if full or m else []
-        return np.asarray(empty_q), np.asarray(rows)
+    n = len(rows[0]) if m else (n_cols or 0)
+    if m == 0:
+        # 行被删空：Q 是 (0, 0)，R 保留原来的列数。
+        q = np.asarray(np.ndarray(shape=(0, 0)))
+        r = np.asarray(np.ndarray(shape=(0, n)))
+        return q, r
+    if n == 0:
+        # 列被删空：Q 仍是 m 行（full 时 m 列，economic 时 0 列），R 有 0 列。
+        q_cols = m if full else 0
+        q = np.asarray(np.ndarray(shape=(m, q_cols)))
+        r = np.asarray(np.ndarray(shape=(q_cols, 0)))
+        return q, r
 
     mode = 'complete' if full else 'reduced'
     q, r = np.linalg.qr(np.asarray(rows), mode=mode)
     return np.asarray(q), np.asarray(r)
+
+
+def _has_nonfinite(arr):
+    """Whether `arr` holds a NaN or an infinity.
+
+    SciPy 的 `check_finite=True`（默认）要求输入有限，否则抛 ValueError。
+    """
+    stack = [np.asarray(arr).tolist()]
+    while stack:
+        value = stack.pop()
+        if isinstance(value, (list, tuple)):
+            stack.extend(value)
+        elif isinstance(value, complex):
+            for part in (value.real, value.imag):
+                if part != part or part in (float('inf'), float('-inf')):
+                    return True
+        elif isinstance(value, float):
+            if value != value or value in (float('inf'), float('-inf')):
+                return True
+    return False
+
+
+def _reject_nonfinite(*arrays):
+    if any(_has_nonfinite(arr) for arr in arrays):
+        raise ValueError('array must not contain infs or NaNs')
 
 
 def _check_index(index, limit, name):
@@ -121,6 +156,8 @@ def qr_update(Q, R, u, v, overwrite_qruv=False, check_finite=True):
     Recomputes ``qr(A + U V**H)`` rather than applying Givens rotations to the
     existing factors, so it is ``O(m n^2)`` where the extension was ``O(m n)``.
     """
+    if check_finite:
+        _reject_nonfinite(Q, R, u, v)
     full = _is_full_mode(Q)
     rows = _matrix(np.matmul(np.asarray(Q), np.asarray(R)))
 
@@ -191,6 +228,8 @@ def qr_insert(Q, R, u, k, which='row', rcond=None, overwrite_qru=False,
     """
     if which not in ('row', 'col'):
         raise ValueError("which must be either 'row' or 'col'")
+    if check_finite:
+        _reject_nonfinite(Q, R, u)
 
     full = _is_full_mode(Q)
     rows = _matrix(np.matmul(np.asarray(Q), np.asarray(R)))
@@ -262,8 +301,11 @@ def qr_delete(Q, R, k, p=1, which='row', overwrite_qr=False,
     """
     if which not in ('row', 'col'):
         raise ValueError("which must be either 'row' or 'col'")
-    if p < 0:
-        raise ValueError('p must be non-negative')
+    # `p` 必须为正：0 与负数都不合法（SciPy 的 "must be positive/nonzero"）。
+    if p <= 0:
+        raise ValueError('p must be positive')
+    if check_finite:
+        _reject_nonfinite(Q, R)
 
     full = _is_full_mode(Q)
     rows = _matrix(np.matmul(np.asarray(Q), np.asarray(R)))
@@ -281,7 +323,7 @@ def qr_delete(Q, R, k, p=1, which='row', overwrite_qr=False,
                 f'cannot delete {p} columns starting at {k} from {n} columns')
         rows = [row[:k] + row[k + p:] for row in rows]
 
-    return _factor(rows, full)
+    return _factor(rows, full, n_cols=n)
 
 
 def _check_rcond(q, u, rcond):

@@ -155,6 +155,20 @@ def _nan_safe_isnan(x):
         return rsnumpy.zeros(x.shape, dtype=bool)
 
 
+def _broadcast_pair(actual, desired):
+    """按 NumPy 语义广播两组值；不可广播时返回 ``None``。
+
+    NumPy 的比较断言是先广播再逐元素比，因此
+    ``assert_allclose(a[mask], 0.0)`` 这类“数组 vs 标量”的写法完全合法。
+    """
+    if actual.shape == desired.shape:
+        return actual, desired
+    try:
+        return rsnumpy.broadcast_arrays(actual, desired)
+    except Exception:
+        return None
+
+
 def assert_allclose(actual, desired, rtol=1e-07, atol=0,
                     equal_nan=True, err_msg='', verbose=True):
     """Like :func:`numpy.testing.assert_allclose`."""
@@ -162,7 +176,10 @@ def assert_allclose(actual, desired, rtol=1e-07, atol=0,
     desired = _as(desired)
     header = f"Not equal to tolerance rtol={rtol:g}, atol={atol:g}"
     if actual.shape != desired.shape:
-        raise AssertionError(_shape_msg(actual, desired, header))
+        broadcast = _broadcast_pair(actual, desired)
+        if broadcast is None:
+            raise AssertionError(_shape_msg(actual, desired, header))
+        actual, desired = broadcast
     if actual.size == 0:
         return
     with rsnumpy.errstate(invalid='ignore', divide='ignore'):
@@ -182,7 +199,10 @@ def assert_array_equal(actual, desired, err_msg='', verbose=True, strict=False):
     desired = _as(desired)
     header = "Arrays are not equal"
     if actual.shape != desired.shape:
-        raise AssertionError(_shape_msg(actual, desired, header))
+        broadcast = _broadcast_pair(actual, desired)
+        if broadcast is None:
+            raise AssertionError(_shape_msg(actual, desired, header))
+        actual, desired = broadcast
     with rsnumpy.errstate(invalid='ignore'):
         eq = actual == desired
     if not strict:
