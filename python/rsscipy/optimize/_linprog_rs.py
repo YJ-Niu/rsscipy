@@ -20,7 +20,7 @@ References
 import rsnumpy as np
 from rsnumpy.linalg import LinAlgError
 
-from scipy.linalg import solve
+from rsscipy.linalg import solve
 from ._optimize import _check_unknown_options
 from ._bglu_dense import LU
 from ._bglu_dense import BGLU as BGLU

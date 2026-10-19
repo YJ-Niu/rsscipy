@@ -339,7 +339,7 @@ class _coo_base(_data_matrix, _minmax_mixin):
         Examples
         --------
         >>> from rsnumpy import array
-        >>> from scipy.sparse import coo_array
+        >>> from rsscipy.sparse import coo_array
         >>> row  = array([0, 0, 1, 3, 1, 0, 0])
         >>> col  = array([0, 2, 1, 3, 1, 0, 0])
         >>> data = array([1, 1, 1, 1, 1, 1, 1])
@@ -385,7 +385,7 @@ class _coo_base(_data_matrix, _minmax_mixin):
         Examples
         --------
         >>> from rsnumpy import array
-        >>> from scipy.sparse import coo_array
+        >>> from rsscipy.sparse import coo_array
         >>> row  = array([0, 0, 1, 3, 1, 0, 0])
         >>> col  = array([0, 2, 1, 3, 1, 0, 0])
         >>> data = array([1, 1, 1, 1, 1, 1, 1])
@@ -1105,7 +1105,7 @@ class _coo_base(_data_matrix, _minmax_mixin):
         --------
 
         >>> import rsnumpy as np
-        >>> from scipy.sparse import coo_array
+        >>> from rsscipy.sparse import coo_array
         >>> A = coo_array([[1, 2, 0], [0, 0, 3], [4, 0, 5]])
         >>> v = np.array([1, 0, -1])
         >>> A.dot(v)
@@ -1248,7 +1248,7 @@ class _coo_base(_data_matrix, _minmax_mixin):
         Examples
         --------
         >>> import rsnumpy as np
-        >>> import scipy.sparse
+        >>> import rsscipy.sparse
         >>> A = scipy.sparse.coo_array([[[2, 3], [0, 0]], [[0, 1], [0, 5]]])
         >>> A.shape
         (2, 2, 2)
@@ -1679,7 +1679,7 @@ def isspmatrix_coo(x):
 
     Examples
     --------
-    >>> from scipy.sparse import coo_array, coo_matrix, csr_matrix, isspmatrix_coo
+    >>> from rsscipy.sparse import coo_array, coo_matrix, csr_matrix, isspmatrix_coo
     >>> isspmatrix_coo(coo_matrix([[5]]))  # doctest: +SKIP
     True
     >>> isspmatrix_coo(coo_array([[5]]))  # doctest: +SKIP
@@ -1786,7 +1786,7 @@ class coo_array(_coo_base, sparray):
 
     >>> # Constructing an empty sparse array
     >>> import rsnumpy as np
-    >>> from scipy.sparse import coo_array
+    >>> from rsscipy.sparse import coo_array
     >>> coo_array((3, 4), dtype=np.int8).toarray()
     array([[0, 0, 0, 0],
            [0, 0, 0, 0],
@@ -1913,7 +1913,7 @@ class coo_matrix(spmatrix, _coo_base):
 
     >>> # Constructing an empty matrix
     >>> import rsnumpy as np
-    >>> from scipy.sparse import coo_matrix
+    >>> from rsscipy.sparse import coo_matrix
     >>> coo_matrix((3, 4), dtype=np.int8).toarray()
     array([[0, 0, 0, 0],
            [0, 0, 0, 0],

@@ -2,7 +2,7 @@
 import math
 
 import rsnumpy as np
-import scipy.linalg
+import rsscipy.linalg
 from ._trustregion import (_minimize_trust_region, BaseQuadraticSubproblem)
 
 __all__ = []

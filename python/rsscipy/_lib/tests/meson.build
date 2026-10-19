@@ -19,6 +19,6 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/_lib/tests',
+  subdir: 'rsscipy/_lib/tests',
   install_tag: 'tests'
 )

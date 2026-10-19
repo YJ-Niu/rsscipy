@@ -3,7 +3,7 @@
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose
-from scipy.special._ufuncs import (
+from rsscipy.special._ufuncs import (
     _iv_ratio as iv_ratio,
     _iv_ratio_c as iv_ratio_c,
     _iv_ratioinv as iv_ratioinv,

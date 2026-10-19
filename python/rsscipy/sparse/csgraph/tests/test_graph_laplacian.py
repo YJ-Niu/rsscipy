@@ -2,9 +2,9 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
 from pytest import raises as assert_raises
-from scipy import sparse
+from rsscipy import sparse
 
-from scipy.sparse import csgraph
+from rsscipy.sparse import csgraph
 
 
 def check_int_type(mat):

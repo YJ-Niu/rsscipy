@@ -3,10 +3,10 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_, assert_equal
 
-from scipy.linalg import clarkson_woodruff_transform
-from scipy.linalg._sketches import _cwt_matrix
-from scipy.sparse import issparse, random_array
-from scipy.sparse.linalg import norm
+from rsscipy.linalg import clarkson_woodruff_transform
+from rsscipy.linalg._sketches import _cwt_matrix
+from rsscipy.sparse import issparse, random_array
+from rsscipy.sparse.linalg import norm
 
 
 class TestClarksonWoodruffTransform:

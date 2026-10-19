@@ -20,8 +20,8 @@
 from types import GenericAlias
 
 # SciPy imports.
-from scipy import linalg, special
-from scipy._lib._util import check_random_state
+from rsscipy import linalg, special
+from rsscipy._lib._util import check_random_state
 
 from rsnumpy import (asarray, atleast_2d, reshape, zeros, newaxis, exp, pi,
                    sqrt, ravel, power, atleast_1d, squeeze, sum, transpose,
@@ -165,7 +165,7 @@ class gaussian_kde:
     Generate some random two-dimensional data:
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> def measure(n):
     ...     "Measurement model, return two coupled measurements."
     ...     m1 = np.random.normal(size=n)
@@ -550,7 +550,7 @@ class gaussian_kde:
         Examples
         --------
         >>> import rsnumpy as np
-        >>> import scipy.stats as stats
+        >>> import rsscipy.stats as stats
         >>> x1 = np.array([-7, -5, 1, 4, 5.])
         >>> kde = stats.gaussian_kde(x1)
         >>> xs = np.linspace(-10, 10, num=50)

@@ -1,8 +1,8 @@
 import pytest
 
-from scipy.special._testutils import MissingModule, check_version
-from scipy.special._mptestutils import mp_assert_allclose
-from scipy.special._precompute.utils import lagrange_inversion
+from rsscipy.special._testutils import MissingModule, check_version
+from rsscipy.special._mptestutils import mp_assert_allclose
+from rsscipy.special._precompute.utils import lagrange_inversion
 
 try:
     import sympy

@@ -13,7 +13,7 @@ py3.extension_module('_nd_image',
   dependencies: [np_dep, ccallback_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/ndimage'
+  subdir: 'rsscipy/ndimage'
 )
 
 py3.extension_module('_ni_label',
@@ -22,7 +22,7 @@ py3.extension_module('_ni_label',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/ndimage'
+  subdir: 'rsscipy/ndimage'
 )
 
 py3.extension_module('_rank_filter_1d',
@@ -30,7 +30,7 @@ py3.extension_module('_rank_filter_1d',
   link_args: version_link_args,
   install: true,
   dependencies: np_dep,
-  subdir: 'scipy/ndimage'
+  subdir: 'rsscipy/ndimage'
 )
 
 py3.extension_module('_ctest',
@@ -38,7 +38,7 @@ py3.extension_module('_ctest',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/ndimage',
+  subdir: 'rsscipy/ndimage',
   install_tag: 'tests'
 )
 
@@ -48,7 +48,7 @@ py3.extension_module('_cytest',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/ndimage',
+  subdir: 'rsscipy/ndimage',
   install_tag: 'tests'
 )
 
@@ -69,7 +69,7 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/ndimage'
+  subdir: 'rsscipy/ndimage'
 )
 
 subdir('tests')

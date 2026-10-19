@@ -4,7 +4,7 @@ py3.extension_module('givens_elimination',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/optimize/_lsq'
+  subdir: 'rsscipy/optimize/_lsq'
 )
 
 py3.install_sources([
@@ -17,5 +17,5 @@ py3.install_sources([
     'trf.py',
     'trf_linear.py'
   ],
-  subdir: 'scipy/optimize/_lsq'
+  subdir: 'rsscipy/optimize/_lsq'
 )

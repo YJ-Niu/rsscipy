@@ -5,15 +5,15 @@ import warnings
 from typing import Literal
 
 import rsnumpy as np
-from scipy.fft import irfft, fft, ifft
-from scipy.linalg import (toeplitz, hankel, solve, LinAlgError, LinAlgWarning,
+from rsscipy.fft import irfft, fft, ifft
+from rsscipy.linalg import (toeplitz, hankel, solve, LinAlgError, LinAlgWarning,
                           lstsq)
-from scipy.signal._arraytools import _validate_fs
+from rsscipy.signal._arraytools import _validate_fs
 from .windows import get_window
 from . import _sigtools
 
-from scipy._lib._array_api import array_namespace, xp_size, xp_device, xp_result_device
-import scipy._external.array_api_extra as xpx
+from rsscipy._lib._array_api import array_namespace, xp_size, xp_device, xp_result_device
+import rsscipy._external.array_api_extra as xpx
 
 
 __all__ = ['kaiser_beta', 'kaiser_atten', 'kaiserord',
@@ -59,7 +59,7 @@ def kaiser_beta(a):
     in the stop band.  The Kaiser window parameter to be used in the
     window method is computed by ``kaiser_beta(65)``:
 
-    >>> from scipy.signal import kaiser_beta
+    >>> from rsscipy.signal import kaiser_beta
     >>> kaiser_beta(65)
     6.20426
 
@@ -107,7 +107,7 @@ def kaiser_atten(numtaps, width):
     the width is 9/(0.5*480) = 0.0375. The approximate attenuation (in dB)
     is computed as follows:
 
-    >>> from scipy.signal import kaiser_atten
+    >>> from rsscipy.signal import kaiser_atten
     >>> kaiser_atten(211, 0.0375)
     64.48099630593983
 
@@ -181,7 +181,7 @@ def kaiserord(ripple, width):
     signal is attenuated by at least 65 dB.
 
     >>> import rsnumpy as np
-    >>> from scipy.signal import kaiserord, firwin, freqz
+    >>> from rsscipy.signal import kaiserord, firwin, freqz
     >>> import matplotlib.pyplot as plt
     >>> fs = 1000.0
     >>> cutoff = 175
@@ -342,7 +342,7 @@ def firwin(numtaps, cutoff, *, width=None, window='hamming', pass_zero=True,
 
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
-    >>> import scipy.signal as signal
+    >>> import rsscipy.signal as signal
     ...
     >>> fs = 200  # sampling frequency and number of taps
     >>> f_c, width = 30, 20  # corner frequency (-6 dB gain)
@@ -382,7 +382,7 @@ def firwin(numtaps, cutoff, *, width=None, window='hamming', pass_zero=True,
 
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
-    >>> import scipy.signal as signal
+    >>> import rsscipy.signal as signal
     ...
     >>> fs = 200  # sampling frequency and number of taps
     >>> n, f_c = 40, 30  # number of taps and corner frequency (-6 dB gain)
@@ -415,7 +415,7 @@ def firwin(numtaps, cutoff, *, width=None, window='hamming', pass_zero=True,
 
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
-    >>> import scipy.signal as signal
+    >>> import rsscipy.signal as signal
     ...
     >>> fs, n = 200, 80  # sampling frequency and number of taps
     >>> cutoff = [40, 60]  # corner frequencies (-6 dB gain)
@@ -450,7 +450,7 @@ def firwin(numtaps, cutoff, *, width=None, window='hamming', pass_zero=True,
     >>> from itertools import product
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
-    >>> import scipy.signal as signal
+    >>> import rsscipy.signal as signal
     ...
     >>> cutoffs = [0.5, (.25, .75)]  # cutoff parameters
     >>> fg, axx = plt.subplots(4, 1, sharex='all', layout="constrained",
@@ -574,7 +574,7 @@ def firwin(numtaps, cutoff, *, width=None, window='hamming', pass_zero=True,
     return h
 
 
-# Original version of firwin2 from scipy ticket #457, submitted by "tash".
+# Original version of firwin2 from rsscipy ticket #457, submitted by "tash".
 #
 # Rewritten by Warren Weckesser, 2010.
 def firwin2(numtaps, freq, gain, *, nfreqs=None, window='hamming',
@@ -673,7 +673,7 @@ def firwin2(numtaps, freq, gain, *, nfreqs=None, window='hamming',
     A lowpass FIR filter with a response that is 1 on [0.0, 0.5], and
     that decreases linearly on [0.5, 1.0] from 1 to 0:
 
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> taps = signal.firwin2(150, [0.0, 0.5, 1.0], [1.0, 1.0, 0.0])
     >>> print(taps[72:78])
     [-0.02286961 -0.06362756  0.57310236  0.57310236 -0.06362756 -0.02286961]
@@ -861,7 +861,7 @@ def remez(numtaps, bands, desired, *, weight=None, type='bandpass',
     the response.
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
 
     >>> fs = 22050   # Sample rate, Hz
@@ -1038,7 +1038,7 @@ def firls(numtaps, bands, desired, *, weight=None, fs=None):
     and thus may overshoot depending on the parameters of our filter:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
     >>> fig, axs = plt.subplots(2)
     >>> fs = 10.0  # Hz
@@ -1300,7 +1300,7 @@ def minimum_phase(h,
     [0.2, 0.3] (assuming a Nyquist frequency of 1):
 
     >>> import rsnumpy as np
-    >>> from scipy.signal import remez, minimum_phase, freqz, group_delay
+    >>> from rsscipy.signal import remez, minimum_phase, freqz, group_delay
     >>> import matplotlib.pyplot as plt
     >>> freq = [0, 0.2, 0.3, 1.0]
     >>> desired = [1, 0]
@@ -1492,8 +1492,8 @@ def firwin_2d(hsize, window, *, fc=None, fs=2, circular=False,
     Generate a 5x5 low-pass filter with cutoff frequency 0.1:
 
     >>> import rsnumpy as np
-    >>> from scipy.signal import get_window
-    >>> from scipy.signal import firwin_2d
+    >>> from rsscipy.signal import get_window
+    >>> from rsscipy.signal import firwin_2d
     >>> hsize = (5, 5)
     >>> window = (("kaiser", 5.0), ("kaiser", 5.0))
     >>> fc = 0.1

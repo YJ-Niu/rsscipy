@@ -1,6 +1,6 @@
 import rsnumpy as np
 
-from scipy._lib._array_api import xp_capabilities
+from rsscipy._lib._array_api import xp_capabilities
 from .iterative import _get_atol_rtol
 from .utils import make_system
 
@@ -81,8 +81,8 @@ def tfqmr(A, b, x0=None, *, rtol=1e-5, atol=0., maxiter=None, M=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csc_array
-    >>> from scipy.sparse.linalg import tfqmr
+    >>> from rsscipy.sparse import csc_array
+    >>> from rsscipy.sparse.linalg import tfqmr
     >>> A = csc_array([[3, 2, 0], [1, -1, 0], [0, 5, 1]], dtype=float)
     >>> b = np.array([2, 4, -1], dtype=float)
     >>> x, exitCode = tfqmr(A, b, atol=0.0)

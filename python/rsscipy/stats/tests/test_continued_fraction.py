@@ -3,9 +3,9 @@ import math
 import pytest
 import rsnumpy as np
 
-from scipy._lib._array_api import array_namespace
-from scipy._lib._array_api_no_0d import xp_assert_close, xp_assert_less, xp_assert_equal
-from scipy.stats._continued_fraction import _continued_fraction
+from rsscipy._lib._array_api import array_namespace
+from rsscipy._lib._array_api_no_0d import xp_assert_close, xp_assert_less, xp_assert_equal
+from rsscipy.stats._continued_fraction import _continued_fraction
 
 skip_xp_torchmeta_continued_fraction = pytest.mark.skip_xp_backends(
     skip_meta=True,

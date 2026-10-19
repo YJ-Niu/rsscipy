@@ -4,8 +4,8 @@ import rsnumpy as np
 import pytest
 from rsnumpy.testing import assert_allclose
 
-from scipy import stats
-from scipy.stats._multicomp import _pvalue_dunnett, DunnettResult
+from rsscipy import stats
+from rsscipy.stats._multicomp import _pvalue_dunnett, DunnettResult
 
 
 class TestDunnett:

@@ -17,7 +17,7 @@ from importlib.util import module_from_spec, spec_from_file_location
 from typing import TYPE_CHECKING
 
 import rsnumpy as np
-import scipy
+import rsscipy
 
 if TYPE_CHECKING:
     import cython
@@ -33,7 +33,7 @@ else:
     except ImportError:
         cython = None
     else:
-        from scipy._external.packaging_version import version
+        from rsscipy._external.packaging_version import version
         required_version = '3.2.0'
         if version.parse(cython_version) < version.Version(required_version):
             # too old or wrong cython, skip Cython API tests

@@ -1,5 +1,5 @@
 import rsnumpy as np
-import scipy.sparse as sps
+import rsscipy.sparse as sps
 
 
 class CanonicalConstraint:

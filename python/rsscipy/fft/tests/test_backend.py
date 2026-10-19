@@ -1,9 +1,9 @@
 from functools import partial
 
 import rsnumpy as np
-import scipy.fft
-from scipy.fft import _fftlog, _duccfft, set_backend
-from scipy.fft.tests import mock_backend
+import rsscipy.fft
+from rsscipy.fft import _fftlog, _duccfft, set_backend
+from rsscipy.fft.tests import mock_backend
 
 from rsnumpy.testing import assert_allclose, assert_equal
 import pytest

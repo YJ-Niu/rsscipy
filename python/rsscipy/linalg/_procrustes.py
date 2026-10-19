@@ -3,9 +3,9 @@ Solve the orthogonal Procrustes problem.
 
 """
 
-from scipy._lib._util import _apply_over_batch
+from rsscipy._lib._util import _apply_over_batch
 from ._decomp_svd import svd
-from scipy._lib._array_api import array_namespace, xp_capabilities, _asarray, is_numpy
+from rsscipy._lib._array_api import array_namespace, xp_capabilities, _asarray, is_numpy
 
 
 __all__ = ['orthogonal_procrustes']
@@ -66,7 +66,7 @@ def orthogonal_procrustes(A, B, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import orthogonal_procrustes
+    >>> from rsscipy.linalg import orthogonal_procrustes
     >>> A = np.array([[ 2,  0,  1], [-2,  0,  0]])
 
     Flip the order of columns and check for the anti-diagonal mapping

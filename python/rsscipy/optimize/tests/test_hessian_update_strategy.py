@@ -6,7 +6,7 @@ import pytest
 from rsnumpy.linalg import norm
 from rsnumpy.testing import (TestCase, assert_array_almost_equal,
                            assert_array_equal, assert_array_less)
-from scipy.optimize import (BFGS, SR1)
+from rsscipy.optimize import (BFGS, SR1)
 
 
 class Rosenbrock:

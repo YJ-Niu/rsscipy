@@ -6,7 +6,7 @@ import pytest
 from pytest import raises as assert_raises, warns as assert_warns
 import rsnumpy as np
 
-from scipy.optimize import root
+from rsscipy.optimize import root
 
 
 class TestRoot:

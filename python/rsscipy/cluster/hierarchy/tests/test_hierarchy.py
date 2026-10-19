@@ -36,7 +36,7 @@ from rsnumpy.testing import assert_allclose, assert_equal, assert_array_equal, a
 import pytest
 from pytest import raises as assert_raises
 
-from scipy.cluster.hierarchy import (
+from rsscipy.cluster.hierarchy import (
     ClusterWarning, linkage, from_mlab_linkage, to_mlab_linkage,
     num_obs_linkage, inconsistent, cophenet, fclusterdata, fcluster,
     is_isomorphic, single, ward, leaders,
@@ -44,16 +44,16 @@ from scipy.cluster.hierarchy import (
     is_valid_linkage, is_valid_im, to_tree, leaves_list, dendrogram,
     set_link_color_palette, cut_tree, optimal_leaf_ordering,
     complete, average, weighted, centroid, median)
-from scipy.cluster.hierarchy._hierarchy import Heap
-from scipy.cluster.hierarchy._hierarchy_impl import (
+from rsscipy.cluster.hierarchy._hierarchy import Heap
+from rsscipy.cluster.hierarchy._hierarchy_impl import (
     _order_cluster_tree, _hierarchy, _EUCLIDEAN_METHODS, _LINKAGE_METHODS
 )
-from scipy.spatial.distance import pdist
-from scipy._lib._array_api import (
+from rsscipy.spatial.distance import pdist
+from rsscipy._lib._array_api import (
     eager_warns, make_xp_test_case, xp_assert_equal,
     xp_assert_close, make_xp_pytest_param, xp_copy_to_numpy
 )
-import scipy._external.array_api_extra as xpx
+import rsscipy._external.array_api_extra as xpx
 
 from threading import Lock
 

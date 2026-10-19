@@ -1,8 +1,8 @@
 from itertools import groupby
 from warnings import warn
 import rsnumpy as np
-from scipy._lib._array_api import xp_capabilities
-from scipy.sparse import find, csc_array, isspmatrix, csc_matrix
+from rsscipy._lib._array_api import xp_capabilities
+from rsscipy.sparse import find, csc_array, isspmatrix, csc_matrix
 
 
 EPS = np.finfo(float).eps

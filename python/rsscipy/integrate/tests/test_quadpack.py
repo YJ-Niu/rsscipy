@@ -6,17 +6,17 @@ from rsnumpy.testing import (assert_,
         assert_allclose, assert_array_less, assert_almost_equal, assert_equal)
 import pytest
 
-from scipy.integrate import quad, dblquad, tplquad, nquad
-from scipy.special import erf, erfc
-from scipy._lib._ccallback import LowLevelCallable
-from scipy._lib._array_api import make_xp_test_case
-from scipy._lib._testutils import IS_WASM
+from rsscipy.integrate import quad, dblquad, tplquad, nquad
+from rsscipy.special import erf, erfc
+from rsscipy._lib._ccallback import LowLevelCallable
+from rsscipy._lib._array_api import make_xp_test_case
+from rsscipy._lib._testutils import IS_WASM
 
 import ctypes
 import ctypes.util
-from scipy._lib._ccallback_c import sine_ctypes
+from rsscipy._lib._ccallback_c import sine_ctypes
 
-import scipy.integrate._test_multivariate as clib_test
+import rsscipy.integrate._test_multivariate as clib_test
 
 
 def assert_quad(value_and_err, tabled_value, error_tolerance=1.5e-8):

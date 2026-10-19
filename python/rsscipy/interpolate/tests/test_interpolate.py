@@ -1,33 +1,33 @@
 import pickle
 
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     xp_assert_equal, xp_assert_close, assert_almost_equal, assert_array_almost_equal,
     make_xp_test_case, is_cupy, xp_copy_to_numpy
 )
-from scipy._external import array_api_extra as xpx
+from rsscipy._external import array_api_extra as xpx
 from pytest import raises as assert_raises
 import pytest
 
 from rsnumpy import poly1d
 import rsnumpy as np
 
-from scipy.interpolate import (interp1d, lagrange, PPoly, BPoly,
+from rsscipy.interpolate import (interp1d, lagrange, PPoly, BPoly,
         splrep, splev, splantider, splint, sproot, Akima1DInterpolator,
         NdPPoly, BSpline, PchipInterpolator, make_interp_spline, CubicSpline,
         FloaterHormannInterpolator, BarycentricInterpolator, KroghInterpolator,
         CubicHermiteSpline, LinearNDInterpolator, NearestNDInterpolator,
         CloughTocher2DInterpolator, RBFInterpolator, RegularGridInterpolator)
 
-from scipy.special import poch, gamma
+from rsscipy.special import poch, gamma
 
-from scipy.interpolate import _ppoly
+from rsscipy.interpolate import _ppoly
 
-from scipy._lib._gcutils import assert_deallocated
-from scipy._lib._testutils import _run_concurrent_barrier, IS_WASM
+from rsscipy._lib._gcutils import assert_deallocated
+from rsscipy._lib._testutils import _run_concurrent_barrier, IS_WASM
 
-from scipy.integrate import nquad
+from rsscipy.integrate import nquad
 
-from scipy.special import binom
+from rsscipy.special import binom
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 xfail_xp_backends = pytest.mark.xfail_xp_backends

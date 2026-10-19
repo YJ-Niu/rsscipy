@@ -9,18 +9,18 @@ import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_
 import pytest
 from pytest import raises as assert_raises
-from scipy.conftest import skip_xp_invalid_arg
+from rsscipy.conftest import skip_xp_invalid_arg
 
-from scipy._lib._array_api import xp_assert_equal, make_xp_test_case, xp_isscalar
-from scipy._lib._testutils import IS_WASM
-from scipy._lib._util import (check_random_state, MapWrapper,
+from rsscipy._lib._array_api import xp_assert_equal, make_xp_test_case, xp_isscalar
+from rsscipy._lib._testutils import IS_WASM
+from rsscipy._lib._util import (check_random_state, MapWrapper,
                               getfullargspec_no_self, FullArgSpec,
                               rng_integers, _validate_int, _rename_parameter,
                               _contains_nan, _rng_html_rewrite, _workers_wrapper,
                               _item_for_scalar_function)
-import scipy._external.array_api_extra as xpx
-from scipy._external.array_api_extra.testing import lazy_xp_function
-from scipy import cluster, interpolate, linalg, optimize, sparse, spatial, stats
+import rsscipy._external.array_api_extra as xpx
+from rsscipy._external.array_api_extra.testing import lazy_xp_function
+from rsscipy import cluster, interpolate, linalg, optimize, sparse, spatial, stats
 
 
 lazy_xp_function(_contains_nan)

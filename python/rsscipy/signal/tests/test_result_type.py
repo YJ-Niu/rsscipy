@@ -2,7 +2,7 @@
 
 import rsnumpy as np
 
-from scipy.signal import (decimate,
+from rsscipy.signal import (decimate,
                           lfilter_zi,
                           lfiltic,
                           sos2tf,

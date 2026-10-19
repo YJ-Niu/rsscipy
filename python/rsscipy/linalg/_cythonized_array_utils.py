@@ -14,7 +14,7 @@ float64 arrays:
 
 import rsnumpy as np
 
-from scipy._lib._util import _apply_over_batch
+from rsscipy._lib._util import _apply_over_batch
 
 from ._array_utils_rs import is_complex_f64, is_sym_f64, is_sym_her_bytes
 
@@ -93,7 +93,7 @@ def issymmetric(a, atol=None, rtol=None):
     Examples
     --------
     >>> import numpy as np
-    >>> from scipy.linalg import issymmetric
+    >>> from rsscipy.linalg import issymmetric
     >>> A = np.arange(9).reshape(3, 3)
     >>> A = A + A.T
     >>> issymmetric(A)
@@ -163,7 +163,7 @@ def ishermitian(a, atol=None, rtol=None):
     Examples
     --------
     >>> import numpy as np
-    >>> from scipy.linalg import ishermitian
+    >>> from rsscipy.linalg import ishermitian
     >>> A = np.arange(9).reshape(3, 3)
     >>> A = A + A.T
     >>> ishermitian(A)

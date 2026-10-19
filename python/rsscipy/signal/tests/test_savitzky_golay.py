@@ -1,15 +1,15 @@
 import pytest
 import rsnumpy as np
 
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     xp_assert_close, xp_assert_equal, xp_swapaxes, is_torch, make_xp_test_case,
     xp_copy_to_numpy, xp_device
 )
 
-from scipy.ndimage import convolve1d
+from rsscipy.ndimage import convolve1d
 
-from scipy.signal import savgol_coeffs, savgol_filter
-from scipy.signal._savitzky_golay import _polyder
+from rsscipy.signal import savgol_coeffs, savgol_filter
+from rsscipy.signal._savitzky_golay import _polyder
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 xfail_xp_backends = pytest.mark.xfail_xp_backends

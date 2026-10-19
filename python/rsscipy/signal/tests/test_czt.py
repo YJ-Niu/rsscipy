@@ -4,9 +4,9 @@
 A unit test module for czt.py
 '''
 import pytest
-from scipy._lib._array_api import xp_assert_close
-from scipy.fft import fft
-from scipy.signal import (czt, zoom_fft, czt_points, CZT, ZoomFFT)
+from rsscipy._lib._array_api import xp_assert_close
+from rsscipy.fft import fft
+from rsscipy.signal import (czt, zoom_fft, czt_points, CZT, ZoomFFT)
 import rsnumpy as np
 
 

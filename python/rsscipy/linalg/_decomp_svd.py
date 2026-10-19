@@ -1,15 +1,15 @@
 """SVD decomposition functions."""
 import rsnumpy as np
 
-from scipy._lib._util import _apply_over_batch, _deprecate_dtypes, HAS_ILP64
-from scipy._lib._array_api import array_namespace, xp_capabilities, xp_device
-import scipy._external.array_api_extra as xpx
+from rsscipy._lib._util import _apply_over_batch, _deprecate_dtypes, HAS_ILP64
+from rsscipy._lib._array_api import array_namespace, xp_capabilities, xp_device
+import rsscipy._external.array_api_extra as xpx
 from . import _batched_linalg
 
 # Local imports.
 from ._misc import LinAlgError, _datacopied
 from .lapack import _normalize_lapack_dtype, _ensure_aligned_and_native
-from scipy.linalg.lapack import get_lapack_funcs   # noqa: F401  (backwards compat)
+from rsscipy.linalg.lapack import get_lapack_funcs   # noqa: F401  (backwards compat)
 from ._decomp import _asarray_validated
 
 
@@ -103,7 +103,7 @@ def svd(a, full_matrices=True, compute_uv=True, overwrite_a=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import linalg
+    >>> from rsscipy import linalg
     >>> rng = np.random.default_rng()
     >>> m, n = 9, 6
     >>> a = rng.standard_normal((m, n)) + 1.j*rng.standard_normal((m, n))
@@ -255,7 +255,7 @@ def svdvals(a, overwrite_a=False, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import svdvals
+    >>> from rsscipy.linalg import svdvals
     >>> m = np.array([[1.0, 0.0],
     ...               [2.0, 3.0],
     ...               [1.0, 1.0],
@@ -295,7 +295,7 @@ def svdvals(a, overwrite_a=False, check_finite=True):
     create a random orthogonal matrix by using the ``rvs()`` method of
     `scipy.stats.ortho_group`.
 
-    >>> from scipy.stats import ortho_group
+    >>> from rsscipy.stats import ortho_group
     >>> orth = ortho_group.rvs(4)
     >>> svdvals(orth)
     array([ 1.,  1.,  1.,  1.])
@@ -336,7 +336,7 @@ def diagsvd(s, M, N):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import diagsvd
+    >>> from rsscipy.linalg import diagsvd
     >>> vals = np.array([1, 2, 3])  # The array representing the computed svd
     >>> diagsvd(vals, 3, 4)
     array([[1, 0, 0, 0],
@@ -393,7 +393,7 @@ def orth(A, rcond=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import orth
+    >>> from rsscipy.linalg import orth
     >>> A = np.array([[2, 0, 0], [0, 5, 0]])  # rank 2 array
     >>> orth(A)
     array([[0., 1.],
@@ -457,7 +457,7 @@ def null_space(A, rcond=None, *, overwrite_a=False, check_finite=True,
     1-D null space:
 
     >>> import rsnumpy as np
-    >>> from scipy.linalg import null_space
+    >>> from rsscipy.linalg import null_space
     >>> A = np.array([[1, 1], [1, 1]])
     >>> ns = null_space(A)
     >>> ns * np.copysign(1, ns[0,0])  # Remove the sign ambiguity of the vector
@@ -542,7 +542,7 @@ def subspace_angles(A, B):
     the subspace angle to be :math:`\frac{\pi}{2}`:
 
     >>> import rsnumpy as np
-    >>> from scipy.linalg import hadamard, subspace_angles
+    >>> from rsscipy.linalg import hadamard, subspace_angles
     >>> rng = np.random.default_rng()
     >>> H = hadamard(4)
     >>> print(H)

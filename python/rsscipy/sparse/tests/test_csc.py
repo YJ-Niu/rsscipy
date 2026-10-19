@@ -4,7 +4,7 @@ import platform
 
 import rsnumpy as np
 from rsnumpy.testing import assert_array_almost_equal, assert_
-from scipy.sparse import csr_matrix, csc_matrix, lil_array, csr_array, csc_array
+from rsscipy.sparse import csr_matrix, csc_matrix, lil_array, csr_array, csc_array
 
 import pytest
 

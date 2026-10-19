@@ -1,7 +1,7 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
 from pytest import raises as assert_raises
-from scipy.optimize import nnls
+from rsscipy.optimize import nnls
 import pytest
 
 

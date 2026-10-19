@@ -79,7 +79,7 @@ add_newdoc("bdtr",
     the probability `p` of heads for a single flip is 0.525.
     This is what ``bdtr(k, n, p)`` computes:
 
-    >>> from scipy.special import bdtr
+    >>> from rsscipy.special import bdtr
 
     >>> bdtr(5, 16, 0.525)
     np.float64(0.07281293895810999)
@@ -160,7 +160,7 @@ add_newdoc("bdtrc",
     probability `p` of heads in a single flip is 0.525.  This is what
     ``bdtrc(k, n, p)`` computes:
 
-    >>> from scipy.special import bdtrc
+    >>> from rsscipy.special import bdtrc
 
     >>> bdtrc(10, 16, 0.525)
     np.float64(0.14643065267555583)
@@ -237,7 +237,7 @@ add_newdoc("bdtri",
     and the cumulative probability `y` is 0.5. This is what ``bdtri(k, n, y)``
     computes:
 
-    >>> from scipy.special import bdtri, bdtr
+    >>> from rsscipy.special import bdtri, bdtr
 
     >>> p = bdtri(1, 4, 0.5)
     >>> p
@@ -303,7 +303,7 @@ add_newdoc("eval_gegenbauer",
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import eval_gegenbauer
+    >>> from rsscipy.special import eval_gegenbauer
     >>> import matplotlib.pyplot as plt
 
     This is the parameter value that we'll use in this example.
@@ -387,7 +387,7 @@ add_newdoc("eval_chebyt",
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import eval_chebyt
+    >>> from rsscipy.special import eval_chebyt
     >>> import matplotlib.pyplot as plt
 
     Evaluate the order 3 polynomial at a few values of x.
@@ -461,7 +461,7 @@ add_newdoc("eval_chebyu",
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import eval_chebyu
+    >>> from rsscipy.special import eval_chebyu
     >>> import matplotlib.pyplot as plt
 
     Evaluate the order 3 polynomial at a few values of x.
@@ -533,7 +533,7 @@ add_newdoc("eval_chebys",
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import eval_chebys, eval_chebyu
+    >>> from rsscipy.special import eval_chebys, eval_chebyu
     >>> import matplotlib.pyplot as plt
 
     Evaluate the order 3 polynomial at a few values of x.
@@ -615,7 +615,7 @@ add_newdoc("eval_chebyc",
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import eval_chebyc, eval_chebyt
+    >>> from rsscipy.special import eval_chebyc, eval_chebyt
     >>> import matplotlib.pyplot as plt
 
     Evaluate the order 3 polynomial at a few values of x.
@@ -697,7 +697,7 @@ add_newdoc("eval_sh_chebyt",
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import eval_sh_chebyt
+    >>> from rsscipy.special import eval_sh_chebyt
     >>> import matplotlib.pyplot as plt
 
     Evaluate the order 3 polynomial at a few values of x.
@@ -769,7 +769,7 @@ add_newdoc("eval_sh_chebyu",
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import eval_sh_chebyu
+    >>> from rsscipy.special import eval_sh_chebyu
     >>> import matplotlib.pyplot as plt
 
     Evaluate the order 3 polynomial at a few values of x.
@@ -843,7 +843,7 @@ add_newdoc("eval_legendre",
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import eval_legendre
+    >>> from rsscipy.special import eval_legendre
     >>> import matplotlib.pyplot as plt
 
     Evaluate the zero-order Legendre polynomial at x = 0
@@ -926,7 +926,7 @@ add_newdoc("eval_sh_legendre",
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import eval_sh_legendre
+    >>> from rsscipy.special import eval_sh_legendre
     >>> import matplotlib.pyplot as plt
 
     Evaluate the order 3 polynomial at a few values of x.
@@ -989,7 +989,7 @@ add_newdoc("expn",
     Examples
     --------
     >>> import rsnumpy as np
-    >>> import scipy.special as sc
+    >>> import rsscipy.special as sc
 
     Its domain is nonnegative n and x.
 
@@ -1056,7 +1056,7 @@ add_newdoc("fdtridfd",
     Compute the F distribution cumulative distribution function for one
     parameter set.
 
-    >>> from scipy.special import fdtridfd, fdtr
+    >>> from rsscipy.special import fdtridfd, fdtr
     >>> dfn, dfd, x = 10, 5, 2
     >>> cdf_value = fdtr(dfn, dfd, x)
     >>> cdf_value
@@ -1157,7 +1157,7 @@ add_newdoc("kn",
     Plot the function of several orders for real input:
 
     >>> import rsnumpy as np
-    >>> from scipy.special import kn
+    >>> from rsscipy.special import kn
     >>> import matplotlib.pyplot as plt
     >>> x = np.linspace(0, 5, 1000)
     >>> for N in range(6):
@@ -1240,7 +1240,7 @@ add_newdoc("nbdtr",
     Compute the function for ``k=10`` and ``n=5`` at ``p=0.5``.
 
     >>> import rsnumpy as np
-    >>> from scipy.special import nbdtr
+    >>> from rsscipy.special import nbdtr
     >>> nbdtr(10, 5, 0.5)
     0.940765380859375
 
@@ -1276,7 +1276,7 @@ add_newdoc("nbdtr",
     arrays or individual values. To get the same results one must use the
     following parametrization: ``nbinom(n, p).cdf(k)=nbdtr(k, n, p)``.
 
-    >>> from scipy.stats import nbinom
+    >>> from rsscipy.stats import nbinom
     >>> k, n, p = 5, 3, 0.5
     >>> nbdtr_res = nbdtr(k, n, p)  # this will often be faster than below
     >>> stats_res = nbinom(n, p).cdf(k)
@@ -1366,7 +1366,7 @@ add_newdoc("nbdtrc",
     Compute the function for ``k=10`` and ``n=5`` at ``p=0.5``.
 
     >>> import rsnumpy as np
-    >>> from scipy.special import nbdtrc
+    >>> from rsscipy.special import nbdtrc
     >>> nbdtrc(10, 5, 0.5)
     0.059234619140624986
 
@@ -1402,7 +1402,7 @@ add_newdoc("nbdtrc",
     arrays or individual values. To get the same results one must use the
     following parametrization: ``nbinom(n, p).sf(k)=nbdtrc(k, n, p)``.
 
-    >>> from scipy.stats import nbinom
+    >>> from rsscipy.stats import nbinom
     >>> k, n, p = 3, 5, 0.5
     >>> nbdtr_res = nbdtrc(k, n, p)  # this will often be faster than below
     >>> stats_res = nbinom(n, p).sf(k)
@@ -1480,7 +1480,7 @@ add_newdoc(
     ``nbdtri(k, n, nbdtr(k, n, p))=p``.
 
     >>> import rsnumpy as np
-    >>> from scipy.special import nbdtri, nbdtr
+    >>> from rsscipy.special import nbdtri, nbdtr
     >>> k, n, p = 5, 10, 0.2
     >>> cdf_val = nbdtr(k, n, p)
     >>> nbdtri(k, n, cdf_val)
@@ -1575,7 +1575,7 @@ add_newdoc("ncfdtridfd",
 
     Examples
     --------
-    >>> from scipy.special import ncfdtr, ncfdtridfd
+    >>> from rsscipy.special import ncfdtr, ncfdtridfd
 
     Compute the CDF for several values of `dfd`:
 
@@ -1635,7 +1635,7 @@ add_newdoc("ncfdtridfn",
 
     Examples
     --------
-    >>> from scipy.special import ncfdtr, ncfdtridfn
+    >>> from rsscipy.special import ncfdtr, ncfdtridfn
 
     Compute the CDF for several values of `dfn`:
 
@@ -1684,7 +1684,7 @@ add_newdoc("pdtri",
 
     Examples
     --------
-    >>> import scipy.special as sc
+    >>> import rsscipy.special as sc
 
     Compute the CDF for several values of `m`:
 
@@ -1752,8 +1752,8 @@ add_newdoc("smirnov",
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import smirnov
-    >>> from scipy.stats import norm
+    >>> from rsscipy.special import smirnov
+    >>> from rsscipy.stats import norm
 
     Show the probability of a gap at least as big as 0, 0.5 and 1.0 for a
     sample of size 5.
@@ -1859,7 +1859,7 @@ add_newdoc("smirnovi",
 
     Examples
     --------
-    >>> from scipy.special import smirnovi, smirnov
+    >>> from rsscipy.special import smirnovi, smirnov
 
     >>> n = 24
     >>> deviations = [0.1, 0.2, 0.3]
@@ -1929,7 +1929,7 @@ add_newdoc("stdtridf",
     Compute the student t cumulative distribution function for one
     parameter set.
 
-    >>> from scipy.special import stdtr, stdtridf
+    >>> from rsscipy.special import stdtr, stdtridf
     >>> df, x = 5, 2
     >>> cdf_value = stdtr(df, x)
     >>> cdf_value
@@ -1986,7 +1986,7 @@ add_newdoc("yn",
     --------
     Evaluate the function of order 0 at one point.
 
-    >>> from scipy.special import yn
+    >>> from rsscipy.special import yn
     >>> yn(0, 1.)
     0.08825696421567697
 

@@ -6,7 +6,7 @@ import pytest
 from pytest import raises as assert_raises
 from rsnumpy.testing import assert_equal, assert_
 
-from scipy.sparse import (sparray, save_npz, load_npz,
+from rsscipy.sparse import (sparray, save_npz, load_npz,
                           csc_matrix, csr_matrix, bsr_matrix, dia_matrix,
                           coo_matrix, dok_matrix, lil_matrix,
                           csc_array, csr_array, bsr_array, dia_array,

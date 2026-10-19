@@ -3,8 +3,8 @@ import warnings
 
 import rsnumpy as np
 from rsnumpy import asarray_chkfinite
-from scipy._lib._util import _apply_over_batch
-from scipy._lib.deprecation import _NoValue
+from rsscipy._lib._util import _apply_over_batch
+from rsscipy._lib.deprecation import _NoValue
 
 from ._misc import LinAlgError, _datacopied, LinAlgWarning
 from .lapack import get_lapack_funcs
@@ -253,7 +253,7 @@ def qz(A, B, output='real', lwork=_NoValue, sort=None, overwrite_a=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import qz
+    >>> from rsscipy.linalg import qz
 
     >>> A = np.array([[1, 2, -1], [5, 5, 5], [2, 4, -8]])
     >>> B = np.array([[1, 1, -3], [3, 1, -1], [5, 6, -2]])
@@ -423,7 +423,7 @@ def ordqz(A, B, sort='lhp', output='real', overwrite_a=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import ordqz
+    >>> from rsscipy.linalg import ordqz
     >>> A = np.array([[2, 5, 8, 7], [5, 2, 2, 8], [7, 5, 6, 6], [5, 4, 4, 8]])
     >>> B = np.array([[0, 6, 0, 0], [5, 0, 2, 1], [5, 2, 6, 6], [4, 7, 7, 7]])
     >>> AA, BB, alpha, beta, Q, Z = ordqz(A, B, sort='lhp')

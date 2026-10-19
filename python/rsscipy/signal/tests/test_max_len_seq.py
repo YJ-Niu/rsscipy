@@ -1,10 +1,10 @@
 import rsnumpy as np
 from pytest import raises as assert_raises
-from scipy._lib._array_api import xp_assert_close, xp_assert_equal
+from rsscipy._lib._array_api import xp_assert_close, xp_assert_equal
 
 from rsnumpy.fft import fft, ifft
 
-from scipy.signal import max_len_seq
+from rsscipy.signal import max_len_seq
 
 
 class TestMLS:

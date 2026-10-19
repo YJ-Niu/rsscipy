@@ -172,7 +172,7 @@ def root_scalar(f, args=(), method=None, bracket=None,
 
     Find the root of a simple cubic
 
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
     >>> def f(x):
     ...     return (x**3 - 1)  # only one real root at x = 1
 

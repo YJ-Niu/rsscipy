@@ -1,7 +1,7 @@
 """Frechet derivative of the matrix exponential."""
 import rsnumpy as np
-import scipy.linalg
-from scipy._lib._util import _apply_over_batch
+import rsscipy.linalg
+from rsscipy._lib._util import _apply_over_batch
 
 
 __all__ = ['expm_frechet', 'expm_cond']
@@ -72,7 +72,7 @@ def expm_frechet(A, E, method=None, compute_expm=True, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import linalg
+    >>> from rsscipy import linalg
     >>> rng = np.random.default_rng()
 
     >>> A = rng.standard_normal((3, 3))
@@ -166,7 +166,7 @@ ell_table_61 = (
 
 
 # The b vectors and U and V are copypasted
-# from scipy.sparse.linalg.matfuncs.py.
+# from rsscipy.sparse.linalg.matfuncs.py.
 # M, Lu, Lv follow (6.11), (6.12), (6.13), (3.3)
 
 def _diff_pade3(A, E, ident):
@@ -392,7 +392,7 @@ def expm_cond(A, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import expm_cond
+    >>> from rsscipy.linalg import expm_cond
     >>> A = np.array([[-0.3, 0.2, 0.6], [0.6, 0.3, -0.1], [-0.7, 1.2, 0.9]])
     >>> k = expm_cond(A)
     >>> k

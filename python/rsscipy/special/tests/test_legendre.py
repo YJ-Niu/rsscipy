@@ -6,8 +6,8 @@ import rsnumpy as np
 import pytest
 from rsnumpy.testing import assert_equal, assert_allclose
 
-from scipy import special
-from scipy.special import (legendre_p, legendre_p_all, assoc_legendre_p,
+from rsscipy import special
+from rsscipy.special import (legendre_p, legendre_p_all, assoc_legendre_p,
     assoc_legendre_p_all, sph_legendre_p, sph_legendre_p_all)
 
 

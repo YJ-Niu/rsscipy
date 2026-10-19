@@ -1,5 +1,5 @@
 import rsnumpy as np
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     array_namespace,
     xp_capabilities,
     xp_device,
@@ -7,7 +7,7 @@ from scipy._lib._array_api import (
     xp_promote,
     xp_float_to_complex,
 )
-from scipy._external import array_api_extra as xpx
+from rsscipy._external import array_api_extra as xpx
 
 __all__ = ["logsumexp", "softmax", "log_softmax"]
 
@@ -76,7 +76,7 @@ def logsumexp(a, axis=None, b=None, keepdims=False, return_sign=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import logsumexp
+    >>> from rsscipy.special import logsumexp
     >>> a = np.arange(10)
     >>> logsumexp(a)
     9.4586297444267107
@@ -296,7 +296,7 @@ def softmax(x, axis=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import softmax
+    >>> from rsscipy.special import softmax
     >>> np.set_printoptions(precision=5)
 
     >>> x = np.array([[1, 0.5, 0.2, 3],
@@ -382,8 +382,8 @@ def log_softmax(x, axis=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import log_softmax
-    >>> from scipy.special import softmax
+    >>> from rsscipy.special import log_softmax
+    >>> from rsscipy.special import softmax
     >>> np.set_printoptions(precision=5)
 
     >>> x = np.array([1000.0, 1.0])

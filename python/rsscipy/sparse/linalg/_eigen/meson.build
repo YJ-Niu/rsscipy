@@ -3,7 +3,7 @@ py3.install_sources([
     '_svds.py',
     '_svds_doc.py'
   ],
-  subdir: 'scipy/sparse/linalg/_eigen'
+  subdir: 'rsscipy/sparse/linalg/_eigen'
 )
 
 subdir('arpack')

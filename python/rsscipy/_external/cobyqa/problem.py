@@ -3,13 +3,13 @@ from inspect import signature
 import copy
 
 import numpy as np
-from scipy.optimize import (
+from rsscipy.optimize import (
     Bounds,
     LinearConstraint,
     NonlinearConstraint,
     OptimizeResult,
 )
-from scipy.optimize._constraints import PreparedConstraint
+from rsscipy.optimize._constraints import PreparedConstraint
 
 
 from .settings import PRINT_OPTIONS, BARRIER

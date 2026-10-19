@@ -14,7 +14,7 @@ import os
 from warnings import warn
 import rsnumpy as np
 
-from scipy._lib._util import check_random_state, rng_integers, _transition_to_rng
+from rsscipy._lib._util import check_random_state, rng_integers, _transition_to_rng
 from ._sputils import upcast, get_index_dtype, isscalarlike, isintlike
 
 from ._sparsetools import csr_hstack
@@ -56,7 +56,7 @@ def expand_dims(A, /, *, axis=0):
 
     Examples
     --------
-    >>> from scipy.sparse import csr_array, expand_dims
+    >>> from rsscipy.sparse import csr_array, expand_dims
     >>> A = csr_array([[1, 2], [2, 0]])
     >>> A.shape
     (2, 2)
@@ -105,7 +105,7 @@ def swapaxes(A, axis1, axis2):
 
     Examples
     --------
-    >>> from scipy.sparse import coo_array, swapaxes
+    >>> from rsscipy.sparse import coo_array, swapaxes
     >>> A = coo_array([[[1, 2, 3], [2, 0, 0]]])
     >>> A.shape
     (1, 2, 3)
@@ -157,7 +157,7 @@ def permute_dims(A, axes=None, copy=False):
 
     Examples
     --------
-    >>> from scipy.sparse import coo_array, permute_dims
+    >>> from rsscipy.sparse import coo_array, permute_dims
     >>> A = coo_array([[[1, 2, 3], [2, 0, 0]]])
     >>> A.shape
     (1, 2, 3)
@@ -232,7 +232,7 @@ def matrix_transpose(A):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse import coo_array, matrix_transpose
+    >>> from rsscipy.sparse import coo_array, matrix_transpose
     >>> data = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
     >>> array = coo_array(data)
     >>> array.T.toarray()
@@ -299,7 +299,7 @@ def spdiags(data, diags, m=None, n=None, format=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse import spdiags
+    >>> from rsscipy.sparse import spdiags
     >>> data = np.array([[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]])
     >>> diags = np.array([0, -1, 2])
     >>> spdiags(data, diags, 4, 4).toarray()  # doctest: +SKIP
@@ -383,7 +383,7 @@ def diags_array(diagonals, /, *, offsets=0, shape=None, format=None, dtype=None)
 
     Examples
     --------
-    >>> from scipy.sparse import diags_array
+    >>> from rsscipy.sparse import diags_array
     >>> diagonals = [[1.0, 2.0, 3.0, 4.0], [1.0, 2.0, 3.0], [1.0, 2.0]]
     >>> diags_array(diagonals, offsets=[0, -1, 2]).toarray()
     array([[1., 0., 1., 0.],
@@ -526,7 +526,7 @@ def diags(diagonals, offsets=0, shape=None, format=None, dtype=None):
 
     Examples
     --------
-    >>> from scipy.sparse import diags
+    >>> from rsscipy.sparse import diags
     >>> diagonals = [[1.0, 2.0, 3.0, 4.0], [1.0, 2.0, 3.0], [1.0, 2.0]]
     >>> diags(diagonals, [0, -1, 2]).toarray()  # doctest: +SKIP
     array([[1., 0., 1., 0.],
@@ -606,7 +606,7 @@ def identity(n, dtype='d', format=None):
 
     Examples
     --------
-    >>> import scipy as sp
+    >>> import rsscipy as sp
     >>> sp.sparse.identity(3).toarray()  # doctest: +SKIP
     array([[ 1.,  0.,  0.],
            [ 0.,  1.,  0.],
@@ -663,7 +663,7 @@ def eye_array(m, n=None, *, k=0, dtype=float, format=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> import scipy as sp
+    >>> import rsscipy as sp
     >>> sp.sparse.eye_array(3).toarray()
     array([[ 1.,  0.,  0.],
            [ 0.,  1.,  0.],
@@ -751,7 +751,7 @@ def eye(m, n=None, k=0, dtype=float, format=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> import scipy as sp
+    >>> import rsscipy as sp
     >>> sp.sparse.eye(3).toarray()  # doctest: +SKIP
     array([[ 1.,  0.,  0.],
            [ 0.,  1.,  0.],
@@ -816,7 +816,7 @@ def kron(A, B, format=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> import scipy as sp
+    >>> import rsscipy as sp
     >>> A = sp.sparse.csr_array(np.array([[0, 2], [5, 0]]))
     >>> B = sp.sparse.csr_array(np.array([[1, 2], [3, 4]]))
     >>> sp.sparse.kron(A, B).toarray()
@@ -967,7 +967,7 @@ def kronsum(A, B, format=None):
     `kronsum` can be used to construct a finite difference discretization of the 2D
     Laplacian from a 1D discretization.
 
-    >>> from scipy.sparse import diags_array, kronsum
+    >>> from rsscipy.sparse import diags_array, kronsum
     >>> from matplotlib import pyplot as plt
     >>> import rsnumpy as np
     >>> ex = np.ones(10)
@@ -1158,7 +1158,7 @@ def hstack(blocks, format=None, dtype=None):
 
     Examples
     --------
-    >>> from scipy.sparse import coo_array, hstack
+    >>> from rsscipy.sparse import coo_array, hstack
     >>> A = coo_array([[1, 2], [3, 4]])
     >>> B = coo_array([[5], [6]])
     >>> hstack([A,B]).toarray()
@@ -1205,7 +1205,7 @@ def vstack(blocks, format=None, dtype=None):
 
     Examples
     --------
-    >>> from scipy.sparse import coo_array, vstack
+    >>> from rsscipy.sparse import coo_array, vstack
     >>> A = coo_array([[1, 2], [3, 4]])
     >>> B = coo_array([[5, 6]])
     >>> vstack([A, B]).toarray()
@@ -1263,7 +1263,7 @@ def bmat(blocks, format=None, dtype=None):
 
     Examples
     --------
-    >>> from scipy.sparse import coo_array, bmat
+    >>> from rsscipy.sparse import coo_array, bmat
     >>> A = coo_array([[1, 2], [3, 4]])
     >>> B = coo_array([[5], [6]])
     >>> C = coo_array([[7]])
@@ -1314,7 +1314,7 @@ def block_array(blocks, *, format=None, dtype=None):
 
     Examples
     --------
-    >>> from scipy.sparse import coo_array, block_array
+    >>> from rsscipy.sparse import coo_array, block_array
     >>> A = coo_array([[1, 2], [3, 4]])
     >>> B = coo_array([[5], [6]])
     >>> C = coo_array([[7]])
@@ -1474,7 +1474,7 @@ def block_diag(mats, format=None, dtype=None):
 
     Examples
     --------
-    >>> from scipy.sparse import coo_array, block_diag
+    >>> from rsscipy.sparse import coo_array, block_diag
     >>> A = coo_array([[1, 2], [3, 4]])
     >>> B = coo_array([[5], [6]])
     >>> C = coo_array([[7]])
@@ -1600,7 +1600,7 @@ def random_array(shape, *, density=0.01, format='coo', dtype=None,
     Passing a ``np.random.Generator`` instance for better performance:
 
     >>> import rsnumpy as np
-    >>> import scipy as sp
+    >>> import rsscipy as sp
     >>> rng = np.random.default_rng()
 
     Default sampling uniformly from [0, 1):
@@ -1760,7 +1760,7 @@ def random(m, n, density=0.01, format='coo', dtype=None,
 
     Passing a ``np.random.Generator`` instance for better performance:
 
-    >>> import scipy as sp
+    >>> import rsscipy as sp
     >>> import rsnumpy as np
     >>> rng = np.random.default_rng()
     >>> S = sp.sparse.random(3, 4, density=0.25, rng=rng)  # doctest: +SKIP
@@ -1871,7 +1871,7 @@ def rand(m, n, density=0.01, format="coo", dtype=None, rng=None):
 
     Examples
     --------
-    >>> from scipy.sparse import rand
+    >>> from rsscipy.sparse import rand
     >>> matrix = rand(3, 4, density=0.25, format="csr", rng=42)  # doctest: +SKIP
     >>> matrix  # doctest: +SKIP
     <Compressed Sparse Row sparse matrix of dtype 'float64'

@@ -2,12 +2,12 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_array_equal, assert_allclose
 
-from scipy.sparse import diags_array, csgraph
-from scipy.linalg import eigh
+from rsscipy.sparse import diags_array, csgraph
+from rsscipy.linalg import eigh
 
-from scipy.sparse.linalg import LaplacianNd
-from scipy.sparse.linalg._special_sparse_arrays import Sakurai
-from scipy.sparse.linalg._special_sparse_arrays import MikotaPair
+from rsscipy.sparse.linalg import LaplacianNd
+from rsscipy.sparse.linalg._special_sparse_arrays import Sakurai
+from rsscipy.sparse.linalg._special_sparse_arrays import MikotaPair
 
 INT_DTYPES = [np.int8, np.int16, np.int32, np.int64]
 REAL_DTYPES = [np.float32, np.float64]

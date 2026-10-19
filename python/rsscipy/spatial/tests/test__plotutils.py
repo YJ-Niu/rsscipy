@@ -10,7 +10,7 @@ try:
 except Exception:
     has_matplotlib = False
 
-from scipy.spatial import \
+from rsscipy.spatial import \
      delaunay_plot_2d, voronoi_plot_2d, convex_hull_plot_2d, \
      Delaunay, Voronoi, ConvexHull
 

@@ -2,13 +2,13 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
 
-from scipy.conftest import skip_xp_invalid_arg
-import scipy._external.array_api_extra as xpx
-from scipy._lib._array_api import (make_xp_test_case, is_jax, is_cupy,
+from rsscipy.conftest import skip_xp_invalid_arg
+import rsscipy._external.array_api_extra as xpx
+from rsscipy._lib._array_api import (make_xp_test_case, is_jax, is_cupy,
                                    eager_warns, xp_result_type, is_array_api_strict)
-from scipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
-from scipy import stats
-from scipy.stats._axis_nan_policy import SmallSampleWarning
+from rsscipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
+from rsscipy import stats
+from rsscipy.stats._axis_nan_policy import SmallSampleWarning
 
 
 lazy_xp_modules = [stats]

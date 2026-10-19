@@ -5,7 +5,7 @@
 
 import rsnumpy as np
 
-from scipy._lib._util import (check_random_state, rng_integers,
+from rsscipy._lib._util import (check_random_state, rng_integers,
                               _transition_to_rng, _apply_over_batch)
 
 __all__ = ['clarkson_woodruff_transform']
@@ -46,7 +46,7 @@ def _cwt_matrix(n_rows, n_columns, dtype, rng=None):
     Where the error epsilon is related to the size of S.
     """
     # lazy import to prevent to prevent sparse dependency for whole module (gh-23420)
-    from scipy.sparse import csc_array
+    from rsscipy.sparse import csc_array
     rng = check_random_state(rng)
     rows = rng_integers(rng, 0, n_rows, n_columns)
     cols = np.arange(n_columns+1)
@@ -114,8 +114,8 @@ def clarkson_woodruff_transform(input_matrix, sketch_size, rng=None):
     computation time for sparse input.
 
     >>> import rsnumpy as np
-    >>> from scipy import linalg
-    >>> from scipy import sparse
+    >>> from rsscipy import linalg
+    >>> from rsscipy import sparse
     >>> rng = np.random.default_rng()
     >>> *shape, density, sketch_n_rows = 15000, 100, 0.01, 200
     >>> A = sparse.random_array(shape, density=density, format='csc')
@@ -142,7 +142,7 @@ def clarkson_woodruff_transform(input_matrix, sketch_size, rng=None):
     Create a big dense matrix ``A`` for the example:
 
     >>> import rsnumpy as np
-    >>> from scipy import linalg
+    >>> from rsscipy import linalg
     >>> n_rows, n_columns  = 15000, 100
     >>> rng = np.random.default_rng()
     >>> A = rng.standard_normal((n_rows, n_columns))
@@ -182,7 +182,7 @@ def clarkson_woodruff_transform(input_matrix, sketch_size, rng=None):
 
     """
     # lazy import to prevent to prevent sparse dependency for whole module (gh-23420)
-    from scipy.sparse import issparse
+    from rsscipy.sparse import issparse
     if issparse(input_matrix) and input_matrix.ndim > 2:
         message = "Batch support for sparse arrays is not available."
         raise NotImplementedError(message)

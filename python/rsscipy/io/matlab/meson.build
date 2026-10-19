@@ -3,7 +3,7 @@ py3.extension_module('_streams',
   c_args: cython_c_args,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/io/matlab'
+  subdir: 'rsscipy/io/matlab'
 )
 
 py3.extension_module('_mio_utils',
@@ -12,7 +12,7 @@ py3.extension_module('_mio_utils',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/io/matlab'
+  subdir: 'rsscipy/io/matlab'
 )
 
 py3.extension_module('_mio5_utils',
@@ -21,7 +21,7 @@ py3.extension_module('_mio5_utils',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/io/matlab'
+  subdir: 'rsscipy/io/matlab'
 )
 
 py3.install_sources([
@@ -33,7 +33,7 @@ py3.install_sources([
     '_mio5_params.py',
     '_miobase.py',
   ],
-  subdir: 'scipy/io/matlab'
+  subdir: 'rsscipy/io/matlab'
 )
 
 subdir('tests')

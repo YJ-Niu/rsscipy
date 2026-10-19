@@ -80,7 +80,7 @@ def iterate_structure(structure, iterations, origin=None):
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> struct = ndimage.generate_binary_structure(2, 1)
     >>> struct.astype(int)
     array([[0, 1, 0],
@@ -158,7 +158,7 @@ def generate_binary_structure(rank, connectivity):
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> struct = ndimage.generate_binary_structure(2, 1)
     >>> struct
@@ -369,7 +369,7 @@ def binary_erosion(input, structure=None, iterations=1, mask=None, output=None,
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.zeros((7,7), dtype=int)
     >>> a[1:6, 2:5] = 1
@@ -470,7 +470,7 @@ def binary_dilation(input, structure=None, iterations=1, mask=None,
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.zeros((5, 5))
     >>> a[2, 2] = 1
@@ -622,7 +622,7 @@ def binary_opening(input, structure=None, iterations=1, output=None,
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.zeros((5,5), dtype=int)
     >>> a[1:4, 1:4] = 1; a[4, 4] = 1
@@ -752,7 +752,7 @@ def binary_closing(input, structure=None, iterations=1, output=None,
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.zeros((5,5), dtype=int)
     >>> a[1:-1, 1:-1] = 1; a[2,2] = 0
@@ -877,7 +877,7 @@ def binary_hit_or_miss(input, structure1=None, structure2=None,
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.zeros((7,7), dtype=int)
     >>> a[1, 1] = 1; a[2:4, 2:4] = 1; a[4:6, 4:6] = 1
@@ -998,7 +998,7 @@ def binary_propagation(input, structure=None, mask=None,
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> input = np.zeros((8, 8), dtype=int)
     >>> input[2, 2] = 1
@@ -1131,7 +1131,7 @@ def binary_fill_holes(input, structure=None, output=None, origin=0, *,
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.zeros((5, 5), dtype=int)
     >>> a[1:4, 1:4] = 1
@@ -1244,7 +1244,7 @@ def grey_erosion(input, size=None, footprint=None, structure=None,
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.zeros((7,7), dtype=int)
     >>> a[1:6, 1:6] = 3
@@ -1362,7 +1362,7 @@ def grey_dilation(input, size=None, footprint=None, structure=None,
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.zeros((7,7), dtype=int)
     >>> a[2:5, 2:5] = 1
@@ -1508,7 +1508,7 @@ def grey_opening(input, size=None, footprint=None, structure=None,
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.arange(36).reshape((6,6))
     >>> a[3, 3] = 50
@@ -1600,7 +1600,7 @@ def grey_closing(input, size=None, footprint=None, structure=None,
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.arange(36).reshape((6,6))
     >>> a[3,3] = 0
@@ -1696,7 +1696,7 @@ def morphological_gradient(input, size=None, footprint=None, structure=None,
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.zeros((7,7), dtype=int)
     >>> a[2:5, 2:5] = 1
@@ -1864,7 +1864,7 @@ def white_tophat(input, size=None, footprint=None, structure=None,
     --------
     Subtract gray background from a bright peak.
 
-    >>> from scipy.ndimage import generate_binary_structure, white_tophat
+    >>> from rsscipy.ndimage import generate_binary_structure, white_tophat
     >>> import rsnumpy as np
     >>> square = generate_binary_structure(rank=2, connectivity=3)
     >>> bright_on_gray = np.array([[2, 3, 3, 3, 2],
@@ -1949,7 +1949,7 @@ def black_tophat(input, size=None, footprint=None, structure=None, output=None,
     --------
     Change dark peak to bright peak and subtract background.
 
-    >>> from scipy.ndimage import generate_binary_structure, black_tophat
+    >>> from rsscipy.ndimage import generate_binary_structure, black_tophat
     >>> import rsnumpy as np
     >>> square = generate_binary_structure(rank=2, connectivity=3)
     >>> dark_on_gray = np.array([[7, 6, 6, 6, 7],
@@ -2065,7 +2065,7 @@ def distance_transform_bf(input, metric="euclidean", sampling=None,
     Import the necessary modules.
 
     >>> import rsnumpy as np
-    >>> from scipy.ndimage import distance_transform_bf
+    >>> from rsscipy.ndimage import distance_transform_bf
     >>> import matplotlib.pyplot as plt
     >>> from mpl_toolkits.axes_grid1 import ImageGrid
 
@@ -2291,7 +2291,7 @@ def distance_transform_cdt(input, metric='chessboard', return_distances=True,
     Import the necessary modules.
 
     >>> import rsnumpy as np
-    >>> from scipy.ndimage import distance_transform_cdt
+    >>> from rsscipy.ndimage import distance_transform_cdt
     >>> import matplotlib.pyplot as plt
     >>> from mpl_toolkits.axes_grid1 import ImageGrid
 
@@ -2498,7 +2498,7 @@ def distance_transform_edt(input, sampling=None, return_distances=True,
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.array(([0,1,1,1,1],
     ...               [0,0,1,1,1],

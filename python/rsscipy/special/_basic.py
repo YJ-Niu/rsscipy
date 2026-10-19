@@ -10,7 +10,7 @@ from heapq import heapify, heappop
 from rsnumpy import (pi, asarray, floor, isscalar, sqrt, where,
                    sin, place, issubdtype, extract, inexact, nan, zeros, sinc)
 
-from scipy._lib._array_api import array_namespace, xp_capabilities, xp_device
+from rsscipy._lib._array_api import array_namespace, xp_capabilities, xp_device
 from . import _ufuncs
 from ._ufuncs import (mathieu_a, mathieu_b, iv, jv, gamma, rgamma,
                       psi, hankel1, hankel2, yv, kv, poch, binom,
@@ -114,7 +114,7 @@ def diric(x, n):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import special
+    >>> from rsscipy import special
     >>> import matplotlib.pyplot as plt
 
     >>> x = np.linspace(-8*np.pi, 8*np.pi, num=201)
@@ -274,7 +274,7 @@ def jnyn_zeros(n, nt):
     Compute the first three roots of :math:`J_1`, :math:`J_1'`,
     :math:`Y_1` and :math:`Y_1'`.
 
-    >>> from scipy.special import jnyn_zeros
+    >>> from rsscipy.special import jnyn_zeros
     >>> jn_roots, jnp_roots, yn_roots, ynp_roots = jnyn_zeros(1, 3)
     >>> jn_roots, yn_roots
     (array([ 3.83170597,  7.01558667, 10.17346814]),
@@ -284,7 +284,7 @@ def jnyn_zeros(n, nt):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.special import jnyn_zeros, jvp, jn, yvp, yn
+    >>> from rsscipy.special import jnyn_zeros, jvp, jn, yvp, yn
     >>> jn_roots, jnp_roots, yn_roots, ynp_roots = jnyn_zeros(1, 3)
     >>> fig, ax = plt.subplots()
     >>> xmax= 11
@@ -354,7 +354,7 @@ def jn_zeros(n, nt):
     --------
     Compute the first four positive roots of :math:`J_3`.
 
-    >>> from scipy.special import jn_zeros
+    >>> from rsscipy.special import jn_zeros
     >>> jn_zeros(3, 4)
     array([ 6.3801619 ,  9.76102313, 13.01520072, 16.22346616])
 
@@ -363,7 +363,7 @@ def jn_zeros(n, nt):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.special import jn, jn_zeros
+    >>> from rsscipy.special import jn, jn_zeros
     >>> j3_roots = jn_zeros(3, 4)
     >>> xmax = 18
     >>> xmin = -1
@@ -417,7 +417,7 @@ def jnp_zeros(n, nt):
     --------
     Compute the first four roots of :math:`J_2'`.
 
-    >>> from scipy.special import jnp_zeros
+    >>> from rsscipy.special import jnp_zeros
     >>> jnp_zeros(2, 4)
     array([ 3.05423693,  6.70613319,  9.96946782, 13.17037086])
 
@@ -427,7 +427,7 @@ def jnp_zeros(n, nt):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.special import jn, jnp_zeros, jvp
+    >>> from rsscipy.special import jn, jnp_zeros, jvp
     >>> j2_roots = jnp_zeros(2, 4)
     >>> xmax = 15
     >>> x = np.linspace(0, xmax, 500)
@@ -478,7 +478,7 @@ def yn_zeros(n, nt):
     --------
     Compute the first four roots of :math:`Y_2`.
 
-    >>> from scipy.special import yn_zeros
+    >>> from rsscipy.special import yn_zeros
     >>> yn_zeros(2, 4)
     array([ 3.38424177,  6.79380751, 10.02347798, 13.20998671])
 
@@ -486,7 +486,7 @@ def yn_zeros(n, nt):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.special import yn, yn_zeros
+    >>> from rsscipy.special import yn, yn_zeros
     >>> xmin = 2
     >>> xmax = 15
     >>> x = np.linspace(xmin, xmax, 500)
@@ -538,7 +538,7 @@ def ynp_zeros(n, nt):
     Compute the first four roots of the first derivative of the
     Bessel function of second kind for order 0 :math:`Y_0'`.
 
-    >>> from scipy.special import ynp_zeros
+    >>> from rsscipy.special import ynp_zeros
     >>> ynp_zeros(0, 4)
     array([ 2.19714133,  5.42968104,  8.59600587, 11.74915483])
 
@@ -547,7 +547,7 @@ def ynp_zeros(n, nt):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.special import yn, ynp_zeros, yvp
+    >>> from rsscipy.special import yn, ynp_zeros, yvp
     >>> zeros = ynp_zeros(0, 4)
     >>> xmax = 13
     >>> x = np.linspace(0, xmax, 500)
@@ -604,7 +604,7 @@ def y0_zeros(nt, complex=False):
     :math:`Y_0`:
 
     >>> import rsnumpy as np
-    >>> from scipy.special import y0_zeros
+    >>> from rsscipy.special import y0_zeros
     >>> zeros, grads = y0_zeros(4)
     >>> with np.printoptions(precision=5):
     ...     print(f"Roots: {zeros}")
@@ -615,7 +615,7 @@ def y0_zeros(nt, complex=False):
     Plot the real part of :math:`Y_0` and the first four computed roots.
 
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.special import y0
+    >>> from rsscipy.special import y0
     >>> xmin = 0
     >>> xmax = 11
     >>> x = np.linspace(xmin, xmax, 500)
@@ -680,7 +680,7 @@ def y1_zeros(nt, complex=False):
     :math:`Y_1`:
 
     >>> import rsnumpy as np
-    >>> from scipy.special import y1_zeros
+    >>> from rsscipy.special import y1_zeros
     >>> zeros, grads = y1_zeros(4)
     >>> with np.printoptions(precision=5):
     ...     print(f"Roots: {zeros}")
@@ -697,7 +697,7 @@ def y1_zeros(nt, complex=False):
     Plot :math:`Y_1` and the first four computed roots.
 
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.special import y1
+    >>> from rsscipy.special import y1
     >>> xmin = 0
     >>> xmax = 13
     >>> x = np.linspace(xmin, xmax, 500)
@@ -762,7 +762,7 @@ def y1p_zeros(nt, complex=False):
     :math:`Y_1` at these roots.
 
     >>> import rsnumpy as np
-    >>> from scipy.special import y1p_zeros
+    >>> from rsscipy.special import y1p_zeros
     >>> y1grad_roots, y1_values = y1p_zeros(4)
     >>> with np.printoptions(precision=5):
     ...     print(f"Y1' Roots: {y1grad_roots.real}")
@@ -774,7 +774,7 @@ def y1p_zeros(nt, complex=False):
     directly. Here we plot :math:`Y_1` and the first four extrema.
 
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.special import y1, yvp
+    >>> from rsscipy.special import y1, yvp
     >>> y1_roots, y1_values_at_roots = y1p_zeros(4)
     >>> real_roots = y1_roots.real
     >>> xmax = 15
@@ -855,7 +855,7 @@ def jvp(v, z, n=1):
     Compute the Bessel function of the first kind of order 0 and
     its first two derivatives at 1.
 
-    >>> from scipy.special import jvp
+    >>> from rsscipy.special import jvp
     >>> jvp(0, 1, 0), jvp(0, 1, 1), jvp(0, 1, 2)
     (0.7651976865579666, -0.44005058574493355, -0.3251471008130331)
 
@@ -935,7 +935,7 @@ def yvp(v, z, n=1):
     Compute the Bessel function of the second kind of order 0 and
     its first two derivatives at 1.
 
-    >>> from scipy.special import yvp
+    >>> from rsscipy.special import yvp
     >>> yvp(0, 1, 0), yvp(0, 1, 1), yvp(0, 1, 2)
     (0.088256964215677, 0.7812128213002889, -0.8694697855159659)
 
@@ -1017,7 +1017,7 @@ def kvp(v, z, n=1):
     Compute the modified bessel function of the second kind of order 0 and
     its first two derivatives at 1.
 
-    >>> from scipy.special import kvp
+    >>> from rsscipy.special import kvp
     >>> kvp(0, 1, 0), kvp(0, 1, 1), kvp(0, 1, 2)
     (0.42102443824070834, -0.6019072301972346, 1.0229316684379428)
 
@@ -1099,7 +1099,7 @@ def ivp(v, z, n=1):
     Compute the modified Bessel function of the first kind of order 0 and
     its first two derivatives at 1.
 
-    >>> from scipy.special import ivp
+    >>> from rsscipy.special import ivp
     >>> ivp(0, 1, 0), ivp(0, 1, 1), ivp(0, 1, 2)
     (1.2660658777520084, 0.565159103992485, 0.7009067737595233)
 
@@ -1177,7 +1177,7 @@ def h1vp(v, z, n=1):
     Compute the Hankel function of the first kind of order 0 and
     its first two derivatives at 1.
 
-    >>> from scipy.special import h1vp
+    >>> from rsscipy.special import h1vp
     >>> h1vp(0, 1, 0), h1vp(0, 1, 1), h1vp(0, 1, 2)
     ((0.7651976865579664+0.088256964215677j),
      (-0.44005058574493355+0.7812128213002889j),
@@ -1246,7 +1246,7 @@ def h2vp(v, z, n=1):
     Compute the Hankel function of the second kind of order 0 and
     its first two derivatives at 1.
 
-    >>> from scipy.special import h2vp
+    >>> from rsscipy.special import h2vp
     >>> h2vp(0, 1, 0), h2vp(0, 1, 1), h2vp(0, 1, 2)
     ((0.7651976865579664-0.088256964215677j),
      (-0.44005058574493355-0.7812128213002889j),
@@ -1323,7 +1323,7 @@ def riccati_jn(n, x):
     The logarithmic derivative is obtained by dividing the derivative of the
     Riccati-Bessel function by the Riccati-Bessel function itself.
 
-    >>> from scipy.special import riccati_jn
+    >>> from rsscipy.special import riccati_jn
     >>> n = 5
     >>> z = 1.2
     >>> psi_n, psi_n_p = riccati_jn(n, z)
@@ -1341,7 +1341,7 @@ def riccati_jn(n, x):
     use of the definition of the Riccati-Bessel function in terms of the
     spherical Bessel function as given above.
 
-    >>> from scipy.special import spherical_jn
+    >>> from rsscipy.special import spherical_jn
     >>> jn = spherical_jn(n, z)
     >>> jnp = spherical_jn(n, z, derivative=True)
     >>> jnp/jn + 1/z
@@ -1412,7 +1412,7 @@ def riccati_yn(n, x):
     The logarithmic derivative is obtained by dividing the derivative of the
     Riccati-Bessel function by the Riccati-Bessel function itself.
 
-    >>> from scipy.special import riccati_yn
+    >>> from rsscipy.special import riccati_yn
     >>> n = 5
     >>> z = 1.2
     >>> chi_n, chi_n_p = riccati_yn(n, z)
@@ -1430,7 +1430,7 @@ def riccati_yn(n, x):
     use of the definition of the Riccati-Bessel function in terms of the
     spherical Bessel function as given above.
 
-    >>> from scipy.special import spherical_yn
+    >>> from rsscipy.special import spherical_yn
     >>> yn = spherical_yn(n, z)
     >>> ynp = spherical_yn(n, z, derivative=True)
     >>> ynp/yn + 1/z
@@ -1477,7 +1477,7 @@ def erf_zeros(nt):
 
     Examples
     --------
-    >>> from scipy import special
+    >>> from rsscipy import special
     >>> special.erf_zeros(1)
     array([1.45061616+1.880943j])
 
@@ -1613,7 +1613,7 @@ def assoc_laguerre(x, n, k=0.0):
     :math:`x = 1`:
 
     >>> import rsnumpy as np
-    >>> from scipy.special import assoc_laguerre, eval_genlaguerre
+    >>> from rsscipy.special import assoc_laguerre, eval_genlaguerre
     >>> np.isclose(assoc_laguerre(1, 3, 2), 7/3)
     True
 
@@ -1673,7 +1673,7 @@ def polygamma(n, x):
 
     Examples
     --------
-    >>> from scipy import special
+    >>> from rsscipy import special
     >>> x = [2, 3, 25.5]
     >>> special.polygamma(1, x)
     array([ 0.64493407,  0.39493407,  0.03999467])
@@ -1737,7 +1737,7 @@ def mathieu_even_coef(m, q):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.special import mathieu_even_coef, mathieu_cem
+    >>> from rsscipy.special import mathieu_even_coef, mathieu_cem
     >>> m = 5
     >>> q = 14
 
@@ -1847,7 +1847,7 @@ def mathieu_odd_coef(m, q):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.special import mathieu_odd_coef, mathieu_sem
+    >>> from rsscipy.special import mathieu_odd_coef, mathieu_sem
     >>> m = 5
     >>> q = 11
 
@@ -2126,7 +2126,7 @@ def bernoulli(n):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import bernoulli, zeta
+    >>> from rsscipy.special import bernoulli, zeta
     >>> bernoulli(4)
     array([ 1.        , -0.5       ,  0.16666667,  0.        , -0.03333333])
 
@@ -2190,7 +2190,7 @@ def euler(n):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import euler
+    >>> from rsscipy.special import euler
     >>> euler(6)
     array([  1.,   0.,  -1.,   0.,   5.,   0., -61.])
 
@@ -2245,7 +2245,7 @@ def lqn(n, z):
     Compute :math:`Q_n(x)` and its derivatives on an interval.
 
     >>> import rsnumpy as np
-    >>> from scipy.special import lqn
+    >>> from rsscipy.special import lqn
     >>> import matplotlib.pyplot as plt
 
     >>> xs = np.linspace(-2, 2, 200)
@@ -2329,7 +2329,7 @@ def ai_zeros(nt):
 
     Examples
     --------
-    >>> from scipy import special
+    >>> from rsscipy import special
     >>> a, ap, ai, aip = special.ai_zeros(3)
     >>> a
     array([-2.33810741, -4.08794944, -5.52055983])
@@ -2380,7 +2380,7 @@ def bi_zeros(nt):
 
     Examples
     --------
-    >>> from scipy import special
+    >>> from rsscipy import special
     >>> b, bp, bi, bip = special.bi_zeros(3)
     >>> b
     array([-1.17371322, -3.2710933 , -4.83073784])
@@ -2614,7 +2614,7 @@ def bei_zeros(nt):
     --------
     Compute the first 5 zeros of the Kelvin function bei.
 
-    >>> from scipy import special
+    >>> from rsscipy import special
     >>> special.bei_zeros(5)
     array([ 5.02622395,  9.4554063 , 13.89348785, 18.33398346, 22.77543929])
     """
@@ -2709,7 +2709,7 @@ def berp_zeros(nt):
     --------
     Compute the first 5 zeros of the derivative of the Kelvin function.
 
-    >>> from scipy.special import berp_zeros
+    >>> from rsscipy.special import berp_zeros
     >>> berp_zeros(5)
     array([ 6.03871081, 10.51364251, 14.96844542, 19.41757493, 23.86430432])
 
@@ -2948,7 +2948,7 @@ def comb(N, k, *, exact=False, repetition=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import comb
+    >>> from rsscipy.special import comb
     >>> k = np.array([3, 4])
     >>> n = np.array([10, 10])
     >>> comb(n, k, exact=False)
@@ -3027,7 +3027,7 @@ def perm(N, k, exact=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import perm
+    >>> from rsscipy.special import perm
     >>> k = np.array([3, 4])
     >>> n = np.array([10, 10])
     >>> perm(n, k)
@@ -3416,7 +3416,7 @@ def factorial(n, exact=False, extend="zero"):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import factorial
+    >>> from rsscipy.special import factorial
     >>> arr = np.array([3, 4, 5])
     >>> factorial(arr, exact=False)
     array([   6.,   24.,  120.])
@@ -3477,7 +3477,7 @@ def factorial2(n, exact=False, extend="zero"):
 
     Examples
     --------
-    >>> from scipy.special import factorial2
+    >>> from rsscipy.special import factorial2
     >>> factorial2(7, exact=False)
     np.float64(105.00000000000001)
     >>> factorial2(7, exact=True)
@@ -3558,7 +3558,7 @@ def factorialk(n, k, exact=False, extend="zero"):
 
     Examples
     --------
-    >>> from scipy.special import factorialk
+    >>> from rsscipy.special import factorialk
     >>> factorialk(5, k=1, exact=True)
     120
     >>> factorialk(5, k=3, exact=True)
@@ -3639,7 +3639,7 @@ def stirling2(N, K, *, exact=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import stirling2
+    >>> from rsscipy.special import stirling2
     >>> k = np.array([3, -1, 3])
     >>> n = np.array([10, 10, 9])
     >>> stirling2(n, k)
@@ -3757,7 +3757,7 @@ def zeta(x, q=None, out=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import zeta, polygamma, factorial
+    >>> from rsscipy.special import zeta, polygamma, factorial
 
     Some specific values:
 
@@ -3811,7 +3811,7 @@ def softplus(x, **kwargs):
 
     Examples
     --------
-    >>> from scipy import special
+    >>> from rsscipy import special
 
     >>> special.softplus(0)
     0.6931471805599453

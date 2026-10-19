@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
-from scipy.optimize import Bounds, LinearConstraint, NonlinearConstraint
-from scipy.optimize._minimize import standardize_constraints
+from rsscipy.optimize import Bounds, LinearConstraint, NonlinearConstraint
+from rsscipy.optimize._minimize import standardize_constraints
 
 from ..main import minimize
 

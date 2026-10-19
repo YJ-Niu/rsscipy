@@ -9,10 +9,10 @@
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_, assert_equal, assert_allclose
-from scipy.special import lambertw
+from rsscipy.special import lambertw
 from rsnumpy import nan, inf, pi, e, isnan, log, r_, array, complex128
 
-from scipy.special._testutils import FuncData
+from rsscipy.special._testutils import FuncData
 
 
 def test_values():

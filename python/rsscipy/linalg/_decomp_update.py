@@ -17,7 +17,7 @@ what callers can check.
 Everything is double-precision only: rsnumpy has no complex64/float32 storage.
 """
 
-from scipy._lib._util import _apply_over_batch
+from rsscipy._lib._util import _apply_over_batch
 
 from ._misc import LinAlgError
 

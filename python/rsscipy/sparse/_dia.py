@@ -504,7 +504,7 @@ def isspmatrix_dia(x):
 
     Examples
     --------
-    >>> from scipy.sparse import dia_array, dia_matrix, coo_matrix, isspmatrix_dia
+    >>> from rsscipy.sparse import dia_array, dia_matrix, coo_matrix, isspmatrix_dia
     >>> isspmatrix_dia(dia_matrix([[5]]))  # doctest: +SKIP
     True
     >>> isspmatrix_dia(dia_array([[5]]))  # doctest: +SKIP
@@ -602,7 +602,7 @@ class dia_array(_dia_base, sparray):
     --------
 
     >>> import rsnumpy as np
-    >>> from scipy.sparse import dia_array
+    >>> from rsscipy.sparse import dia_array
     >>> dia_array((3, 4), dtype=np.int8).toarray()
     array([[0, 0, 0, 0],
            [0, 0, 0, 0],
@@ -616,7 +616,7 @@ class dia_array(_dia_base, sparray):
            [0, 2, 3, 0],
            [0, 0, 3, 4]])
 
-    >>> from scipy.sparse import dia_array
+    >>> from rsscipy.sparse import dia_array
     >>> n = 10
     >>> ex = np.ones(n)
     >>> data = np.array([ex, 2 * ex, ex])
@@ -715,7 +715,7 @@ class dia_matrix(spmatrix, _dia_base):
     --------
 
     >>> import rsnumpy as np
-    >>> from scipy.sparse import dia_matrix
+    >>> from rsscipy.sparse import dia_matrix
     >>> dia_matrix((3, 4), dtype=np.int8).toarray()
     array([[0, 0, 0, 0],
            [0, 0, 0, 0],
@@ -729,7 +729,7 @@ class dia_matrix(spmatrix, _dia_base):
            [0, 2, 3, 0],
            [0, 0, 3, 4]])
 
-    >>> from scipy.sparse import dia_matrix
+    >>> from rsscipy.sparse import dia_matrix
     >>> n = 10
     >>> ex = np.ones(n)
     >>> data = np.array([ex, 2 * ex, ex])

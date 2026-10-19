@@ -38,9 +38,9 @@ analysis."""
 
 import rsnumpy as np
 
-import scipy.special._gufuncs as _gufuncs
-from scipy.special._ufuncs import gammaln as loggam
-from scipy.special._ufunc_tools import _with_cache_optimization
+import rsscipy.special._gufuncs as _gufuncs
+from rsscipy.special._ufuncs import gammaln as loggam
+from rsscipy.special._ufunc_tools import _with_cache_optimization
 
 
 __all__ = ['multigammaln', 'poisson_binom_cdf']
@@ -90,7 +90,7 @@ def multigammaln(a, d):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import multigammaln, gammaln
+    >>> from rsscipy.special import multigammaln, gammaln
     >>> a = 23.5
     >>> d = 10
     >>> multigammaln(a, d)
@@ -192,7 +192,7 @@ _poisson_binom_cdf_doc = (
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.special import poisson_binom_cdf
+    >>> from rsscipy.special import poisson_binom_cdf
 
     A batch of two Poisson binomial distributions involving three trials
     each.

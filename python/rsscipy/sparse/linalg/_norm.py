@@ -2,10 +2,10 @@
 
 """
 import rsnumpy as np
-from scipy.sparse import issparse
-from scipy.sparse.linalg._eigen._svds import svds
-from scipy.sparse._sputils import convert_pydata_sparse_to_scipy
-import scipy.sparse as sp
+from rsscipy.sparse import issparse
+from rsscipy.sparse.linalg._eigen._svds import svds
+from rsscipy.sparse._sputils import convert_pydata_sparse_to_scipy
+import rsscipy.sparse as sp
 
 from rsnumpy import sqrt, abs
 
@@ -79,9 +79,9 @@ def norm(x, ord=None, axis=None):
 
     Examples
     --------
-    >>> from scipy.sparse import csr_array, diags_array
+    >>> from rsscipy.sparse import csr_array, diags_array
     >>> import rsnumpy as np
-    >>> from scipy.sparse.linalg import norm
+    >>> from rsscipy.sparse.linalg import norm
     >>> a = np.arange(9) - 4
     >>> a
     array([-4, -3, -2, -1, 0, 1, 2, 3, 4])

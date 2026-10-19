@@ -2,20 +2,20 @@ import pickle
 import pytest
 import rsnumpy as np
 from rsnumpy.linalg import LinAlgError
-from scipy.__config__ import CONFIG
+from rsscipy.__config__ import CONFIG
 
-from scipy import LowLevelCallable
-from scipy._lib._array_api import xp_assert_close, make_xp_test_case
-from scipy.interpolate._rbfinterp_np import _get_kernel_capsule
-from scipy.interpolate.tests import _rbfinterp_kernel_pythran
-from scipy.stats.qmc import Halton
-from scipy.spatial import cKDTree
-from scipy.interpolate._rbfinterp import (
+from rsscipy import LowLevelCallable
+from rsscipy._lib._array_api import xp_assert_close, make_xp_test_case
+from rsscipy.interpolate._rbfinterp_np import _get_kernel_capsule
+from rsscipy.interpolate.tests import _rbfinterp_kernel_pythran
+from rsscipy.stats.qmc import Halton
+from rsscipy.spatial import cKDTree
+from rsscipy.interpolate._rbfinterp import (
     _AVAILABLE, _SCALE_INVARIANT, _NAME_TO_MIN_DEGREE, RBFInterpolator,
     _get_backend
     )
-from scipy.interpolate import _rbfinterp_pythran
-from scipy._lib._testutils import _run_concurrent_barrier, IS_WASM
+from rsscipy.interpolate import _rbfinterp_pythran
+from rsscipy._lib._testutils import _run_concurrent_barrier, IS_WASM
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 
@@ -512,7 +512,7 @@ class _TestRBFInterpolator:
         # patch_lazy_xp_functions returns a JIT-wrapped verion of RBFInterpolator which
         # tries to serialise the arguments via pickle which raises a different error
         # so a locally imported version for this test
-        from scipy.interpolate._rbfinterp import RBFInterpolator as _RBFInterpolator
+        from rsscipy.interpolate._rbfinterp import RBFInterpolator as _RBFInterpolator
         llc = LowLevelCallable(_rbfinterp_kernel_pythran.my_kernel,
                            signature="double (double)")
 
@@ -539,7 +539,7 @@ class _TestRBFInterpolator:
         reason = "LLC kernels are not supported in the no-pythran build"
     )
     def test_degree_validation_llc_degree(self):
-        from scipy.interpolate._rbfinterp import RBFInterpolator as _RBFInterpolator
+        from rsscipy.interpolate._rbfinterp import RBFInterpolator as _RBFInterpolator
         llc = LowLevelCallable(_rbfinterp_kernel_pythran.my_kernel,
                            signature="double (double)")
         seq = Halton(1, scramble=False, seed=np.random.RandomState(2305982309))
@@ -564,7 +564,7 @@ class _TestRBFInterpolator:
     )
     def test_llc_wrong_signature(self):
         import ctypes
-        from scipy.interpolate._rbfinterp import RBFInterpolator as _RBFInterpolator
+        from rsscipy.interpolate._rbfinterp import RBFInterpolator as _RBFInterpolator
         wrong = ctypes.CFUNCTYPE(ctypes.c_double, ctypes.c_double, ctypes.c_double)(
             lambda x, y: x
         )
@@ -586,7 +586,7 @@ class _TestRBFInterpolator:
         # patch_lazy_xp_functions returns a JIT-wrapped verion of RBFInterpolator which
         # tries to serialise the arguments via pickle which raises a different error
         # so a locally imported version for this test
-        from scipy.interpolate._rbfinterp import RBFInterpolator as _RBFInterpolator
+        from rsscipy.interpolate._rbfinterp import RBFInterpolator as _RBFInterpolator
         llc = LowLevelCallable(_rbfinterp_kernel_pythran.my_kernel,
                            signature="double (double)")
 

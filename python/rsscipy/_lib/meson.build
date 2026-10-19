@@ -21,7 +21,7 @@ py3.extension_module('_test_ccallback',
   dependencies: ccallback_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/_lib',
+  subdir: 'rsscipy/_lib',
   install_tag: 'tests'
 )
 
@@ -34,7 +34,7 @@ py3.extension_module('_test_deprecation_call',
   include_directories: 'src',
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/_lib',
+  subdir: 'rsscipy/_lib',
   install_tag: 'tests'
 )
 
@@ -44,7 +44,7 @@ py3.extension_module('_test_deprecation_def',
   include_directories: 'src',
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/_lib',
+  subdir: 'rsscipy/_lib',
   install_tag: 'tests'
 )
 
@@ -76,7 +76,7 @@ py3.extension_module('messagestream',
   include_directories: 'src',
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/_lib'
+  subdir: 'rsscipy/_lib'
 )
 
 python_sources = [
@@ -104,7 +104,7 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/_lib'
+  subdir: 'rsscipy/_lib'
 )
 
 # Rust extension modules written by `tools/build_rust.py` at configure time.

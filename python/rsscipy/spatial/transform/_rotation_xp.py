@@ -12,7 +12,7 @@ from types import EllipsisType
 from typing import cast
 
 import rsnumpy as np
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     array_namespace,
     Array,
     ArrayLike,
@@ -22,10 +22,10 @@ from scipy._lib._array_api import (
     xp_promote,
     is_jax,
 )
-from scipy._lib._util import broadcastable
-from scipy._external.array_api_compat import device as xp_device
-from scipy._external.array_api_compat import is_array_api_obj
-import scipy._external.array_api_extra as xpx
+from rsscipy._lib._util import broadcastable
+from rsscipy._external.array_api_compat import device as xp_device
+from rsscipy._external.array_api_compat import is_array_api_obj
+import rsscipy._external.array_api_extra as xpx
 
 
 def from_quat(

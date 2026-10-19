@@ -1,6 +1,6 @@
 from types import GenericAlias
 import rsnumpy as np
-from scipy._lib._array_api import xp_capabilities
+from rsscipy._lib._array_api import xp_capabilities
 
 
 def check_arguments(fun, y0, support_complex):

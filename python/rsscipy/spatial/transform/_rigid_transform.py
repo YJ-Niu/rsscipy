@@ -6,21 +6,21 @@ from collections.abc import Callable
 
 import rsnumpy as np
 
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     array_namespace,
     is_numpy,
     ArrayLike,
     Array,
     xp_capabilities,
 )
-from scipy.spatial.transform._rotation import Rotation
-from scipy.spatial.transform._rotation import _promote
-import scipy.spatial.transform._rigid_transform_cy as cython_backend
-import scipy.spatial.transform._rigid_transform_xp as xp_backend
-import scipy._external.array_api_extra as xpx
-from scipy._external.array_api_compat import device
-from scipy._lib._array_api import xp_promote
-from scipy._lib._util import broadcastable
+from rsscipy.spatial.transform._rotation import Rotation
+from rsscipy.spatial.transform._rotation import _promote
+import rsscipy.spatial.transform._rigid_transform_cy as cython_backend
+import rsscipy.spatial.transform._rigid_transform_xp as xp_backend
+import rsscipy._external.array_api_extra as xpx
+from rsscipy._external.array_api_compat import device
+from rsscipy._lib._array_api import xp_promote
+from rsscipy._lib._util import broadcastable
 
 
 __all__ = ["RigidTransform"]
@@ -256,8 +256,8 @@ class RigidTransform:
 
     **Visualization**
 
-    >>> from scipy.spatial.transform import RigidTransform as Tf
-    >>> from scipy.spatial.transform import Rotation as R
+    >>> from rsscipy.spatial.transform import RigidTransform as Tf
+    >>> from rsscipy.spatial.transform import Rotation as R
     >>> import rsnumpy as np
 
     The following function can be used to plot transforms with Matplotlib
@@ -506,7 +506,7 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
         >>> import rsnumpy as np
 
         Creating a transform from a single matrix:
@@ -567,8 +567,8 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Creating a transform from a single rotation:
@@ -637,7 +637,7 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
         >>> import rsnumpy as np
 
         Creating a transform from a single translation vector:
@@ -718,8 +718,8 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Creating from a single rotation and translation:
@@ -790,7 +790,7 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
         >>> import rsnumpy as np
 
         Creating from a single 6d vector of exponential coordinates:
@@ -879,7 +879,7 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
         >>> import rsnumpy as np
 
         Creating from a single unit dual quaternion:
@@ -926,8 +926,8 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Creating a single identity transform:
@@ -1010,7 +1010,7 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
         >>> tf1 = Tf.from_translation([1, 0, 0])
         >>> tf2 = Tf.from_translation([[2, 0, 0], [3, 0, 0]])
         >>> Tf.concatenate([tf1, tf2]).translation
@@ -1078,8 +1078,8 @@ class RigidTransform:
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from scipy.spatial.transform import RigidTransform as Tf
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> rng = np.random.default_rng(seed=123)
 
         The mean of a set of transforms is the same as the mean of the
@@ -1123,8 +1123,8 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         A transformation matrix is a 4x4 matrix formed from a 3x3 rotation
@@ -1186,8 +1186,8 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Recover the rotation and translation from a transform:
@@ -1233,7 +1233,7 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
         >>> import rsnumpy as np
 
         Get exponential coordinates of the identity matrix:
@@ -1269,7 +1269,7 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
         >>> import rsnumpy as np
 
         Get identity dual quaternion (we use scalar-last by default):
@@ -1306,7 +1306,7 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
         >>> import rsnumpy as np
         >>> tf = Tf.identity(3)
         >>> len(tf)
@@ -1362,7 +1362,7 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
         >>> t = [[0, 0, 0], [1, 0, 0], [2, 0, 0]]  # 3 translations
         >>> tf = Tf.from_translation(t)
 
@@ -1430,7 +1430,7 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
         >>> t = [[0, 0, 0], [1, 0, 0], [2, 0, 0]]  # 3 translations
         >>> tf = Tf.from_translation(t)
 
@@ -1483,8 +1483,8 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Compose two transforms:
@@ -1618,7 +1618,7 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
         >>> import rsnumpy as np
 
         A power of 2 returns the transform composed with itself:
@@ -1693,8 +1693,8 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         A transform composed with its inverse results in an identity transform:
@@ -1775,8 +1775,8 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Apply a single transform to a vector. Here the transform is just a
@@ -1860,8 +1860,8 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         The rotation component is extracted from the transform:
@@ -1891,8 +1891,8 @@ class RigidTransform:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import RigidTransform as Tf
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import RigidTransform as Tf
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         The translation component is extracted from the transform:

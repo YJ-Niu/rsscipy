@@ -8,7 +8,7 @@ from rsnumpy.testing import (
 import pytest
 from pytest import raises as assert_raises
 
-from scipy.fft._duccfft.realtransforms import (
+from rsscipy.fft._duccfft.realtransforms import (
     dct, idct, dst, idst, dctn, idctn, dstn, idstn)
 
 fftpack_test_dir = join(dirname(__file__), '..', '..', '..', 'fftpack', 'tests')

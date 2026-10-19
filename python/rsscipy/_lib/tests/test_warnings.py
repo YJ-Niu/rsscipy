@@ -10,7 +10,7 @@ from pathlib import Path
 import ast
 import tokenize
 
-import scipy
+import rsscipy
 
 import pytest
 

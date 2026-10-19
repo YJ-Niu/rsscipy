@@ -4,7 +4,7 @@ py3.extension_module('_distance_wrap',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/spatial/distance'
+  subdir: 'rsscipy/spatial/distance'
 )
 
 py3.extension_module('_distance_pybind',
@@ -13,7 +13,7 @@ py3.extension_module('_distance_pybind',
   dependencies: [np_dep, pybind11_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/spatial/distance'
+  subdir: 'rsscipy/spatial/distance'
 )
 
 py3.extension_module('_hausdorff',
@@ -22,7 +22,7 @@ py3.extension_module('_hausdorff',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/spatial/distance'
+  subdir: 'rsscipy/spatial/distance'
 )
 
 py3.install_sources([
@@ -30,7 +30,7 @@ py3.install_sources([
     '_distance.pyi',
     '_distance.py'
   ],
-  subdir: 'scipy/spatial/distance'
+  subdir: 'rsscipy/spatial/distance'
 )
 
 subdir('tests')

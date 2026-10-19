@@ -4,13 +4,13 @@ import pytest
 
 import rsnumpy as np
 
-from scipy._external import array_api_extra as xpx
-from scipy._lib._array_api import is_array_api_strict, make_xp_test_case, xp_device
-from scipy._lib._array_api_no_0d import (xp_assert_equal, xp_assert_close,
+from rsscipy._external import array_api_extra as xpx
+from rsscipy._lib._array_api import is_array_api_strict, make_xp_test_case, xp_device
+from rsscipy._lib._array_api_no_0d import (xp_assert_equal, xp_assert_close,
                                          xp_assert_less)
 
-from scipy.special import log_softmax, logsumexp, softmax
-from scipy.special._logsumexp import _wrap_radians
+from rsscipy.special import log_softmax, logsumexp, softmax
+from rsscipy.special._logsumexp import _wrap_radians
 
 
 dtypes = ['float32', 'float64', 'int32', 'int64', 'complex64', 'complex128']

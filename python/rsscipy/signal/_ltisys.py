@@ -25,9 +25,9 @@ from types import GenericAlias
 # np.linalg.qr fails on some tests with LinAlgError: zgeqrf returns -7
 # use scipy's qr until this is solved
 
-from scipy.linalg import qr as s_qr
-from scipy import linalg
-from scipy.interpolate import make_interp_spline
+from rsscipy.linalg import qr as s_qr
+from rsscipy import linalg
+from rsscipy.interpolate import make_interp_spline
 from ._filter_design import (tf2zpk, zpk2tf, normalize, freqs, freqz, freqs_zpk,
                             freqz_zpk)
 from ._lti_conversion import (tf2ss, abcd_normalize, ss2tf, zpk2ss, ss2zpk,
@@ -173,7 +173,7 @@ class lti(LinearTimeInvariant):
 
     Examples
     --------
-    >>> from scipy import signal
+    >>> from rsscipy import signal
 
     >>> signal.lti(1, 2, 3, 4)
     StateSpaceContinuous(
@@ -348,7 +348,7 @@ class lti(LinearTimeInvariant):
 
         Examples
         --------
-        >>> from scipy import signal
+        >>> from rsscipy import signal
         >>> import matplotlib.pyplot as plt
 
         >>> sys = signal.TransferFunction([1], [1, 1])
@@ -473,7 +473,7 @@ class dlti(LinearTimeInvariant):
 
     Examples
     --------
-    >>> from scipy import signal
+    >>> from rsscipy import signal
 
     >>> signal.dlti(1, 2, 3, 4)
     StateSpaceDiscrete(
@@ -676,7 +676,7 @@ class dlti(LinearTimeInvariant):
 
         Examples
         --------
-        >>> from scipy import signal
+        >>> from rsscipy import signal
         >>> import matplotlib.pyplot as plt
 
         Construct the transfer function :math:`H(z) = \frac{1}{z^2 + 2z + 3}`
@@ -782,7 +782,7 @@ class TransferFunction(LinearTimeInvariant):
     Construct the transfer function
     :math:`H(s) = \frac{s^2 + 3s + 3}{s^2 + 2s + 1}`:
 
-    >>> from scipy import signal
+    >>> from rsscipy import signal
 
     >>> num = [1, 3, 3]
     >>> den = [1, 2, 1]
@@ -1018,7 +1018,7 @@ class TransferFunctionContinuous(TransferFunction, lti):
     Construct the transfer function
     :math:`H(s) = \frac{s^2 + 3s + 3}{s^2 + 2s + 1}`:
 
-    >>> from scipy import signal
+    >>> from rsscipy import signal
 
     >>> num = [1, 3, 3]
     >>> den = [1, 2, 1]
@@ -1118,7 +1118,7 @@ class TransferFunctionDiscrete(TransferFunction, dlti):
     :math:`H(z) = \frac{z^2 + 3z + 3}{z^2 + 2z + 1}` with a sampling time of
     0.5 seconds:
 
-    >>> from scipy import signal
+    >>> from rsscipy import signal
 
     >>> num = [1, 3, 3]
     >>> den = [1, 2, 1]
@@ -1180,7 +1180,7 @@ class ZerosPolesGain(LinearTimeInvariant):
     Construct the transfer function
     :math:`H(s) = \frac{5(s - 1)(s - 2)}{(s - 3)(s - 4)}`:
 
-    >>> from scipy import signal
+    >>> from rsscipy import signal
 
     >>> signal.ZerosPolesGain([1, 2], [3, 4], 5)
     ZerosPolesGainContinuous(
@@ -1372,7 +1372,7 @@ class ZerosPolesGainContinuous(ZerosPolesGain, lti):
     Construct the transfer function
     :math:`H(s)=\frac{5(s - 1)(s - 2)}{(s - 3)(s - 4)}`:
 
-    >>> from scipy import signal
+    >>> from rsscipy import signal
 
     >>> signal.ZerosPolesGain([1, 2], [3, 4], 5)
     ZerosPolesGainContinuous(
@@ -1466,7 +1466,7 @@ class ZerosPolesGainDiscrete(ZerosPolesGain, dlti):
     Construct the transfer function
     :math:`H(s) = \frac{5(s - 1)(s - 2)}{(s - 3)(s - 4)}`:
 
-    >>> from scipy import signal
+    >>> from rsscipy import signal
 
     >>> signal.ZerosPolesGain([1, 2], [3, 4], 5)
     ZerosPolesGainContinuous(
@@ -1543,7 +1543,7 @@ class StateSpace(LinearTimeInvariant):
 
     Examples
     --------
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import rsnumpy as np
     >>> a = np.array([[0, 1], [0, 0]])
     >>> b = np.array([[0], [1]])
@@ -1943,7 +1943,7 @@ class StateSpaceContinuous(StateSpace, lti):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
 
     >>> a = np.array([[0, 1], [0, 0]])
     >>> b = np.array([[0], [1]])
@@ -2041,7 +2041,7 @@ class StateSpaceDiscrete(StateSpace, dlti):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
 
     >>> a = np.array([[1, 0.1], [0, 1]])
     >>> b = np.array([[0.005], [0.1]])
@@ -2113,7 +2113,7 @@ def lsim(system, U, T, X0=None, interp=True):
     a signal.
 
     >>> import rsnumpy as np
-    >>> from scipy.signal import bessel, lsim
+    >>> from rsscipy.signal import bessel, lsim
     >>> import matplotlib.pyplot as plt
 
     Create a low-pass Bessel filter with a cutoff of 12 Hz.
@@ -2148,7 +2148,7 @@ def lsim(system, U, T, X0=None, interp=True):
     a constant input ``u = 1``.  We'll use the state space representation
     of the integrator.
 
-    >>> from scipy.signal import lti
+    >>> from rsscipy.signal import lti
     >>> A = np.array([[0.0, 1.0], [0.0, 0.0]])
     >>> B = np.array([[0.0], [1.0]])
     >>> C = np.array([[1.0, 0.0]])
@@ -2350,7 +2350,7 @@ def impulse(system, X0=None, T=None, N=None):
     Compute the impulse response of a second order system with a repeated
     root: ``x''(t) + 2*x'(t) + x(t) = u(t)``
 
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> system = ([1.0], [1.0, 2.0, 1.0])
     >>> t, y = signal.impulse(system)
     >>> import matplotlib.pyplot as plt
@@ -2417,7 +2417,7 @@ def step(system, X0=None, T=None, N=None):
 
     Examples
     --------
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
     >>> lti = signal.lti([1.0], [1.0, 1.0])
     >>> t, y = signal.step(lti)
@@ -2489,7 +2489,7 @@ def bode(system, w=None, n=100):
 
     Examples
     --------
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
 
     >>> sys = signal.TransferFunction([1], [1, 1])
@@ -2550,7 +2550,7 @@ def freqresp(system, w=None, n=10000):
     --------
     Generating the Nyquist plot of a transfer function
 
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
 
     Construct the transfer function :math:`H(s) = \frac{5}{(s-1)^3}`:
@@ -3100,7 +3100,7 @@ def place_poles(A, B, poles, method="YT", rtol=1e-3, maxiter=30):
     publication ([1]_):
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
     ...
     >>> A = np.array([[ 1.380,  -0.2077,  6.715, -5.676  ],
@@ -3391,7 +3391,7 @@ def dlsim(system, u, t=None, x0=None):
     could be implemented as:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> tf = ([1.0,], [1.0, -1.0], 1.0)
     >>> t_in = [0.0, 1.0, 2.0, 3.0]
     >>> u = np.asarray([0.0, 0.0, 1.0, 1.0])
@@ -3501,7 +3501,7 @@ def dimpulse(system, x0=None, t=None, n=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
     ...
     >>> dt = 1  # sampling interval is one => time unit is sample number
@@ -3597,7 +3597,7 @@ def dstep(system, x0=None, t=None, n=None):
     plot its step response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
     ...
     >>> dt = 1  # sampling interval is one => time unit is sample number
@@ -3702,7 +3702,7 @@ def dfreqresp(system, w=None, n=10000, whole=False):
     The following example generates the Nyquist plot of the transfer function
     :math:`H(z) = \frac{1}{z^2 + 2z + 3}`  with a sampling time of 0.05 seconds:
 
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
     >>> sys = signal.TransferFunction([1], [1, 2, 3], dt=0.05)  # construct H(z)
     >>> w, H = signal.dfreqresp(sys)
@@ -3814,7 +3814,7 @@ def dbode(system, w=None, n=100):
 
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     ...
     >>> T = 1e-4  # sampling interval in s
     >>> f_c, o = 1e2, 5  # corner frequency in Hz (i.e., -3 dB value) and filter order

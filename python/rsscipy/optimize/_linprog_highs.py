@@ -25,7 +25,7 @@ from ._highspy._core import(
     HighsModelStatus,
     simplex_constants as s_c,  # [1]
 )
-from scipy.sparse import csc_array, vstack, issparse
+from rsscipy.sparse import csc_array, vstack, issparse
 
 # [1]: Directly importing from "._highspy._core.simplex_constants"
 # causes problems when reloading.

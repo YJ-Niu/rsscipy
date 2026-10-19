@@ -23,6 +23,6 @@ from ._rotation_spline import RotationSpline
 
 __all__ = ['Rotation', 'Slerp', 'RotationSpline', 'RigidTransform']
 
-from scipy._lib._testutils import PytestTester
+from rsscipy._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester

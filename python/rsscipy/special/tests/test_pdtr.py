@@ -1,5 +1,5 @@
 import rsnumpy as np
-import scipy.special as sc
+import rsscipy.special as sc
 from rsnumpy.testing import assert_allclose, assert_array_equal
 
 

@@ -113,6 +113,6 @@ from ._harwell_boeing import hb_read, hb_write
 
 __all__ = [s for s in dir() if not s.startswith('_')]
 
-from scipy._lib._testutils import PytestTester
+from rsscipy._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester

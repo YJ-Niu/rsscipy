@@ -1,7 +1,7 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
-import scipy.linalg
-from scipy.optimize import minimize
+import rsscipy.linalg
+from rsscipy.optimize import minimize
 
 
 def test_1():

@@ -1,7 +1,7 @@
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal
-import scipy.special as sc
+import rsscipy.special as sc
 
 
 class TestHyperu:

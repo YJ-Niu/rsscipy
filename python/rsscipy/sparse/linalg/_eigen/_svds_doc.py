@@ -83,9 +83,9 @@ def _svds_arpack_doc(A, k=6, ncv=None, tol=0, which='LM', v0=None,
     Construct a matrix ``A`` from singular values and vectors.
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import ortho_group
-    >>> from scipy.sparse import csc_array, diags_array
-    >>> from scipy.sparse.linalg import svds
+    >>> from rsscipy.stats import ortho_group
+    >>> from rsscipy.sparse import csc_array, diags_array
+    >>> from rsscipy.sparse.linalg import svds
     >>> rng = np.random.default_rng()
     >>> orthogonal = csc_array(ortho_group.rvs(10, random_state=rng))
     >>> s = [0.0001, 0.001, 3, 4, 5]  # singular values
@@ -207,9 +207,9 @@ def _svds_lobpcg_doc(A, k=6, ncv=None, tol=0, which='LM', v0=None,
     Construct a matrix ``A`` from singular values and vectors.
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import ortho_group
-    >>> from scipy.sparse import csc_array, diags_array
-    >>> from scipy.sparse.linalg import svds
+    >>> from rsscipy.stats import ortho_group
+    >>> from rsscipy.sparse import csc_array, diags_array
+    >>> from rsscipy.sparse.linalg import svds
     >>> rng = np.random.default_rng()
     >>> orthogonal = csc_array(ortho_group.rvs(10, random_state=rng))
     >>> s = [0.0001, 0.001, 3, 4, 5]  # singular values
@@ -338,9 +338,9 @@ def _svds_propack_doc(A, k=6, ncv=None, tol=0, which='LM', v0=None,
     Construct a matrix ``A`` from singular values and vectors.
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import ortho_group
-    >>> from scipy.sparse import csc_array, diags_array
-    >>> from scipy.sparse.linalg import svds
+    >>> from rsscipy.stats import ortho_group
+    >>> from rsscipy.sparse import csc_array, diags_array
+    >>> from rsscipy.sparse.linalg import svds
     >>> rng = np.random.default_rng()
     >>> orthogonal = csc_array(ortho_group.rvs(10, random_state=rng))
     >>> s = [0.0001, 0.001, 3, 4, 5]  # singular values

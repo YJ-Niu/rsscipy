@@ -8,24 +8,24 @@
 [[module]]
 crate = "fpumode"
 lib = "_fpumode"
-dest = "scipy/_lib"
+dest = "python/rsscipy/_lib"
 
 [[module]]
 crate = "ccallback"
 lib = "_ccallback_rs"
-dest = "scipy/_lib"
+dest = "python/rsscipy/_lib"
 
 [[module]]
 crate = "array_utils"
 lib = "_array_utils_rs"
-dest = "scipy/linalg"
+dest = "python/rsscipy/linalg"
 
 [[module]]
 crate = "fblas"
 lib = "_fblas_rs"
-dest = "scipy/linalg"
+dest = "python/rsscipy/linalg"
 
 [[module]]
 crate = "flapack"
 lib = "_flapack_rs"
-dest = "scipy/linalg"
+dest = "python/rsscipy/linalg"

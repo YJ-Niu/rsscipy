@@ -30,21 +30,21 @@ import warnings
 import sys
 from rsnumpy import eye, argmin, zeros, shape, asarray, sqrt
 import rsnumpy as np
-from scipy.linalg import cholesky, issymmetric, LinAlgError
-from scipy.sparse.linalg import LinearOperator
+from rsscipy.linalg import cholesky, issymmetric, LinAlgError
+from rsscipy.sparse.linalg import LinearOperator
 from ._linesearch import (line_search_wolfe1, line_search_wolfe2,
                           line_search_wolfe2 as line_search,
                           LineSearchWarning)
 from ._numdiff import approx_derivative
-from scipy._lib._util import getfullargspec_no_self as _getfullargspec
-from scipy._lib._util import (MapWrapper, check_random_state, _RichResult,
+from rsscipy._lib._util import getfullargspec_no_self as _getfullargspec
+from rsscipy._lib._util import (MapWrapper, check_random_state, _RichResult,
                               _call_callback_maybe_halt, _transition_to_rng,
                               wrapped_inspect_signature)
-from scipy.optimize._differentiable_functions import ScalarFunction, FD_METHODS
-from scipy._lib._array_api import (
+from rsscipy.optimize._differentiable_functions import ScalarFunction, FD_METHODS
+from rsscipy._lib._array_api import (
     array_namespace, xp_capabilities, xp_device, xp_promote
 )
-from scipy._external import array_api_extra as xpx
+from rsscipy._external import array_api_extra as xpx
 
 
 # standard status messages of optimizers
@@ -366,7 +366,7 @@ def rosen(x):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.optimize import rosen
+    >>> from rsscipy.optimize import rosen
     >>> X = 0.1 * np.arange(10)
     >>> rosen(X)
     76.56
@@ -412,7 +412,7 @@ def rosen_der(x):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.optimize import rosen_der
+    >>> from rsscipy.optimize import rosen_der
     >>> X = 0.1 * np.arange(9)
     >>> rosen_der(X)
     array([ -2. ,  10.6,  15.6,  13.4,   6.4,  -3. , -12.4, -19.4,  62. ])
@@ -453,7 +453,7 @@ def rosen_hess(x):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.optimize import rosen_hess
+    >>> from rsscipy.optimize import rosen_hess
     >>> X = 0.1 * np.arange(4)
     >>> rosen_hess(X)
     array([[-38.,   0.,   0.,   0.],
@@ -499,7 +499,7 @@ def rosen_hess_prod(x, p):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.optimize import rosen_hess_prod
+    >>> from rsscipy.optimize import rosen_hess_prod
     >>> X = 0.1 * np.arange(9)
     >>> p = 0.5 * np.arange(9)
     >>> rosen_hess_prod(X, p)
@@ -668,7 +668,7 @@ def fmin(func, x0, args=(), xtol=1e-4, ftol=1e-4, maxiter=None, maxfun=None,
     >>> def f(x):
     ...     return x**2
 
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
 
     >>> minimum = optimize.fmin(f, 1)
     Optimization terminated successfully.
@@ -1032,7 +1032,7 @@ def approx_fprime(xk, f, epsilon=_epsilon, *args):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
     >>> def func(x, c0, c1):
     ...     "Coordinate vector `x` should be an array of size two."
     ...     return c0 * x[0]**2 + c1*x[1]**2
@@ -1104,7 +1104,7 @@ def check_grad(func, grad, x0, *args, epsilon=_epsilon, direction='all', rng=Non
     ...     return x[0]**2 - 0.5 * x[1]**3
     >>> def grad(x):
     ...     return [2 * x[0], -1.5 * x[1]**2]
-    >>> from scipy.optimize import check_grad
+    >>> from rsscipy.optimize import check_grad
     >>> check_grad(func, grad, [1.5, -1.5])
     2.9802322387695312e-08  # may vary
     >>> rng = np.random.default_rng()
@@ -1290,7 +1290,7 @@ def fmin_bfgs(f, x0, fprime=None, args=(), gtol=1e-5, norm=np.inf,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.optimize import fmin_bfgs
+    >>> from rsscipy.optimize import fmin_bfgs
     >>> def quadratic_cost(x, Q):
     ...     return x @ Q @ x
     ...
@@ -1664,7 +1664,7 @@ def fmin_cg(f, x0, fprime=None, args=(), gtol=1e-5, norm=np.inf,
     ...     gv = b*u + 2*c*v + e     # v-component of the gradient
     ...     return np.asarray((gu, gv))
     >>> x0 = np.asarray((0, 0))  # Initial guess.
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
     >>> res1 = optimize.fmin_cg(f, x0, fprime=gradf, args=args)
     Optimization terminated successfully.
              Current function value: 1.617021
@@ -1961,7 +1961,7 @@ def fmin_ncg(f, x0, fprime, fhess_p=None, fhess=None, args=(), avextol=1e-5,
     it.
 
     Newton-CG methods are also called truncated Newton methods. This
-    function differs from scipy.optimize.fmin_tnc because
+    function differs from rsscipy.optimize.fmin_tnc because
 
     1. scipy.optimize.fmin_ncg is written purely in Python using NumPy
         and scipy while scipy.optimize.fmin_tnc calls a C function.
@@ -2260,7 +2260,7 @@ def fminbound(func, x1, x2, args=(), xtol=1e-5, maxfun=500,
     `fminbound` finds the minimizer of the function in the given range.
     The following examples illustrate this.
 
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
     >>> def f(x):
     ...     return (x-1)**2
     >>> minimizer = optimize.fminbound(f, -4, 4)
@@ -2679,7 +2679,7 @@ def brent(func, args=(), brack=None, tol=1.48e-8, full_output=0, maxiter=500):
     >>> def f(x):
     ...     return (x-1)**2
 
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
 
     >>> minimizer = optimize.brent(f, brack=(1, 2))
     >>> minimizer
@@ -2814,7 +2814,7 @@ def golden(func, args=(), brack=None, tol=_epsilon,
     >>> def f(x):
     ...     return (x-1)**2
 
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
 
     >>> minimizer = optimize.golden(f, brack=(1, 2))
     >>> minimizer
@@ -3004,7 +3004,7 @@ def bracket(func, xa=0.0, xb=1.0, args=(), grow_limit=110.0, maxiter=1000):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.optimize import bracket
+    >>> from rsscipy.optimize import bracket
     >>> def f(x):
     ...     return 10*x**2 + 3*x + 5
     >>> x = np.linspace(-2, 2)
@@ -3377,7 +3377,7 @@ def fmin_powell(func, x0, args=(), xtol=1e-4, ftol=1e-4, maxiter=None,
     >>> def f(x):
     ...     return x**2
 
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
 
     >>> minimum = optimize.fmin_powell(f, -1)
     Optimization terminated successfully.
@@ -3833,7 +3833,7 @@ def brute(func, ranges, args=(), Ns=20, full_output=0, finish=fmin,
     follows:
 
     >>> rranges = (slice(-4, 4, 0.25), slice(-4, 4, 0.25))
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
     >>> resbrute = optimize.brute(f, rranges, args=params, full_output=True,
     ...                           finish=optimize.fmin)
     >>> resbrute[0]  # global minimum
@@ -4039,7 +4039,7 @@ def show_options(solver=None, method=None, disp=True):
     --------
     We can print documentations of a solver in stdout:
 
-    >>> from scipy.optimize import show_options
+    >>> from rsscipy.optimize import show_options
     >>> show_options(solver="minimize")
     ...
 

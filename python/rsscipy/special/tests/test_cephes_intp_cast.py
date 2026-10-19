@@ -1,6 +1,6 @@
 import pytest
 import rsnumpy as np
-from scipy.special._ufuncs import (
+from rsscipy.special._ufuncs import (
     _smirnovc, _smirnovci, _smirnovp,
     bdtr, bdtrc, bdtri, expn, kn, nbdtr, nbdtrc, nbdtri, pdtri,
     smirnov, smirnovi, yn

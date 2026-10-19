@@ -1,7 +1,7 @@
-from scipy.datasets._registry import registry
-from scipy.datasets._fetchers import data_fetcher
-from scipy.datasets._utils import _clear_cache
-from scipy.datasets import ascent, face, electrocardiogram, download_all
+from rsscipy.datasets._registry import registry
+from rsscipy.datasets._fetchers import data_fetcher
+from rsscipy.datasets._utils import _clear_cache
+from rsscipy.datasets import ascent, face, electrocardiogram, download_all
 from rsnumpy.testing import assert_equal, assert_almost_equal
 import os
 from threading import get_ident

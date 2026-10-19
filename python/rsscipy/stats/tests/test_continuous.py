@@ -11,21 +11,21 @@ from rsnumpy.testing import assert_allclose, assert_equal
 from hypothesis import strategies, given
 import hypothesis.extra.numpy as npst
 
-from scipy import special
-from scipy import stats
-from scipy.stats._fit import _kolmogorov_smirnov
-from scipy.stats._ksstats import kolmogn
-from scipy.stats import qmc
-from scipy.stats._distr_params import distcont, distdiscrete
-from scipy.stats._distribution_infrastructure import (
+from rsscipy import special
+from rsscipy import stats
+from rsscipy.stats._fit import _kolmogorov_smirnov
+from rsscipy.stats._ksstats import kolmogn
+from rsscipy.stats import qmc
+from rsscipy.stats._distr_params import distcont, distdiscrete
+from rsscipy.stats._distribution_infrastructure import (
     _Domain, _RealInterval, _Parameter, _Parameterization, _RealParameter,
     ContinuousDistribution, DiscreteDistribution, CircularDistribution, Mixture,
     ShiftedScaledDistribution, _fiinfo, _generate_domain_support, _logexpxmexpy)
-from scipy.stats._new_distributions import (
+from rsscipy.stats._new_distributions import (
     StandardNormal, _LogUniform, _Gamma, _TestCircular)
-from scipy.stats import Normal, Uniform
-from scipy._lib._testutils import mutually_broadcastable_shapes
-from scipy._lib._util import _RichResult
+from rsscipy.stats import Normal, Uniform
+from rsscipy._lib._testutils import mutually_broadcastable_shapes
+from rsscipy._lib._util import _RichResult
 
 
 class Test_RealInterval:
@@ -1757,7 +1757,7 @@ class TestMakeDistribution:
             stats.make_distribution(MyTestDistribution())(n=10)
 
     def test_repr_str_docs(self):
-        from scipy.stats._distribution_infrastructure import _distribution_names
+        from rsscipy.stats._distribution_infrastructure import _distribution_names
         for dist in _distribution_names.keys():
             assert hasattr(stats, dist)
 
@@ -2480,9 +2480,9 @@ class TestReprs:
         # provided relevant imports are made.
         from rsnumpy import array  # noqa: F401
         from rsnumpy import float32  # noqa: F401
-        from scipy.stats import abs, exp, log, order_statistic, truncate # noqa: F401
-        from scipy.stats import Mixture, Normal # noqa: F401
-        from scipy.stats._new_distributions import Uniform # noqa: F401
+        from rsscipy.stats import abs, exp, log, order_statistic, truncate # noqa: F401
+        from rsscipy.stats import Mixture, Normal # noqa: F401
+        from rsscipy.stats._new_distributions import Uniform # noqa: F401
         new_dist = eval(repr(dist))
         # A basic check that the distributions are the same
         sample1 = dist.sample(shape=10, rng=1234)

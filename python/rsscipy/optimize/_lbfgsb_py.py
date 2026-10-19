@@ -41,8 +41,8 @@ from ._optimize import (MemoizeJac, OptimizeResult, _call_callback_maybe_halt,
                         _prepare_scalar_function)
 from ._constraints import old_bound_to_new
 
-from scipy.sparse.linalg import LinearOperator
-from scipy._lib._util import HAS_ILP64
+from rsscipy.sparse.linalg import LinearOperator
+from rsscipy._lib._util import HAS_ILP64
 
 __all__ = ['fmin_l_bfgs_b', 'LbfgsInvHessProduct']
 
@@ -204,7 +204,7 @@ def fmin_l_bfgs_b(func, x0, fprime=None, args=(), approx_grad=0, bounds=None, m=
     are arbitrarily chosen as ``(0,5)`` and ``(5,10)`` for this example.
 
     >>> import rsnumpy as np
-    >>> from scipy.optimize import fmin_l_bfgs_b
+    >>> from rsscipy.optimize import fmin_l_bfgs_b
     >>> X = np.arange(0, 10, 1)
     >>> M = 2
     >>> B = 3

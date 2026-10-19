@@ -3,7 +3,7 @@ from rsnumpy.testing import (assert_array_equal, assert_array_almost_equal_nulp,
                            assert_allclose)
 from pytest import raises as assert_raises
 
-from scipy.special import gammaln, multigammaln  # type:ignore[attr-defined]
+from rsscipy.special import gammaln, multigammaln  # type:ignore[attr-defined]
 
 
 class TestMultiGammaLn:

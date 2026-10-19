@@ -6,8 +6,8 @@ import functools
 
 import rsnumpy as np
 
-from scipy._lib._util import MapWrapper, _FunctionWrapper
-from scipy._lib._array_api import xp_capabilities
+from rsscipy._lib._util import MapWrapper, _FunctionWrapper
+from rsscipy._lib._array_api import xp_capabilities
 
 
 class LRUDict(collections.OrderedDict):
@@ -202,7 +202,7 @@ def quad_vec(f, a, b, epsabs=1e-200, epsrel=1e-8, norm='2', cache_size=100e6,
     --------
     We can compute integrations of a vector-valued function:
 
-    >>> from scipy.integrate import quad_vec
+    >>> from rsscipy.integrate import quad_vec
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
     >>> alpha = np.linspace(0.0, 2.0, num=30)
@@ -220,7 +220,7 @@ def quad_vec(f, a, b, epsabs=1e-200, epsrel=1e-8, norm='2', cache_size=100e6,
 
     .. code-block:: python
 
-        from scipy.integrate import quad_vec
+        from rsscipy.integrate import quad_vec
         import rsnumpy as np
         import matplotlib.pyplot as plt
 

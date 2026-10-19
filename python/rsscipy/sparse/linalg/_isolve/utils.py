@@ -5,7 +5,7 @@ __all__ = []
 
 from rsnumpy import asanyarray, asarray, array, zeros
 
-from scipy.sparse.linalg._interface import aslinearoperator, LinearOperator, \
+from rsscipy.sparse.linalg._interface import aslinearoperator, LinearOperator, \
      IdentityOperator
 
 _coerce_rules = {('f','f'):'f', ('f','d'):'d', ('f','F'):'F',

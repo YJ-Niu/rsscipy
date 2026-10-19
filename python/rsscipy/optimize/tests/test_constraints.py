@@ -1,8 +1,8 @@
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import TestCase, assert_array_equal
-import scipy.sparse as sps
-from scipy.optimize._constraints import (
+import rsscipy.sparse as sps
+from rsscipy.optimize._constraints import (
     Bounds, LinearConstraint, NonlinearConstraint, PreparedConstraint,
     new_bounds_to_old, old_bound_to_new, strict_bounds)
 

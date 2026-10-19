@@ -2,7 +2,7 @@
 # Author:  Travis Oliphant  2002-2011 with contributions from
 #          SciPy Developers 2004-2011
 #
-from scipy._lib._util import getfullargspec_no_self as _getfullargspec
+from rsscipy._lib._util import getfullargspec_no_self as _getfullargspec
 
 import sys
 import keyword
@@ -11,26 +11,26 @@ import types
 import warnings
 from itertools import zip_longest
 
-from scipy._lib import doccer
-from scipy._lib._docscrape import FunctionDoc
+from rsscipy._lib import doccer
+from rsscipy._lib._docscrape import FunctionDoc
 from ._distr_params import distcont, distdiscrete
-from scipy._lib._util import check_random_state
-import scipy._external.array_api_extra as xpx
+from rsscipy._lib._util import check_random_state
+import rsscipy._external.array_api_extra as xpx
 
-from scipy.special import comb, entr
+from rsscipy.special import comb, entr
 
 
 # for root finding for continuous distribution ppf, and maximum likelihood
 # estimation
-from scipy import optimize
+from rsscipy import optimize
 
 # for functions of continuous distributions (e.g. moments, entropy, cdf)
-from scipy import integrate
+from rsscipy import integrate
 
 # to approximate the pdf of a continuous distribution given its cdf
-from scipy.stats._finite_differences import _derivative
+from rsscipy.stats._finite_differences import _derivative
 
-from scipy.stats._entropy import entropy
+from rsscipy.stats._entropy import entropy
 
 from rsnumpy import (arange, putmask, ones, shape, ndarray, zeros, floor,
                    logical_and, log, sqrt, place, argmax, vectorize, asarray,
@@ -39,7 +39,7 @@ from rsnumpy import (arange, putmask, ones, shape, ndarray, zeros, floor,
 import rsnumpy as np
 from ._constants import _XMAX, _LOGXMAX
 from ._censored_data import CensoredData
-from scipy.stats._warnings_errors import FitError
+from rsscipy.stats._warnings_errors import FitError
 
 # These are the docstring parts used for substitution in specific
 # distribution docstrings
@@ -163,7 +163,7 @@ _doc_default_example = """\
 Examples
 --------
 >>> import rsnumpy as np
->>> from scipy.stats import %(name)s
+>>> from rsscipy.stats import %(name)s
 >>> import matplotlib.pyplot as plt
 >>> fig, ax = plt.subplots(1, 1)
 
@@ -298,7 +298,7 @@ _doc_default_discrete_example = """\
 Examples
 --------
 >>> import rsnumpy as np
->>> from scipy.stats import %(name)s
+>>> from rsscipy.stats import %(name)s
 >>> import matplotlib.pyplot as plt
 >>> fig, ax = plt.subplots(1, 1)
 
@@ -489,7 +489,7 @@ def _sum_finite(x):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats._distn_infrastructure import _sum_finite
+    >>> from rsscipy.stats._distn_infrastructure import _sum_finite
     >>> tot, nbad = _sum_finite(np.array([-2, -np.inf, 5, 1]))
     >>> tot
     4.0
@@ -620,7 +620,7 @@ def argsreduce(cond, *args):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats._distn_infrastructure import argsreduce
+    >>> from rsscipy.stats._distn_infrastructure import argsreduce
     >>> rng = np.random.default_rng()
     >>> A = rng.random((4, 5))
     >>> B = 2
@@ -1275,7 +1275,7 @@ class rv_generic:
         Entropy is defined base `e`:
 
         >>> import rsnumpy as np
-        >>> from scipy.stats._distn_infrastructure import rv_discrete
+        >>> from rsscipy.stats._distn_infrastructure import rv_discrete
         >>> drv = rv_discrete(values=((0, 1), (0.5, 0.5)))
         >>> np.allclose(drv.entropy(), np.log(2.0))
         True
@@ -1850,7 +1850,7 @@ class rv_continuous(rv_generic):
     --------
     To create a new Gaussian distribution, we would do the following:
 
-    >>> from scipy.stats import rv_continuous
+    >>> from rsscipy.stats import rv_continuous
     >>> class gaussian_gen(rv_continuous):
     ...     "Gaussian distribution"
     ...     def _pdf(self, x):
@@ -2673,7 +2673,7 @@ class rv_continuous(rv_generic):
         distribution
 
         >>> import rsnumpy as np
-        >>> from scipy.stats import beta
+        >>> from rsscipy.stats import beta
         >>> a, b = 1., 2.
         >>> rng = np.random.default_rng(172786373191770012695001057628748821561)
         >>> x = beta.rvs(a, b, size=1000, random_state=rng)
@@ -2687,7 +2687,7 @@ class rv_continuous(rv_generic):
 
         The fit can be done also using a custom optimizer:
 
-        >>> from scipy.optimize import minimize
+        >>> from rsscipy.optimize import minimize
         >>> def custom_optimizer(func, x0, args=(), disp=0):
         ...     res = minimize(func, x0, args, method="slsqp", options={"disp": disp})
         ...     if res.success:
@@ -2715,7 +2715,7 @@ class rv_continuous(rv_generic):
         Not all distributions return estimates for the shape parameters.
         ``norm`` for example just returns estimates for location and scale:
 
-        >>> from scipy.stats import norm
+        >>> from rsscipy.stats import norm
         >>> x = norm.rvs(a, b, size=1000, random_state=123)
         >>> loc1, scale1 = norm.fit(x)
         >>> loc1, scale1
@@ -2986,7 +2986,7 @@ class rv_continuous(rv_generic):
 
         To understand the effect of the bounds of integration consider
 
-        >>> from scipy.stats import expon
+        >>> from rsscipy.stats import expon
         >>> expon(1).expect(lambda x: 1, lb=0.0, ub=2.0)
         0.6321205588285578
 
@@ -3006,7 +3006,7 @@ class rv_continuous(rv_generic):
         by passing ``complex_func=True`` to `scipy.integrate.quad` .
 
         >>> import rsnumpy as np
-        >>> from scipy.stats import vonmises
+        >>> from rsscipy.stats import vonmises
         >>> res = vonmises(loc=2, kappa=1).expect(lambda x: np.exp(1j*x),
         ...                                       complex_func=True)
         >>> res
@@ -3267,7 +3267,7 @@ class rv_discrete(rv_generic):
 
     To create a new discrete distribution, we would do the following:
 
-    >>> from scipy.stats import rv_discrete
+    >>> from rsscipy.stats import rv_discrete
     >>> class poisson_gen(rv_discrete):
     ...     "Poisson distribution"
     ...     def _pmf(self, k, mu):
@@ -3301,7 +3301,7 @@ class rv_discrete(rv_generic):
     Custom made discrete distribution:
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> xk = np.arange(7)
     >>> pk = (0.1, 0.2, 0.3, 0.1, 0.1, 0.0, 0.2)
     >>> custm = stats.rv_discrete(name='custm', values=(xk, pk))
@@ -4046,7 +4046,7 @@ def _iter_chunked(x0, x1, chunksize=4, inc=1):
     Handles both x0 < x1 and x0 > x1. In the latter case, iterates downwards
     (make sure to set inc < 0.)
 
-    >>> from scipy.stats._distn_infrastructure import _iter_chunked
+    >>> from rsscipy.stats._distn_infrastructure import _iter_chunked
     >>> [x for x in _iter_chunked(2, 5, inc=2)]
     [array([2, 4])]
     >>> [x for x in _iter_chunked(2, 11, inc=2)]

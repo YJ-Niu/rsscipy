@@ -126,7 +126,7 @@ class CensoredData:
     interval-censored in the interval [2, 3].
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import CensoredData
+    >>> from rsscipy.stats import CensoredData
     >>> data = CensoredData(uncensored=[1, 1.5], left=[0], right=[10],
     ...                     interval=[[2, 3]])
     >>> print(data)
@@ -201,7 +201,7 @@ class CensoredData:
     distribution, and then fit `weibull_min` to that data. We'll assume
     that the location parameter is known to be 0.
 
-    >>> from scipy.stats import weibull_min
+    >>> from rsscipy.stats import weibull_min
     >>> rng = np.random.default_rng()
 
     Create the random data set.
@@ -333,7 +333,7 @@ class CensoredData:
 
         Examples
         --------
-        >>> from scipy.stats import CensoredData
+        >>> from rsscipy.stats import CensoredData
 
         Two uncensored values (4 and 10) and two right-censored values
         (24 and 25).
@@ -374,7 +374,7 @@ class CensoredData:
 
         Examples
         --------
-        >>> from scipy.stats import CensoredData
+        >>> from rsscipy.stats import CensoredData
 
         Two uncensored values (0.12 and 0.033) and two left-censored values
         (both 1e-3).
@@ -418,7 +418,7 @@ class CensoredData:
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from scipy.stats import CensoredData
+        >>> from rsscipy.stats import CensoredData
 
         ``a`` and ``b`` are the low and high ends of a collection of
         interval-censored values.

@@ -7,11 +7,11 @@ import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose
 from rsnumpy.exceptions import ComplexWarning
 
-from scipy.sparse import (
+from rsscipy.sparse import (
         bsr_array, csc_array, dia_array, lil_array,
         coo_array, csr_array, dok_array,
     )
-from scipy.sparse._sputils import supported_dtypes, matrix
+from rsscipy.sparse._sputils import supported_dtypes, matrix
 
 
 spcreators = [coo_array, csr_array, dok_array]

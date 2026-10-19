@@ -2,10 +2,10 @@
 import pytest
 
 import rsnumpy as np
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     assert_almost_equal, xp_assert_close, make_xp_test_case,
 )
-from scipy import ndimage
+from rsscipy import ndimage
 
 xfail_xp_backends = pytest.mark.xfail_xp_backends
 

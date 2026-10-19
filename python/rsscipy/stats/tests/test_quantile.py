@@ -1,10 +1,10 @@
 import pytest
 import rsnumpy as np
 
-from scipy import stats
-from scipy.stats._quantile import (_xp_searchsorted, _estimated_cdf_methods,
+from rsscipy import stats
+from rsscipy.stats._quantile import (_xp_searchsorted, _estimated_cdf_methods,
     _estimated_cdf_discontinuous_methods, _estimated_cdf_continuous_methods)
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     is_numpy,
     is_torch,
     is_jax,
@@ -15,10 +15,10 @@ from scipy._lib._array_api import (
     xp_size,
     xp_copy,
 )
-from scipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
-from scipy._lib._util import _apply_over_batch
-import scipy._external.array_api_extra as xpx
-from scipy.stats._axis_nan_policy import _broadcast_arrays
+from rsscipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
+from rsscipy._lib._util import _apply_over_batch
+import rsscipy._external.array_api_extra as xpx
+from rsscipy.stats._axis_nan_policy import _broadcast_arrays
 
 pytestmark = [
     pytest.mark.filterwarnings(r"ignore:^`scipy\.stats\.mstats\.[^`]+` is deprecated:DeprecationWarning"),  # noqa: E501

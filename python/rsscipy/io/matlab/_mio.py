@@ -11,7 +11,7 @@ from contextlib import contextmanager
 from ._miobase import _get_matfile_version, docfiller
 from ._mio4 import MatFile4Reader, MatFile4Writer
 from ._mio5 import MatFile5Reader, MatFile5Writer
-from scipy._lib.deprecation import _NoValue
+from rsscipy._lib.deprecation import _NoValue
 
 __all__ = ['loadmat', 'savemat', 'whosmat']
 
@@ -181,7 +181,7 @@ def loadmat(file_name, mdict=None, appendmat=True, *, spmatrix=_NoValue, **kwarg
     Examples
     --------
     >>> from os.path import dirname, join as pjoin
-    >>> import scipy.io as sio
+    >>> import rsscipy.io as sio
 
     Get the filename for an example .mat file from the tests/data directory.
 
@@ -260,7 +260,7 @@ def loadmat(file_name, mdict=None, appendmat=True, *, spmatrix=_NoValue, **kwarg
         https://docs.scipy.org/doc/scipy/reference/sparse.migration_to_sparray.html
         """
 
-    from scipy.sparse import issparse, coo_matrix, csc_matrix, coo_array, csc_array
+    from rsscipy.sparse import issparse, coo_matrix, csc_matrix, coo_array, csc_array
     for name, var in list(matfile_dict.items()):
         if issparse(var):
             if spmatrix is _NoValue:
@@ -334,7 +334,7 @@ def savemat(file_name, mdict,
 
     Examples
     --------
-    >>> from scipy.io import savemat
+    >>> from rsscipy.io import savemat
     >>> import rsnumpy as np
     >>> a = np.arange(20)
     >>> mdic = {"a": a, "label": "experiment"}
@@ -396,7 +396,7 @@ def whosmat(file_name, appendmat=True, **kwargs):
     --------
     >>> from io import BytesIO
     >>> import rsnumpy as np
-    >>> from scipy.io import savemat, whosmat
+    >>> from rsscipy.io import savemat, whosmat
 
     Create some arrays, and use `savemat` to write them to a ``BytesIO``
     instance.

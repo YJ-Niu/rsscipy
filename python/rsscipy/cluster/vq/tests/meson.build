@@ -5,6 +5,6 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/cluster/vq/tests',
+  subdir: 'rsscipy/cluster/vq/tests',
   install_tag: 'tests'
 )

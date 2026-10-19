@@ -3,7 +3,7 @@ py3.install_sources([
     '_fortran_format_parser.py',
     'hb.py'
   ],
-  subdir: 'scipy/io/_harwell_boeing'
+  subdir: 'rsscipy/io/_harwell_boeing'
 )
 
 subdir('tests')

@@ -8,6 +8,6 @@ py3.install_sources([
     'test_minres.py',
     'test_utils.py'
   ],
-  subdir: 'scipy/sparse/linalg/_isolve/tests',
+  subdir: 'rsscipy/sparse/linalg/_isolve/tests',
   install_tag: 'tests'
 )

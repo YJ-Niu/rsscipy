@@ -21,7 +21,7 @@ from collections.abc import Iterable
 import rsnumpy as np
 import rsnumpy.typing as npt
 
-from scipy._external.array_api_compat import (
+from rsscipy._external.array_api_compat import (
     is_array_api_obj,
     is_lazy_array,
     is_numpy_array,
@@ -40,15 +40,15 @@ from scipy._external.array_api_compat import (
     is_dask_namespace as is_dask,
     is_array_api_strict_namespace as is_array_api_strict,
 )
-from scipy._external.array_api_compat.common._helpers import _compat_module_name
-from scipy._external.array_api_extra.testing import lazy_xp_function
-from scipy._lib._array_api_override import (
+from rsscipy._external.array_api_compat.common._helpers import _compat_module_name
+from rsscipy._external.array_api_extra.testing import lazy_xp_function
+from rsscipy._lib._array_api_override import (
     array_namespace, SCIPY_ARRAY_API, SCIPY_DEVICE
 )
 
-from scipy._lib._docscrape import FunctionDoc
-import scipy._external.array_api_extra as xpx
-import scipy._external.array_api_extra.testing as xpt
+from rsscipy._lib._docscrape import FunctionDoc
+import rsscipy._external.array_api_extra as xpx
+import rsscipy._external.array_api_extra.testing as xpt
 
 
 __all__ = [
@@ -228,7 +228,7 @@ def eager_warns(warning_type, *, match=None, xp):
     Otherwise, context manager that *ignores* specified warning.
     """
     import pytest
-    from scipy._lib._util import ignore_warns
+    from rsscipy._lib._util import ignore_warns
     if is_numpy(xp) or is_array_api_strict(xp) or is_cupy(xp):
         return pytest.warns(warning_type, match=match)
     return ignore_warns(warning_type, match='' if match is None else match)

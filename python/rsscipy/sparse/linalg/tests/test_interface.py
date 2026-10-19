@@ -13,18 +13,18 @@ from pytest import raises as assert_raises, warns
 from rsnumpy.testing import assert_, assert_equal
 
 import rsnumpy as np
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     SCIPY_ARRAY_API, SCIPY_DEVICE, is_torch, xp_assert_close, is_lazy_array,
     xp_assert_equal, xp_ravel, is_numpy, make_xp_pytest_marks, is_jax_array,
 )
-from scipy._external import array_api_extra as xpx
-import scipy.sparse as sparse
+from rsscipy._external import array_api_extra as xpx
+import rsscipy.sparse as sparse
 
-import scipy.sparse.linalg._interface as interface
-from scipy.sparse.linalg import LinearOperator, aslinearoperator
-from scipy.sparse._sputils import matrix
-from scipy._lib._gcutils import assert_deallocated
-from scipy._lib._testutils import mutually_broadcastable_shapes
+import rsscipy.sparse.linalg._interface as interface
+from rsscipy.sparse.linalg import LinearOperator, aslinearoperator
+from rsscipy.sparse._sputils import matrix
+from rsscipy._lib._gcutils import assert_deallocated
+from rsscipy._lib._testutils import mutually_broadcastable_shapes
 
 pytestmark = make_xp_pytest_marks(
     (LinearOperator, "__init__"),

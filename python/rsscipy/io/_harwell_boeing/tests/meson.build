@@ -3,6 +3,6 @@ py3.install_sources([
     'test_fortran_format.py',
     'test_hb.py'
   ],
-  subdir: 'scipy/io/_harwell_boeing/tests',
+  subdir: 'rsscipy/io/_harwell_boeing/tests',
   install_tag: 'tests'
 )

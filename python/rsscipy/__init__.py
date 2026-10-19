@@ -24,13 +24,13 @@ import importlib as _importlib
 
 # Registers the rsnumpy compatibility layer (`rsnumpy.testing` & friends).
 # Must happen before anything else imports rsnumpy.
-from scipy import _rsnumpy_compat  # noqa: F401
+from rsscipy import _rsnumpy_compat  # noqa: F401
 
 from rsnumpy import __version__ as __numpy_version__
 
 
 try:
-    from scipy.__config__ import show as show_config
+    from rsscipy.__config__ import show as show_config
 except ImportError as e:
     msg = """Error importing SciPy: you cannot import SciPy while
     being in scipy source directory; please exit the SciPy source
@@ -38,7 +38,7 @@ except ImportError as e:
     raise ImportError(msg) from e
 
 
-from scipy.version import version as __version__
+from rsscipy.version import version as __version__
 
 
 # Allow distributors to run custom init code
@@ -46,7 +46,7 @@ from . import _distributor_init
 del _distributor_init
 
 
-from scipy._external.packaging_version.version import Version, parse
+from rsscipy._external.packaging_version.version import Version, parse
 # In maintenance branch, change to np_maxversion N+3 if rsnumpy is at N
 np_minversion = '1.2.0'
 np_maxversion = '9.9.99'
@@ -65,7 +65,7 @@ del Version, parse
 # or cannot be imported, this is where we'll get a failure - so give an
 # informative error message.
 try:
-    from scipy._lib._ccallback import LowLevelCallable
+    from rsscipy._lib._ccallback import LowLevelCallable
 except ImportError as e:
     msg = "The `scipy` install you are using seems to be broken, " + \
           "(extension modules cannot be imported), " + \
@@ -73,7 +73,7 @@ except ImportError as e:
     raise ImportError(msg) from e
 
 
-from scipy._lib._testutils import PytestTester
+from rsscipy._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester
 

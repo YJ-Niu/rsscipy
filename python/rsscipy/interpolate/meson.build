@@ -4,7 +4,7 @@ py3.extension_module('_interpnd',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/interpolate'
+  subdir: 'rsscipy/interpolate'
 )
 
 py3.extension_module('_ppoly',
@@ -13,7 +13,7 @@ py3.extension_module('_ppoly',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/interpolate'
+  subdir: 'rsscipy/interpolate'
 )
 
 py3.extension_module('_rgi_cython',
@@ -22,7 +22,7 @@ py3.extension_module('_rgi_cython',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/interpolate'
+  subdir: 'rsscipy/interpolate'
 )
 
 __fitpack_lib = static_library('__fitpack',
@@ -41,7 +41,7 @@ py3.extension_module('_dierckx',
     dependencies: [np_dep, __fitpack_dep],
     link_args: version_link_args,
     install: true,
-    subdir: 'scipy/interpolate'
+    subdir: 'rsscipy/interpolate'
 )
 
 py3.extension_module('_fitpack',
@@ -50,24 +50,15 @@ py3.extension_module('_fitpack',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/interpolate'
+  subdir: 'rsscipy/interpolate'
 )
 
-if use_pythran
-  py3.extension_module('_rbfinterp_pythran',
-    pythran_gen.process('_rbfinterp_pythran.py'),
-    cpp_args: cpp_args_pythran,
-    dependencies: [pythran_dep, np_dep],
-    link_args: version_link_args,
-    install: true,
-    subdir: 'scipy/interpolate'
-  )
-else
-  py3.install_sources(
-    ['_rbfinterp_pythran.py'],
-    subdir: 'scipy/interpolate'
-  )
-endif
+# `_rbfinterp_pythran.py` is plain Python now; install it instead of compiling
+# it through pythran.
+py3.install_sources(
+  ['_rbfinterp_pythran.py'],
+  subdir: 'rsscipy/interpolate'
+)
 
 py3.install_sources([
     '__init__.py',
@@ -91,7 +82,7 @@ py3.install_sources([
     '_rgi.py',
     '_ndbspline.py',
   ],
-  subdir: 'scipy/interpolate'
+  subdir: 'rsscipy/interpolate'
 )
 
 subdir('tests')

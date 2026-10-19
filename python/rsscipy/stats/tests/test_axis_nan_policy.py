@@ -13,14 +13,14 @@ import warnings
 
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal
-from scipy import stats, special
-from scipy.stats._axis_nan_policy import (_masked_arrays_2_sentinel_arrays,
+from rsscipy import stats, special
+from rsscipy.stats._axis_nan_policy import (_masked_arrays_2_sentinel_arrays,
                                           SmallSampleWarning,
                                           too_small_nd_omit, too_small_nd_not_omit,
                                           too_small_1d_omit, too_small_1d_not_omit)
-from scipy._lib._util import AxisError, USING_ACCELERATE
-from scipy._lib._array_api import make_xp_test_case
-from scipy.conftest import skip_xp_invalid_arg
+from rsscipy._lib._util import AxisError, USING_ACCELERATE
+from rsscipy._lib._array_api import make_xp_test_case
+from rsscipy.conftest import skip_xp_invalid_arg
 
 pytestmark = [
     pytest.mark.filterwarnings(r"ignore:^`scipy\.stats\.mstats\.[^`]+` is deprecated:DeprecationWarning"),  # noqa: E501

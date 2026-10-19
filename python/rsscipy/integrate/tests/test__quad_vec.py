@@ -3,9 +3,9 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
 
-from scipy.integrate import quad_vec
-from scipy._lib._array_api import make_xp_test_case
-from scipy._lib._testutils import IS_WASM
+from rsscipy.integrate import quad_vec
+from rsscipy._lib._array_api import make_xp_test_case
+from rsscipy._lib._testutils import IS_WASM
 
 from multiprocessing.dummy import Pool
 

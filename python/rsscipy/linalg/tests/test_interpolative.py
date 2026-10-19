@@ -26,11 +26,11 @@
 #   POSSIBILITY OF SUCH DAMAGE.
 #  ******************************************************************************
 
-import scipy.linalg.interpolative as pymatrixid
+import rsscipy.linalg.interpolative as pymatrixid
 import rsnumpy as np
-from scipy.linalg import hilbert, svdvals, norm
-from scipy.sparse.linalg import aslinearoperator
-from scipy.linalg.interpolative import interp_decomp
+from rsscipy.linalg import hilbert, svdvals, norm
+from rsscipy.sparse.linalg import aslinearoperator
+from rsscipy.linalg.interpolative import interp_decomp
 
 from rsnumpy.testing import (assert_, assert_allclose, assert_equal,
                            assert_array_equal)

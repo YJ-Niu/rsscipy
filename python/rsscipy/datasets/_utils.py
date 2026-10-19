@@ -2,7 +2,7 @@ import os
 import shutil
 from ._registry import method_files_map
 
-from scipy._lib._array_api import xp_capabilities
+from rsscipy._lib._array_api import xp_capabilities
 
 try:
     import platformdirs
@@ -70,7 +70,7 @@ def clear_cache(datasets=None):
 
     Examples
     --------
-    >>> from scipy import datasets
+    >>> from rsscipy import datasets
     >>> ascent_array = datasets.ascent()
     >>> ascent_array.shape
     (512, 512)

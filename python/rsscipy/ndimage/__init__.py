@@ -160,6 +160,6 @@ __all__ = _support_alternative_backends.__all__
 del _support_alternative_backends, _ndimage_api, _delegators  # noqa: F821  # pyrefly:ignore[unbound-name]
 
 
-from scipy._lib._testutils import PytestTester
+from rsscipy._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester

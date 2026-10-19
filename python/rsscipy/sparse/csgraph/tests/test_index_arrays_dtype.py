@@ -5,9 +5,9 @@ See gh-24629
 import rsnumpy as np
 import pytest
 
-from scipy.sparse import csr_array
-import scipy.sparse.csgraph as csgraph_subpackage
-from scipy.sparse.csgraph import (
+from rsscipy.sparse import csr_array
+import rsscipy.sparse.csgraph as csgraph_subpackage
+from rsscipy.sparse.csgraph import (
     connected_components,
     laplacian,
     shortest_path,

@@ -43,9 +43,9 @@ References
 import rsnumpy as np
 from rsnumpy.linalg import lstsq, norm
 
-from scipy.sparse.linalg import LinearOperator, aslinearoperator, lsmr
-from scipy.optimize._optimize import OptimizeResult
-from scipy._lib._util import _call_callback_maybe_halt
+from rsscipy.sparse.linalg import LinearOperator, aslinearoperator, lsmr
+from rsscipy.optimize._optimize import OptimizeResult
+from rsscipy._lib._util import _call_callback_maybe_halt
 
 
 from .common import (

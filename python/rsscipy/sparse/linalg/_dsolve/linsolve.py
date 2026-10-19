@@ -2,11 +2,11 @@ from warnings import warn, catch_warnings, simplefilter
 
 import rsnumpy as np
 from rsnumpy import asarray
-from scipy.sparse import (issparse, SparseEfficiencyWarning,
+from rsscipy.sparse import (issparse, SparseEfficiencyWarning,
                           csr_array, csc_array, eye_array, diags_array)
-from scipy.sparse._sputils import (is_pydata_spmatrix, convert_pydata_sparse_to_scipy,
+from rsscipy.sparse._sputils import (is_pydata_spmatrix, convert_pydata_sparse_to_scipy,
                                    get_index_dtype, safely_cast_index_arrays)
-from scipy.linalg import LinAlgError
+from rsscipy.linalg import LinAlgError
 import copy
 import threading
 
@@ -83,8 +83,8 @@ def use_solver(**kwargs):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse.linalg import use_solver, spsolve
-    >>> from scipy.sparse import csc_array
+    >>> from rsscipy.sparse.linalg import use_solver, spsolve
+    >>> from rsscipy.sparse import csc_array
     >>> R = np.random.randn(5, 5)
     >>> A = csc_array(R)
     >>> b = np.random.randn(5)
@@ -208,8 +208,8 @@ def spsolve(A, b, permc_spec=None, use_umfpack=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csc_array
-    >>> from scipy.sparse.linalg import spsolve
+    >>> from rsscipy.sparse import csc_array
+    >>> from rsscipy.sparse.linalg import spsolve
     >>> A = csc_array([[3, 2, 0], [1, -1, 0], [0, 5, 1]], dtype=float)
     >>> B = csc_array([[2, 0], [-1, 0], [2, 0]], dtype=float)
     >>> x = spsolve(A, B)
@@ -396,8 +396,8 @@ def splu(A, permc_spec=None, diag_pivot_thresh=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csc_array
-    >>> from scipy.sparse.linalg import splu
+    >>> from rsscipy.sparse import csc_array
+    >>> from rsscipy.sparse.linalg import splu
     >>> A = csc_array([[1., 0., 0.], [5., 0., 2.], [0., -1., 0.]], dtype=float)
     >>> B = splu(A)
     >>> x = np.array([1., 2., 3.], dtype=float)
@@ -532,8 +532,8 @@ def spilu(A, drop_tol=None, fill_factor=None, drop_rule=None, permc_spec=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csc_array
-    >>> from scipy.sparse.linalg import spilu
+    >>> from rsscipy.sparse import csc_array
+    >>> from rsscipy.sparse.linalg import spilu
     >>> A = csc_array([[1., 0., 0.], [5., 0., 2.], [0., -1., 0.]], dtype=float)
     >>> B = spilu(A)
     >>> x = np.array([1., 2., 3.], dtype=float)
@@ -603,8 +603,8 @@ def factorized(A):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse.linalg import factorized
-    >>> from scipy.sparse import csc_array
+    >>> from rsscipy.sparse.linalg import factorized
+    >>> from rsscipy.sparse import csc_array
     >>> A = np.array([[ 3. ,  2. , -1. ],
     ...               [ 2. , -2. ,  4. ],
     ...               [-1. ,  0.5, -1. ]])
@@ -700,8 +700,8 @@ def spsolve_triangular(A, b, lower=True, overwrite_A=False, overwrite_b=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csc_array
-    >>> from scipy.sparse.linalg import spsolve_triangular
+    >>> from rsscipy.sparse import csc_array
+    >>> from rsscipy.sparse.linalg import spsolve_triangular
     >>> A = csc_array([[3, 0, 0], [1, -1, 0], [2, 0, 1]], dtype=float)
     >>> B = np.array([[2, 0], [-1, 0], [2, 0]], dtype=float)
     >>> x = spsolve_triangular(A, B)
@@ -827,8 +827,8 @@ def is_sptriangular(A):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csc_array, eye_array
-    >>> from scipy.sparse.linalg import is_sptriangular
+    >>> from rsscipy.sparse import csc_array, eye_array
+    >>> from rsscipy.sparse.linalg import is_sptriangular
     >>> A = csc_array([[3, 0, 0], [1, -1, 0], [2, 0, 1]], dtype=float)
     >>> is_sptriangular(A)
     (True, False)
@@ -902,8 +902,8 @@ def spbandwidth(A):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse.linalg import spbandwidth
-    >>> from scipy.sparse import csc_array, eye_array
+    >>> from rsscipy.sparse.linalg import spbandwidth
+    >>> from rsscipy.sparse import csc_array, eye_array
     >>> A = csc_array([[3, 0, 0], [1, -1, 0], [2, 0, 1]], dtype=float)
     >>> spbandwidth(A)
     (2, 0)

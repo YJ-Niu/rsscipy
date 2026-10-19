@@ -1,10 +1,10 @@
 '''Test dtype deprecations.
 '''
 import rsnumpy as np
-import scipy.linalg as linalg
+import rsscipy.linalg as linalg
 import pytest
 
-from scipy._lib._array_api import SCIPY_ARRAY_API
+from rsscipy._lib._array_api import SCIPY_ARRAY_API
 
 #
 # When the deprecation expires
@@ -166,13 +166,13 @@ def _patch_args(func_name, args):
         a = args[0]
         args = (a, a.shape[0]//2, a.shape[1]//2)
     elif func_name == 'solve_banded':
-        from scipy.linalg._basic import _to_banded
+        from rsscipy.linalg._basic import _to_banded
         args = ((1, 2), _to_banded(1, 2, args[0]), args[0])
     elif func_name == 'solveh_banded':
-        from scipy.linalg._basic import _to_banded
+        from rsscipy.linalg._basic import _to_banded
         args = (_to_banded(0, 2, args[0])[:, :-1], args[0][0, :-1])
     elif func_name == 'cholesky_banded':
-        from scipy.linalg._basic import _to_banded
+        from rsscipy.linalg._basic import _to_banded
         args = (_to_banded(0, 2, args[0])[:, :-1],)
     elif func_name == 'solve_toeplitz':
         c = args[0][1]

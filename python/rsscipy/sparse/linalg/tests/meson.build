@@ -11,6 +11,6 @@ py3.install_sources([
     'test_pydata_sparse.py',
     'test_special_sparse_arrays.py'
   ],
-  subdir: 'scipy/sparse/linalg/tests',
+  subdir: 'rsscipy/sparse/linalg/tests',
   install_tag: 'tests'
 )

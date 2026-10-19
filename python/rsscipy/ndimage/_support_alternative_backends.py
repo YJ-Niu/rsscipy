@@ -1,5 +1,5 @@
 import functools
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     xp_result_device, is_cupy, is_jax, scipy_namespace_for, SCIPY_ARRAY_API,
     xp_capabilities,
 )

@@ -30,7 +30,7 @@ py3.extension_module(
     dependencies: [fft_deps, pybind11_dep, duccfft_dep],
     link_args: version_link_args,
     install: true,
-    subdir: 'scipy/fft/_duccfft',
+    subdir: 'rsscipy/fft/_duccfft',
 )
 
 python_sources = [
@@ -43,7 +43,7 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/fft/_duccfft'
+  subdir: 'rsscipy/fft/_duccfft'
 )
 
 subdir('tests')

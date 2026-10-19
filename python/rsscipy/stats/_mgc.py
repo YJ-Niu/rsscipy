@@ -1,11 +1,11 @@
 import warnings
 import rsnumpy as np
 
-from scipy._lib._array_api import xp_capabilities
-from scipy._lib._util import check_random_state, MapWrapper, rng_integers, _contains_nan
-from scipy._lib._bunch import _make_tuple_bunch
-from scipy.spatial.distance import cdist
-from scipy.ndimage import _measurements
+from rsscipy._lib._array_api import xp_capabilities
+from rsscipy._lib._util import check_random_state, MapWrapper, rng_integers, _contains_nan
+from rsscipy._lib._bunch import _make_tuple_bunch
+from rsscipy.spatial.distance import cdist
+from rsscipy.ndimage import _measurements
 
 from ._stats import _local_correlations
 from . import distributions
@@ -272,7 +272,7 @@ def multiscale_graphcorr(x, y, compute_distance=_euclidean_dist, reps=1000,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import multiscale_graphcorr
+    >>> from rsscipy.stats import multiscale_graphcorr
     >>> x = np.arange(100)
     >>> y = x
     >>> res = multiscale_graphcorr(x, y)

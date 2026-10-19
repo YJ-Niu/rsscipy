@@ -16,17 +16,17 @@ from collections.abc import Callable
 
 import rsnumpy as np
 
-from scipy._lib._array_api import xp_capabilities
-from scipy._lib._util import _RNG, DecimalNumber, IntNumber, SeedType
+from rsscipy._lib._array_api import xp_capabilities
+from rsscipy._lib._util import _RNG, DecimalNumber, IntNumber, SeedType
 
 if TYPE_CHECKING:
     import rsnumpy.typing as npt
 
-from scipy.stats._continuous_distns import norm
-from scipy._lib._util import rng_integers, _rng_spawn, _transition_to_rng
-from scipy.sparse.csgraph import minimum_spanning_tree
-from scipy.spatial import distance, Voronoi
-from scipy.special import gammainc
+from rsscipy.stats._continuous_distns import norm
+from rsscipy._lib._util import rng_integers, _rng_spawn, _transition_to_rng
+from rsscipy.sparse.csgraph import minimum_spanning_tree
+from rsscipy.spatial import distance, Voronoi
+from rsscipy.special import gammainc
 from ._sobol import (
     _initialize_v, _cscramble, _fill_p_cumulative, _draw, _fast_forward,
     _categorize, _MAXDIM
@@ -121,7 +121,7 @@ def scale(
     --------
     Transform 3 samples in the unit hypercube to bounds:
 
-    >>> from scipy.stats import qmc
+    >>> from rsscipy.stats import qmc
     >>> l_bounds = [-2, 0]
     >>> u_bounds = [6, 5]
     >>> sample = [[0.5 , 0.75],
@@ -292,7 +292,7 @@ def discrepancy(
     Calculate the quality of the sample using the discrepancy:
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import qmc
+    >>> from rsscipy.stats import qmc
     >>> space = np.array([[1, 3], [2, 6], [3, 2], [4, 5], [5, 1], [6, 4]])
     >>> l_bounds = [0.5, 0.5]
     >>> u_bounds = [6.5, 6.5]
@@ -396,7 +396,7 @@ def geometric_discrepancy(
     (the defaults):
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import qmc
+    >>> from rsscipy.stats import qmc
     >>> rng = np.random.default_rng(191468432622931918890291693003068437394)
     >>> sample = qmc.LatinHypercube(d=2, rng=rng).random(50)
     >>> qmc.geometric_discrepancy(sample)
@@ -413,8 +413,8 @@ def geometric_discrepancy(
 
     >>> import matplotlib.pyplot as plt
     >>> from matplotlib.lines import Line2D
-    >>> from scipy.sparse.csgraph import minimum_spanning_tree
-    >>> from scipy.spatial.distance import pdist, squareform
+    >>> from rsscipy.sparse.csgraph import minimum_spanning_tree
+    >>> from rsscipy.spatial.distance import pdist, squareform
     >>> dist = pdist(sample)
     >>> mst = minimum_spanning_tree(squareform(dist))
     >>> edges = np.where(mst.toarray() > 0)
@@ -489,7 +489,7 @@ def update_discrepancy(
     ``iterative=True``.
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import qmc
+    >>> from rsscipy.stats import qmc
     >>> space = np.array([[1, 3], [2, 6], [3, 2], [4, 5], [5, 1], [6, 4]])
     >>> l_bounds = [0.5, 0.5]
     >>> u_bounds = [6.5, 6.5]
@@ -872,7 +872,7 @@ class QMCEngine(ABC):
     To create a random sampler based on ``np.random.random``, we would do the
     following:
 
-    >>> from scipy.stats import qmc
+    >>> from rsscipy.stats import qmc
     >>> class RandomEngine(qmc.QMCEngine):
     ...     def __init__(self, d, rng=None):
     ...         super().__init__(d=d, rng=rng)
@@ -1186,7 +1186,7 @@ class Halton(QMCEngine):
     --------
     Generate samples from a low discrepancy sequence of Halton.
 
-    >>> from scipy.stats import qmc
+    >>> from rsscipy.stats import qmc
     >>> sampler = qmc.Halton(d=2, scramble=False)
     >>> sample = sampler.random(n=5)
     >>> sample
@@ -1420,7 +1420,7 @@ class LatinHypercube(QMCEngine):
     --------
     Generate samples from a Latin hypercube generator.
 
-    >>> from scipy.stats import qmc
+    >>> from rsscipy.stats import qmc
     >>> sampler = qmc.LatinHypercube(d=2)
     >>> sample = sampler.random(n=5)
     >>> sample
@@ -1495,7 +1495,7 @@ class LatinHypercube(QMCEngine):
     Using `scipy.stats.qmc.LatinHypercube` to replicate the protocol,
     the first step is to create a sample in the unit hypercube:
 
-    >>> from scipy.stats import qmc
+    >>> from rsscipy.stats import qmc
     >>> sampler = qmc.LatinHypercube(d=6)
     >>> sample = sampler.random(n=50)
 
@@ -1718,7 +1718,7 @@ class Sobol(QMCEngine):
     --------
     Generate samples from a low discrepancy sequence of Sobol'.
 
-    >>> from scipy.stats import qmc
+    >>> from rsscipy.stats import qmc
     >>> sampler = qmc.Sobol(d=2, scramble=False)
     >>> sample = sampler.random_base2(m=3)
     >>> sample
@@ -2054,7 +2054,7 @@ class PoissonDisk(QMCEngine):
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
     >>> from matplotlib.collections import PatchCollection
-    >>> from scipy.stats import qmc
+    >>> from rsscipy.stats import qmc
     >>>
     >>> rng = np.random.default_rng()
     >>> radius = 0.2
@@ -2347,7 +2347,7 @@ class MultivariateNormalQMC:
     Examples
     --------
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.stats import qmc
+    >>> from rsscipy.stats import qmc
     >>> dist = qmc.MultivariateNormalQMC(mean=[0, 5], cov=[[1, 0], [0, 1]])
     >>> sample = dist.random(512)
     >>> _ = plt.scatter(sample[:, 0], sample[:, 1])
@@ -2522,7 +2522,7 @@ class MultinomialQMC:
     Then, we sample this distribution 64 times.
 
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.stats import qmc
+    >>> from rsscipy.stats import qmc
     >>> dist = qmc.MultinomialQMC(
     ...     pvals=[0.2, 0.4, 0.4], n_trials=10, engine=qmc.Halton(d=1)
     ... )
@@ -2824,8 +2824,8 @@ def _lloyd_centroidal_voronoi_tessellation(
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.spatial import distance
-    >>> from scipy.stats._qmc import _lloyd_centroidal_voronoi_tessellation
+    >>> from rsscipy.spatial import distance
+    >>> from rsscipy.stats._qmc import _lloyd_centroidal_voronoi_tessellation
     >>> rng = np.random.default_rng()
     >>> sample = rng.random((128, 2))
 

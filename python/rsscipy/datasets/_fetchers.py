@@ -3,7 +3,7 @@ import sys
 from rsnumpy import array, frombuffer, load
 from ._registry import registry, registry_urls
 
-from scipy._lib._array_api import xp_capabilities
+from rsscipy._lib._array_api import xp_capabilities
 
 try:
     import pooch
@@ -55,7 +55,7 @@ def ascent():
 
     Examples
     --------
-    >>> import scipy.datasets
+    >>> import rsscipy.datasets
     >>> ascent = scipy.datasets.ascent()
     >>> ascent.shape
     (512, 512)
@@ -117,7 +117,7 @@ def electrocardiogram():
 
     Examples
     --------
-    >>> from scipy.datasets import electrocardiogram
+    >>> from rsscipy.datasets import electrocardiogram
     >>> ecg = electrocardiogram()
     >>> ecg
     array([-0.245, -0.215, -0.185, ..., -0.405, -0.395, -0.385], shape=(108000,))
@@ -164,7 +164,7 @@ def electrocardiogram():
     made up of lower frequencies. At 60 Hz the noise induced by the mains
     electricity can be clearly observed.
 
-    >>> from scipy.signal import welch
+    >>> from rsscipy.signal import welch
     >>> f, Pxx = welch(ecg, fs=fs, nperseg=2048, scaling="spectrum")
     >>> plt.semilogy(f, Pxx)
     >>> plt.xlabel("Frequency in Hz")
@@ -200,7 +200,7 @@ def face(gray=False):
 
     Examples
     --------
-    >>> import scipy.datasets
+    >>> import rsscipy.datasets
     >>> face = scipy.datasets.face()
     >>> face.shape
     (768, 1024, 3)

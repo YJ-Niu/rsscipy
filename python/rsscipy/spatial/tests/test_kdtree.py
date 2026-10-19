@@ -10,12 +10,12 @@ from rsnumpy.testing import (assert_equal, assert_array_equal, assert_,
 from pytest import raises as assert_raises
 import pytest
 import rsnumpy as np
-from scipy._lib._testutils import _run_concurrent_barrier, IS_WASM
-from scipy.spatial import KDTree, Rectangle, distance_matrix, cKDTree
-from scipy.spatial._ckdtree import cKDTreeNode
-from scipy.spatial import minkowski_distance, minkowski_distance_p
-from scipy.spatial.distance import cdist, minkowski
-from scipy.sparse import dok_array, coo_array, dok_matrix, coo_matrix
+from rsscipy._lib._testutils import _run_concurrent_barrier, IS_WASM
+from rsscipy.spatial import KDTree, Rectangle, distance_matrix, cKDTree
+from rsscipy.spatial._ckdtree import cKDTreeNode
+from rsscipy.spatial import minkowski_distance, minkowski_distance_p
+from rsscipy.spatial.distance import cdist, minkowski
+from rsscipy.sparse import dok_array, coo_array, dok_matrix, coo_matrix
 
 
 @pytest.fixture(params=[KDTree, cKDTree])

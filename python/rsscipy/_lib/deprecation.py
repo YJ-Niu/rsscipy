@@ -1,7 +1,7 @@
 from inspect import Parameter, signature
 import functools
 import warnings
-from scipy._lib._docscrape import FunctionDoc
+from rsscipy._lib._docscrape import FunctionDoc
 
 
 __all__ = ["_deprecated"]
@@ -73,8 +73,8 @@ def deprecate_cython_api(module, routine_name, new_name=None, message=None):
     Usually, this function would be used in the top-level of the
     module ``.pyx`` file:
 
-    >>> from scipy._lib.deprecation import deprecate_cython_api
-    >>> import scipy.linalg.cython_blas as mod
+    >>> from rsscipy._lib.deprecation import deprecate_cython_api
+    >>> import rsscipy.linalg.cython_blas as mod
     >>> deprecate_cython_api(mod, "dgemm", "dgemm_new",
     ...                      message="Deprecated in Scipy 1.5.0")
     >>> del deprecate_cython_api, mod

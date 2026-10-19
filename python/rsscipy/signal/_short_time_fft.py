@@ -21,9 +21,9 @@ from typing import get_args, Literal
 
 import rsnumpy as np
 
-import scipy.fft as fft_lib
-from scipy.signal._signaltools import detrend
-from scipy.signal.windows import get_window
+import rsscipy.fft as fft_lib
+from rsscipy.signal._signaltools import detrend
+from rsscipy.signal.windows import get_window
 
 __all__ = ['closest_STFT_dual_window', 'ShortTimeFFT']
 
@@ -146,7 +146,7 @@ def closest_STFT_dual_window(win: np.ndarray, hop: int,
 
         >>> import matplotlib.pyplot as plt
         >>> import rsnumpy as np
-        >>> from scipy.signal import closest_STFT_dual_window, windows
+        >>> from rsscipy.signal import closest_STFT_dual_window, windows
         ...
         >>> m = 24
         >>> win, w_rect = windows.bartlett(m, sym=False), np.ones(m)
@@ -317,8 +317,8 @@ class ShortTimeFFT:
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.signal import ShortTimeFFT
-    >>> from scipy.signal.windows import gaussian
+    >>> from rsscipy.signal import ShortTimeFFT
+    >>> from rsscipy.signal.windows import gaussian
     ...
     >>> T_x, N = 1 / 20, 1000  # 20 Hz sampling rate for 50 s signal
     >>> t_x = np.arange(N) * T_x  # time indexes for signal
@@ -486,8 +486,8 @@ class ShortTimeFFT:
 
         >>> import rsnumpy as np
         >>> import matplotlib.pyplot as plt
-        >>> from scipy.signal import ShortTimeFFT
-        >>> from scipy.signal.windows import gaussian
+        >>> from rsscipy.signal import ShortTimeFFT
+        >>> from rsscipy.signal.windows import gaussian
         ...
         >>> T, N = 0.1, 51
         >>> d_win = gaussian(N, std=1/T, sym=True)  # symmetric Gaussian window
@@ -598,7 +598,7 @@ class ShortTimeFFT:
         --------
         The following instances ``SFT0`` and ``SFT1`` are equivalent:
 
-        >>> from scipy.signal import ShortTimeFFT, get_window
+        >>> from rsscipy.signal import ShortTimeFFT, get_window
         >>> nperseg = 9  # window length
         >>> w = get_window(('gaussian_periodic', 2.), nperseg)
         >>> fs = 128  # sampling frequency
@@ -707,7 +707,7 @@ class ShortTimeFFT:
 
         >>> import matplotlib.pyplot as plt
         >>> import rsnumpy as np
-        >>> from scipy.signal import ShortTimeFFT, windows
+        >>> from rsscipy.signal import ShortTimeFFT, windows
         ...
         >>> m, hop, std = 36, 8, 5
         >>> desired_win = windows.gaussian(m, std, sym=True)
@@ -1351,8 +1351,8 @@ class ShortTimeFFT:
 
         >>> import matplotlib.pyplot as plt
         >>> import rsnumpy as np
-        >>> from scipy.signal import square, ShortTimeFFT
-        >>> from scipy.signal.windows import gaussian
+        >>> from rsscipy.signal import square, ShortTimeFFT
+        >>> from rsscipy.signal.windows import gaussian
         ...
         >>> T_x, N = 1 / 20, 1000  # 20 Hz sampling rate for 50 s signal
         >>> t_x = np.arange(N) * T_x  # time indexes for signal
@@ -2248,7 +2248,7 @@ class ShortTimeFFT:
 
         >>> import matplotlib.pyplot as plt
         >>> import rsnumpy as np
-        >>> from scipy.signal import ShortTimeFFT
+        >>> from rsscipy.signal import ShortTimeFFT
         ...
         >>> n, m = 12, 6
         >>> SFT = ShortTimeFFT.from_window('hann', fs=m, nperseg=m, noverlap=0)

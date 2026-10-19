@@ -1,8 +1,8 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_array_equal, assert_equal
 import pytest
-import scipy.sparse
-from scipy.sparse.linalg import lsqr, LinearOperator
+import rsscipy.sparse
+from rsscipy.sparse.linalg import lsqr, LinearOperator
 
 # Set up a test problem
 n = 35

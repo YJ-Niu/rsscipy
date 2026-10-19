@@ -2,8 +2,8 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_, assert_equal, assert_allclose
 
-import scipy.special as sc
-from scipy.special._testutils import assert_func_equal
+import rsscipy.special as sc
+from rsscipy.special._testutils import assert_func_equal
 
 
 def test_wrightomega_nan():

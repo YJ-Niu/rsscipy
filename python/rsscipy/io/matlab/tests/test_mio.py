@@ -17,17 +17,17 @@ from pytest import raises as assert_raises
 
 import rsnumpy as np
 from rsnumpy import array
-from scipy.sparse import issparse, eye_array, coo_array, csc_array, sparray
+from rsscipy.sparse import issparse, eye_array, coo_array, csc_array, sparray
 
-from scipy.io.matlab import MatlabOpaque, MatlabFunction, MatlabObject
-import scipy.io.matlab._byteordercodes as boc
-from scipy.io.matlab._miobase import (matdims, MatWriteError, MatReadError,
+from rsscipy.io.matlab import MatlabOpaque, MatlabFunction, MatlabObject
+import rsscipy.io.matlab._byteordercodes as boc
+from rsscipy.io.matlab._miobase import (matdims, MatWriteError, MatReadError,
                                       matfile_version, MatWriteWarning)
-from scipy.io.matlab._mio import mat_reader_factory, loadmat, savemat, whosmat
-from scipy.io.matlab._mio5 import (
+from rsscipy.io.matlab._mio import mat_reader_factory, loadmat, savemat, whosmat
+from rsscipy.io.matlab._mio5 import (
     MatFile5Writer, MatFile5Reader, varmats_from_mat, to_writeable,
     EmptyStructMarker)
-import scipy.io.matlab._mio5_params as mio5p
+import rsscipy.io.matlab._mio5_params as mio5p
 
 
 test_data_path = pjoin(dirname(__file__), 'data')
@@ -1179,7 +1179,7 @@ def test_logical_sparse():
 def test_empty_sparse():
     # Can we read empty sparse matrices?
     sio = BytesIO()
-    import scipy.sparse
+    import rsscipy.sparse
     empty_sparse = scipy.sparse.csr_array([[0,0],[0,0]])
     savemat(sio, dict(x=empty_sparse))
     sio.seek(0)
@@ -1428,7 +1428,7 @@ def test_large_m4():
 
 
 def test_gh_19223():
-    from scipy.io.matlab import varmats_from_mat  # noqa: F401
+    from rsscipy.io.matlab import varmats_from_mat  # noqa: F401
 
 
 def test_invalid_field_name_warning():

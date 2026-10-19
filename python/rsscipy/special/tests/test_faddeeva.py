@@ -2,8 +2,8 @@ import pytest
 
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
-import scipy.special as sc
-from scipy.special._testutils import FuncData
+import rsscipy.special as sc
+from rsscipy.special._testutils import FuncData
 
 
 class TestVoigtProfile:

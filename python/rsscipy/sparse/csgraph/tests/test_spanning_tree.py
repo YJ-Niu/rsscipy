@@ -2,8 +2,8 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_
 import rsnumpy.testing as npt
-from scipy.sparse import csr_array
-from scipy.sparse.csgraph import minimum_spanning_tree
+from rsscipy.sparse import csr_array
+from rsscipy.sparse.csgraph import minimum_spanning_tree
 
 
 def test_minimum_spanning_tree():

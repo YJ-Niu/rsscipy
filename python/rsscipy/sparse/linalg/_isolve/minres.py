@@ -2,7 +2,7 @@ from rsnumpy import inner, vdot, iscomplexobj, zeros, inf, finfo
 from rsnumpy.linalg import norm
 from math import sqrt
 
-from scipy._lib._array_api import xp_capabilities
+from rsscipy._lib._array_api import xp_capabilities
 
 from .utils import make_system
 
@@ -84,8 +84,8 @@ def minres(A, b, x0=None, *, rtol=1e-5, shift=0.0, maxiter=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csc_array
-    >>> from scipy.sparse.linalg import minres
+    >>> from rsscipy.sparse import csc_array
+    >>> from rsscipy.sparse.linalg import minres
     >>> A = csc_array([[3, 2, 0], [1, -1, 0], [0, 5, 1]], dtype=float)
     >>> A = A + A.T
     >>> b = np.array([2, 4, -1], dtype=float)

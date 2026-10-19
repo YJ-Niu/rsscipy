@@ -3,10 +3,10 @@ from types import GenericAlias
 import os
 
 import rsnumpy as np
-from scipy.special import factorial
-from scipy._lib._util import (_asarray_validated, float_factorial, check_random_state,
+from rsscipy.special import factorial
+from rsscipy._lib._util import (_asarray_validated, float_factorial, check_random_state,
                               _transition_to_rng)
-from scipy._lib._array_api import xp_capabilities
+from rsscipy._lib._array_api import xp_capabilities
 
 
 __all__ = ["KroghInterpolator", "krogh_interpolate",
@@ -174,7 +174,7 @@ class _Interpolator1DWithDerivatives(_Interpolator1D):
 
         Examples
         --------
-        >>> from scipy.interpolate import KroghInterpolator
+        >>> from rsscipy.interpolate import KroghInterpolator
         >>> KroghInterpolator([0,0,0],[1,2,3]).derivatives(0)
         array([1.0,2.0,3.0])
         >>> KroghInterpolator([0,0,0],[1,2,3]).derivatives([0,0])
@@ -297,7 +297,7 @@ class KroghInterpolator(_Interpolator1DWithDerivatives):
     To produce a polynomial that is zero at 0 and 1 and has
     derivative 2 at 0, call
 
-    >>> from scipy.interpolate import KroghInterpolator
+    >>> from rsscipy.interpolate import KroghInterpolator
     >>> KroghInterpolator([0,0,1],[0,2,0])
 
     This constructs the quadratic :math:`2x^2-2x`. The derivative condition
@@ -441,7 +441,7 @@ def krogh_interpolate(xi, yi, x, der=0, axis=0):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.interpolate import krogh_interpolate
+    >>> from rsscipy.interpolate import krogh_interpolate
     >>> x_observed = np.linspace(0.0, 10.0, 11)
     >>> y_observed = np.sin(x_observed)
     >>> x = np.linspace(min(x_observed), max(x_observed), num=100)
@@ -522,7 +522,7 @@ def approximate_taylor_polynomial(f,x,degree,scale,order=None):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.interpolate import approximate_taylor_polynomial
+    >>> from rsscipy.interpolate import approximate_taylor_polynomial
     >>> x = np.linspace(-10.0, 10.0, num=100)
     >>> plt.plot(x, np.sin(x), label="sin curve")
     >>> for degree in np.arange(1, 15, step=2):
@@ -681,7 +681,7 @@ class BarycentricInterpolator(_Interpolator1DWithDerivatives):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.interpolate import BarycentricInterpolator
+    >>> from rsscipy.interpolate import BarycentricInterpolator
     >>> rng = np.random.default_rng()
     >>> xi = rng.random(6) * np.pi/2
     >>> f, f_d1, f_d2, f_d3, f_d4 = np.sin, np.cos, lambda x: -np.sin(x), lambda x: -np.cos(x), np.sin
@@ -1031,7 +1031,7 @@ def barycentric_interpolate(xi, yi, x, axis=0, *, der=0, rng=None):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.interpolate import barycentric_interpolate
+    >>> from rsscipy.interpolate import barycentric_interpolate
     >>> x_observed = np.linspace(0.0, 10.0, 11)
     >>> y_observed = np.sin(x_observed)
     >>> x = np.linspace(min(x_observed), max(x_observed), num=100)

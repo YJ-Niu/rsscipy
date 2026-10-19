@@ -1,8 +1,8 @@
 import pytest
 
-import scipy.constants as sc
-from scipy._lib._array_api_no_0d import xp_assert_equal, xp_assert_close
-from scipy._lib._array_api import make_xp_test_case
+import rsscipy.constants as sc
+from rsscipy._lib._array_api_no_0d import xp_assert_equal, xp_assert_close
+from rsscipy._lib._array_api import make_xp_test_case
 
 lazy_xp_modules = [sc]
 

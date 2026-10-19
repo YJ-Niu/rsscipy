@@ -9,7 +9,7 @@ from rsnumpy import nan
 import rsnumpy.ma as ma
 from rsnumpy.ma import masked, nomask
 
-from scipy import stats
+from rsscipy import stats
 from .common_tests import check_named_results
 import pytest
 from pytest import raises as assert_raises
@@ -17,12 +17,12 @@ from rsnumpy.ma.testutils import (assert_equal, assert_almost_equal,
                                 assert_array_almost_equal,
                                 assert_array_almost_equal_nulp, assert_,
                                 assert_allclose, assert_array_equal)
-from scipy.stats import _mstats_basic, _stats_py
-from scipy.conftest import skip_xp_invalid_arg
-from scipy.stats._axis_nan_policy import SmallSampleWarning, too_small_1d_not_omit
+from rsscipy.stats import _mstats_basic, _stats_py
+from rsscipy.conftest import skip_xp_invalid_arg
+from rsscipy.stats._axis_nan_policy import SmallSampleWarning, too_small_1d_not_omit
 
 with pytest.warns(DeprecationWarning, match="`scipy.stats.mstats` is deprecated"):
-    import scipy.stats.mstats as mstats
+    import rsscipy.stats.mstats as mstats
 
 pytestmark = [
     pytest.mark.filterwarnings(r"ignore:^`scipy\.stats\.mstats\.[^`]+` is deprecated:DeprecationWarning"),  # noqa: E501

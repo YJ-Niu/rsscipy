@@ -1,7 +1,7 @@
 from rsnumpy.testing import assert_equal
 
-from scipy.special._testutils import check_version, MissingModule
-from scipy.special._precompute.expn_asy import generate_A
+from rsscipy.special._testutils import check_version, MissingModule
+from rsscipy.special._precompute.expn_asy import generate_A
 
 try:
     import sympy

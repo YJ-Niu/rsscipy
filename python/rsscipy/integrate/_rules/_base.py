@@ -1,4 +1,4 @@
-from scipy._lib._array_api import array_namespace, xp_size, xp_device
+from rsscipy._lib._array_api import array_namespace, xp_size, xp_device
 
 from functools import cached_property
 
@@ -27,8 +27,8 @@ class Rule:
     error.
 
     >>> import rsnumpy as np
-    >>> from scipy.integrate import cubature
-    >>> from scipy.integrate._rules import (
+    >>> from rsscipy.integrate import cubature
+    >>> from rsscipy.integrate._rules import (
     ...     Rule, ProductNestedFixed, GenzMalikCubature, GaussLegendreQuadrature
     ... )
     >>> def f(x, r, alphas):
@@ -177,7 +177,7 @@ class FixedRule(Rule):
     Implementing Simpson's 1/3 rule:
 
     >>> import rsnumpy as np
-    >>> from scipy.integrate._rules import FixedRule
+    >>> from rsscipy.integrate._rules import FixedRule
     >>> class SimpsonsQuad(FixedRule):
     ...     @property
     ...     def nodes_and_weights(self):
@@ -269,8 +269,8 @@ class NestedFixedRule(FixedRule):
     Examples
     --------
 
-    >>> from scipy.integrate import cubature
-    >>> from scipy.integrate._rules import (
+    >>> from rsscipy.integrate import cubature
+    >>> from rsscipy.integrate._rules import (
     ...     GaussLegendreQuadrature, NestedFixedRule, ProductNestedFixed
     ... )
     >>> higher = GaussLegendreQuadrature(10)
@@ -380,8 +380,8 @@ class ProductNestedFixed(NestedFixedRule):
     Evaluate a 2D integral by taking the product of two 1D rules:
 
     >>> import rsnumpy as np
-    >>> from scipy.integrate import cubature
-    >>> from scipy.integrate._rules import (
+    >>> from rsscipy.integrate import cubature
+    >>> from rsscipy.integrate._rules import (
     ...  ProductNestedFixed, GaussKronrodQuadrature
     ... )
     >>> def f(x):

@@ -1,5 +1,5 @@
 import rsnumpy as np
-from scipy._lib._array_api import xp_capabilities
+from rsscipy._lib._array_api import xp_capabilities
 from .base import OdeSolver, DenseOutput
 from .common import (validate_max_step, validate_tol, select_initial_step,
                      norm, warn_extraneous, validate_first_step)
@@ -283,7 +283,7 @@ class RK23(RungeKutta):
     orbit in a two-dimensional dynamical system.
 
     >>> import rsnumpy as np
-    >>> import scipy.integrate as itg
+    >>> import rsscipy.integrate as itg
     >>> import matplotlib.pylab as plt
 
     Define a function that returns the right-hand side of a dynamical
@@ -466,7 +466,7 @@ class RK45(RungeKutta):
     orbit in a two-dimensional dynamical system.
 
     >>> import rsnumpy as np
-    >>> import scipy.integrate as itg
+    >>> import rsscipy.integrate as itg
     >>> import matplotlib.pylab as plt
 
     Define a function that returns the right-hand side of a dynamical
@@ -663,14 +663,14 @@ class DOP853(RungeKutta):
     for orbit simulations.
 
     >>> import rsnumpy as np
-    >>> import scipy.integrate as itg
+    >>> import rsscipy.integrate as itg
     >>> import matplotlib.pyplot as plt
 
     Import the Newtonian constant of gravitation and create variables
     for earth's mass and radius, and the satellite's mass and altitude
     in kilograms and meters. Calculate the satellite's orbital velocity.
 
-    >>> from scipy.constants import G
+    >>> from rsscipy.constants import G
     >>> mass_e, radius_e = 5.9722E24, 6.371E6
     >>> mass_s, alt_s = 6E3, 2E6
     >>> v_orbit = np.sqrt((G*mass_e)/(radius_e+alt_s))

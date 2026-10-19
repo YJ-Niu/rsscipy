@@ -4,10 +4,10 @@ from .bdf import BDF
 from .radau import Radau
 from .rk import RK23, RK45, DOP853
 from .lsoda import LSODA
-from scipy.optimize import OptimizeResult
+from rsscipy.optimize import OptimizeResult
 from .common import EPS, OdeSolution
 from .base import OdeSolver
-from scipy._lib._array_api import xp_capabilities
+from rsscipy._lib._array_api import xp_capabilities
 
 
 METHODS = {'RK23': RK23,
@@ -72,7 +72,7 @@ def solve_event_equation(event, sol, t_old, t):
     root : float
         Found solution.
     """
-    from scipy.optimize import brentq
+    from rsscipy.optimize import brentq
     return brentq(lambda t: event(t, sol(t)), t_old, t,
                   xtol=4 * EPS, rtol=4 * EPS)
 
@@ -443,7 +443,7 @@ def solve_ivp(fun, t_span, y0, method='RK45', t_eval=None, dense_output=False,
     Basic exponential decay showing automatically chosen time points.
 
     >>> import rsnumpy as np
-    >>> from scipy.integrate import solve_ivp
+    >>> from rsscipy.integrate import solve_ivp
     >>> def exponential_decay(t, y): return -0.5 * y
     >>> sol = solve_ivp(exponential_decay, [0, 10], [2, 4, 8])
     >>> print(sol.t)

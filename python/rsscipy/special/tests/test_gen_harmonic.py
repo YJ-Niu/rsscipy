@@ -1,7 +1,7 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal
 import pytest
-from scipy.special._ufuncs import _gen_harmonic, _normalized_gen_harmonic
+from rsscipy.special._ufuncs import _gen_harmonic, _normalized_gen_harmonic
 
 
 #

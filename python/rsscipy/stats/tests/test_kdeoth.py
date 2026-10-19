@@ -1,4 +1,4 @@
-from scipy import stats, linalg, integrate
+from rsscipy import stats, linalg, integrate
 import rsnumpy as np
 from rsnumpy.testing import (assert_almost_equal, assert_, assert_equal,
                            assert_array_almost_equal,
@@ -334,7 +334,7 @@ def test_gaussian_kde_subclassing():
 def test_gaussian_kde_covariance_caching():
     x1 = np.array([-7, -5, 1, 4, 5], dtype=float)
     xs = np.linspace(-10, 10, num=5)
-    # These expected values are from scipy 0.10, before some changes to
+    # These expected values are from rsscipy 0.10, before some changes to
     # gaussian_kde.  They were not compared with any external reference.
     y_expected = [0.02463386, 0.04689208, 0.05395444, 0.05337754, 0.01664475]
 

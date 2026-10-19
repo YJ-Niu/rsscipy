@@ -18,5 +18,5 @@ py3.extension_module('_propack',
   dependencies: [np_dep, ccallback_dep, lapack_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/sparse/linalg/',
+  subdir: 'rsscipy/sparse/linalg/',
 )

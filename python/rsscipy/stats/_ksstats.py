@@ -66,9 +66,9 @@
 
 
 import rsnumpy as np
-import scipy.special
-import scipy.special._ufuncs as scu
-from scipy.stats._finite_differences import _derivative
+import rsscipy.special
+import rsscipy.special._ufuncs as scu
+from rsscipy.stats._finite_differences import _derivative
 
 _E128 = 128
 _EP128 = np.ldexp(np.longdouble(1), _E128)

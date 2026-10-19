@@ -4,7 +4,7 @@ py3.extension_module('convolve',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/fftpack'
+  subdir: 'rsscipy/fftpack'
 )
 
 
@@ -19,7 +19,7 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/fftpack'
+  subdir: 'rsscipy/fftpack'
 )
 
 subdir('tests')

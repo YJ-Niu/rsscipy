@@ -1,8 +1,8 @@
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose
-from scipy.special import log_ndtr, ndtri_exp
-from scipy.special._testutils import assert_func_equal
+from rsscipy.special import log_ndtr, ndtri_exp
+from rsscipy.special._testutils import assert_func_equal
 
 
 def log_ndtr_ndtri_exp(y):

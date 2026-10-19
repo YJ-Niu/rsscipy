@@ -2,9 +2,9 @@ import math
 
 from pytest import raises as assert_raises
 
-from scipy.spatial import procrustes
-from scipy._lib._array_api import make_xp_test_case
-from scipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
+from rsscipy.spatial import procrustes
+from rsscipy._lib._array_api import make_xp_test_case
+from rsscipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
 
 
 @make_xp_test_case(procrustes)

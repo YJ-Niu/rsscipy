@@ -36,7 +36,7 @@ py3.extension_module('_special_ufuncs',
   link_args: version_link_args,
   cpp_args: ['-DBOOST_MATH_STANDALONE=1'] + ufuncs_cpp_args,
   install: true,
-  subdir: 'scipy/special',
+  subdir: 'rsscipy/special',
 )
 
 py3.extension_module('_gufuncs',
@@ -46,7 +46,7 @@ py3.extension_module('_gufuncs',
   link_args: version_link_args,
   cpp_args: ufuncs_cpp_args,
   install: true,
-  subdir: 'scipy/special',
+  subdir: 'rsscipy/special',
 )
 
 py3.extension_module('_specfun',
@@ -54,7 +54,7 @@ py3.extension_module('_specfun',
   dependencies: [xsf_dep, np_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/special'
+  subdir: 'rsscipy/special'
 )
 
 _generate_pyx = find_program('_generate_pyx.py')
@@ -104,7 +104,7 @@ py3.extension_module('_ufuncs',
   link_args: version_link_args,
   link_with: cdflib_lib,
   install: true,
-  subdir: 'scipy/special',
+  subdir: 'rsscipy/special',
 )
 
 ufuncs_cxx_cpp_args = [
@@ -123,7 +123,7 @@ py3.extension_module('_ufuncs_cxx',
   link_args: version_link_args,
   dependencies: [boost_math_dep, xsf_dep, np_dep],
   install: true,
-  subdir: 'scipy/special',
+  subdir: 'rsscipy/special',
 )
 
 py3.extension_module('_ellip_harm_2',
@@ -134,7 +134,7 @@ py3.extension_module('_ellip_harm_2',
   link_args: version_link_args,
   dependencies: [xsf_dep, np_dep],
   install: true,
-  subdir: 'scipy/special',
+  subdir: 'rsscipy/special',
 )
 
 py3.extension_module('cython_special',
@@ -150,7 +150,7 @@ py3.extension_module('cython_special',
   dependencies: [boost_math_dep, xsf_dep, np_dep, lapack_dep],
   link_with: cdflib_lib,
   install: true,
-  subdir: 'scipy/special',
+  subdir: 'rsscipy/special',
 )
 
 npz_files = [
@@ -215,7 +215,7 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/special'
+  subdir: 'rsscipy/special'
 )
 
 subdir('tests')

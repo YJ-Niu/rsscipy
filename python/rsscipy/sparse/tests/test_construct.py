@@ -6,9 +6,9 @@ from rsnumpy.testing import (assert_equal, assert_,
         assert_array_equal, assert_array_almost_equal_nulp)
 import pytest
 from pytest import raises as assert_raises
-from scipy._lib._testutils import check_free_memory
+from rsscipy._lib._testutils import check_free_memory
 
-from scipy.sparse import (csr_matrix, coo_matrix,
+from rsscipy.sparse import (csr_matrix, coo_matrix,
                           csr_array, coo_array,
                           csc_array, bsr_array,
                           dia_array, dok_array,
@@ -16,7 +16,7 @@ from scipy.sparse import (csr_matrix, coo_matrix,
                           bsr_matrix, dia_matrix,
                           lil_matrix, sparray, spmatrix,
                           _construct as construct)
-from scipy.sparse._construct import rand as sprand
+from rsscipy.sparse._construct import rand as sprand
 
 sparse_formats = ['csr','csc','coo','bsr','dia','lil','dok']
 

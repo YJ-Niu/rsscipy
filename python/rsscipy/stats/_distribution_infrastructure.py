@@ -8,17 +8,17 @@ import math
 import rsnumpy as np
 from rsnumpy import inf
 
-from scipy._lib._array_api import xp_capabilities, xp_promote
-from scipy._lib._util import _rng_spawn
-from scipy._lib._docscrape import ClassDoc, NumpyDocString
-from scipy._external import array_api_extra as xpx
-from scipy import special, stats
-from scipy.special._ufuncs import _log1mexp
-from scipy.differentiate import derivative
-from scipy.integrate import tanhsinh as _tanhsinh, nsum
-from scipy.optimize import elementwise
-from scipy.stats._probability_distribution import _ProbabilityDistribution
-from scipy.stats import qmc
+from rsscipy._lib._array_api import xp_capabilities, xp_promote
+from rsscipy._lib._util import _rng_spawn
+from rsscipy._lib._docscrape import ClassDoc, NumpyDocString
+from rsscipy._external import array_api_extra as xpx
+from rsscipy import special, stats
+from rsscipy.special._ufuncs import _log1mexp
+from rsscipy.differentiate import derivative
+from rsscipy.integrate import tanhsinh as _tanhsinh, nsum
+from rsscipy.optimize import elementwise
+from rsscipy.stats._probability_distribution import _ProbabilityDistribution
+from rsscipy.stats import qmc
 
 # in case we need to distinguish between None and not specified
 # Typically this is used to determine whether the tolerance has been set by the
@@ -1340,8 +1340,8 @@ def _generate_example(dist_family):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy import stats
-    >>> from scipy.stats import {name}
+    >>> from rsscipy import stats
+    >>> from rsscipy.stats import {name}
     >>> X = {instantiation}
 
     For convenience, the ``plot`` method can be used to visualize the density
@@ -3485,7 +3485,7 @@ class UnivariateDistribution(_ProbabilityDistribution):
 
         >>> import rsnumpy as np
         >>> import matplotlib.pyplot as plt
-        >>> from scipy import stats
+        >>> from rsscipy import stats
         >>> X = stats.Normal(mu=1., sigma=2.)
 
         Plot the PDF over the central 99.9% of the distribution.
@@ -4273,7 +4273,7 @@ def make_distribution(dist):
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy import stats, special
+    >>> from rsscipy import stats, special
 
     Create a `ContinuousDistribution` from `scipy.stats.loguniform`.
 
@@ -4953,7 +4953,7 @@ def truncate(X, lb=-np.inf, ub=np.inf):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> loc, scale, lb, ub = 1, 2, -2, 2
     >>> X = stats.truncnorm(lb, ub, loc, scale)
     >>> Y = scale * stats.truncate(stats.Normal(), lb, ub) + loc
@@ -5262,8 +5262,8 @@ class OrderStatisticDistribution(TransformedDistribution):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy import stats
-    >>> from scipy.stats._distribution_infrastructure import OrderStatisticDistribution
+    >>> from rsscipy import stats
+    >>> from rsscipy.stats._distribution_infrastructure import OrderStatisticDistribution
     >>>
     >>> X = stats.Normal()
     >>> data = X.sample(shape=(10000, 5))
@@ -5409,7 +5409,7 @@ def order_statistic(X, /, *, r, n):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>>
     >>> X = stats.Normal()
     >>> data = X.sample(shape=(10000, 5))
@@ -5528,7 +5528,7 @@ class Mixture(_ProbabilityDistribution):
     A mixture of normal distributions:
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> import matplotlib.pyplot as plt
     >>> X1 = stats.Normal(mu=-2, sigma=1)
     >>> X2 = stats.Normal(mu=2, sigma=1)
@@ -6085,7 +6085,7 @@ def abs(X, /):
     Suppose we have a normally distributed random variable :math:`X`:
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> X = stats.Normal()
 
     We wish to have a random variable :math:`Y` distributed according to
@@ -6128,7 +6128,7 @@ def exp(X, /):
     Suppose we have a normally distributed random variable :math:`X`:
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> X = stats.Normal()
 
     We wish to have a lognormally distributed random variable :math:`Y`,
@@ -6175,7 +6175,7 @@ def log(X, /):
     Suppose we have a gamma distributed random variable :math:`X`:
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> Gamma = stats.make_distribution(stats.gamma)
     >>> X = Gamma(a=1.0)
 

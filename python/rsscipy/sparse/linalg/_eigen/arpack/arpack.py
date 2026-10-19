@@ -37,15 +37,15 @@ Uses ARPACK: https://github.com/opencollab/arpack-ng
 
 import rsnumpy as np
 import warnings
-from scipy.sparse.linalg._interface import aslinearoperator, LinearOperator
-from scipy.sparse import eye_array, issparse
-from scipy.linalg import eig, eigh, lu_factor, lu_solve
-from scipy.sparse._sputils import (
+from rsscipy.sparse.linalg._interface import aslinearoperator, LinearOperator
+from rsscipy.sparse import eye_array, issparse
+from rsscipy.linalg import eig, eigh, lu_factor, lu_solve
+from rsscipy.sparse._sputils import (
     convert_pydata_sparse_to_scipy, isdense, is_pydata_spmatrix,
 )
-from scipy.sparse.linalg._isolve.iterative import gmres
-from scipy.sparse.linalg._dsolve.linsolve import splu
-from scipy._lib._util import HAS_ILP64
+from rsscipy.sparse.linalg._isolve.iterative import gmres
+from rsscipy.sparse.linalg._dsolve.linsolve import splu
+from rsscipy._lib._util import HAS_ILP64
 
 from . import _arpacklib
 
@@ -1326,7 +1326,7 @@ def eigs(A, k=6, M=None, sigma=None, which='LM', v0=None,
     Find 6 eigenvectors of the identity matrix:
 
     >>> import rsnumpy as np
-    >>> from scipy.sparse.linalg import eigs
+    >>> from rsscipy.sparse.linalg import eigs
     >>> id = np.eye(13)
     >>> vals, vecs = eigs(id, k=6)
     >>> vals
@@ -1643,7 +1643,7 @@ def eigsh(A, k=6, M=None, sigma=None, which='LM', v0=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse.linalg import eigsh
+    >>> from rsscipy.sparse.linalg import eigsh
     >>> identity = np.eye(13)
     >>> eigenvalues, eigenvectors = eigsh(identity, k=6)
     >>> eigenvalues

@@ -1,10 +1,10 @@
 """Linear least squares with bound constraints on independent variables."""
 import rsnumpy as np
 from rsnumpy.linalg import norm
-from scipy.sparse import issparse, csr_array
-from scipy.sparse.linalg import LinearOperator, lsmr
-from scipy.optimize._optimize import OptimizeResult
-from scipy.optimize._minimize import Bounds
+from rsscipy.sparse import issparse, csr_array
+from rsscipy.sparse.linalg import LinearOperator, lsmr
+from rsscipy.optimize._optimize import OptimizeResult
+from rsscipy.optimize._minimize import Bounds
 
 from .common import in_bounds, compute_grad
 from .trf_linear import trf_linear
@@ -228,8 +228,8 @@ def lsq_linear(A, b, bounds=(-np.inf, np.inf), method='trf', tol=1e-10,
     variables is solved.
 
     >>> import rsnumpy as np
-    >>> from scipy.sparse import random_array
-    >>> from scipy.optimize import lsq_linear
+    >>> from rsscipy.sparse import random_array
+    >>> from rsscipy.optimize import lsq_linear
     >>> rng = np.random.default_rng()
     ...
     >>> m = 2000

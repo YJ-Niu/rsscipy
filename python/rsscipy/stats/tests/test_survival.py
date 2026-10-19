@@ -1,8 +1,8 @@
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose
-from scipy import stats
-from scipy.stats import _survival
+from rsscipy import stats
+from rsscipy.stats import _survival
 
 
 def _kaplan_meier_reference(times, censored):

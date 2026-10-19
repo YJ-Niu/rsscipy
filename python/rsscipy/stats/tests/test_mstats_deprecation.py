@@ -4,8 +4,8 @@ import warnings
 # importing `scipy.stats` does not emit warning
 with warnings.catch_warnings():
     warnings.simplefilter("error")
-    from scipy import stats
-    import scipy.stats  # noqa: F401
+    from rsscipy import stats
+    import rsscipy.stats  # noqa: F401
 
 
 class TestMstatsDeprecation:
@@ -24,11 +24,11 @@ class TestMstatsDeprecation:
 
         self.forget_mstats()
         with pytest.warns(DeprecationWarning, match=message):
-            import scipy.stats.mstats  # noqa: F401
+            import rsscipy.stats.mstats  # noqa: F401
 
         self.forget_mstats()
         with pytest.warns(DeprecationWarning, match=message):
-            from scipy.stats import mstats  # noqa: F401
+            from rsscipy.stats import mstats  # noqa: F401
 
     def test_function_warnings(self):
         # Spot check of the various branches of _get_deprecation_message

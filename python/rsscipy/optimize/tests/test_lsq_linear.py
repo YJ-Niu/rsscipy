@@ -6,10 +6,10 @@ import rsnumpy as np
 from rsnumpy.linalg import lstsq
 from rsnumpy.testing import assert_allclose, assert_equal, assert_
 
-from scipy.sparse import random_array, coo_array
-from scipy.sparse.linalg import aslinearoperator
-from scipy.optimize import lsq_linear
-from scipy.optimize._minimize import Bounds
+from rsscipy.sparse import random_array, coo_array
+from rsscipy.sparse.linalg import aslinearoperator
+from rsscipy.optimize import lsq_linear
+from rsscipy.optimize._minimize import Bounds
 
 
 A = np.array([

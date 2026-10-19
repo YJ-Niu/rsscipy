@@ -9,7 +9,7 @@ py3.install_sources([
     'tfqmr.py',
     'utils.py',
   ],
-  subdir: 'scipy/sparse/linalg/_isolve'
+  subdir: 'rsscipy/sparse/linalg/_isolve'
 )
 
 subdir('tests')

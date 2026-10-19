@@ -1,7 +1,7 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal
 
-from scipy.stats._tukeylambda_stats import (tukeylambda_variance,
+from rsscipy.stats._tukeylambda_stats import (tukeylambda_variance,
                                             tukeylambda_kurtosis)
 
 

@@ -57,6 +57,6 @@ __all__ = [
     'MatlabFunction', 'varmats_from_mat',
 ]
 
-from scipy._lib._testutils import PytestTester
+from rsscipy._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester

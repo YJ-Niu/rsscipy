@@ -3,14 +3,14 @@ import math
 import warnings
 from collections import namedtuple
 
-from scipy.special import roots_legendre
-from scipy.special import gammaln, logsumexp
-from scipy._lib._util import _rng_spawn
-from scipy._lib._array_api import (_asarray, array_namespace, xp_result_type, xp_copy,
+from rsscipy.special import roots_legendre
+from rsscipy.special import gammaln, logsumexp
+from rsscipy._lib._util import _rng_spawn
+from rsscipy._lib._array_api import (_asarray, array_namespace, xp_result_type, xp_copy,
                                    xp_capabilities, xp_promote, xp_swapaxes, is_numpy,
                                    xp_size, xp_device,
                                    is_lazy_array)
-import scipy._external.array_api_extra as xpx
+import rsscipy._external.array_api_extra as xpx
 
 
 __all__ = ['fixed_quad', 'romb',
@@ -78,7 +78,7 @@ def trapezoid(y, x=None, dx=1.0, axis=-1):
     Use the trapezoidal rule on evenly spaced points:
 
     >>> import rsnumpy as np
-    >>> from scipy import integrate
+    >>> from rsscipy import integrate
     >>> integrate.trapezoid([1, 2, 3])
     4.0
 
@@ -219,7 +219,7 @@ def fixed_quad(func, a, b, args=(), n=5):
 
     Examples
     --------
-    >>> from scipy import integrate
+    >>> from rsscipy import integrate
     >>> import rsnumpy as np
     >>> f = lambda x: x**8
     >>> integrate.fixed_quad(f, 0.0, 1.0, n=4)
@@ -299,7 +299,7 @@ def cumulative_trapezoid(y, x=None, dx=1.0, axis=-1, initial=None):
 
     Examples
     --------
-    >>> from scipy import integrate
+    >>> from rsscipy import integrate
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
 
@@ -437,7 +437,7 @@ def simpson(y, x=None, *, dx=1.0, axis=-1):
 
     Examples
     --------
-    >>> from scipy import integrate
+    >>> from rsscipy import integrate
     >>> import rsnumpy as np
     >>> x = np.arange(0, 10)
     >>> y = np.arange(0, 10)
@@ -681,7 +681,7 @@ def cumulative_simpson(y, *, x=None, dx=1.0, axis=-1, initial=None):
 
     Examples
     --------
-    >>> from scipy import integrate
+    >>> from rsscipy import integrate
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
     >>> x = np.linspace(-2, 2, num=20)
@@ -815,7 +815,7 @@ def romb(y, dx=1.0, axis=-1, show=False):
 
     Examples
     --------
-    >>> from scipy import integrate
+    >>> from rsscipy import integrate
     >>> import rsnumpy as np
     >>> x = np.arange(10, 14.25, 0.25)
     >>> y = np.arange(3, 12)
@@ -1006,7 +1006,7 @@ def newton_cotes(rn, equal=0):
     --------
     Compute the integral of sin(x) in [0, :math:`\pi`]:
 
-    >>> from scipy.integrate import newton_cotes
+    >>> from rsscipy.integrate import newton_cotes
     >>> import rsnumpy as np
     >>> def f(x):
     ...     return np.sin(x)
@@ -1075,7 +1075,7 @@ def newton_cotes(rn, equal=0):
 def _qmc_quad_iv(func, a, b, n_points, n_estimates, qrng, log, xp):
     # lazy import to avoid issues with partially-initialized submodule
     if not hasattr(qmc_quad, 'qmc'):
-        from scipy import stats
+        from rsscipy import stats
         qmc_quad.stats = stats
     else:
         stats = qmc_quad.stats
@@ -1235,7 +1235,7 @@ def qmc_quad(func, a, b, *, n_estimates=8, n_points=1024, qrng=None,
     of a multivariate normal distribution.
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> dim = 8
     >>> mean = np.zeros(dim)
     >>> cov = np.eye(dim)
@@ -1246,7 +1246,7 @@ def qmc_quad(func, a, b, *, n_estimates=8, n_points=1024, qrng=None,
 
     To compute the integral over the unit hypercube:
 
-    >>> from scipy.integrate import qmc_quad
+    >>> from rsscipy.integrate import qmc_quad
     >>> a = np.zeros(dim)
     >>> b = np.ones(dim)
     >>> rng = np.random.default_rng()

@@ -122,6 +122,6 @@ from . import distance, transform
 
 __all__ += ['distance', 'transform']
 
-from scipy._lib._testutils import PytestTester
+from rsscipy._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester

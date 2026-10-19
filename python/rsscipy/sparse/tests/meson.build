@@ -24,6 +24,6 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/sparse/tests',
+  subdir: 'rsscipy/sparse/tests',
   install_tag: 'tests'
 )

@@ -14,7 +14,7 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/fft'
+  subdir: 'rsscipy/fft'
 )
 
 subdir('_duccfft')

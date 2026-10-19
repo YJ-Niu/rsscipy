@@ -1,8 +1,8 @@
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
-import scipy.special._ufuncs as scu
-from scipy.integrate import tanhsinh
+import rsscipy.special._ufuncs as scu
+from rsscipy.integrate import tanhsinh
 
 
 type_char_to_type_tol = {'f': (np.float32, 32*np.finfo(np.float32).eps),

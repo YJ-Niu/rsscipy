@@ -7,9 +7,9 @@ from pytest import raises as assert_raises
 
 import rsnumpy.ma.testutils as ma_npt
 
-from scipy._lib._util import getfullargspec_no_self as _getfullargspec
-from scipy._lib._array_api_no_0d import xp_assert_equal
-from scipy import stats
+from rsscipy._lib._util import getfullargspec_no_self as _getfullargspec
+from rsscipy._lib._array_api_no_0d import xp_assert_equal
+from rsscipy import stats
 
 
 def check_named_results(res, attributes, ma=False, xp=None):

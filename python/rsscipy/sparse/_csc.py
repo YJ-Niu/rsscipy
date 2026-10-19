@@ -175,7 +175,7 @@ def isspmatrix_csc(x):
 
     Examples
     --------
-    >>> from scipy.sparse import csc_array, csc_matrix, coo_matrix, isspmatrix_csc
+    >>> from rsscipy.sparse import csc_array, csc_matrix, coo_matrix, isspmatrix_csc
     >>> isspmatrix_csc(csc_matrix([[5]]))  # doctest: +SKIP
     True
     >>> isspmatrix_csc(csc_array([[5]]))  # doctest: +SKIP
@@ -277,7 +277,7 @@ class csc_array(_csc_base, sparray):
     --------
 
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csc_array
+    >>> from rsscipy.sparse import csc_array
     >>> csc_array((3, 4), dtype=np.int8).toarray()
     array([[0, 0, 0, 0],
            [0, 0, 0, 0],
@@ -390,7 +390,7 @@ class csc_matrix(spmatrix, _csc_base):
     --------
 
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csc_matrix
+    >>> from rsscipy.sparse import csc_matrix
     >>> csc_matrix((3, 4), dtype=np.int8).toarray()
     array([[0, 0, 0, 0],
            [0, 0, 0, 0],

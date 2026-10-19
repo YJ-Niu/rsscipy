@@ -25,12 +25,12 @@ py3.extension_module('unuran_wrapper',
   dependencies: [np_dep, ccallback_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/stats/_unuran'
+  subdir: 'rsscipy/stats/_unuran'
 )
 
 py3.install_sources([
     '__init__.py',
     'unuran_wrapper.pyi',
   ],
-  subdir: 'scipy/stats/_unuran'
+  subdir: 'rsscipy/stats/_unuran'
 )

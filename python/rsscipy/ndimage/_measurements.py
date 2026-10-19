@@ -127,7 +127,7 @@ def label(input, structure=None, output=None):
     Create an image with some features, then label it using the default
     (cross-shaped) structuring element:
 
-    >>> from scipy.ndimage import label, generate_binary_structure
+    >>> from rsscipy.ndimage import label, generate_binary_structure
     >>> import rsnumpy as np
     >>> a = np.array([[0,0,1,1,0,0],
     ...               [0,0,0,1,0,0],
@@ -268,7 +268,7 @@ def find_objects(input, max_label=0):
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.zeros((6,6), dtype=int)
     >>> a[2:4, 2:4] = 1
@@ -368,7 +368,7 @@ def value_indices(arr, *, ignore_value=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> a = np.zeros((6, 6), dtype=int)
     >>> a[2:4, 2:4] = 1
     >>> a[4, 4] = 1
@@ -468,7 +468,7 @@ def labeled_comprehension(input, labels, index, func, out_dtype, default,
     ...               [5, 3, 0, 4],
     ...               [0, 0, 0, 7],
     ...               [9, 3, 0, 0]])
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> lbl, nlbl = ndimage.label(a)
     >>> lbls = np.arange(1, nlbl+1)
     >>> ndimage.labeled_comprehension(a, lbl, lbls, np.mean, float, 0)
@@ -741,7 +741,7 @@ def sum_labels(input, labels=None, index=None):
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> input =  [0,1,2,3]
     >>> labels = [1,1,2,2]
     >>> ndimage.sum_labels(input, labels, index=[1,2])
@@ -787,7 +787,7 @@ def mean(input, labels=None, index=None):
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.arange(25).reshape((5,5))
     >>> labels = np.zeros_like(a)
@@ -843,7 +843,7 @@ def variance(input, labels=None, index=None):
     ...               [5, 3, 0, 4],
     ...               [0, 0, 0, 7],
     ...               [9, 3, 0, 0]])
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> ndimage.variance(a)
     7.609375
 
@@ -896,7 +896,7 @@ def standard_deviation(input, labels=None, index=None):
     ...               [5, 3, 0, 4],
     ...               [0, 0, 0, 7],
     ...               [9, 3, 0, 0]])
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> ndimage.standard_deviation(a)
     2.7585095613392387
 
@@ -1074,7 +1074,7 @@ def minimum(input, labels=None, index=None):
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.array([[1, 2, 0, 0],
     ...               [5, 3, 0, 4],
@@ -1152,7 +1152,7 @@ def maximum(input, labels=None, index=None):
            [1, 1, 0, 0],
            [0, 2, 2, 0],
            [0, 2, 2, 0]])
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> ndimage.maximum(a)
     15
     >>> ndimage.maximum(a, labels=labels, index=[1,2])
@@ -1216,7 +1216,7 @@ def median(input, labels=None, index=None):
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.array([[1, 2, 0, 1],
     ...               [5, 3, 0, 4],
@@ -1288,7 +1288,7 @@ def minimum_position(input, labels=None, index=None):
     ...               [0, 0, 0, 7],
     ...               [9, 3, 0, 0]])
 
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
 
     >>> ndimage.minimum_position(a)
     (2, 0)
@@ -1362,7 +1362,7 @@ def maximum_position(input, labels=None, index=None):
 
     Examples
     --------
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> import rsnumpy as np
     >>> a = np.array([[1, 2, 0, 0],
     ...               [5, 3, 0, 4],
@@ -1438,7 +1438,7 @@ def extrema(input, labels=None, index=None):
     ...               [5, 3, 0, 4],
     ...               [0, 0, 0, 7],
     ...               [9, 3, 0, 0]])
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> ndimage.extrema(a)
     (0, 9, (0, 2), (3, 0))
 
@@ -1511,7 +1511,7 @@ def center_of_mass(input, labels=None, index=None):
     ...               [0,1,1,0],
     ...               [0,1,1,0],
     ...               [0,1,1,0]))
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> ndimage.center_of_mass(a)
     (2.0, 1.5)
 
@@ -1593,7 +1593,7 @@ def histogram(input, min, max, bins, labels=None, index=None):
     ...               [ 0.    ,  0.    ,  0.    ,  0.    ],
     ...               [ 0.    ,  0.    ,  0.7181,  0.2787],
     ...               [ 0.    ,  0.    ,  0.6573,  0.3094]])
-    >>> from scipy import ndimage
+    >>> from rsscipy import ndimage
     >>> ndimage.histogram(a, 0, 1, 10)
     array([13,  0,  2,  1,  0,  1,  1,  2,  0,  0])
 

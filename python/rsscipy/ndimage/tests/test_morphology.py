@@ -1,6 +1,6 @@
 import warnings
 import rsnumpy as np
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     is_cupy, is_numpy,
     xp_assert_close, xp_assert_equal, assert_array_almost_equal,
     make_xp_test_case,
@@ -9,7 +9,7 @@ from scipy._lib._array_api import (
 import pytest
 from pytest import raises as assert_raises
 
-from scipy import ndimage
+from rsscipy import ndimage
 
 from . import types
 

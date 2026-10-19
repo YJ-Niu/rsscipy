@@ -9,7 +9,7 @@ py3.install_sources([
     'radau.py',
     'rk.py'
   ],
-  subdir: 'scipy/integrate/_ivp'
+  subdir: 'rsscipy/integrate/_ivp'
 )
 
 subdir('tests')

@@ -3,7 +3,7 @@ py3.install_sources([
     'test_distance.py',
     'test_hausdorff.py'
   ],
-  subdir: 'scipy/spatial/distance/tests',
+  subdir: 'rsscipy/spatial/distance/tests',
   install_tag: 'tests'
 )
 
@@ -38,6 +38,6 @@ py3.install_sources([
     'data/random-int-data.txt',
     'data/random-uint-data.txt'
   ],
-  subdir: 'scipy/spatial/distance/tests/data',
+  subdir: 'rsscipy/spatial/distance/tests/data',
   install_tag: 'tests'
 )

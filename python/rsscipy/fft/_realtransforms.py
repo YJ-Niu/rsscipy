@@ -1,6 +1,6 @@
 from ._basic import _dispatch
-from scipy._lib.uarray import Dispatchable
-from scipy._lib._array_api import xp_capabilities
+from rsscipy._lib.uarray import Dispatchable
+from rsscipy._lib._array_api import xp_capabilities
 import rsnumpy as np
 
 __all__ = ['dct', 'idct', 'dst', 'idst', 'dctn', 'idctn', 'dstn', 'idstn']
@@ -62,7 +62,7 @@ def dctn(x, type=2, s=None, axes=None, norm=None, overwrite_x=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.fft import dctn, idctn
+    >>> from rsscipy.fft import dctn, idctn
     >>> rng = np.random.default_rng()
     >>> y = rng.standard_normal((16, 16))
     >>> np.allclose(y, idctn(dctn(y)))
@@ -128,7 +128,7 @@ def idctn(x, type=2, s=None, axes=None, norm=None, overwrite_x=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.fft import dctn, idctn
+    >>> from rsscipy.fft import dctn, idctn
     >>> rng = np.random.default_rng()
     >>> y = rng.standard_normal((16, 16))
     >>> np.allclose(y, idctn(dctn(y)))
@@ -194,7 +194,7 @@ def dstn(x, type=2, s=None, axes=None, norm=None, overwrite_x=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.fft import dstn, idstn
+    >>> from rsscipy.fft import dstn, idstn
     >>> rng = np.random.default_rng()
     >>> y = rng.standard_normal((16, 16))
     >>> np.allclose(y, idstn(dstn(y)))
@@ -260,7 +260,7 @@ def idstn(x, type=2, s=None, axes=None, norm=None, overwrite_x=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.fft import dstn, idstn
+    >>> from rsscipy.fft import dstn, idstn
     >>> rng = np.random.default_rng()
     >>> y = rng.standard_normal((16, 16))
     >>> np.allclose(y, idstn(dstn(y)))
@@ -411,7 +411,7 @@ def dct(x, type=2, n=None, axis=-1, norm=None, overwrite_x=False, workers=None,
     even-symmetrical inputs. The output is also real and even-symmetrical.
     Half of the FFT input is used to generate half of the FFT output:
 
-    >>> from scipy.fft import fft, dct
+    >>> from rsscipy.fft import fft, dct
     >>> import rsnumpy as np
     >>> fft(np.array([4., 3., 5., 10., 5., 3.])).real
     array([ 30.,  -8.,   6.,  -2.,   6.,  -8.])
@@ -492,7 +492,7 @@ def idct(x, type=2, n=None, axis=-1, norm=None, overwrite_x=False,
     inputs. The output is also real and even-symmetrical. Half of the IFFT
     input is used to generate half of the IFFT output:
 
-    >>> from scipy.fft import ifft, idct
+    >>> from rsscipy.fft import ifft, idct
     >>> import rsnumpy as np
     >>> ifft(np.array([ 30.,  -8.,   6.,  -2.,   6.,  -8.])).real
     array([  4.,   3.,   5.,  10.,   5.,   3.])
@@ -636,7 +636,7 @@ def dst(x, type=2, n=None, axis=-1, norm=None, overwrite_x=False, workers=None,
     Compute the DST of a simple 1D array:
 
     >>> import rsnumpy as np
-    >>> from scipy.fft import dst
+    >>> from rsscipy.fft import dst
     >>> x = np.array([1, -1, 1, -1])
     >>> dst(x, type=2)
     array([0., 0., 0., 8.])
@@ -723,7 +723,7 @@ def idst(x, type=2, n=None, axis=-1, norm=None, overwrite_x=False,
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.fft import idst
+    >>> from rsscipy.fft import idst
     ...
     >>> N = 15
     >>> X = np.array([0, N])  # the last `N-2` bin zero-valued bins are not needed

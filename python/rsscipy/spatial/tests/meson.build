@@ -7,7 +7,7 @@ py3.install_sources([
     'test_slerp.py',
     'test_spherical_voronoi.py'
   ],
-  subdir: 'scipy/spatial/tests',
+  subdir: 'rsscipy/spatial/tests',
   install_tag: 'tests'
 )
 
@@ -15,6 +15,6 @@ py3.install_sources([
     'data/degenerate_pointset.npz',
     'data/selfdual-4d-polytope.txt'
   ],
-  subdir: 'scipy/spatial/tests/data',
+  subdir: 'rsscipy/spatial/tests/data',
   install_tag: 'tests'
 )

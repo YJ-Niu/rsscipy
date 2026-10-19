@@ -13,12 +13,12 @@ from rsnumpy.testing import (
     assert_equal)
 
 from .test_linprog import magic_square
-from scipy.optimize._remove_redundancy import _remove_redundancy_svd
-from scipy.optimize._remove_redundancy import _remove_redundancy_pivot_dense
-from scipy.optimize._remove_redundancy import _remove_redundancy_pivot_sparse
-from scipy.optimize._remove_redundancy import _remove_redundancy_id
+from rsscipy.optimize._remove_redundancy import _remove_redundancy_svd
+from rsscipy.optimize._remove_redundancy import _remove_redundancy_pivot_dense
+from rsscipy.optimize._remove_redundancy import _remove_redundancy_pivot_sparse
+from rsscipy.optimize._remove_redundancy import _remove_redundancy_id
 
-from scipy.sparse import csc_array
+from rsscipy.sparse import csc_array
 
 
 def redundancy_removed(A, B):

@@ -72,35 +72,15 @@ py3.extension_module('_decomp_interpolative',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/linalg'
+  subdir: 'rsscipy/linalg'
 )
 
 # batched linalg inv module
-py3.extension_module('_batched_linalg',
-  [
-    'src/_common_array_utils.hh',
-    'src/_linalg_lu_det.hh',
-    'src/_linalg_inv.hh',
-    'src/_linalg_solve.hh',
-    'src/_npymath.hh',
-    'src/_batched_linalg_module.cc',
-  ],
-  include_directories: ['src'],
-  dependencies: [np_dep, lapack_dep],
-  link_args: version_link_args,
-  install: true,
-  subdir: 'scipy/linalg'
-)
+# `_batched_linalg` is now pure Python (`_batched_linalg.py`); the C++ sources
+# under `src/` are gone.
 
-# _solve_toeplitz
-py3.extension_module('_solve_toeplitz',
-  linalg_init_cython_gen.process('_solve_toeplitz.pyx'),
-  c_args: cython_c_args,
-  dependencies: np_dep,
-  link_args: version_link_args,
-  install: true,
-  subdir: 'scipy/linalg'
-)
+# `_solve_toeplitz` is now pure Python (`_solve_toeplitz.py`): the Levinson
+# recursion is inherently sequential, so there was nothing for Rust to speed up.
 
 # _matfuncs_sqrtm_triu:
 py3.extension_module('_matfuncs_sqrtm_triu',
@@ -109,7 +89,7 @@ py3.extension_module('_matfuncs_sqrtm_triu',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/linalg'
+  subdir: 'rsscipy/linalg'
 )
 
 cython_blas_lapack_dep = cython_blas_ilp64 ? lapack_dep : lapack_lp64_dep
@@ -122,7 +102,7 @@ cython_blas = py3.extension_module('cython_blas',
   link_args: version_link_args,
   dependencies: [cython_blas_lapack_dep, np_dep],
   install: true,
-  subdir: 'scipy/linalg'
+  subdir: 'rsscipy/linalg'
 )
 
 cython_lapack = py3.extension_module('cython_lapack',
@@ -134,7 +114,7 @@ cython_lapack = py3.extension_module('cython_lapack',
   link_args: version_link_args,
   dependencies: [cython_blas_lapack_dep, np_dep],
   install: true,
-  subdir: 'scipy/linalg'
+  subdir: 'rsscipy/linalg'
 )
 
 _decomp_update_pyx = custom_target('_decomp_update',
@@ -149,42 +129,23 @@ py3.extension_module('_decomp_update',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/linalg'
+  subdir: 'rsscipy/linalg'
 )
 
-py3.extension_module('_internal_matfuncs',
-  [
-    '_matfuncsmodule.c',
-    'src/_matfuncs_expm.c',
-    'src/_matfuncs_sqrtm.c',
-  ],
-  include_directories: ['src/'],
-  dependencies: [np_dep, lapack_dep],
-  link_args: version_link_args,
-  install: true,
-  subdir: 'scipy/linalg'
-)
+# `_internal_matfuncs` is now pure Python (`_internal_matfuncs.py`);
+# `_matfuncsmodule.c` and `src/_matfuncs_*.c` are gone.
 
 
 # `_cythonized_array_utils` is now pure Python: `_cythonized_array_utils.py`
 # delegates the element walks to the Rust `array_utils` crate.  The `.pyx` is
 # gone, so building it here would fail.
 
-if use_pythran
-  py3.extension_module('_linalg_pythran',
-    pythran_gen.process('_linalg_pythran.py'),
-    cpp_args: cpp_args_pythran,
-    dependencies: [pythran_dep, np_dep],
-    link_args: version_link_args,
-    install: true,
-    subdir: 'scipy/linalg'
-  )
-else
-  py3.install_sources(
-    ['_linalg_pythran.py'],
-    subdir: 'scipy/linalg'
-  )
-endif
+# `_linalg_pythran.py` is a plain Python module now, so it is installed as a
+# source rather than compiled through pythran.
+py3.install_sources(
+  ['_linalg_pythran.py'],
+  subdir: 'rsscipy/linalg'
+)
 
 
 python_sources = [
@@ -241,7 +202,7 @@ install_data(
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/linalg'
+  subdir: 'rsscipy/linalg'
 )
 
 subdir('tests')

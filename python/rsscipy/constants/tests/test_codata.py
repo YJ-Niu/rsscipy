@@ -1,7 +1,7 @@
-from scipy.constants import find, value, c, speed_of_light, precision
+from rsscipy.constants import find, value, c, speed_of_light, precision
 from rsnumpy.testing import assert_equal, assert_, assert_almost_equal
-import scipy.constants._codata as _cd
-from scipy import constants
+import rsscipy.constants._codata as _cd
+from rsscipy import constants
 
 
 def test_find():

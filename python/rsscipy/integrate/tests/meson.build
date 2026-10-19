@@ -9,6 +9,6 @@ py3.install_sources([
     'test_tanhsinh.py',
     'test_cubature.py',
   ],
-  subdir: 'scipy/integrate/tests',
+  subdir: 'rsscipy/integrate/tests',
   install_tag: 'tests'
 )

@@ -1,8 +1,8 @@
 import pytest
 
 import rsnumpy as np
-import scipy.sparse as sp
-import scipy.sparse.linalg as splin
+import rsscipy.sparse as sp
+import rsscipy.sparse.linalg as splin
 
 from rsnumpy.testing import assert_allclose, assert_equal
 

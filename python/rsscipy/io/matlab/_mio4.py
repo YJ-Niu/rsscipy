@@ -7,7 +7,7 @@ from operator import mul
 
 import rsnumpy as np
 
-import scipy.sparse
+import rsscipy.sparse
 
 from ._miobase import (MatFileReader, docfiller, matdims, read_dtype,
                       convert_dtypes, arr_to_chars, arr_dtype_number)

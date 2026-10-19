@@ -2,7 +2,7 @@ import threading
 import pickle
 import pytest
 
-from scipy._lib._testutils import IS_WASM
+from rsscipy._lib._testutils import IS_WASM
 from copy import deepcopy
 import platform
 import sys
@@ -11,7 +11,7 @@ import warnings
 
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal
-from scipy.stats.sampling import (
+from rsscipy.stats.sampling import (
     TransformedDensityRejection,
     DiscreteAliasUrn,
     DiscreteGuideTable,
@@ -22,12 +22,12 @@ from scipy.stats.sampling import (
     UNURANError
 )
 from pytest import raises as assert_raises
-from scipy import stats
-from scipy import special
-from scipy.stats import chisquare, cramervonmises
-from scipy.stats._distr_params import distdiscrete, distcont
-from scipy._lib._util import check_random_state
-from scipy._lib._gcutils import assert_deallocated
+from rsscipy import stats
+from rsscipy import special
+from rsscipy.stats import chisquare, cramervonmises
+from rsscipy.stats._distr_params import distdiscrete, distcont
+from rsscipy._lib._util import check_random_state
+from rsscipy._lib._gcutils import assert_deallocated
 
 
 # common test data: this data can be shared between all the tests.

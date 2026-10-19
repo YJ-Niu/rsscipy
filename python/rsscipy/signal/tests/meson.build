@@ -24,13 +24,13 @@ py3.install_sources([
     'test_windows.py',
     'test_whittaker.py'
   ],
-  subdir: 'scipy/signal/tests',
+  subdir: 'rsscipy/signal/tests',
   install_tag: 'tests'
 )
 
 py3.install_sources([
     'data/GLB.Ts+dSST.csv',
   ],
-  subdir: 'scipy/signal/tests/data',
+  subdir: 'rsscipy/signal/tests/data',
   install_tag: 'tests'
 )

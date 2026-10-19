@@ -8,12 +8,12 @@ import rsnumpy as np
 from rsnumpy import (isscalar, sort, amin, amax, sqrt, array,
                    exp, ravel)
 
-from scipy import optimize, special, interpolate, stats
-from scipy._lib._bunch import _make_tuple_bunch
-from scipy._lib._util import _rename_parameter, _contains_nan, _get_nan
-import scipy._external.array_api_extra as xpx
+from rsscipy import optimize, special, interpolate, stats
+from rsscipy._lib._bunch import _make_tuple_bunch
+from rsscipy._lib._util import _rename_parameter, _contains_nan, _get_nan
+import rsscipy._external.array_api_extra as xpx
 
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     array_namespace,
     is_marray,
     xp_capabilities,
@@ -110,7 +110,7 @@ def bayes_mvs(data, alpha=0.90):
     --------
     First a basic example to demonstrate the outputs:
 
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> data = [6, 9, 12, 7, 8, 8, 13]
     >>> mean, var, std = stats.bayes_mvs(data)
     >>> mean
@@ -198,7 +198,7 @@ def mvsdist(data):
 
     Examples
     --------
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> data = [6, 9, 12, 7, 8, 8, 13]
     >>> mean, var, std = stats.mvsdist(data)
 
@@ -294,7 +294,7 @@ def kstat(data, n=2, *, axis=None):
 
     Examples
     --------
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> from rsnumpy.random import default_rng
     >>> rng = default_rng()
 
@@ -386,7 +386,7 @@ def kstatvar(data, n=2, *, axis=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng(92366746)
 
     As the sample size increases, the estimated variance of the k-statistic converges
@@ -449,7 +449,7 @@ def _calc_uniform_order_statistic_medians(n):
     >>> import rsnumpy as np
     >>> n = 4
     >>> k = np.arange(1, n+1)
-    >>> from scipy.stats import beta
+    >>> from rsscipy.stats import beta
     >>> a = k
     >>> b = n-k+1
     >>> beta.mean(a, b)
@@ -461,7 +461,7 @@ def _calc_uniform_order_statistic_medians(n):
     and greatest order statistics, and the remaining medians are approximated
     by points spread evenly across a sub-interval of the unit interval:
 
-    >>> from scipy.stats._morestats import _calc_uniform_order_statistic_medians
+    >>> from rsscipy.stats._morestats import _calc_uniform_order_statistic_medians
     >>> _calc_uniform_order_statistic_medians(n)
     array([0.15910358, 0.38545246, 0.61454754, 0.84089642])
 
@@ -607,7 +607,7 @@ def probplot(x, sparams=(), dist='norm', fit=True, plot=None, rvalue=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> import matplotlib.pyplot as plt
     >>> nsample = 100
     >>> rng = np.random.default_rng()
@@ -749,7 +749,7 @@ def ppcc_max(x, brack=(0.0, 1.0), dist='tukeylambda'):
     with shape parameter 2.5:
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng()
     >>> c = 2.5
@@ -843,7 +843,7 @@ def ppcc_plot(x, a, b, dist='tukeylambda', plot=None, N=80):
     with shape parameter 2.5, and plot the histogram of the data:
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng()
     >>> c = 2.5
@@ -967,7 +967,7 @@ def boxcox_llf(lmb, data, *, axis=0, keepdims=False, nan_policy='propagate'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> import matplotlib.pyplot as plt
     >>> from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
@@ -1189,7 +1189,7 @@ def boxcox(x, lmbda=None, alpha=None, optimizer=None, *, nan_policy='propagate')
 
     Examples
     --------
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> import matplotlib.pyplot as plt
 
     We generate some random variates from a non-normal distribution and make a
@@ -1333,7 +1333,7 @@ def boxcox_normmax(
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> import matplotlib.pyplot as plt
 
     We can generate some data and determine the optimal ``lmbda`` in various
@@ -1367,7 +1367,7 @@ def boxcox_normmax(
     `fun` and uses `scipy.optimize.minimize_scalar` to minimize `fun` subject
     to the provided bounds and tolerances:
 
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
     >>> options = {'xatol': 1e-12}  # absolute tolerance on `x`
     >>> def optimizer(fun):
     ...     return optimize.minimize_scalar(fun, bounds=(6, 7),
@@ -1588,7 +1588,7 @@ def boxcox_normplot(x, la, lb, plot=None, N=80):
 
     Examples
     --------
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> import matplotlib.pyplot as plt
 
     Generate some non-normally distributed data, and create a Box-Cox plot:
@@ -1677,7 +1677,7 @@ def yeojohnson(x, lmbda=None, *, nan_policy='propagate'):
 
     Examples
     --------
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> import matplotlib.pyplot as plt
 
     We generate some random variates from a non-normal distribution and make a
@@ -1818,7 +1818,7 @@ def yeojohnson_llf(lmb, data, *, axis=0, nan_policy='propagate', keepdims=False)
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> import matplotlib.pyplot as plt
     >>> from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 
@@ -1956,7 +1956,7 @@ def yeojohnson_normmax(x, brack=None, *, nan_policy='propagate'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> import matplotlib.pyplot as plt
 
     Generate some data and determine optimal ``lmbda``
@@ -2070,7 +2070,7 @@ def yeojohnson_normplot(x, la, lb, plot=None, N=80):
 
     Examples
     --------
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> import matplotlib.pyplot as plt
 
     Generate some non-normally distributed data, and create a Yeo-Johnson plot:
@@ -2150,7 +2150,7 @@ def shapiro(x, *, axis=None):
     --------
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng()
     >>> x = stats.norm.rvs(loc=5, scale=3, size=100, random_state=rng)
     >>> shapiro_test = stats.shapiro(x)
@@ -2440,7 +2440,7 @@ def anderson(x, dist='norm', *, method="interpolate", axis=0):
     distribution (with unspecified mean and standard deviation).
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import anderson
+    >>> from rsscipy.stats import anderson
     >>> rng = np.random.default_rng(9781234521)
     >>> data = rng.random(size=35)
     >>> res = anderson(data, dist='norm', method='interpolate')
@@ -2832,7 +2832,7 @@ def anderson_ksamp(samples, *, variant="midrank", method=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng(44925884305279435)
     >>> res = stats.anderson_ksamp([rng.normal(size=50), rng.normal(loc=0.5, size=30)],
     ...                            variant='midrank')
@@ -3101,7 +3101,7 @@ def ansari(x, y, alternative='two-sided', *, axis=0, method='auto'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import ansari
+    >>> from rsscipy.stats import ansari
     >>> rng = np.random.default_rng()
 
     For these examples, we'll create three random data sets.  The first
@@ -3304,7 +3304,7 @@ def bartlett(*samples, axis=0):
     with equal variances.
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> a = [8.88, 9.12, 9.04, 8.98, 9.00, 9.08, 9.01, 8.85, 9.06, 8.99]
     >>> b = [8.88, 8.95, 9.29, 9.44, 9.15, 9.58, 8.36, 9.18, 8.67, 9.05]
     >>> c = [8.95, 9.12, 8.95, 8.85, 9.03, 8.84, 9.07, 8.98, 8.86, 8.98]
@@ -3438,7 +3438,7 @@ def levene(*samples, center='median', proportiontocut=0.05, axis=0):
     with equal variances.
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> a = [8.88, 9.12, 9.04, 8.98, 9.00, 9.08, 9.01, 8.85, 9.06, 8.99]
     >>> b = [8.88, 8.95, 9.29, 9.44, 9.15, 9.58, 8.36, 9.18, 8.67, 9.05]
     >>> c = [8.95, 9.12, 8.95, 8.85, 9.03, 8.84, 9.07, 8.98, 8.86, 8.98]
@@ -3589,7 +3589,7 @@ def fligner(*samples, center='median', proportiontocut=0.05, axis=0):
     --------
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
 
     Test whether the lists `a`, `b` and `c` come from populations
     with equal variances.
@@ -3819,7 +3819,7 @@ def mood(x, y, axis=0, alternative="two-sided"):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng()
     >>> x2 = rng.standard_normal((2, 45, 6, 7))
     >>> x1 = rng.standard_normal((2, 30, 6, 7))
@@ -4073,7 +4073,7 @@ def wilcoxon(x, y=None, zero_method="wilcox", correction=False,
     hypothesis that there is no height difference, we can apply the
     two-sided test:
 
-    >>> from scipy.stats import wilcoxon
+    >>> from rsscipy.stats import wilcoxon
     >>> res = wilcoxon(d)
     >>> res.statistic, res.pvalue
     (24.0, 0.041259765625)
@@ -4253,7 +4253,7 @@ def median_test(*samples, ties='below', correction=True, lambda_=1,
     >>> g1 = [10, 14, 14, 18, 20, 22, 24, 25, 31, 31, 32, 39, 43, 43, 48, 49]
     >>> g2 = [28, 30, 31, 33, 34, 35, 36, 40, 44, 55, 57, 61, 91, 92, 99]
     >>> g3 = [0, 3, 9, 22, 23, 25, 25, 33, 34, 34, 40, 45, 46, 48, 62, 67, 84]
-    >>> from scipy.stats import median_test
+    >>> from rsscipy.stats import median_test
     >>> res = median_test(g1, g2, g3)
 
     The median is
@@ -4513,7 +4513,7 @@ def false_discovery_control(ps, *, axis=0, method='bh'):
     control the false discovery rate at 5%, we apply the Benjamini-Hochberg
     p-value adjustment.
 
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> stats.false_discovery_control(ps)
     array([0.0015    , 0.003     , 0.0095    , 0.035625  , 0.0603    ,
            0.06385714, 0.06385714, 0.0645    , 0.0765    , 0.486     ,

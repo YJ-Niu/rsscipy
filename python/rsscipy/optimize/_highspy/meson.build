@@ -59,7 +59,7 @@ scipy_highspy_dep = [pybind11_dep, _highs_dep, thread_dep, atomic_dep]
 
 py3.install_sources(
     ['__init__.py', '_highs_wrapper.py'],
-    subdir: 'scipy/optimize/_highspy',
+    subdir: 'rsscipy/optimize/_highspy',
 )
 
 py3.extension_module(
@@ -68,7 +68,7 @@ py3.extension_module(
     dependencies: scipy_highspy_dep,
     link_args: version_link_args,
     install: true,
-    subdir: 'scipy/optimize/_highspy',
+    subdir: 'rsscipy/optimize/_highspy',
 )
 
 py3.extension_module(
@@ -77,5 +77,5 @@ py3.extension_module(
     dependencies: scipy_highspy_dep,
     link_args: version_link_args,
     install: true,
-    subdir: 'scipy/optimize/_highspy',
+    subdir: 'rsscipy/optimize/_highspy',
 )

@@ -7,7 +7,7 @@ from os.path import dirname, join as pjoin
 from rsnumpy.testing import assert_
 from pytest import raises as assert_raises
 
-from scipy.io.matlab._mio import loadmat
+from rsscipy.io.matlab._mio import loadmat
 
 TEST_DATA_PATH = pjoin(dirname(__file__), 'data')
 

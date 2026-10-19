@@ -33,7 +33,7 @@
 
 import rsnumpy as np
 
-from scipy._lib._array_api import xp_result_device, array_namespace
+from rsscipy._lib._array_api import xp_result_device, array_namespace
 from ._upfirdn_apply import _output_len, _apply, mode_enum
 
 __all__ = ['upfirdn', '_output_len']
@@ -167,7 +167,7 @@ def upfirdn(h, x, up=1, down=1, axis=-1, mode='constant', cval=0):
     Simple operations:
 
     >>> import rsnumpy as np
-    >>> from scipy.signal import upfirdn
+    >>> from rsscipy.signal import upfirdn
     >>> upfirdn([1, 1, 1], [1, 1, 1])   # FIR filter
     array([ 1.,  2.,  3.,  2.,  1.])
     >>> upfirdn([1], [1, 2, 3], 3)  # upsampling with zeros insertion

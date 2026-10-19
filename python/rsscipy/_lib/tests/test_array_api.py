@@ -3,14 +3,14 @@ import re
 import rsnumpy as np
 import pytest
 
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     SCIPY_ARRAY_API, array_namespace, _asarray, xp_copy, xp_assert_equal, is_numpy,
     np_compat, xp_device, xp_promote, xp_result_device,
     xp_result_type, is_torch, xp_copy_to_numpy
 )
-from scipy._external import array_api_extra as xpx
-from scipy._lib._array_api_no_0d import xp_assert_equal as xp_assert_equal_no_0d
-from scipy._external.array_api_extra.testing import lazy_xp_function
+from rsscipy._external import array_api_extra as xpx
+from rsscipy._lib._array_api_no_0d import xp_assert_equal as xp_assert_equal_no_0d
+from rsscipy._external.array_api_extra.testing import lazy_xp_function
 
 # Run all tests in this module in the Array API CI,
 # including those without the `xp` fixture
@@ -457,7 +457,7 @@ def test_cpu_pinning_namespace():
     # (`pixi run test-torch-meta`): creation is pinned to cpu unless an
     # explicit device is passed; everything else delegates. See gh-22680.
     torch = pytest.importorskip("torch")
-    from scipy.conftest import _CpuPinningNamespace
+    from rsscipy.conftest import _CpuPinningNamespace
 
     real = array_namespace(torch.empty(0))
     xp = _CpuPinningNamespace(real)

@@ -11,5 +11,5 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/special/_precompute'
+  subdir: 'rsscipy/special/_precompute'
 )

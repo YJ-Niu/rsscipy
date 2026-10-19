@@ -7,7 +7,7 @@ from rsnumpy.testing import assert_allclose, assert_equal
 import rsnumpy as np
 from math import pow
 
-from scipy import optimize
+from rsscipy import optimize
 
 
 class TestTnc:

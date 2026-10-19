@@ -6,7 +6,7 @@ import rsnumpy as np
 from functools import cached_property
 
 
-from scipy.integrate._rules._base import NestedFixedRule
+from rsscipy.integrate._rules._base import NestedFixedRule
 
 
 class GenzMalikCubature(NestedFixedRule):
@@ -40,8 +40,8 @@ class GenzMalikCubature(NestedFixedRule):
     Evaluate a 3D integral:
 
     >>> import rsnumpy as np
-    >>> from scipy.integrate import cubature
-    >>> from scipy.integrate._rules import GenzMalikCubature
+    >>> from rsscipy.integrate import cubature
+    >>> from rsscipy.integrate._rules import GenzMalikCubature
     >>> def f(x):
     ...     # f(x) = cos(x_1) + cos(x_2) + cos(x_3)
     ...     return np.sum(np.cos(x), axis=-1)

@@ -14,7 +14,7 @@ in `scipy.optimize.cython_optimize` for more information.
 """
 
 import rsnumpy.testing as npt
-from scipy.optimize.cython_optimize import _zeros
+from rsscipy.optimize.cython_optimize import _zeros
 
 # CONSTANTS
 # Solve x**3 - A0 = 0  for A0 = [2.0, 2.1, ..., 2.9].

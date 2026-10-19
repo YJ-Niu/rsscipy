@@ -11,8 +11,8 @@ import rsnumpy as np
 from typing import NamedTuple
 from rsnumpy.testing import assert_allclose
 
-from scipy.special import hyp2f1
-from scipy.special._testutils import check_version, MissingModule
+from rsscipy.special import hyp2f1
+from rsscipy.special._testutils import check_version, MissingModule
 
 
 try:

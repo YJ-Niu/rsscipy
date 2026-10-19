@@ -5,11 +5,11 @@ import rsnumpy as np
 from rsnumpy.testing import assert_, assert_equal, HAS_REFCOUNT
 import pytest
 
-from scipy._lib._testutils import IS_WASM
+from rsscipy._lib._testutils import IS_WASM
 from pytest import raises as assert_raises
 
-import scipy.special as sc
-from scipy.special._ufuncs import _sf_error_test_function
+import rsscipy.special as sc
+from rsscipy.special._ufuncs import _sf_error_test_function
 
 _sf_error_code_map = {
     # skip 'ok'

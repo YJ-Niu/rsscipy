@@ -2,7 +2,7 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose
 from .._discrete_distns import nchypergeom_fisher, hypergeom
-from scipy.stats._odds_ratio import odds_ratio
+from rsscipy.stats._odds_ratio import odds_ratio
 from .data.fisher_exact_results_from_r import data
 
 

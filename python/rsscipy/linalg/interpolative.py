@@ -137,12 +137,12 @@ Initializing
 The first step is to import :mod:`scipy.linalg.interpolative` by issuing the
 command:
 
->>> import scipy.linalg.interpolative as sli
+>>> import rsscipy.linalg.interpolative as sli
 
 Now let's build a matrix. For this, we consider a Hilbert matrix, which is well
 know to have low rank:
 
->>> from scipy.linalg import hilbert
+>>> from rsscipy.linalg import hilbert
 >>> n = 1000
 >>> A = hilbert(n)
 
@@ -162,7 +162,7 @@ avoiding data copying when passing to the backend.
 We then define multiplication routines for the matrix by regarding it as a
 :class:`scipy.sparse.linalg.LinearOperator`:
 
->>> from scipy.sparse.linalg import aslinearoperator
+>>> from rsscipy.sparse.linalg import aslinearoperator
 >>> L = aslinearoperator(A)
 
 This automatically sets up methods describing the action of the matrix and its
@@ -357,7 +357,7 @@ backend routine.
 
 """
 
-import scipy.linalg._decomp_interpolative as _backend
+import rsscipy.linalg._decomp_interpolative as _backend
 import rsnumpy as np
 
 __all__ = [
@@ -481,7 +481,7 @@ def interp_decomp(A, eps_or_k, rand=True, rng=None):
     proj : :class:`rsnumpy.ndarray`
         Interpolation coefficients.
     """  # numpy/numpydoc#87  # noqa: E501
-    from scipy.sparse.linalg import LinearOperator
+    from rsscipy.sparse.linalg import LinearOperator
     rng = np.random.default_rng(rng)
     real = _is_real(A)
 
@@ -721,7 +721,7 @@ def estimate_spectral_norm(A, its=20, rng=None):
     float
         Spectral norm estimate.
     """
-    from scipy.sparse.linalg import aslinearoperator
+    from rsscipy.sparse.linalg import aslinearoperator
     rng = np.random.default_rng(rng)
     A = aslinearoperator(A)
 
@@ -762,7 +762,7 @@ def estimate_spectral_norm_diff(A, B, its=20, rng=None):
     float
         Spectral norm estimate of matrix difference.
     """
-    from scipy.sparse.linalg import aslinearoperator
+    from rsscipy.sparse.linalg import aslinearoperator
     rng = np.random.default_rng(rng)
     A = aslinearoperator(A)
     B = aslinearoperator(B)
@@ -829,7 +829,7 @@ def svd(A, eps_or_k, rand=True, rng=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg.interpolative import svd
+    >>> from rsscipy.linalg.interpolative import svd
     >>> rng = np.random.default_rng()
     >>> # Create a rank-5 matrix
     >>> A = rng.standard_normal((20, 5)) @ rng.standard_normal((5, 10))
@@ -844,7 +844,7 @@ def svd(A, eps_or_k, rand=True, rng=None):
     True
 
     """
-    from scipy.sparse.linalg import LinearOperator
+    from rsscipy.sparse.linalg import LinearOperator
     rng = np.random.default_rng(rng)
 
     real = _is_real(A)
@@ -935,7 +935,7 @@ def estimate_rank(A, eps, rng=None):
     int
         Estimated matrix rank.
     """
-    from scipy.sparse.linalg import LinearOperator
+    from rsscipy.sparse.linalg import LinearOperator
 
     rng = np.random.default_rng(rng)
     real = _is_real(A)

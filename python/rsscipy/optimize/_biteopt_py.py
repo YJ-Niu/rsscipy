@@ -2,10 +2,10 @@ from collections.abc import Callable, Iterable
 from typing import Concatenate
 
 import rsnumpy as np
-from scipy.optimize._optimize import OptimizeResult
+from rsscipy.optimize._optimize import OptimizeResult
 from ._constraints import old_bound_to_new, Bounds
 from ._biteopt import minimize as _minimize  # type: ignore[import-not-found]
-from scipy._lib._util import _validate_int
+from rsscipy._lib._util import _validate_int
 
 __all__ = ['biteopt']
 
@@ -108,7 +108,7 @@ def biteopt(
     the Styblinski-Tang function
     (https://en.wikipedia.org/wiki/Test_functions_for_optimization).
 
-    >>> from scipy.optimize import biteopt, Bounds
+    >>> from rsscipy.optimize import biteopt, Bounds
     >>> def styblinski_tang(pos):
     ...     x, y = pos
     ...     return 0.5 * (x**4 - 16*x**2 + 5*x + y**4 - 16*y**2 + 5*y)

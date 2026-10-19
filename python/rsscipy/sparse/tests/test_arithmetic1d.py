@@ -5,8 +5,8 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose
 
-from scipy.sparse import coo_array, csr_array
-from scipy.sparse._sputils import isscalarlike
+from rsscipy.sparse import coo_array, csr_array
+from rsscipy.sparse._sputils import isscalarlike
 
 
 spcreators = [coo_array, csr_array]

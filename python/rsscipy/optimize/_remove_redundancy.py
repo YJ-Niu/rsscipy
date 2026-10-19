@@ -5,10 +5,10 @@ programming equality constraints.
 # Author: Matt Haberland
 
 import rsnumpy as np
-from scipy.linalg import svd
-from scipy.linalg.interpolative import interp_decomp
-import scipy
-from scipy.linalg.blas import dtrsm
+from rsscipy.linalg import svd
+from rsscipy.linalg.interpolative import interp_decomp
+import rsscipy
+from rsscipy.linalg.blas import dtrsm
 
 
 def _row_count(A):

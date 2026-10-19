@@ -5,21 +5,21 @@ import os
 
 from itertools import product
 
-from scipy._external.packaging_version import version
+from rsscipy._external.packaging_version import version
 import rsnumpy as np
 import pytest
 from pytest import raises as assert_raises
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     xp_assert_close, xp_assert_equal, array_namespace,
     assert_array_almost_equal, xp_size, is_numpy,
     make_xp_test_case, make_xp_pytest_param, is_cupy, is_torch, scipy_namespace_for,
     xp_copy_to_numpy, xp_assert_close_nulp
 )
-from scipy._lib._array_api_no_0d import xp_assert_close as xp_assert_close_no_0d
-import scipy._external.array_api_extra as xpx
+from rsscipy._lib._array_api_no_0d import xp_assert_close as xp_assert_close_no_0d
+import rsscipy._external.array_api_extra as xpx
 
 from rsnumpy import array, spacing, sin, pi
-from scipy.signal import (argrelextrema, BadCoefficients, bessel, besselap, bilinear,
+from rsscipy.signal import (argrelextrema, BadCoefficients, bessel, besselap, bilinear,
                           buttap, butter, buttord, cheb1ap, cheb1ord, cheb2ap,
                           cheb2ord, cheby1, cheby2, ellip, ellipap, ellipord,
                           findfreqs, firwin, freqs_zpk, freqs, freqz, freqz_zpk,
@@ -28,11 +28,11 @@ from scipy.signal import (argrelextrema, BadCoefficients, bessel, besselap, bili
                           sos2tf, sos2zpk, sosfreqz, freqz_sos, tf2sos, tf2zpk, zpk2sos,
                           zpk2tf, bilinear_zpk, lp2lp_zpk, lp2hp_zpk, lp2bp_zpk,
                           lp2bs_zpk)
-from scipy.signal._filter_design import (_cplxreal, _cplxpair, _norm_factor,
+from rsscipy.signal._filter_design import (_cplxreal, _cplxpair, _norm_factor,
                                         _bessel_poly, _bessel_zeros)
-from scipy.signal._filter_design import _logspace
-from scipy.signal import _polyutils as _pu
-from scipy.signal._polyutils import _sort_cmplx
+from rsscipy.signal._filter_design import _logspace
+from rsscipy.signal import _polyutils as _pu
+from rsscipy.signal._polyutils import _sort_cmplx
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 xfail_xp_backends = pytest.mark.xfail_xp_backends
@@ -296,7 +296,7 @@ class TestZpk2Tf:
 
         b, a = zpk2tf(z, p, k)
 
-        # reference values from scipy 1.15.3
+        # reference values from rsscipy 1.15.3
         b_ref = xp.asarray([[ 2.5, -7.5,  5. ], [ 2.5,  2.5,  0. ]], dtype=xp.float64)
         a_ref = xp.asarray([ 1., -7., 12.], dtype=xp.float64)
 

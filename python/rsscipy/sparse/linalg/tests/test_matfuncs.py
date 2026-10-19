@@ -13,16 +13,16 @@ from rsnumpy.testing import (
         assert_allclose, assert_, assert_array_almost_equal, assert_equal,
         assert_array_almost_equal_nulp)
 
-from scipy.sparse import csc_array, SparseEfficiencyWarning
-from scipy.sparse._construct import eye_array
-from scipy.sparse.linalg._matfuncs import (expm, _expm,
+from rsscipy.sparse import csc_array, SparseEfficiencyWarning
+from rsscipy.sparse._construct import eye_array
+from rsscipy.sparse.linalg._matfuncs import (expm, _expm,
         ProductOperator, MatrixPowerOperator,
         _onenorm_matrix_power_nnm, matrix_power)
-from scipy.sparse._sputils import matrix
-from scipy.linalg import logm
-from scipy.special import factorial, binom
-import scipy.sparse
-import scipy.sparse.linalg
+from rsscipy.sparse._sputils import matrix
+from rsscipy.linalg import logm
+from rsscipy.special import factorial, binom
+import rsscipy.sparse
+import rsscipy.sparse.linalg
 
 
 def _burkardt_13_power(n, p):

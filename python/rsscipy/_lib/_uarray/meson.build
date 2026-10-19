@@ -3,7 +3,7 @@ py3.extension_module('_uarray',
   cpp_args: [_cpp_Wno_terminate, _cpp_Wno_unused_function, _cpp_Wno_uninitialized],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/_lib/_uarray'
+  subdir: 'rsscipy/_lib/_uarray'
 )
 
 
@@ -15,5 +15,5 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/_lib/_uarray'
+  subdir: 'rsscipy/_lib/_uarray'
 )

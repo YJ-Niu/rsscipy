@@ -37,17 +37,17 @@ import os
 import rsnumpy as np
 from rsnumpy import array, asarray, ma
 
-from scipy import sparse
-from scipy.spatial.distance import cdist
+from rsscipy import sparse
+from rsscipy.spatial.distance import cdist
 
-from scipy.optimize import milp, LinearConstraint
-from scipy.optimize.elementwise import find_root
-from scipy._lib._util import _get_nan, _rename_parameter, _contains_nan
+from rsscipy.optimize import milp, LinearConstraint
+from rsscipy.optimize.elementwise import find_root
+from rsscipy._lib._util import _get_nan, _rename_parameter, _contains_nan
 
-import scipy.special as special
+import rsscipy.special as special
 # Import unused here but needs to stay until end of deprecation period
 # See https://github.com/scipy/scipy/issues/15765#issuecomment-1875564522
-from scipy import linalg  # noqa: F401
+from rsscipy import linalg  # noqa: F401
 from . import distributions
 from . import _mstats_basic as mstats_basic
 
@@ -63,9 +63,9 @@ from ._axis_nan_policy import (_axis_nan_policy_factory, _broadcast_shapes,
                                too_small_1d_not_omit, too_small_1d_omit,
                                too_small_nd_not_omit, too_small_nd_omit)
 from ._binomtest import _binary_search_for_binom_tst as _binary_search, _SimpleBinomial
-from scipy._lib._bunch import _make_tuple_bunch
-from scipy import stats
-from scipy._lib._array_api import (
+from rsscipy._lib._bunch import _make_tuple_bunch
+from rsscipy import stats
+from rsscipy._lib._array_api import (
     _asarray,
     array_namespace,
     is_lazy_array,
@@ -88,8 +88,8 @@ from scipy._lib._array_api import (
     xp_copy,
     xp_result_device,
 )
-import scipy._external.array_api_extra as xpx
-from scipy.stats._quantile import _xp_searchsorted
+import rsscipy._external.array_api_extra as xpx
+from rsscipy.stats._quantile import _xp_searchsorted
 
 
 # Functions/classes in other files should be added in `__init__.py`, not here
@@ -214,7 +214,7 @@ def gmean(a, axis=0, dtype=None, weights=None):
 
     Examples
     --------
-    >>> from scipy.stats import gmean
+    >>> from rsscipy.stats import gmean
     >>> gmean([1, 4])
     2.0
     >>> gmean([1, 2, 3, 4, 5, 6, 7])
@@ -307,7 +307,7 @@ def hmean(a, axis=0, dtype=None, *, weights=None):
 
     Examples
     --------
-    >>> from scipy.stats import hmean
+    >>> from rsscipy.stats import hmean
     >>> hmean([1, 4])
     1.6000000000000001
     >>> hmean([1, 2, 3, 4, 5, 6, 7])
@@ -414,7 +414,7 @@ def pmean(a, p, *, axis=0, dtype=None, weights=None):
 
     Examples
     --------
-    >>> from scipy.stats import pmean, hmean, gmean
+    >>> from rsscipy.stats import pmean, hmean, gmean
     >>> pmean([1, 4], 1.3)
     2.639372938300652
     >>> pmean([1, 2, 3, 4, 5, 6, 7], 1.3)
@@ -554,7 +554,7 @@ def mode(a, axis=0, nan_policy='propagate', keepdims=False):
     ...               [1, 7, 2, 8],
     ...               [3, 0, 6, 1],
     ...               [3, 2, 5, 5]])
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> stats.mode(a, keepdims=True)
     ModeResult(mode=array([[3, 0, 6, 1]]), count=array([[4, 2, 2, 1]]))
 
@@ -705,7 +705,7 @@ def tmean(a, limits=None, inclusive=(True, True), axis=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> x = np.arange(20)
     >>> stats.tmean(x)
     9.5
@@ -767,7 +767,7 @@ def tvar(a, limits=None, inclusive=(True, True), axis=0, ddof=1):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> x = np.arange(20)
     >>> stats.tvar(x)
     35.0
@@ -819,7 +819,7 @@ def tmin(a, lowerlimit=None, axis=0, inclusive=True, nan_policy='propagate'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> x = np.arange(20)
     >>> stats.tmin(x)
     0
@@ -882,7 +882,7 @@ def tmax(a, upperlimit=None, axis=0, inclusive=True, nan_policy='propagate'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> x = np.arange(20)
     >>> stats.tmax(x)
     19
@@ -954,7 +954,7 @@ def tstd(a, limits=None, inclusive=(True, True), axis=0, ddof=1):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> x = np.arange(20)
     >>> stats.tstd(x)
     5.9160797830996161
@@ -1007,7 +1007,7 @@ def tsem(a, limits=None, inclusive=(True, True), axis=0, ddof=1):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> x = np.arange(20)
     >>> stats.tsem(x)
     1.3228756555322954
@@ -1150,7 +1150,7 @@ def moment(a, order=1, axis=0, nan_policy='propagate', *, center=None):
 
     Examples
     --------
-    >>> from scipy.stats import moment
+    >>> from rsscipy.stats import moment
     >>> moment([1, 2, 3, 4, 5], order=1)
     0.0
     >>> moment([1, 2, 3, 4, 5], order=2)
@@ -1309,7 +1309,7 @@ def skew(a, axis=0, bias=True, nan_policy='propagate'):
 
     Examples
     --------
-    >>> from scipy.stats import skew
+    >>> from rsscipy.stats import skew
     >>> skew([1, 2, 3, 4, 5])
     0.0
     >>> skew([2, 8, 0, 4, 1, 9, 9, 0])
@@ -1391,7 +1391,7 @@ def kurtosis(a, axis=0, fisher=True, bias=True, nan_policy='propagate'):
     calculated from the dataset, not from the continuous distribution.
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import norm, kurtosis
+    >>> from rsscipy.stats import norm, kurtosis
     >>> data = norm.rvs(size=1000, random_state=3)
     >>> kurtosis(data)
     -0.06928694200380558
@@ -1401,8 +1401,8 @@ def kurtosis(a, axis=0, fisher=True, bias=True, nan_policy='propagate'):
     can serve as a reference point.
 
     >>> import matplotlib.pyplot as plt
-    >>> import scipy.stats as stats
-    >>> from scipy.stats import kurtosis
+    >>> import rsscipy.stats as stats
+    >>> from rsscipy.stats import kurtosis
 
     >>> x = np.linspace(-5, 5, 100)
     >>> ax = plt.subplot()
@@ -1509,7 +1509,7 @@ def describe(a, axis=0, ddof=1, bias=True, nan_policy='propagate'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> a = np.arange(10)
     >>> stats.describe(a)
     DescribeResult(nobs=10, minmax=(0, 9), mean=4.5,
@@ -1641,7 +1641,7 @@ def skewtest(a, axis=0, nan_policy='propagate', alternative='two-sided'):
     Examples
     --------
 
-    >>> from scipy.stats import skewtest
+    >>> from rsscipy.stats import skewtest
     >>> skewtest([1, 2, 3, 4, 5, 6, 7, 8])
     SkewtestResult(statistic=1.0108048609177787, pvalue=0.3121098361421897)
     >>> skewtest([2, 8, 0, 4, 1, 9, 9, 0])
@@ -1745,7 +1745,7 @@ def kurtosistest(a, axis=0, nan_policy='propagate', alternative='two-sided'):
     --------
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import kurtosistest
+    >>> from rsscipy.stats import kurtosistest
     >>> kurtosistest(list(range(20)))
     KurtosistestResult(statistic=-1.7058104152122062, pvalue=0.08804338332528348)
     >>> kurtosistest(list(range(20)), alternative='less')
@@ -1844,7 +1844,7 @@ def normaltest(a, axis=0, nan_policy='propagate'):
     --------
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng()
     >>> pts = 1000
     >>> a = rng.normal(0, 1, size=pts)
@@ -1919,7 +1919,7 @@ def jarque_bera(x, *, axis=None):
     --------
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng()
     >>> x = rng.normal(0, 1, 100000)
     >>> jarque_bera_test = stats.jarque_bera(x)
@@ -2012,7 +2012,7 @@ def scoreatpercentile(a, per, limit=(), interpolation_method='fraction',
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> a = np.arange(100)
     >>> stats.scoreatpercentile(a, 50)
     49.5
@@ -2133,7 +2133,7 @@ def percentileofscore(a, score, kind='rank', nan_policy='propagate'):
     Three-quarters of the given values lie below a given score:
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> stats.percentileofscore([1, 2, 3, 4], 3)
     75.0
 
@@ -2391,7 +2391,7 @@ def cumfreq(a, numbins=10, defaultreallimits=None, weights=None):
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng()
     >>> x = [1, 4, 2, 1, 3, 1]
     >>> res = stats.cumfreq(x, numbins=4, defaultreallimits=(1.5, 5))
@@ -2474,7 +2474,7 @@ def relfreq(a, numbins=10, defaultreallimits=None, weights=None):
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng()
     >>> a = np.array([2, 4, 1, 2, 3, 2])
     >>> res = stats.relfreq(a, numbins=4)
@@ -2564,13 +2564,13 @@ def obrientransform(*samples, nan_policy='propagate'):
 
     Apply the O'Brien transform to the data.
 
-    >>> from scipy.stats import obrientransform
+    >>> from rsscipy.stats import obrientransform
     >>> tx, ty = obrientransform(x, y)
 
     Use `scipy.stats.f_oneway` to apply a one-way ANOVA test to the
     transformed data.
 
-    >>> from scipy.stats import f_oneway
+    >>> from rsscipy.stats import f_oneway
     >>> F, p = f_oneway(tx, ty)
     >>> p
     0.1314139477040335
@@ -2641,7 +2641,7 @@ def sem(a, axis=0, ddof=1, nan_policy='propagate'):
     Find standard error along the first axis:
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> a = np.arange(20).reshape(5,4)
     >>> stats.sem(a)
     array([ 2.8284,  2.8284,  2.8284,  2.8284])
@@ -2733,7 +2733,7 @@ def zscore(a, axis=0, ddof=0, nan_policy='propagate'):
     >>> import rsnumpy as np
     >>> a = np.array([ 0.7972,  0.0767,  0.4383,  0.7866,  0.8091,
     ...                0.1954,  0.6307,  0.6599,  0.1065,  0.0508])
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> stats.zscore(a)
     array([ 1.1273, -1.247 , -0.0552,  1.0923,  1.1664, -0.8559,  0.5786,
             0.6748, -1.1488, -1.3324])
@@ -2825,7 +2825,7 @@ def gzscore(a, *, axis=0, ddof=0, nan_policy='propagate'):
     Draw samples from a log-normal distribution:
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import zscore, gzscore
+    >>> from rsscipy.stats import zscore, gzscore
     >>> import matplotlib.pyplot as plt
 
     >>> rng = np.random.default_rng()
@@ -2903,7 +2903,7 @@ def zmap(scores, compare, axis=0, ddof=0, nan_policy='propagate'):
 
     Examples
     --------
-    >>> from scipy.stats import zmap
+    >>> from rsscipy.stats import zmap
     >>> a = [0.5, 2.0, 2.5, 3]
     >>> b = [0, 1, 2, 3, 4]
     >>> zmap(a, b)
@@ -3028,7 +3028,7 @@ def gstd(a, axis=0, ddof=1, *, keepdims=False, nan_policy='propagate'):
     log scale this evaluates to approximately ``exp(1)``.
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import gstd
+    >>> from rsscipy.stats import gstd
     >>> rng = np.random.default_rng()
     >>> sample = rng.lognormal(mean=0, sigma=1, size=1000)
     >>> gstd(sample)
@@ -3164,7 +3164,7 @@ def iqr(x, axis=None, rng=(25, 75), scale=1.0, nan_policy='propagate',
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import iqr
+    >>> from rsscipy.stats import iqr
     >>> x = np.array([[10, 7, 4], [3, 2, 1]])
     >>> x
     array([[10,  7,  4],
@@ -3321,7 +3321,7 @@ def median_abs_deviation(x, axis=0, center=None, scale=1.0,
     outlier value while the MAD hardly changes:
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> x = stats.norm.rvs(size=100, scale=1, random_state=123456)
     >>> x.std()
     0.9973906394005013
@@ -3437,7 +3437,7 @@ def sigmaclip(a, low=4., high=4., *, nan_policy='propagate'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import sigmaclip
+    >>> from rsscipy.stats import sigmaclip
     >>> a = np.concatenate((np.linspace(9.5, 10.5, 31),
     ...                     np.linspace(0, 20, 5)))
     >>> fact = 1.5
@@ -3518,7 +3518,7 @@ def trimboth(a, proportiontocut, axis=0):
     Create an array of 10 values and trim 10% of those values from each end:
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     >>> stats.trimboth(a, 0.1)
     array([1, 3, 2, 4, 5, 6, 7, 8])
@@ -3602,7 +3602,7 @@ def trim1(a, proportiontocut, tail='right', axis=0):
     Create an array of 10 values and trim 20% of its lowest values:
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> a = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     >>> stats.trim1(a, 0.2, 'left')
     array([2, 4, 3, 5, 6, 7, 8, 9])
@@ -3700,7 +3700,7 @@ def trim_mean(a, proportiontocut, axis=0):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> x = [1, 2, 3, 5]
     >>> stats.trim_mean(x, 0.25)
     2.5
@@ -3881,7 +3881,7 @@ def f_oneway(*samples, axis=0, equal_var=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import f_oneway
+    >>> from rsscipy.stats import f_oneway
 
     Here are some data [3]_ on a shell measurement (the length of the anterior
     adductor muscle scar, standardized by dividing by length) in the mussel
@@ -4144,7 +4144,7 @@ def alexandergovern(*samples, nan_policy='propagate', axis=0):
 
     Examples
     --------
-    >>> from scipy.stats import alexandergovern
+    >>> from rsscipy.stats import alexandergovern
 
     Here are some data on annual percentage rate of interest charged on
     new car loans at nine of the largest banks in four American cities
@@ -4580,7 +4580,7 @@ def pearsonr(x, y, *, alternative='two-sided', method=None, axis=0):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> x, y = [1, 2, 3, 4, 5, 6, 7], [10, 9, 2.5, 6, 4, 3, 2]
     >>> res = stats.pearsonr(x, y)
     >>> res
@@ -4973,7 +4973,7 @@ def fisher_exact(table, alternative=None, *, method=None):
     These can be computed with::
 
         >>> import rsnumpy as np
-        >>> from scipy.stats import hypergeom
+        >>> from rsscipy.stats import hypergeom
         >>> table = np.array([[6, 2], [1, 4]])
         >>> M = table.sum()
         >>> n = table[0].sum()
@@ -4990,7 +4990,7 @@ def fisher_exact(table, alternative=None, *, method=None):
     probability does not exceed this are 2, 6 and 7, so the two-sided p-value
     is ``0.0163 + 0.0816 + 0.00466 ~= 0.10256``::
 
-        >>> from scipy.stats import fisher_exact
+        >>> from rsscipy.stats import fisher_exact
         >>> res = fisher_exact(table, alternative='two-sided')
         >>> res.pvalue
         0.10256410256410257
@@ -5043,7 +5043,7 @@ def fisher_exact(table, alternative=None, *, method=None):
     Examples
     --------
 
-    >>> from scipy.stats import fisher_exact
+    >>> from rsscipy.stats import fisher_exact
     >>> res = fisher_exact([[8, 2], [1, 5]])
     >>> res.statistic
     20.0
@@ -5055,7 +5055,7 @@ def fisher_exact(table, alternative=None, *, method=None):
     `method` parameter:
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import MonteCarloMethod
+    >>> from rsscipy.stats import MonteCarloMethod
     >>> rng = np.random.default_rng(4507195762371367)
     >>> method = MonteCarloMethod(rng=rng)
     >>> fisher_exact([[8, 2, 3], [1, 5, 4]], method=method)
@@ -5324,7 +5324,7 @@ def spearmanr(a, b=None, axis=0, nan_policy='propagate',
     --------
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> res = stats.spearmanr([1, 2, 3, 4, 5], [5, 6, 7, 8, 7])
     >>> res.statistic
     0.8207826816681233
@@ -5576,7 +5576,7 @@ def pointbiserialr(x, y, *, axis=0):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> a = np.array([0, 0, 0, 1, 1, 1, 1])
     >>> b = np.arange(7)
     >>> stats.pointbiserialr(a, b)
@@ -5712,7 +5712,7 @@ def kendalltau(x, y, *, nan_policy='propagate', method='auto', variant='b',
     Examples
     --------
 
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> x1 = [12, 2, 1, 12, 2]
     >>> x2 = [1, 4, 7, 1, 0]
     >>> res = stats.kendalltau(x1, x2)
@@ -5956,7 +5956,7 @@ def weightedtau(x, y, rank=True, weigher=None, additive=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> x = [12, 2, 1, 12, 2]
     >>> y = [1, 4, 7, 1, 0]
     >>> res = stats.weightedtau(x, y)
@@ -6227,7 +6227,7 @@ def ttest_1samp(a, popmean, axis=0, nan_policy="propagate", alternative="two-sid
     hypothesis most of the time.
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng()
     >>> rvs = stats.uniform.rvs(size=50, random_state=rng)
     >>> stats.ttest_1samp(rvs, popmean=0.5)
@@ -6515,7 +6515,7 @@ def ttest_ind_from_stats(mean1, std1, nobs1, mean2, std2, nobs2,
     variances are equal):
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import ttest_ind_from_stats
+    >>> from rsscipy.stats import ttest_ind_from_stats
     >>> ttest_ind_from_stats(mean1=15.0, std1=np.sqrt(87.5), nobs1=13,
     ...                      mean2=12.0, std2=np.sqrt(39.0), nobs2=11)
     Ttest_indResult(statistic=0.9051358093310269, pvalue=0.3751996797581487)
@@ -6526,7 +6526,7 @@ def ttest_ind_from_stats(mean1, std1, nobs1, mean2, std2, nobs2,
 
     >>> a = np.array([1, 3, 4, 6, 11, 13, 15, 19, 22, 24, 25, 26, 26])
     >>> b = np.array([2, 4, 6, 9, 11, 13, 14, 15, 18, 19, 21])
-    >>> from scipy.stats import ttest_ind
+    >>> from rsscipy.stats import ttest_ind
     >>> ttest_ind(a, b)
     TtestResult(statistic=0.905135809331027,
                 pvalue=0.3751996797581486,
@@ -6749,7 +6749,7 @@ def ttest_ind(a, b, *, axis=0, equal_var=True, nan_policy='propagate',
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng()
 
     Test with sample with identical means:
@@ -7051,7 +7051,7 @@ def ttest_rel(a, b, axis=0, nan_policy='propagate', alternative="two-sided"):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng()
 
     >>> rvs1 = stats.norm.rvs(loc=5, scale=10, size=500, random_state=rng)
@@ -7199,7 +7199,7 @@ def power_divergence(f_obs, f_exp=None, ddof=0, axis=0, lambda_=None):
     perform a G-test (i.e. use the log-likelihood ratio statistic):
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import power_divergence
+    >>> from rsscipy.stats import power_divergence
     >>> power_divergence([16, 18, 16, 14, 12, 12], lambda_='log-likelihood')
     (2.006573162632538, 0.84823476779463769)
 
@@ -7434,7 +7434,7 @@ def chisquare(f_obs, f_exp=None, ddof=0, axis=0, *, sum_check=True):
     frequencies:
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import chisquare
+    >>> from rsscipy.stats import chisquare
     >>> chisquare([16, 18, 16, 14, 12, 12])
     Power_divergenceResult(statistic=2.0, pvalue=0.84914503608460956)
 
@@ -7632,7 +7632,7 @@ def ks_1samp(x, cdf, args=(), alternative='two-sided', method='auto', *, axis=0)
     null hypothesis to be rejected.
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng()
     >>> stats.ks_1samp(stats.uniform.rvs(size=100, random_state=rng),
     ...                stats.norm.cdf)
@@ -8019,7 +8019,7 @@ def ks_2samp(data1, data2, alternative='two-sided', method='auto', *, axis=0):
     to be rejected.
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng()
     >>> sample1 = stats.uniform.rvs(size=100, random_state=rng)
     >>> sample2 = stats.norm.rvs(size=110, random_state=rng)
@@ -8366,7 +8366,7 @@ def kstest(rvs, cdf, args=(), N=20, alternative='two-sided', method='auto', *,
     null hypothesis to be rejected.
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng()
     >>> stats.kstest(stats.uniform.rvs(size=100, random_state=rng),
     ...              stats.norm.cdf)
@@ -8480,7 +8480,7 @@ def tiecorrect(rankvals):
 
     Examples
     --------
-    >>> from scipy.stats import tiecorrect, rankdata
+    >>> from rsscipy.stats import tiecorrect, rankdata
     >>> tiecorrect([1, 2.5, 2.5, 4])
     0.9
     >>> ranks = rankdata([1, 3, 2, 4, 5, 7, 2, 8, 4])
@@ -8567,7 +8567,7 @@ def ranksums(x, y, alternative='two-sided'):
     statistic.
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng(6004253334)
     >>> sample1 = rng.uniform(-1, 1, 200)
     >>> sample2 = rng.uniform(-0.5, 1.5, 300) # a shifted distribution
@@ -8673,7 +8673,7 @@ def kruskal(*samples, nan_policy='propagate', axis=0):
 
     Examples
     --------
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> x = [1, 3, 5, 7, 9]
     >>> y = [2, 4, 6, 8, 10]
     >>> stats.kruskal(x, y)
@@ -8778,7 +8778,7 @@ def friedmanchisquare(*samples, axis=0):
     >>> import rsnumpy as np
     >>> rng = np.random.default_rng(seed=18)
     >>> x = rng.random((6, 10))
-    >>> from scipy.stats import friedmanchisquare
+    >>> from rsscipy.stats import friedmanchisquare
     >>> res = friedmanchisquare(x[0], x[1], x[2], x[3], x[4], x[5])
     >>> res.statistic, res.pvalue
     (11.428571428571416, 0.043514520866727614)
@@ -8905,7 +8905,7 @@ def brunnermunzel(x, y, alternative="two-sided", distribution="t",
 
     Examples
     --------
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> x1 = [1,2,1,1,1,1,1,1,1,1,2,4,1,1]
     >>> x2 = [3,3,4,3,1,2,3,1,1,5,4]
     >>> w, p_value = stats.brunnermunzel(x1, x2)
@@ -9021,7 +9021,7 @@ def combine_pvalues(pvalues, method='fisher', weights=None, *, axis=0):
     Suppose we wish to combine p-values from four independent tests
     of the same null hypothesis using Fisher's method (default).
 
-    >>> from scipy.stats import combine_pvalues
+    >>> from rsscipy.stats import combine_pvalues
     >>> pvalues = [0.1, 0.05, 0.02, 0.3]
     >>> combine_pvalues(pvalues)
     SignificanceResult(statistic=20.828626352604235, pvalue=0.007616871850449092)
@@ -9214,7 +9214,7 @@ class QuantileTestResult:
         Examples
         --------
         >>> import rsnumpy as np
-        >>> import scipy.stats as stats
+        >>> import rsscipy.stats as stats
         >>> p = 0.75  # quantile of interest
         >>> q = 0  # hypothesized value of the quantile
         >>> x = np.exp(np.arange(0, 1.01, 0.01))
@@ -9575,7 +9575,7 @@ def quantile_test(x, *, q=0.0, p=0.5, alternative='two-sided', axis=0, keepdims=
     hypothesis most of the time.
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng(6981396440634228121)
     >>> rvs = stats.uniform.rvs(size=100, random_state=rng)
     >>> stats.quantile_test(rvs, q=0.5, p=0.5)
@@ -9897,7 +9897,7 @@ def wasserstein_distance_nd(u_values, v_values, u_weights=None, v_weights=None):
     Compute the Wasserstein distance between two three-dimensional samples,
     each with two observations.
 
-    >>> from scipy.stats import wasserstein_distance_nd
+    >>> from rsscipy.stats import wasserstein_distance_nd
     >>> wasserstein_distance_nd([[0, 2, 3], [1, 2, 5]], [[3, 2, 3], [4, 2, 5]])
     3.0
 
@@ -10039,7 +10039,7 @@ def wasserstein_distance(u_values, v_values, u_weights=None, v_weights=None):
 
     Examples
     --------
-    >>> from scipy.stats import wasserstein_distance
+    >>> from rsscipy.stats import wasserstein_distance
 
     When no weights are provided, each value is treated as a single unit
     of probability mass at that location:
@@ -10134,7 +10134,7 @@ def energy_distance(u_values, v_values, u_weights=None, v_weights=None):
 
     Examples
     --------
-    >>> from scipy.stats import energy_distance
+    >>> from rsscipy.stats import energy_distance
     >>> energy_distance([0], [2])
     2.0000000000000004
     >>> energy_distance([0, 8], [0, 8], [3, 1], [2, 2])
@@ -10348,7 +10348,7 @@ def rankdata(a, method='average', *, axis=None, nan_policy='propagate'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import rankdata
+    >>> from rsscipy.stats import rankdata
     >>> rankdata([0, 2, 3, 2])
     array([1. , 2.5, 4. , 2.5])
     >>> rankdata([0, 2, 3, 2], method='min')
@@ -10618,7 +10618,7 @@ def expectile(a, alpha=0.5, *, weights=None, axis=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import expectile
+    >>> from rsscipy.stats import expectile
     >>> a = [1, 4, 2, -1]
     >>> expectile(a, alpha=0.5) == np.mean(a)
     True
@@ -10796,7 +10796,7 @@ def lmoment(sample, order=None, *, axis=0, sorted=False, standardize=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng(328458568356392)
     >>> sample = rng.exponential(size=100000)
     >>> stats.lmoment(sample)
@@ -10925,7 +10925,7 @@ def linregress(x, y, alternative='two-sided', *, axis=0):
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng()
 
     Generate some data:
@@ -10953,7 +10953,7 @@ def linregress(x, y, alternative='two-sided', *, axis=0):
 
     >>> # Two-sided inverse Students t-distribution
     >>> # p - probability, df - degrees of freedom
-    >>> from scipy.stats import t
+    >>> from rsscipy.stats import t
     >>> tinv = lambda p, df: abs(t.ppf(p/2, df))
 
     >>> ts = tinv(0.05, len(x)-2)

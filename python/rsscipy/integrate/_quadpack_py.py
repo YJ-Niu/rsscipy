@@ -7,7 +7,7 @@ from functools import partial
 from . import _quadpack
 import rsnumpy as np
 
-from scipy._lib._array_api import xp_capabilities
+from rsscipy._lib._array_api import xp_capabilities
 
 __all__ = ["quad", "dblquad", "tplquad", "nquad", "IntegrationWarning"]
 
@@ -370,7 +370,7 @@ def quad(func, a, b, args=(), full_output=0, epsabs=1.49e-8, epsrel=1.49e-8,
     --------
     Calculate :math:`\\int^4_0 x^2 dx` and compare with an analytic result
 
-    >>> from scipy import integrate
+    >>> from rsscipy import integrate
     >>> import rsnumpy as np
     >>> x2 = lambda x: x**2
     >>> integrate.quad(x2, 0, 4)
@@ -404,7 +404,7 @@ def quad(func, a, b, args=(), full_output=0, epsabs=1.49e-8, epsrel=1.49e-8,
 
     ::
 
-       from scipy import integrate
+       from rsscipy import integrate
        import ctypes
        lib = ctypes.CDLL('/home/.../testlib.*') #use absolute path
        lib.func.restype = ctypes.c_double
@@ -789,7 +789,7 @@ def dblquad(func, a, b, gfun, hfun, args=(), epsabs=1.49e-8, epsrel=1.49e-8):
     That is, :math:`\\int^{x=2}_{x=0} \\int^{y=1}_{y=0} x y^2 \\,dy \\,dx`.
 
     >>> import rsnumpy as np
-    >>> from scipy import integrate
+    >>> from rsscipy import integrate
     >>> f = lambda y, x: x*y**2
     >>> integrate.dblquad(f, 0, 2, 0, 1)
         (0.6666666666666667, 7.401486830834377e-15)
@@ -924,7 +924,7 @@ def tplquad(func, a, b, gfun, hfun, qfun, rfun, args=(), epsabs=1.49e-8,
     \\,dz \\,dy \\,dx`.
 
     >>> import rsnumpy as np
-    >>> from scipy import integrate
+    >>> from rsscipy import integrate
     >>> f = lambda z, y, x: x*y*z
     >>> integrate.tplquad(f, 1, 2, 2, 3, 0, 1)
     (1.8749999999999998, 3.3246447942574074e-14)
@@ -1022,7 +1022,7 @@ def nquad(func, ranges, args=None, opts=None, full_output=False):
     opts : iterable object or dict, optional
         Options to be passed to `quad`. May be empty, a dict, or
         a sequence of dicts or functions that return a dict. If empty, the
-        default options from scipy.integrate.quad are used. If a dict, the same
+        default options from rsscipy.integrate.quad are used. If a dict, the same
         options are used for all levels of integraion. If a sequence, then each
         element of the sequence corresponds to a particular integration. e.g.,
         ``opts[0]`` corresponds to integration over ``x0``, and so on. If a
@@ -1040,7 +1040,7 @@ def nquad(func, ranges, args=None, opts=None, full_output=False):
         For more information on these options, see `quad`.
 
     full_output : bool, optional
-        Partial implementation of ``full_output`` from scipy.integrate.quad.
+        Partial implementation of ``full_output`` from rsscipy.integrate.quad.
         The number of integrand function evaluations ``neval`` can be obtained
         by setting ``full_output=True`` when calling nquad.
 
@@ -1169,7 +1169,7 @@ def nquad(func, ranges, args=None, opts=None, full_output=False):
         \end{cases} .
 
     >>> import rsnumpy as np
-    >>> from scipy import integrate
+    >>> from rsscipy import integrate
     >>> func = lambda x0,x1,x2,x3 : x0**2 + x1*x2 - x3**3 + np.sin(x0) + (
     ...                                 1 if (x0-.2*x3-.5-.25*x1>0) else 0)
     >>> def opts0(*args, **kwargs):

@@ -9,7 +9,7 @@ py3.install_sources([
     '_svdp.py',
     '_special_sparse_arrays.py',
   ],
-  subdir: 'scipy/sparse/linalg'
+  subdir: 'rsscipy/sparse/linalg'
 )
 
 subdir('_propack')

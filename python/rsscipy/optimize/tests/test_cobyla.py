@@ -3,7 +3,7 @@ import math
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_array_almost_equal
 
-from scipy.optimize import (
+from rsscipy.optimize import (
     fmin_cobyla, minimize, Bounds, NonlinearConstraint, LinearConstraint,
     OptimizeResult
 )

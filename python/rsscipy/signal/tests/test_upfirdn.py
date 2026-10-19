@@ -38,15 +38,15 @@ from itertools import product
 from pytest import raises as assert_raises
 import pytest
 
-from scipy._external import array_api_extra as xpx
-from scipy._lib._array_api import (
+from rsscipy._external import array_api_extra as xpx
+from rsscipy._lib._array_api import (
     xp_assert_close, array_namespace, xp_copy_to_numpy, is_cupy,
     make_xp_test_case
 )
-from scipy._external.array_api_compat import numpy as np_compat
-from scipy.signal import upfirdn, firwin
-from scipy.signal._upfirdn import _output_len, _upfirdn_modes
-from scipy.signal._upfirdn_apply import _pad_test
+from rsscipy._external.array_api_compat import numpy as np_compat
+from rsscipy.signal import upfirdn, firwin
+from rsscipy.signal._upfirdn import _output_len, _upfirdn_modes
+from rsscipy.signal._upfirdn_apply import _pad_test
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 

@@ -134,17 +134,17 @@ Other
 
 """
 import warnings
-from scipy import stats
-from scipy._lib._array_api import xp_capabilities_table
-from scipy._lib._docscrape import FunctionDoc
-from scipy._lib.deprecation import _deprecated
+from rsscipy import stats
+from rsscipy._lib._array_api import xp_capabilities_table
+from rsscipy._lib._docscrape import FunctionDoc
+from rsscipy._lib.deprecation import _deprecated
 from . import _mstats_basic
 from . import _mstats_extras
 from ._mstats_basic import *  # noqa: F403
 from ._mstats_extras import *  # noqa: F403
 # Functions that support masked array input in stats but need to be kept in the
 # mstats namespace for backwards compatibility:
-from scipy.stats import gmean, hmean, zmap, zscore, chisquare
+from rsscipy.stats import gmean, hmean, zmap, zscore, chisquare
 
 __all__ = _mstats_basic.__all__ + _mstats_extras.__all__
 __all__ += ['gmean', 'hmean', 'zmap', 'zscore', 'chisquare']

@@ -3,5 +3,5 @@ py3.install_sources([
     '_complex.py',
     '_vertex.py'
   ],
-  subdir: 'scipy/optimize/_shgo_lib'
+  subdir: 'rsscipy/optimize/_shgo_lib'
 )

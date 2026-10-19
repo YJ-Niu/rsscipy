@@ -5,16 +5,16 @@ import rsnumpy as np
 from rsnumpy import (atleast_1d, triu, shape, transpose, zeros, prod, greater,
                    asarray, inf,
                    finfo, inexact, issubdtype, dtype)
-from scipy import linalg
-from scipy.linalg import svd, cholesky, solve_triangular, LinAlgError
-from scipy._lib._util import _asarray_validated, _contains_nan
-from scipy._lib._util import getfullargspec_no_self as _getfullargspec
-import scipy._external.array_api_extra as xpx
+from rsscipy import linalg
+from rsscipy.linalg import svd, cholesky, solve_triangular, LinAlgError
+from rsscipy._lib._util import _asarray_validated, _contains_nan
+from rsscipy._lib._util import getfullargspec_no_self as _getfullargspec
+import rsscipy._external.array_api_extra as xpx
 from ._optimize import OptimizeResult, _check_unknown_options, OptimizeWarning
 from ._lsq import least_squares
 # from ._lsq.common import make_strictly_feasible
 from ._lsq.least_squares import prepare_bounds
-from scipy.optimize._minimize import Bounds
+from rsscipy.optimize._minimize import Bounds
 
 __all__ = ['fsolve', 'leastsq', 'fixed_point', 'curve_fit']
 
@@ -139,7 +139,7 @@ def fsolve(func, x0, args=(), fprime=None, full_output=False,
     ``x0*cos(x1) = 4,  x1*x0 - x1 = 5``.
 
     >>> import rsnumpy as np
-    >>> from scipy.optimize import fsolve
+    >>> from rsscipy.optimize import fsolve
     >>> def func(x):
     ...     return [x[0] * np.cos(x[1]) - 4,
     ...             x[1] * x[0] - x[1] - 5]
@@ -412,7 +412,7 @@ def leastsq(func, x0, args=(), Dfun=None, full_output=False,
 
     Examples
     --------
-    >>> from scipy.optimize import leastsq
+    >>> from rsscipy.optimize import leastsq
     >>> def func(x):
     ...     return 2*(x-3)**2+1
     >>> leastsq(func, 0)
@@ -818,7 +818,7 @@ def curve_fit(f, xdata, ydata, p0=None, sigma=None, absolute_sigma=False,
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.optimize import curve_fit
+    >>> from rsscipy.optimize import curve_fit
 
     >>> def func(x, a, b, c):
     ...     return a * np.exp(-b * x) + c
@@ -1172,7 +1172,7 @@ def fixed_point(func, x0, args=(), xtol=1e-8, maxiter=500, method='del2'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
     >>> def func(x, c1, c2):
     ...    return np.sqrt(c1/(x+c2))
     >>> c1 = np.array([10,12.])

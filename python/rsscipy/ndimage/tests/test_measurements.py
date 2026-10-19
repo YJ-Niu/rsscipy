@@ -4,7 +4,7 @@ import warnings
 
 import rsnumpy as np
 
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     is_torch,
     xp_assert_equal,
     xp_assert_close,
@@ -16,7 +16,7 @@ from scipy._lib._array_api import (
 import pytest
 from pytest import raises as assert_raises
 
-import scipy.ndimage as ndimage
+import rsscipy.ndimage as ndimage
 
 from . import types
 

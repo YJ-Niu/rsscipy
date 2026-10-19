@@ -66,7 +66,7 @@ def max_len_seq(nbits, state=None, length=None, taps=None):
     --------
     MLS uses binary convention:
 
-    >>> from scipy.signal import max_len_seq
+    >>> from rsscipy.signal import max_len_seq
     >>> max_len_seq(4)[0]
     array([1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 0], dtype=int8)
 

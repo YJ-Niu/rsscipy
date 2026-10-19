@@ -8,7 +8,7 @@ are arrays.
 
 --------------
 import inspect
-from scipy import ndimage
+from rsscipy import ndimage
 
 names = [x for x in dir(ndimage) if not x.startswith('_')]
 objs = [getattr(ndimage, name) for name in names]
@@ -24,8 +24,8 @@ for func in funcs:
 
 """
 import rsnumpy as np
-from scipy._lib._array_api import array_namespace
-from scipy.ndimage._ni_support import _skip_if_dtype
+from rsscipy._lib._array_api import array_namespace
+from rsscipy.ndimage._ni_support import _skip_if_dtype
 
 
 def affine_transform_signature(

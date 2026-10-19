@@ -1,5 +1,5 @@
-from scipy._lib.uarray import generate_multimethod, Dispatchable
-from scipy._lib._array_api import xp_capabilities
+from rsscipy._lib.uarray import generate_multimethod, Dispatchable
+from rsscipy._lib._array_api import xp_capabilities
 
 import rsnumpy as np
 
@@ -143,7 +143,7 @@ def fft(x, n=None, axis=-1, norm=None, overwrite_x=False, workers=None, *,
 
     Examples
     --------
-    >>> import scipy.fft
+    >>> import rsscipy.fft
     >>> import rsnumpy as np
     >>> scipy.fft.fft(np.exp(2j * np.pi * np.arange(8) / 8))
     array([-2.33486982e-16+1.14423775e-17j,  8.00000000e+00-1.25557246e-15j,
@@ -154,7 +154,7 @@ def fft(x, n=None, axis=-1, norm=None, overwrite_x=False, workers=None, *,
     In this example, real input has an FFT which is Hermitian, i.e., symmetric
     in the real part and anti-symmetric in the imaginary part:
 
-    >>> from scipy.fft import fft, fftfreq, fftshift
+    >>> from rsscipy.fft import fft, fftfreq, fftshift
     >>> import matplotlib.pyplot as plt
     >>> t = np.arange(256)
     >>> sp = fftshift(fft(np.sin(t)))
@@ -252,7 +252,7 @@ def ifft(x, n=None, axis=-1, norm=None, overwrite_x=False, workers=None, *,
 
     Examples
     --------
-    >>> import scipy.fft
+    >>> import rsscipy.fft
     >>> import rsnumpy as np
     >>> scipy.fft.ifft([0, 4, 0, 0])
     array([ 1.+0.j,  0.+1.j, -1.+0.j,  0.-1.j]) # may vary
@@ -356,7 +356,7 @@ def rfft(x, n=None, axis=-1, norm=None, overwrite_x=False, workers=None, *,
 
     Examples
     --------
-    >>> import scipy.fft
+    >>> import rsscipy.fft
     >>> scipy.fft.fft([0, 1, 0, 0])
     array([ 1.+0.j,  0.-1.j, -1.+0.j,  0.+1.j]) # may vary
     >>> scipy.fft.rfft([0, 1, 0, 0])
@@ -457,7 +457,7 @@ def irfft(x, n=None, axis=-1, norm=None, overwrite_x=False, workers=None, *,
 
     Examples
     --------
-    >>> import scipy.fft
+    >>> import rsscipy.fft
     >>> scipy.fft.ifft([1, -1j, -1, 1j])
     array([0.+0.j,  1.+0.j,  0.+0.j,  0.+0.j]) # may vary
     >>> scipy.fft.irfft([1, -1j, -1])
@@ -541,7 +541,7 @@ def hfft(x, n=None, axis=-1, norm=None, overwrite_x=False, workers=None, *,
 
     Examples
     --------
-    >>> from scipy.fft import fft, hfft
+    >>> from rsscipy.fft import fft, hfft
     >>> import rsnumpy as np
     >>> a = 2 * np.pi * np.arange(10) / 10
     >>> signal = np.cos(a) + 3j * np.sin(3 * a)
@@ -613,7 +613,7 @@ def ihfft(x, n=None, axis=-1, norm=None, overwrite_x=False, workers=None, *,
 
     Examples
     --------
-    >>> from scipy.fft import ifft, ihfft
+    >>> from rsscipy.fft import ifft, ihfft
     >>> import rsnumpy as np
     >>> spectrum = np.array([ 15, -4, 0, -1, 0, -4])
     >>> ifft(spectrum)
@@ -697,7 +697,7 @@ def fftn(x, s=None, axes=None, norm=None, overwrite_x=False, workers=None, *,
 
     Examples
     --------
-    >>> import scipy.fft
+    >>> import rsscipy.fft
     >>> import rsnumpy as np
     >>> x = np.mgrid[:3, :3, :3][0]
     >>> scipy.fft.fftn(x, axes=(1, 2))
@@ -810,7 +810,7 @@ def ifftn(x, s=None, axes=None, norm=None, overwrite_x=False, workers=None, *,
 
     Examples
     --------
-    >>> import scipy.fft
+    >>> import rsscipy.fft
     >>> import rsnumpy as np
     >>> x = np.eye(4)
     >>> scipy.fft.ifftn(scipy.fft.fftn(x, axes=(0,)), axes=(1,))
@@ -916,7 +916,7 @@ def fft2(x, s=None, axes=(-2, -1), norm=None, overwrite_x=False, workers=None, *
 
     Examples
     --------
-    >>> import scipy.fft
+    >>> import rsscipy.fft
     >>> import rsnumpy as np
     >>> x = np.mgrid[:5, :5][0]
     >>> scipy.fft.fft2(x)
@@ -1019,7 +1019,7 @@ def ifft2(x, s=None, axes=(-2, -1), norm=None, overwrite_x=False, workers=None, 
 
     Examples
     --------
-    >>> import scipy.fft
+    >>> import rsscipy.fft
     >>> import rsnumpy as np
     >>> x = 4 * np.eye(4)
     >>> scipy.fft.ifft2(x)
@@ -1114,7 +1114,7 @@ def rfftn(x, s=None, axes=None, norm=None, overwrite_x=False, workers=None, *,
 
     Examples
     --------
-    >>> import scipy.fft
+    >>> import rsscipy.fft
     >>> import rsnumpy as np
     >>> x = np.ones((2, 2, 2))
     >>> scipy.fft.rfftn(x)
@@ -1182,7 +1182,7 @@ def rfft2(x, s=None, axes=(-2, -1), norm=None, overwrite_x=False, workers=None, 
 
     Examples
     --------
-    >>> import scipy.fft
+    >>> import rsscipy.fft
     >>> import rsnumpy as np
     >>> x = np.broadcast_to([1, 0, -1, 0], (4, 4))
     >>> scipy.fft.rfft2(x)
@@ -1287,7 +1287,7 @@ def irfftn(x, s=None, axes=None, norm=None, overwrite_x=False, workers=None, *,
 
     Examples
     --------
-    >>> import scipy.fft
+    >>> import rsscipy.fft
     >>> import rsnumpy as np
     >>> x = np.zeros((3, 2, 2))
     >>> x[0, 0, 0] = 3 * 2 * 2
@@ -1360,7 +1360,7 @@ def irfft2(x, s=None, axes=(-2, -1), norm=None, overwrite_x=False, workers=None,
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.fft import rfft2, irfft2, fftfreq, rfftfreq
+    >>> from rsscipy.fft import rfft2, irfft2, fftfreq, rfftfreq
     ...
     >>> rng = np.random.default_rng()
     >>> m = 280  # Image size is m x m.
@@ -1507,7 +1507,7 @@ def hfftn(x, s=None, axes=None, norm=None, overwrite_x=False, workers=None, *,
 
     Examples
     --------
-    >>> import scipy.fft
+    >>> import rsscipy.fft
     >>> import rsnumpy as np
     >>> x = np.ones((3, 2, 2))
     >>> scipy.fft.hfftn(x)
@@ -1569,7 +1569,7 @@ def hfft2(x, s=None, axes=(-2, -1), norm=None, overwrite_x=False, workers=None, 
 
     Examples
     --------
-    >>> import scipy.fft
+    >>> import rsscipy.fft
     >>> import rsnumpy as np
     >>> x = np.array([[1+0j, 2+0j], [2+0j, 1+0j]])  # Hermitian-symmetric input
     >>> scipy.fft.hfft2(x, s=(2, 2))
@@ -1657,7 +1657,7 @@ def ihfftn(x, s=None, axes=None, norm=None, overwrite_x=False, workers=None, *,
 
     Examples
     --------
-    >>> import scipy.fft
+    >>> import rsscipy.fft
     >>> import rsnumpy as np
     >>> x = np.ones((2, 2, 2))
     >>> scipy.fft.ihfftn(x)

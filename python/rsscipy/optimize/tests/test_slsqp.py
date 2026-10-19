@@ -6,7 +6,7 @@ from rsnumpy.testing import (assert_, assert_array_almost_equal,
 from pytest import raises as assert_raises
 import rsnumpy as np
 
-from scipy.optimize import (fmin_slsqp, minimize, Bounds, NonlinearConstraint,
+from rsscipy.optimize import (fmin_slsqp, minimize, Bounds, NonlinearConstraint,
                             OptimizeResult)
 
 

@@ -19,7 +19,7 @@ def axis_slice(a, start=None, stop=None, step=None, axis=-1):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.signal._arraytools import axis_slice
+    >>> from rsscipy.signal._arraytools import axis_slice
     >>> a = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
     >>> axis_slice(a, start=0, stop=1, axis=1)
     array([[1],
@@ -72,7 +72,7 @@ def odd_ext(x, n, axis=-1):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.signal._arraytools import odd_ext
+    >>> from rsscipy.signal._arraytools import odd_ext
     >>> a = np.array([[1, 2, 3, 4, 5], [0, 1, 4, 9, 16]])
     >>> odd_ext(a, 2)
     array([[-1,  0,  1,  2,  3,  4,  5,  6,  7],
@@ -125,7 +125,7 @@ def even_ext(x, n, axis=-1):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.signal._arraytools import even_ext
+    >>> from rsscipy.signal._arraytools import even_ext
     >>> a = np.array([[1, 2, 3, 4, 5], [0, 1, 4, 9, 16]])
     >>> even_ext(a, 2)
     array([[ 3,  2,  1,  2,  3,  4,  5,  4,  3],
@@ -178,7 +178,7 @@ def const_ext(x, n, axis=-1):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.signal._arraytools import const_ext
+    >>> from rsscipy.signal._arraytools import const_ext
     >>> a = np.array([[1, 2, 3, 4, 5], [0, 1, 4, 9, 16]])
     >>> const_ext(a, 2)
     array([[ 1,  1,  1,  2,  3,  4,  5,  5,  5],
@@ -232,7 +232,7 @@ def zero_ext(x, n, axis=-1):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.signal._arraytools import zero_ext
+    >>> from rsscipy.signal._arraytools import zero_ext
     >>> a = np.array([[1, 2, 3, 4, 5], [0, 1, 4, 9, 16]])
     >>> zero_ext(a, 2)
     array([[ 0,  0,  1,  2,  3,  4,  5,  0,  0],

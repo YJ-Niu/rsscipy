@@ -3,7 +3,7 @@ import rsnumpy as np
 
 from functools import cached_property
 
-from scipy.special import roots_legendre
+from rsscipy.special import roots_legendre
 
 from ._base import FixedRule
 
@@ -23,8 +23,8 @@ class GaussLegendreQuadrature(FixedRule):
     estimates will also be arrays.
 
     >>> import rsnumpy as np
-    >>> from scipy.integrate import cubature
-    >>> from scipy.integrate._rules import GaussLegendreQuadrature
+    >>> from rsscipy.integrate import cubature
+    >>> from rsscipy.integrate._rules import GaussLegendreQuadrature
     >>> def f(x):
     ...     return np.cos(x)
     >>> rule = GaussLegendreQuadrature(21) # Use 21-point GaussLegendre

@@ -3,7 +3,7 @@
 
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal
-from scipy.special import stdtr, stdtrit, ndtr, ndtri
+from rsscipy.special import stdtr, stdtrit, ndtr, ndtri
 
 
 def test_stdtr_vs_R_large_df():

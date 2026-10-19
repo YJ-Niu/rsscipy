@@ -7,7 +7,7 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/constants'
+  subdir: 'rsscipy/constants'
 )
 
 subdir('tests')

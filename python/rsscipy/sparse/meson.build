@@ -10,7 +10,7 @@ py3.extension_module('_csparsetools',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/sparse'
+  subdir: 'rsscipy/sparse'
 )
 
 python_sources = [
@@ -37,7 +37,7 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/sparse'
+  subdir: 'rsscipy/sparse'
 )
 
 subdir('sparsetools')

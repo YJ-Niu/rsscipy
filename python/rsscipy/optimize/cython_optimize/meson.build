@@ -27,7 +27,7 @@ py3.extension_module('_zeros',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/optimize/cython_optimize'
+  subdir: 'rsscipy/optimize/cython_optimize'
 )
 
 py3.install_sources([
@@ -35,5 +35,5 @@ py3.install_sources([
     '_zeros.pxd',
     'c_zeros.pxd'
   ],
-  subdir: 'scipy/optimize/cython_optimize'
+  subdir: 'rsscipy/optimize/cython_optimize'
 )

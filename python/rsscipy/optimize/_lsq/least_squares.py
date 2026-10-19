@@ -4,22 +4,22 @@ from warnings import warn
 import rsnumpy as np
 from rsnumpy.linalg import norm
 
-from scipy.sparse.linalg import LinearOperator
-from scipy.optimize import _minpack
-from scipy.optimize._optimize import OptimizeResult
-from scipy.optimize._differentiable_functions import VectorFunction
-from scipy.optimize._numdiff import group_columns
-from scipy.optimize._minimize import Bounds
-from scipy._lib._sparse import issparse
-from scipy._lib._array_api import array_namespace
-from scipy._lib._util import _workers_wrapper
+from rsscipy.sparse.linalg import LinearOperator
+from rsscipy.optimize import _minpack
+from rsscipy.optimize._optimize import OptimizeResult
+from rsscipy.optimize._differentiable_functions import VectorFunction
+from rsscipy.optimize._numdiff import group_columns
+from rsscipy.optimize._minimize import Bounds
+from rsscipy._lib._sparse import issparse
+from rsscipy._lib._array_api import array_namespace
+from rsscipy._lib._util import _workers_wrapper
 
 from .trf import trf
 from .dogbox import dogbox
 from .common import EPS, in_bounds, make_strictly_feasible
 
 
-from scipy.optimize._optimize import _wrap_callback
+from rsscipy.optimize._optimize import _wrap_callback
 
 TERMINATION_MESSAGES = {
     -2: "Stopped because `callback` function raised `StopIteration` or returned `True`",
@@ -681,7 +681,7 @@ def least_squares(
     constructs the cost function as a sum of squares of the residuals, which
     gives the Rosenbrock function. The exact minimum is at ``x = [1.0, 1.0]``.
 
-    >>> from scipy.optimize import least_squares
+    >>> from rsscipy.optimize import least_squares
     >>> x0_rosenbrock = np.array([2, 2])
     >>> res_1 = least_squares(fun_rosenbrock, x0_rosenbrock)
     >>> res_1.x
@@ -728,7 +728,7 @@ def least_squares(
     estimate it by finite differences and provide the sparsity structure of
     Jacobian to significantly speed up this process.
 
-    >>> from scipy.sparse import lil_array
+    >>> from rsscipy.sparse import lil_array
     >>> def sparsity_broyden(n):
     ...     sparsity = lil_array((n, n), dtype=int)
     ...     i = np.arange(n)
@@ -841,7 +841,7 @@ def least_squares(
     Thus, instead of the original m-D complex function of n complex
     variables we optimize a 2m-D real function of 2n real variables:
 
-    >>> from scipy.optimize import least_squares
+    >>> from rsscipy.optimize import least_squares
     >>> res_wrapped = least_squares(f_wrap, (0.1, 0.1), bounds=([0, 0], [1, 1]))
     >>> z = res_wrapped.x[0] + res_wrapped.x[1]*1j
     >>> z

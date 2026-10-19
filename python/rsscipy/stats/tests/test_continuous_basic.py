@@ -6,10 +6,10 @@ import rsnumpy as np
 import rsnumpy.testing as npt
 import pytest
 from pytest import raises as assert_raises
-from scipy.integrate import IntegrationWarning
+from rsscipy.integrate import IntegrationWarning
 import itertools
 
-from scipy import stats
+from rsscipy import stats
 from .common_tests import (check_normalization, check_moment,
                            check_mean_expect,
                            check_var_expect, check_skew_expect,
@@ -21,8 +21,8 @@ from .common_tests import (check_normalization, check_moment,
                            check_cmplx_deriv,
                            check_pickling, check_rvs_broadcast,
                            check_freezing, check_munp_expect,)
-from scipy.stats._distr_params import distcont
-from scipy.stats._distn_infrastructure import rv_continuous_frozen
+from rsscipy.stats._distr_params import distcont
+from rsscipy.stats._distn_infrastructure import rv_continuous_frozen
 
 """
 Test all continuous distributions.
@@ -744,7 +744,7 @@ def check_distribution_rvs(dist, args, alpha, rvs):
     # args are the args for scipy.stats.dist(*args)
     # alpha is a significance level, ~0.01
     # rvs is array_like of random variables
-    # test from scipy.stats.tests
+    # test from rsscipy.stats.tests
     # this version reuses existing random variables
     D, pval = stats.kstest(rvs, dist, args=args, N=1000)
     if (pval < alpha):

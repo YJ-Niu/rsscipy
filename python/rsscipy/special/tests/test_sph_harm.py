@@ -2,7 +2,7 @@ import rsnumpy as np
 import pytest
 
 from rsnumpy.testing import assert_allclose
-import scipy.special as sc
+import rsscipy.special as sc
 
 class TestSphHarm:
     @pytest.mark.slow

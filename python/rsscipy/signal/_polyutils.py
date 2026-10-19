@@ -6,8 +6,8 @@ namespace, and "new-style", np.polynomial.polynomial, routines.
 To distinguish the two sets, the "new-style" routine names start with `npp_`
 """
 import warnings
-import scipy._external.array_api_extra as xpx
-from scipy._lib._array_api import (
+import rsscipy._external.array_api_extra as xpx
+from rsscipy._lib._array_api import (
     xp_promote, xp_size, xp_device, is_numpy
 )
 
@@ -83,7 +83,7 @@ def _lstsq(a, b, xp=None, rcond=None):
         rcond = xp.finfo(a.dtype).eps
 
     if is_numpy(xp):
-        from scipy.linalg import lstsq as s_lstsq
+        from rsscipy.linalg import lstsq as s_lstsq
         return s_lstsq(a, b, cond=rcond)
     elif lstsq_func := getattr(xp.linalg, "lstsq", None):
         # cupy, torch, jax.numpy all have xp.linalg.lstsq
@@ -149,7 +149,7 @@ def poly(seq_of_zeros, *, xp):
     # prefer np.convolve etc, if available
     convolve_func = getattr(xp, 'convolve', None)
     if convolve_func is None:
-        from scipy.signal import convolve as convolve_func
+        from rsscipy.signal import convolve as convolve_func
 
     dt = seq_of_zeros.dtype
     a = xp.ones((1,), dtype=dt, device=xp_device(seq_of_zeros))
@@ -173,7 +173,7 @@ def polymul(a1, a2, *, xp):
     # prefer np.convolve etc, if available
     convolve_func = getattr(xp, 'convolve', None)
     if convolve_func is None:
-        from scipy.signal import convolve as convolve_func
+        from rsscipy.signal import convolve as convolve_func
 
     val = convolve_func(a1, a2)
     return val

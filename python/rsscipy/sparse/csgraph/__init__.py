@@ -83,7 +83,7 @@ keeping in mind that an undirected graph is represented by a symmetric matrix::
     ...                     [2, 0, 0],
     ...                     [1, 0, 0]])
     >>> G_masked = np.ma.masked_values(G_dense, 0)
-    >>> from scipy.sparse import csr_array
+    >>> from rsscipy.sparse import csr_array
     >>> G_sparse = csr_array(G_dense)
 
 This becomes more difficult when zero edges are significant. For example,
@@ -108,7 +108,7 @@ to eliminate the ambiguity::
     ...                     [2,      np.inf, np.inf],
     ...                     [0,      np.inf, np.inf]])
     >>> G2_masked = np.ma.masked_invalid(G2_data)
-    >>> from scipy.sparse.csgraph import csgraph_from_dense
+    >>> from rsscipy.sparse.csgraph import csgraph_from_dense
     >>> # G2_sparse = csr_array(G2_data) would give the wrong result
     >>> G2_sparse = csgraph_from_dense(G2_data, null_value=np.inf)
     >>> G2_sparse.data
@@ -205,6 +205,6 @@ from ._tools import (
     csgraph_to_masked
 )
 
-from scipy._lib._testutils import PytestTester
+from rsscipy._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester

@@ -317,7 +317,7 @@ def isspmatrix_csr(x):
 
     Examples
     --------
-    >>> from scipy.sparse import csr_array, csr_matrix, coo_matrix, isspmatrix_csr
+    >>> from rsscipy.sparse import csr_array, csr_matrix, coo_matrix, isspmatrix_csr
     >>> isspmatrix_csr(csr_matrix([[5]]))  # doctest: +SKIP
     True
     >>> isspmatrix_csr(csr_array([[5]]))  # doctest: +SKIP
@@ -418,7 +418,7 @@ class csr_array(_csr_base, sparray):
     --------
 
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csr_array
+    >>> from rsscipy.sparse import csr_array
     >>> csr_array((3, 4), dtype=np.int8).toarray()
     array([[0, 0, 0, 0],
            [0, 0, 0, 0],
@@ -559,7 +559,7 @@ class csr_matrix(spmatrix, _csr_base):
     --------
 
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csr_matrix
+    >>> from rsscipy.sparse import csr_matrix
     >>> csr_matrix((3, 4), dtype=np.int8).toarray()
     array([[0, 0, 0, 0],
            [0, 0, 0, 0],

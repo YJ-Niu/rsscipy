@@ -1,8 +1,8 @@
 import pytest
 import rsnumpy as np
 from rsnumpy.random import default_rng
-from scipy.optimize import quadratic_assignment, OptimizeWarning
-from scipy.optimize._qap import _calc_score as _score
+from rsscipy.optimize import quadratic_assignment, OptimizeWarning
+from rsscipy.optimize._qap import _calc_score as _score
 from rsnumpy.testing import assert_equal, assert_
 
 

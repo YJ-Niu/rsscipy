@@ -36,11 +36,11 @@ py3.extension_module('_fmm_core',
   dependencies: [np_dep, pybind11_dep, fast_float_dep, ryu_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/io/_fast_matrix_market'
+  subdir: 'rsscipy/io/_fast_matrix_market'
 )
 
 py3.install_sources([
     '__init__.py'
   ],
-  subdir: 'scipy/io/_fast_matrix_market'
+  subdir: 'rsscipy/io/_fast_matrix_market'
 )

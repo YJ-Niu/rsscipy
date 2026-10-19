@@ -3,13 +3,13 @@ from warnings import warn
 
 import rsnumpy as np
 
-import scipy.linalg
-from scipy.linalg._decomp_qr import qr
-from scipy.sparse._sputils import is_pydata_spmatrix
-from scipy.sparse.linalg._interface import (
+import rsscipy.linalg
+from rsscipy.linalg._decomp_qr import qr
+from rsscipy.sparse._sputils import is_pydata_spmatrix
+from rsscipy.sparse.linalg._interface import (
     aslinearoperator, IdentityOperator, LinearOperator
 )
-from scipy.sparse.linalg._onenormest import onenormest
+from rsscipy.sparse.linalg._onenormest import onenormest
 
 __all__ = ['expm_multiply']
 
@@ -183,8 +183,8 @@ def expm_multiply(A, B, start=None, stop=None, num=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csc_array
-    >>> from scipy.sparse.linalg import expm, expm_multiply
+    >>> from rsscipy.sparse import csc_array
+    >>> from rsscipy.sparse.linalg import expm, expm_multiply
     >>> A = csc_array([[1, 0], [0, 1]])
     >>> A.toarray()
     array([[1, 0],
@@ -390,7 +390,7 @@ def _onenormest_matrix_power(A, p,
     #XXX Eventually turn this into an API function in the  _onenormest module,
     #XXX and remove its underscore,
     #XXX but wait until expm_multiply goes into scipy.
-    from scipy.sparse.linalg._onenormest import onenormest
+    from rsscipy.sparse.linalg._onenormest import onenormest
     return onenormest(aslinearoperator(A) ** p)
 
 class LazyOperatorNormInfo:

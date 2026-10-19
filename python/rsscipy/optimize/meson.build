@@ -11,7 +11,7 @@ py3.extension_module('_direct',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/optimize'
+  subdir: 'rsscipy/optimize'
 )
 
 py3.extension_module('_minpack',
@@ -23,7 +23,7 @@ py3.extension_module('_minpack',
   dependencies: [np_dep, ccallback_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/optimize'
+  subdir: 'rsscipy/optimize'
 )
 
 rectangular_lsap = static_library('rectangular_lsap',
@@ -41,7 +41,7 @@ py3.extension_module('_lsap',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/optimize'
+  subdir: 'rsscipy/optimize'
 )
 
 rootfind_lib = static_library('rootfind',
@@ -61,7 +61,7 @@ py3.extension_module('_zeros',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/optimize'
+  subdir: 'rsscipy/optimize'
 )
 
 
@@ -74,7 +74,7 @@ py3.extension_module('_lbfgsb',
   include_directories: ['src/'],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/optimize'
+  subdir: 'rsscipy/optimize'
 )
 
 py3.extension_module('_moduleTNC',
@@ -86,7 +86,7 @@ py3.extension_module('_moduleTNC',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/optimize'
+  subdir: 'rsscipy/optimize'
 )
 
 py3.extension_module('_pava_pybind',
@@ -95,7 +95,7 @@ py3.extension_module('_pava_pybind',
   dependencies: [np_dep, pybind11_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/optimize'
+  subdir: 'rsscipy/optimize'
 )
 
 py3.extension_module('_biteopt',
@@ -103,7 +103,7 @@ py3.extension_module('_biteopt',
   dependencies: [np_dep, pybind11_dep, biteopt_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/optimize'
+  subdir: 'rsscipy/optimize'
 )
 
 if use_pythran
@@ -113,7 +113,7 @@ if use_pythran
     dependencies: [pythran_dep, np_dep],
     link_args: version_link_args,
     install: true,
-    subdir: 'scipy/optimize'
+    subdir: 'rsscipy/optimize'
   )
 else
   py3.extension_module('_group_columns',
@@ -122,7 +122,7 @@ else
     dependencies: np_dep,
     link_args: version_link_args,
     install: true,
-    subdir: 'scipy/optimize'
+    subdir: 'rsscipy/optimize'
   )
 endif
 
@@ -144,7 +144,7 @@ py3.extension_module('_bglu_dense',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/optimize'
+  subdir: 'rsscipy/optimize'
 )
 
 py3.extension_module('_slsqplib',
@@ -156,7 +156,7 @@ py3.extension_module('_slsqplib',
   dependencies: [lapack_dep, np_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/optimize'
+  subdir: 'rsscipy/optimize'
 )
 
 subdir('_lsq')
@@ -220,5 +220,5 @@ py3.install_sources([
   'cython_optimize.pxd',
   'elementwise.py',
 ],
-  subdir: 'scipy/optimize'
+  subdir: 'rsscipy/optimize'
 )

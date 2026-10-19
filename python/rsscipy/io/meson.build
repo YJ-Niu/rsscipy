@@ -6,7 +6,7 @@ py3.install_sources([
     '_netcdf.py',
     'wavfile.py'
   ],
-  subdir: 'scipy/io'
+  subdir: 'rsscipy/io'
 )
 
 subdir('tests')

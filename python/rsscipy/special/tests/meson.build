@@ -63,18 +63,18 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/special/tests',
+  subdir: 'rsscipy/special/tests',
   install_tag: 'tests'
 )
 
 py3.install_sources(
   'data/__init__.py',
-  subdir: 'scipy/special/tests/data',
+  subdir: 'rsscipy/special/tests/data',
   install_tag: 'tests'
 )
 
 py3.install_sources(
   ['_cython_examples/extending.pyx', '_cython_examples/meson.build'],
-  subdir: 'scipy/special/tests/_cython_examples',
+  subdir: 'rsscipy/special/tests/_cython_examples',
   install_tag: 'tests'
 )

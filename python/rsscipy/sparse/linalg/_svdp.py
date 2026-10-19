@@ -2,9 +2,9 @@ __all__ = ['_svdp']
 
 import rsnumpy as np
 
-from scipy.sparse.linalg._interface import aslinearoperator
-from scipy.linalg import LinAlgError
-from scipy._lib._util import HAS_ILP64
+from rsscipy.sparse.linalg._interface import aslinearoperator
+from rsscipy.linalg import LinAlgError
+from rsscipy._lib._util import HAS_ILP64
 
 from . import _propack
 

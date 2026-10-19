@@ -148,12 +148,12 @@ as FITPACK, but without relying on the single monolithic REGRID entry point.
 - `return_NdBSpline(...)` - packs `(tx, ty, C)` into an `NdBSpline`.
 """
 import rsnumpy as np
-from scipy.interpolate._ndbspline import NdBSpline
-from scipy.interpolate._fitpack_repro import (
+from rsscipy.interpolate._ndbspline import NdBSpline
+from rsscipy.interpolate._fitpack_repro import (
     root_rati, disc, add_knot, _not_a_knot)
 from . import _dierckx
-from scipy.sparse import csr_array
-from scipy._lib._util import _validate_int
+from rsscipy.sparse import csr_array
+from rsscipy._lib._util import _validate_int
 
 def _ndbspline_call_like_bivariate(ndbs, x, y, dx=0, dy=0, grid=True):
     """

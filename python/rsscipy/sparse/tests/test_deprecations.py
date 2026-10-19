@@ -1,7 +1,7 @@
 import rsnumpy as np
 import pytest
 
-from scipy.sparse import (
+from rsscipy.sparse import (
         csr_array,
         # for deprecation testing
         bsr_matrix, csc_matrix, dia_matrix, lil_matrix,

@@ -6,7 +6,7 @@
 
 import warnings
 import rsnumpy as np
-from scipy._lib._util import _apply_over_batch, _deprecate_dtypes, HAS_ILP64
+from rsscipy._lib._util import _apply_over_batch, _deprecate_dtypes, HAS_ILP64
 from .lapack import (
     get_lapack_funcs, _normalize_lapack_dtype, _normalize_lapack_dtype1,
     _ensure_aligned_and_native, _ensure_dtype_cdsz
@@ -150,7 +150,7 @@ def solve(a, b, lower=False, overwrite_a=False,
     >>> import rsnumpy as np
     >>> a = np.array([[3, 2, 0], [1, -1, 0], [0, 5, 1]])
     >>> b = np.array([2, 4, -1])
-    >>> from scipy.linalg import solve
+    >>> from rsscipy.linalg import solve
     >>> x = solve(a, b)
     >>> x
     array([ 2., -2.,  9.])
@@ -343,7 +343,7 @@ def solve_triangular(a, b, trans=0, lower=False, unit_diagonal=False,
              [1  1  1  1]       [2]
 
     >>> import rsnumpy as np
-    >>> from scipy.linalg import solve_triangular
+    >>> from rsscipy.linalg import solve_triangular
     >>> a = np.array([[3, 0, 0, 0], [2, 1, 0, 0], [1, 0, 1, 0], [1, 1, 1, 1]])
     >>> b = np.array([4, 2, 4, 2])
     >>> x = solve_triangular(a, b, lower=True)
@@ -463,7 +463,7 @@ def solve_banded(l_and_u, ab, b, overwrite_ab=False, overwrite_b=False,
              [1  1  1  1  *]
 
     >>> import rsnumpy as np
-    >>> from scipy.linalg import solve_banded
+    >>> from rsscipy.linalg import solve_banded
     >>> ab = np.array([[0,  0, -1, -1, -1],
     ...                [0,  2,  2,  2,  2],
     ...                [5,  4,  3,  2,  1],
@@ -616,7 +616,7 @@ def solveh_banded(ab, b, overwrite_ab=False, overwrite_b=False, lower=False,
             [ 0  0  0 -1  2  9]       [3]
 
     >>> import rsnumpy as np
-    >>> from scipy.linalg import solveh_banded
+    >>> from rsscipy.linalg import solveh_banded
 
     ``ab`` contains the main diagonal and the nonzero diagonals below the
     main diagonal. That is, we use the lower form:
@@ -744,7 +744,7 @@ def solve_toeplitz(c_or_cr, b, check_finite=True):
     >>> r = np.array([1, -1, -2, -3])  # First row of T
     >>> b = np.array([1, 2, 2, 5])
 
-    >>> from scipy.linalg import solve_toeplitz, toeplitz
+    >>> from rsscipy.linalg import solve_toeplitz, toeplitz
     >>> x = solve_toeplitz((c, r), b)
     >>> x
     array([ 1.66666667, -1.        , -2.66666667,  2.33333333])
@@ -873,7 +873,7 @@ def solve_circulant(c, b, singular='raise', tol=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import solve_circulant, solve, circulant, lstsq
+    >>> from rsscipy.linalg import solve_circulant, solve, circulant, lstsq
 
     >>> c = np.array([2, 2, 4])
     >>> b = np.array([1, 2, 3])
@@ -1068,7 +1068,7 @@ def inv(a, overwrite_a=False, check_finite=True, *, assume_a=None, lower=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import linalg
+    >>> from rsscipy import linalg
     >>> a = np.array([[1., 2.], [3., 4.]])
     >>> linalg.inv(a)
     array([[-2. ,  1. ],
@@ -1189,7 +1189,7 @@ def det(a, overwrite_a=False, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import linalg
+    >>> from rsscipy import linalg
     >>> a = np.array([[1,2,3], [4,5,6], [7,8,9]])  # A singular matrix
     >>> linalg.det(a)
     0.0
@@ -1335,7 +1335,7 @@ def lstsq(a, b, cond=None, overwrite_a=False, overwrite_b=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import lstsq
+    >>> from rsscipy.linalg import lstsq
     >>> import matplotlib.pyplot as plt
 
     Suppose we have the following data:
@@ -1575,7 +1575,7 @@ def pinv(a, *, atol=None, rtol=None, return_rank=False, check_finite=True):
     random non-square matrix and verify it satisfies the four conditions.
 
     >>> import rsnumpy as np
-    >>> from scipy import linalg
+    >>> from rsscipy import linalg
     >>> rng = np.random.default_rng()
     >>> A = rng.standard_normal((9, 6))
     >>> B = linalg.pinv(A)
@@ -1681,7 +1681,7 @@ def pinvh(a, atol=None, rtol=None, lower=True, return_rank=False,
     For a more detailed example see `pinv`.
 
     >>> import rsnumpy as np
-    >>> from scipy.linalg import pinvh
+    >>> from rsscipy.linalg import pinvh
     >>> rng = np.random.default_rng()
     >>> a = rng.standard_normal((9, 6))
     >>> a = np.dot(a, a.T)
@@ -1806,7 +1806,7 @@ def matrix_balance(A, permute=True, scale=True, separate=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import linalg
+    >>> from rsscipy import linalg
     >>> x = np.array([[1,2,0], [9,1,0.01], [1,2,10*np.pi]])
 
     >>> y, permscale = linalg.matrix_balance(x)
@@ -2062,7 +2062,7 @@ def matmul_toeplitz(c_or_cr, x, check_finite=False, workers=None):
     >>> r = np.array([1, -1, -2, -3])  # First row of T
     >>> x = np.array([[1, 10], [2, 11], [2, 11], [5, 19]])
 
-    >>> from scipy.linalg import toeplitz, matmul_toeplitz
+    >>> from rsscipy.linalg import toeplitz, matmul_toeplitz
     >>> matmul_toeplitz((c, r), x)
     array([[-20., -80.],
            [ -7.,  -8.],

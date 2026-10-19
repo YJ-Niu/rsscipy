@@ -631,7 +631,7 @@ class AttrDict(dict):
     A case-insensitive dictionary with access via item, attribute, and call
     notations:
 
-        >>> from scipy.io._idl import AttrDict
+        >>> from rsscipy.io._idl import AttrDict
         >>> d = AttrDict()
         >>> d['Variable'] = 123
         >>> d['Variable']
@@ -714,8 +714,8 @@ def readsav(file_name, idict=None, python_dict=False,
     Examples
     --------
     >>> from os.path import dirname, join as pjoin
-    >>> import scipy.io as sio
-    >>> from scipy.io import readsav
+    >>> import rsscipy.io as sio
+    >>> from rsscipy.io import readsav
 
     Get the filename for an example .sav file from the tests/data directory.
 

@@ -339,7 +339,7 @@ endif
 # End of BLAS/LAPACK handling
 
 
-scipy_dir = py3.get_install_dir() / 'scipy'
+scipy_dir = py3.get_install_dir() / 'rsscipy'
 
 # Generate version.py for sdist
 meson.add_dist_script(
@@ -375,7 +375,7 @@ endif
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy'
+  subdir: 'rsscipy'
 )
 
 # Copy the main __init__.py to the build dir.
@@ -404,7 +404,7 @@ cython_shared_src = custom_target(
 
 cython_shared_module = py3.extension_module('_cyutility',
   cython_shared_src,
-  subdir: 'scipy',
+  subdir: 'rsscipy',
   cython_args: cython_args,
   link_args: version_link_args,
   install: true,

@@ -1,7 +1,7 @@
 import warnings
 
 import numpy as np
-from scipy.linalg import eigh
+from rsscipy.linalg import eigh
 
 from .settings import Options
 from .utils import MaxEvalError, TargetSuccess, FeasibleSuccess

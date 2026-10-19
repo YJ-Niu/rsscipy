@@ -47,12 +47,12 @@ py3.install_sources([
     'test_trustregion_krylov.py',
     'test_zeros.py'
   ],
-  subdir: 'scipy/optimize/tests',
+  subdir: 'rsscipy/optimize/tests',
   install_tag: 'tests'
 )
 
 py3.install_sources(
   ['_cython_examples/extending.pyx', '_cython_examples/meson.build'],
-  subdir: 'scipy/optimize/tests/_cython_examples',
+  subdir: 'rsscipy/optimize/tests/_cython_examples',
   install_tag: 'tests'
 )

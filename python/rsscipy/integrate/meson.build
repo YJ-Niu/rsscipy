@@ -3,7 +3,7 @@ py3.extension_module('_quadpack',
   dependencies: [np_dep, ccallback_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/integrate'
+  subdir: 'rsscipy/integrate'
 )
 
 py3.extension_module('_odepack',
@@ -11,7 +11,7 @@ py3.extension_module('_odepack',
   link_args: version_link_args,
   dependencies: [lapack_dep, np_dep, ccallback_dep],
   install: true,
-  subdir: 'scipy/integrate'
+  subdir: 'rsscipy/integrate'
 )
 
 py3.extension_module('_vode',
@@ -19,7 +19,7 @@ py3.extension_module('_vode',
   link_args: version_link_args,
   dependencies: [lapack_dep, np_dep, ccallback_dep],
   install: true,
-  subdir: 'scipy/integrate'
+  subdir: 'rsscipy/integrate'
 )
 
 py3.extension_module('_dop',
@@ -27,14 +27,14 @@ py3.extension_module('_dop',
   dependencies: [np_dep, ccallback_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/integrate'
+  subdir: 'rsscipy/integrate'
 )
 
 py3.extension_module('_test_multivariate',
   ['tests/_test_multivariate.c'],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/integrate',
+  subdir: 'rsscipy/integrate',
   install_tag: 'tests'
 )
 
@@ -56,5 +56,5 @@ py3.install_sources([
     '_cubature.py',
     'src/LICENSE_DOP'
   ],
-  subdir: 'scipy/integrate'
+  subdir: 'rsscipy/integrate'
 )

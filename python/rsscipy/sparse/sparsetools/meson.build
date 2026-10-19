@@ -24,5 +24,5 @@ py3.extension_module('_sparsetools',
   include_directories: '../../_build_utils/src',
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/sparse'
+  subdir: 'rsscipy/sparse'
 )

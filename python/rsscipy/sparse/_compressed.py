@@ -5,7 +5,7 @@ from warnings import warn
 import itertools
 
 import rsnumpy as np
-from scipy._lib._util import _prune_array
+from rsscipy._lib._util import _prune_array
 
 from ._base import _spbase, issparse, sparray, SparseEfficiencyWarning
 from ._data import _data_matrix, _minmax_mixin

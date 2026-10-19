@@ -33,12 +33,12 @@ This module contains low-level functions from the BLAS library.
 .. note::
 
     Prefer using ``get_blas_funcs`` to importing the bare functions directly.
-    If you do, for example, ``from scipy.linalg.blas import dgemm``, the ``dgemm``
+    If you do, for example, ``from rsscipy.linalg.blas import dgemm``, the ``dgemm``
     function may be either LP64 or ILP64, depending on how SciPy is built.
 
     The following is more robust:
 
-    >>> from scipy.linalg.blas import get_blas_funcs
+    >>> from rsscipy.linalg.blas import get_blas_funcs
     >>> dgemm = get_blas_funcs('gemm', dtype='float64', ilp64='preferred')
     >>> dgemm.int_dtype
     dtype('int32')    # may vary
@@ -236,7 +236,7 @@ __all__ = ['get_blas_funcs', 'find_best_blas_type']
 
 import rsnumpy as np
 import functools
-from scipy.__config__ import CONFIG
+from rsscipy.__config__ import CONFIG
 
 # If `_fblas` was built, it means the Cython BLAS ABI is LP64, and we're then also
 # keeping `linalg.blas` as LP64.
@@ -245,12 +245,12 @@ HAS_ILP64 = CONFIG['Build Dependencies']['blas']['has ilp64']
 del CONFIG
 
 if HAS_LP64:
-    from scipy.linalg import _fblas
+    from rsscipy.linalg import _fblas
 else:
     _fblas = None
 
 if HAS_ILP64:
-    from scipy.linalg import _fblas_64
+    from rsscipy.linalg import _fblas_64
 else:
     _fblas_64 = None
 
@@ -258,9 +258,9 @@ if not (HAS_LP64 or HAS_ILP64):
     raise RuntimeError("SciPy needs either LP64 or ILP64 BLAS.")
 
 if HAS_LP64:
-    from scipy.linalg._fblas import *  # noqa: F403
+    from rsscipy.linalg._fblas import *  # noqa: F403
 else:
-    from scipy.linalg._fblas_64 import *  # noqa: F403
+    from rsscipy.linalg._fblas_64 import *  # noqa: F403
 
 # all numeric dtypes '?bBhHiIlLqQefdgFDGO' that are safe to be converted to
 
@@ -316,7 +316,7 @@ def find_best_blas_type(arrays=(), dtype=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> import scipy.linalg.blas as bla
+    >>> import rsscipy.linalg.blas as bla
     >>> rng = np.random.default_rng()
     >>> a = rng.random((10,15))
     >>> b = np.asfortranarray(a)  # Change the memory layout order
@@ -482,7 +482,7 @@ def get_blas_funcs(names, arrays=(), dtype=None, ilp64="preferred"):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> import scipy.linalg as LA
+    >>> import rsscipy.linalg as LA
     >>> rng = np.random.default_rng()
     >>> a = rng.random((3, 2))
     >>> x_gemv = LA.get_blas_funcs('gemv', (a,))

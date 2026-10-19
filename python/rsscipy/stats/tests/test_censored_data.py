@@ -3,7 +3,7 @@
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_array_equal
-from scipy.stats import CensoredData
+from rsscipy.stats import CensoredData
 
 
 class TestCensoredData:

@@ -14,7 +14,7 @@ from rsnumpy.testing import assert_, assert_allclose, assert_equal
 import pytest
 from pytest import raises as assert_raises
 
-from scipy.io import netcdf_file
+from rsscipy.io import netcdf_file
 
 TEST_DATA_PATH = pjoin(dirname(__file__), 'data')
 

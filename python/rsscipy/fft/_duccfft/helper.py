@@ -6,7 +6,7 @@ import contextlib
 
 import rsnumpy as np
 
-from scipy._lib._array_api import xp_capabilities
+from rsscipy._lib._array_api import xp_capabilities
 
 # good_size is exposed (and used) from this import
 from .pyduccfft import good_size, prev_good_size
@@ -220,7 +220,7 @@ def set_workers(workers):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import fft, signal
+    >>> from rsscipy import fft, signal
     >>> rng = np.random.default_rng()
     >>> x = rng.standard_normal((128, 64))
     >>> with fft.set_workers(4):
@@ -246,7 +246,7 @@ def get_workers():
 
     Examples
     --------
-    >>> from scipy import fft
+    >>> from rsscipy import fft
     >>> fft.get_workers()
     1
     >>> with fft.set_workers(4):

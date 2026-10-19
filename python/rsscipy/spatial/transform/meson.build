@@ -4,7 +4,7 @@ py3.extension_module('_rotation_cy',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/spatial/transform'
+  subdir: 'rsscipy/spatial/transform'
 )
 
 py3.extension_module('_rigid_transform_cy',
@@ -13,7 +13,7 @@ py3.extension_module('_rigid_transform_cy',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/spatial/transform'
+  subdir: 'rsscipy/spatial/transform'
 )
 
 py3.install_sources([
@@ -25,7 +25,7 @@ py3.install_sources([
     '_rotation_spline.py',
     '_rotation_xp.py',
   ],
-  subdir: 'scipy/spatial/transform'
+  subdir: 'rsscipy/spatial/transform'
 )
 
 subdir('tests')

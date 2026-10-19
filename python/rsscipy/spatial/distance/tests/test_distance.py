@@ -45,32 +45,32 @@ import rsnumpy as np
 from rsnumpy.linalg import norm
 import pytest
 
-import scipy.spatial.distance
+import rsscipy.spatial.distance
 
-from scipy.spatial.distance import (
+from rsscipy.spatial.distance import (
     squareform, pdist, cdist, num_obs_y, num_obs_dm, is_valid_dm, is_valid_y)
-from scipy.spatial.distance._distance import (
+from rsscipy.spatial.distance._distance import (
     _validate_vector, _validate_weights, _METRICS_NAMES)
 
 # these were missing: chebyshev cityblock
 # jensenshannon  and seuclidean are referenced by string name.
-from scipy.spatial.distance import (braycurtis, canberra, chebyshev, cityblock,
+from rsscipy.spatial.distance import (braycurtis, canberra, chebyshev, cityblock,
                                     correlation, cosine, dice, euclidean,
                                     hamming, jaccard, jensenshannon, mahalanobis,
                                     minkowski, rogerstanimoto,
                                     russellrao, seuclidean,  # noqa: F401
                                     sokalsneath, sqeuclidean, yule)
-from scipy._external import array_api_extra as xpx
-from scipy._lib._util import _apply_over_batch
-from scipy.conftest import skip_xp_invalid_arg
-from scipy._lib._array_api import (
+from rsscipy._external import array_api_extra as xpx
+from rsscipy._lib._util import _apply_over_batch
+from rsscipy.conftest import skip_xp_invalid_arg
+from rsscipy._lib._array_api import (
     make_xp_test_case,
     is_lazy_array,
     array_namespace,
     make_xp_pytest_param,
     xp_device,
 )
-from scipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
+from rsscipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
 
 
 @pytest.fixture(params=_METRICS_NAMES, scope="session")

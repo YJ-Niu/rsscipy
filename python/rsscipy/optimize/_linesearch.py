@@ -15,7 +15,7 @@ import math
 from warnings import warn
 
 import rsnumpy as np
-from scipy._lib._array_api import array_namespace, xp_capabilities
+from rsscipy._lib._array_api import array_namespace, xp_capabilities
 from ._dcsrch import DCSRCH
 
 __all__ = ['LineSearchWarning', 'line_search_wolfe1', 'line_search_wolfe2',
@@ -286,7 +286,7 @@ def line_search_wolfe2(f, myfprime, xk, pk, gfk=None, old_fval=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.optimize import line_search
+    >>> from rsscipy.optimize import line_search
 
     An objective function and its gradient are defined.
 

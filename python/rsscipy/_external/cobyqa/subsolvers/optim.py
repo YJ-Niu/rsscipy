@@ -1,7 +1,7 @@
 import inspect
 
 import numpy as np
-from scipy.linalg import qr
+from rsscipy.linalg import qr
 
 from ..utils import get_arrays_tol
 

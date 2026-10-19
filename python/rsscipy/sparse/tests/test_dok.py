@@ -3,8 +3,8 @@ import warnings
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_equal
-import scipy as sp
-from scipy.sparse import dok_array, dok_matrix
+import rsscipy as sp
+from rsscipy.sparse import dok_array, dok_matrix
 
 
 pytestmark = pytest.mark.thread_unsafe

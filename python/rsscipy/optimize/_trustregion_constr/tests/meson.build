@@ -6,6 +6,6 @@ py3.install_sources([
     'test_report.py',
     'test_nested_minimize.py'
   ],
-  subdir: 'scipy/optimize/_trustregion_constr/tests',
+  subdir: 'rsscipy/optimize/_trustregion_constr/tests',
   install_tag: 'tests'
 )

@@ -4,11 +4,11 @@ import warnings
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose
 import pytest
-from scipy.linalg import block_diag
-from scipy.sparse import (
+from rsscipy.linalg import block_diag
+from rsscipy.sparse import (
     coo_array, random_array, SparseEfficiencyWarning, matrix_transpose
 )
-from scipy.sparse._csr import csr_array
+from rsscipy.sparse._csr import csr_array
 from .._coo import _block_diag, _extract_block_diag
 
 

@@ -7,8 +7,8 @@ from rsnumpy.testing import assert_allclose, assert_equal
 from pytest import raises as assert_raises
 import pytest
 
-import scipy.sparse
-from scipy.sparse.linalg import norm as spnorm
+import rsscipy.sparse
+from rsscipy.sparse.linalg import norm as spnorm
 
 
 # https://github.com/scipy/scipy/issues/16031

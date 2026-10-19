@@ -2,7 +2,7 @@ from rsnumpy.testing import assert_, assert_allclose, assert_equal
 from pytest import raises as assert_raises
 import rsnumpy as np
 
-from scipy.optimize._lsq.common import (
+from rsscipy.optimize._lsq.common import (
     step_size_to_bound, find_active_constraints, make_strictly_feasible,
     CL_scaling_vector, intersect_trust_region, build_quadratic_1d,
     minimize_quadratic_1d, evaluate_quadratic, reflective_transformation,

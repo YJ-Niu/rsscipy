@@ -7,7 +7,7 @@ import re
 import rsnumpy as np
 import warnings
 
-from scipy._external.packaging_version import version
+from rsscipy._external.packaging_version import version
 
 
 def _parse_core_dims(signature):

@@ -6,8 +6,8 @@ from rsnumpy.testing import assert_allclose
 import rsnumpy as np
 import pytest
 
-from scipy import stats
-from scipy.special import _ufuncs
+from rsscipy import stats
+from rsscipy.special import _ufuncs
 from .common_tests import (check_normalization, check_moment,
                            check_mean_expect,
                            check_var_expect, check_skew_expect,
@@ -16,8 +16,8 @@ from .common_tests import (check_normalization, check_moment,
                            check_named_args, check_random_state_property,
                            check_pickling, check_rvs_broadcast,
                            check_freezing,)
-from scipy.stats._distr_params import distdiscrete, invdistdiscrete
-from scipy.stats._distn_infrastructure import rv_discrete_frozen
+from rsscipy.stats._distr_params import distdiscrete, invdistdiscrete
+from rsscipy.stats._distn_infrastructure import rv_discrete_frozen
 
 vals = ([1, 2, 3, 4], [0.1, 0.2, 0.3, 0.4])
 distdiscrete += [[stats.rv_discrete(values=vals), ()]]

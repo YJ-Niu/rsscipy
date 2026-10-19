@@ -4,10 +4,10 @@ from rsnumpy.testing import assert_allclose
 from pytest import raises as assert_raises
 
 from rsnumpy import array, transpose, zeros_like, empty
-from scipy.linalg import (cholesky, cholesky_banded, cho_solve_banded,
+from rsscipy.linalg import (cholesky, cholesky_banded, cho_solve_banded,
      cho_factor, cho_solve, LinAlgError)
 
-from scipy.linalg._testutils import assert_no_overwrite
+from rsscipy.linalg._testutils import assert_no_overwrite
 from .test_basic import parametrize_overwrite_arg
 
 

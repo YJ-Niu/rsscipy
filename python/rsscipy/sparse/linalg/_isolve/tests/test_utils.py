@@ -1,7 +1,7 @@
 import rsnumpy as np
 from pytest import raises as assert_raises
 
-import scipy.sparse.linalg._isolve.utils as utils
+import rsscipy.sparse.linalg._isolve.utils as utils
 
 
 def test_make_system_bad_shape():

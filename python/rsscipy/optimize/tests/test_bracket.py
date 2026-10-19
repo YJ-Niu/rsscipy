@@ -2,14 +2,14 @@ import pytest
 
 import rsnumpy as np
 
-from scipy.optimize._bracket import _ELIMITS
-from scipy.optimize.elementwise import (bracket_root, bracket_minimum,
+from rsscipy.optimize._bracket import _ELIMITS
+from rsscipy.optimize.elementwise import (bracket_root, bracket_minimum,
                                         find_root, find_minimum)
-import scipy._lib._elementwise_iterative_method as eim
-from scipy import stats
-from scipy._lib._array_api_no_0d import (xp_assert_close, xp_assert_equal,
+import rsscipy._lib._elementwise_iterative_method as eim
+from rsscipy import stats
+from rsscipy._lib._array_api_no_0d import (xp_assert_close, xp_assert_equal,
                                          xp_assert_less)
-from scipy._lib._array_api import xp_ravel, make_xp_test_case
+from rsscipy._lib._array_api import xp_ravel, make_xp_test_case
 
 
 # These tests were originally written for the private `optimize._bracket`

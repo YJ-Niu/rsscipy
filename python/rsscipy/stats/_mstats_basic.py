@@ -41,12 +41,12 @@ import warnings
 from collections import namedtuple
 
 from . import distributions
-from scipy._lib._util import _rename_parameter, _contains_nan, _dedent_for_py313
-from scipy._lib._bunch import _make_tuple_bunch
-import scipy.special as special
-import scipy.stats._stats_py
-import scipy.stats._stats_py as _stats_py
-from scipy.stats._stats_pythran import siegelslopes as siegelslopes_pythran
+from rsscipy._lib._util import _rename_parameter, _contains_nan, _dedent_for_py313
+from rsscipy._lib._bunch import _make_tuple_bunch
+import rsscipy.special as special
+import rsscipy.stats._stats_py
+import rsscipy.stats._stats_py as _stats_py
+from rsscipy.stats._stats_pythran import siegelslopes as siegelslopes_pythran
 from ._stats_mstats_common import _find_repeats, TheilslopesResult, SiegelslopesResult
 
 
@@ -132,7 +132,7 @@ def argstoarray(*args):
     --------
     A 2D masked array constructed from a group of sequences is returned.
 
-    >>> from scipy.stats.mstats import argstoarray
+    >>> from rsscipy.stats.mstats import argstoarray
     >>> argstoarray([1, 2, 3], [4, 5, 6])
     masked_array(
      data=[[1.0, 2.0, 3.0],
@@ -187,7 +187,7 @@ def find_repeats(arr):
 
     Examples
     --------
-    >>> from scipy.stats import mstats
+    >>> from rsscipy.stats import mstats
     >>> mstats.find_repeats([2, 1, 2, 3, 2, 2, 5])
     (array([2.]), array([4]))
 
@@ -226,7 +226,7 @@ def count_tied_groups(x, use_missing=False):
 
     Examples
     --------
-    >>> from scipy.stats import mstats
+    >>> from rsscipy.stats import mstats
     >>> import rsnumpy as np
     >>> z = [0, 0, 0, 2, 2, 2, 3, 3, 4, 5, 6]
     >>> mstats.count_tied_groups(z)
@@ -337,8 +337,8 @@ def mode(a, axis=0):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
-    >>> from scipy.stats import mstats
+    >>> from rsscipy import stats
+    >>> from rsscipy.stats import mstats
     >>> m_arr = np.ma.array([1, 1, 0, 0, 0, 0], mask=[0, 0, 1, 1, 1, 0])
     >>> mstats.mode(m_arr)  # note that most zeros are masked
     ModeResult(mode=array([1.]), count=array([2.]))
@@ -499,8 +499,8 @@ def pearsonr(x, y):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
-    >>> from scipy.stats import mstats
+    >>> from rsscipy import stats
+    >>> from rsscipy.stats import mstats
     >>> mstats.pearsonr([1, 2, 3, 4, 5], [10, 9, 2.5, 6, 4])
     (-0.7426106572325057, 0.1505558088534455)
 
@@ -1099,7 +1099,7 @@ def linregress(x, y=None):
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng()
 
     Generate some data:
@@ -1130,7 +1130,7 @@ def linregress(x, y=None):
 
     >>> # Two-sided inverse Students t-distribution
     >>> # p - probability, df - degrees of freedom
-    >>> from scipy.stats import t
+    >>> from rsscipy.stats import t
     >>> tinv = lambda p, df: abs(t.ppf(p/2, df))
 
     >>> ts = tinv(0.05, len(x)-2)
@@ -1257,7 +1257,7 @@ def _theilslopes(y, x=None, alpha=0.95, method='separate'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> import matplotlib.pyplot as plt
 
     >>> x = np.linspace(-5, 5, num=150)
@@ -1561,7 +1561,7 @@ def sen_seasonal_slopes(x):
 
     We compute the seasonal slopes as:
 
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> intra_slope, inter_slope = stats.mstats.sen_seasonal_slopes(x)
 
     If we define a function to compute all slopes between observations within
@@ -1890,7 +1890,7 @@ def kruskal(*samples):
 
     Examples
     --------
-    >>> from scipy.stats.mstats import kruskal
+    >>> from rsscipy.stats.mstats import kruskal
 
     Random samples from three different brands of batteries were tested
     to see how long the charge lasted. Results were as follows:
@@ -2057,7 +2057,7 @@ def trima(a, limits=None, inclusive=(True,True)):
 
     Examples
     --------
-    >>> from scipy.stats.mstats import trima
+    >>> from rsscipy.stats.mstats import trima
     >>> import rsnumpy as np
 
     >>> a = np.arange(10)
@@ -2206,7 +2206,7 @@ def trim(a, limits=None, inclusive=(True,True), relative=False, axis=None):
 
     Examples
     --------
-    >>> from scipy.stats.mstats import trim
+    >>> from rsscipy.stats.mstats import trim
     >>> z = [ 1, 2, 3, 4, 5, 6, 7, 8, 9,10]
     >>> print(trim(z,(3,8)))
     [-- -- 3 4 5 6 7 8 -- --]
@@ -2521,7 +2521,7 @@ def tmean(a, limits=None, inclusive=(True, True), axis=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import mstats
+    >>> from rsscipy.stats import mstats
     >>> a = np.array([[6, 8, 3, 0],
     ...               [3, 9, 1, 2],
     ...               [8, 7, 8, 2],
@@ -2615,7 +2615,7 @@ def tmin(a, lowerlimit=None, axis=0, inclusive=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import mstats
+    >>> from rsscipy.stats import mstats
     >>> a = np.array([[6, 8, 3, 0],
     ...               [3, 2, 1, 2],
     ...               [8, 1, 8, 2],
@@ -2666,7 +2666,7 @@ def tmax(a, upperlimit=None, axis=0, inclusive=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import mstats
+    >>> from rsscipy.stats import mstats
     >>> a = np.array([[6, 8, 3, 0],
     ...               [3, 9, 1, 2],
     ...               [8, 7, 8, 2],
@@ -2776,7 +2776,7 @@ def winsorize(a, limits=None, inclusive=(True, True), inplace=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats.mstats import winsorize
+    >>> from rsscipy.stats.mstats import winsorize
 
     A shuffled array contains integers from 1 to 10.
 
@@ -2973,7 +2973,7 @@ def variation(a, axis=0, ddof=0):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats.mstats import variation
+    >>> from rsscipy.stats.mstats import variation
     >>> a = np.array([2,8,4])
     >>> variation(a)
     0.5345224838248487
@@ -3142,7 +3142,7 @@ def describe(a, axis=0, ddof=0, bias=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats.mstats import describe
+    >>> from rsscipy.stats.mstats import describe
     >>> ma = np.ma.array(range(6), mask=[0, 0, 0, 1, 1, 1])
     >>> describe(ma)
     DescribeResult(nobs=np.int64(3), minmax=(masked_array(data=0,
@@ -3435,7 +3435,7 @@ def mquantiles(a, prob=(.25, .5, .75), alphap=.4, betap=.4, axis=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats.mstats import mquantiles
+    >>> from rsscipy.stats.mstats import mquantiles
     >>> a = np.array([6., 47., 49., 15., 42., 41., 7., 39., 43., 40., 36.])
     >>> mquantiles(a)
     array([ 19.2,  40. ,  42.8])
@@ -3625,7 +3625,7 @@ def sem(a, axis=0, ddof=1):
     Find standard error along the first axis:
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> a = np.arange(20).reshape(5,4)
     >>> print(stats.mstats.sem(a))
     [2.8284271247461903 2.8284271247461903 2.8284271247461903
@@ -3779,7 +3779,7 @@ def brunnermunzel(x, y, alternative="two-sided", distribution="t"):
 
     Examples
     --------
-    >>> from scipy.stats.mstats import brunnermunzel
+    >>> from rsscipy.stats.mstats import brunnermunzel
     >>> import rsnumpy as np
     >>> x1 = [1, 2, np.nan, np.nan, 1, 1, 1, 1, 1, 1, 2, 4, 1, 1]
     >>> x2 = [3, 3, 4, 3, 1, 2, 3, 1, 1, 5, 4]

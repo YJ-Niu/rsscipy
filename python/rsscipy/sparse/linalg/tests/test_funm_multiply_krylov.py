@@ -4,12 +4,12 @@ from functools import partial
 import rsnumpy as np
 import pytest
 from rsnumpy.testing import (assert_allclose)
-import scipy.sparse
-import scipy.linalg
-from scipy.sparse.linalg import aslinearoperator
-from scipy.linalg import (expm, cosm, coshm, sinm, sinhm)
+import rsscipy.sparse
+import rsscipy.linalg
+from rsscipy.sparse.linalg import aslinearoperator
+from rsscipy.linalg import (expm, cosm, coshm, sinm, sinhm)
 
-from scipy.sparse.linalg._funm_multiply_krylov import funm_multiply_krylov
+from rsscipy.sparse.linalg._funm_multiply_krylov import funm_multiply_krylov
 
 REAL_DTYPES = (np.float32, np.float64)
 COMPLEX_DTYPES = (np.complex64, np.complex128)

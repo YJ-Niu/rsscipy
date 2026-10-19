@@ -133,7 +133,7 @@ class NominalAttribute(Attribute):
 
         Examples
         --------
-        >>> from scipy.io.arff._arffread import NominalAttribute
+        >>> from rsscipy.io.arff._arffread import NominalAttribute
         >>> NominalAttribute._get_nom_val("{floup, bouga, fl, ratata}")
         ('floup', 'bouga', 'fl', 'ratata')
         """
@@ -221,7 +221,7 @@ class NumericAttribute(Attribute):
 
         Examples
         --------
-        >>> from scipy.io.arff._arffread import NumericAttribute
+        >>> from rsscipy.io.arff._arffread import NumericAttribute
         >>> atr = NumericAttribute('atr')
         >>> atr.parse_data('1')
         1.0
@@ -542,7 +542,7 @@ def tokenize_attribute(iterable, attribute):
     If attribute is a string defined in python as r"floupi real", will
     return floupi as name, and real as value.
 
-    >>> from scipy.io.arff._arffread import tokenize_attribute
+    >>> from rsscipy.io.arff._arffread import tokenize_attribute
     >>> iterable = iter([0] * 10) # dummy iterator
     >>> tokenize_attribute(iterable, r"@attribute floupi real")
     ('floupi', 'real', 0)
@@ -792,7 +792,7 @@ def loadarff(f):
 
     Examples
     --------
-    >>> from scipy.io import arff
+    >>> from rsscipy.io import arff
     >>> from io import StringIO
     >>> content = \"\"\"
     ... @relation foo

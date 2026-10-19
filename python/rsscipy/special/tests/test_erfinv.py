@@ -2,7 +2,7 @@ import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal
 import pytest
 
-import scipy.special as sc
+import rsscipy.special as sc
 
 
 class TestInverseErrorFunction:

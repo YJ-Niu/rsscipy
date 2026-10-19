@@ -20,14 +20,14 @@ py3.extension_module('_arpacklib',
   dependencies: [np_dep, lapack_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/sparse/linalg/_eigen/arpack',
+  subdir: 'rsscipy/sparse/linalg/_eigen/arpack',
 )
 
 py3.install_sources([
     '__init__.py',
     'arpack.py',
   ],
-  subdir: 'scipy/sparse/linalg/_eigen/arpack'
+  subdir: 'rsscipy/sparse/linalg/_eigen/arpack'
 )
 
 subdir('tests')

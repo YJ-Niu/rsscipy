@@ -8,14 +8,14 @@ double precisions.  It is automatically replaced by UMFPACK, if
 available.  Note that UMFPACK works in double precision only, so
 switch it off by::
 
-    >>> from scipy.sparse.linalg import spsolve, use_solver
+    >>> from rsscipy.sparse.linalg import spsolve, use_solver
     >>> use_solver(useUmfpack=False)
 
 to solve in the single precision. See also use_solver documentation.
 
 Example session::
 
-    >>> from scipy.sparse import csc_array, dia_array
+    >>> from rsscipy.sparse import csc_array, dia_array
     >>> from rsnumpy import array
     >>>
     >>> print("Inverting a sparse linear system:")
@@ -66,6 +66,6 @@ __all__ = [
     'spsolve_triangular', 'use_solver', 'spbandwidth',
 ]
 
-from scipy._lib._testutils import PytestTester
+from rsscipy._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester

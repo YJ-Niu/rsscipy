@@ -1,7 +1,7 @@
 import itertools
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
-from scipy.integrate import ode
+from rsscipy.integrate import ode
 
 
 def _band_count(a):

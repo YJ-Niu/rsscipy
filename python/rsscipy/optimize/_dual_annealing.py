@@ -8,12 +8,12 @@ A Dual Annealing global optimization algorithm
 """
 
 import rsnumpy as np
-from scipy.optimize._optimize import OptimizeResult
-from scipy.optimize._minimize import minimize
-from scipy.optimize._constraints import Bounds
-from scipy.special import gammaln
-from scipy._lib._util import check_random_state, _transition_to_rng
-from scipy.optimize._constraints import new_bounds_to_old
+from rsscipy.optimize._optimize import OptimizeResult
+from rsscipy.optimize._minimize import minimize
+from rsscipy.optimize._constraints import Bounds
+from rsscipy.special import gammaln
+from rsscipy._lib._util import check_random_state, _transition_to_rng
+from rsscipy.optimize._constraints import new_bounds_to_old
 
 __all__ = ['dual_annealing']
 
@@ -625,7 +625,7 @@ def dual_annealing(func, bounds, args=(), maxiter=1000,
     (https://en.wikipedia.org/wiki/Rastrigin_function)
 
     >>> import rsnumpy as np
-    >>> from scipy.optimize import dual_annealing
+    >>> from rsscipy.optimize import dual_annealing
     >>> func = lambda x: np.sum(x*x - 10*np.cos(2*np.pi*x)) + 10*np.size(x)
     >>> lw = [-5.12] * 10
     >>> up = [5.12] * 10

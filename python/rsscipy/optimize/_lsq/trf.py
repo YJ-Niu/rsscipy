@@ -95,9 +95,9 @@ References
 """
 import rsnumpy as np
 from rsnumpy.linalg import norm
-from scipy.linalg import svd, qr
-from scipy.sparse.linalg import lsmr
-from scipy.optimize._optimize import OptimizeResult
+from rsscipy.linalg import svd, qr
+from rsscipy.sparse.linalg import lsmr
+from rsscipy.optimize._optimize import OptimizeResult
 
 from .common import (
     step_size_to_bound, find_active_constraints, in_bounds,
@@ -107,7 +107,7 @@ from .common import (
     CL_scaling_vector, compute_grad, compute_jac_scale, check_termination,
     update_tr_radius, scale_for_robust_loss_function, print_header_nonlinear,
     print_iteration_nonlinear)
-from scipy._lib._util import _call_callback_maybe_halt
+from rsscipy._lib._util import _call_callback_maybe_halt
 
 
 def trf(fun, jac, x0, f0, J0, lb, ub, ftol, xtol, gtol, max_nfev, x_scale,

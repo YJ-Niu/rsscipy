@@ -3,4 +3,4 @@ python_sources = files(
   'src/version.py',
 )
 
-py3.install_sources(python_sources, subdir: 'scipy/_external/packaging_version')
+py3.install_sources(python_sources, subdir: 'rsscipy/_external/packaging_version')

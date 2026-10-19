@@ -7,10 +7,10 @@ from tempfile import TemporaryDirectory
 import rsnumpy as np
 import pytest
 
-import scipy.io
-import scipy.io.wavfile
-import scipy.sparse
-from scipy._lib._testutils import IS_WASM
+import rsscipy.io
+import rsscipy.io.wavfile
+import rsscipy.sparse
+from rsscipy._lib._testutils import IS_WASM
 
 
 class TestPaths:

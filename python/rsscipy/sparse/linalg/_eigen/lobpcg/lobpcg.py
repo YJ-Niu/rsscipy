@@ -19,10 +19,10 @@ References
 
 import warnings
 import rsnumpy as np
-from scipy.linalg import (inv, eigh, cho_factor, cho_solve,
+from rsscipy.linalg import (inv, eigh, cho_factor, cho_solve,
                           cholesky, LinAlgError)
-from scipy.sparse.linalg._interface import LinearOperator
-from scipy.sparse import issparse
+from rsscipy.sparse.linalg._interface import LinearOperator
+from rsscipy.sparse import issparse
 
 __all__ = ["lobpcg"]
 
@@ -31,7 +31,7 @@ def _report_nonhermitian(M, name):
     """
     Report if `M` is not a Hermitian matrix given its type.
     """
-    from scipy.linalg import norm
+    from rsscipy.linalg import norm
 
     md = M - M.T.conj()
     nmd = norm(md, 1)
@@ -306,9 +306,9 @@ def lobpcg(
     ``A x = lambda x`` without constraints or preconditioning.
 
     >>> import rsnumpy as np
-    >>> from scipy.sparse import diags_array
-    >>> from scipy.sparse.linalg import LinearOperator, aslinearoperator
-    >>> from scipy.sparse.linalg import lobpcg
+    >>> from rsscipy.sparse import diags_array
+    >>> from rsscipy.sparse.linalg import LinearOperator, aslinearoperator
+    >>> from rsscipy.sparse.linalg import lobpcg
 
     The square matrix size is
 

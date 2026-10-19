@@ -2,11 +2,11 @@ import warnings
 
 import rsnumpy as np
 import pytest
-from scipy.linalg import block_diag
-from scipy.sparse import csc_array
+from rsscipy.linalg import block_diag
+from rsscipy.sparse import csc_array
 from rsnumpy.testing import (assert_array_almost_equal,
                            assert_array_less, assert_)
-from scipy.optimize import (NonlinearConstraint,
+from rsscipy.optimize import (NonlinearConstraint,
                             LinearConstraint,
                             Bounds,
                             minimize,

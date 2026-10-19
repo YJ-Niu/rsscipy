@@ -11,21 +11,21 @@ import rsnumpy as np
 from rsnumpy.testing import assert_allclose
 from rsnumpy import zeros, arange, array, ones, eye, iscomplexobj
 
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     is_numpy, make_xp_pytest_param, make_xp_pytest_marks,
     xp_assert_close, xp_assert_less, xp_vector_norm, xp_assert_equal,
     xp_assert_less_equal,
 )
-from scipy._external import array_api_extra as xpx
-from scipy._lib._sparse import issparse
-from scipy._lib._testutils import IS_WASM
-from scipy.sparse import dia_array, csr_array, kronsum
+from rsscipy._external import array_api_extra as xpx
+from rsscipy._lib._sparse import issparse
+from rsscipy._lib._testutils import IS_WASM
+from rsscipy.sparse import dia_array, csr_array, kronsum
 
-from scipy.sparse.linalg import LinearOperator, aslinearoperator
-from scipy.sparse.linalg._isolve import (bicg, bicgstab, cg, cgs,
+from rsscipy.sparse.linalg import LinearOperator, aslinearoperator
+from rsscipy.sparse.linalg._isolve import (bicg, bicgstab, cg, cgs,
                                          gcrotmk, gmres, lgmres,
                                          minres, qmr, tfqmr)
-from scipy.sparse.linalg._interface import IdentityOperator
+from rsscipy.sparse.linalg._interface import IdentityOperator
 
 # TODO check that method preserve shape and type
 # TODO test both preconditioner methods
@@ -717,8 +717,8 @@ class TestQMR:
     def test_leftright_precond(self):
         """Check that QMR works with left and right preconditioners"""
 
-        from scipy.sparse.linalg._dsolve import splu
-        from scipy.sparse.linalg._interface import LinearOperator
+        from rsscipy.sparse.linalg._dsolve import splu
+        from rsscipy.sparse.linalg._interface import LinearOperator
 
         n = 100
 

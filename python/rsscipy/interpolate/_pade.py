@@ -2,8 +2,8 @@ import warnings
 import os
 
 from rsnumpy import zeros, asarray, eye, poly1d, hstack, r_
-from scipy import linalg
-from scipy._lib._array_api import xp_capabilities
+from rsscipy import linalg
+from rsscipy._lib._array_api import xp_capabilities
 
 __all__ = ["pade"]
 
@@ -35,7 +35,7 @@ def pade(an, m, n=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.interpolate import pade
+    >>> from rsscipy.interpolate import pade
     >>> e_exp = [1.0, 1.0, 1.0/2.0, 1.0/6.0, 1.0/24.0, 1.0/120.0]
     >>> p, q = pade(e_exp, 2)
 

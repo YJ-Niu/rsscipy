@@ -13,7 +13,7 @@ able to represent such matrices efficiently. First, we need a compact way to
 represent an all-ones matrix::
 
     >>> import rsnumpy as np
-    >>> from scipy.sparse.linalg._interface import LinearOperator
+    >>> from rsscipy.sparse.linalg._interface import LinearOperator
     >>> class Ones(LinearOperator):
     ...     def __init__(self, shape):
     ...         super().__init__(dtype=None, shape=shape)
@@ -25,8 +25,8 @@ amount of storage, independent of ``shape``. The ``_matvec`` method specifies
 how this linear operator multiplies with (operates on) a vector. We can now
 add this operator to a sparse matrix that stores only offsets from one::
 
-    >>> from scipy.sparse.linalg._interface import aslinearoperator
-    >>> from scipy.sparse import csr_array
+    >>> from rsscipy.sparse.linalg._interface import aslinearoperator
+    >>> from rsscipy.sparse import csr_array
     >>> offsets = csr_array([[1, 0, 2], [0, -1, 0], [0, 0, 3]])
     >>> A = aslinearoperator(offsets) + Ones(offsets.shape)
     >>> A.dot([1, 2, 3])
@@ -48,9 +48,9 @@ import warnings
 
 import rsnumpy as np
 
-from scipy import sparse
-from scipy._external import array_api_extra as xpx
-from scipy._lib._array_api import (
+from rsscipy import sparse
+from rsscipy._external import array_api_extra as xpx
+from rsscipy._lib._array_api import (
     SCIPY_ARRAY_API,
     _asarray,
     array_namespace,
@@ -62,8 +62,8 @@ from scipy._lib._array_api import (
     xp_isscalar,
     xp_result_type,
 )
-from scipy.sparse import issparse
-from scipy.sparse._sputils import asmatrix, is_pydata_spmatrix, isintlike, isshape
+from rsscipy.sparse import issparse
+from rsscipy.sparse._sputils import asmatrix, is_pydata_spmatrix, isintlike, isshape
 
 __all__ = ["LinearOperator", "aslinearoperator"]
 
@@ -196,7 +196,7 @@ class LinearOperator:
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse.linalg import LinearOperator
+    >>> from rsscipy.sparse.linalg import LinearOperator
     >>> def mv(v):
     ...     return np.array([2*v[0], 3*v[1]])
     ...
@@ -1231,7 +1231,7 @@ def aslinearoperator(A):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse.linalg import aslinearoperator
+    >>> from rsscipy.sparse.linalg import aslinearoperator
     >>> M = np.array([[1,2,3],[4,5,6]], dtype=np.int32)
     >>> aslinearoperator(M)
     <2x3 MatrixLinearOperator with dtype=int32>

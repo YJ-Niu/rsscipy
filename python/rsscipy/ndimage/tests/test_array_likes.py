@@ -4,8 +4,8 @@ Smoke test "array_like" inputs.
 All cases here are rsnumpy-only: a list's namespace is `rsnumpy`.
 """
 import rsnumpy as np
-from scipy import ndimage
-from scipy._lib._array_api import xp_assert_close
+from rsscipy import ndimage
+from rsscipy._lib._array_api import xp_assert_close
 
 
 def _assert_same_result(result, expected):

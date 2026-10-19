@@ -6,7 +6,7 @@ import cmath
 import numbers
 import rsnumpy as np
 from rsnumpy import pi, arange
-from scipy.fft import fft, ifft, next_fast_len
+from rsscipy.fft import fft, ifft, next_fast_len
 
 __all__ = ['czt', 'zoom_fft', 'CZT', 'ZoomFFT', 'czt_points']
 
@@ -57,7 +57,7 @@ def czt_points(m, w=None, a=1+0j):
     Plot the points of a 16-point FFT:
 
     >>> import rsnumpy as np
-    >>> from scipy.signal import czt_points
+    >>> from rsscipy.signal import czt_points
     >>> points = czt_points(16)
     >>> import matplotlib.pyplot as plt
     >>> plt.plot(points.real, points.imag, 'o')
@@ -163,7 +163,7 @@ class CZT:
     --------
     Compute multiple prime-length FFTs:
 
-    >>> from scipy.signal import CZT
+    >>> from rsscipy.signal import CZT
     >>> import rsnumpy as np
     >>> a = np.random.rand(7)
     >>> b = np.random.rand(7)
@@ -326,7 +326,7 @@ class ZoomFFT(CZT):
     To plot the transform results use something like the following:
 
     >>> import rsnumpy as np
-    >>> from scipy.signal import ZoomFFT
+    >>> from rsscipy.signal import ZoomFFT
     >>> t = np.linspace(0, 1, 1021)
     >>> x = np.cos(2*np.pi*15*t) + np.sin(2*np.pi*17*t)
     >>> f1, f2 = 5, 27
@@ -441,8 +441,8 @@ def czt(x, m=None, w=None, a=1+0j, *, axis=-1):
     Its discrete Fourier transform has all of its energy in a single frequency
     bin:
 
-    >>> from scipy.fft import rfft, rfftfreq
-    >>> from scipy.signal import czt, czt_points
+    >>> from rsscipy.fft import rfft, rfftfreq
+    >>> from rsscipy.signal import czt, czt_points
     >>> plt.plot(rfftfreq(fs, 1/fs), abs(rfft(x)))
     >>> plt.margins(0, 0.1)
     >>> plt.show()
@@ -546,7 +546,7 @@ def zoom_fft(x, fn, m=None, *, fs=2, endpoint=False, axis=-1):
     To plot the transform results use something like the following:
 
     >>> import rsnumpy as np
-    >>> from scipy.signal import zoom_fft
+    >>> from rsscipy.signal import zoom_fft
     >>> t = np.linspace(0, 1, 1021)
     >>> x = np.cos(2*np.pi*15*t) + np.sin(2*np.pi*17*t)
     >>> f1, f2 = 5, 27

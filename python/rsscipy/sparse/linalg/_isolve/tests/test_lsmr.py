@@ -21,8 +21,8 @@ from rsnumpy import array, arange, eye, zeros, ones, transpose, hstack
 from rsnumpy.linalg import norm
 from rsnumpy.testing import assert_allclose
 import pytest
-from scipy.sparse import coo_array
-from scipy.sparse.linalg import lsmr, LinearOperator, aslinearoperator
+from rsscipy.sparse import coo_array
+from rsscipy.sparse.linalg import lsmr, LinearOperator, aslinearoperator
 from .test_lsqr import G, b
 
 

@@ -4,7 +4,7 @@ Various made-up tests to hit different branches of the code in specfun.c
 
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
-from scipy import special
+from rsscipy import special
 
 
 def test_cva2_cv0_branches():

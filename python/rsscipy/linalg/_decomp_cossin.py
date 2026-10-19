@@ -1,9 +1,9 @@
 from collections.abc import Iterable
 import rsnumpy as np
 
-from scipy._lib._util import _asarray_validated, _apply_over_batch
-from scipy.linalg._special_matrices import block_diag
-from scipy.linalg._misc import LinAlgError
+from rsscipy._lib._util import _asarray_validated, _apply_over_batch
+from rsscipy.linalg._special_matrices import block_diag
+from rsscipy.linalg._misc import LinAlgError
 from .lapack import _compute_lwork, get_lapack_funcs
 
 __all__ = ['cossin']
@@ -94,8 +94,8 @@ def cossin(X, p=None, q=None, separate=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import cossin
-    >>> from scipy.stats import unitary_group
+    >>> from rsscipy.linalg import cossin
+    >>> from rsscipy.stats import unitary_group
     >>> x = unitary_group.rvs(4)
     >>> u, cs, vdh = cossin(x, p=2, q=2)
     >>> np.allclose(x, u @ cs @ vdh)

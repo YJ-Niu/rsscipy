@@ -2,8 +2,8 @@
 """
 import rsnumpy as np
 import rsnumpy.typing as npt
-from scipy import fft as sp_fft
-from scipy._lib._array_api import xp_result_device, array_namespace
+from rsscipy import fft as sp_fft
+from rsscipy._lib._array_api import xp_result_device, array_namespace
 from . import _signaltools
 from ._short_time_fft import ShortTimeFFT
 from .windows import get_window
@@ -164,7 +164,7 @@ def lombscargle(
 
     Calculate Lomb-Scargle periodogram for each of the normalize options:
 
-    >>> from scipy.signal import lombscargle
+    >>> from rsscipy.signal import lombscargle
     >>> pgram_power = lombscargle(x, y, w, normalize=False)
     >>> pgram_norm = lombscargle(x, y, w, normalize=True)
     >>> pgram_amp = lombscargle(x, y, w, normalize='amplitude')
@@ -412,7 +412,7 @@ def periodogram(x, fs=1.0, window='boxcar', nfft=None, detrend='constant',
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng()
 
@@ -595,7 +595,7 @@ def welch(x, fs=1.0, window='hann_periodic', nperseg=None, noverlap=None, nfft=N
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng()
 
@@ -807,7 +807,7 @@ def csd(x, y, fs=1.0, window='hann_periodic', nperseg=None, noverlap=None, nfft=
     some common features:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng()
     ...
@@ -1065,8 +1065,8 @@ def spectrogram(x, fs=1.0, window=('tukey_periodic', .25), nperseg=None, noverla
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fftshift
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng()
 
@@ -1153,7 +1153,7 @@ def check_COLA(window, nperseg, noverlap, tol=1e-10):
         example shows:
 
         >>> import rsnumpy as np
-        >>> from scipy.signal import check_COLA, closest_STFT_dual_window, windows
+        >>> from rsscipy.signal import check_COLA, closest_STFT_dual_window, windows
         ...
         >>> w, w_rect, hop = windows.hann(12, sym=False), np.ones(12), 6
         >>> dual_win, alpha = closest_STFT_dual_window(w, hop, w_rect, scaled=True)
@@ -1229,7 +1229,7 @@ def check_COLA(window, nperseg, noverlap, tol=1e-10):
 
     Examples
     --------
-    >>> from scipy import signal
+    >>> from rsscipy import signal
 
     Confirm COLA condition for rectangular window of 75% (3/4) overlap:
 
@@ -1349,7 +1349,7 @@ def check_NOLA(window, nperseg, noverlap, tol=1e-10):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
 
     Confirm NOLA condition for rectangular window of 75% (3/4) overlap:
 
@@ -1548,7 +1548,7 @@ def stft(x, fs=1.0, window='hann_periodic', nperseg=256, noverlap=None, nfft=Non
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng()
 
@@ -1728,7 +1728,7 @@ def istft(Zxx, fs=1.0, window='hann_periodic', nperseg=None, noverlap=None, nfft
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng()
 
@@ -1989,7 +1989,7 @@ def coherence(x, y, fs=1.0, window='hann_periodic', nperseg=None, noverlap=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng()
 

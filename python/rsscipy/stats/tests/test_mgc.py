@@ -4,8 +4,8 @@ from pytest import raises as assert_raises, warns as assert_warns
 import rsnumpy as np
 from rsnumpy.testing import assert_approx_equal, assert_allclose, assert_equal
 
-from scipy.spatial.distance import cdist
-from scipy import stats
+from rsscipy.spatial.distance import cdist
+from rsscipy import stats
 
 class TestMGCErrorWarnings:
     """ Tests errors and warnings derived from MGC.

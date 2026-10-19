@@ -2,8 +2,8 @@ import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal
 import pytest
 
-from scipy.optimize._pava_pybind import pava
-from scipy.optimize import isotonic_regression
+from rsscipy.optimize._pava_pybind import pava
+from rsscipy.optimize import isotonic_regression
 
 
 class TestIsotonicRegression:

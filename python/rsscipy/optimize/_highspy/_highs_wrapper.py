@@ -1,10 +1,10 @@
 from warnings import warn
 
 import rsnumpy as np
-import scipy.optimize._highspy._core as _h
+import rsscipy.optimize._highspy._core as _h
 # pyrefly: ignore[missing-module-attribute]
-from scipy.optimize._highspy import _highs_options as hopt
-from scipy.optimize._optimize import OptimizeWarning
+from rsscipy.optimize._highspy import _highs_options as hopt
+from rsscipy.optimize._optimize import OptimizeWarning
 
 
 def _highs_wrapper(c, indptr, indices, data, lhs, rhs, lb, ub, integrality, options):

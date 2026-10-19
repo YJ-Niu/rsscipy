@@ -3,10 +3,10 @@
 import pytest
 
 from rsnumpy.testing import assert_equal
-from scipy.sparse import csr_matrix, csr_array, sparray
+from rsscipy.sparse import csr_matrix, csr_array, sparray
 
 import rsnumpy as np
-from scipy.sparse import _extract
+from rsscipy.sparse import _extract
 
 
 class TestExtract:

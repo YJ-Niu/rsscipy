@@ -1,8 +1,8 @@
 """QR decomposition functions."""
 import rsnumpy as np
 
-from scipy._lib._util import _apply_over_batch, _deprecate_dtypes, HAS_ILP64
-from scipy._lib.deprecation import _NoValue
+from rsscipy._lib._util import _apply_over_batch, _deprecate_dtypes, HAS_ILP64
+from rsscipy._lib.deprecation import _NoValue
 
 import os
 import warnings
@@ -100,7 +100,7 @@ def qr(a, overwrite_a=False, lwork=_NoValue, mode="full", pivoting=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import linalg
+    >>> from rsscipy import linalg
     >>> rng = np.random.default_rng()
     >>> a = rng.standard_normal((9, 6))
 
@@ -311,7 +311,7 @@ def qr_multiply(a, c, mode='right', pivoting=False, conjugate=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import qr_multiply, qr
+    >>> from rsscipy.linalg import qr_multiply, qr
     >>> A = np.array([[1, 3, 3], [2, 3, 2], [2, 3, 3], [1, 3, 2]])
     >>> qc, r1, piv1 = qr_multiply(A, 2*np.eye(4), pivoting=1)
     >>> qc
@@ -474,7 +474,7 @@ def rq(a, overwrite_a=False, lwork=_NoValue, mode='full', check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import linalg
+    >>> from rsscipy import linalg
     >>> rng = np.random.default_rng()
     >>> a = rng.standard_normal((6, 9))
     >>> r, q = linalg.rq(a)

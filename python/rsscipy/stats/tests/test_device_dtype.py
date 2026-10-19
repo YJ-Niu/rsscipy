@@ -1,9 +1,9 @@
 import pytest
 import rsnumpy as np
-from scipy import stats
+from rsscipy import stats
 
-from scipy._lib._array_api import xp_device, is_array_api_strict, is_torch
-from scipy.stats._stats_py import _xp_mean, _xp_var
+from rsscipy._lib._array_api import xp_device, is_array_api_strict, is_torch
+from rsscipy.stats._stats_py import _xp_mean, _xp_var
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 

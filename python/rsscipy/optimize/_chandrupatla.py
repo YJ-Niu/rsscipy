@@ -1,8 +1,8 @@
 import math
 import rsnumpy as np
-import scipy._lib._elementwise_iterative_method as eim
-from scipy._lib._util import _RichResult
-from scipy._lib._array_api import xp_copy, xp_device
+import rsscipy._lib._elementwise_iterative_method as eim
+from rsscipy._lib._util import _RichResult
+from rsscipy._lib._array_api import xp_copy, xp_device
 
 
 def _chandrupatla(func, a, b, *, args=(), kwargs=None, xatol=None, xrtol=None,
@@ -113,7 +113,7 @@ def _chandrupatla(func, a, b, *, args=(), kwargs=None, xatol=None, xrtol=None,
 
     Examples
     --------
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
     >>> def f(x, c):
     ...     return x**3 - 2*x - c
     >>> c = 5
@@ -395,7 +395,7 @@ def _chandrupatla_minimize(func, x1, x2, x3, *, args=(), kwargs=None, xatol=None
 
     Examples
     --------
-    >>> from scipy.optimize._chandrupatla import _chandrupatla_minimize
+    >>> from rsscipy.optimize._chandrupatla import _chandrupatla_minimize
     >>> def f(x, args=1):
     ...     return (x - args)**2
     >>> res = _chandrupatla_minimize(f, -5, 0, 5)

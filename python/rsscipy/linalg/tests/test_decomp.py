@@ -10,29 +10,29 @@ from rsnumpy.testing import (assert_equal, assert_almost_equal,
 import pytest
 from pytest import raises as assert_raises
 
-from scipy._lib._array_api import make_xp_test_case, xp_assert_close
-from scipy.linalg import (eig, eigvals, lu, svd, svdvals, cholesky, qr,
+from rsscipy._lib._array_api import make_xp_test_case, xp_assert_close
+from rsscipy.linalg import (eig, eigvals, lu, svd, svdvals, cholesky, qr,
                           schur, rsf2csf, lu_solve, lu_factor, solve, diagsvd,
                           hessenberg, rq, eig_banded, eigvals_banded, eigh,
                           eigvalsh, qr_multiply, qz, orth, ordqz,
                           subspace_angles, hadamard, eigvalsh_tridiagonal,
                           eigh_tridiagonal, null_space, cdf2rdf, LinAlgError)
 
-from scipy.linalg.lapack import get_lapack_funcs
-from scipy.linalg._misc import norm
-from scipy.linalg._decomp_qz import _select_function
-from scipy.stats import ortho_group
+from rsscipy.linalg.lapack import get_lapack_funcs
+from rsscipy.linalg._misc import norm
+from rsscipy.linalg._decomp_qz import _select_function
+from rsscipy.stats import ortho_group
 
 from rsnumpy import (array, diag, full, linalg, argsort, zeros, arange,
                    float32, complex64, ravel, sqrt, iscomplex, shape, sort,
                    sign, asarray, isfinite, ndarray, eye,)
 
-from scipy.linalg._testutils import assert_no_overwrite
-from scipy.sparse._sputils import matrix
+from rsscipy.linalg._testutils import assert_no_overwrite
+from rsscipy.sparse._sputils import matrix
 
-from scipy._lib._testutils import IS_WASM, check_free_memory
-from scipy.linalg.blas import HAS_ILP64
-from scipy.conftest import skip_xp_invalid_arg
+from rsscipy._lib._testutils import IS_WASM, check_free_memory
+from rsscipy.linalg.blas import HAS_ILP64
+from rsscipy.conftest import skip_xp_invalid_arg
 
 from .test_basic import parametrize_overwrite_arg, parametrize_overwrite_b_arg
 
@@ -1067,7 +1067,7 @@ class TestEigh:
     @pytest.mark.filterwarnings("ignore::DeprecationWarning")
     def test_eigh_of_sparse(self):
         # This tests the rejection of inputs that eigh cannot currently handle.
-        import scipy.sparse
+        import rsscipy.sparse
         a = scipy.sparse.eye_array(2).tocsc()
         b = np.atleast_2d(a)
         assert_raises(ValueError, eigh, a)
@@ -3477,7 +3477,7 @@ class TestOrdQZWorkspaceSize:
 class TestDatacopied:
 
     def test_datacopied(self):
-        from scipy.linalg._decomp import _datacopied
+        from rsscipy.linalg._decomp import _datacopied
 
         M = matrix([[0, 1], [2, 3]])
         A = asarray(M)

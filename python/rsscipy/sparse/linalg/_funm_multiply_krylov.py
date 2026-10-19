@@ -36,7 +36,7 @@
 """
 
 import rsnumpy as np
-from scipy.linalg import norm
+from rsscipy.linalg import norm
 from ._isolve.iterative import _get_atol_rtol
 
 __all__ = ['funm_multiply_krylov']
@@ -212,9 +212,9 @@ def funm_multiply_krylov(f, A, b, *, assume_a = "general", t = 1.0, atol = 0.0,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csr_array
-    >>> from scipy.sparse.linalg import funm_multiply_krylov
-    >>> from scipy.linalg import expm, solve
+    >>> from rsscipy.sparse import csr_array
+    >>> from rsscipy.sparse.linalg import funm_multiply_krylov
+    >>> from rsscipy.linalg import expm, solve
     >>> A = csr_array([[3, 2, 0], [1, -1, 0], [0, 5, 1]], dtype=float)
     >>> b = np.array([2, 4, -1], dtype=float)
     >>> t = 0.1

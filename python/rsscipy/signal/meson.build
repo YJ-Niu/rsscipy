@@ -10,7 +10,7 @@ py3.extension_module('_sigtools',
   link_args: version_link_args,
   include_directories: ['../_build_utils/src'],
   install: true,
-  subdir: 'scipy/signal'
+  subdir: 'rsscipy/signal'
 )
 
 if use_pythran
@@ -20,7 +20,7 @@ if use_pythran
     dependencies: [pythran_dep, np_dep],
     link_args: version_link_args,
     install: true,
-    subdir: 'scipy/signal'
+    subdir: 'rsscipy/signal'
   )
 else
   py3.extension_module('_max_len_seq_inner',
@@ -29,7 +29,7 @@ else
     dependencies: np_dep,
     link_args: version_link_args,
     install: true,
-    subdir: 'scipy/signal'
+    subdir: 'rsscipy/signal'
   )
 endif
 
@@ -46,7 +46,7 @@ foreach pyx_file: pyx_files
     dependencies: np_dep,
     link_args: version_link_args,
     install: true,
-    subdir: 'scipy/signal'
+    subdir: 'rsscipy/signal'
   )
 endforeach
 
@@ -57,7 +57,7 @@ py3.extension_module('_spline',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/signal'
+  subdir: 'rsscipy/signal'
 )
 
 py3.install_sources([
@@ -85,7 +85,7 @@ py3.install_sources([
     '_wavelets.py',
     '_whittaker.py',
   ],
-  subdir: 'scipy/signal'
+  subdir: 'rsscipy/signal'
 )
 
 subdir('windows')

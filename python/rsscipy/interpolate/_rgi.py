@@ -6,11 +6,11 @@ from types import GenericAlias
 
 import rsnumpy as np
 
-import scipy.sparse.linalg as ssl
-from scipy._lib._array_api import (
+import rsscipy.sparse.linalg as ssl
+from rsscipy._lib._array_api import (
     array_namespace, xp_capabilities, xp_result_device
 )
-from scipy._external.array_api_compat import is_array_api_obj
+from rsscipy._external.array_api_compat import is_array_api_obj
 
 from ._interpnd import _ndim_coords_from_arrays
 from ._cubic import PchipInterpolator
@@ -182,7 +182,7 @@ class RegularGridInterpolator:
     As a first example, we evaluate a simple example function on the points of
     a 3-D grid:
 
-    >>> from scipy.interpolate import RegularGridInterpolator
+    >>> from rsscipy.interpolate import RegularGridInterpolator
     >>> import rsnumpy as np
     >>> def f(x, y, z):
     ...     return 2 * x**3 + 3 * y**2 - z
@@ -419,7 +419,7 @@ class RegularGridInterpolator:
         >>> def f(x, y):
         ...     return x**2 + y**2
         >>> data = f(*np.meshgrid(x, y, indexing='ij', sparse=True))
-        >>> from scipy.interpolate import RegularGridInterpolator
+        >>> from rsscipy.interpolate import RegularGridInterpolator
         >>> interp = RegularGridInterpolator((x, y), data, method='nearest')
 
         By construction, the interpolator uses the nearest-neighbor
@@ -722,7 +722,7 @@ def interpn(points, values, xi, method="linear", bounds_error=True,
     Evaluate a simple example function on the points of a regular 3-D grid:
 
     >>> import rsnumpy as np
-    >>> from scipy.interpolate import interpn
+    >>> from rsscipy.interpolate import interpn
     >>> def value_func_3d(x, y, z):
     ...     return 2 * x + 3 * y - z
     >>> x = np.linspace(0, 4, 5)

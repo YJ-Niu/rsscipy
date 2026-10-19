@@ -583,7 +583,7 @@ def linprog(c, A_ub=None, b_ub=None, A_eq=None, b_eq=None,
     default is for variables to be non-negative. After collecting coefficients
     into arrays and tuples, the input for this problem is:
 
-    >>> from scipy.optimize import linprog
+    >>> from rsscipy.optimize import linprog
     >>> c = [-1, 4]
     >>> A = [[-3, 1], [1, 2]]
     >>> b = [6, 4]

@@ -4,11 +4,11 @@ import warnings
 
 import rsnumpy as np
 from pytest import raises as assert_raises
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     assert_array_almost_equal, assert_almost_equal, xp_assert_close, xp_assert_equal,
 )
 
-from scipy.signal import (dlsim, dstep, dimpulse, tf2zpk, lti, dlti,
+from rsscipy.signal import (dlsim, dstep, dimpulse, tf2zpk, lti, dlti,
                           StateSpace, TransferFunction, ZerosPolesGain,
                           dfreqresp, dbode, BadCoefficients)
 

@@ -11,14 +11,14 @@ from rsnumpy.exceptions import VisibleDeprecationWarning
 from rsnumpy.testing import (assert_, assert_allclose, assert_equal,
                            assert_array_less)
 from pytest import raises as assert_raises
-from scipy.optimize import linprog, OptimizeWarning
-from scipy.optimize._numdiff import approx_derivative
-from scipy.sparse.linalg import MatrixRankWarning
-from scipy.linalg import LinAlgWarning
-import scipy.sparse
+from rsscipy.optimize import linprog, OptimizeWarning
+from rsscipy.optimize._numdiff import approx_derivative
+from rsscipy.sparse.linalg import MatrixRankWarning
+from rsscipy.linalg import LinAlgWarning
+import rsscipy.sparse
 import pytest
 
-from scipy._lib._testutils import IS_WASM
+from rsscipy._lib._testutils import IS_WASM
 
 has_umfpack = True
 try:
@@ -338,7 +338,7 @@ def test_highs_status_message():
     assert res.status == 3
     assert res.message.startswith(msg)
 
-    from scipy.optimize._linprog_highs import _highs_to_scipy_status_message
+    from rsscipy.optimize._linprog_highs import _highs_to_scipy_status_message
     status, message = _highs_to_scipy_status_message(58, "Hello!")
     msg = "The HiGHS status code was not recognized. (HiGHS Status 58:"
     assert status == 4

@@ -1,5 +1,5 @@
 import rsnumpy as np
-from scipy.constants import golden as phi
+from rsscipy.constants import golden as phi
 
 
 def icosahedral(cls):

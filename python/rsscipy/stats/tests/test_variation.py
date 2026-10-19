@@ -3,14 +3,14 @@ import math
 import rsnumpy as np
 import pytest
 
-from scipy._lib._util import AxisError
-from scipy._lib._array_api import make_xp_test_case, eager_warns, is_numpy
-from scipy._lib._array_api_no_0d import xp_assert_equal, xp_assert_close
-from scipy._external import array_api_extra as xpx
+from rsscipy._lib._util import AxisError
+from rsscipy._lib._array_api import make_xp_test_case, eager_warns, is_numpy
+from rsscipy._lib._array_api_no_0d import xp_assert_equal, xp_assert_close
+from rsscipy._external import array_api_extra as xpx
 
-from scipy import stats
-from scipy.stats import variation
-from scipy.stats._axis_nan_policy import (too_small_nd_omit, too_small_nd_not_omit,
+from rsscipy import stats
+from rsscipy.stats import variation
+from rsscipy.stats._axis_nan_policy import (too_small_nd_omit, too_small_nd_not_omit,
                                           SmallSampleWarning)
 
 lazy_xp_modules = [stats]

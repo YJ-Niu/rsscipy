@@ -4,13 +4,13 @@ __usage__ = """
 Build fftpack:
   python setup_fftpack.py build
 Run tests if scipy is installed:
-  python -c 'import scipy;scipy.fftpack.test(<level>)'
+  python -c 'import rsscipy;scipy.fftpack.test(<level>)'
 Run tests if fftpack is not installed:
   python tests/test_helper.py [<level>]
 """
 
 from rsnumpy.testing import assert_array_almost_equal
-from scipy.fftpack import fftshift, ifftshift, fftfreq, rfftfreq
+from rsscipy.fftpack import fftshift, ifftshift, fftfreq, rfftfreq
 
 from rsnumpy import pi, random
 

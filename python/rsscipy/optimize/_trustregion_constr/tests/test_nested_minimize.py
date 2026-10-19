@@ -1,6 +1,6 @@
 import pytest
 import rsnumpy as np
-from scipy.optimize import minimize, NonlinearConstraint, rosen, rosen_der
+from rsscipy.optimize import minimize, NonlinearConstraint, rosen, rosen_der
 
 
 # Ignore this warning about inefficient use of Hessians

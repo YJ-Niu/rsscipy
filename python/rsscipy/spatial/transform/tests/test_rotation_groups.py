@@ -2,11 +2,11 @@ import pytest
 
 import rsnumpy as np
 from rsnumpy.testing import assert_array_almost_equal
-from scipy.spatial.transform import Rotation
-from scipy.optimize import linear_sum_assignment
-from scipy.spatial.distance import cdist
-from scipy.constants import golden as phi
-from scipy.spatial import cKDTree
+from rsscipy.spatial.transform import Rotation
+from rsscipy.optimize import linear_sum_assignment
+from rsscipy.spatial.distance import cdist
+from rsscipy.constants import golden as phi
+from rsscipy.spatial import cKDTree
 
 
 TOL = 1E-12

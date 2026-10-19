@@ -2,9 +2,9 @@
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
-from scipy import stats, special
-from scipy.stats.tests.test_continuous import DistributionsTest
-from scipy.stats._new_distributions import StandardNormal
+from rsscipy import stats, special
+from rsscipy.stats.tests.test_continuous import DistributionsTest
+from rsscipy.stats._new_distributions import StandardNormal
 
 
 class TestBinomial(DistributionsTest):

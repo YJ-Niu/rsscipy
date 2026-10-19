@@ -3,15 +3,15 @@ import warnings
 from types import GenericAlias
 
 import rsnumpy as np
-from scipy.spatial import KDTree
+from rsscipy.spatial import KDTree
 
 from . import _rbfinterp_np
 from . import _rbfinterp_xp
 
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     _asarray, array_namespace, xp_size, is_numpy, xp_capabilities, xp_device
 )
-import scipy._external.array_api_extra as xpx
+import rsscipy._external.array_api_extra as xpx
 
 
 __all__ = ["RBFInterpolator"]
@@ -211,8 +211,8 @@ class RBFInterpolator:
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.interpolate import RBFInterpolator
-    >>> from scipy.stats.qmc import Halton
+    >>> from rsscipy.interpolate import RBFInterpolator
+    >>> from rsscipy.stats.qmc import Halton
 
     >>> rng = np.random.default_rng()
     >>> xobs = 2*Halton(2, seed=rng).random(100) - 1

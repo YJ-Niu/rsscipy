@@ -19,7 +19,7 @@ py3.extension_module('_stats',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/stats'
+  subdir: 'rsscipy/stats'
 )
 
 py3.extension_module('_ansari_swilk_statistics',
@@ -28,7 +28,7 @@ py3.extension_module('_ansari_swilk_statistics',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/stats'
+  subdir: 'rsscipy/stats'
 )
 
 py3.extension_module('_sobol',
@@ -37,13 +37,13 @@ py3.extension_module('_sobol',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/stats'
+  subdir: 'rsscipy/stats'
 )
 
 py3.install_sources([
     '_sobol_direction_numbers.npz'
   ],
-  subdir: 'scipy/stats'
+  subdir: 'rsscipy/stats'
 )
 
 py3.extension_module('_qmc_cy',
@@ -52,7 +52,7 @@ py3.extension_module('_qmc_cy',
   dependencies: [np_dep, thread_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/stats'
+  subdir: 'rsscipy/stats'
 )
 
 py3.extension_module('_biasedurn',
@@ -71,29 +71,15 @@ py3.extension_module('_biasedurn',
   link_args: version_link_args,
   dependencies: [np_dep],
   install: true,
-  subdir: 'scipy/stats'
+  subdir: 'rsscipy/stats'
 )
 
-if use_pythran
-  py3.extension_module('_stats_pythran',
-    pythran_gen.process('_stats_pythran.py'),
-    # `_cpp_Wno_unused_local_typedefs` can be removed when we require pythran >= 0.19.0
-    cpp_args: [
-      cpp_args_pythran,
-      _cpp_Wno_unused_local_typedefs,
-      _cpp_Wno_maybe_uninitialized,
-    ],
-    dependencies: [pythran_dep, np_dep],
-    link_args: version_link_args,
-    install: true,
-    subdir: 'scipy/stats'
-  )
-else
-  py3.install_sources(
-    ['_stats_pythran.py'],
-    subdir: 'scipy/stats'
-  )
-endif
+# `_stats_pythran.py` is plain Python now; install it instead of compiling it
+# through pythran.
+py3.install_sources(
+  ['_stats_pythran.py'],
+  subdir: 'rsscipy/stats'
+)
 
 
 py3.extension_module('_qmvnt_cy',
@@ -102,7 +88,7 @@ py3.extension_module('_qmvnt_cy',
   dependencies: [np_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/stats'
+  subdir: 'rsscipy/stats'
 )
 
 
@@ -163,21 +149,21 @@ py3.install_sources([
     'qmc.py',
     'sampling.py',
   ],
-  subdir: 'scipy/stats'
+  subdir: 'rsscipy/stats'
 )
 
 py3.install_sources([
     '_biasedurn.pxd',
     '_stats.pxd'
   ],
-  subdir: 'scipy/stats'
+  subdir: 'rsscipy/stats'
 )
 
 py3.install_sources([
     '_qmc_cy.pyi',
     '_sobol.pyi'
   ],
-  subdir: 'scipy/stats'
+  subdir: 'rsscipy/stats'
 )
 
 subdir('_levy_stable')

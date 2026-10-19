@@ -21,7 +21,7 @@ py3.extension_module('_qhull',
   link_args: version_link_args,
   dependencies: [np_dep, qhull_r_dep],
   install: true,
-  subdir: 'scipy/spatial'
+  subdir: 'rsscipy/spatial'
 )
 
 ckdtree_src = [
@@ -50,7 +50,7 @@ py3.extension_module('_ckdtree',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/spatial'
+  subdir: 'rsscipy/spatial'
 )
 
 py3.extension_module('_voronoi',
@@ -59,20 +59,20 @@ py3.extension_module('_voronoi',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/spatial'
+  subdir: 'rsscipy/spatial'
 )
 
 py3.install_sources([
     'COPYING_QHULL.txt',  # copied from subprojects/qhull_r (see gh-23428)
   ],
-  subdir: 'scipy/spatial/qhull_src'
+  subdir: 'rsscipy/spatial/qhull_src'
 )
 
 py3.install_sources([
     '_qhull.pyi',
     '_voronoi.pyi'
   ],
-  subdir: 'scipy/spatial'
+  subdir: 'rsscipy/spatial'
 )
 
 py3.install_sources([
@@ -83,7 +83,7 @@ py3.install_sources([
     '_procrustes.py',
     '_spherical_voronoi.py',
   ],
-  subdir: 'scipy/spatial'
+  subdir: 'rsscipy/spatial'
 )
 
 subdir('distance')

@@ -5,5 +5,5 @@ py3.install_sources([
     '_gauss_legendre.py',
     '_genz_malik.py',
   ],
-  subdir: 'scipy/integrate/_rules'
+  subdir: 'rsscipy/integrate/_rules'
 )

@@ -1,7 +1,7 @@
 import warnings
 
 import numpy as np
-from scipy.optimize import lsq_linear
+from rsscipy.optimize import lsq_linear
 
 from .models import Models, Quadratic
 from .settings import Options, Constants

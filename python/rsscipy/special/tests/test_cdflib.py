@@ -13,10 +13,10 @@ import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose, assert_array_equal
 import pytest
 
-import scipy.special as sp
-from scipy.special._testutils import (
+import rsscipy.special as sp
+from rsscipy.special._testutils import (
     MissingModule, check_version, FuncData)
-from scipy.special._mptestutils import (
+from rsscipy.special._mptestutils import (
     Arg, IntArg, get_args, mpf2float, assert_mpmath_equal)
 
 try:
@@ -482,7 +482,7 @@ class TestNoncentralF:
         # import rsnumpy as np
         #
         # from mpmath import mp
-        # from scipy.special import ncfdtr
+        # from rsscipy.special import ncfdtr
         #
         # mp.dps = 100
         #
@@ -771,7 +771,7 @@ class TestNegativeBinomialFunctions:
     def test_inverses(self, k, y, p, n, rtol):
         # The following code was used to generate the values.
         # import mpmath
-        # import scipy
+        # import rsscipy
         # mpmath.mp.dps = 1000
 
         # def neg_binomial_cdf(k, n, p):

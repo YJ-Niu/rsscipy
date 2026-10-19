@@ -3,7 +3,7 @@ from typing import (  # noqa: UP035
 )
 
 import rsnumpy as np
-from scipy.optimize._optimize import OptimizeResult
+from rsscipy.optimize._optimize import OptimizeResult
 from ._constraints import old_bound_to_new, Bounds
 from ._direct import direct as _direct  # pyrefly: ignore[missing-module-attribute]
 
@@ -181,7 +181,7 @@ def direct(
     the Styblinski-Tang function
     (https://en.wikipedia.org/wiki/Test_functions_for_optimization).
 
-    >>> from scipy.optimize import direct, Bounds
+    >>> from rsscipy.optimize import direct, Bounds
     >>> def styblinski_tang(pos):
     ...     x, y = pos
     ...     return 0.5 * (x**4 - 16*x**2 + 5*x + y**4 - 16*y**2 + 5*y)

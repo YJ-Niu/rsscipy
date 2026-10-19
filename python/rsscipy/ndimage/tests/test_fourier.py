@@ -1,7 +1,7 @@
 import math
 import rsnumpy as np
 
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     xp_assert_equal,
     assert_array_almost_equal,
     assert_almost_equal,
@@ -12,7 +12,7 @@ from scipy._lib._array_api import (
 
 import pytest
 
-from scipy import ndimage
+from rsscipy import ndimage
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 

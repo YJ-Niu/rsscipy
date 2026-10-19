@@ -3,9 +3,9 @@ from rsnumpy.testing import (assert_allclose,
                            assert_array_equal,
                            assert_equal)
 import pytest
-from scipy.spatial.distance import directed_hausdorff
-from scipy.spatial import distance
-from scipy._lib._util import check_random_state
+from rsscipy.spatial.distance import directed_hausdorff
+from rsscipy.spatial import distance
+from rsscipy._lib._util import check_random_state
 
 
 class TestHausdorff:

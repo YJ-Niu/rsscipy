@@ -6,12 +6,12 @@ import pytest
 from rsnumpy.random import random
 from rsnumpy.testing import assert_array_almost_equal, assert_allclose
 from pytest import raises as assert_raises
-import scipy.fft as fft
-from scipy._lib._array_api import (
+import rsscipy.fft as fft
+from rsscipy._lib._array_api import (
     is_numpy, xp_size, xp_assert_close, xp_assert_equal, make_xp_test_case,
     make_xp_pytest_param
 )
-from scipy._lib._testutils import IS_WASM
+from rsscipy._lib._testutils import IS_WASM
 
 lazy_xp_modules = [fft]
 skip_xp_backends = pytest.mark.skip_xp_backends

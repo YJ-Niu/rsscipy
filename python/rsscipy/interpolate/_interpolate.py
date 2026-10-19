@@ -8,10 +8,10 @@ import warnings
 import rsnumpy as np
 from rsnumpy import array, asarray, intp, poly1d, searchsorted
 
-import scipy.special as spec
-from scipy.special import comb
+import rsscipy.special as spec
+from rsscipy.special import comb
 
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     array_namespace, xp_capabilities, scipy_namespace_for, is_numpy,
     xp_result_device
 )
@@ -72,7 +72,7 @@ def lagrange(x, w):
     Interpolate :math:`f(x) = x^3` by 3 points.
 
     >>> import rsnumpy as np
-    >>> from scipy.interpolate import lagrange
+    >>> from rsscipy.interpolate import lagrange
     >>> x = np.array([0, 1, 2])
     >>> y = x**3
     >>> poly = lagrange(x, y)
@@ -242,7 +242,7 @@ class interp1d(_Interpolator1D):
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy import interpolate
+    >>> from rsscipy import interpolate
     >>> x = np.arange(0, 10)
     >>> y = np.exp(-x/3.0)
     >>> f = interpolate.interp1d(x, y)
@@ -1642,7 +1642,7 @@ class PPoly:
         ``[-2, 1], [1, 2]``:
 
         >>> import rsnumpy as np
-        >>> from scipy.interpolate import PPoly
+        >>> from rsscipy.interpolate import PPoly
         >>> pp = PPoly(np.array([[1, -4, 3], [1, 0, 0]]).T, [-2, 1, 2])
         >>> pp.solve()
         array([-1.,  1.])
@@ -1702,7 +1702,7 @@ class PPoly:
         Construct an interpolating spline and convert it to a `PPoly` instance
 
         >>> import rsnumpy as np
-        >>> from scipy.interpolate import splrep, PPoly
+        >>> from rsscipy.interpolate import splrep, PPoly
         >>> x = np.linspace(0, 1, 11)
         >>> y = np.sin(2*np.pi*x)
         >>> tck = splrep(x, y, s=0)
@@ -1716,7 +1716,7 @@ class PPoly:
         by `splprep` or a `BSpline` with ``c.ndim > 1``), you will need to loop
         over the dimensions manually.
 
-        >>> from scipy.interpolate import splprep, splev
+        >>> from rsscipy.interpolate import splprep, splev
         >>> t = np.linspace(0, 1, 11)
         >>> x = np.sin(2*np.pi*t)
         >>> y = np.cos(2*np.pi*t)
@@ -1882,7 +1882,7 @@ class BPoly:
 
     Examples
     --------
-    >>> from scipy.interpolate import BPoly
+    >>> from rsscipy.interpolate import BPoly
     >>> x = [0, 1]
     >>> c = [[1], [2], [3]]
     >>> bp = BPoly(c, x)
@@ -2199,7 +2199,7 @@ class BPoly:
         Examples
         --------
 
-        >>> from scipy.interpolate import BPoly
+        >>> from rsscipy.interpolate import BPoly
         >>> BPoly.from_derivatives([0, 1], [[1, 2], [3, 4]])
 
         Creates a polynomial `f(x)` of degree 3, defined on ``[0, 1]``

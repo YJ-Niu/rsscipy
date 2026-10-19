@@ -5,7 +5,7 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal
 
-from scipy.sparse import csr_array, dok_array, SparseEfficiencyWarning
+from rsscipy.sparse import csr_array, dok_array, SparseEfficiencyWarning
 from .test_arithmetic1d import toarray
 
 

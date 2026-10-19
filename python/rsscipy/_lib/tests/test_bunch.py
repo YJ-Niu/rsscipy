@@ -1,7 +1,7 @@
 import pytest
 import pickle
 from rsnumpy.testing import assert_equal
-from scipy._lib._bunch import _make_tuple_bunch
+from rsscipy._lib._bunch import _make_tuple_bunch
 
 
 # `Result` is defined at the top level of the module so it can be

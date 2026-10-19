@@ -276,4 +276,4 @@ else
 endif
 
 
-subdir('scipy')
+subdir('python/rsscipy')

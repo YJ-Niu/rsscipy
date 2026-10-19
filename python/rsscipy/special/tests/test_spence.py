@@ -1,7 +1,7 @@
 import rsnumpy as np
 from rsnumpy import sqrt, log, pi
-from scipy.special._testutils import FuncData
-from scipy.special import spence
+from rsscipy.special._testutils import FuncData
+from rsscipy.special import spence
 
 
 def test_consistency():

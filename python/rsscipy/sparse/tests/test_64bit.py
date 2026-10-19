@@ -1,7 +1,7 @@
 """ Test functions involving 64bit or 32bit indexing """
 import pytest
 import rsnumpy as np
-from scipy.sparse import (
+from rsscipy.sparse import (
     bsr_array, coo_array, csc_array, csr_array, dia_array,
     bsr_matrix, coo_matrix, csc_matrix, csr_matrix, dia_matrix,
 )

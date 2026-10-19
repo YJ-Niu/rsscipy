@@ -1,6 +1,6 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose
-import scipy.special as sc
+import rsscipy.special as sc
 
 
 def test_ndtr():

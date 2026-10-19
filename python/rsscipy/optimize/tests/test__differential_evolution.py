@@ -5,15 +5,15 @@ from multiprocessing.dummy import Pool as ThreadPool
 import platform
 import warnings
 
-from scipy._lib._gcutils import assert_deallocated
-from scipy.optimize._differentialevolution import (DifferentialEvolutionSolver,
+from rsscipy._lib._gcutils import assert_deallocated
+from rsscipy.optimize._differentialevolution import (DifferentialEvolutionSolver,
                                                    _ConstraintWrapper)
-from scipy.optimize import differential_evolution, OptimizeResult
-from scipy.optimize._constraints import (Bounds, NonlinearConstraint,
+from rsscipy.optimize import differential_evolution, OptimizeResult
+from rsscipy.optimize._constraints import (Bounds, NonlinearConstraint,
                                          LinearConstraint)
-from scipy.optimize import rosen, minimize, rosen_der
-from scipy.sparse import csr_array
-from scipy import stats
+from rsscipy.optimize import rosen, minimize, rosen_der
+from rsscipy.sparse import csr_array
+from rsscipy import stats
 
 import rsnumpy as np
 from rsnumpy.testing import (assert_equal, assert_allclose, assert_almost_equal,
@@ -21,7 +21,7 @@ from rsnumpy.testing import (assert_equal, assert_allclose, assert_almost_equal,
 from pytest import raises as assert_raises, warns
 import pytest
 
-from scipy._lib._testutils import IS_WASM
+from rsscipy._lib._testutils import IS_WASM
 
 
 class TestDifferentialEvolutionSolver:

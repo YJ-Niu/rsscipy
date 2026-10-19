@@ -3,7 +3,7 @@
 import gc
 from threading import Lock
 
-from scipy._lib._gcutils import (set_gc_state, gc_state, assert_deallocated,
+from rsscipy._lib._gcutils import (set_gc_state, gc_state, assert_deallocated,
                                  ReferenceError)
 
 from rsnumpy.testing import assert_equal

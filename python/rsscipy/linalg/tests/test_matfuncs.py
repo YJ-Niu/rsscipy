@@ -13,18 +13,18 @@ from rsnumpy import array, identity, sqrt
 from rsnumpy.testing import (assert_array_almost_equal, assert_allclose, assert_,
                            assert_array_less, assert_array_equal)
 
-from scipy._lib._array_api import make_xp_test_case, xp_assert_close, xp_assert_equal
-import scipy._external.array_api_extra as xpx
-import scipy.linalg
-from scipy.linalg import (funm, signm, logm, sqrtm, fractional_matrix_power,
+from rsscipy._lib._array_api import make_xp_test_case, xp_assert_close, xp_assert_equal
+import rsscipy._external.array_api_extra as xpx
+import rsscipy.linalg
+from rsscipy.linalg import (funm, signm, logm, sqrtm, fractional_matrix_power,
                           expm, expm_frechet, expm_cond, norm, khatri_rao,
                           cosm, sinm, tanm, coshm, sinhm, tanhm)
 
-from scipy.linalg import _matfuncs_inv_ssq
-from scipy.linalg._matfuncs_inv_ssq import LogmExactlySingularWarning
-import scipy.linalg._expm_frechet
-from scipy.linalg import LinAlgWarning
-from scipy.optimize import minimize
+from rsscipy.linalg import _matfuncs_inv_ssq
+from rsscipy.linalg._matfuncs_inv_ssq import LogmExactlySingularWarning
+import rsscipy.linalg._expm_frechet
+from rsscipy.linalg import LinAlgWarning
+from rsscipy.optimize import minimize
 
 
 def _get_al_mohy_higham_2012_experiment_1():

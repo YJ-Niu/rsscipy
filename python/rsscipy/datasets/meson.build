@@ -8,7 +8,7 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/datasets'
+  subdir: 'rsscipy/datasets'
 )
 
 subdir('tests')

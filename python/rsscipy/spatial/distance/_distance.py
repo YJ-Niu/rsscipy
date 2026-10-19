@@ -39,11 +39,11 @@ from functools import partial
 
 import rsnumpy as np
 
-from scipy._lib._array_api import (_asarray, array_namespace, is_lazy_array,
+from rsscipy._lib._array_api import (_asarray, array_namespace, is_lazy_array,
                                    is_numpy, xp_promote, xp_capabilities)
-from scipy._lib._util import _asarray_validated, _transition_to_rng
-from scipy._external import array_api_extra as xpx
-from scipy.special import rel_entr
+from rsscipy._lib._util import _asarray_validated, _transition_to_rng
+from rsscipy._external import array_api_extra as xpx
+from rsscipy.special import rel_entr
 from . import _hausdorff, _distance_pybind, _distance_wrap
 
 
@@ -358,7 +358,7 @@ def directed_hausdorff(u, v, rng=0):
     Find the directed Hausdorff distance between two 2-D arrays of
     coordinates:
 
-    >>> from scipy.spatial.distance import directed_hausdorff
+    >>> from rsscipy.spatial.distance import directed_hausdorff
     >>> import rsnumpy as np
     >>> u = np.array([(1.0, 0.0),
     ...               (0.0, 1.0),
@@ -432,7 +432,7 @@ def minkowski(u, v, p=2, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.minkowski([1, 0, 0], [0, 1, 0], 1)
     2.0
     >>> distance.minkowski([1, 0, 0], [0, 1, 0], 2)
@@ -496,7 +496,7 @@ def euclidean(u, v, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.euclidean([1, 0, 0], [0, 1, 0])
     1.4142135623730951
     >>> distance.euclidean([1, 1, 0], [0, 1, 0])
@@ -533,7 +533,7 @@ def sqeuclidean(u, v, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.sqeuclidean([1, 0, 0], [0, 1, 0])
     2.0
     >>> distance.sqeuclidean([1, 1, 0], [0, 1, 0])
@@ -586,7 +586,7 @@ def correlation(u, v, w=None, centered=True):
     --------
     Find the correlation between two arrays.
 
-    >>> from scipy.spatial.distance import correlation
+    >>> from rsscipy.spatial.distance import correlation
     >>> correlation([1, 0, 1], [1, 1, 0])
     1.5
 
@@ -661,7 +661,7 @@ def cosine(u, v, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.cosine([1, 0, 0], [0, 1, 0])
     1.0
     >>> distance.cosine([100, 0, 0], [0, 1, 0])
@@ -708,7 +708,7 @@ def hamming(u, v, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.hamming([1, 0, 0], [0, 1, 0])
     0.66666666666666663
     >>> distance.hamming([1, 0, 0], [1, 1, 0])
@@ -814,7 +814,7 @@ def jaccard(u, v, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
 
     Non-zero vectors with no matching 1s have dissimilarity of 1.0:
 
@@ -885,7 +885,7 @@ def seuclidean(u, v, V):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.seuclidean([1, 0, 0], [0, 1, 0], [0.1, 0.1, 0.1])
     4.4721359549995796
     >>> distance.seuclidean([1, 0, 0], [0, 1, 0], [1, 0.1, 0.1])
@@ -931,7 +931,7 @@ def cityblock(u, v, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.cityblock([1, 0, 0], [0, 1, 0])
     2
     >>> distance.cityblock([1, 0, 0], [0, 2, 0])
@@ -978,7 +978,7 @@ def mahalanobis(u, v, VI):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> iv = [[1, 0.5, 0.5], [0.5, 1, 0.5], [0.5, 0.5, 1]]
     >>> distance.mahalanobis([1, 0, 0], [0, 1, 0], iv)
     1.0
@@ -1042,7 +1042,7 @@ def chebyshev(u, v, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.chebyshev([1, 0, 0], [0, 1, 0])
     1
     >>> distance.chebyshev([1, 1, 0], [0, 1, 0])
@@ -1087,7 +1087,7 @@ def braycurtis(u, v, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.braycurtis([1, 0, 0], [0, 1, 0])
     1.0
     >>> distance.braycurtis([1, 1, 0], [0, 1, 0])
@@ -1138,7 +1138,7 @@ def canberra(u, v, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.canberra([1, 0, 0], [0, 1, 0])
     2.0
     >>> distance.canberra([1, 1, 0], [0, 1, 0])
@@ -1213,7 +1213,7 @@ def jensenshannon(p, q, base=None, *, axis=0, keepdims=False):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> import rsnumpy as np
     >>> distance.jensenshannon([1.0, 0.0, 0.0], [0.0, 1.0, 0.0], 2.0)
     1.0
@@ -1279,7 +1279,7 @@ def yule(u, v, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.yule([1, 0, 0], [0, 1, 0])
     2.0
     >>> distance.yule([1, 1, 0], [0, 1, 0])
@@ -1336,7 +1336,7 @@ def dice(u, v, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.dice([1, 0, 0], [0, 1, 0])
     1.0
     >>> distance.dice([1, 0, 0], [1, 1, 0])
@@ -1396,7 +1396,7 @@ def rogerstanimoto(u, v, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.rogerstanimoto([1, 0, 0], [0, 1, 0])
     0.8
     >>> distance.rogerstanimoto([1, 0, 0], [1, 1, 0])
@@ -1446,7 +1446,7 @@ def russellrao(u, v, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.russellrao([1, 0, 0], [0, 1, 0])
     1.0
     >>> distance.russellrao([1, 0, 0], [1, 1, 0])
@@ -1502,7 +1502,7 @@ def sokalsneath(u, v, w=None):
 
     Examples
     --------
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> distance.sokalsneath([1, 0, 0], [0, 1, 0])
     1.0
     >>> distance.sokalsneath([1, 0, 0], [1, 1, 0])
@@ -2017,7 +2017,7 @@ def pdist(X, metric='euclidean', *, out=None, **kwargs):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.spatial.distance import pdist
 
     ``x`` is an array of five points in three-dimensional space.
 
@@ -2161,7 +2161,7 @@ def squareform(X, force="no", checks=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.spatial.distance import pdist, squareform
+    >>> from rsscipy.spatial.distance import pdist, squareform
 
     ``x`` is an array of five points in three-dimensional space.
 
@@ -2316,7 +2316,7 @@ def is_valid_dm(D, tol=0.0, throw=False, name="D", warning=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.spatial.distance import is_valid_dm
+    >>> from rsscipy.spatial.distance import is_valid_dm
 
     This matrix is a valid distance matrix.
 
@@ -2423,7 +2423,7 @@ def is_valid_y(y, warning=False, throw=False, name=None):
 
     Examples
     --------
-    >>> from scipy.spatial.distance import is_valid_y
+    >>> from rsscipy.spatial.distance import is_valid_y
 
     This vector is a valid condensed distance matrix.  The length is 6,
     which corresponds to ``n = 4``, since ``4*(4 - 1)/2`` is 6.
@@ -2480,7 +2480,7 @@ def num_obs_dm(d):
     Find the number of original observations corresponding
     to a square redundant distance matrix d.
 
-    >>> from scipy.spatial.distance import num_obs_dm
+    >>> from rsscipy.spatial.distance import num_obs_dm
     >>> d = [[0, 100, 200], [100, 0, 150], [200, 150, 0]]
     >>> num_obs_dm(d)
     3
@@ -2510,7 +2510,7 @@ def num_obs_y(Y):
     Find the number of original observations corresponding to a
     condensed distance matrix Y.
 
-    >>> from scipy.spatial.distance import num_obs_y
+    >>> from rsscipy.spatial.distance import num_obs_y
     >>> Y = [1, 2, 3.5, 7, 10, 4]
     >>> num_obs_y(Y)
     4
@@ -2814,7 +2814,7 @@ def cdist(XA, XB, metric='euclidean', *, out=None, **kwargs):
     --------
     Find the Euclidean distances between four 2-D coordinates:
 
-    >>> from scipy.spatial import distance
+    >>> from rsscipy.spatial import distance
     >>> import rsnumpy as np
     >>> coords = [(35.0456, -85.2672),
     ...           (35.1174, -89.9711),

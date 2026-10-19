@@ -8,7 +8,7 @@ scipy/doc/source/array_api_capabilities.py.
 
 # Historically SciPy has not used leading underscores for private submodules
 # much.  This has resulted in lots of things that look like public modules
-# (i.e. things that can be imported as `import scipy.somesubmodule.somefile`),
+# (i.e. things that can be imported as `import rsscipy.somesubmodule.somefile`),
 # but were never intended to be public.  The PUBLIC_MODULES list contains
 
 # modules that are either public because they were meant to be, or because they

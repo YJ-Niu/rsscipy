@@ -1,6 +1,6 @@
 import rsnumpy as np
-from scipy._lib._util import _apply_over_batch
-from scipy.linalg._decomp_svd import svd
+from rsscipy._lib._util import _apply_over_batch
+from rsscipy.linalg._decomp_svd import svd
 
 
 __all__ = ['polar']
@@ -53,7 +53,7 @@ def polar(a, side="right"):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import polar
+    >>> from rsscipy.linalg import polar
     >>> a = np.array([[1, -1], [2, 4]])
     >>> u, p = polar(a)
     >>> u

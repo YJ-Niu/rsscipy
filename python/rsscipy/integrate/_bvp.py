@@ -4,10 +4,10 @@ from warnings import warn
 import rsnumpy as np
 from rsnumpy.linalg import pinv
 
-from scipy.sparse import csc_array
-from scipy.sparse.linalg import splu
-from scipy.optimize import OptimizeResult
-from scipy._lib._array_api import xp_capabilities
+from rsscipy.sparse import csc_array
+from rsscipy.sparse.linalg import splu
+from rsscipy.optimize import OptimizeResult
+from rsscipy._lib._array_api import xp_capabilities
 
 
 EPS = np.finfo(float).eps
@@ -585,7 +585,7 @@ def create_spline(y, yp, x, h):
     sol : PPoly
         Constructed spline as a PPoly instance.
     """
-    from scipy.interpolate import PPoly
+    from rsscipy.interpolate import PPoly
 
     n, m = y.shape
     c = np.empty((4, n, m - 1), dtype=y.dtype)
@@ -927,7 +927,7 @@ def solve_bvp(fun, bc, x, y, p=None, S=None, fun_jac=None, bc_jac=None,
 
     Now we are ready to run the solver.
 
-    >>> from scipy.integrate import solve_bvp
+    >>> from rsscipy.integrate import solve_bvp
     >>> res_a = solve_bvp(fun, bc, x, y_a)
     >>> res_b = solve_bvp(fun, bc, x, y_b)
 

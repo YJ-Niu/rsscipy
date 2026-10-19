@@ -4,10 +4,10 @@
 import rsnumpy as np
 from rsnumpy.linalg import LinAlgError
 # pyrefly:ignore[missing-module-attribute]
-from scipy.linalg import get_blas_funcs, qr, solve, svd, qr_insert, lstsq
+from rsscipy.linalg import get_blas_funcs, qr, solve, svd, qr_insert, lstsq
 from .iterative import _get_atol_rtol
-from scipy.sparse.linalg._isolve.utils import make_system
-from scipy._lib._array_api import xp_capabilities
+from rsscipy.sparse.linalg._isolve.utils import make_system
+from rsscipy._lib._array_api import xp_capabilities
 
 
 __all__ = ['gcrotmk']
@@ -264,8 +264,8 @@ def gcrotmk(A, b, x0=None, *, rtol=1e-5, atol=0., maxiter=1000, M=None, callback
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csc_array
-    >>> from scipy.sparse.linalg import gcrotmk
+    >>> from rsscipy.sparse import csc_array
+    >>> from rsscipy.sparse.linalg import gcrotmk
     >>> R = np.random.randn(5, 5)
     >>> A = csc_array(R)
     >>> b = np.random.randn(5)

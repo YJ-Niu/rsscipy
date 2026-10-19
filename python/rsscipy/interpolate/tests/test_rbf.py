@@ -4,11 +4,11 @@
 import rsnumpy as np
 
 
-from scipy._lib._array_api import assert_array_almost_equal, assert_almost_equal
+from rsscipy._lib._array_api import assert_array_almost_equal, assert_almost_equal
 
 from rsnumpy import linspace, sin, cos, exp, allclose
-from scipy.interpolate._rbf import Rbf
-from scipy._lib._testutils import _run_concurrent_barrier, IS_WASM
+from rsscipy.interpolate._rbf import Rbf
+from rsscipy._lib._testutils import _run_concurrent_barrier, IS_WASM
 import pytest
 
 

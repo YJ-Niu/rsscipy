@@ -1,14 +1,14 @@
 import math
 import rsnumpy as np
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     assert_array_almost_equal, xp_assert_close,
     make_xp_test_case
 )
 
 import pytest
-from scipy.signal import cont2discrete as c2d
-from scipy.signal import dlsim, ss2tf, ss2zpk, lsim, lti
-from scipy.signal import tf2ss, impulse, dimpulse, step, dstep
+from rsscipy.signal import cont2discrete as c2d
+from rsscipy.signal import dlsim, ss2tf, ss2zpk, lsim, lti
+from rsscipy.signal import tf2ss, impulse, dimpulse, step, dstep
 
 # Author: Jeffrey Armstrong <jeff@approximatrix.com>
 # March 29, 2011

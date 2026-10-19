@@ -4,7 +4,7 @@ Real spectrum transforms (DCT, DST, MDCT)
 
 __all__ = ['dct', 'idct', 'dst', 'idst', 'dctn', 'idctn', 'dstn', 'idstn']
 
-from scipy.fft import _duccfft
+from rsscipy.fft import _duccfft
 from ._helper import _good_shape
 
 _inverse_typemap = {1: 1, 2: 3, 3: 2, 4: 4}
@@ -54,7 +54,7 @@ def dctn(x, type=2, shape=None, axes=None, norm=None, overwrite_x=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.fftpack import dctn, idctn
+    >>> from rsscipy.fftpack import dctn, idctn
     >>> rng = np.random.default_rng()
     >>> y = rng.standard_normal((16, 16))
     >>> np.allclose(y, idctn(dctn(y, norm='ortho'), norm='ortho'))
@@ -109,7 +109,7 @@ def idctn(x, type=2, shape=None, axes=None, norm=None, overwrite_x=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.fftpack import dctn, idctn
+    >>> from rsscipy.fftpack import dctn, idctn
     >>> rng = np.random.default_rng()
     >>> y = rng.standard_normal((16, 16))
     >>> np.allclose(y, idctn(dctn(y, norm='ortho'), norm='ortho'))
@@ -165,7 +165,7 @@ def dstn(x, type=2, shape=None, axes=None, norm=None, overwrite_x=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.fftpack import dstn, idstn
+    >>> from rsscipy.fftpack import dstn, idstn
     >>> rng = np.random.default_rng()
     >>> y = rng.standard_normal((16, 16))
     >>> np.allclose(y, idstn(dstn(y, norm='ortho'), norm='ortho'))
@@ -220,7 +220,7 @@ def idstn(x, type=2, shape=None, axes=None, norm=None, overwrite_x=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.fftpack import dstn, idstn
+    >>> from rsscipy.fftpack import dstn, idstn
     >>> rng = np.random.default_rng()
     >>> y = rng.standard_normal((16, 16))
     >>> np.allclose(y, idstn(dstn(y, norm='ortho'), norm='ortho'))
@@ -369,7 +369,7 @@ def dct(x, type=2, n=None, axis=-1, norm=None, overwrite_x=False):
     even-symmetrical inputs. The output is also real and even-symmetrical.
     Half of the FFT input is used to generate half of the FFT output:
 
-    >>> from scipy.fftpack import fft, dct
+    >>> from rsscipy.fftpack import fft, dct
     >>> import rsnumpy as np
     >>> fft(np.array([4., 3., 5., 10., 5., 3.])).real
     array([ 30.,  -8.,   6.,  -2.,   6.,  -8.])
@@ -428,7 +428,7 @@ def idct(x, type=2, n=None, axis=-1, norm=None, overwrite_x=False):
     inputs. The output is also real and even-symmetrical. Half of the IFFT
     input is used to generate half of the IFFT output:
 
-    >>> from scipy.fftpack import ifft, idct
+    >>> from rsscipy.fftpack import ifft, idct
     >>> import rsnumpy as np
     >>> ifft(np.array([ 30.,  -8.,   6.,  -2.,   6.,  -8.])).real
     array([  4.,   3.,   5.,  10.,   5.,   3.])

@@ -5,10 +5,10 @@ from types import EllipsisType, GenericAlias, ModuleType
 
 import rsnumpy as np
 
-import scipy.spatial.transform._rotation_cy as cython_backend
-import scipy.spatial.transform._rotation_xp as xp_backend
-from scipy.spatial.transform._rotation_groups import create_group
-from scipy._lib._array_api import (
+import rsscipy.spatial.transform._rotation_cy as cython_backend
+import rsscipy.spatial.transform._rotation_xp as xp_backend
+from rsscipy.spatial.transform._rotation_groups import create_group
+from rsscipy._lib._array_api import (
     array_namespace,
     Array,
     is_numpy,
@@ -17,9 +17,9 @@ from scipy._lib._array_api import (
     xp_capabilities,
     xp_promote,
 )
-from scipy._external.array_api_compat import device as xp_device
-import scipy._external.array_api_extra as xpx
-from scipy._lib._util import _transition_to_rng, broadcastable
+from rsscipy._external.array_api_compat import device as xp_device
+import rsscipy._external.array_api_extra as xpx
+from rsscipy._lib._util import _transition_to_rng, broadcastable
 
 backend_registry = {array_namespace(np.empty(0)): cython_backend}
 
@@ -191,7 +191,7 @@ class Rotation:
 
     Examples
     --------
-    >>> from scipy.spatial.transform import Rotation as R
+    >>> from rsscipy.spatial.transform import Rotation as R
     >>> import rsnumpy as np
 
     A `Rotation` instance can be initialized in any of the above formats and
@@ -484,7 +484,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
 
         A rotation can be initialized from a quaternion with the scalar-last
         (default) or scalar-first component order as shown below:
@@ -575,7 +575,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Initialize a single rotation:
@@ -684,7 +684,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Initialize a single rotation:
@@ -768,7 +768,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
 
         Initialize a single rotation along a single axis:
 
@@ -878,7 +878,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
 
         Davenport angles are a generalization of Euler angles, when we use the
         canonical basis axes:
@@ -965,7 +965,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Initialize a single rotation:
@@ -1051,7 +1051,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         A rotation can be represented as a quaternion with either scalar-last
@@ -1112,7 +1112,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Represent a single rotation:
@@ -1179,7 +1179,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Represent a single rotation:
@@ -1279,7 +1279,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Represent a single rotation:
@@ -1402,7 +1402,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Davenport angles are a generalization of Euler angles, when we use the
@@ -1481,7 +1481,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Represent a single rotation:
@@ -1539,7 +1539,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> r1 = R.from_rotvec([0, 0, 1])
         >>> r2 = R.from_rotvec([0, 0, 2])
         >>> rc = R.concatenate([r1, r2])
@@ -1613,7 +1613,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Single rotation applied on a single vector:
@@ -1744,7 +1744,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Composition of two single rotations:
@@ -1855,7 +1855,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
 
         Raising a rotation to a power:
 
@@ -1894,7 +1894,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
 
         Inverting a single rotation:
@@ -1930,7 +1930,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
         >>> r = R.from_quat(np.eye(4))
         >>> r.as_quat()
@@ -1986,7 +1986,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> import rsnumpy as np
         >>> p = R.from_quat([0, 0, 0, 1])
         >>> q = R.from_quat(np.eye(4))
@@ -2051,7 +2051,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> r = R.from_euler('zyx', [[0, 0, 0],
         ...                          [1, 0, 0],
         ...                          [0, 1, 0],
@@ -2180,7 +2180,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
         >>> rs = R.from_quat([
         ... [1, 1, 0, 0],
         ... [0, 1, 0, 1],
@@ -2333,7 +2333,7 @@ class Rotation:
 
         Examples
         --------
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
 
         Sample a single rotation:
 
@@ -2490,7 +2490,7 @@ class Rotation:
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from scipy.spatial.transform import Rotation as R
+        >>> from rsscipy.spatial.transform import Rotation as R
 
         Here we run the baseline Kabsch algorithm to best align two sets of
         vectors, where there is noise on the last two vector measurements of
@@ -2715,8 +2715,8 @@ class Slerp:
 
     Examples
     --------
-    >>> from scipy.spatial.transform import Rotation as R
-    >>> from scipy.spatial.transform import Slerp
+    >>> from rsscipy.spatial.transform import Rotation as R
+    >>> from rsscipy.spatial.transform import Slerp
 
     Setup the fixed keyframe rotations and times:
 

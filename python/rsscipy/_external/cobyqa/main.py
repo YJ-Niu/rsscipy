@@ -1,7 +1,7 @@
 import warnings
 
 import numpy as np
-from scipy.optimize import (
+from rsscipy.optimize import (
     Bounds,
     LinearConstraint,
     NonlinearConstraint,
@@ -311,7 +311,7 @@ def minimize(
         np.set_printoptions(precision=3, suppress=True)
 
     >>> from cobyqa import minimize
-    >>> from scipy.optimize import rosen
+    >>> from rsscipy.optimize import rosen
 
     To solve the problem using COBYQA, run:
 
@@ -335,7 +335,7 @@ def minimize(
         \end{aligned}
 
     >>> import numpy as np
-    >>> from scipy.optimize import Bounds, LinearConstraint
+    >>> from rsscipy.optimize import Bounds, LinearConstraint
 
     Its objective function can be implemented as:
 
@@ -366,7 +366,7 @@ def minimize(
                                         & \quad x_1^2 + x_2^2 \le 1.
         \end{aligned}
 
-    >>> from scipy.optimize import NonlinearConstraint
+    >>> from rsscipy.optimize import NonlinearConstraint
 
     Its objective and constraint functions can be implemented as:
 

@@ -5,7 +5,7 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/differentiate'
+  subdir: 'rsscipy/differentiate'
 )
 
 subdir('tests')

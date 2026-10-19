@@ -3,8 +3,8 @@
 
 import rsnumpy as np
 from rsnumpy.linalg import LinAlgError
-from scipy._lib._array_api import xp_capabilities
-from scipy.linalg import get_blas_funcs
+from rsscipy._lib._array_api import xp_capabilities
+from rsscipy.linalg import get_blas_funcs
 from .iterative import _get_atol_rtol
 from .utils import make_system
 
@@ -111,8 +111,8 @@ def lgmres(A, b, x0=None, *, rtol=1e-5, atol=0., maxiter=1000, M=None, callback=
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.sparse import csc_array
-    >>> from scipy.sparse.linalg import lgmres
+    >>> from rsscipy.sparse import csc_array
+    >>> from rsscipy.sparse.linalg import lgmres
     >>> A = csc_array([[3, 2, 0], [1, -1, 0], [0, 5, 1]], dtype=float)
     >>> b = np.array([2, 4, -1], dtype=float)
     >>> x, exitCode = lgmres(A, b, atol=1e-5)

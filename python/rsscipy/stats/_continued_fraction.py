@@ -1,12 +1,12 @@
 import rsnumpy as np
 
-from scipy._external import array_api_extra as xpx
-from scipy._lib._array_api import (
+from rsscipy._external import array_api_extra as xpx
+from rsscipy._lib._array_api import (
     array_namespace, xp_ravel, xp_copy, xp_device, xp_promote
 )
-import scipy._lib._elementwise_iterative_method as eim
-from scipy._lib._util import _RichResult
-from scipy import special
+import rsscipy._lib._elementwise_iterative_method as eim
+from rsscipy._lib._util import _RichResult
+from rsscipy import special
 
 # Todo:
 # Avoid special-casing key 'n' in _lib._elementwise_iterative_method::_check_termination
@@ -194,7 +194,7 @@ def _continued_fraction(a, b, *, args=(), tolerances=None, maxiter=100, log=Fals
     with simple callables which simply return the precomputed coefficients:
 
     >>> import rsnumpy as np
-    >>> from scipy.special._continued_fraction import _continued_fraction
+    >>> from rsscipy.special._continued_fraction import _continued_fraction
     >>> res = _continued_fraction(a=lambda n: 1, b=lambda n: b[n], maxiter=len(b) - 1)
     >>> (res.f - np.pi) / np.pi
     np.float64(7.067899292141148e-15)

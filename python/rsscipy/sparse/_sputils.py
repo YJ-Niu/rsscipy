@@ -6,7 +6,7 @@ from typing import Any, Literal
 import operator
 import rsnumpy as np
 from math import prod
-import scipy.sparse as sp
+import rsscipy.sparse as sp
 
 
 __all__ = ['upcast', 'getdtype', 'getdata', 'isscalarlike', 'isintlike',
@@ -29,7 +29,7 @@ def upcast(*args):
 
     Examples
     --------
-    >>> from scipy.sparse._sputils import upcast
+    >>> from rsscipy.sparse._sputils import upcast
     >>> upcast('int32')
     <class 'rsnumpy.int32'>
     >>> upcast('bool')
@@ -198,7 +198,7 @@ def safely_cast_index_arrays(A, idx_dtype=np.int32, msg=""):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import sparse
+    >>> from rsscipy import sparse
     >>> data = [3]
     >>> coords = (np.array([3]), np.array([1]))  # Note: int64 arrays
     >>> A = sparse.coo_array((data, coords))
@@ -284,7 +284,7 @@ def get_index_dtype(arrays=(), maxval=None, check_contents=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import sparse
+    >>> from rsscipy import sparse
     >>> # select index dtype based on shape
     >>> shape = (3, 3)
     >>> idx_dtype = sparse.get_index_dtype(maxval=max(shape))

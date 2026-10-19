@@ -5,13 +5,13 @@ from typing import TYPE_CHECKING, Literal
 
 import rsnumpy as np
 
-from scipy.stats._multivariate import multivariate_t
-from scipy.optimize import minimize_scalar
-from scipy.stats._common import ConfidenceInterval
-from scipy.stats._qmc import check_random_state
-from scipy.stats._stats_py import _var
-from scipy._lib._array_api import xp_capabilities
-from scipy._lib._util import _transition_to_rng, DecimalNumber, SeedType
+from rsscipy.stats._multivariate import multivariate_t
+from rsscipy.optimize import minimize_scalar
+from rsscipy.stats._common import ConfidenceInterval
+from rsscipy.stats._qmc import check_random_state
+from rsscipy.stats._stats_py import _var
+from rsscipy._lib._array_api import xp_capabilities
+from rsscipy._lib._util import _transition_to_rng, DecimalNumber, SeedType
 
 
 if TYPE_CHECKING:
@@ -304,7 +304,7 @@ def dunnett(
     and control are unequal (``alternative='two-sided'``, the default).
 
     >>> import rsnumpy as np
-    >>> from scipy.stats import dunnett
+    >>> from rsscipy.stats import dunnett
     >>> samples = [[3.8, 2.7, 4.0, 2.4], [2.8, 3.4, 3.7, 2.2, 2.0]]
     >>> control = [2.9, 3.0, 2.5, 2.6, 3.2]
     >>> res = dunnett(*samples, control=control)

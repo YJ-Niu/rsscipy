@@ -20,9 +20,9 @@ import rsnumpy as np
 from rsnumpy import (array, isfinite, inexact, nonzero, asarray, argsort, empty,
                     iscomplex, zeros, einsum, eye, inf)
 # Local imports
-from scipy._lib._util import _asarray_validated, _apply_over_batch, _deprecate_dtypes
+from rsscipy._lib._util import _asarray_validated, _apply_over_batch, _deprecate_dtypes
 from ._misc import LinAlgError, _datacopied
-from scipy.linalg._misc import norm   # noqa: F401  (backwards compat)
+from rsscipy.linalg._misc import norm   # noqa: F401  (backwards compat)
 from .lapack import (
     _normalize_lapack_dtype, _ensure_aligned_and_native, _ensure_dtype_cdsz
 )
@@ -147,7 +147,7 @@ def eig(a, b=None, left=False, right=True, overwrite_a=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import linalg
+    >>> from rsscipy import linalg
     >>> a = np.array([[0., -1.],
     ...               [1.,  0.]])
 
@@ -438,7 +438,7 @@ def eigh(a, b=None, *, lower=True, eigvals_only=False, overwrite_a=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import eigh
+    >>> from rsscipy.linalg import eigh
     >>> A = np.array([[6, 3, 1, 5], [3, 0, 5, 1], [1, 5, 6, 2], [5, 1, 2, 2]])
     >>> w, v = eigh(A)
     >>> np.allclose(A @ v - v @ np.diag(w), np.zeros((4, 4)))
@@ -733,7 +733,7 @@ def eig_banded(a_band, lower=False, eigvals_only=False, overwrite_a_band=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import eig_banded
+    >>> from rsscipy.linalg import eig_banded
     >>> A = np.array([[1, 5, 2, 0], [5, 2, 5, 2], [2, 5, 3, 5], [0, 2, 5, 4]])
     >>> Ab = np.array([[1, 2, 3, 4], [5, 5, 5, 0], [2, 2, 0, 0]])
     >>> w, v = eig_banded(Ab, lower=True)
@@ -884,7 +884,7 @@ def eigvals(a, b=None, overwrite_a=False, overwrite_b=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy import linalg
+    >>> from rsscipy import linalg
     >>> a = np.array([[0., -1.],
     ...               [1.,  0.]])
 
@@ -1030,7 +1030,7 @@ def eigvalsh(a, b=None, *, lower=True, overwrite_a=False,
     For more examples see `scipy.linalg.eigh`.
 
     >>> import rsnumpy as np
-    >>> from scipy.linalg import eigvalsh
+    >>> from rsscipy.linalg import eigvalsh
     >>> A = np.array([[6, 3, 1, 5], [3, 0, 5, 1], [1, 5, 6, 2], [5, 1, 2, 2]])
     >>> w = eigvalsh(A)
     >>> w
@@ -1126,7 +1126,7 @@ def eigvals_banded(a_band, lower=False, overwrite_a_band=False,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import eigvals_banded
+    >>> from rsscipy.linalg import eigvals_banded
     >>> A = np.array([[1, 5, 2, 0], [5, 2, 5, 2], [2, 5, 3, 5], [0, 2, 5, 4]])
     >>> Ab = np.array([[1, 2, 3, 4], [5, 5, 5, 0], [2, 2, 0, 0]])
     >>> w = eigvals_banded(Ab, lower=True)
@@ -1206,7 +1206,7 @@ def eigvalsh_tridiagonal(d, e, select='a', select_range=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import eigvalsh_tridiagonal, eigvalsh
+    >>> from rsscipy.linalg import eigvalsh_tridiagonal, eigvalsh
     >>> d = 3*np.ones(4)
     >>> e = -1*np.ones(3)
     >>> w = eigvalsh_tridiagonal(d, e)
@@ -1312,7 +1312,7 @@ def eigh_tridiagonal(d, e, eigvals_only=False, select='a', select_range=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import eigh_tridiagonal
+    >>> from rsscipy.linalg import eigh_tridiagonal
     >>> d = 3*np.ones(4)
     >>> e = -1*np.ones(3)
     >>> w, v = eigh_tridiagonal(d, e)
@@ -1461,7 +1461,7 @@ def hessenberg(a, calc_q=False, overwrite_a=False, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import hessenberg
+    >>> from rsscipy.linalg import hessenberg
     >>> A = np.array([[2, 5, 8, 7], [5, 2, 2, 8], [7, 5, 6, 6], [5, 4, 4, 8]])
     >>> H, Q = hessenberg(A, calc_q=True)
     >>> H
@@ -1578,7 +1578,7 @@ def cdf2rdf(w, v):
            [ 0,  4,  5],
            [ 0, -5,  4]])
 
-    >>> from scipy import linalg
+    >>> from rsscipy import linalg
     >>> w, v = linalg.eig(X)
     >>> w
     array([ 1.+0.j,  4.+5.j,  4.-5.j])

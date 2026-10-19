@@ -14,12 +14,12 @@ from types import ModuleType
 from typing import Literal
 
 import rsnumpy as np
-from scipy._lib._array_api import (Array, array_namespace, is_lazy_array, is_numpy,
+from rsscipy._lib._array_api import (Array, array_namespace, is_lazy_array, is_numpy,
                                    is_marray, xp_size, xp_result_device, xp_result_type,
                                    xp_capabilities, xp_isscalar, xp_device)
-from scipy._lib._docscrape import FunctionDoc, Parameter
-from scipy._lib._sparse import issparse
-from scipy.__config__ import CONFIG
+from rsscipy._lib._docscrape import FunctionDoc, Parameter
+from rsscipy._lib._sparse import issparse
+from rsscipy.__config__ import CONFIG
 
 from rsnumpy.exceptions import AxisError
 

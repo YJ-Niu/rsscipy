@@ -41,12 +41,12 @@ from collections import deque
 
 import rsnumpy as np
 from . import _hierarchy, _optimal_leaf_ordering  # type:ignore[attr-defined]
-import scipy.spatial.distance as distance
-from scipy._lib._array_api import (_asarray, array_namespace, is_dask,
+import rsscipy.spatial.distance as distance
+from rsscipy._lib._array_api import (_asarray, array_namespace, is_dask,
                                    is_lazy_array, xp_capabilities, xp_copy,
                                    xp_device, xp_result_device)
-from scipy._lib._disjoint_set import DisjointSet
-import scipy._external.array_api_extra as xpx
+from rsscipy._lib._disjoint_set import DisjointSet
+import rsscipy._external.array_api_extra as xpx
 
 
 _LINKAGE_METHODS = {'single': 0, 'complete': 1, 'average': 2, 'centroid': 3,
@@ -109,8 +109,8 @@ def single(y):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import single, fcluster
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import single, fcluster
+    >>> from rsscipy.spatial.distance import pdist
 
     First, we need a toy dataset to play with::
 
@@ -190,8 +190,8 @@ def complete(y):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import complete, fcluster
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import complete, fcluster
+    >>> from rsscipy.spatial.distance import pdist
 
     First, we need a toy dataset to play with::
 
@@ -272,8 +272,8 @@ def average(y):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import average, fcluster
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import average, fcluster
+    >>> from rsscipy.spatial.distance import pdist
 
     First, we need a toy dataset to play with::
 
@@ -358,8 +358,8 @@ def weighted(y):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import weighted, fcluster
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import weighted, fcluster
+    >>> from rsscipy.spatial.distance import pdist
 
     First, we need a toy dataset to play with::
 
@@ -461,8 +461,8 @@ def centroid(y):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import centroid, fcluster
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import centroid, fcluster
+    >>> from rsscipy.spatial.distance import pdist
 
     First, we need a toy dataset to play with::
 
@@ -561,8 +561,8 @@ def median(y):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import median, fcluster
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import median, fcluster
+    >>> from rsscipy.spatial.distance import pdist
 
     First, we need a toy dataset to play with::
 
@@ -661,8 +661,8 @@ def ward(y):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import ward, fcluster
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import ward, fcluster
+    >>> from rsscipy.spatial.distance import pdist
 
     First, we need a toy dataset to play with::
 
@@ -911,7 +911,7 @@ def linkage(y, method='single', metric='euclidean', optimal_ordering=False):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import dendrogram, linkage
+    >>> from rsscipy.cluster.hierarchy import dendrogram, linkage
     >>> from matplotlib import pyplot as plt
     >>> X = [[i] for i in [2, 8, 0, 4, 1, 9, 9, 0]]
 
@@ -1239,7 +1239,7 @@ def cut_tree(Z, n_clusters=None, height=None):
 
     Examples
     --------
-    >>> from scipy import cluster
+    >>> from rsscipy import cluster
     >>> import rsnumpy as np
     >>> from rsnumpy.random import default_rng
     >>> rng = default_rng()
@@ -1349,7 +1349,7 @@ def to_tree(Z, rd=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.cluster import hierarchy
+    >>> from rsscipy.cluster import hierarchy
     >>> rng = np.random.default_rng()
     >>> x = rng.random((5, 2))
     >>> Z = hierarchy.linkage(x)
@@ -1435,7 +1435,7 @@ def optimal_leaf_ordering(Z, y, metric='euclidean'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.cluster import hierarchy
+    >>> from rsscipy.cluster import hierarchy
     >>> rng = np.random.default_rng()
     >>> X = rng.standard_normal((10, 10))
     >>> Z = hierarchy.ward(X)
@@ -1525,8 +1525,8 @@ def cophenet(Z, Y=None):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import single, cophenet
-    >>> from scipy.spatial.distance import pdist, squareform
+    >>> from rsscipy.cluster.hierarchy import single, cophenet
+    >>> from rsscipy.spatial.distance import pdist, squareform
 
     Given a dataset ``X`` and a linkage matrix ``Z``, the cophenetic distance
     between two points of ``X`` is the distance between the largest two
@@ -1659,7 +1659,7 @@ def inconsistent(Z, d=2):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import inconsistent, linkage
+    >>> from rsscipy.cluster.hierarchy import inconsistent, linkage
     >>> from matplotlib import pyplot as plt
     >>> X = [[i] for i in [2, 8, 0, 4, 1, 9, 9, 0]]
     >>> Z = linkage(X, 'ward')
@@ -1738,7 +1738,7 @@ def from_mlab_linkage(Z):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.cluster.hierarchy import ward, from_mlab_linkage
+    >>> from rsscipy.cluster.hierarchy import ward, from_mlab_linkage
 
     Given a linkage matrix in MATLAB format ``mZ``, we can use
     `scipy.cluster.hierarchy.from_mlab_linkage` to import
@@ -1847,8 +1847,8 @@ def to_mlab_linkage(Z):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import ward, to_mlab_linkage
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import ward, to_mlab_linkage
+    >>> from rsscipy.spatial.distance import pdist
 
     >>> X = [[0, 0], [0, 1], [1, 0],
     ...      [0, 4], [0, 3], [1, 4],
@@ -1926,8 +1926,8 @@ def is_monotonic(Z):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import median, ward, is_monotonic
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import median, ward, is_monotonic
+    >>> from rsscipy.spatial.distance import pdist
 
     By definition, some hierarchical clustering algorithms - such as
     `scipy.cluster.hierarchy.ward` - produce monotonic assignments of
@@ -2028,8 +2028,8 @@ def is_valid_im(R, warning=False, throw=False, name=None):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import ward, inconsistent, is_valid_im
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import ward, inconsistent, is_valid_im
+    >>> from rsscipy.spatial.distance import pdist
 
     Given a data set ``X``, we can apply a clustering method to obtain a
     linkage matrix ``Z``. `scipy.cluster.hierarchy.inconsistent` can
@@ -2179,8 +2179,8 @@ def is_valid_linkage(Z, warning=False, throw=False, name=None):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import ward, is_valid_linkage
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import ward, is_valid_linkage
+    >>> from rsscipy.spatial.distance import pdist
 
     All linkage matrices generated by the clustering methods in this module
     will be valid (i.e., they will have the appropriate dimensions and the two
@@ -2341,8 +2341,8 @@ def num_obs_linkage(Z):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import ward, num_obs_linkage
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import ward, num_obs_linkage
+    >>> from rsscipy.spatial.distance import pdist
 
     >>> X = [[0, 0], [0, 1], [1, 0],
     ...      [0, 4], [0, 3], [1, 4],
@@ -2395,8 +2395,8 @@ def correspond(Z, Y):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import ward, correspond
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import ward, correspond
+    >>> from rsscipy.spatial.distance import pdist
 
     This method can be used to check if a given linkage matrix ``Z`` has been
     obtained from the application of a cluster method over a dataset ``X``:
@@ -2506,8 +2506,8 @@ def fcluster(Z, t, criterion='inconsistent', depth=2, R=None, monocrit=None):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import ward, fcluster
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import ward, fcluster
+    >>> from rsscipy.spatial.distance import pdist
 
     All cluster linkage methods - e.g., `scipy.cluster.hierarchy.ward`
     generate a linkage matrix ``Z`` as their output:
@@ -2673,7 +2673,7 @@ def fclusterdata(X, t, criterion='inconsistent',
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import fclusterdata
+    >>> from rsscipy.cluster.hierarchy import fclusterdata
 
     This is a convenience method that abstracts all the steps to perform in a
     typical SciPy's hierarchical clustering workflow.
@@ -2739,8 +2739,8 @@ def leaves_list(Z):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import ward, dendrogram, leaves_list
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import ward, dendrogram, leaves_list
+    >>> from rsscipy.spatial.distance import pdist
     >>> from matplotlib import pyplot as plt
 
     >>> X = [[0, 0], [0, 1], [1, 0],
@@ -2998,7 +2998,7 @@ def set_link_color_palette(palette):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.cluster import hierarchy
+    >>> from rsscipy.cluster import hierarchy
     >>> ytdist = np.array([662., 877., 255., 412., 996., 295., 468., 268.,
     ...                    400., 754., 564., 138., 219., 869., 669.])
     >>> Z = hierarchy.linkage(ytdist, 'single')
@@ -3274,7 +3274,7 @@ def dendrogram(Z, p=30, truncate_mode=None, color_threshold=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.cluster import hierarchy
+    >>> from rsscipy.cluster import hierarchy
     >>> import matplotlib.pyplot as plt
 
     A very basic example:
@@ -3741,9 +3741,9 @@ def is_isomorphic(T1, T2):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import fcluster, is_isomorphic
-    >>> from scipy.cluster.hierarchy import single, complete
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import fcluster, is_isomorphic
+    >>> from rsscipy.cluster.hierarchy import single, complete
+    >>> from rsscipy.spatial.distance import pdist
 
     Two flat cluster assignments can be isomorphic if they represent the same
     cluster assignment, with different labels.
@@ -3834,8 +3834,8 @@ def maxdists(Z):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import median, maxdists
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import median, maxdists
+    >>> from rsscipy.spatial.distance import pdist
 
     Given a linkage matrix ``Z``, `scipy.cluster.hierarchy.maxdists`
     computes for each new cluster generated (i.e., for each row of the linkage
@@ -3923,8 +3923,8 @@ def maxinconsts(Z, R):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import median, inconsistent, maxinconsts
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import median, inconsistent, maxinconsts
+    >>> from rsscipy.spatial.distance import pdist
 
     Given a data set ``X``, we can apply a clustering method to obtain a
     linkage matrix ``Z``. `scipy.cluster.hierarchy.inconsistent` can
@@ -4029,8 +4029,8 @@ def maxRstat(Z, R, i):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import median, inconsistent, maxRstat
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import median, inconsistent, maxRstat
+    >>> from rsscipy.spatial.distance import pdist
 
     Given a data set ``X``, we can apply a clustering method to obtain a
     linkage matrix ``Z``. `scipy.cluster.hierarchy.inconsistent` can
@@ -4164,8 +4164,8 @@ def leaders(Z, T):
 
     Examples
     --------
-    >>> from scipy.cluster.hierarchy import ward, fcluster, leaders
-    >>> from scipy.spatial.distance import pdist
+    >>> from rsscipy.cluster.hierarchy import ward, fcluster, leaders
+    >>> from rsscipy.spatial.distance import pdist
 
     Given a linkage matrix ``Z`` - obtained after apply a clustering method
     to a dataset ``X`` - and a flat cluster assignment array ``T``:

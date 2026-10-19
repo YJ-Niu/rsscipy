@@ -43,7 +43,7 @@ def to_numpy_code(code):
     Examples
     --------
     >>> import sys
-    >>> from scipy.io.matlab._byteordercodes import to_numpy_code
+    >>> from rsscipy.io.matlab._byteordercodes import to_numpy_code
     >>> sys_is_le = (sys.byteorder == 'little')
     >>> sys_is_le
     True

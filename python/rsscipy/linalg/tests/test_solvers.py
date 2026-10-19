@@ -5,13 +5,13 @@ from rsnumpy.testing import assert_array_almost_equal, assert_allclose
 import pytest
 from pytest import raises as assert_raises
 
-from scipy.linalg import solve_sylvester
-from scipy.linalg import solve_continuous_lyapunov, solve_discrete_lyapunov
-from scipy.linalg import solve_continuous_are, solve_discrete_are
-from scipy.linalg import block_diag, solve, LinAlgError
-from scipy.sparse._sputils import matrix
-from scipy.conftest import skip_xp_invalid_arg
-from scipy.linalg.lapack import _ensure_dtype_cdsz
+from rsscipy.linalg import solve_sylvester
+from rsscipy.linalg import solve_continuous_lyapunov, solve_discrete_lyapunov
+from rsscipy.linalg import solve_continuous_are, solve_discrete_are
+from rsscipy.linalg import block_diag, solve, LinAlgError
+from rsscipy.sparse._sputils import matrix
+from rsscipy.conftest import skip_xp_invalid_arg
+from rsscipy.linalg.lapack import _ensure_dtype_cdsz
 
 
 # dtypes for testing size-0 case following precedent set in gh-20295

@@ -216,7 +216,7 @@ py3.extension_module('_superlu',
   link_args: version_link_args,
   dependencies: [blas_dep, np_dep],
   install: true,
-  subdir: 'scipy/sparse/linalg/_dsolve'
+  subdir: 'rsscipy/sparse/linalg/_dsolve'
 )
 
 py3.install_sources([
@@ -224,7 +224,7 @@ py3.install_sources([
     '_add_newdocs.py',
     'linsolve.py'
   ],
-  subdir: 'scipy/sparse/linalg/_dsolve'
+  subdir: 'rsscipy/sparse/linalg/_dsolve'
 )
 
 subdir('tests')

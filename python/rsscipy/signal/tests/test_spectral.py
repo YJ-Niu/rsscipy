@@ -7,18 +7,18 @@ from rsnumpy.testing import (assert_,
                            assert_array_almost_equal_nulp)
 import pytest
 from pytest import raises as assert_raises
-from scipy._lib._array_api import make_xp_test_case, xp_assert_close, is_jax
-import scipy._external.array_api_extra as xpx
-from scipy import signal
-from scipy.fft import fftfreq, rfftfreq, fft, irfft
-from scipy.signal import (periodogram, welch, lombscargle, coherence, csd,
+from rsscipy._lib._array_api import make_xp_test_case, xp_assert_close, is_jax
+import rsscipy._external.array_api_extra as xpx
+from rsscipy import signal
+from rsscipy.fft import fftfreq, rfftfreq, fft, irfft
+from rsscipy.signal import (periodogram, welch, lombscargle, coherence, csd,
                           spectrogram, check_COLA, check_NOLA)
-from scipy.signal.windows import hann
-from scipy.signal._spectral_py import _spectral_helper
+from rsscipy.signal.windows import hann
+from rsscipy.signal._spectral_py import _spectral_helper
 
 # Compare ShortTimeFFT.stft() / ShortTimeFFT.istft() with stft() / istft():
-from scipy.signal.tests._scipy_spectral_test_shim import stft_compare as stft
-from scipy.signal.tests._scipy_spectral_test_shim import istft_compare as istft
+from rsscipy.signal.tests._scipy_spectral_test_shim import stft_compare as stft
+from rsscipy.signal.tests._scipy_spectral_test_shim import istft_compare as istft
 
 
 class TestPeriodogram:

@@ -29,7 +29,7 @@ import importlib.resources
 import json
 
 import pytest
-import scipy
+import rsscipy
 
 CYTHON_BLAS_ILP64 = (
     scipy.show_config(mode='dicts')['Build Dependencies']['blas']['cython blas ilp64']

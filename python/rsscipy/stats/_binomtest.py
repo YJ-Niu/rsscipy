@@ -1,10 +1,10 @@
 import rsnumpy as np
-import scipy._external.array_api_extra as xpx
-from scipy._lib._array_api import (xp_capabilities, array_namespace, xp_promote,
+import rsscipy._external.array_api_extra as xpx
+from rsscipy._lib._array_api import (xp_capabilities, array_namespace, xp_promote,
                                    is_jax, xp_device, is_lazy_array)
-from scipy.optimize.elementwise import find_root
-from scipy.special import ndtri
-from scipy.special import _ufuncs as scu
+from rsscipy.optimize.elementwise import find_root
+from rsscipy.special import ndtri
+from rsscipy.special import _ufuncs as scu
 from ._common import ConfidenceInterval
 
 
@@ -91,7 +91,7 @@ class BinomTestResult:
 
         Examples
         --------
-        >>> from scipy.stats import binomtest
+        >>> from rsscipy.stats import binomtest
         >>> result = binomtest(k=7, n=50, p=0.1)
         >>> result.statistic
         0.14
@@ -246,7 +246,7 @@ def binomtest(k, n, p=0.5, alternative='two-sided'):
 
     Examples
     --------
-    >>> from scipy.stats import binomtest
+    >>> from rsscipy.stats import binomtest
 
     A car manufacturer claims that no more than 10% of their cars are unsafe.
     15 cars are inspected for safety, 3 were found to be unsafe. Test the

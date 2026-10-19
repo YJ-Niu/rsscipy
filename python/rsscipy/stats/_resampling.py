@@ -6,9 +6,9 @@ from dataclasses import dataclass, field
 import inspect
 import math
 
-from scipy._lib._util import (check_random_state, _rename_parameter, rng_integers,
+from rsscipy._lib._util import (check_random_state, _rename_parameter, rng_integers,
                               _transition_to_rng)
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     array_namespace,
     is_numpy,
     is_array_api_strict,
@@ -20,8 +20,8 @@ from scipy._lib._array_api import (
     xp_swapaxes,
     is_lazy_array,
 )
-from scipy._external import array_api_extra as xpx
-from scipy.special import ndtr, ndtri
+from rsscipy._external import array_api_extra as xpx
+from rsscipy.special import ndtr, ndtri
 
 from ._common import ConfidenceInterval
 from ._quantile import quantile
@@ -442,7 +442,7 @@ def bootstrap(data, statistic, *, n_resamples=9999, batch=None,
 
     >>> import rsnumpy as np
     >>> rng = np.random.default_rng()
-    >>> from scipy.stats import norm
+    >>> from rsscipy.stats import norm
     >>> dist = norm(loc=2, scale=4)  # our "unknown" distribution
     >>> data = dist.rvs(size=100, random_state=rng)
 
@@ -463,7 +463,7 @@ def bootstrap(data, statistic, *, n_resamples=9999, batch=None,
     the statistic.
 
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.stats import bootstrap
+    >>> from rsscipy.stats import bootstrap
     >>> data = (data,)  # samples must be in a sequence
     >>> res = bootstrap(data, np.std, confidence_level=0.9, rng=rng)
     >>> fig, ax = plt.subplots()
@@ -579,7 +579,7 @@ def bootstrap(data, statistic, *, n_resamples=9999, batch=None,
     Paired-sample statistics work, too. For example, consider the Pearson
     correlation coefficient.
 
-    >>> from scipy.stats import pearsonr
+    >>> from rsscipy.stats import pearsonr
     >>> n = 100
     >>> x = np.linspace(0, 10, n)
     >>> y = x + rng.uniform(size=n)
@@ -901,7 +901,7 @@ def monte_carlo_test(data, rvs, statistic, *, vectorized=None,
     significant.
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> def statistic(x, axis):
     ...     return stats.skew(x, axis)
 
@@ -920,7 +920,7 @@ def monte_carlo_test(data, rvs, statistic, *, vectorized=None,
     of each sample, and compare our original skewness against this
     distribution to determine an approximate p-value.
 
-    >>> from scipy.stats import monte_carlo_test
+    >>> from rsscipy.stats import monte_carlo_test
     >>> # because our statistic is vectorized, we pass `vectorized=True`
     >>> rvs = lambda size: stats.norm.rvs(size=size, random_state=rng)
     >>> res = monte_carlo_test(x, rvs, statistic, vectorized=True)
@@ -1237,7 +1237,7 @@ def power(test, rvs, n_observations, *, significance=0.01, vectorized=None,
     - The threshold on p-values for significance is 0.05.
 
     >>> import rsnumpy as np
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> rng = np.random.default_rng(2549598345528)
     >>>
     >>> test = stats.ttest_ind
@@ -1979,7 +1979,7 @@ def permutation_test(data, statistic, *, permutation_type='independent',
     After collecting our data, we calculate the observed value of the test
     statistic.
 
-    >>> from scipy.stats import norm
+    >>> from rsscipy.stats import norm
     >>> rng = np.random.default_rng()
     >>> x = norm.rvs(size=5, random_state=rng)
     >>> y = norm.rvs(size=6, loc = 3, random_state=rng)
@@ -1992,7 +1992,7 @@ def permutation_test(data, statistic, *, permutation_type='independent',
     if the two samples were drawn from the same distribution, we perform
     a permutation test.
 
-    >>> from scipy.stats import permutation_test
+    >>> from rsscipy.stats import permutation_test
     >>> # because our statistic is vectorized, we pass `vectorized=True`
     >>> # `n_resamples=np.inf` indicates that an exact test is to be performed
     >>> res = permutation_test((x, y), statistic, vectorized=True,
@@ -2029,7 +2029,7 @@ def permutation_test(data, statistic, *, permutation_type='independent',
     For large samples and number of permutations, the result is comparable to
     that of the corresponding asymptotic test, the independent sample t-test.
 
-    >>> from scipy.stats import ttest_ind
+    >>> from rsscipy.stats import ttest_ind
     >>> res_asymptotic = ttest_ind(x, y, alternative='less')
     >>> print(res_asymptotic.pvalue)
     0.0014669545224902675
@@ -2048,7 +2048,7 @@ def permutation_test(data, statistic, *, permutation_type='independent',
     from inaccuracy due to limited machine precision. Consider the following
     case:
 
-    >>> from scipy.stats import pearsonr
+    >>> from rsscipy.stats import pearsonr
     >>> x = [1, 2, 4, 3]
     >>> y = [2, 4, 6, 8]
     >>> def statistic(x, y, axis=-1):

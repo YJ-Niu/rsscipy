@@ -1,8 +1,8 @@
 import rsnumpy as np
 from rsnumpy.linalg import LinAlgError
-from scipy._lib._ccallback_c import get_capsule_signature
+from rsscipy._lib._ccallback_c import get_capsule_signature
 
-from scipy.linalg.lapack import get_lapack_funcs
+from rsscipy.linalg.lapack import get_lapack_funcs
 from ._rbfinterp_common import _monomial_powers_impl
 
 from . import _rbfinterp_pythran as _pythran_mod

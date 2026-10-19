@@ -14,7 +14,7 @@ import copy
 from warnings import warn
 
 import rsnumpy as np
-from scipy._lib._util import wrapped_inspect_signature
+from rsscipy._lib._util import wrapped_inspect_signature
 
 # unconstrained minimization
 from ._optimize import (_minimize_neldermead, _minimize_powell, _minimize_cg,
@@ -499,7 +499,7 @@ def minimize(fun, x0, args=(), method=None, jac=None, hess=None,
     function (and its respective derivatives) is implemented in `rosen`
     (resp. `rosen_der`, `rosen_hess`) in the `scipy.optimize`.
 
-    >>> from scipy.optimize import minimize, rosen, rosen_der
+    >>> from rsscipy.optimize import minimize, rosen, rosen_der
 
     A simple application of the *Nelder-Mead* method is:
 
@@ -963,7 +963,7 @@ def minimize_scalar(fun, bracket=None, bounds=None, args=(),
 
     Using the *Brent* method, we find the local minimum as:
 
-    >>> from scipy.optimize import minimize_scalar
+    >>> from rsscipy.optimize import minimize_scalar
     >>> res = minimize_scalar(f)
     >>> res.fun
     -9.9149495908

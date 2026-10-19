@@ -1,11 +1,11 @@
-from scipy import fft
+from rsscipy import fft
 import rsnumpy as np
 import pytest
 from rsnumpy.testing import assert_allclose
 import multiprocessing
 import os
 
-from scipy._lib._testutils import IS_WASM
+from rsscipy._lib._testutils import IS_WASM
 
 
 @pytest.fixture(scope='module')

@@ -3,12 +3,12 @@ import functools
 import rsnumpy as np
 from rsnumpy.linalg import norm
 
-from scipy.sparse.linalg import LinearOperator
+from rsscipy.sparse.linalg import LinearOperator
 from ..sparse import issparse, spmatrix, find, csc_array, csr_array, csr_matrix
 from ._group_columns import group_dense, group_sparse
-from scipy._lib._array_api import array_namespace, xp_result_type
-from scipy._lib._util import MapWrapper
-from scipy._external import array_api_extra as xpx
+from rsscipy._lib._array_api import array_namespace, xp_result_type
+from rsscipy._lib._util import MapWrapper
+from rsscipy._external import array_api_extra as xpx
 
 
 def _adjust_scheme_to_bounds(x0, h, num_steps, scheme, lb, ub):
@@ -457,7 +457,7 @@ def approx_derivative(fun, x0, method='3-point', rel_step=None, abs_step=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.optimize._numdiff import approx_derivative
+    >>> from rsscipy.optimize._numdiff import approx_derivative
     >>>
     >>> def f(x, c1, c2):
     ...     return np.array([x[0] * np.sin(c1 * x[1]),
@@ -959,7 +959,7 @@ def check_derivative(fun, jac, x0, bounds=(-np.inf, np.inf), args=(),
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.optimize._numdiff import check_derivative
+    >>> from rsscipy.optimize._numdiff import check_derivative
     >>>
     >>>
     >>> def f(x, c1, c2):

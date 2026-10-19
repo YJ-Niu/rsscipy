@@ -1,7 +1,7 @@
 """Test possibility of patching fftpack with pyfftw.
 
 No module source outside of scipy.fftpack should contain an import of
-the form `from scipy.fftpack import ...`, so that a simple replacement
+the form `from rsscipy.fftpack import ...`, so that a simple replacement
 of scipy.fftpack by the corresponding fftw interface completely swaps
 the two FFT implementations.
 
@@ -15,7 +15,7 @@ import re
 import tokenize
 import pytest
 from rsnumpy.testing import assert_
-import scipy
+import rsscipy
 
 class TestFFTPackImport:
     @pytest.mark.slow

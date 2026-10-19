@@ -1,11 +1,11 @@
 import rsnumpy as np
 import pytest
 from rsnumpy.testing import assert_allclose
-from scipy.signal import whittaker_henderson
-from scipy.signal._whittaker import (
+from rsscipy.signal import whittaker_henderson
+from rsscipy.signal._whittaker import (
     _logdet_difference_matrix, _polynomial_fit, _reml, _solveh_banded, _solve_WH_banded,
 )
-from scipy.stats import special_ortho_group
+from rsscipy.stats import special_ortho_group
 
 
 def _solve_WH_order2_fast(y, lamb):

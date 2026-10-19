@@ -2,11 +2,11 @@ import math
 
 import rsnumpy as np
 from rsnumpy.lib.stride_tricks import as_strided
-from scipy._lib._util import _apply_over_batch
-from scipy._lib._array_api import (
+from rsscipy._lib._util import _apply_over_batch
+from rsscipy._lib._array_api import (
     array_namespace, xp_capabilities, xp_promote, xp_device
 )
-import scipy._external.array_api_extra as xpx
+import rsscipy._external.array_api_extra as xpx
 
 
 __all__ = ['toeplitz', 'circulant', 'hankel',
@@ -63,7 +63,7 @@ def toeplitz(c, r=None):
 
     Examples
     --------
-    >>> from scipy.linalg import toeplitz
+    >>> from rsscipy.linalg import toeplitz
     >>> toeplitz([1,2,3], [1,4,5,6])
     array([[1, 4, 5, 6],
            [2, 1, 4, 5],
@@ -128,7 +128,7 @@ def circulant(c):
 
     Examples
     --------
-    >>> from scipy.linalg import circulant
+    >>> from rsscipy.linalg import circulant
     >>> circulant([1, 2, 3])
     array([[1, 3, 2],
            [2, 1, 3],
@@ -192,7 +192,7 @@ def hankel(c, r=None):
 
     Examples
     --------
-    >>> from scipy.linalg import hankel
+    >>> from rsscipy.linalg import hankel
     >>> hankel([1, 17, 99])
     array([[ 1, 17, 99],
            [17, 99,  0],
@@ -244,7 +244,7 @@ def hadamard(n, dtype=int):
 
     Examples
     --------
-    >>> from scipy.linalg import hadamard
+    >>> from rsscipy.linalg import hadamard
     >>> hadamard(2, dtype=complex)
     array([[ 1.+0.j,  1.+0.j],
            [ 1.+0.j, -1.-0.j]])
@@ -321,7 +321,7 @@ def leslie(f, s):
 
     Examples
     --------
-    >>> from scipy.linalg import leslie
+    >>> from rsscipy.linalg import leslie
     >>> leslie([0.1, 2.0, 1.0, 0.1], [0.2, 0.8, 0.7])
     array([[ 0.1,  2. ,  1. ,  0.1],
            [ 0.2,  0. ,  0. ,  0. ],
@@ -389,7 +389,7 @@ def block_diag(*arrs):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import block_diag
+    >>> from rsscipy.linalg import block_diag
     >>> A = [[1, 0],
     ...      [0, 1]]
     >>> B = [[3, 4, 5],
@@ -485,7 +485,7 @@ def companion(a):
 
     Examples
     --------
-    >>> from scipy.linalg import companion
+    >>> from rsscipy.linalg import companion
     >>> companion([1, -10, 31, -30])
     array([[ 10., -31.,  30.],
            [  1.,   0.,   0.],
@@ -534,7 +534,7 @@ def helmert(n, full=False):
 
     Examples
     --------
-    >>> from scipy.linalg import helmert
+    >>> from rsscipy.linalg import helmert
     >>> helmert(5, full=True)
     array([[ 0.4472136 ,  0.4472136 ,  0.4472136 ,  0.4472136 ,  0.4472136 ],
            [ 0.70710678, -0.70710678,  0.        ,  0.        ,  0.        ],
@@ -580,7 +580,7 @@ def hilbert(n):
 
     Examples
     --------
-    >>> from scipy.linalg import hilbert
+    >>> from rsscipy.linalg import hilbert
     >>> hilbert(3)
     array([[ 1.        ,  0.5       ,  0.33333333],
            [ 0.5       ,  0.33333333,  0.25      ],
@@ -631,7 +631,7 @@ def invhilbert(n, exact=False):
 
     Examples
     --------
-    >>> from scipy.linalg import invhilbert
+    >>> from rsscipy.linalg import invhilbert
     >>> invhilbert(4)
     array([[   16.,  -120.,   240.,  -140.],
            [ -120.,  1200., -2700.,  1680.],
@@ -648,7 +648,7 @@ def invhilbert(n, exact=False):
     42475099528537378560
 
     """
-    from scipy.special import comb
+    from rsscipy.special import comb
     if exact:
         if n > 14:
             dtype = object
@@ -710,7 +710,7 @@ def pascal(n, kind='symmetric', exact=True):
 
     Examples
     --------
-    >>> from scipy.linalg import pascal
+    >>> from rsscipy.linalg import pascal
     >>> pascal(4)
     array([[ 1,  1,  1,  1],
            [ 1,  2,  3,  4],
@@ -723,13 +723,13 @@ def pascal(n, kind='symmetric', exact=True):
            [1, 3, 3, 1]], dtype=uint64)
     >>> pascal(50)[-1, -1]
     25477612258980856902730428600
-    >>> from scipy.special import comb
+    >>> from rsscipy.special import comb
     >>> comb(98, 49, exact=True)
     25477612258980856902730428600
 
     """
 
-    from scipy.special import comb
+    from rsscipy.special import comb
     if kind not in ['symmetric', 'lower', 'upper']:
         raise ValueError("kind must be 'symmetric', 'lower', or 'upper'")
 
@@ -800,7 +800,7 @@ def invpascal(n, kind='symmetric', exact=True):
 
     Examples
     --------
-    >>> from scipy.linalg import invpascal, pascal
+    >>> from rsscipy.linalg import invpascal, pascal
     >>> invp = invpascal(5)
     >>> invp
     array([[  5, -10,  10,  -5,   1],
@@ -827,7 +827,7 @@ def invpascal(n, kind='symmetric', exact=True):
            [ 1., -4.,  6., -4.,  1.]])
 
     """
-    from scipy.special import comb
+    from rsscipy.special import comb
 
     if kind not in ['symmetric', 'lower', 'upper']:
         raise ValueError("'kind' must be 'symmetric', 'lower' or 'upper'.")
@@ -904,7 +904,7 @@ def dft(n, scale=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import dft
+    >>> from rsscipy.linalg import dft
     >>> np.set_printoptions(precision=2, suppress=True)  # for compact output
     >>> m = dft(5)
     >>> m
@@ -919,7 +919,7 @@ def dft(n, scale=None):
 
     Verify that ``m @ x`` is the same as ``fft(x)``.
 
-    >>> from scipy.fft import fft
+    >>> from rsscipy.fft import fft
     >>> fft(x)     # Same result as m @ x
     array([ 9.  +0.j  ,  0.12-0.81j, -2.12+3.44j, -2.12-3.44j,  0.12+0.81j])
     """
@@ -980,7 +980,7 @@ def fiedler(a):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import det, inv, fiedler
+    >>> from rsscipy.linalg import det, inv, fiedler
     >>> a = [1, 4, 12, 45, 77]
     >>> n = len(a)
     >>> A = fiedler(a)
@@ -1065,7 +1065,7 @@ def fiedler_companion(a):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import fiedler_companion, eigvals
+    >>> from rsscipy.linalg import fiedler_companion, eigvals
     >>> p = np.poly(np.arange(1, 9, 2))  # [1., -16., 86., -176., 105.]
     >>> fc = fiedler_companion(p)
     >>> fc
@@ -1235,7 +1235,7 @@ def convolution_matrix(a, n, mode='full'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.linalg import convolution_matrix
+    >>> from rsscipy.linalg import convolution_matrix
     >>> A = convolution_matrix([-1, 4, -2], 5, mode='same')
     >>> A
     array([[ 4, -1,  0,  0,  0],

@@ -7,22 +7,22 @@ import warnings
 import rsnumpy as np
 import pytest
 from pytest import raises as assert_raises
-from scipy._lib._array_api import (
+from rsscipy._lib._array_api import (
     xp_assert_equal, xp_assert_close, assert_almost_equal, assert_array_almost_equal
 )
 
 from rsnumpy import array, diff, linspace, meshgrid, ones, pi, shape
-from scipy.interpolate._fitpack_py import bisplrep, bisplev, splrep, spalde
-from scipy.interpolate._fitpack2 import (UnivariateSpline,
+from rsscipy.interpolate._fitpack_py import bisplrep, bisplev, splrep, spalde
+from rsscipy.interpolate._fitpack2 import (UnivariateSpline,
         LSQUnivariateSpline, InterpolatedUnivariateSpline,
         LSQBivariateSpline, SmoothBivariateSpline, RectBivariateSpline,
         LSQSphereBivariateSpline, SmoothSphereBivariateSpline,
         RectSphereBivariateSpline)
 
-from scipy._lib._testutils import _run_concurrent_barrier, IS_WASM
+from rsscipy._lib._testutils import _run_concurrent_barrier, IS_WASM
 
-from scipy.interpolate import make_splrep, NdBSpline
-from scipy.interpolate._regrid import (_regrid,
+from rsscipy.interpolate import make_splrep, NdBSpline
+from rsscipy.interpolate._regrid import (_regrid,
         _ndbspline_call_like_bivariate)
 
 def convert_to_ndbspline(lut):

@@ -2,8 +2,8 @@ import rsnumpy as np
 from rsnumpy import pi, log, sqrt
 from rsnumpy.testing import assert_, assert_allclose, assert_equal
 
-from scipy.special._testutils import FuncData
-import scipy.special as sc
+from rsscipy.special._testutils import FuncData
+import rsscipy.special as sc
 
 # Euler-Mascheroni constant
 euler = 0.57721566490153286

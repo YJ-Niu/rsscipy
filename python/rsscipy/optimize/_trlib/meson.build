@@ -12,10 +12,10 @@ py3.extension_module('_trlib',
   dependencies: [lapack_dep, np_dep],
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/optimize/_trlib'
+  subdir: 'rsscipy/optimize/_trlib'
 )
 
 py3.install_sources(
   ['__init__.py'],
-  subdir: 'scipy/optimize/_trlib'
+  subdir: 'rsscipy/optimize/_trlib'
 )

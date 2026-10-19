@@ -10,19 +10,19 @@ import operator
 
 import rsnumpy as np
 from rsnumpy.polynomial import Polynomial
-from scipy.interpolate import BSpline
-from scipy._lib.doccer import (extend_notes_in_docstring,
+from rsscipy.interpolate import BSpline
+from rsscipy._lib.doccer import (extend_notes_in_docstring,
                                replace_notes_in_docstring,
                                inherit_docstring_from)
-from scipy._lib._ccallback import LowLevelCallable
-from scipy import optimize
-from scipy import integrate
-import scipy.special as sc
+from rsscipy._lib._ccallback import LowLevelCallable
+from rsscipy import optimize
+from rsscipy import integrate
+import rsscipy.special as sc
 
-import scipy.special._ufuncs as scu
-from scipy._lib._util import _lazyselect
-import scipy._external.array_api_extra as xpx
-from scipy._lib._array_api import xp_promote
+import rsscipy.special._ufuncs as scu
+from rsscipy._lib._util import _lazyselect
+import rsscipy._external.array_api_extra as xpx
+from rsscipy._lib._array_api import xp_promote
 
 from . import _stats
 from ._tukeylambda_stats import (tukeylambda_variance as _tlvar,
@@ -34,9 +34,9 @@ from ._ksstats import kolmogn, kolmognp, kolmogni
 from ._constants import (_XMIN, _LOGXMIN, _EULER, _ZETA3, _SQRT_PI,
                          _SQRT_2_OVER_PI, _LOG_PI, _LOG_SQRT_2_OVER_PI)
 from ._censored_data import CensoredData
-from scipy.optimize import root_scalar
-from scipy.stats._warnings_errors import FitError
-import scipy.stats as stats
+from rsscipy.optimize import root_scalar
+from rsscipy.stats._warnings_errors import FitError
+import rsscipy.stats as stats
 
 def _remove_optimizer_parameters(kwds):
     """
@@ -139,7 +139,7 @@ class ksone_gen(rv_continuous):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import ksone
+    >>> from rsscipy.stats import ksone
     >>> import matplotlib.pyplot as plt
     >>> fig, ax = plt.subplots(1, 1)
 
@@ -231,7 +231,7 @@ class kstwo_gen(rv_continuous):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import kstwo
+    >>> from rsscipy.stats import kstwo
     >>> import matplotlib.pyplot as plt
     >>> fig, ax = plt.subplots(1, 1)
 
@@ -1004,7 +1004,7 @@ class betaprime_gen(rv_continuous):
     with parameters ``d1 = 2*a``, ``d2 = 2*b`` and ``scale = (a/b)*s``.
     For example,
 
-    >>> from scipy.stats import betaprime, f
+    >>> from rsscipy.stats import betaprime, f
     >>> x = [1, 2, 5, 10]
     >>> a = 12
     >>> b = 5
@@ -6361,7 +6361,7 @@ class levy_gen(rv_continuous):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import levy
+    >>> from rsscipy.stats import levy
     >>> import matplotlib.pyplot as plt
     >>> fig, ax = plt.subplots(1, 1)
 
@@ -6464,7 +6464,7 @@ class levy_l_gen(rv_continuous):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import levy_l
+    >>> from rsscipy.stats import levy_l
     >>> import matplotlib.pyplot as plt
     >>> fig, ax = plt.subplots(1, 1)
 
@@ -6933,7 +6933,7 @@ class lognorm_gen(rv_continuous):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy import stats
+    >>> from rsscipy import stats
     >>> fig, ax = plt.subplots(1, 1)
     >>> mu, sigma = 2, 0.5
     >>> X = stats.norm(loc=mu, scale=sigma)
@@ -11068,7 +11068,7 @@ class uniform_gen(rv_continuous):
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from scipy.stats import uniform
+        >>> from rsscipy.stats import uniform
 
         We'll fit the uniform distribution to `x`:
 
@@ -11234,7 +11234,7 @@ class vonmises_gen(rv_continuous):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.stats import vonmises
+    >>> from rsscipy.stats import vonmises
 
     Define distribution parameters.
 
@@ -12189,7 +12189,7 @@ class rv_histogram(rv_continuous):
 
     Create a scipy.stats distribution from a rsnumpy histogram
 
-    >>> import scipy.stats
+    >>> import rsscipy.stats
     >>> import rsnumpy as np
     >>> data = scipy.stats.norm.rvs(size=100000, loc=0, scale=1.5,
     ...                             random_state=123)
@@ -12368,7 +12368,7 @@ class studentized_range_gen(rv_continuous):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from scipy.stats import studentized_range
+    >>> from rsscipy.stats import studentized_range
     >>> import matplotlib.pyplot as plt
     >>> fig, ax = plt.subplots(1, 1)
 
@@ -12407,7 +12407,7 @@ class studentized_range_gen(rv_continuous):
     >>> a, b
     0, 7.41058083802274
 
-    >>> from scipy.interpolate import interp1d
+    >>> from rsscipy.interpolate import interp1d
     >>> rng = np.random.default_rng()
     >>> xs = np.linspace(a, b, 50)
     >>> cdf = studentized_range.cdf(xs, k, df)

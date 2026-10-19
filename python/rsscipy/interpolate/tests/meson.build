@@ -15,7 +15,7 @@ py3.install_sources([
     'test_rbfinterp.py',
     'test_rgi.py'
   ],
-  subdir: 'scipy/interpolate/tests',
+  subdir: 'rsscipy/interpolate/tests',
   install_tag: 'tests'
 )
 
@@ -24,7 +24,7 @@ py3.install_sources([
     'data/estimate_gradients_hang.npy',
     'data/gcvspl.npz'
   ],
-  subdir: 'scipy/interpolate/tests/data',
+  subdir: 'rsscipy/interpolate/tests/data',
   install_tag: 'tests'
 )
 
@@ -35,11 +35,11 @@ if use_pythran
     dependencies: [pythran_dep, np_dep],
     link_args: version_link_args,
     install: true,
-    subdir: 'scipy/interpolate/tests'
+    subdir: 'rsscipy/interpolate/tests'
   )
 else
   py3.install_sources(
     ['_rbfinterp_kernel_pythran.py'],
-    subdir: 'scipy/interpolate/tests'
+    subdir: 'rsscipy/interpolate/tests'
   )
 endif

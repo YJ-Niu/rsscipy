@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 import rsnumpy as np
 
-from scipy._lib._util import MapWrapper
+from rsscipy._lib._util import MapWrapper
 
 
 class VertexBase(ABC):

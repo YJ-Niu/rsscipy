@@ -1,6 +1,6 @@
 from rsnumpy.testing import assert_allclose
-from scipy.linalg import cython_lapack as cython_lapack
-from scipy.linalg import lapack
+from rsscipy.linalg import cython_lapack as cython_lapack
+from rsscipy.linalg import lapack
 
 
 class TestLamch:
@@ -39,7 +39,7 @@ class TestBlasInt:
 
     def test_blas_int_size(self):
         """Verify blas_int and blas_bint sizes matches the build configuration."""
-        from scipy.__config__ import CONFIG
+        from rsscipy.__config__ import CONFIG
         size = cython_lapack._blas_int_size()
         cython_blas_ilp64 = CONFIG['Build Dependencies']['blas']['cython blas ilp64']
         if cython_blas_ilp64:

@@ -4,9 +4,9 @@ basinhopping: The basinhopping global optimization algorithm
 import rsnumpy as np
 import math
 import inspect
-from scipy.optimize._optimize import OptimizeResult
-from scipy.optimize._minimize import minimize
-from scipy._lib._util import (check_random_state, _transition_to_rng,
+from rsscipy.optimize._optimize import OptimizeResult
+from rsscipy.optimize._minimize import minimize
+from rsscipy._lib._util import (check_random_state, _transition_to_rng,
                               wrapped_inspect_signature)
 
 __all__ = ['basinhopping']
@@ -557,7 +557,7 @@ def basinhopping(func, x0, niter=100, T=1.0, stepsize=0.5,
     local minima superimposed on a parabola.
 
     >>> import rsnumpy as np
-    >>> from scipy.optimize import basinhopping
+    >>> from rsscipy.optimize import basinhopping
     >>> func = lambda x: np.cos(14.5 * x - 0.3) + (x + 0.2) * x
     >>> x0 = [1.]
 

@@ -8,9 +8,9 @@ from types import GenericAlias
 
 from . import _dierckx
 
-import scipy.sparse.linalg as ssl
-from scipy.sparse import csr_array, diags_array
-from scipy._lib._array_api import (
+import rsscipy.sparse.linalg as ssl
+from rsscipy.sparse import csr_array, diags_array
+from rsscipy._lib._array_api import (
     array_namespace, xp_capabilities, xp_result_device
 )
 

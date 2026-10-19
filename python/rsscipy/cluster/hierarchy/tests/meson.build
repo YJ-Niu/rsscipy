@@ -7,6 +7,6 @@ python_sources = [
 
 py3.install_sources(
   python_sources,
-  subdir: 'scipy/cluster/hierarchy/tests',
+  subdir: 'rsscipy/cluster/hierarchy/tests',
   install_tag: 'tests'
 )

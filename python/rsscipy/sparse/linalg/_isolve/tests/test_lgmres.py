@@ -8,12 +8,12 @@ from rsnumpy.testing import (assert_, assert_allclose, assert_equal)
 
 import rsnumpy as np
 from rsnumpy import zeros, array, allclose
-from scipy.linalg import norm
-from scipy.sparse import csr_array, eye_array, random_array
+from rsscipy.linalg import norm
+from rsscipy.sparse import csr_array, eye_array, random_array
 
-from scipy.sparse.linalg._interface import LinearOperator
-from scipy.sparse.linalg import splu
-from scipy.sparse.linalg._isolve import lgmres, gmres
+from rsscipy.sparse.linalg._interface import LinearOperator
+from rsscipy.sparse.linalg import splu
+from rsscipy.sparse.linalg._isolve import lgmres, gmres
 
 
 Am = csr_array(array([[-2, 1, 0, 0, 0, 9],

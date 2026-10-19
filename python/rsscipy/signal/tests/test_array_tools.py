@@ -1,9 +1,9 @@
 import rsnumpy as np
 
-from scipy._lib._array_api import xp_assert_equal
+from rsscipy._lib._array_api import xp_assert_equal
 from pytest import raises as assert_raises
 
-from scipy.signal._arraytools import (axis_slice, axis_reverse,
+from rsscipy.signal._arraytools import (axis_slice, axis_reverse,
      odd_ext, even_ext, const_ext, zero_ext)
 
 

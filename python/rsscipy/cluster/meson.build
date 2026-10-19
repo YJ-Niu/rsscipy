@@ -1,7 +1,7 @@
 py3.install_sources([
     '__init__.py',
   ],
-  subdir: 'scipy/cluster'
+  subdir: 'rsscipy/cluster'
 )
 
 subdir('hierarchy')

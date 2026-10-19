@@ -240,7 +240,7 @@ def newton(func, x0, fprime=None, args=(), tol=1.48e-8, maxiter=50,
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
 
     >>> def f(x):
     ...     return (x**3 - 1)  # only one real root at x = 1
@@ -586,7 +586,7 @@ def bisect(f, a, b, args=(),
     >>> def f(x):
     ...     return (x**2 - 1)
 
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
 
     >>> root = optimize.bisect(f, 0, 2)
     >>> root
@@ -699,7 +699,7 @@ def ridder(f, a, b, args=(),
     >>> def f(x):
     ...     return (x**2 - 1)
 
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
 
     >>> root = optimize.ridder(f, 0, 2)
     >>> root
@@ -837,7 +837,7 @@ def brentq(f, a, b, args=(),
     >>> def f(x):
     ...     return (x**2 - 1)
 
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
 
     >>> root = optimize.brentq(f, -2, 0)
     >>> root
@@ -964,7 +964,7 @@ def brenth(f, a, b, args=(),
     >>> def f(x):
     ...     return (x**2 - 1)
 
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
 
     >>> root = optimize.brenth(f, -2, 0)
     >>> root
@@ -1448,7 +1448,7 @@ def toms748(f, a, b, args=(), k=1,
     >>> def f(x):
     ...     return (x**3 - 1)  # only one real root at x = 1
 
-    >>> from scipy import optimize
+    >>> from rsscipy import optimize
     >>> root, results = optimize.toms748(f, 0, 2, full_output=True)
     >>> root
     1.0

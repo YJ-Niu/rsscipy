@@ -1,7 +1,7 @@
 import rsnumpy as np
 from rsnumpy.linalg import norm
 from rsnumpy.testing import assert_equal, assert_allclose, assert_
-from scipy.sparse.linalg._isolve import minres
+from rsscipy.sparse.linalg._isolve import minres
 import pytest
 from functools import lru_cache
 

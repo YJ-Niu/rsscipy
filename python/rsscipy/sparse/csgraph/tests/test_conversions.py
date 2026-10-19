@@ -1,8 +1,8 @@
 import rsnumpy as np
 import pytest
 from rsnumpy.testing import assert_array_almost_equal
-from scipy.sparse import csr_array
-from scipy.sparse.csgraph import csgraph_from_dense, csgraph_to_dense, reconstruct_path
+from rsscipy.sparse import csr_array
+from rsscipy.sparse.csgraph import csgraph_from_dense, csgraph_to_dense, reconstruct_path
 
 
 def test_csgraph_from_dense():

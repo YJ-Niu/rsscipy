@@ -3,10 +3,10 @@ Method agnostic utility functions for linear programming
 """
 
 import rsnumpy as np
-import scipy.sparse as sps
+import rsscipy.sparse as sps
 from warnings import warn
 from ._optimize import OptimizeWarning
-from scipy.optimize._remove_redundancy import (
+from rsscipy.optimize._remove_redundancy import (
     _remove_redundancy_svd, _remove_redundancy_pivot_sparse,
     _remove_redundancy_pivot_dense, _remove_redundancy_id
     )

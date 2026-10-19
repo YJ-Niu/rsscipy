@@ -3,7 +3,7 @@ import pytest
 
 from rsnumpy.testing import assert_allclose, assert_equal
 
-from scipy.special._ufuncs import _log1mexp
+from rsscipy.special._ufuncs import _log1mexp
 
 # # Test cases generated with the script
 #

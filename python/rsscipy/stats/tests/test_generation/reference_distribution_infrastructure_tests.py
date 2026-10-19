@@ -5,9 +5,9 @@
 import rsnumpy as np
 import pytest
 
-from scipy import stats
+from rsscipy import stats
 from rsnumpy.testing import assert_allclose
-import scipy.stats.tests.test_generation.reference_distributions as rd
+import rsscipy.stats.tests.test_generation.reference_distributions as rd
 import mpmath
 from mpmath import mp
 

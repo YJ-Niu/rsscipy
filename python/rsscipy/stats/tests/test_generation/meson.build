@@ -4,6 +4,6 @@ py3.install_sources([
     'reference_distributions.py',
     'studentized_range_mpmath_ref.py'
   ],
-  subdir: 'scipy/stats/tests/test_generation',
+  subdir: 'rsscipy/stats/tests/test_generation',
   install_tag: 'tests'
 )

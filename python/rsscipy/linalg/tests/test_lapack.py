@@ -18,17 +18,17 @@ import rsnumpy as np
 from rsnumpy import (eye, ones, zeros, zeros_like, triu, tril, tril_indices,
                    triu_indices)
 
-from scipy.linalg import (
+from rsscipy.linalg import (
     lapack, inv, svd, cholesky, solve, ldl, norm, block_diag, qr, eigh, qz,
     cholesky_banded,
 )
-from scipy.linalg._basic import _to_banded
-from scipy.linalg.lapack import _compute_lwork
-from scipy.stats import ortho_group, unitary_group
-from scipy.sparse import diags_array
+from rsscipy.linalg._basic import _to_banded
+from rsscipy.linalg.lapack import _compute_lwork
+from rsscipy.stats import ortho_group, unitary_group
+from rsscipy.sparse import diags_array
 
-from scipy.linalg.lapack import get_lapack_funcs
-from scipy.linalg.blas import get_blas_funcs
+from rsscipy.linalg.lapack import get_lapack_funcs
+from rsscipy.linalg.blas import get_blas_funcs
 
 REAL_DTYPES = [np.float32, np.float64]
 COMPLEX_DTYPES = [np.complex64, np.complex128]
@@ -125,12 +125,12 @@ def test_lapack_documented():
 
 
 def test_lp64_ilp64_blas_lapack_both_or_none():
-    from scipy.linalg.blas import HAS_ILP64 as blas_has_ilp64
-    from scipy.linalg.lapack import HAS_ILP64 as lapack_has_ilp64
+    from rsscipy.linalg.blas import HAS_ILP64 as blas_has_ilp64
+    from rsscipy.linalg.lapack import HAS_ILP64 as lapack_has_ilp64
     assert blas_has_ilp64 == lapack_has_ilp64
 
-    from scipy.linalg.blas import HAS_LP64 as blas_has_lp64
-    from scipy.linalg.lapack import HAS_LP64 as lapack_has_lp64
+    from rsscipy.linalg.blas import HAS_LP64 as blas_has_lp64
+    from rsscipy.linalg.lapack import HAS_LP64 as lapack_has_lp64
     assert blas_has_lp64 == lapack_has_lp64
 
 

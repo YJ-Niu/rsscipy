@@ -80,8 +80,8 @@ from itertools import product
 from multiprocessing import Pool
 
 
-from scipy.special import hyp2f1
-from scipy.special.tests.test_hyp2f1 import mp_hyp2f1
+from rsscipy.special import hyp2f1
+from rsscipy.special.tests.test_hyp2f1 import mp_hyp2f1
 
 
 def get_region(z):

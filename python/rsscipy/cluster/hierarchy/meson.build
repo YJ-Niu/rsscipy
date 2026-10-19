@@ -4,7 +4,7 @@ py3.extension_module('_hierarchy',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/cluster/hierarchy'
+  subdir: 'rsscipy/cluster/hierarchy'
 )
 
 py3.extension_module('_optimal_leaf_ordering',
@@ -13,14 +13,14 @@ py3.extension_module('_optimal_leaf_ordering',
   dependencies: np_dep,
   link_args: version_link_args,
   install: true,
-  subdir: 'scipy/cluster/hierarchy'
+  subdir: 'rsscipy/cluster/hierarchy'
 )
 
 py3.install_sources([
     '__init__.py',
     '_hierarchy_impl.py'
   ],
-  subdir: 'scipy/cluster/hierarchy'
+  subdir: 'rsscipy/cluster/hierarchy'
 )
 
 subdir('tests')

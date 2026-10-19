@@ -4,13 +4,13 @@ import math
 import numbers
 import operator
 import warnings
-from scipy._lib import doccer
+from rsscipy._lib import doccer
 
-from scipy import linalg, special, fft as sp_fft
-from scipy._lib._array_api import (array_namespace, xp_compat_namespace,
+from rsscipy import linalg, special, fft as sp_fft
+from rsscipy._lib._array_api import (array_namespace, xp_compat_namespace,
                                    xp_device)
-from scipy._lib._array_api import xp_capabilities
-from scipy._external import array_api_extra as xpx
+from rsscipy._lib._array_api import xp_capabilities
+from rsscipy._external import array_api_extra as xpx
 
 __all__ = ['boxcar', 'triang', 'parzen', 'bohman', 'blackman', 'nuttall',
            'blackmanharris', 'flattop', 'bartlett', 'barthann',
@@ -119,8 +119,8 @@ def general_cosine(M, a, sym=True):
     the sidelobe level in red:
 
     >>> import rsnumpy as np
-    >>> from scipy.signal.windows import general_cosine
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy.signal.windows import general_cosine
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = general_cosine(1000, HFT90D, sym=False)
@@ -217,8 +217,8 @@ def boxcar(M, sym=True, *, xp=None, device=None):
 
     >>> import rsnumpy as np
     >>> from matplotlib import pyplot as plt
-    >>> from scipy.fft import fft, fftfreq, fftshift
-    >>> from scipy.signal.windows import boxcar
+    >>> from rsscipy.fft import fft, fftfreq, fftshift
+    >>> from rsscipy.signal.windows import boxcar
     ...
     >>> N, T = 10, 1/10  # number of samples and sampling interval in seconds
     >>> t_w = np.arange(N) * T  # sample times
@@ -321,8 +321,8 @@ def triang(M, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.triang(51)
@@ -391,8 +391,8 @@ def parzen(M, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.parzen(51)
@@ -453,8 +453,8 @@ def bohman(M, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.bohman(51)
@@ -550,8 +550,8 @@ def blackman(M, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.blackman(51)
@@ -617,8 +617,8 @@ def nuttall(M, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.nuttall(51)
@@ -672,8 +672,8 @@ def blackmanharris(M, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.blackmanharris(51)
@@ -741,8 +741,8 @@ def flattop(M, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.flattop(51)
@@ -839,8 +839,8 @@ def bartlett(M, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.bartlett(51)
@@ -980,8 +980,8 @@ def hann(M, sym=True, *, xp=None, device=None):
 
     >>> import rsnumpy as np
     >>> from matplotlib import pyplot as plt
-    >>> from scipy.fft import fft, fftfreq
-    >>> from scipy.signal.windows import hann
+    >>> from rsscipy.fft import fft, fftfreq
+    >>> from rsscipy.signal.windows import hann
     ...
     >>> M, T = 10, 1/10  # number of samples and sampling interval in seconds
     >>> k, tau = np.arange(M) * T, M*T  # sample times and window width in seconds
@@ -1078,8 +1078,8 @@ def tukey(M, alpha=0.5, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.tukey(51)
@@ -1153,8 +1153,8 @@ def barthann(M, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.barthann(51)
@@ -1250,8 +1250,8 @@ def general_hamming(M, alpha, sym=True, *, xp=None, device=None):
     plot these different windows.
 
     >>> import rsnumpy as np
-    >>> from scipy.signal.windows import general_hamming
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy.signal.windows import general_hamming
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> fig1, spatial_plot = plt.subplots()
@@ -1337,8 +1337,8 @@ def hamming(M, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.hamming(51)
@@ -1449,8 +1449,8 @@ def kaiser(M, beta, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.kaiser(51, beta=14)
@@ -1535,7 +1535,7 @@ def kaiser_bessel_derived(M, beta, *, sym=True, xp=None, device=None):
     reference [2]_:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
+    >>> from rsscipy import signal
     >>> import matplotlib.pyplot as plt
     >>> fig, ax = plt.subplots()
     >>> N = 50
@@ -1609,8 +1609,8 @@ def gaussian(M, std, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.gaussian(51, std=7)
@@ -1684,8 +1684,8 @@ def general_gaussian(M, p, sig, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.general_gaussian(51, p=1.5, sig=7)
@@ -1786,8 +1786,8 @@ def chebwin(M, at, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.chebwin(51, at=100)
@@ -1829,7 +1829,7 @@ def chebwin(M, at, sym=True, *, xp=None, device=None):
     x = beta * xp.cos(xp.pi * k / M)
     # Find the window's DFT coefficients
     # Use analytic definition of Chebyshev polynomial instead of expansion
-    # from scipy.special. Using the expansion in scipy.special leads to errors.
+    # from rsscipy.special. Using the expansion in scipy.special leads to errors.
     one = xp.asarray(1, dtype=x.dtype, device=device)
     p = xp.where(
         x > 1,
@@ -1889,8 +1889,8 @@ def cosine(M, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.cosine(51)
@@ -1967,8 +1967,8 @@ def exponential(M, center=None, tau=1., sym=True, *, xp=None, device=None):
     Plot the symmetric window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> M = 51
@@ -2076,8 +2076,8 @@ def taylor(M, nbar=4, sll=30, norm=True, sym=True, *, xp=None, device=None):
     Plot the window and its frequency response:
 
     >>> import rsnumpy as np
-    >>> from scipy import signal
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy import signal
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
 
     >>> window = signal.windows.taylor(51, nbar=20, sll=100, norm=False)
@@ -2219,7 +2219,7 @@ def dpss(M, NW, Kmax=None, sym=True, norm=None, return_ratios=False,
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from scipy.signal import windows, freqz
+    >>> from rsscipy.signal import windows, freqz
     >>> M = 51
     >>> fig, axes = plt.subplots(3, 2, figsize=(5, 7))
     >>> for ai, alpha in enumerate((1, 3, 5)):
@@ -2461,8 +2461,8 @@ def lanczos(M, *, sym=True, xp=None, device=None):
     Plot the window
 
     >>> import rsnumpy as np
-    >>> from scipy.signal.windows import lanczos
-    >>> from scipy.fft import fft, fftshift
+    >>> from rsscipy.signal.windows import lanczos
+    >>> from rsscipy.fft import fft, fftshift
     >>> import matplotlib.pyplot as plt
     >>> fig, ax = plt.subplots(1)
     >>> window = lanczos(51)
@@ -2671,7 +2671,7 @@ def get_window(window, Nx, fftbins=True, *, xp=None, device=None):
     --------
     This example shows different usages of the `window` parameter:
 
-    >>> from scipy.signal import get_window
+    >>> from rsscipy.signal import get_window
     >>> get_window('triang', 7)
     array([ 0.125,  0.375,  0.625,  0.875,  0.875,  0.625,  0.375])
     >>> get_window(('exponential', None, 1.), 9)
@@ -2687,7 +2687,7 @@ def get_window(window, Nx, fftbins=True, *, xp=None, device=None):
     The following snippet shows different ways to create identical symmetric and
     periodic Bartlett windows:
 
-    >>> from scipy.signal import get_window, windows
+    >>> from rsscipy.signal import get_window, windows
     >>> # Symmetric window:
     >>> windows.bartlett(5)  # Parameter `sym` defaults to True
     array([0. , 0.5, 1. , 0.5, 0. ])
