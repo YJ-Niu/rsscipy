@@ -1,0 +1,14 @@
+[package]
+name = "rsscipy-sosfilt"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Rust port of scipy/signal/_sosfilt.pyx"
+
+[lib]
+# becomes `scipy/signal/_sosfilt_rs.so`
+name = "_sosfilt_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3.workspace = true

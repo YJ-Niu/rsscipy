@@ -1,0 +1,14 @@
+[package]
+name = "rsscipy-max-len-seq-inner"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Rust port of scipy/signal/_max_len_seq_inner.pyx"
+
+[lib]
+# becomes `scipy/signal/_max_len_seq_inner_rs.so`
+name = "_max_len_seq_inner_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3.workspace = true

@@ -77,12 +77,6 @@ fn extract_intp_slice<'py>(py: Python<'py>, obj: &Bound<'py, PyAny>) -> PyResult
         return Err(PyTypeError::new_err("'x' must not be None"));
     }
 
-    if obj.is_instance_of::<PyList>() || obj.is_instance_of::<PyTuple>() {
-        return Err(PyTypeError::new_err(
-            "expected 'const intp_t' buffer, got list",
-        ));
-    }
-
     // Fast path: zero-copy buffer (only available for float64 in rsnumpy).
     match PyBuffer::<isize>::get(obj) {
         Ok(buf) => {

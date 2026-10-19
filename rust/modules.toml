@@ -34,3 +34,13 @@ dest = "python/rsscipy/linalg"
 crate = "peak_finding_utils"
 lib = "_peak_finding_utils_rs"
 dest = "python/rsscipy/signal"
+
+[[module]]
+crate = "sosfilt"
+lib = "_sosfilt_rs"
+dest = "python/rsscipy/signal"
+
+[[module]]
+crate = "max_len_seq_inner"
+lib = "_max_len_seq_inner_rs"
+dest = "python/rsscipy/signal"
