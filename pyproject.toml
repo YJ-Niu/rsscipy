@@ -46,11 +46,11 @@ classifiers = [
 ]
 
 [project.urls]
-homepage = "https://github.com/cowboy_niu/rsscipy"
-documentation = "https://github.com/cowboy_niu/rsscipy#readme"
-source = "https://github.com/cowboy_niu/rsscipy"
+homepage = "https://github.com/YJ-Niu/rsscipy"
+documentation = "https://github.com/YJ-Niu/rsscipy#readme"
+source = "https://github.com/YJ-Niu/rsscipy"
 download = "https://pypi.org/project/rsscipy/"
-tracker = "https://github.com/cowboy_niu/rsscipy/issues"
+tracker = "https://github.com/YJ-Niu/rsscipy/issues"
 
 # NOTE: when updating this table, also update `dependency-groups.optional-runtime-deps`
 [project.optional-dependencies]
