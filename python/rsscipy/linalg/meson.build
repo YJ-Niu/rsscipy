@@ -180,7 +180,7 @@ install_data(
     '_fblas_rs.so',
     '_flapack_rs.so',
   ],
-  install_dir: py3.get_install_dir() / 'scipy/linalg',
+  install_dir: scipy_dir / 'linalg',
 )
 
 py3.install_sources(

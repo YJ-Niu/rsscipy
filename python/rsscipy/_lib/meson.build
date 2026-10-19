@@ -113,7 +113,7 @@ install_data(
     '_ccallback_rs.so',
     '_fpumode.so',
   ],
-  install_dir: py3.get_install_dir() / 'scipy/_lib',
+  install_dir: scipy_dir / '_lib',
 )
 
 subdir('_uarray')

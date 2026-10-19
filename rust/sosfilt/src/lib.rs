@@ -1,6 +1,7 @@
 //! Rust port of `scipy/signal/_sosfilt.pyx`.
 //!
-//! Second-order sections (SOS) filter.  Modifies `x` and `zi` in place.
+//! Second-order sections (SOS) filter. The Python adapter writes the returned
+//! arrays back to `x` and `zi`.
 //!
 //! For each signal `i` and sample `n`:
 //!   x_cur = x[i, n]
@@ -14,30 +15,23 @@
 use pyo3::buffer::PyBuffer;
 use pyo3::exceptions::{PyTypeError, PyValueError};
 use pyo3::prelude::*;
-use pyo3::types::{PyList, PyTuple};
+use pyo3::types::PyList;
 
 // ---------------------------------------------------------------------------
 // helpers
 // ---------------------------------------------------------------------------
 
-/// Extract a 2-D f64 buffer (C-contiguous in the last dimension).
+/// Extract a C-contiguous 2-D f64 buffer.
 fn extract_f64_2d<'py>(obj: &Bound<'py, PyAny>) -> PyResult<(PyBuffer<f64>, usize, usize)> {
     if obj.is_none() {
         return Err(PyTypeError::new_err("'x' must not be None"));
     }
     match PyBuffer::<f64>::get(obj) {
         Ok(buf) => {
-            if buf.dimensions() != 2 {
-                return Err(PyValueError::new_err(
-                    "expected 2-D buffer",
-                ));
+            if buf.dimensions() != 2 || !buf.is_c_contiguous() {
+                return Err(PyValueError::new_err("expected a C-contiguous 2-D buffer"));
             }
             let shape = buf.shape().to_vec();
-            if shape.len() != 2 {
-                return Err(PyValueError::new_err(
-                    "expected 2-D buffer",
-                ));
-            }
             Ok((buf, shape[0], shape[1]))
         }
         Err(_) => Err(PyTypeError::new_err(
@@ -53,27 +47,16 @@ fn extract_f64_3d<'py>(obj: &Bound<'py, PyAny>) -> PyResult<(PyBuffer<f64>, usiz
     }
     match PyBuffer::<f64>::get(obj) {
         Ok(buf) => {
-            if buf.dimensions() != 3 {
-                return Err(PyValueError::new_err(
-                    "expected 3-D buffer",
-                ));
+            if buf.dimensions() != 3 || !buf.is_c_contiguous() {
+                return Err(PyValueError::new_err("expected a C-contiguous 3-D buffer"));
             }
             let shape = buf.shape().to_vec();
-            if shape.len() != 3 {
-                return Err(PyValueError::new_err(
-                    "expected 3-D buffer",
-                ));
-            }
             Ok((buf, shape[0], shape[1], shape[2]))
         }
         Err(_) => Err(PyTypeError::new_err(
             "expected 'const float64_t' 3-D buffer",
         )),
     }
-}
-
-unsafe fn f64_slice(buf: &PyBuffer<f64>) -> &[f64] {
-    std::slice::from_raw_parts(buf.buf_ptr() as *const f64, buf.item_count())
 }
 
 // ---------------------------------------------------------------------------
@@ -87,16 +70,13 @@ unsafe fn f64_slice(buf: &PyBuffer<f64>) -> &[f64] {
 /// in place.
 #[pyfunction]
 fn _sosfilt_float<'py>(
-    py: Python<'py>,
     sos: &Bound<'py, PyAny>,
     x: &Bound<'py, PyAny>,
     zi: &Bound<'py, PyAny>,
-) -> PyResult<()> {
+) -> PyResult<(Vec<f64>, Vec<f64>)> {
     let (sos_buf, n_sections, sos_cols) = extract_f64_2d(sos)?;
     if sos_cols != 6 {
-        return Err(PyValueError::new_err(
-            "sos must have shape (n_sections, 6)",
-        ));
+        return Err(PyValueError::new_err("sos must have shape (n_sections, 6)"));
     }
 
     let (x_buf, n_signals, n_samples) = extract_f64_2d(x)?;
@@ -108,49 +88,138 @@ fn _sosfilt_float<'py>(
         ));
     }
 
-    let sos_data = unsafe { f64_slice(&sos_buf) };
-    let x_data = unsafe { f64_slice(&x_buf) };
-    let zi_data = unsafe { f64_slice(&zi_buf) };
-
-    // Strides: sos is (n_sections, 6), x is (n_signals, n_samples),
-    // zi is (n_signals, n_sections, 2).  We assume C-contiguous last dim.
-    // sos stride: row stride = 6, element stride = 1
-    // x stride: row stride = n_samples, element stride = 1
-    // zi stride: section stride = 2, element stride = 1
-
-    // We need mutable access to x and zi.  Since PyBuffer only gives us a
-    // pointer, we cast to mutable (the caller guarantees the arrays are
-    // writable).
-    let x_data_mut: &mut [f64] =
-        unsafe { std::slice::from_raw_parts_mut(x_buf.buf_ptr() as *mut f64, x_buf.item_count()) };
-    let zi_data_mut: &mut [f64] =
-        unsafe { std::slice::from_raw_parts_mut(zi_buf.buf_ptr() as *mut f64, zi_buf.item_count()) };
+    let sos_data = unsafe {
+        std::slice::from_raw_parts(sos_buf.buf_ptr() as *const f64, sos_buf.item_count())
+    };
+    let mut x_data = unsafe {
+        std::slice::from_raw_parts(x_buf.buf_ptr() as *const f64, x_buf.item_count()).to_vec()
+    };
+    let mut zi_data = unsafe {
+        std::slice::from_raw_parts(zi_buf.buf_ptr() as *const f64, zi_buf.item_count()).to_vec()
+    };
 
     for i in 0..n_signals {
         for n in 0..n_samples {
-            let mut x_cur = x_data_mut[i * n_samples + n];
+            let mut x_cur = x_data[i * n_samples + n];
 
             for s in 0..n_sections {
                 let sos_base = s * 6;
-                let x_new = sos_data[sos_base + 0] * x_cur
-                    + zi_data_mut[i * n_sections * 2 + s * 2 + 0];
+                let zi_base = i * n_sections * 2 + s * 2;
+                let x_new = sos_data[sos_base] * x_cur + zi_data[zi_base];
 
-                zi_data_mut[i * n_sections * 2 + s * 2 + 0] =
-                    sos_data[sos_base + 1] * x_cur
-                    - sos_data[sos_base + 4] * x_new
-                    + zi_data_mut[i * n_sections * 2 + s * 2 + 1];
-                zi_data_mut[i * n_sections * 2 + s * 2 + 1] =
-                    sos_data[sos_base + 2] * x_cur
-                    - sos_data[sos_base + 5] * x_new;
+                zi_data[zi_base] = sos_data[sos_base + 1] * x_cur - sos_data[sos_base + 4] * x_new
+                    + zi_data[zi_base + 1];
+                zi_data[zi_base + 1] =
+                    sos_data[sos_base + 2] * x_cur - sos_data[sos_base + 5] * x_new;
 
                 x_cur = x_new;
             }
 
-            x_data_mut[i * n_samples + n] = x_cur;
+            x_data[i * n_samples + n] = x_cur;
         }
     }
 
-    Ok(())
+    Ok((x_data, zi_data))
+}
+
+#[derive(Clone, Copy)]
+struct ComplexValue {
+    re: f64,
+    im: f64,
+}
+
+type ComplexFilterOutput = (Vec<f64>, Vec<f64>, Vec<f64>, Vec<f64>);
+
+fn extract_complex_values(obj: &Bound<'_, PyAny>) -> PyResult<Vec<ComplexValue>> {
+    let values = obj.cast::<PyList>()?;
+    values
+        .iter()
+        .map(|value| {
+            Ok(ComplexValue {
+                re: value.getattr("real")?.extract()?,
+                im: value.getattr("imag")?.extract()?,
+            })
+        })
+        .collect()
+}
+
+fn multiply(a: ComplexValue, b: ComplexValue) -> ComplexValue {
+    ComplexValue {
+        re: a.re * b.re - a.im * b.im,
+        im: a.re * b.im + a.im * b.re,
+    }
+}
+
+fn add(a: ComplexValue, b: ComplexValue) -> ComplexValue {
+    ComplexValue {
+        re: a.re + b.re,
+        im: a.im + b.im,
+    }
+}
+
+fn subtract(a: ComplexValue, b: ComplexValue) -> ComplexValue {
+    ComplexValue {
+        re: a.re - b.re,
+        im: a.im - b.im,
+    }
+}
+
+#[pyfunction]
+fn _sosfilt_complex<'py>(
+    sos: &Bound<'py, PyAny>,
+    x: &Bound<'py, PyAny>,
+    zi: &Bound<'py, PyAny>,
+    n_sections: usize,
+    n_signals: usize,
+    n_samples: usize,
+) -> PyResult<ComplexFilterOutput> {
+    let sos_data = extract_complex_values(sos)?;
+    let mut x_data = extract_complex_values(x)?;
+    let mut zi_data = extract_complex_values(zi)?;
+
+    if sos_data.len() != n_sections * 6 {
+        return Err(PyValueError::new_err("sos must have shape (n_sections, 6)"));
+    }
+    if x_data.len() != n_signals * n_samples {
+        return Err(PyValueError::new_err(
+            "x shape does not match n_signals and n_samples",
+        ));
+    }
+    if zi_data.len() != n_signals * n_sections * 2 {
+        return Err(PyValueError::new_err(
+            "zi must have shape (n_signals, n_sections, 2)",
+        ));
+    }
+
+    for signal in 0..n_signals {
+        for sample in 0..n_samples {
+            let mut x_cur = x_data[signal * n_samples + sample];
+            for section in 0..n_sections {
+                let sos_base = section * 6;
+                let zi_base = signal * n_sections * 2 + section * 2;
+                let x_new = add(multiply(sos_data[sos_base], x_cur), zi_data[zi_base]);
+                zi_data[zi_base] = add(
+                    subtract(
+                        multiply(sos_data[sos_base + 1], x_cur),
+                        multiply(sos_data[sos_base + 4], x_new),
+                    ),
+                    zi_data[zi_base + 1],
+                );
+                zi_data[zi_base + 1] = subtract(
+                    multiply(sos_data[sos_base + 2], x_cur),
+                    multiply(sos_data[sos_base + 5], x_new),
+                );
+                x_cur = x_new;
+            }
+            x_data[signal * n_samples + sample] = x_cur;
+        }
+    }
+
+    let x_real = x_data.iter().map(|value| value.re).collect();
+    let x_imag = x_data.iter().map(|value| value.im).collect();
+    let zi_real = zi_data.iter().map(|value| value.re).collect();
+    let zi_imag = zi_data.iter().map(|value| value.im).collect();
+    Ok((x_real, x_imag, zi_real, zi_imag))
 }
 
 // ---------------------------------------------------------------------------
@@ -160,5 +229,6 @@ fn _sosfilt_float<'py>(
 #[pymodule]
 fn _sosfilt_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(_sosfilt_float, m)?)?;
+    m.add_function(wrap_pyfunction!(_sosfilt_complex, m)?)?;
     Ok(())
 }

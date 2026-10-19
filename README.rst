@@ -17,11 +17,14 @@ Why
 ---
 
 SciPy's compiled kernels are C, C++, Cython and Fortran. rsSciPy keeps the
-algorithms but rebuilds the compiled layer in Rust, and swaps the array backend
-from NumPy to rsnumpy. Two consequences worth knowing up front:
+algorithms, migrates compiled kernels to Rust incrementally, and swaps the array
+backend from NumPy to rsnumpy. Until that migration is complete, some native
+extensions still use the upstream implementations. Two consequences worth
+knowing up front:
 
-- **No NumPy at runtime.** Arrays are rsnumpy arrays; the numerical kernels are
-  Rust.
+- **No Python NumPy dependency at runtime.** Arrays are rsnumpy arrays. NumPy
+  remains a build-time dependency for the C/Cython extensions that have not yet
+  been ported.
 - **Recomputation over incremental update.** Where upstream keeps a factorisation
   up to date with Givens rotations (``scipy.linalg.qr_update`` and friends), this
   port recomputes the factorisation. The results match, but the complexity is
@@ -39,7 +42,7 @@ Building from source
 --------------------
 
 The build is **meson-python plus Rust**: meson builds the Python package, and
-``tools/build_rust.py`` builds the five Rust crates declared in
+``tools/build_rust.py`` builds the Rust crates declared in
 ``rust/modules.toml`` into CPython extension modules that are copied next to the
 Python files that import them.
 

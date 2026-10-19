@@ -13,16 +13,7 @@ py3.extension_module('_sigtools',
   subdir: 'rsscipy/signal'
 )
 
-# `_max_len_seq_inner` is now `_max_len_seq_inner.py` (pure Python), installed
-# as a source rather than compiled through pythran or Cython.
-py3.install_sources(
-  ['_max_len_seq_inner.py'],
-  subdir: 'rsscipy/signal'
-)
-
 pyx_files = [
-  ['_peak_finding_utils', '_peak_finding_utils.pyx'],
-  ['_sosfilt', '_sosfilt.pyx'],
   ['_upfirdn_apply', '_upfirdn_apply.pyx']
 ]
 
@@ -36,6 +27,16 @@ foreach pyx_file: pyx_files
     subdir: 'rsscipy/signal'
   )
 endforeach
+
+# Rust extension modules built by `tools/build_rust.py` at configure time.
+install_data(
+  [
+    '_peak_finding_utils_rs.so',
+    '_sosfilt_rs.so',
+    '_max_len_seq_inner_rs.so',
+  ],
+  install_dir: scipy_dir / 'signal',
+)
 
 py3.extension_module('_spline',
   [
@@ -60,10 +61,12 @@ py3.install_sources([
     '_lti_conversion.py',
     '_ltisys.py',
     '_max_len_seq.py',
+    '_max_len_seq_inner.py',
     '_peak_finding.py',
     '_polyutils.py',
     '_savitzky_golay.py',
     '_short_time_fft.py',
+    '_sosfilt.py',
     '_signaltools.py',
     '_spectral_py.py',
     '_spline.pyi',
