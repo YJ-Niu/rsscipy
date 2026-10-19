@@ -13,25 +13,12 @@ py3.extension_module('_sigtools',
   subdir: 'rsscipy/signal'
 )
 
-if use_pythran
-  py3.extension_module('_max_len_seq_inner',
-    pythran_gen.process('_max_len_seq_inner.py'),
-    cpp_args: [cpp_args_pythran, _cpp_Wno_unused_local_typedefs],
-    dependencies: [pythran_dep, np_dep],
-    link_args: version_link_args,
-    install: true,
-    subdir: 'rsscipy/signal'
-  )
-else
-  py3.extension_module('_max_len_seq_inner',
-    [cython_gen.process('_max_len_seq_inner.pyx')],
-    c_args: cython_c_args,
-    dependencies: np_dep,
-    link_args: version_link_args,
-    install: true,
-    subdir: 'rsscipy/signal'
-  )
-endif
+# `_max_len_seq_inner` is now `_max_len_seq_inner.py` (pure Python), installed
+# as a source rather than compiled through pythran or Cython.
+py3.install_sources(
+  ['_max_len_seq_inner.py'],
+  subdir: 'rsscipy/signal'
+)
 
 pyx_files = [
   ['_peak_finding_utils', '_peak_finding_utils.pyx'],

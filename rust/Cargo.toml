@@ -6,7 +6,7 @@
 # performs the build + copy.
 [workspace]
 resolver = "2"
-members = ["fpumode", "ccallback", "array_utils", "fblas", "flapack"]
+members = ["fpumode", "ccallback", "array_utils", "fblas", "flapack", "peak_finding_utils"]
 
 [workspace.package]
 version = "2.0.0-dev"

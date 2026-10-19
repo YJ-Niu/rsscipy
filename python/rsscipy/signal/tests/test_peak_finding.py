@@ -16,7 +16,7 @@ from rsscipy.signal._peak_finding import (
     _identify_ridge_lines
 )
 from rsscipy.signal.windows import gaussian
-from rsscipy.signal._peak_finding_utils import _local_maxima_1d, PeakPropertyWarning
+from rsscipy.signal._peak_finding_utils_rs import _local_maxima_1d, PeakPropertyWarning
 
 
 def _gen_gaussians(center_locs, sigmas, total_length):

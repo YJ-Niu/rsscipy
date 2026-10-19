@@ -106,25 +106,12 @@ py3.extension_module('_biteopt',
   subdir: 'rsscipy/optimize'
 )
 
-if use_pythran
-  py3.extension_module('_group_columns',
-    pythran_gen.process('_group_columns.py'),
-    cpp_args: cpp_args_pythran,
-    dependencies: [pythran_dep, np_dep],
-    link_args: version_link_args,
-    install: true,
-    subdir: 'rsscipy/optimize'
-  )
-else
-  py3.extension_module('_group_columns',
-    cython_gen.process('_group_columns.pyx'),
-    c_args: cython_c_args,
-    dependencies: np_dep,
-    link_args: version_link_args,
-    install: true,
-    subdir: 'rsscipy/optimize'
-  )
-endif
+# `_group_columns` is now `_group_columns.py` (pure Python), installed as a
+# source rather than compiled through pythran or Cython.
+py3.install_sources(
+  ['_group_columns.py'],
+  subdir: 'rsscipy/optimize'
+)
 
 _dummy_init_optimize = fs.copyfile('__init__.py')
 

@@ -58,7 +58,7 @@ if 'musl' in _v:
     IS_MUSL = True
 
 
-IS_EDITABLE = 'editable' in scipy.__path__[0]
+IS_EDITABLE = 'editable' in rsscipy.__path__[0]
 
 
 class FPUModeChangeWarning(RuntimeWarning):

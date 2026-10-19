@@ -29,3 +29,8 @@ dest = "python/rsscipy/linalg"
 crate = "flapack"
 lib = "_flapack_rs"
 dest = "python/rsscipy/linalg"
+
+[[module]]
+crate = "peak_finding_utils"
+lib = "_peak_finding_utils_rs"
+dest = "python/rsscipy/signal"

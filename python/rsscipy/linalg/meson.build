@@ -82,15 +82,8 @@ py3.extension_module('_decomp_interpolative',
 # `_solve_toeplitz` is now pure Python (`_solve_toeplitz.py`): the Levinson
 # recursion is inherently sequential, so there was nothing for Rust to speed up.
 
-# _matfuncs_sqrtm_triu:
-py3.extension_module('_matfuncs_sqrtm_triu',
-  linalg_init_cython_gen.process('_matfuncs_sqrtm_triu.pyx'),
-  c_args: cython_c_args,
-  dependencies: np_dep,
-  link_args: version_link_args,
-  install: true,
-  subdir: 'rsscipy/linalg'
-)
+# `_matfuncs_sqrtm_triu` is now `_matfuncs_sqrtm_triu.py` (pure Python on
+# rsnumpy); the Cython version is superseded.
 
 cython_blas_lapack_dep = cython_blas_ilp64 ? lapack_dep : lapack_lp64_dep
 cython_blas = py3.extension_module('cython_blas',
@@ -117,20 +110,10 @@ cython_lapack = py3.extension_module('cython_lapack',
   subdir: 'rsscipy/linalg'
 )
 
-_decomp_update_pyx = custom_target('_decomp_update',
-  output: '_decomp_update.pyx',
-  input: '_decomp_update.pyx.in',
-  command: [tempita, '@INPUT@', '-o', '@OUTDIR@']
-)
-
-py3.extension_module('_decomp_update',
-  linalg_cython_gen.process(_decomp_update_pyx),
-  c_args: cython_c_args,
-  dependencies: np_dep,
-  link_args: version_link_args,
-  install: true,
-  subdir: 'rsscipy/linalg'
-)
+# `_decomp_update` is now `_decomp_update.py` (pure Python: it recomputes the
+# QR factorisation instead of applying Givens rotations).  The
+# `_decomp_update.pyx.in` template is gone, so the custom target above and the
+# Cython build are both removed -- referencing them would break configure.
 
 # `_internal_matfuncs` is now pure Python (`_internal_matfuncs.py`);
 # `_matfuncsmodule.c` and `src/_matfuncs_*.c` are gone.

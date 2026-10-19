@@ -28,18 +28,5 @@ py3.install_sources([
   install_tag: 'tests'
 )
 
-if use_pythran
-  py3.extension_module('_rbfinterp_kernel_pythran',
-    pythran_gen.process('_rbfinterp_kernel_pythran.py'),
-    cpp_args: cpp_args_pythran,
-    dependencies: [pythran_dep, np_dep],
-    link_args: version_link_args,
-    install: true,
-    subdir: 'rsscipy/interpolate/tests'
-  )
-else
-  py3.install_sources(
-    ['_rbfinterp_kernel_pythran.py'],
-    subdir: 'rsscipy/interpolate/tests'
-  )
-endif
+# `_rbfinterp_kernel_pythran.py` is plain Python and is already listed in the
+# `py3.install_sources` block above; compiling it through pythran is gone.

@@ -52,7 +52,10 @@ if use_pythran
       [
         '-c',
       '''import os
-os.chdir(os.path.join("..", "tools"))
+# The package now lives at `python/rsscipy`, one level deeper than the old
+# `scipy/`, so `tools/` is two levels up -- the previous `("..", "tools")`
+# resolved to a directory that does not exist.
+os.chdir(os.path.join("..", "..", "tools"))
 import pythran
 try:
   incdir = os.path.relpath(pythran.get_include())

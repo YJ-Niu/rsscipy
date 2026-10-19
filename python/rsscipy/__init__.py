@@ -112,7 +112,7 @@ def __dir__():
 
 def __getattr__(name):
     if name in submodules:
-        return _importlib.import_module(f'scipy.{name}')
+        return _importlib.import_module(f'rsscipy.{name}')
     elif name == "odr":
         raise AttributeError(
             "`scipy.odr` was deprecated in SciPy 1.17 and removed in SciPy 2.0. "
