@@ -25,6 +25,10 @@ knowing up front:
 - **No Python NumPy dependency at runtime.** Arrays are rsnumpy arrays. NumPy
   remains a build-time dependency for the C/Cython extensions that have not yet
   been ported.
+- **Native-kernel migration is ongoing.** Signal filtering kernels including
+  ``lfilter``, ``sosfilt``, ``upfirdn``, spline filtering, and 2-D median
+  filtering now run in Rust; other C, C++, Cython, and Fortran production
+  extensions are still being replaced.
 - **Recomputation over incremental update.** Where upstream keeps a factorisation
   up to date with Givens rotations (``scipy.linalg.qr_update`` and friends), this
   port recomputes the factorisation. The results match, but the complexity is
@@ -42,9 +46,9 @@ Building from source
 --------------------
 
 The build is **meson-python plus Rust**: meson builds the Python package, and
-``tools/build_rust.py`` builds the Rust crates declared in
-``rust/modules.toml`` into CPython extension modules that are copied next to the
-Python files that import them.
+``tools/build_rust.py`` builds the unified Rust crate declared in
+``rust/modules.toml`` into one CPython extension. Its internal Rust modules
+remain organized by package domain.
 
 There is a helper that does the whole thing and installs the result into
 ``.venv``::
@@ -59,7 +63,7 @@ Useful flags::
 
 To do it by hand::
 
-    python tools/build_rust.py      # build the Rust extension modules
+    python tools/build_rust.py      # build the unified Rust extension
     python -m build --wheel         # build the wheel
     pip install dist/*.whl
 
@@ -79,6 +83,11 @@ Clone with submodules; meson hard-errors without them::
 or, after a plain clone::
 
     git submodule update --init --recursive
+
+Run the Rust unit tests from the workspace root::
+
+    cd rust
+    cargo test --workspace
 
 Links
 -----

@@ -16,7 +16,7 @@ import rsnumpy as np
 
 from rsscipy._lib._util import _apply_over_batch
 
-from ._array_utils_rs import is_complex_f64, is_sym_f64, is_sym_her_bytes
+from rsscipy._rsscipy_rs.linalg import is_complex_f64, is_sym_f64, is_sym_her_bytes
 
 __all__ = ['issymmetric', 'ishermitian']
 

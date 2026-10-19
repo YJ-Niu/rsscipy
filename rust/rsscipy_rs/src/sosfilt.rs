@@ -226,8 +226,7 @@ fn _sosfilt_complex<'py>(
 // module
 // ---------------------------------------------------------------------------
 
-#[pymodule]
-fn _sosfilt_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub(super) fn register(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(_sosfilt_float, m)?)?;
     m.add_function(wrap_pyfunction!(_sosfilt_complex, m)?)?;
     Ok(())

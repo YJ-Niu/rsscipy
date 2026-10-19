@@ -70,6 +70,7 @@ def build(profile: str, offline: bool) -> list[Path]:
             cargo, "build",
             "--manifest-path", str(manifest),
             "--target-dir", str(target_dir),
+            "--features", "extension-module",
         ]
         if profile == "release":
             cmd.append("--release")

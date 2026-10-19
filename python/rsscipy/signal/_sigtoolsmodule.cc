@@ -950,88 +950,10 @@ fail:
     return NULL;
 }
 
-static char doc_median2d[] = "filt = _median2d(data, size)";
-
-extern void f_medfilt2(float*,float*,npy_intp*,npy_intp*,int*);
-extern void d_medfilt2(double*,double*,npy_intp*,npy_intp*,int*);
-extern void b_medfilt2(unsigned char*,unsigned char*,npy_intp*,npy_intp*,int*);
-
-static PyObject *_sigtools_median2d(PyObject *NPY_UNUSED(dummy), PyObject *args)
-{
-    PyObject *image=NULL, *size=NULL;
-    int typenum, errnum=-2;
-    PyArrayObject *a_image=NULL, *a_size=NULL;
-    PyArrayObject *a_out=NULL;
-    npy_intp Nwin[2] = {3,3};
-
-    if (!PyArg_ParseTuple(args, "O|O", &image, &size)) return NULL;
-
-    typenum = PyArray_ObjectType(image, 0);
-    a_image = (PyArrayObject *)PyArray_ContiguousFromObject(image, typenum, 2, 2);
-    if (a_image == NULL) goto fail;
-
-    if (size != NULL) {
-	a_size = (PyArrayObject *)PyArray_ContiguousFromObject(size, NPY_INTP, 1, 1);
-	if (a_size == NULL) goto fail;
-	if ((PyArray_NDIM(a_size) != 1) || (PyArray_DIMS(a_size)[0] < 2))
-	    PYERR("Size must be a length two sequence");
-	Nwin[0] = ((npy_intp *)PyArray_DATA(a_size))[0];
-	Nwin[1] = ((npy_intp *)PyArray_DATA(a_size))[1];
-    }
-
-    a_out = (PyArrayObject *)PyArray_SimpleNew(2, PyArray_DIMS(a_image), typenum);
-    if (a_out == NULL) goto fail;
-
-    switch (typenum) {
-        case NPY_UBYTE:
-            b_medfilt2((unsigned char *)PyArray_DATA(a_image),
-                       (unsigned char *)PyArray_DATA(a_out),
-                       Nwin, PyArray_DIMS(a_image),
-                       &errnum);
-            break;
-        case NPY_FLOAT:
-            f_medfilt2((float *)PyArray_DATA(a_image),
-                       (float *)PyArray_DATA(a_out), Nwin,
-                       PyArray_DIMS(a_image),
-                       &errnum);
-            break;
-        case NPY_DOUBLE:
-            d_medfilt2((double *)PyArray_DATA(a_image),
-                       (double *)PyArray_DATA(a_out), Nwin,
-                       PyArray_DIMS(a_image),
-                       &errnum);
-            break;
-        default:
-            PYERR("2D median filter only supports uint8, float32, and float64.");
-    }
-    if (errnum != 0) {
-        PYERR("ERROR: unable to allocate enough memory in _medfilt2d!\n");
-    }
-
-    Py_DECREF(a_image);
-    Py_XDECREF(a_size);
-
-    return PyArray_Return(a_out);
-
- fail:
-    Py_XDECREF(a_image);
-    Py_XDECREF(a_size);
-    Py_XDECREF(a_out);
-    return NULL;
-
-}
-
-static char doc_linear_filter[] =
-    "(y,Vf) = _linear_filter(b,a,X,Dim=-1,Vi=None)  " \
-    "implemented using Direct Form II transposed flow " \
-    "diagram. If Vi is not given, Vf is not returned.";
-
 static struct PyMethodDef toolbox_module_methods[] = {
 	{"_correlateND", scipy_signal__sigtools_correlateND, METH_VARARGS, doc_correlateND},
 	{"_convolve2d", _sigtools_convolve2d, METH_VARARGS, doc_convolve2d},
-	{"_linear_filter", scipy_signal__sigtools_linear_filter, METH_VARARGS, doc_linear_filter},
 	{"_remez", _sigtools_remez, METH_VARARGS, doc_remez},
-	{"_medfilt2d", _sigtools_median2d, METH_VARARGS, doc_median2d},
 	{NULL, NULL, 0, NULL}		/* sentinel */
 };
 
@@ -1039,8 +961,6 @@ static int module_exec(PyObject *module) {
     (void)module;  /* unused */
 
     if (_import_array() < 0) { return -1; }
-
-    scipy_signal__sigtools_linear_filter_module_init();
 
     return 0;
 }

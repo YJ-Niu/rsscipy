@@ -1,14 +1,16 @@
 [package]
-name = "rsscipy-fpumode"
+name = "rsscipy-rust"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Rust port of scipy/_lib/_fpumode.c"
+description = "Rust extension kernels for rsSciPy"
 
 [lib]
-# becomes `scipy/_lib/_fpumode.so`
-name = "_fpumode"
+name = "_rsscipy_rs"
 crate-type = ["cdylib"]
+
+[features]
+extension-module = ["pyo3/extension-module"]
 
 [dependencies]
 pyo3.workspace = true

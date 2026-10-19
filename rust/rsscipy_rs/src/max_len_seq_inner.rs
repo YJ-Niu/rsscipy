@@ -176,8 +176,7 @@ fn _max_len_seq_inner<'py>(
 // module
 // ---------------------------------------------------------------------------
 
-#[pymodule]
-fn _max_len_seq_inner_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub(super) fn register(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(_max_len_seq_inner, m)?)?;
     Ok(())
 }

@@ -2,7 +2,7 @@
 
 import rsnumpy as np
 
-from ._max_len_seq_inner_rs import _max_len_seq_inner as _max_len_seq_inner_rust
+from rsscipy._rsscipy_rs.signal import _max_len_seq_inner as _max_len_seq_inner_rust
 
 __all__ = ['_max_len_seq_inner']
 

@@ -8,7 +8,7 @@ they are pure glue.
 
 import ctypes
 
-from ._ccallback_rs import (
+from rsscipy._rsscipy_rs._lib import (
     check_capsule,
     get_capsule_signature,
     get_raw_capsule,

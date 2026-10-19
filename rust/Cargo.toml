@@ -1,12 +1,10 @@
 # Rust extension layer for rsscipy.
 #
-# Every Rust crate here becomes one CPython extension module that replaces the
-# corresponding C/Cython sources under `scipy/`.  `rust/modules.toml` declares
-# where each built module has to be copied to, and `tools/build_rust.py`
-# performs the build + copy.
+# All native Rust kernels are built into one CPython extension. The source
+# modules remain separated by domain under `rsscipy_rs/src`.
 [workspace]
 resolver = "2"
-members = ["fpumode", "ccallback", "array_utils", "fblas", "flapack", "peak_finding_utils", "sosfilt", "max_len_seq_inner"]
+members = ["rsscipy_rs"]
 
 [workspace.package]
 version = "2.0.0-dev"
@@ -14,4 +12,4 @@ edition = "2021"
 license = "BSD-3-Clause"
 
 [workspace.dependencies]
-pyo3 = { version = "0.29", features = ["extension-module"] }
+pyo3 = { version = "0.29", features = ["macros"] }

@@ -381,6 +381,11 @@ py3.install_sources(
   subdir: 'rsscipy'
 )
 
+install_data(
+  '_rsscipy_rs.so',
+  install_dir: scipy_dir,
+)
+
 # Copy the main __init__.py to the build dir.
 # Some submodules (linalg, special, optimize) add pxd files to this.
 # Needed to trick Cython, it won't do a relative import outside a package

@@ -316,8 +316,7 @@ fn gemm_f64(
     )
 }
 
-#[pymodule]
-fn _fblas_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub(super) fn register(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(gemm_f32, m)?)?;
     m.add_function(wrap_pyfunction!(gemm_f64, m)?)?;
     Ok(())

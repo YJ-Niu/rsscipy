@@ -22,7 +22,7 @@ predictably rather than silently.
 
 import rsnumpy as np
 
-from ._fblas_rs import gemm_f32, gemm_f64
+from rsscipy._rsscipy_rs.linalg import gemm_f32, gemm_f64
 
 # NOTE: rsnumpy stores *every* numeric array as float64 internally, so a
 # `dtype=float32` array still reports a `<f8` buffer.  There is therefore no

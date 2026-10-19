@@ -263,8 +263,7 @@ fn getri_lwork_f64(n: usize) -> PyResult<(f64, i32)> {
     Ok((work, info))
 }
 
-#[pymodule]
-fn _flapack_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub(super) fn register(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(getrf_f64, m)?)?;
     m.add_function(wrap_pyfunction!(getrs_f64, m)?)?;
     m.add_function(wrap_pyfunction!(getri_f64, m)?)?;

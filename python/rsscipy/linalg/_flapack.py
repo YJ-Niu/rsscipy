@@ -24,7 +24,7 @@ array as float64 and rejects complex arrays outright, so ``s-``, ``c-`` and
 
 import rsnumpy as np
 
-from ._flapack_rs import getrf_f64, getri_f64, getri_lwork_f64, getrs_f64
+from rsscipy._rsscipy_rs.linalg import getrf_f64, getri_f64, getri_lwork_f64, getrs_f64
 
 __all__ = ['dgetrf', 'dgetrs', 'dgetri', 'dgetri_lwork']
 

@@ -26,8 +26,7 @@ fn get_fpu_mode(_py: Python<'_>) -> Option<u64> {
     fpu_control_word()
 }
 
-#[pymodule]
-fn _fpumode(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub(super) fn register(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(get_fpu_mode, m)?)?;
     Ok(())
 }

@@ -300,8 +300,7 @@ fn make_sigs(py: Python<'_>) -> PyResult<Py<PyAny>> {
     Ok(PyList::new(py, items)?.into_any().unbind())
 }
 
-#[pymodule]
-fn _ccallback_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub(super) fn register(m: &Bound<'_, PyModule>) -> PyResult<()> {
     let py = m.py();
     m.add_function(wrap_pyfunction!(get_raw_capsule, m)?)?;
     m.add_function(wrap_pyfunction!(get_capsule_signature, m)?)?;

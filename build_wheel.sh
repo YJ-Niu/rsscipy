@@ -7,14 +7,13 @@ set -euo pipefail
 #
 # The build has two stages, and the order matters:
 #
-#   1. `tools/build_rust.py` runs `cargo build` for the crates listed in
-#      `rust/modules.toml` and drops the resulting extension modules next to the
-#      Python files that import them.
+#   1. `tools/build_rust.py` builds the unified Rust crate listed in
+#      `rust/modules.toml` and places its extension in the Python package.
 #   2. `python -m build --wheel` runs meson-python, which packages those .so
 #      files together with the Python sources.
 #
-# Skipping (1) produces a wheel that builds cleanly and then fails at
-# `import scipy.linalg`, because `scipy/linalg/_fblas_rs.so` is missing.
+# Skipping (1) produces a wheel that builds cleanly but fails when importing
+# functionality backed by Rust because the unified extension is missing.
 #
 # Cross-platform: run directly on macOS / Linux; on Windows use Git Bash or WSL
 # (the venv layout switches to Scripts/python.exe automatically).

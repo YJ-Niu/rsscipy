@@ -6,7 +6,7 @@ returns plain Python lists; this wrapper converts them to rsnumpy arrays.
 
 import rsnumpy as np
 
-from ._peak_finding_utils_rs import (
+from rsscipy._rsscipy_rs.signal import (
     _local_maxima_1d as _rust_local_maxima_1d,
     _select_by_peak_distance as _rust_select_by_peak_distance,
     _peak_prominences as _rust_peak_prominences,

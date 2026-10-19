@@ -210,8 +210,7 @@ fn is_sym_her_bytes(
     Ok(real_dispatch!(buf, n, code))
 }
 
-#[pymodule]
-fn _array_utils_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub(super) fn register(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(is_sym_f64, m)?)?;
     m.add_function(wrap_pyfunction!(is_complex_f64, m)?)?;
     m.add_function(wrap_pyfunction!(is_sym_her_bytes, m)?)?;

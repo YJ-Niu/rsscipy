@@ -170,19 +170,6 @@ python_sources = [
   'lapack.py',
 ]
 
-# Rust extension modules.  `tools/build_rust.py` runs at configure time (see
-# the top-level meson.build) and writes these next to the Python modules that
-# import them; without the install step below the wheel would build happily and
-# then fail at `import scipy.linalg`.
-install_data(
-  [
-    '_array_utils_rs.so',
-    '_fblas_rs.so',
-    '_flapack_rs.so',
-  ],
-  install_dir: scipy_dir / 'linalg',
-)
-
 py3.install_sources(
   python_sources,
   subdir: 'rsscipy/linalg'

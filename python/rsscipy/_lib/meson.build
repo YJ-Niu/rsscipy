@@ -107,14 +107,5 @@ py3.install_sources(
   subdir: 'rsscipy/_lib'
 )
 
-# Rust extension modules written by `tools/build_rust.py` at configure time.
-install_data(
-  [
-    '_ccallback_rs.so',
-    '_fpumode.so',
-  ],
-  install_dir: scipy_dir / '_lib',
-)
-
 subdir('_uarray')
 subdir('tests')

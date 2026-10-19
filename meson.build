@@ -23,12 +23,10 @@ py3_dep = py3.dependency()
 
 # Build the Rust extension modules before anything can install them.
 #
-# The Rust crates sit outside meson: `tools/build_rust.py` runs
-# `cargo build --release` for every entry in `rust/modules.toml` and drops the
-# shared objects next to the Python modules that import them.  Running it here
-# means `pip install .` (and therefore the wheel built at release time) ships a
-# working package, instead of one that looks fine and then fails at
-# `import scipy.linalg` because `scipy/linalg/_fblas_rs.so` is absent.
+# The unified Rust crate sits outside meson: `tools/build_rust.py` builds it
+# and drops the shared object into the Python package. Running it here means
+# `pip install .` (and therefore the wheel built at release time) includes the
+# native kernels.
 #
 # `check: true` makes a missing or failing cargo a hard configure error, which
 # is the behaviour we want: an unusable wheel is worse than no wheel.

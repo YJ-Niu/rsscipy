@@ -438,8 +438,7 @@ struct PeakPropertyWarning;
 // module
 // ---------------------------------------------------------------------------
 
-#[pymodule]
-fn _peak_finding_utils_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub(super) fn register(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(_local_maxima_1d, m)?)?;
     m.add_function(wrap_pyfunction!(_select_by_peak_distance, m)?)?;
     m.add_function(wrap_pyfunction!(_peak_prominences, m)?)?;

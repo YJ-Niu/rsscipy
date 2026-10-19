@@ -2,7 +2,7 @@
 
 import rsnumpy as np
 
-from ._sosfilt_rs import _sosfilt_complex, _sosfilt_float
+from rsscipy._rsscipy_rs.signal import _sosfilt_complex, _sosfilt_float
 
 __all__ = ['_sosfilt']
 

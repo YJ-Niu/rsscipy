@@ -51,13 +51,7 @@ typedef void (MultAddFunction) (char *, npy_intp, char *, npy_intp, char *,
                                 npy_intp *, npy_intp *, npy_uintp *);
 
 PyObject*
-scipy_signal__sigtools_linear_filter(PyObject * NPY_UNUSED(dummy), PyObject * args);
-
-PyObject*
 scipy_signal__sigtools_correlateND(PyObject *NPY_UNUSED(dummy), PyObject *args);
-
-void
-scipy_signal__sigtools_linear_filter_module_init(void);
 
 /*
 static int index_out_of_bounds(int *, int *, int );

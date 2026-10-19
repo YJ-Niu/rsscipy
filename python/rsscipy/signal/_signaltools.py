@@ -24,6 +24,8 @@ from ._arraytools import axis_slice, axis_reverse, odd_ext, even_ext, const_ext
 from ._filter_design import cheby1, _validate_sos, zpk2sos
 from ._fir_filter_design import firwin
 from ._sosfilt import _sosfilt
+from ._medfilt2d import _medfilt2d
+from ._lfilter import _linear_filter_adapter
 
 from rsscipy._lib._array_api import (
     xp_result_device, array_namespace, is_torch, is_numpy, xp_copy, xp_size,
@@ -2092,7 +2094,7 @@ def medfilt2d(input, kernel_size=3):
         if (size % 2) != 1:
             raise ValueError("Each element of kernel_size should be odd.")
 
-    result_np = _sigtools._medfilt2d(image, kernel_size)
+    result_np = _medfilt2d(image, kernel_size)
     return xp.asarray(result_np, device=device)
 
 
@@ -2304,10 +2306,10 @@ def lfilter(b, a, x, axis=-1, zi=None):
             return xp.asarray(out, device=device), xp.asarray(zf, device=device)
     else:
         if zi is None:
-            result =_sigtools._linear_filter(b, a, x, axis)
+            result = _linear_filter_adapter(b, a, x, axis)
             return xp.asarray(result, device=device)
         else:
-            out, zf = _sigtools._linear_filter(b, a, x, axis, zi)
+            out, zf = _linear_filter_adapter(b, a, x, axis, zi)
             return xp.asarray(out, device=device), xp.asarray(zf, device=device)
 
 
