@@ -104,24 +104,22 @@ jobs:
 
   publish:
     name: Publish to PyPI
-    needs: [sdist, wheels]
     runs-on: ubuntu-latest
-    environment: pypi
-    permissions:
-      # Required for Trusted Publishing (OIDC).
-      id-token: write
+    needs: [linux, windows, macos, sdist]
+    if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'release'
     steps:
-      - uses: actions/download-artifact@v4
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
         with:
-          pattern: dist-*
-          merge-multiple: true
+          pattern: wheels-*
           path: dist
-
-      - name: List artifacts
-        run: ls -l dist
+          merge-multiple: true
 
       - name: Publish
-        uses: pypa/gh-action-pypi-publish@release/v1
-        # Token fallback, if you prefer that over Trusted Publishing:
-        #   with:
-        #     password: ${{ secrets.PYPI_API_TOKEN }}
+        uses: PyO3/maturin-action@v1
+        env:
+          # 仓库 Settings → Secrets and variables → Actions 中的 secret 名（值为 PyPI token，以 pypi- 开头）。
+          MATURIN_PYPI_TOKEN: ${{ secrets.YJ_NIU }}
+        with:
+          command: upload
+          args: --non-interactive --skip-existing dist/*
