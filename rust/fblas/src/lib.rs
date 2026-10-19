@@ -68,6 +68,9 @@ trait Blas: Sized + Copy {
     fn bytes_from_slice(v: &[Self]) -> Vec<u8>;
     /// SAFETY: the caller guarantees `c` has room for `m * n` elements and that
     /// every pointer is valid for its declared leading dimension.
+    // BLAS signatures are long by nature; splitting them would only obscure
+    // the one-to-one mapping onto the reference implementation.
+    #[allow(clippy::too_many_arguments)]
     unsafe fn gemm_nn(
         m: i32,
         n: i32,
@@ -149,6 +152,8 @@ compile_error!("define a BLAS backend for this platform (see the `link` block ab
 ///
 /// All buffers are contiguous little-endian row-major; `c_bytes` may be empty
 /// when there is no output array yet, in which case `beta` is passed as 0.
+// See `gemm_nn`: this mirrors the BLAS argument list on purpose.
+#[allow(clippy::too_many_arguments)]
 fn gemm_core<T: Blas>(
     a_bytes: &[u8],
     a_shape: (usize, usize),
@@ -259,6 +264,7 @@ fn gemm_core<T: Blas>(
 
 #[pyfunction]
 #[pyo3(signature = (a_bytes, a_shape, trans_a, b_bytes, b_shape, trans_b, alpha, beta, c_bytes))]
+#[allow(clippy::too_many_arguments)]
 fn gemm_f32(
     a_bytes: &Bound<'_, PyBytes>,
     a_shape: (usize, usize),
@@ -285,6 +291,7 @@ fn gemm_f32(
 
 #[pyfunction]
 #[pyo3(signature = (a_bytes, a_shape, trans_a, b_bytes, b_shape, trans_b, alpha, beta, c_bytes))]
+#[allow(clippy::too_many_arguments)]
 fn gemm_f64(
     a_bytes: &Bound<'_, PyBytes>,
     a_shape: (usize, usize),

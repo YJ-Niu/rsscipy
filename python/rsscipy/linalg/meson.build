@@ -56,91 +56,14 @@ linalg_cython_gen = generator(cython,
   output : '@BASENAME@.c',
   depends : [_cython_tree, __init__py, cython_blas_pxd])#, cython_linalg])
 
-if needs_lp64_fblas
-  # Note: we're linking LAPACK on purpose here. For some routines (e.g., spmv)
-  # the float/double routines are in BLAS while the complex routines are in
-  # LAPACK - we have historically put these in `_fblas` (and csymv/zsymv & co. are
-  # LAPACK auxiliaries).
-  py3.extension_module('_fblas',
-    [
-      'src/blas/blas_l1.cpp',
-      'src/blas/blas_l2.cpp',
-      'src/blas/blas_l3.cpp',
-      'src/blas/blas_docs.cpp',
-      'src/blas/blas_module.cpp',
-    ],
-    include_directories: ['src/wrapper', 'src/blas'],
-    link_args: version_link_args,
-    dependencies: [np_dep, lapack_lp64_dep],
-    link_with: blas_lapack_wrapper_lib_lp64,
-    install: true,
-    subdir: 'scipy/linalg'
-  )
-
-  py3.extension_module('_flapack',
-    [
-      'src/lapack/lapack_docs.cpp',
-      'src/lapack/lapack_gen.cpp',
-      'src/lapack/lapack_gen_banded.cpp',
-      'src/lapack/lapack_gen_tri.cpp',
-      'src/lapack/lapack_pos_def.cpp',
-      'src/lapack/lapack_pos_def_tri.cpp',
-      'src/lapack/lapack_sym_herm.cpp',
-      'src/lapack/lapack_other.cpp',
-      'src/lapack/lapack_module.cpp',
-    ],
-    include_directories: ['src/wrapper', 'src/lapack'],
-    link_args: version_link_args,
-    dependencies: [np_dep, lapack_lp64_dep],
-    link_with: blas_lapack_wrapper_lib_lp64,
-    install: true,
-    subdir: 'scipy/linalg'
-  )
-
-endif
-
-if use_ilp64
-  # ILP64 sibling of `_fblas`, built from the exact same C++ sources. The module name
-  # becomes (`_fblas_64`), which the sources derive from the `-DHAVE_BLAS_ILP64`.
-  # The g77-ABI complex-dot shims used via `lapack_dep` (which links the ILP64
-  # `g77_abi_wrappers`), same as the old f2py `_fblas_64` did.
-  py3.extension_module('_fblas_64',
-    [
-      'src/blas/blas_l1.cpp',
-      'src/blas/blas_l2.cpp',
-      'src/blas/blas_l3.cpp',
-      'src/blas/blas_docs.cpp',
-      'src/blas/blas_module.cpp',
-    ],
-    include_directories: ['src/wrapper', 'src/blas'],
-    link_args: version_link_args,
-    dependencies: [np_dep, lapack_dep],
-    link_with: blas_lapack_wrapper_lib_ilp64,
-    install: true,
-    subdir: 'scipy/linalg'
-  )
-
-  # ILP64 sibling of `_flapack`, same sources; the module name follows -DHAVE_BLAS_ILP64.
-  py3.extension_module('_flapack_64',
-    [
-      'src/lapack/lapack_docs.cpp',
-      'src/lapack/lapack_gen.cpp',
-      'src/lapack/lapack_gen_banded.cpp',
-      'src/lapack/lapack_gen_tri.cpp',
-      'src/lapack/lapack_pos_def.cpp',
-      'src/lapack/lapack_pos_def_tri.cpp',
-      'src/lapack/lapack_sym_herm.cpp',
-      'src/lapack/lapack_other.cpp',
-      'src/lapack/lapack_module.cpp',
-    ],
-    include_directories: ['src/wrapper', 'src/lapack'],
-    link_args: version_link_args,
-    dependencies: [np_dep, lapack_dep],
-    link_with: blas_lapack_wrapper_lib_ilp64,
-    install: true,
-    subdir: 'scipy/linalg'
-  )
-endif
+# `_fblas` / `_flapack` (and their ILP64 siblings `_fblas_64` / `_flapack_64`)
+# used to be built here from `src/blas/*.cpp` and `src/lapack/*.cpp`, linked
+# against an external BLAS/LAPACK.  Both are now Rust crates (`rust/fblas`,
+# `rust/flapack`) producing `_fblas_rs` / `_flapack_rs`, which implement the
+# kernels in Rust and link no external BLAS at all.  `scipy/linalg/_fblas.py`
+# and `_flapack.py` import the `_rs` modules, so these C++ targets are dead
+# code -- and, because the sources are being removed, referencing them here
+# would break the configure step.
 
 # _decomp_interpolative
 py3.extension_module('_decomp_interpolative',
@@ -243,14 +166,9 @@ py3.extension_module('_internal_matfuncs',
 )
 
 
-_cythonized_array_utils = py3.extension_module('_cythonized_array_utils',
-  linalg_init_utils_cython_gen.process('_cythonized_array_utils.pyx'),
-  c_args: [cython_c_args, Wno_maybe_uninitialized],
-  dependencies: np_dep,
-  link_args: version_link_args,
-  install: true,
-  subdir: 'scipy/linalg'
-)
+# `_cythonized_array_utils` is now pure Python: `_cythonized_array_utils.py`
+# delegates the element walks to the Rust `array_utils` crate.  The `.pyx` is
+# gone, so building it here would fail.
 
 if use_pythran
   py3.extension_module('_linalg_pythran',

@@ -1,6 +1,5 @@
 _lib_pxd = [
   fs.copyfile('__init__.py'),
-  fs.copyfile('_ccallback_c.pxd'),
   fs.copyfile('ccallback.pxd'),
   fs.copyfile('messagestream.pxd'),
 ]
@@ -13,14 +12,9 @@ lib_cython_gen = generator(cython,
 
 ccallback_dep = declare_dependency(include_directories: ['..', 'src'])
 
-py3.extension_module('_ccallback_c',
-  lib_cython_gen.process('_ccallback_c.pyx'),
-  c_args: [cython_c_args, Wno_discarded_qualifiers],
-  dependencies: ccallback_dep,
-  link_args: version_link_args,
-  install: true,
-  subdir: 'scipy/_lib'
-)
+# `_ccallback_c` was a Cython module; it is now `_ccallback_c.py`, which keeps
+# the ctypes glue in Python and takes the PyCapsule machinery from the Rust
+# `ccallback` crate (`_ccallback_rs`).  The `.pyx`/`.pxd` are gone.
 
 py3.extension_module('_test_ccallback',
   'src/_test_ccallback.c',
@@ -31,13 +25,8 @@ py3.extension_module('_test_ccallback',
   install_tag: 'tests'
 )
 
-py3.extension_module('_fpumode',
-  '_fpumode.c',
-  include_directories: 'src',
-  link_args: version_link_args,
-  install: true,
-  subdir: 'scipy/_lib'
-)
+# `_fpumode` is now the Rust crate `rust/fpumode` (`_fpumode.so`); `_fpumode.c`
+# has been removed, so it must not be referenced here.
 
 py3.extension_module('_test_deprecation_call',
   cython_gen.process('_test_deprecation_call.pyx'),

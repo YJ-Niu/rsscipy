@@ -183,7 +183,7 @@ fn is_sym_her_bytes(
     buffer: &Bound<'_, PyBytes>,
     n: usize,
     typestr: &str,
-    _hermitian: bool,  // conjugation is the identity for real data
+    _hermitian: bool, // conjugation is the identity for real data
 ) -> PyResult<bool> {
     // typestr looks like "<f8" / "=c16" / "|u1": byte-order + type code
     let order = typestr.chars().next().unwrap_or('<');

@@ -47,13 +47,15 @@ extern "C" {
 }
 
 fn to_f64(buf: &[u8]) -> PyResult<Vec<f64>> {
-    if buf.len() % 8 != 0 {
+    if !buf.len().is_multiple_of(8) {
         return Err(PyValueError::new_err(
             "float64 buffer length is not a multiple of 8",
         ));
     }
     Ok(buf
-        .chunks_exact(8)
+        .as_chunks::<8>()
+        .0
+        .iter()
         .map(|c| {
             let mut arr = [0u8; 8];
             arr.copy_from_slice(c);
@@ -107,7 +109,14 @@ fn getrf_f64<'py>(
     let mut info: i32 = 0;
 
     unsafe {
-        dgetrf_(&(m as i32), &(n as i32), a_cm.as_mut_ptr(), &lda, pivots.as_mut_ptr(), &mut info);
+        dgetrf_(
+            &(m as i32),
+            &(n as i32),
+            a_cm.as_mut_ptr(),
+            &lda,
+            pivots.as_mut_ptr(),
+            &mut info,
+        );
     }
 
     for p in pivots.iter_mut() {
@@ -203,9 +212,8 @@ fn getri_f64<'py>(
     if pivots.len() != n {
         return Err(PyValueError::new_err("pivots length must match n"));
     }
-    let lwork_i = i32::try_from(lwork).map_err(|_| {
-        PyValueError::new_err("lwork does not fit in a 32-bit BLAS integer")
-    })?;
+    let lwork_i = i32::try_from(lwork)
+        .map_err(|_| PyValueError::new_err("lwork does not fit in a 32-bit BLAS integer"))?;
     if lwork_i < n as i32 {
         return Err(PyValueError::new_err(format!(
             "lwork={lwork_i} is too small, need at least {n}"
@@ -242,7 +250,15 @@ fn getri_lwork_f64(n: usize) -> PyResult<(f64, i32)> {
     let n_i = n as i32;
     let lda = leading_dim(n);
     unsafe {
-        dgetri_(&n_i, std::ptr::null_mut(), &lda, std::ptr::null(), &mut work, &-1, &mut info);
+        dgetri_(
+            &n_i,
+            std::ptr::null_mut(),
+            &lda,
+            std::ptr::null(),
+            &mut work,
+            &-1,
+            &mut info,
+        );
     }
     Ok((work, info))
 }

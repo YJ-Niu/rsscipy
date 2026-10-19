@@ -5,7 +5,7 @@
 //! The `test_*` / `plus1_*` helpers of the original module exist solely for
 //! `scipy/_lib/tests/test_ccallback.py` and are not part of the port.
 
-use std::ffi::{CStr, CString, c_char, c_double, c_int, c_long, c_short, c_void};
+use std::ffi::{c_char, c_double, c_int, c_long, c_short, c_void, CStr, CString};
 
 use pyo3::exceptions::PyValueError;
 use pyo3::ffi;
@@ -160,7 +160,11 @@ fn check_capsule(item: &Bound<'_, PyAny>) -> bool {
 /// ERROR_VALUE used by `src/_test_callback.c`; signals a failed callback.
 const ERROR_VALUE: c_double = 2.0;
 
-extern "C" fn plus1_cython(a: c_double, error_flag: *mut c_int, user_data: *mut c_void) -> c_double {
+extern "C" fn plus1_cython(
+    a: c_double,
+    error_flag: *mut c_int,
+    user_data: *mut c_void,
+) -> c_double {
     if a == ERROR_VALUE {
         unsafe { *error_flag = 1 };
         Python::attach(|py| PyValueError::new_err("failure...").restore(py));

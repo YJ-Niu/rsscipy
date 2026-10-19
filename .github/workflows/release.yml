@@ -1,32 +1,28 @@
-# Publish `rsscipy` to PyPI when a GitHub Release is published.
-#
-# Authentication uses PyPI *Trusted Publishing* (OIDC): no API token is stored
-# in this repo.  To enable it, register a pending publisher on PyPI for the
-# package `rsscipy` pointing at this workflow, and give this job
-# `permissions.id-token: write`.  A token-based fallback is documented at the
-# bottom of the publish job.
-#
-# The Rust extension modules are the reason this workflow is not just
-# `python -m build`: `tools/build_rust.py` has to run `cargo` before meson
-# configures, otherwise the wheel builds without `scipy/linalg/*.so` and fails
-# only later, at import time.  `meson.build` runs the same script at configure
-# time, so the explicit step below is a belt-and-braces measure that also makes
-# a missing Rust toolchain visible in the build log.
+name: Build and Publish Wheels
 
-name: Release
-
+# Triggered by pushing a `v*` tag (e.g. v0.1.0) or by publishing a GitHub
+# Release.  `workflow_dispatch` builds only -- it never publishes, so it is safe
+# to run by hand to check that the wheel still builds.
 on:
+  push:
+    tags:
+      - "v*"
   release:
     types: [published]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
+  # ---------------- Source distribution ----------------
+  # When no prebuilt wheel exists for a platform/Python version, pip falls back
+  # to this and builds from source (needs a Rust toolchain on the target machine).
   sdist:
     name: sdist
     runs-on: ubuntu-latest
     steps:
-      # `subprojects/` ships as git submodules (array_api_compat, xsf, unuran,
-      # ...) and meson hard-errors when they are absent.
+      # `subprojects/` are git submodules; meson hard-errors without them.
       - uses: actions/checkout@v4
         with:
           submodules: recursive
@@ -35,34 +31,43 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
-
       - name: Build sdist
         run: |
           python -m pip install --upgrade build
-          python -m build --sdist
+          python -m build --sdist --outdir dist
 
+      # Named `wheels-*` so the publish job's `pattern: wheels-*` picks it up.
       - uses: actions/upload-artifact@v4
         with:
-          name: dist-sdist
+          name: wheels-sdist
           path: dist/*.tar.gz
 
+  # ---------------- Binary wheels ----------------
   wheels:
     name: wheel (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        # macos-13 (Intel) is retired upstream; macos-latest is arm64.
         include:
           - os: ubuntu-latest
-          - os: macos-13      # x86_64
-          - os: macos-latest  # arm64
+          - os: macos-latest
           - os: windows-latest
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            rust/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('rust/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-
 
       - uses: actions/setup-python@v5
         with:
@@ -71,15 +76,24 @@ jobs:
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Build Rust extension modules
-        run: python tools/build_rust.py
+      # Needed by the still-unported C/Cython extensions; see ci.yml.
+      - name: Install BLAS/LAPACK and pkg-config (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libopenblas-dev pkg-config
 
-      - name: Build wheel
+      - name: Install BLAS/LAPACK and pkg-config (macOS)
+        if: runner.os == 'macOS'
+        run: brew install openblas pkg-config
+
+      - name: Build the wheel
+        shell: bash
         run: |
           python -m pip install --upgrade pip build
-          python -m build --wheel
+          ./build_wheel.sh --out-dir dist --python python
 
-      # PyPI rejects `linux_x86_64` wheels; auditwheel retags them manylinux.
+      # PyPI rejects `linux_x86_64`; auditwheel retags it as manylinux.
       # macOS/Windows wheels need no repair.
       - name: Repair wheel (Linux only)
         if: runner.os == 'Linux'
@@ -99,13 +113,14 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: dist-wheel-${{ matrix.os }}
+          name: wheels-${{ matrix.os }}
           path: dist-final/*.whl
 
+  # ---------------- Publish to PyPI (tags / Release only) ----------------
   publish:
     name: Publish to PyPI
     runs-on: ubuntu-latest
-    needs: [linux, windows, macos, sdist]
+    needs: [sdist, wheels]
     if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'release'
     steps:
       - name: Download all artifacts
@@ -118,7 +133,8 @@ jobs:
       - name: Publish
         uses: PyO3/maturin-action@v1
         env:
-          # 仓库 Settings → Secrets and variables → Actions 中的 secret 名（值为 PyPI token，以 pypi- 开头）。
+          # Settings → Secrets and variables → Actions. Value is a PyPI token
+          # (starts with `pypi-`).
           MATURIN_PYPI_TOKEN: ${{ secrets.YJ_NIU }}
         with:
           command: upload
