@@ -1,0 +1,127 @@
+# Publish `rsscipy` to PyPI when a GitHub Release is published.
+#
+# Authentication uses PyPI *Trusted Publishing* (OIDC): no API token is stored
+# in this repo.  To enable it, register a pending publisher on PyPI for the
+# package `rsscipy` pointing at this workflow, and give this job
+# `permissions.id-token: write`.  A token-based fallback is documented at the
+# bottom of the publish job.
+#
+# The Rust extension modules are the reason this workflow is not just
+# `python -m build`: `tools/build_rust.py` has to run `cargo` before meson
+# configures, otherwise the wheel builds without `scipy/linalg/*.so` and fails
+# only later, at import time.  `meson.build` runs the same script at configure
+# time, so the explicit step below is a belt-and-braces measure that also makes
+# a missing Rust toolchain visible in the build log.
+
+name: Release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  sdist:
+    name: sdist
+    runs-on: ubuntu-latest
+    steps:
+      # `subprojects/` ships as git submodules (array_api_compat, xsf, unuran,
+      # ...) and meson hard-errors when they are absent.
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build sdist
+        run: |
+          python -m pip install --upgrade build
+          python -m build --sdist
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-sdist
+          path: dist/*.tar.gz
+
+  wheels:
+    name: wheel (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+          - os: macos-13      # x86_64
+          - os: macos-latest  # arm64
+          - os: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build Rust extension modules
+        run: python tools/build_rust.py
+
+      - name: Build wheel
+        run: |
+          python -m pip install --upgrade pip build
+          python -m build --wheel
+
+      # PyPI rejects `linux_x86_64` wheels; auditwheel retags them manylinux.
+      # macOS/Windows wheels need no repair.
+      - name: Repair wheel (Linux only)
+        if: runner.os == 'Linux'
+        run: |
+          python -m pip install auditwheel
+          python -m auditwheel repair dist/*.whl --wheel-dir wheelhouse
+
+      - name: Collect wheel
+        shell: bash
+        run: |
+          mkdir -p dist-final
+          if [ -d wheelhouse ]; then
+            cp wheelhouse/*.whl dist-final/
+          else
+            cp dist/*.whl dist-final/
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-wheel-${{ matrix.os }}
+          path: dist-final/*.whl
+
+  publish:
+    name: Publish to PyPI
+    needs: [sdist, wheels]
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      # Required for Trusted Publishing (OIDC).
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: dist-*
+          merge-multiple: true
+          path: dist
+
+      - name: List artifacts
+        run: ls -l dist
+
+      - name: Publish
+        uses: pypa/gh-action-pypi-publish@release/v1
+        # Token fallback, if you prefer that over Trusted Publishing:
+        #   with:
+        #     password: ${{ secrets.PYPI_API_TOKEN }}

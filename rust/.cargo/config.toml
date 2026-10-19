@@ -1,0 +1,9 @@
+# On macOS a CPython extension module must not link against libpython; the
+# interpreter's symbols are resolved when the module is imported.  pyo3 adds
+# these flags itself when it can, but they are set explicitly here so the build
+# is reproducible.
+[target.aarch64-apple-darwin]
+rustflags = ["-C", "link-arg=-undefined", "-C", "link-arg=dynamic_lookup"]
+
+[target.x86_64-apple-darwin]
+rustflags = ["-C", "link-arg=-undefined", "-C", "link-arg=dynamic_lookup"]

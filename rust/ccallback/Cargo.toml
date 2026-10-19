@@ -1,0 +1,15 @@
+[package]
+name = "rsscipy-ccallback"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Rust port of scipy/_lib/_ccallback_c.pyx"
+
+[lib]
+# becomes `scipy/_lib/_ccallback_rs.so`; `scipy/_lib/_ccallback_c.py`
+# wraps it and adds the ctypes declarations.
+name = "_ccallback_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3.workspace = true

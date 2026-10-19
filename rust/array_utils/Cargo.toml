@@ -1,0 +1,14 @@
+[package]
+name = "rsscipy-array-utils"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Rust port of scipy/linalg/_cythonized_array_utils.pyx"
+
+[lib]
+# becomes `scipy/linalg/_array_utils_rs.so`
+name = "_array_utils_rs"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3.workspace = true

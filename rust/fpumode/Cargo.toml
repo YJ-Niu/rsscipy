@@ -1,0 +1,14 @@
+[package]
+name = "rsscipy-fpumode"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Rust port of scipy/_lib/_fpumode.c"
+
+[lib]
+# becomes `scipy/_lib/_fpumode.so`
+name = "_fpumode"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3.workspace = true

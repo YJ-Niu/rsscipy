@@ -1,0 +1,206 @@
+{
+    "_ellip_harm": {
+        "_ellip_harm.pxd": {
+            "ellip_harmonic": "ddiiddd->d"
+        },
+        "_legacy.pxd": {
+            "ellip_harmonic_unsafe": "ddddddd->d"
+        }
+    },
+    "bdtr": {
+        "_legacy.pxd": {
+            "bdtr_unsafe": "ddd->d"
+        },
+        "cython_special_wrappers.h": {
+            "cephes_bdtr_wrap": "dpd->d"
+        }
+    },
+    "bdtrc": {
+        "_legacy.pxd": {
+            "bdtrc_unsafe": "ddd->d"
+        },
+        "cython_special_wrappers.h": {
+            "cephes_bdtrc_wrap": "dpd->d"
+        }
+    },
+    "bdtri": {
+        "_legacy.pxd": {
+            "bdtri_unsafe": "ddd->d"
+        },
+        "cython_special_wrappers.h": {
+            "cephes_bdtri_wrap": "dpd->d"
+        }
+    },
+    "eval_chebyc": {
+        "orthogonal_eval.pxd": {
+            "eval_chebyc[double complex]": "dD->D",
+            "eval_chebyc[double]": "dd->d",
+            "eval_chebyc_l": "pd->d"
+        }
+    },
+    "eval_chebys": {
+        "orthogonal_eval.pxd": {
+            "eval_chebys[double complex]": "dD->D",
+            "eval_chebys[double]": "dd->d",
+            "eval_chebys_l": "pd->d"
+        }
+    },
+    "eval_chebyt": {
+        "orthogonal_eval.pxd": {
+            "eval_chebyt[double complex]": "dD->D",
+            "eval_chebyt[double]": "dd->d",
+            "eval_chebyt_l": "pd->d"
+        }
+    },
+    "eval_chebyu": {
+        "orthogonal_eval.pxd": {
+            "eval_chebyu[double complex]": "dD->D",
+            "eval_chebyu[double]": "dd->d",
+            "eval_chebyu_l": "pd->d"
+        }
+    },
+    "eval_gegenbauer": {
+        "orthogonal_eval.pxd": {
+            "eval_gegenbauer[double complex]": "ddD->D",
+            "eval_gegenbauer[double]": "ddd->d",
+            "eval_gegenbauer_l": "pdd->d"
+        }
+    },
+    "eval_legendre": {
+        "orthogonal_eval.pxd": {
+            "eval_legendre[double complex]": "dD->D",
+            "eval_legendre[double]": "dd->d",
+            "eval_legendre_l": "pd->d"
+        }
+    },
+    "eval_sh_chebyt": {
+        "orthogonal_eval.pxd": {
+            "eval_sh_chebyt[double complex]": "dD->D",
+            "eval_sh_chebyt[double]": "dd->d",
+            "eval_sh_chebyt_l": "pd->d"
+        }
+    },
+    "eval_sh_chebyu": {
+        "orthogonal_eval.pxd": {
+            "eval_sh_chebyu[double complex]": "dD->D",
+            "eval_sh_chebyu[double]": "dd->d",
+            "eval_sh_chebyu_l": "pd->d"
+        }
+    },
+    "eval_sh_legendre": {
+        "orthogonal_eval.pxd": {
+            "eval_sh_legendre[double complex]": "dD->D",
+            "eval_sh_legendre[double]": "dd->d",
+            "eval_sh_legendre_l": "pd->d"
+        }
+    },
+    "expn": {
+        "_legacy.pxd": {
+            "expn_unsafe": "dd->d"
+        },
+        "cython_special_wrappers.h": {
+            "cephes_expn_wrap": "pd->d"
+        }
+    },
+    "fdtridfd": {
+        "_cdflib_wrappers.pxd": {
+            "fdtridfd": "ddd->d"        }
+    },
+    "kn": {
+        "_legacy.pxd": {
+            "kn_unsafe": "dd->d"
+        },
+        "cython_special_wrappers.h": {
+            "special_cyl_bessel_k_int": "pd->d"
+        }
+    },
+    "nbdtr": {
+        "_legacy.pxd": {
+            "nbdtr_unsafe": "ddd->d"
+        },
+        "cython_special_wrappers.h": {
+            "cephes_nbdtr_wrap": "ppd->d"
+        }
+    },
+    "nbdtrc": {
+        "_legacy.pxd": {
+            "nbdtrc_unsafe": "ddd->d"
+        },
+        "cython_special_wrappers.h": {
+            "cephes_nbdtrc_wrap": "ppd->d"
+        }
+    },
+    "nbdtri": {
+        "_legacy.pxd": {
+            "nbdtri_unsafe": "ddd->d"
+        },
+        "cython_special_wrappers.h": {
+            "cephes_nbdtri_wrap": "ppd->d"
+        }
+    },
+    "ncfdtridfd": {
+        "_cdflib_wrappers.pxd": {
+            "ncfdtridfd": "dddd->d"
+        }
+    },
+    "ncfdtridfn": {
+        "_cdflib_wrappers.pxd": {
+            "ncfdtridfn": "dddd->d"        }
+    },
+    "pdtri": {
+        "_legacy.pxd": {
+            "pdtri_unsafe": "dd->d"
+        },
+        "cython_special_wrappers.h": {
+            "cephes_pdtri_wrap": "pd->d"
+        }
+    },
+    "smirnov": {
+        "_legacy.pxd": {
+            "smirnov_unsafe": "dd->d"
+        },
+        "cython_special_wrappers.h": {
+            "cephes_smirnov_wrap": "pd->d"
+        }
+    },
+    "_smirnovc": {
+        "_legacy.pxd": {
+            "smirnovc_unsafe": "dd->d"
+        },
+        "cython_special_wrappers.h": {
+            "cephes_smirnovc_wrap": "pd->d"
+        }
+    },
+    "_smirnovci": {
+        "_legacy.pxd": {
+            "smirnovci_unsafe": "dd->d"
+        },
+        "cython_special_wrappers.h": {
+            "cephes_smirnovci_wrap": "pd->d"
+        }
+    },
+    "smirnovi": {
+        "_legacy.pxd": {
+            "smirnovi_unsafe": "dd->d"
+        },
+        "cython_special_wrappers.h": {
+            "cephes_smirnovi_wrap": "pd->d"
+        }
+    },
+    "_smirnovp": {
+        "_legacy.pxd": {
+            "smirnovp_unsafe": "dd->d"
+        },
+        "cython_special_wrappers.h": {
+            "cephes_smirnovp_wrap": "pd->d"
+        }
+    },
+    "yn": {
+        "_legacy.pxd": {
+            "yn_unsafe": "dd->d"
+        },
+        "cython_special_wrappers.h": {
+            "cephes_yn_wrap": "pd->d"
+        }
+    }
+}

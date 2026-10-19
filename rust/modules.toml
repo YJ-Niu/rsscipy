@@ -1,0 +1,31 @@
+# Which Rust crate produces which CPython extension module, and where it goes.
+#
+#   crate  : directory name under `rust/`
+#   lib    : the `#[pymodule]` name == the `[lib] name` in the crate's Cargo.toml
+#   dest   : destination directory inside the Python package
+#
+# Add a new entry (plus the crate) whenever another C/Cython module is ported.
+[[module]]
+crate = "fpumode"
+lib = "_fpumode"
+dest = "scipy/_lib"
+
+[[module]]
+crate = "ccallback"
+lib = "_ccallback_rs"
+dest = "scipy/_lib"
+
+[[module]]
+crate = "array_utils"
+lib = "_array_utils_rs"
+dest = "scipy/linalg"
+
+[[module]]
+crate = "fblas"
+lib = "_fblas_rs"
+dest = "scipy/linalg"
+
+[[module]]
+crate = "flapack"
+lib = "_flapack_rs"
+dest = "scipy/linalg"
