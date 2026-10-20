@@ -26,9 +26,14 @@ knowing up front:
   remains a build-time dependency for the C/Cython extensions that have not yet
   been ported.
 - **Native-kernel migration is ongoing.** Signal filtering kernels including
-  ``lfilter``, ``sosfilt``, ``upfirdn``, spline filtering, and 2-D median
-  filtering now run in Rust; other C, C++, Cython, and Fortran production
-  extensions are still being replaced.
+  ``lfilter``, ``sosfilt``, ``upfirdn``, direct N-D ``correlate``,
+  ``convolve2d``/``correlate2d``, ``remez`` FIR design, spline filtering, and
+  2-D median filtering now run in Rust. FFTPACK's packed-spectrum convolution
+  kernels and convolution-kernel generation, as well as cluster VQ assignment
+  and cluster-mean updates, also run in Rust; other C, C++, Cython, and Fortran
+  production extensions are still being replaced. Regular-grid interpolation's
+  interval search and 2-D linear interpolation kernels, as well as reverse
+  Cuthill-McKee graph ordering, also run in Rust.
 - **Recomputation over incremental update.** Where upstream keeps a factorisation
   up to date with Givens rotations (``scipy.linalg.qr_update`` and friends), this
   port recomputes the factorisation. The results match, but the complexity is

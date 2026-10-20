@@ -2,12 +2,12 @@
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs.signal import (
-    _sepfir2d,
-    _symiirorder1_ic,
-    _symiirorder2_ic_bwd,
-    _symiirorder2_ic_fwd,
-)
+from rsscipy._rsscipy_rs import signal as _rust_signal
+
+_sepfir2d = _rust_signal._sepfir2d
+_symiirorder1_ic = _rust_signal._symiirorder1_ic
+_symiirorder2_ic_bwd = _rust_signal._symiirorder2_ic_bwd
+_symiirorder2_ic_fwd = _rust_signal._symiirorder2_ic_fwd
 
 __all__ = [
     'sepfir2d',

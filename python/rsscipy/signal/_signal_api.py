@@ -6,7 +6,7 @@ The latter --- also private! --- module adds delegation to CuPy etc and
 re-exports decorated names to __init__.py
 """
 
-from . import _sigtools, windows         # noqa: F401
+from . import windows                    # noqa: F401
 from ._waveforms import *        # noqa: F403
 from ._max_len_seq import max_len_seq       # noqa: F401
 from ._upfirdn import upfirdn         # noqa: F401

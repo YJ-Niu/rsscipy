@@ -16,15 +16,6 @@ py3.extension_module('_ppoly',
   subdir: 'rsscipy/interpolate'
 )
 
-py3.extension_module('_rgi_cython',
-  linalg_cython_gen.process('_rgi_cython.pyx'),
-  c_args: cython_c_args,
-  dependencies: np_dep,
-  link_args: version_link_args,
-  install: true,
-  subdir: 'rsscipy/interpolate'
-)
-
 __fitpack_lib = static_library('__fitpack',
     ['src/__fitpack.h', 'src/__fitpack.cc'],
     dependencies:[lapack_dep, np_dep, py3_dep],
@@ -80,6 +71,7 @@ py3.install_sources([
     '_rbfinterp_xp.py',
     '_regrid.py',
     '_rgi.py',
+    '_rgi_cython.py',
     '_ndbspline.py',
   ],
   subdir: 'rsscipy/interpolate'

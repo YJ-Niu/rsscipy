@@ -1,24 +1,23 @@
 """Low-level callback helpers.
 
 Replaces the Cython module ``scipy/_lib/_ccallback_c.pyx``: the PyCapsule
-machinery and the C-ABI test callables now live in Rust
-(``rust/ccallback``), while the ``ctypes`` declarations stay in Python because
-they are pure glue.
+machinery and the C-ABI test callables now live in the unified Rust extension,
+while the ``ctypes`` declarations stay in Python because they are pure glue.
 """
 
 import ctypes
 
-from rsscipy._rsscipy_rs._lib import (
-    check_capsule,
-    get_capsule_signature,
-    get_raw_capsule,
-    plus1_addr,
-    plus1b_addr,
-    plus1bc_addr,
-    sine_addr,
-    sigs,
-    test_call_cython,
-)
+from rsscipy._rsscipy_rs import _lib as _rust_lib
+
+check_capsule = _rust_lib.check_capsule
+get_capsule_signature = _rust_lib.get_capsule_signature
+get_raw_capsule = _rust_lib.get_raw_capsule
+plus1_addr = _rust_lib.plus1_addr
+plus1b_addr = _rust_lib.plus1b_addr
+plus1bc_addr = _rust_lib.plus1bc_addr
+sine_addr = _rust_lib.sine_addr
+sigs = _rust_lib.sigs
+test_call_cython = _rust_lib.test_call_cython
 
 __all__ = [
     "check_capsule",

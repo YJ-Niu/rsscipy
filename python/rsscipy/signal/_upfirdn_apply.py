@@ -2,12 +2,12 @@
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs.signal import (
-    _apply as _apply_rust,
-    _output_len,
-    _pad_test as _pad_test_rust,
-    mode_enum as _mode_enum_rust,
-)
+from rsscipy._rsscipy_rs import signal as _rust_signal
+
+_apply_rust = _rust_signal._apply
+_output_len = _rust_signal._output_len
+_pad_test_rust = _rust_signal._pad_test
+_mode_enum_rust = _rust_signal.mode_enum
 
 __all__ = ['_output_len', '_apply', '_pad_test', 'mode_enum']
 

@@ -4,7 +4,8 @@ from math import prod
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs.signal import _linear_filter
+from rsscipy._rsscipy_rs import signal as _rust_signal
+_linear_filter = _rust_signal._linear_filter
 
 
 def _filter_values(values):

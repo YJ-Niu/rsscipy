@@ -2,9 +2,8 @@
 
 Meson cannot configure this tree (7 bundled subprojects are empty), so the
 package is exposed to the target environment with a `.pth` file that puts the
-source directory on `sys.path`.  The compiled modules produced by
-`tools/build_rust.py` sit next to their Python sources, so the result is a
-working editable-style install.
+source directory on `sys.path`.  The unified compiled extension produced by `tools/build_rust.py` is placed in
+the Python package, so the result is a working editable-style install.
 
 Usage::
 

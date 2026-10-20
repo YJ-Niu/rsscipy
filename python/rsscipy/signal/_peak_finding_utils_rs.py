@@ -1,4 +1,4 @@
-"""Python wrapper for the Rust `_peak_finding_utils_rs` extension module.
+"""Python wrapper for peak-finding functions in the unified Rust extension.
 
 This module replaces the original `_peak_finding_utils.pyx`. The Rust module
 returns plain Python lists; this wrapper converts them to rsnumpy arrays.
@@ -6,13 +6,12 @@ returns plain Python lists; this wrapper converts them to rsnumpy arrays.
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs.signal import (
-    _local_maxima_1d as _rust_local_maxima_1d,
-    _select_by_peak_distance as _rust_select_by_peak_distance,
-    _peak_prominences as _rust_peak_prominences,
-    _peak_widths as _rust_peak_widths,
-    PeakPropertyWarning,
-)
+from rsscipy._rsscipy_rs import signal as _rust_signal
+_rust_local_maxima_1d = _rust_signal._local_maxima_1d
+_rust_select_by_peak_distance = _rust_signal._select_by_peak_distance
+_rust_peak_prominences = _rust_signal._peak_prominences
+_rust_peak_widths = _rust_signal._peak_widths
+PeakPropertyWarning = _rust_signal.PeakPropertyWarning
 
 __all__ = [
     '_local_maxima_1d',

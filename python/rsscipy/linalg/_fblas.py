@@ -12,7 +12,7 @@ with ``trans_a``/``trans_b`` meaning ``0`` = no transpose, ``1`` = transpose,
 Argument conversion -- forcing Fortran order and the right dtype, which
 ``blas_helpers.hpp`` did with ``NPY_ARRAY_F_CONTIGUOUS`` -- is kept in Python
 because it needs rsnumpy.  The arithmetic then runs in Rust; see
-``rust/fblas``.
+the unified Rust extension.
 
 Only a subset of the 149 routines in ``cython_blas_signatures.txt`` is provided
 so far.  Everything else raises the same ``ValueError`` that
@@ -22,7 +22,9 @@ predictably rather than silently.
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs.linalg import gemm_f32, gemm_f64
+from rsscipy._rsscipy_rs import linalg as _rust_linalg
+gemm_f32 = _rust_linalg.gemm_f32
+gemm_f64 = _rust_linalg.gemm_f64
 
 # NOTE: rsnumpy stores *every* numeric array as float64 internally, so a
 # `dtype=float32` array still reports a `<f8` buffer.  There is therefore no

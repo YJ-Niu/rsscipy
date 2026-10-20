@@ -1,16 +1,3 @@
-py3.extension_module('_sigtools',
-  [
-    '_firfilter.cc',
-    '_sigtoolsmodule.cc',
-    '_correlate_nd.cc'
-  ],
-  dependencies: np_dep,
-  link_args: version_link_args,
-  include_directories: ['../_build_utils/src'],
-  install: true,
-  subdir: 'rsscipy/signal'
-)
-
 py3.install_sources([
     '__init__.py',
     '_support_alternative_backends.py',
@@ -33,6 +20,9 @@ py3.install_sources([
     '_spline.py',
     '_medfilt2d.py',
     '_lfilter.py',
+    '_convolve2d.py',
+    '_correlate_nd.py',
+    '_remez.py',
     '_signaltools.py',
     '_spectral_py.py',
     '_spline.pyi',

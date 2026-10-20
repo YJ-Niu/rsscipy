@@ -7,7 +7,7 @@ import rsnumpy as np
 from rsscipy.signal._wavelets import _cwt, _ricker
 from rsscipy.stats import scoreatpercentile
 
-from rsscipy._rsscipy_rs.signal import (
+from ._peak_finding_utils_rs import (
     _local_maxima_1d,
     _select_by_peak_distance,
     _peak_prominences,

@@ -1,9 +1,8 @@
-"""Build the Rust extension modules of rsscipy and drop them into `scipy/`.
+"""Build the unified Rust extension for rsscipy.
 
-Every entry in `rust/modules.toml` maps a Cargo crate to the CPython extension
-module it produces and to the directory inside the `scipy` package where that
-module has to end up.  This script runs `cargo build --release` for each crate
-and copies the resulting shared object to `<dest>/<lib>.so`.
+The entry in `rust/modules.toml` maps the unified Cargo crate to its CPython
+extension name and destination inside the Python package. The resulting shared
+object is copied to `<dest>/<lib>.so`.
 
 Usage::
 

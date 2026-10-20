@@ -18,7 +18,9 @@ try:
 except ImportError:
     hypothesis_available = False
 
-from rsscipy._lib._fpumode import get_fpu_mode
+from rsscipy._rsscipy_rs import _lib as _rust_lib
+
+get_fpu_mode = _rust_lib.get_fpu_mode
 from rsscipy._lib._array_api import (
     SCIPY_ARRAY_API, SCIPY_DEVICE, array_namespace, default_xp,
     is_cupy, is_dask, is_jax, is_torch, xp_result_device)

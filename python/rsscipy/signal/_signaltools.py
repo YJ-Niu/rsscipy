@@ -11,7 +11,6 @@ from typing import Literal
 from rsnumpy._typing import ArrayLike
 
 from rsscipy.spatial import cKDTree
-from . import _sigtools
 from ._ltisys import dlti
 from ._upfirdn import upfirdn, _output_len, _upfirdn_modes
 from rsscipy import linalg, fft as sp_fft
@@ -26,6 +25,8 @@ from ._fir_filter_design import firwin
 from ._sosfilt import _sosfilt
 from ._medfilt2d import _medfilt2d
 from ._lfilter import _linear_filter_adapter
+from ._convolve2d import _convolve2d
+from ._correlate_nd import _correlate_nd
 
 from rsscipy._lib._array_api import (
     xp_result_device, array_namespace, is_torch, is_numpy, xp_copy, xp_size,
@@ -267,41 +268,14 @@ def correlate(in1, in2, mode='full', method='auto'):
             out = np.correlate(a_in1, a_in2, mode)
             return xp.asarray(out, device=device)
 
-        # _correlateND is far slower when in2.size > in1.size, so swap them
-        # and then undo the effect afterward if mode == 'full'.  Also, it fails
-        # with 'valid' mode if in2 is larger than in1, so swap those, too.
-        # Don't swap inputs for 'same' mode, since shape of in1 matters.
+        # Match SciPy's direct-correlation input ordering and undo full-mode swaps.
         swapped_inputs = ((mode == 'full') and (xp_size(in2) > xp_size(in1)) or
                           _inputs_swap_needed(mode, in1.shape, in2.shape))
 
         if swapped_inputs:
             in1, in2 = in2, in1
 
-        # convert to rsnumpy & back for _sigtools._correlateND
-        a_in1 = np.asarray(in1)
-        a_in2 = np.asarray(in2)
-
-        if mode == 'valid':
-            ps = [i - j + 1 for i, j in zip(in1.shape, in2.shape)]
-            out = np.empty(ps, a_in1.dtype)
-
-            z = _sigtools._correlateND(a_in1, a_in2, out, val)
-
-        else:
-            ps = [i + j - 1 for i, j in zip(in1.shape, in2.shape)]
-
-            # zero pad input
-            in1zpadded = np.zeros(ps, a_in1.dtype)
-            sc = tuple(slice(0, i) for i in in1.shape)
-            in1zpadded[sc] = a_in1.copy()
-
-            if mode == 'full':
-                out = np.empty(ps, a_in1.dtype)
-            elif mode == 'same':
-                out = np.empty(in1.shape, a_in1.dtype)
-
-            z = _sigtools._correlateND(in1zpadded, a_in2, out, val)
-
+        z = _correlate_nd(in1, in2, val)
         z = xp.asarray(z, device=device)
 
         if swapped_inputs:
@@ -1877,7 +1851,7 @@ def convolve2d(in1, in2, mode='full', boundary='fill', fillvalue=0):
 
     val = _valfrommode(mode)
     bval = _bvalfromboundary(boundary)
-    out = _sigtools._convolve2d(in1, in2, 1, val, bval, fillvalue)
+    out = _convolve2d(in1, in2, 1, val, bval, fillvalue)
     return xp.asarray(out, device=device)
 
 
@@ -1978,7 +1952,7 @@ def correlate2d(in1, in2, mode='full', boundary='fill', fillvalue=0):
 
     val = _valfrommode(mode)
     bval = _bvalfromboundary(boundary)
-    out = _sigtools._convolve2d(in1, in2.conj(), 0, val, bval, fillvalue)
+    out = _convolve2d(in1, in2.conj(), 0, val, bval, fillvalue)
 
     if swapped_inputs:
         out = out[::-1, ::-1]

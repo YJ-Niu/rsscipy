@@ -11,12 +11,17 @@
 //! protocol and return plain Python lists; the Python-side wrapper converts
 //! them to rsnumpy arrays.
 
-#![recursion_limit = "256"]
-
 use pyo3::buffer::PyBuffer;
 use pyo3::exceptions::{PyTypeError, PyValueError};
 use pyo3::prelude::*;
-use pyo3::types::{PyAny, PyList, PyTuple};
+use pyo3::types::{PyAny, PyList};
+
+type PeakWidthsOutput<'py> = (
+    Bound<'py, PyAny>,
+    Bound<'py, PyAny>,
+    Bound<'py, PyAny>,
+    Bound<'py, PyAny>,
+);
 
 // ---------------------------------------------------------------------------
 // helpers
@@ -33,22 +38,19 @@ use pyo3::types::{PyAny, PyList, PyTuple};
 ///
 /// Returns the data as a `Vec<f64>` (owned) because rsnumpy only exposes a
 /// zero-copy buffer for float64 arrays.
-fn extract_f64_slice<'py>(py: Python<'py>, obj: &Bound<'py, PyAny>) -> PyResult<Vec<f64>> {
+fn extract_f64_slice<'py>(_py: Python<'py>, obj: &Bound<'py, PyAny>) -> PyResult<Vec<f64>> {
     if obj.is_none() {
         return Err(PyTypeError::new_err("'x' must not be None"));
     }
 
     // Fast path: zero-copy buffer (only available for float64 in rsnumpy).
-    match PyBuffer::<f64>::get(obj) {
-        Ok(buf) => {
-            if buf.dimensions() != 1 {
-                return Err(PyValueError::new_err(
-                    "wrong number of dimensions, expected 1",
-                ));
-            }
-            return Ok(unsafe { f64_slice(&buf) }.to_vec());
+    if let Ok(buf) = PyBuffer::<f64>::get(obj) {
+        if buf.dimensions() != 1 {
+            return Err(PyValueError::new_err(
+                "wrong number of dimensions, expected 1",
+            ));
         }
-        Err(_) => {}
+        return Ok(unsafe { f64_slice(&buf) }.to_vec());
     }
 
     // Fallback: if it's already a list, use it directly; otherwise call tolist().
@@ -72,22 +74,19 @@ fn extract_f64_slice<'py>(py: Python<'py>, obj: &Bound<'py, PyAny>) -> PyResult<
 ///
 /// Returns the data as a `Vec<isize>` (owned) because rsnumpy only exposes a
 /// zero-copy buffer for float64 arrays, not for integer dtypes.
-fn extract_intp_slice<'py>(py: Python<'py>, obj: &Bound<'py, PyAny>) -> PyResult<Vec<isize>> {
+fn extract_intp_slice<'py>(_py: Python<'py>, obj: &Bound<'py, PyAny>) -> PyResult<Vec<isize>> {
     if obj.is_none() {
         return Err(PyTypeError::new_err("'x' must not be None"));
     }
 
     // Fast path: zero-copy buffer (only available for float64 in rsnumpy).
-    match PyBuffer::<isize>::get(obj) {
-        Ok(buf) => {
-            if buf.dimensions() != 1 {
-                return Err(PyValueError::new_err(
-                    "wrong number of dimensions, expected 1",
-                ));
-            }
-            return Ok(unsafe { isize_slice(&buf) }.to_vec());
+    if let Ok(buf) = PyBuffer::<isize>::get(obj) {
+        if buf.dimensions() != 1 {
+            return Err(PyValueError::new_err(
+                "wrong number of dimensions, expected 1",
+            ));
         }
-        Err(_) => {}
+        return Ok(unsafe { isize_slice(&buf) }.to_vec());
     }
 
     // Fallback: if it's already a list, use it directly; otherwise call tolist().
@@ -335,12 +334,7 @@ fn _peak_widths<'py>(
     prominences: &Bound<'py, PyAny>,
     left_bases: &Bound<'py, PyAny>,
     right_bases: &Bound<'py, PyAny>,
-) -> PyResult<(
-    Bound<'py, PyAny>,
-    Bound<'py, PyAny>,
-    Bound<'py, PyAny>,
-    Bound<'py, PyAny>,
-)> {
+) -> PyResult<PeakWidthsOutput<'py>> {
     if rel_height < 0.0 {
         return Err(PyValueError::new_err(
             "`rel_height` must be greater or equal to 0.0",
@@ -360,8 +354,7 @@ fn _peak_widths<'py>(
     let rb_data: &[isize] = &rb_data;
 
     let n_peaks = peaks_data.len();
-    if !(n_peaks == prom_data.len() && n_peaks == lb_data.len() && n_peaks == rb_data.len())
-    {
+    if !(n_peaks == prom_data.len() && n_peaks == lb_data.len() && n_peaks == rb_data.len()) {
         return Err(PyValueError::new_err(
             "arrays in `prominence_data` must have the same shape as `peaks`",
         ));

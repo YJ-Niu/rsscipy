@@ -10,7 +10,7 @@ from rsscipy.linalg import (toeplitz, hankel, solve, LinAlgError, LinAlgWarning,
                           lstsq)
 from rsscipy.signal._arraytools import _validate_fs
 from .windows import get_window
-from . import _sigtools
+from ._remez import _remez
 
 from rsscipy._lib._array_api import array_namespace, xp_size, xp_device, xp_result_device
 import rsscipy._external.array_api_extra as xpx
@@ -952,8 +952,12 @@ def remez(numtaps, bands, desired, *, weight=None, type='bandpass',
         weight = [1] * len(desired)
 
     bands = np.asarray(bands).copy()
-    result = _sigtools._remez(numtaps, bands, desired, weight, tnum, fs,
-                              maxiter, grid_density)
+    result = _remez(
+        bands.tolist(),
+        desired.tolist(),
+        np.asarray(weight).tolist(),
+        (numtaps, tnum, fs, maxiter, grid_density),
+    )
     return xp.asarray(result, device=device)
 
 

@@ -1,4 +1,4 @@
-# common bits and pieces for _ppoly.pyx and _rgi_cython.pyx
+# common helpers for _ppoly.pyx
 
 ctypedef double complex double_complex
 
@@ -88,6 +88,5 @@ cdef int find_interval_ascending(const double *x,
         interval = low
 
     return interval
-
 
 

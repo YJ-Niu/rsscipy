@@ -1,7 +1,7 @@
 """Symmetry / Hermitian tests for square 2-D arrays.
 
 Replaces the Cython module ``scipy/linalg/_cythonized_array_utils.pyx``; the
-element walks now run in Rust (``rust/array_utils``).
+element walks now run in the unified Rust extension.
 
 Three data paths are used, because rsnumpy only exposes a zero-copy buffer for
 float64 arrays:
@@ -16,7 +16,10 @@ import rsnumpy as np
 
 from rsscipy._lib._util import _apply_over_batch
 
-from rsscipy._rsscipy_rs.linalg import is_complex_f64, is_sym_f64, is_sym_her_bytes
+from rsscipy._rsscipy_rs import linalg as _rust_linalg
+is_complex_f64 = _rust_linalg.is_complex_f64
+is_sym_f64 = _rust_linalg.is_sym_f64
+is_sym_her_bytes = _rust_linalg.is_sym_her_bytes
 
 __all__ = ['issymmetric', 'ishermitian']
 

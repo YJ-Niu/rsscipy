@@ -2,7 +2,8 @@
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs.signal import _medfilt2d as _medfilt2d_rust
+from rsscipy._rsscipy_rs import signal as _rust_signal
+_medfilt2d_rust = _rust_signal._medfilt2d
 
 __all__ = ['_medfilt2d']
 

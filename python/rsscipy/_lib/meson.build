@@ -13,8 +13,8 @@ lib_cython_gen = generator(cython,
 ccallback_dep = declare_dependency(include_directories: ['..', 'src'])
 
 # `_ccallback_c` was a Cython module; it is now `_ccallback_c.py`, which keeps
-# the ctypes glue in Python and takes the PyCapsule machinery from the Rust
-# `ccallback` crate (`_ccallback_rs`).  The `.pyx`/`.pxd` are gone.
+# the ctypes glue in Python and takes the PyCapsule machinery from the unified
+# Rust extension. The `.pyx`/`.pxd` are gone.
 
 py3.extension_module('_test_ccallback',
   'src/_test_ccallback.c',
@@ -25,8 +25,8 @@ py3.extension_module('_test_ccallback',
   install_tag: 'tests'
 )
 
-# `_fpumode` is now the Rust crate `rust/fpumode` (`_fpumode.so`); `_fpumode.c`
-# has been removed, so it must not be referenced here.
+# `_fpumode` is now provided by the unified Rust extension; `_fpumode.c` has
+# been removed, so it must not be referenced here.
 
 py3.extension_module('_test_deprecation_call',
   cython_gen.process('_test_deprecation_call.pyx'),

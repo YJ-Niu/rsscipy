@@ -58,12 +58,8 @@ linalg_cython_gen = generator(cython,
 
 # `_fblas` / `_flapack` (and their ILP64 siblings `_fblas_64` / `_flapack_64`)
 # used to be built here from `src/blas/*.cpp` and `src/lapack/*.cpp`, linked
-# against an external BLAS/LAPACK.  Both are now Rust crates (`rust/fblas`,
-# `rust/flapack`) producing `_fblas_rs` / `_flapack_rs`, which implement the
-# kernels in Rust and link no external BLAS at all.  `scipy/linalg/_fblas.py`
-# and `_flapack.py` import the `_rs` modules, so these C++ targets are dead
-# code -- and, because the sources are being removed, referencing them here
-# would break the configure step.
+# against an external BLAS/LAPACK. The currently implemented kernels now live
+# in the unified Rust extension and link no external BLAS.
 
 # _decomp_interpolative
 py3.extension_module('_decomp_interpolative',
