@@ -4,15 +4,19 @@ use pyo3::prelude::*;
 
 mod array_utils;
 mod ccallback;
+mod column_grouping;
 mod convolve2d;
 mod correlate_nd;
 mod fblas;
 mod fftpack_convolve;
 mod flapack;
 mod fpumode;
+mod givens_elimination;
+mod graph_tools;
 mod lfilter;
 mod max_len_seq_inner;
 mod median_filter_2d;
+mod ndimage_label;
 mod peak_finding_utils;
 mod remez;
 mod reordering;
@@ -35,6 +39,7 @@ fn _rsscipy_rs(module: &Bound<'_, PyModule>) -> PyResult<()> {
     array_utils::register(&linalg)?;
     fblas::register(&linalg)?;
     flapack::register(&linalg)?;
+    givens_elimination::register(&linalg)?;
     module.add("linalg", linalg)?;
 
     let signal = PyModule::new(py, "signal")?;
@@ -64,7 +69,16 @@ fn _rsscipy_rs(module: &Bound<'_, PyModule>) -> PyResult<()> {
 
     let csgraph = PyModule::new(py, "csgraph")?;
     reordering::register(&csgraph)?;
+    graph_tools::register(&csgraph)?;
     module.add("csgraph", csgraph)?;
+
+    let optimize = PyModule::new(py, "optimize")?;
+    column_grouping::register(&optimize)?;
+    module.add("optimize", optimize)?;
+
+    let ndimage = PyModule::new(py, "ndimage")?;
+    ndimage_label::register(&ndimage)?;
+    module.add("ndimage", ndimage)?;
 
     Ok(())
 }

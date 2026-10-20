@@ -16,15 +16,6 @@ py3.extension_module('_nd_image',
   subdir: 'rsscipy/ndimage'
 )
 
-py3.extension_module('_ni_label',
-  cython_gen.process('src/_ni_label.pyx'),
-  c_args: cython_c_args,
-  dependencies: np_dep,
-  link_args: version_link_args,
-  install: true,
-  subdir: 'rsscipy/ndimage'
-)
-
 py3.extension_module('_rank_filter_1d',
   'src/_rank_filter_1d.cpp',
   link_args: version_link_args,
@@ -57,6 +48,7 @@ python_sources = [
   '__init__.py',
   '_ndimage_api.py',
   '_delegators.py',
+  '_ni_label.py',
   '_support_alternative_backends.py',
   '_filters.py',
   '_fourier.py',

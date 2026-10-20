@@ -1,6 +1,6 @@
 import warnings
 
-import numpy as np
+import rsnumpy as np
 from rsscipy.optimize import (
     Bounds,
     LinearConstraint,
@@ -307,7 +307,7 @@ def minimize(
 
     .. testsetup::
 
-        import numpy as np
+        import rsnumpy as np
         np.set_printoptions(precision=3, suppress=True)
 
     >>> from cobyqa import minimize
@@ -334,7 +334,7 @@ def minimize(
                                         & \quad x_2 \ge 0.
         \end{aligned}
 
-    >>> import numpy as np
+    >>> import rsnumpy as np
     >>> from rsscipy.optimize import Bounds, LinearConstraint
 
     Its objective function can be implemented as:

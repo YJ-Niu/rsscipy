@@ -106,8 +106,7 @@ py3.extension_module('_biteopt',
   subdir: 'rsscipy/optimize'
 )
 
-# `_group_columns` is now `_group_columns.py` (pure Python), installed as a
-# source rather than compiled through pythran or Cython.
+# `_group_columns.py` is a Python adapter for the unified Rust implementation.
 py3.install_sources(
   ['_group_columns.py'],
   subdir: 'rsscipy/optimize'

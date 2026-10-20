@@ -1,7 +1,7 @@
 import sys
 from enum import Enum
 
-import numpy as np
+import rsnumpy as np
 
 
 # Exit status.

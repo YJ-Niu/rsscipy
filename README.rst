@@ -33,7 +33,11 @@ knowing up front:
   and cluster-mean updates, also run in Rust; other C, C++, Cython, and Fortran
   production extensions are still being replaced. Regular-grid interpolation's
   interval search and 2-D linear interpolation kernels, as well as reverse
-  Cuthill-McKee graph ordering, also run in Rust.
+  Cuthill-McKee graph ordering and sparse-to-dense/distance-matrix graph
+  kernels, as well as least-squares Givens elimination, also run in Rust.
+  Sparse graph conversion adapters and sparse finite-difference column
+  grouping kernels are Rust-backed with Python adapters. Multidimensional
+  connected-component labeling also runs in Rust.
 - **Recomputation over incremental update.** Where upstream keeps a factorisation
   up to date with Givens rotations (``scipy.linalg.qr_update`` and friends), this
   port recomputes the factorisation. The results match, but the complexity is
@@ -43,9 +47,10 @@ knowing up front:
 Status
 ------
 
-This is a work in progress. ``import scipy.linalg`` works; other subpackages are
-still being ported. Treat the API as experimental and pin the version if you
-depend on it.
+This is a work in progress. Native kernels and the wheel build are still being
+migrated; Meson remains temporarily because many upstream native extensions
+have not yet been replaced. Treat the API as experimental and pin the version
+if you depend on it.
 
 Building from source
 --------------------
@@ -93,6 +98,12 @@ Run the Rust unit tests from the workspace root::
 
     cd rust
     cargo test --workspace
+
+The repository's rsSciPy-owned Python tests live in ``tests/`` and
+``tools/``. ``pytest.ini`` limits ``python -m pytest`` to those tests so the
+vendored upstream SciPy test corpus is not run as if it were an rsSciPy suite.
+The Python tests cover the rsnumpy migration and Rust-backed Python adapters;
+the Rust workspace tests cover each migrated kernel.
 
 Links
 -----

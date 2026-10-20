@@ -1,6 +1,6 @@
 import inspect
 
-import numpy as np
+import rsnumpy as np
 from rsscipy.linalg import qr
 
 from ..utils import get_arrays_tol

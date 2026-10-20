@@ -1,6 +1,6 @@
 import warnings
 
-import numpy as np
+import rsnumpy as np
 from rsscipy.optimize import lsq_linear
 
 from .models import Models, Quadratic

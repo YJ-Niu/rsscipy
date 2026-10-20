@@ -51,6 +51,10 @@ jobs:
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
 
+      - name: Test Rust kernels
+        run: cargo test --workspace
+        working-directory: rust
+
       # The still-unported C/Cython extensions link BLAS/LAPACK, and meson
       # locates them via pkg-config.  Neither is present on a bare runner.
       # (The ported BLAS/LAPACK kernels are Rust and need none of this.)
@@ -77,8 +81,8 @@ jobs:
 
       - name: Smoke test
         run: |
-          python -c "import scipy; import scipy.linalg; print('scipy', scipy.__version__)"
-          python -m pytest -o addopts= tools/test_rsnumpy_migration.py -q
+          python -c "import rsscipy; print('rsscipy', rsscipy.__version__)"
+          python -m pytest -q
 
   lint:
     name: Lint (rustfmt + clippy)

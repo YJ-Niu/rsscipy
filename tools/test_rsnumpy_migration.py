@@ -4,8 +4,9 @@ Run it with::
 
     python -m pytest tools/test_rsnumpy_migration.py -v
 
-It is deliberately self-contained: it loads ``scipy/_rsnumpy_compat.py`` by path
-so it can also be executed before the compiled extension modules are built.
+It is deliberately self-contained: it loads
+``python/rsscipy/_rsnumpy_compat.py`` by path so it can also be executed before
+the compiled extension modules are built.
 """
 
 import compileall
@@ -17,7 +18,7 @@ import sys
 import pytest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-SCIPY_DIRS = ('scipy', 'tools', 'benchmarks')
+SOURCE_DIRS = ('python/rsscipy', 'tools', 'benchmarks')
 
 # `numpy` that is *not* part of a dotted name (jax.numpy), a path
 # (github.com/numpy/numpy, <numpy/arrayobject.h>) or a URL (numpy.org).
@@ -27,7 +28,7 @@ RESIDUAL_NUMPY = re.compile(r'(?<![\w./])numpy(?![\w/])')
 @pytest.fixture(scope='module')
 def compat():
     """Import (and thereby install) the rsnumpy compatibility layer."""
-    path = ROOT / 'scipy' / '_rsnumpy_compat.py'
+    path = ROOT / 'python' / 'rsscipy' / '_rsnumpy_compat.py'
     spec = importlib.util.spec_from_file_location('_rsnumpy_compat', path)
     module = importlib.util.module_from_spec(spec)
     sys.modules['_rsnumpy_compat'] = module
@@ -38,9 +39,9 @@ def compat():
 def _iter_python_files():
     """All ported sources.
 
-    ``scipy/_rsnumpy_compat.py`` is excluded on purpose: it documents the NumPy
-    functions it re-implements, so ``numpy`` legitimately appears in its
-    docstrings.  This verification file is excluded for the same reason.
+    ``python/rsscipy/_rsnumpy_compat.py`` is excluded on purpose: it documents
+    the NumPy functions it re-implements, so ``numpy`` legitimately appears in
+    its docstrings.  This verification file is excluded for the same reason.
     """
     # `_rsnumpy_compat.py` and ports like `_cythonized_array_utils.py` describe
     # their NumPy-equivalent behaviour in docstrings, so `numpy` legitimately
@@ -50,14 +51,14 @@ def _iter_python_files():
         '_rsnumpy_compat.py',
         '_cythonized_array_utils.py',
     }
-    for name in SCIPY_DIRS:
+    for name in SOURCE_DIRS:
         base = ROOT / name
         if not base.is_dir():
             continue
         for pattern in ('*.py', '*.pyi'):
             for path in base.rglob(pattern):
-                # `.venv`, `subprojects` and `scipy/_external` hold third-party
-                # sources that were never ported (they legitimately use numpy).
+                # Vendored sources were not ported as part of this migration
+                # and may legitimately depend on NumPy.
                 if {'.venv', 'subprojects', '_external'} & set(path.parts):
                     continue
                 if path.name in excluded:
@@ -100,7 +101,7 @@ def test_no_numpy_import_statements():
 
 def test_all_python_sources_compile():
     ok = compileall.compile_dir(
-        str(ROOT / 'scipy'), quiet=2, force=True,
+        str(ROOT / 'python' / 'rsscipy'), quiet=2, force=True,
     )
     assert ok, 'some SciPy sources do not byte-compile'
 

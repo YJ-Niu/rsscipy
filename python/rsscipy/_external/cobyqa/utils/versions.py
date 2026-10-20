@@ -29,7 +29,7 @@ def _get_deps_info():
     dict
         Versions of the dependencies.
     """
-    deps = ["cobyqa", "numpy", "scipy", "setuptools", "pip"]
+    deps = ["cobyqa", "rsnumpy", "rsscipy", "setuptools", "pip"]
     deps_info = {}
     for module in deps:
         try:

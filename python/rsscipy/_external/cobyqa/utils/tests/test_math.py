@@ -1,4 +1,4 @@
-import numpy as np
+import rsnumpy as np
 import pytest
 
 from ..math import get_arrays_tol, exact_1d_array, exact_2d_array

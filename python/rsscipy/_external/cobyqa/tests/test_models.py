@@ -1,4 +1,4 @@
-import numpy as np
+import rsnumpy as np
 import pytest
 from rsscipy.optimize import Bounds, LinearConstraint, NonlinearConstraint, rosen
 from concurrent.futures import ThreadPoolExecutor

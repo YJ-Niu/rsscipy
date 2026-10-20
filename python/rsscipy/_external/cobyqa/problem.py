@@ -2,7 +2,7 @@ from contextlib import suppress
 from inspect import signature
 import copy
 
-import numpy as np
+import rsnumpy as np
 from rsscipy.optimize import (
     Bounds,
     LinearConstraint,

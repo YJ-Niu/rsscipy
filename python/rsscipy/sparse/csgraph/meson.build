@@ -4,7 +4,6 @@ pyx_files_for_c = [
   ['_flow', '_flow.pyx'],
   ['_matching', '_matching.pyx'],
   ['_min_spanning_tree', '_min_spanning_tree.pyx'],
-  ['_tools', '_tools.pyx'],
 ]
 pyx_files_for_cpp = [
   ['_shortest_path', '_shortest_path.pyx'],
@@ -47,6 +46,7 @@ endforeach
 
 python_sources = [
   '__init__.py',
+  '_tools.py',
   '_reordering.py',
   '_laplacian.py',
   '_validation.py',

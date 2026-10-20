@@ -1,4 +1,4 @@
-import numpy as np
+import rsnumpy as np
 import pytest
 from rsscipy.optimize import Bounds, LinearConstraint, NonlinearConstraint
 from rsscipy.optimize._minimize import standardize_constraints

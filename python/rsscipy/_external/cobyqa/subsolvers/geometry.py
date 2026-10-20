@@ -1,6 +1,6 @@
 import inspect
 
-import numpy as np
+import rsnumpy as np
 
 from ..utils import get_arrays_tol
 
