@@ -683,13 +683,20 @@ def _fixed_where(original):
 
 def _make_adopting(original):
     def wrapper(*args, **kwargs):
-        # rsnumpy.asarray doesn't accept 'copy'; strip it out
+        # rsnumpy.asarray doesn't accept 'copy' or 'device'; strip them out
         kwargs.pop('copy', None)
+        kwargs.pop('device', None)
         args = tuple(_to_rs(a) for a in args)
         # Convert dtype objects to rsnumpy-compatible form
         if 'dtype' in kwargs:
             dt = kwargs['dtype']
-            if type(dt).__name__ == 'DType':
+            # Convert any dtype-like object (rsnumpy DType, numpy dtype, etc.)
+            # to a plain string that rsnumpy understands.
+            if hasattr(dt, 'name'):
+                kwargs['dtype'] = str(dt.name)
+            elif hasattr(dt, '__name__'):
+                kwargs['dtype'] = str(dt.__name__)
+            else:
                 kwargs['dtype'] = str(dt)
         kwargs = {k: _to_rs(v) for k, v in kwargs.items()}
         return original(*args, **kwargs)

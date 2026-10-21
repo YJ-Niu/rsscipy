@@ -118,6 +118,9 @@ def is_numpy_array(x: object) -> TypeIs[npt.NDArray[Any]]:
     return (
         _issubclass_fast(cls, "numpy", "ndarray") 
         or _issubclass_fast(cls, "numpy", "generic")
+        # rsnumpy is the drop-in NumPy replacement in this build.
+        or _issubclass_fast(cls, "rsnumpy", "ndarray")
+        or _issubclass_fast(cls, "rsnumpy", "generic")
     ) and not _is_jax_zero_gradient_array(x)
 
 
@@ -340,7 +343,7 @@ def is_numpy_namespace(xp: Namespace) -> bool:
     is_pydata_sparse_namespace
     is_array_api_strict_namespace
     """
-    return xp.__name__ in {"numpy", _compat_module_name() + ".numpy"}
+    return xp.__name__ in {"numpy", "rsnumpy", _compat_module_name() + ".numpy"}
 
 
 @lru_cache(100)
@@ -516,7 +519,7 @@ def _cls_to_namespace(
     cls_ = cast(Hashable, cls)  # Make mypy happy
 
     if (
-        _issubclass_fast(cls_, "numpy", "ndarray") 
+        _issubclass_fast(cls_, "numpy", "ndarray")
         or _issubclass_fast(cls_, "numpy", "generic")
     ):
         if use_compat is True:
@@ -529,6 +532,17 @@ def _cls_to_namespace(
             # yet fully array API compatible.
             from .. import numpy as xp  # type: ignore[no-redef]
         return xp, _ClsToXPInfo.MAYBE_JAX_ZERO_GRADIENT
+
+    # rsnumpy is the drop-in NumPy replacement in this build. Its arrays are
+    # already array-API compatible (they expose __array_namespace__), so let
+    # array_namespace() resolve them to the rsnumpy namespace itself rather
+    # than to the NumPy compat wrapper (which is built on real NumPy).
+    if (
+        _issubclass_fast(cls_, "rsnumpy", "ndarray")
+        or _issubclass_fast(cls_, "rsnumpy", "generic")
+    ):
+        import rsnumpy as _rs
+        return _rs, _ClsToXPInfo.MAYBE_JAX_ZERO_GRADIENT
 
     # Note: this must happen _after_ the test for np.generic,
     # because np.float64 and np.complex128 are subclasses of float and complex.

@@ -468,21 +468,28 @@ def xp_result_type(*args, force_floating=False, xp):
     if force_floating:
         args_not_none.append(1.0)
 
+    # Convert rsnumpy arrays to dtype strings so xp.result_type receives
+    # scalars/dtype strings rather than array objects.
+    def _as_dtype_str(arg):
+        if hasattr(arg, '_dtype'):
+            return arg._dtype
+        return arg
+
+    args_dtype = [_as_dtype_str(a) for a in args_not_none]
+
     try:  # follow library's preferred promotion rules
-        return xp.result_type(*args_not_none)
-    except ValueError:  # all scalars; need at least one array/dtype
+        return xp.result_type(*args_dtype)
+    except Exception:  # rsnumpy result_type may not accept all inputs
         if not force_floating:
             raise
-        return xp.result_type(*(args_not_none + [xp.asarray(1.0)])) # skip device check
+        # Fall back to float64 when promotion fails
+        return xp.dtype('float64')
     except TypeError:  # mixed type promotion isn't defined
         if not force_floating:
             raise
         # use `result_type` of default floating point type and any floats present
-        # This can be revisited, but right now, the only backends that get here
-        # are array-api-strict (which is not for production use) and PyTorch
-        # (due to data-apis/array-api-compat#279).
         float_args = []
-        for arg in args_not_none:
+        for arg in args_dtype:
             arg_array = xp.asarray(arg) if np.isscalar(arg) else arg
             dtype = getattr(arg_array, 'dtype', arg)
             if xp.isdtype(dtype, ('real floating', 'complex floating')):

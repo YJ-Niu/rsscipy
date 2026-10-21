@@ -576,13 +576,13 @@ def convert_pydata_sparse_to_scipy(
 # ones below do not.
 
 def matrix(*args, **kwargs):
-    return np.array(*args, **kwargs).view(np.matrix)
+    # rsnumpy has no `np.matrix` subclass; plain 2-D arrays are sufficient
+    # for all callers (matrix semantics are deprecated in NumPy anyway).
+    return np.array(*args, **kwargs)
 
 
 def asmatrix(data, dtype=None):
-    if isinstance(data, np.matrix) and (dtype is None or data.dtype == dtype):
-        return data
-    return np.asarray(data, dtype=dtype).view(np.matrix)
+    return np.asarray(data, dtype=dtype)
 
 ###############################################################################
 

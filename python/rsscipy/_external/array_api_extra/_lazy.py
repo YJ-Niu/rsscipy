@@ -318,9 +318,14 @@ def _lazy_apply_wrapper(  # numpydoc ignore=PR01,RT01
                 if device is None:
                     device = _compat.device(arg)
                 if as_numpy:
-                    import numpy as np
+                    # rsnumpy arrays are already eager and accepted by the
+                    # downstream (Rust/Python) kernels; converting them with
+                    # real NumPy would produce a read-only buffer view and
+                    # break in-place writes into `out`.
+                    if type(arg).__module__.split(".")[0] != "rsnumpy":
+                        import numpy as np
 
-                    arg = typing.cast(Array, np.asarray(arg))  # pyright: ignore[reportInvalidCast] # noqa: PLW2901
+                        arg = typing.cast(Array, np.asarray(arg))  # pyright: ignore[reportInvalidCast] # noqa: PLW2901
             args_list.append(arg)
         assert device is not None
 
