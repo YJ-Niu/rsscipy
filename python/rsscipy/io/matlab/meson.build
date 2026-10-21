@@ -6,15 +6,6 @@ py3.extension_module('_streams',
   subdir: 'rsscipy/io/matlab'
 )
 
-py3.extension_module('_mio_utils',
-  cython_gen.process('_mio_utils.pyx'),
-  c_args: cython_c_args,
-  dependencies: np_dep,
-  link_args: version_link_args,
-  install: true,
-  subdir: 'rsscipy/io/matlab'
-)
-
 py3.extension_module('_mio5_utils',
   cython_gen.process('_mio5_utils.pyx'),
   c_args: cython_c_args,
@@ -31,6 +22,7 @@ py3.install_sources([
     '_mio4.py',
     '_mio5.py',
     '_mio5_params.py',
+    '_mio_utils.py',
     '_miobase.py',
   ],
   subdir: 'rsscipy/io/matlab'

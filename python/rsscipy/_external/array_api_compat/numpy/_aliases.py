@@ -4,7 +4,7 @@ from __future__ import annotations
 from builtins import bool as py_bool
 from typing import Any, cast
 
-import numpy as np
+import rsnumpy as np
 
 from .._internal import get_xp
 from ..common import _aliases, _helpers
@@ -84,14 +84,8 @@ def asarray(
     """
     _helpers._check_device(np, device)
 
-    # None is unsupported in NumPy 1.0, but we can use an internal enum
-    # False in NumPy 1.0 means None in NumPy 2.0 and in the Array API
-    if copy is None:
-        copy = np._CopyMode.IF_NEEDED  # type: ignore[assignment,attr-defined]
-    elif copy is False:
-        copy = np._CopyMode.NEVER  # type: ignore[assignment,attr-defined]
-
-    return np.array(obj, copy=copy, dtype=dtype, **kwargs)
+    # rsnumpy does not support the 'copy' keyword; ignore it
+    return np.array(obj, dtype=dtype, **kwargs)
 
 
 def astype(

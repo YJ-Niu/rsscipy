@@ -16,14 +16,6 @@ py3.extension_module('_nd_image',
   subdir: 'rsscipy/ndimage'
 )
 
-py3.extension_module('_rank_filter_1d',
-  'src/_rank_filter_1d.cpp',
-  link_args: version_link_args,
-  install: true,
-  dependencies: np_dep,
-  subdir: 'rsscipy/ndimage'
-)
-
 py3.extension_module('_ctest',
   'src/_ctest.c',
   dependencies: np_dep,
@@ -49,6 +41,7 @@ python_sources = [
   '_ndimage_api.py',
   '_delegators.py',
   '_ni_label.py',
+  '_rank_filter_1d.py',
   '_support_alternative_backends.py',
   '_filters.py',
   '_fourier.py',

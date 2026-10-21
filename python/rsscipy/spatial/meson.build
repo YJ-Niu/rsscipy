@@ -16,7 +16,6 @@ py3.extension_module('_qhull',
   c_args: cython_c_args,
   include_directories: [
     '../_lib',
-    '../_build_utils/src',
   ],
   link_args: version_link_args,
   dependencies: [np_dep, qhull_r_dep],
@@ -44,7 +43,6 @@ py3.extension_module('_ckdtree',
   ],
   include_directories: [
     '../_lib',
-    '../_build_utils/src',
     'ckdtree/src'
   ],
   dependencies: np_dep,
@@ -53,12 +51,9 @@ py3.extension_module('_ckdtree',
   subdir: 'rsscipy/spatial'
 )
 
-py3.extension_module('_voronoi',
-  [cython_gen.process('_voronoi.pyx')],
-  c_args: [cython_c_args, Wno_maybe_uninitialized],
-  dependencies: np_dep,
-  link_args: version_link_args,
-  install: true,
+py3.install_sources([
+    '_voronoi.py',
+  ],
   subdir: 'rsscipy/spatial'
 )
 

@@ -16,17 +16,9 @@ py3.extension_module('_distance_pybind',
   subdir: 'rsscipy/spatial/distance'
 )
 
-py3.extension_module('_hausdorff',
-  [cython_gen.process('_hausdorff.pyx')],
-  c_args: cython_c_args,
-  dependencies: np_dep,
-  link_args: version_link_args,
-  install: true,
-  subdir: 'rsscipy/spatial/distance'
-)
-
 py3.install_sources([
     '__init__.py',
+    '_hausdorff.py',
     '_distance.pyi',
     '_distance.py'
   ],

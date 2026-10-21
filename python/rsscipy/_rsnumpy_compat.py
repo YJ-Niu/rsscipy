@@ -542,6 +542,17 @@ def install():
     rsnumpy.allclose = _fixed_allclose()
     rsnumpy.where = _fixed_where(rsnumpy.where)
 
+    # Make rsnumpy.ndarray hashable (needed for use as dict keys).
+    # rsnumpy defines __eq__ which sets __hash__ = None; override it.
+    if rsnumpy.ndarray.__hash__ is None:
+        def _ndarray_hash(self):
+            try:
+                flat = tuple(self.tolist())
+            except TypeError:
+                flat = (float(self),)
+            return hash((self.shape, flat))
+        rsnumpy.ndarray.__hash__ = _ndarray_hash
+
     rsnumpy._scipy_compat_installed = True
     return rsnumpy
 
@@ -672,7 +683,14 @@ def _fixed_where(original):
 
 def _make_adopting(original):
     def wrapper(*args, **kwargs):
+        # rsnumpy.asarray doesn't accept 'copy'; strip it out
+        kwargs.pop('copy', None)
         args = tuple(_to_rs(a) for a in args)
+        # Convert dtype objects to rsnumpy-compatible form
+        if 'dtype' in kwargs:
+            dt = kwargs['dtype']
+            if type(dt).__name__ == 'DType':
+                kwargs['dtype'] = str(dt)
         kwargs = {k: _to_rs(v) for k, v in kwargs.items()}
         return original(*args, **kwargs)
 

@@ -31,27 +31,9 @@ py3.extension_module('_ansari_swilk_statistics',
   subdir: 'rsscipy/stats'
 )
 
-py3.extension_module('_sobol',
-  cython_gen.process('_sobol.pyx'),
-  c_args: cython_c_args,
-  dependencies: np_dep,
-  link_args: version_link_args,
-  install: true,
-  subdir: 'rsscipy/stats'
-)
-
 py3.install_sources([
     '_sobol_direction_numbers.npz'
   ],
-  subdir: 'rsscipy/stats'
-)
-
-py3.extension_module('_qmc_cy',
-  cython_gen_cpp.process('_qmc_cy.pyx'),
-  cpp_args: cython_cpp_args,
-  dependencies: [np_dep, thread_dep],
-  link_args: version_link_args,
-  install: true,
   subdir: 'rsscipy/stats'
 )
 
@@ -82,18 +64,11 @@ py3.install_sources(
 )
 
 
-py3.extension_module('_qmvnt_cy',
-  cython_gen_cpp.process('_qmvnt_cy.pyx'),
-  cpp_args: cython_cpp_args,
-  dependencies: [np_dep],
-  link_args: version_link_args,
-  install: true,
-  subdir: 'rsscipy/stats'
-)
-
-
 py3.install_sources([
     '__init__.py',
+    '_qmc_cy.py',
+    '_qmvnt_cy.py',
+    '_sobol.py',
     '_axis_nan_policy.py',
     '_binned_statistic.py',
     '_binomtest.py',

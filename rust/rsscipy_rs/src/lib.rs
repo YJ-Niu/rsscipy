@@ -13,15 +13,24 @@ mod flapack;
 mod fpumode;
 mod givens_elimination;
 mod graph_tools;
+mod hausdorff;
+mod levy_stable;
 mod lfilter;
 mod max_len_seq_inner;
 mod median_filter_2d;
+mod mio_utils;
 mod ndimage_label;
 mod peak_finding_utils;
+mod qmc;
+mod qmvnt;
+mod rank_filter_1d;
+mod rcont;
 mod remez;
 mod reordering;
 mod rgi;
+mod sobol;
 mod sosfilt;
+mod spherical_voronoi;
 mod spline;
 mod upfirdn_apply;
 mod vq;
@@ -72,13 +81,31 @@ fn _rsscipy_rs(module: &Bound<'_, PyModule>) -> PyResult<()> {
     graph_tools::register(&csgraph)?;
     module.add("csgraph", csgraph)?;
 
+    let spatial = PyModule::new(py, "spatial")?;
+    hausdorff::register(&spatial)?;
+    spherical_voronoi::register(&spatial)?;
+    module.add("spatial", spatial)?;
+
+    let stats = PyModule::new(py, "stats")?;
+    rcont::register(&stats)?;
+    levy_stable::register(&stats)?;
+    qmvnt::register(&stats)?;
+    qmc::register(&stats)?;
+    sobol::register(&stats)?;
+    module.add("stats", stats)?;
+
     let optimize = PyModule::new(py, "optimize")?;
     column_grouping::register(&optimize)?;
     module.add("optimize", optimize)?;
 
     let ndimage = PyModule::new(py, "ndimage")?;
     ndimage_label::register(&ndimage)?;
+    rank_filter_1d::register(&ndimage)?;
     module.add("ndimage", ndimage)?;
+
+    let io = PyModule::new(py, "io")?;
+    mio_utils::register(&io)?;
+    module.add("io", io)?;
 
     Ok(())
 }

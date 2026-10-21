@@ -37,7 +37,11 @@ knowing up front:
   kernels, as well as least-squares Givens elimination, also run in Rust.
   Sparse graph conversion adapters and sparse finite-difference column
   grouping kernels are Rust-backed with Python adapters. Multidimensional
-  connected-component labeling also runs in Rust.
+  connected-component labeling and the one-dimensional rank-filter kernel
+  also run in Rust. The directed Hausdorff distance search kernel is Rust-backed
+  with its existing Python random-number and array API preserved. Boyett and
+  Patefield random contingency-table sampling and the Nolan stable-distribution
+  integration kernel also run in Rust.
 - **Recomputation over incremental update.** Where upstream keeps a factorisation
   up to date with Givens rotations (``scipy.linalg.qr_update`` and friends), this
   port recomputes the factorisation. The results match, but the complexity is

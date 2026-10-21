@@ -587,6 +587,7 @@ class _Parameter(ABC):
         parameter_values = parameter_values or {}
         domain = self.domain
         proportions = (1, 0, 0, 0) if proportions is None else proportions
+        proportions = np.asarray(proportions)
 
         pvals = proportions / np.sum(proportions)
 
@@ -803,7 +804,7 @@ class _Parameterization:
             parameter = self.parameters[name]
             arr, dtype, valid = parameter.validate(arr, parameter_values)
             dtypes.add(dtype)
-            all_valid = all_valid & valid
+            all_valid = np.logical_and(all_valid, valid)
             parameter_values[name] = arr
         dtype = arr.dtype if len(dtypes)==1 else np.result_type(*list(dtypes))
 

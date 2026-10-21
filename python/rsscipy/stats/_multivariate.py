@@ -1732,7 +1732,7 @@ class matrix_t_gen(multi_rv_generic):
 
     def __init__(self, seed=None):
         super().__init__(seed)
-        self.__doc__ = scipy._lib.doccer.docformat(
+        self.__doc__ = doccer.docformat(
             self.__doc__, matrix_t_docdict_params
         )
 
@@ -2116,10 +2116,10 @@ class matrix_t_frozen:
 for name in ["logpdf", "pdf", "rvs"]:
     method = matrix_t_gen.__dict__[name]
     method_frozen = matrix_t_frozen.__dict__[name]
-    method_frozen.__doc__ = scipy._lib.doccer.docformat(
+    method_frozen.__doc__ = doccer.docformat(
         method.__doc__, matrix_t_docdict_noparams
     )
-    method.__doc__ = scipy._lib.doccer.docformat(
+    method.__doc__ = doccer.docformat(
         method.__doc__, matrix_t_docdict_params
     )
 

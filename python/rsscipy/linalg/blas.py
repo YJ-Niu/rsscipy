@@ -381,8 +381,12 @@ def _get_funcs(
         func_name = alias.get(func_name, func_name)
         func = getattr(fmodule, func_name, None)
         if func is None:
-            raise ValueError(
-                f'{lib_name} function {func_name} could not be found')
+            # Stub for BLAS functions not yet ported to Rust/rsnumpy
+            def _blas_stub(*args, **kwargs):
+                raise NotImplementedError(
+                    f"BLAS function {func_name} not yet ported to Rust/rsnumpy")
+            _blas_stub.__name__ = func_name
+            func = _blas_stub
         func.module_name, func.typecode, func.dtype = fmodule_name, prefix, dtype
         if not ilp64:
             func.int_dtype = np.dtype(np.intc)
@@ -533,3 +537,35 @@ def get_blas_funcs(names, arrays=(), dtype=None, ilp64="preferred"):
         return _get_funcs(
             names, arrays, dtype, "BLAS", _fblas_64, "fblas_64", _blas_alias, ilp64=True
         )
+
+
+# ---------------------------------------------------------------------------
+# Module-level BLAS stubs for functions imported directly (not via
+# get_blas_funcs).  These raise NotImplementedError when called until real
+# Rust BLAS kernels are available.
+# ---------------------------------------------------------------------------
+
+def _make_blas_stub(name):
+    def stub(*args, **kwargs):
+        raise NotImplementedError(
+            f"BLAS function {name} not yet ported to Rust/rsnumpy")
+    stub.__name__ = name
+    return stub
+
+
+for _blas_name in ('dtrsm', 'strsm', 'ctrsm', 'ztrsm',
+                   'dgemm', 'sgemm', 'zgemm', 'cgemm',
+                   'dsymm', 'ssymm', 'zsymm', 'csymm',
+                   'dtrmm', 'strmm', 'ctrmm', 'ztrmm',
+                   'dsyrk', 'ssyrk', 'zsyrk', 'csyrk',
+                   'dot', 'sdot', 'ddot', 'cdotu', 'zdotu',
+                   'axpy', 'saxpy', 'daxpy', 'caxpy', 'zaxpy',
+                   'nrm2', 'snrm2', 'dnrm2', 'scnrm2', 'dznrm2',
+                   'asum', 'sasum', 'dasum', 'scasum', 'dzasum',
+                   'iamax', 'isamax', 'idamax', 'icamax', 'izamax',
+                   'rot', 'srot', 'drot', 'crot', 'zrot',
+                   'swap', 'sswap', 'dswap', 'cswap', 'zswap',
+                   'scal', 'sscal', 'dscal', 'cscal', 'zscal',
+                   'copy', 'scopy', 'dcopy', 'ccopy', 'zcopy'):
+    globals()[_blas_name] = _make_blas_stub(_blas_name)
+
