@@ -39,6 +39,8 @@ def _wvec(w, n):
     w = _f64(w).reshape(-1)
     if w.shape[0] != n:
         raise ValueError("The weight vector does not match the data.")
+    if bool(np.any(w < 0)):
+        raise ValueError("Weights must be non-negative.")
     return w
 
 
@@ -161,6 +163,13 @@ def _dice(A, B, w=None):
 
 
 def _jaccard(A, B, w=None):
+    # Since SciPy 1.15.0 jaccard converts numeric input to Boolean before
+    # computation (any nonzero is treated as True), unlike the other boolean
+    # metrics which allow fuzzy values.
+    return _jaccard_bool((A != 0).astype('float64'), (B != 0).astype('float64'), w)
+
+
+def _jaccard_bool(A, B, w=None):
     _, nft, ntf, ntt = _bool_counts(A, B, w)
     num = ntf + nft
     den = ntt + num
