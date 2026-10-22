@@ -18,6 +18,17 @@ supported_dtypes = [np.bool_, np.byte, np.ubyte, np.short, np.ushort, np.intc,
                     np.float32, np.float64, np.longdouble,
                     np.complex64, np.complex128, np.clongdouble]
 
+# Canonical names of the supported dtypes. rsnumpy's ``dtype.type`` returns a
+# builtin scalar type (``float``/``int``/``complex``) rather than the rsnumpy
+# scalar wrapper, so validating by ``dtype.type`` identity (as upstream NumPy
+# does) always fails here. Comparing by canonical dtype name is robust.
+_supported_dtype_names = set()
+for _t in supported_dtypes:
+    try:
+        _supported_dtype_names.add(np.dtype(_t).name)
+    except Exception:
+        pass
+
 _upcast_memo: dict[int, np.dtype] = {}
 
 
@@ -131,8 +142,9 @@ def getdtype(dtype, a=None, default=None):
     else:
         newdtype = np.dtype(dtype)
 
-    # check newdtype.type to avoid raising for endians which get fixed later
-    if newdtype.type not in supported_dtypes:
+    # Validate by canonical dtype name (see `_supported_dtype_names`); rsnumpy's
+    # `dtype.type` returns a builtin rather than the rsnumpy scalar type.
+    if newdtype.name not in _supported_dtype_names:
         supported_dtypes_fmt = ", ".join(t.__name__ for t in supported_dtypes)
         raise ValueError(f"scipy.sparse does not support dtype {newdtype}. "
                          f"The only supported types are: {supported_dtypes_fmt}.")

@@ -14,9 +14,25 @@ from typing import Any
 import rsnumpy as np
 import rsnumpy.typing as npt
 
-from rsscipy._external import array_api_compat
-import rsscipy._external.array_api_compat.numpy as np_compat
-from rsscipy._external.array_api_compat import is_array_api_obj, is_jax_array
+try:
+    from rsscipy._external import array_api_compat
+    import rsscipy._external.array_api_compat.numpy as np_compat
+    from rsscipy._external.array_api_compat import is_array_api_obj, is_jax_array
+except Exception:  # numpy (and the vendored array-api compat) unavailable
+    # rsnumpy is the only eager backend in this build, so the "NumPy compat"
+    # namespace is rsnumpy itself; the array_api_compat dispatch (used only to
+    # handle mixed foreign backends such as cupy/jax) is unavailable.
+    import types as _types
+
+    def _array_namespace_unavailable(*args, **kwargs):
+        raise NotImplementedError("array_api_compat dispatch requires numpy")
+
+    array_api_compat = _types.SimpleNamespace(
+        array_namespace=_array_namespace_unavailable)
+    np_compat = np
+    is_array_api_obj = lambda obj: False
+    is_jax_array = lambda obj: False
+
 from rsscipy._lib._sparse import SparseABC
 
 

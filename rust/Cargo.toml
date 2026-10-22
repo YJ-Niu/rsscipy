@@ -4,7 +4,7 @@
 # modules remain separated by domain under `rsscipy_rs/src`.
 [workspace]
 resolver = "2"
-members = ["rsscipy_rs"]
+members = ["rsscipy_rs", "fmm_core"]
 
 [workspace.package]
 version = "2.0.0-dev"

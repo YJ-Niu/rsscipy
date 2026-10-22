@@ -182,7 +182,6 @@ class _ufunc(np.ufunc):
                                     stack.append(sub)
                             else:
                                 flat_vals.append(item)
-                        flat_vals.reverse()
                     else:
                         flat_vals = [vals]
                     flat_args.append([float(x) for x in flat_vals[:n_flat]])
@@ -244,6 +243,12 @@ for _n in _for_math1:
     if hasattr(math, _n):
         _register(_n, _math1(getattr(math, _n)))
 
+# ``math.lgamma`` is ln|Gamma(x)|; scipy exposes it as ``gammaln`` and
+# ``loggamma`` — neither name exists in the stdlib ``math`` module, so wire
+# them explicitly (otherwise they fall through to the NaN stubs).
+_register('gammaln', _math1(math.lgamma))
+_register('loggamma', _math1(math.lgamma))
+
 # --- two-argument math functions ---
 _for_math2 = []
 for _n in _for_math2:
@@ -273,6 +278,22 @@ def _hankel2(x):
 def _kelvin(x):
     return (float('nan'),) * 4
 
+def _binom(n, k):
+    # Binomial coefficient C(n, k). Exact for integer n, k (the common case,
+    # e.g. the moment transforms); Gamma-based for general real arguments.
+    # NB: avoid the builtin ``round`` here — it is shadowed in this module's
+    # namespace by rsnumpy's ``round`` ufunc, so use ``int`` + an exact check.
+    ni = int(n); ki = int(k)
+    if n == ni and k == ki:
+        if ni < 0 or ki < 0 or ki > ni:
+            return 0.0
+        return float(math.comb(ni, ki))
+    try:
+        return math.exp(math.lgamma(n + 1) - math.lgamma(k + 1)
+                        - math.lgamma(n - k + 1))
+    except (ValueError, OverflowError):
+        return float('nan')
+
 # Register the rest as NaN-returning stubs
 _for_stub = [n for n in __all__ if n not in _SCALAR_FUNCS and n not in (
     'geterr', 'seterr', 'errstate',
@@ -290,7 +311,7 @@ _stub_funcs = {
     'airy': _airy, 'airye': _airye, 'fresnel': _fresnel, 'ellipj': _ellipj,
     'hankel1': _hankel1, 'hankel2': _hankel2, 'kelvin': _kelvin,
     # All stubs accept arbitrary arguments
-    'binom': lambda *args: float('nan'),
+    'binom': _binom,
     'gammainc': lambda *args: float('nan'),
     'gammaincc': lambda *args: float('nan'),
     'betainc': lambda *args: float('nan'),

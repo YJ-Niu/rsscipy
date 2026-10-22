@@ -43,6 +43,26 @@ _field_to_dtype = {
     "pattern": "float64",
 }
 
+# Reverse mapping: infer the Matrix Market field from an rsnumpy dtype string
+# when the caller does not specify one explicitly.
+_dtype_to_field = {
+    "float64": "real",
+    "float32": "real",
+    "complex128": "complex",
+    "complex64": "complex",
+    "int64": "integer",
+    "int32": "integer",
+    "uint64": "unsigned-integer",
+    "uint32": "unsigned-integer",
+}
+
+
+def _resolve_field(field, arr):
+    """Return the Matrix Market field to write, inferring from ``arr.dtype``."""
+    if field is not None:
+        return field
+    return _dtype_to_field.get(str(arr.dtype), "real")
+
 
 def _fmm_version():
     from . import _fmm_core
@@ -129,9 +149,9 @@ def _read_body_array(cursor):
     """
     from . import _fmm_core
 
-    vals = np.zeros(cursor.header.shape, dtype=_field_to_dtype.get(cursor.header.field))
-    _fmm_core.read_body_array(cursor, vals)
-    return vals
+    flat = _fmm_core.read_body_array(cursor)
+    vals = np.array(flat, dtype=_field_to_dtype.get(cursor.header.field))
+    return vals.reshape(cursor.header.shape)
 
 
 def _read_body_coo(cursor, generalize_symmetry=True):
@@ -145,11 +165,14 @@ def _read_body_coo(cursor, generalize_symmetry=True):
         # Dimensions are too large to fit in int32
         index_dtype = "int64"
 
-    i = np.zeros(cursor.header.nnz, dtype=index_dtype)
-    j = np.zeros(cursor.header.nnz, dtype=index_dtype)
-    data = np.zeros(cursor.header.nnz, dtype=_field_to_dtype.get(cursor.header.field))
-
-    _fmm_core.read_body_coo(cursor, i, j, data)
+    i_list, j_list, data_list = _fmm_core.read_body_coo(cursor)
+    i = np.array(i_list, dtype=index_dtype)
+    j = np.array(j_list, dtype=index_dtype)
+    field = cursor.header.field
+    if field == "pattern":
+        data = np.zeros(len(i_list), dtype="float64")
+    else:
+        data = np.array(data_list, dtype=_field_to_dtype.get(field))
 
     if generalize_symmetry and cursor.header.symmetry != "general":
         off_diagonal_mask = (i != j)
@@ -158,7 +181,7 @@ def _read_body_coo(cursor, generalize_symmetry=True):
         off_diagonal_data = data[off_diagonal_mask]
 
         if cursor.header.symmetry == "skew-symmetric":
-            off_diagonal_data *= -1
+            off_diagonal_data = off_diagonal_data * -1
         elif cursor.header.symmetry == "hermitian":
             off_diagonal_data = off_diagonal_data.conjugate()
 
@@ -551,7 +574,8 @@ def mmwrite(target, a, comment=None, field=None, precision=None, symmetry="AUTO"
     if isinstance(a, np.ndarray):
         # Write dense rsnumpy arrays
         a = _apply_field(a, field, no_pattern=True)
-        _fmm_core.write_body_array(cursor, a)
+        wfield = _resolve_field(field, a)
+        _fmm_core.write_body_array(cursor, wfield, a.shape, a.flatten().tolist())
 
     elif issparse(a):
         # Write sparse scipy matrices
@@ -566,7 +590,10 @@ def mmwrite(target, a, comment=None, field=None, precision=None, symmetry="AUTO"
                                a.col[lower_triangle_mask])), shape=a.shape)
 
         data = _apply_field(a.data, field)
-        _fmm_core.write_body_coo(cursor, a.shape, a.row, a.col, data)
+        wfield = _resolve_field(field, data)
+        _fmm_core.write_body_coo(
+            cursor, wfield, a.shape, a.row.tolist(), a.col.tolist(), data.tolist()
+        )
 
     else:
         raise ValueError(f"unknown matrix type: {type(a)}")

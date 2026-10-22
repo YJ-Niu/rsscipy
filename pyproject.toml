@@ -1,25 +1,12 @@
 [build-system]
-build-backend = 'mesonpy'
-# NOTE: when updating this table, also update `dependency-groups.build`
-#
-# These are installed into an isolated build env, so *everything* meson needs at
-# configure time has to be listed.  `meson-python` is the backend itself, and
-# `rsnumpy` is imported by `scipy/` at build/install time -- omitting either
-# makes `pip install .` fail in a way that looks unrelated to packaging.
-#
-# `numpy` here is a *build-time* dependency only: the still-unported C/Cython
-# extensions link against NumPy's C API (`np_dep` in the meson files).  At run
-# time the package uses `rsnumpy` exclusively -- see `[project].dependencies`,
-# which lists nothing else.  It can be dropped once the port is complete.
-requires = [
-    "meson-python>=0.15.0",
-    "ninja>=1.8.2",
-    "Cython>=3.2.0",
-    "pybind11>=2.13.2",
-    "pythran>=0.18.1",
-    "numpy>=2.0.0",
-    "rsnumpy>=1.2.4",
-]
+# The build is driven by the in-tree ``rsbuild`` PEP 517 backend (see
+# ``tools/rsbuild.py``), located via ``backend-path``. It builds the unified
+# Rust extension (``tools/build_rust.py``) and packages ``python/`` into a
+# wheel. The backend is stdlib-only, so no build-time packages are required and
+# a wheel can be built fully offline -- the only external tool is ``cargo``.
+build-backend = "rsbuild"
+backend-path = ["tools"]
+requires = []
 
 [project]
 # The distribution is `rsscipy`; the *import* package stays `scipy` so this
@@ -83,7 +70,7 @@ tracker = "https://github.com/YJ-Niu/rsscipy/issues"
 all = [
     "pooch",  # datasets
     "threadpoolctl",  # io.mm{...}
-    "matplotlib",  # cluster.hierarchy.dendrogram, stats.probplot
+    "rsplotlib",  # cluster.hierarchy.dendrogram, stats.probplot
     # circular dependency issues, https://github.com/scipy/scipy/issues/19783
     # "scikit-umfpack",  # optimize, sparse.linalg
 ]
@@ -92,7 +79,7 @@ all = [
 optional-runtime-deps = [
     "pooch",  # datasets
     "threadpoolctl",  # io.mm{...}
-    "matplotlib",  # cluster.hierarchy.dendrogram, stats.probplot
+    "rsplotlib",  # cluster.hierarchy.dendrogram, stats.probplot
     # circular dependency issues, https://github.com/scipy/scipy/issues/19783
     # "scikit-umfpack",  # optimize, sparse.linalg
 ]

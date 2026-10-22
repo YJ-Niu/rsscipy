@@ -120,12 +120,32 @@ def coo_tocsr(row, col, data, shape):
     raise NotImplementedError("coo_tocsr not yet ported")
 
 
-def coo_todense(row, col, data, shape, out):
-    raise NotImplementedError("coo_todense not yet ported")
+def coo_todense(M, N, nnz, row, col, data, out, fortran):
+    """Scatter COO entries into a flat dense buffer (2-D).
+
+    Pure rsnumpy replacement for the C ``coo_todense``.  ``out`` is the
+    raveled dense array (length ``M*N``); the flat index is computed for the
+    C or Fortran layout selected by ``fortran``.
+    """
+    if fortran:
+        idx = col * M + row
+    else:
+        idx = row * N + col
+    out[idx.astype(np.intp)] += data
 
 
-def coo_todense_nd(row, col, data, shape, out):
-    raise NotImplementedError("coo_todense_nd not yet ported")
+def coo_todense_nd(strides, nnz, ndim, coords, data, out, fortran):
+    """N-dimensional analogue of :func:`coo_todense`.
+
+    ``coords`` is the concatenation of the per-dimension index arrays
+    (``ndim * nnz`` long); the flat index is each dimension's index dotted
+    with ``strides``.
+    """
+    idx = np.zeros(nnz, dtype=np.intp)
+    for d in range(ndim):
+        s = d * nnz
+        idx += coords[s:s + nnz].astype(np.intp) * strides[d]
+    out[idx] += data
 
 
 # ----- DIA -----

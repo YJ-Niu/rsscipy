@@ -1,5 +1,12 @@
-# The single Rust crate and CPython extension installed into the Python package.
+# Rust crates and the CPython extensions installed into the Python package.
 [[module]]
 crate = "rsscipy_rs"
 lib = "_rsscipy_rs"
 dest = "python/rsscipy"
+
+# Matrix Market (.mtx) I/O kernel; installed into the io._fast_matrix_market
+# package as `_fmm_core`.
+[[module]]
+crate = "fmm_core"
+lib = "_fmm_core"
+dest = "python/rsscipy/io/_fast_matrix_market"

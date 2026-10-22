@@ -16,7 +16,7 @@ from rsscipy._rsscipy_rs import spatial as _rust_spatial
 __all__ = ['directed_hausdorff', 'hausdorff_distance']
 
 
-def directed_hausdorff(u, v, rng=0):
+def directed_hausdorff(u, v, seed=0):
     """Directed Hausdorff distance between two 2-D arrays.
 
     Returns ``(distance, index_in_u, index_in_v)`` using Euclidean
@@ -30,20 +30,20 @@ def directed_hausdorff(u, v, rng=0):
         raise ValueError('u and v need to have the same number of columns '
                          f'u.shape[1]={u.shape[1]} v.shape[1]={v.shape[1]}')
 
-    if isinstance(rng, np.random.Generator):
+    if isinstance(seed, np.random.Generator):
         # Randomized order: shuffling generally helps the early-break
         # heuristic find the Hausdorff pair sooner.
         resort1 = np.arange(u.shape[0], dtype='int64')
         resort2 = np.arange(v.shape[0], dtype='int64')
-        rng.shuffle(resort1)
-        rng.shuffle(resort2)
+        seed.shuffle(resort1)
+        seed.shuffle(resort2)
     else:
         # Legacy path (int / None / RandomState): keep the original order.
         # The distance is exact either way; only the reported indices for
         # tied Hausdorff pairs are implementation-defined.  Validate the
         # seed like ``np.random.RandomState(seed)`` would.
-        if not isinstance(rng, np.random.RandomState):
-            np.random.RandomState(rng)
+        if not isinstance(seed, np.random.RandomState):
+            np.random.RandomState(seed)
         resort1 = np.arange(u.shape[0], dtype='int64')
         resort2 = np.arange(v.shape[0], dtype='int64')
 

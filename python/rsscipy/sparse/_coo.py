@@ -299,15 +299,19 @@ class _coo_base(_data_matrix, _minmax_mixin):
         fortran = int(B.flags.f_contiguous)
         if not fortran and not B.flags.c_contiguous:
             raise ValueError("Output array must be C or F contiguous")
+        # rsnumpy's `ravel` returns a writable copy rather than a view, so the
+        # sparse values are scattered into the flat buffer itself and the
+        # buffer (not `B`) is the dense result.
+        buf = B.ravel('A')
         # This handles both 0D and 1D cases correctly regardless of the
         # original shape.
         if self.ndim == 1:
             coo_todense_nd(np.array([1]), self.nnz, self.ndim,
-                           self.coords[0], self.data, B.ravel('A'), fortran)
+                           self.coords[0], self.data, buf, fortran)
         elif self.ndim == 2:
             M, N = self.shape
             coo_todense(M, N, self.nnz, self.row, self.col, self.data,
-                        B.ravel('A'), fortran)
+                        buf, fortran)
         else:  # dim>2
             if fortran:
                 strides = np.append(1, np.cumprod(self.shape[:-1]))
@@ -315,9 +319,9 @@ class _coo_base(_data_matrix, _minmax_mixin):
                 strides = np.append(np.cumprod(self.shape[1:][::-1])[::-1], 1)
             coords = np.concatenate(self.coords)
             coo_todense_nd(strides, self.nnz, self.ndim,
-                           coords, self.data, B.ravel('A'), fortran)
+                           coords, self.data, buf, fortran)
         # Note: reshape() doesn't copy here, but does return a new array (view).
-        return B.reshape(self.shape)
+        return buf.reshape(self.shape)
 
     toarray.__doc__ = _spbase.toarray.__doc__
 
@@ -845,13 +849,16 @@ class _coo_base(_data_matrix, _minmax_mixin):
         dtype = upcast_char(self.dtype.char, other.dtype.char)
         result = np.array(other, dtype=dtype, copy=True)
         fortran = int(result.flags.f_contiguous)
+        # rsnumpy's `ravel` returns a writable copy, so scatter into the flat
+        # buffer and use it (not `result`) as the dense result.
+        buf = result.ravel('A')
         if self.ndim == 1:
             coo_todense_nd(np.array([1]), self.nnz, self.ndim,
-                           self.coords[0], self.data, result.ravel('A'), fortran)
+                           self.coords[0], self.data, buf, fortran)
         elif self.ndim == 2:
             M, N = self._shape_as_2d
             coo_todense(M, N, self.nnz, self.row, self.col, self.data,
-                        result.ravel('A'), fortran)
+                        buf, fortran)
         else:
             if fortran:
                 strides = np.append(1, np.cumprod(self.shape[:-1]))
@@ -859,8 +866,8 @@ class _coo_base(_data_matrix, _minmax_mixin):
                 strides = np.append(np.cumprod(self.shape[1:][::-1])[::-1], 1)
             coords = np.concatenate(self.coords)
             coo_todense_nd(strides, self.nnz, self.ndim,
-                           coords, self.data, result.ravel('A'), fortran)
-        return self._container(result, copy=False)
+                           coords, self.data, buf, fortran)
+        return self._container(buf.reshape(self.shape), copy=False)
 
 
     def _add_sparse(self, other):

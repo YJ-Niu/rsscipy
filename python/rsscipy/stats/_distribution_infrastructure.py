@@ -1274,7 +1274,14 @@ def _combine_docs(dist_family, *, include_examples=True):
         elif field == "Extended Summary":
             doc[field].append(_generate_domain_support(dist_family))
         elif field == 'Examples':
-            doc[field] = [_generate_example(dist_family)]
+            try:
+                doc[field] = [_generate_example(dist_family)]
+            except Exception:
+                # Building the example evaluates live distribution methods
+                # (mean, moments, ...). Under rsnumpy some of these hit
+                # shape/ufunc limitations; degrade gracefully so that importing
+                # the module (which builds every docstring) never fails.
+                doc[field] = ['(Examples unavailable in this build.)']
         else:
             doc[field] += superdoc[field]
     return str(doc)

@@ -21,34 +21,76 @@ from collections.abc import Iterable
 import rsnumpy as np
 import rsnumpy.typing as npt
 
-from rsscipy._external.array_api_compat import (
-    is_array_api_obj,
-    is_lazy_array,
-    is_numpy_array,
-    is_cupy_array,
-    is_torch_array,
-    is_jax_array,
-    is_dask_array,
-    is_pydata_sparse_array,
-    size as xp_size,
-    numpy as np_compat,
-    device as xp_device,
-    is_numpy_namespace as is_numpy,
-    is_cupy_namespace as is_cupy,
-    is_torch_namespace as is_torch,
-    is_jax_namespace as is_jax,
-    is_dask_namespace as is_dask,
-    is_array_api_strict_namespace as is_array_api_strict,
-)
-from rsscipy._external.array_api_compat.common._helpers import _compat_module_name
-from rsscipy._external.array_api_extra.testing import lazy_xp_function
+try:
+    # Array-API machinery (optional). The vendored ``array_api_compat`` numpy
+    # namespace imports ``numpy`` at load time, so it is only available when
+    # numpy is installed. rsnumpy is the primary backend and needs none of it.
+    from rsscipy._external.array_api_compat import (
+        is_array_api_obj,
+        is_lazy_array,
+        is_numpy_array,
+        is_cupy_array,
+        is_torch_array,
+        is_jax_array,
+        is_dask_array,
+        is_pydata_sparse_array,
+        size as xp_size,
+        numpy as np_compat,
+        device as xp_device,
+        is_numpy_namespace as is_numpy,
+        is_cupy_namespace as is_cupy,
+        is_torch_namespace as is_torch,
+        is_jax_namespace as is_jax,
+        is_dask_namespace as is_dask,
+        is_array_api_strict_namespace as is_array_api_strict,
+    )
+    from rsscipy._external.array_api_compat.common._helpers import _compat_module_name
+    from rsscipy._external.array_api_extra.testing import lazy_xp_function
+    import rsscipy._external.array_api_extra as xpx
+    import rsscipy._external.array_api_extra.testing as xpt
+    _ARRAY_API_AVAILABLE = True
+except Exception:  # numpy (and the vendored array-api compat) unavailable
+    # Minimal fallbacks so this module — and therefore rsscipy.signal /
+    # rsscipy.stats — still imports without numpy. rsnumpy is treated as the
+    # "numpy-like" backend; all other (cupy/jax/torch/...) backends are
+    # reported as absent.
+    def _is_rsnumpy_namespace(xp):
+        return xp is np or getattr(xp, '__name__', '') in ('rsnumpy', 'numpy')
+
+    is_array_api_obj = lambda obj: isinstance(obj, np.ndarray)
+    is_lazy_array = lambda obj: False
+    is_numpy_array = lambda obj: isinstance(obj, np.ndarray)
+    is_cupy_array = lambda obj: False
+    is_torch_array = lambda obj: False
+    is_jax_array = lambda obj: False
+    is_dask_array = lambda obj: False
+    is_pydata_sparse_array = lambda obj: False
+    xp_size = np.size
+    np_compat = np
+    xp_device = lambda *args, **kwargs: None
+    is_numpy = _is_rsnumpy_namespace
+    is_cupy = lambda xp: False
+    is_torch = lambda xp: False
+    is_jax = lambda xp: False
+    is_dask = lambda xp: False
+    is_array_api_strict = lambda xp: False
+    _compat_module_name = lambda xp, default='rsnumpy': default
+
+    def lazy_xp_function(func):
+        return func
+
+    class _XPStub:
+        pass
+
+    xpx = _XPStub()
+    xpt = _XPStub()
+    _ARRAY_API_AVAILABLE = False
+
 from rsscipy._lib._array_api_override import (
     array_namespace, SCIPY_ARRAY_API, SCIPY_DEVICE
 )
 
 from rsscipy._lib._docscrape import FunctionDoc
-import rsscipy._external.array_api_extra as xpx
-import rsscipy._external.array_api_extra.testing as xpt
 
 
 __all__ = [
