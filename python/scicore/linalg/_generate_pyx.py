@@ -98,9 +98,9 @@ should follow this pattern:
 
     # Check if scipy's cython_blas exports blas_int (ILP64 support).
     _blas_int_conf = configuration_data()
-    if cython.compiles('from rsscipy.linalg.cython_blas cimport blas_int')
-      _blas_int_conf.set('BLAS_INT_DEF', 'from rsscipy.linalg.cython_blas cimport blas_int')
-      _blas_int_conf.set('BLAS_BINT_DEF', 'from rsscipy.linalg.cython_blas cimport blas_bint')
+    if cython.compiles('from scicore.linalg.cython_blas cimport blas_int')
+      _blas_int_conf.set('BLAS_INT_DEF', 'from scicore.linalg.cython_blas cimport blas_int')
+      _blas_int_conf.set('BLAS_BINT_DEF', 'from scicore.linalg.cython_blas cimport blas_bint')
     else
       _blas_int_conf.set('BLAS_INT_DEF', 'ctypedef int blas_int')
       _blas_int_conf.set('BLAS_BINT_DEF', 'ctypedef bint blas_bint')
@@ -134,7 +134,7 @@ Raw function pointers (Fortran-style pointer arguments):
 # Within SciPy, these wrappers can be used via relative or absolute cimport.
 # Examples:
 # from ..linalg cimport cython_blas
-# from rsscipy.linalg cimport cython_blas
+# from scicore.linalg cimport cython_blas
 # cimport scipy.linalg.cython_blas as cython_blas
 # cimport ..linalg.cython_blas as cython_blas
 
@@ -195,9 +195,9 @@ should follow this pattern:
 
     # Check if scipy's cython_lapack exports blas_int (ILP64 support).
     _blas_int_conf = configuration_data()
-    if cython.compiles('from rsscipy.linalg.cython_lapack cimport blas_int')
-      _blas_int_conf.set('BLAS_INT_DEF', 'from rsscipy.linalg.cython_lapack cimport blas_int')
-      _blas_int_conf.set('BLAS_BINT_DEF', 'from rsscipy.linalg.cython_lapack cimport blas_bint')
+    if cython.compiles('from scicore.linalg.cython_lapack cimport blas_int')
+      _blas_int_conf.set('BLAS_INT_DEF', 'from scicore.linalg.cython_lapack cimport blas_int')
+      _blas_int_conf.set('BLAS_BINT_DEF', 'from scicore.linalg.cython_lapack cimport blas_bint')
     else
       _blas_int_conf.set('BLAS_INT_DEF', 'ctypedef int blas_int')
       _blas_int_conf.set('BLAS_BINT_DEF', 'ctypedef bint blas_bint')
@@ -231,7 +231,7 @@ Raw function pointers (Fortran-style pointer arguments):
 # Within SciPy, these wrappers can be used via relative or absolute cimport.
 # Examples:
 # from ..linalg cimport cython_lapack
-# from rsscipy.linalg cimport cython_lapack
+# from scicore.linalg cimport cython_lapack
 # cimport scipy.linalg.cython_lapack as cython_lapack
 # cimport ..linalg.cython_lapack as cython_lapack
 
@@ -572,7 +572,7 @@ _pxd_blas_comments = """\
 # Within scipy, these wrappers can be used via relative or absolute cimport.
 # Examples:
 # from ..linalg cimport cython_blas
-# from rsscipy.linalg cimport cython_blas
+# from scicore.linalg cimport cython_blas
 # cimport scipy.linalg.cython_blas as cython_blas
 # cimport ..linalg.cython_blas as cython_blas
 
@@ -586,7 +586,7 @@ _pxd_lapack_comments = """\
 # Within SciPy, these wrappers can be used via relative or absolute cimport.
 # Examples:
 # from ..linalg cimport cython_lapack
-# from rsscipy.linalg cimport cython_lapack
+# from scicore.linalg cimport cython_lapack
 # cimport scipy.linalg.cython_lapack as cython_lapack
 # cimport ..linalg.cython_lapack as cython_lapack
 

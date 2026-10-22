@@ -28,10 +28,10 @@ from ._stats_py import power_divergence, _untabulate, Power_divergenceResult
 from ._relative_risk import relative_risk
 from ._crosstab import crosstab
 from ._odds_ratio import odds_ratio
-from rsscipy._lib._array_api import (array_namespace, xp_capabilities, xp_promote,
+from scicore._lib._array_api import (array_namespace, xp_capabilities, xp_promote,
                                    xp_size, xp_device)
-from rsscipy._lib._bunch import _make_tuple_bunch
-from rsscipy import stats
+from scicore._lib._bunch import _make_tuple_bunch
+from scicore import stats
 
 
 __all__ = ['margins', 'expected_freq', 'chi2_contingency', 'crosstab',
@@ -58,7 +58,7 @@ def margins(a):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats.contingency import margins
+    >>> from scicore.stats.contingency import margins
 
     >>> a = np.arange(12).reshape(2, 6)
     >>> a
@@ -117,7 +117,7 @@ def expected_freq(observed):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats.contingency import expected_freq
+    >>> from scicore.stats.contingency import expected_freq
     >>> observed = np.array([[10, 10, 20],[20, 20, 20]])
     >>> expected_freq(observed)
     array([[ 12.,  12.,  16.],
@@ -260,7 +260,7 @@ def chi2_contingency(observed, correction=True, lambda_=None, *, method=None):
     A two-way example (2 x 3):
 
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import chi2_contingency
+    >>> from scicore.stats import chi2_contingency
     >>> obs = np.array([[10, 10, 20], [20, 20, 20]])
     >>> res = chi2_contingency(obs)
     >>> res.statistic
@@ -304,7 +304,7 @@ def chi2_contingency(observed, correction=True, lambda_=None, *, method=None):
     Consider passing a `PermutationMethod` or `MonteCarloMethod` as the
     `method` parameter with `correction=False`.
 
-    >>> from rsscipy.stats import PermutationMethod
+    >>> from scicore.stats import PermutationMethod
     >>> obs = np.asarray([[12, 3],
     ...                   [17, 16]])
     >>> res = chi2_contingency(obs, correction=False)
@@ -524,7 +524,7 @@ def association(observed, method="cramer", correction=False, lambda_=None):
     An example with a 4x2 contingency table:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.stats.contingency import association
+    >>> from scicore.stats.contingency import association
     >>> obs4x2 = np.array([[100, 150], [203, 322], [420, 700], [320, 210]])
 
     Pearson's contingency coefficient

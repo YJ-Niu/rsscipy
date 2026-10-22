@@ -1,13 +1,13 @@
 from collections import namedtuple
 
 import rsnumpy as np
-import rsscipy.sparse as sps
+import scicore.sparse as sps
 from ._numdiff import approx_derivative, group_columns
 from ._hessian_update_strategy import HessianUpdateStrategy
-from rsscipy.sparse.linalg import LinearOperator
-from rsscipy._lib._array_api import array_namespace, xp_copy
-from rsscipy._external import array_api_extra as xpx
-from rsscipy._lib._util import _ScalarFunctionWrapper
+from scicore.sparse.linalg import LinearOperator
+from scicore._lib._array_api import array_namespace, xp_copy
+from scicore._external import array_api_extra as xpx
+from scicore._lib._util import _ScalarFunctionWrapper
 
 
 FD_METHODS = ('2-point', '3-point', 'cs')

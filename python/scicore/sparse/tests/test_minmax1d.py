@@ -6,9 +6,9 @@ import rsnumpy as np
 
 from rsnumpy.testing import assert_equal, assert_array_equal
 
-from rsscipy.sparse import coo_array, csr_array, csc_array, bsr_array
-from rsscipy.sparse import coo_matrix, csr_matrix, csc_matrix, bsr_matrix
-from rsscipy.sparse._sputils import isscalarlike
+from scicore.sparse import coo_array, csr_array, csc_array, bsr_array
+from scicore.sparse import coo_matrix, csr_matrix, csc_matrix, bsr_matrix
+from scicore.sparse._sputils import isscalarlike
 
 
 def toarray(a):

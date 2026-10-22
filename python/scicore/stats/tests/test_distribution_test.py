@@ -3,7 +3,7 @@
 # no other definitions in `test_continuous.py`.
 import pytest
 import rsnumpy as np
-from rsscipy import stats, special
+from scicore import stats, special
 from .test_continuous import DistributionsTest
 
 

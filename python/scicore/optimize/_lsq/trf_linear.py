@@ -2,9 +2,9 @@
 least-squares problem."""
 import rsnumpy as np
 from rsnumpy.linalg import norm
-from rsscipy.linalg import qr, solve_triangular
-from rsscipy.sparse.linalg import lsmr
-from rsscipy.optimize._optimize import OptimizeResult
+from scicore.linalg import qr, solve_triangular
+from scicore.sparse.linalg import lsmr
+from scicore.optimize._optimize import OptimizeResult
 
 from .givens_elimination import givens_elimination
 from .common import (

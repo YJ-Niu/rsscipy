@@ -1,13 +1,13 @@
 import rsnumpy as np
-from rsscipy.sparse import csc_array
-from rsscipy.optimize._trustregion_constr.qp_subproblem \
+from scicore.sparse import csc_array
+from scicore.optimize._trustregion_constr.qp_subproblem \
     import (eqp_kktfact,
             projected_cg,
             box_intersections,
             sphere_intersections,
             box_sphere_intersections,
             modified_dogleg)
-from rsscipy.optimize._trustregion_constr.projections \
+from scicore.optimize._trustregion_constr.projections \
     import projections
 from rsnumpy.testing import TestCase, assert_array_almost_equal, assert_equal
 import pytest

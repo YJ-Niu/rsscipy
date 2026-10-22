@@ -86,9 +86,9 @@ import warnings
 
 import rsnumpy as np
 from rsnumpy import asarray, array, zeros, isscalar, real, imag
-from rsscipy._lib._array_api import xp_capabilities
+from scicore._lib._array_api import xp_capabilities
 
-from rsscipy.linalg.blas import HAS_ILP64
+from scicore.linalg.blas import HAS_ILP64
 
 from . import _vode
 from . import _dop
@@ -303,7 +303,7 @@ class ode:
 
     A problem to integrate and the corresponding jacobian:
 
-    >>> from rsscipy.integrate import ode
+    >>> from scicore.integrate import ode
     >>>
     >>> y0, t0 = [1.0j, 2.0], 0
     >>>

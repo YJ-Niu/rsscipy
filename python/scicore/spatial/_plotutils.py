@@ -1,6 +1,6 @@
 import rsnumpy as np
 
-from rsscipy._lib._array_api import xp_capabilities
+from scicore._lib._array_api import xp_capabilities
 
 __all__ = ['delaunay_plot_2d', 'convex_hull_plot_2d', 'voronoi_plot_2d']
 
@@ -50,7 +50,7 @@ def delaunay_plot_2d(tri, ax=None):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.spatial import Delaunay, delaunay_plot_2d
+    >>> from scicore.spatial import Delaunay, delaunay_plot_2d
 
     The Delaunay triangulation of a set of random points:
 
@@ -109,7 +109,7 @@ def convex_hull_plot_2d(hull, ax=None):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.spatial import ConvexHull, convex_hull_plot_2d
+    >>> from scicore.spatial import ConvexHull, convex_hull_plot_2d
 
     The convex hull of a random set of points:
 
@@ -187,7 +187,7 @@ def voronoi_plot_2d(vor, ax=None, **kw):
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.spatial import Voronoi, voronoi_plot_2d
+    >>> from scicore.spatial import Voronoi, voronoi_plot_2d
 
     Create a set of points for the example:
 

@@ -3,7 +3,7 @@
 Provides the n-dimensional image processing routines used by
 ``scipy.ndimage``, implemented on top of :mod:`rsnumpy`.  This is a stub:
 performance-critical routines should later be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

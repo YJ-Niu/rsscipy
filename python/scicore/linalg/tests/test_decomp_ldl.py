@@ -4,7 +4,7 @@ from rsnumpy import (array, eye, zeros, empty_like, empty, tril_indices_from,
                    tril, triu_indices_from, spacing, float32, float64,
                    complex64, complex128)
 from rsnumpy.exceptions import ComplexWarning
-from rsscipy.linalg import ldl
+from scicore.linalg import ldl
 import pytest
 
 

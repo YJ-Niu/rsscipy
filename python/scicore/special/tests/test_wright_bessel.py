@@ -22,8 +22,8 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose
 
-import rsscipy.special as sc
-from rsscipy.special import log_wright_bessel, loggamma, rgamma, wright_bessel
+import scicore.special as sc
+from scicore.special import log_wright_bessel, loggamma, rgamma, wright_bessel
 
 
 @pytest.mark.parametrize('a', [0, 1e-6, 0.1, 0.5, 1, 10])

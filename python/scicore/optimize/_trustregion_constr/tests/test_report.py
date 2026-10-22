@@ -1,6 +1,6 @@
 import pytest
 import rsnumpy as np
-from rsscipy.optimize import minimize, Bounds
+from scicore.optimize import minimize, Bounds
 
 def test_gh10880():
     # checks that verbose reporting works with trust-constr for

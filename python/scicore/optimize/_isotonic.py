@@ -93,7 +93,7 @@ def isotonic_regression(
     constrained optimization problem.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.optimize import isotonic_regression, minimize
+    >>> from scicore.optimize import isotonic_regression, minimize
     >>> y = [1.5, 1.0, 4.0, 6.0, 5.7, 5.0, 7.8, 9.0, 7.5, 9.5, 9.0]
     >>> def objective(yhat, y):
     ...     return np.sum((yhat - y)**2)

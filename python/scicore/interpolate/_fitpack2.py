@@ -26,7 +26,7 @@ import rsnumpy as np
 
 from . import _fitpack_impl
 from . import _fitpack  # type:ignore[attr-defined]
-from rsscipy._lib._array_api import xp_capabilities
+from scicore._lib._array_api import xp_capabilities
 
 
 # Helper functions for bbox calculation (matching f2py behavior)
@@ -509,7 +509,7 @@ class UnivariateSpline:
     data points:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.interpolate import UnivariateSpline
+    >>> from scicore.interpolate import UnivariateSpline
     >>> x, y = np.array([1, 2, 3, 4]), np.array([1, np.nan, 3, 4])
     >>> w = np.isnan(y)
     >>> y[w] = 0.
@@ -537,7 +537,7 @@ class UnivariateSpline:
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.interpolate import UnivariateSpline
+    >>> from scicore.interpolate import UnivariateSpline
     >>> rng = np.random.default_rng()
     >>> x = np.linspace(-3, 3, 50)
     >>> y = np.exp(-x**2) + 0.1 * rng.standard_normal(50)
@@ -799,7 +799,7 @@ class UnivariateSpline:
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from rsscipy.interpolate import UnivariateSpline
+        >>> from scicore.interpolate import UnivariateSpline
         >>> x = np.linspace(0, 3, 11)
         >>> y = x**2
         >>> spl = UnivariateSpline(x, y)
@@ -836,7 +836,7 @@ class UnivariateSpline:
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from rsscipy.interpolate import UnivariateSpline
+        >>> from scicore.interpolate import UnivariateSpline
         >>> x = np.linspace(0, 3, 11)
         >>> y = x**2
         >>> spl = UnivariateSpline(x, y)
@@ -868,14 +868,14 @@ class UnivariateSpline:
         >>> y = [-6.365470e-03, -4.790580e-03, -3.204320e-03, -1.607270e-03,
         ...      4.440892e-16,  1.616930e-03,  3.243000e-03,  4.877670e-03,
         ...      6.520430e-03,  8.170770e-03]
-        >>> from rsscipy.interpolate import UnivariateSpline
+        >>> from scicore.interpolate import UnivariateSpline
         >>> spl = UnivariateSpline(x, y, s=0)
         >>> spl.roots()
         array([], dtype=float64)
 
         Converting to a PPoly object does find the roots at `x=2`:
 
-        >>> from rsscipy.interpolate import splrep, PPoly
+        >>> from scicore.interpolate import splrep, PPoly
         >>> tck = splrep(x, y, s=0)
         >>> ppoly = PPoly.from_spline(tck)
         >>> ppoly.roots(extrapolate=False)
@@ -925,7 +925,7 @@ class UnivariateSpline:
         This can be used for finding maxima of a curve:
 
         >>> import rsnumpy as np
-        >>> from rsscipy.interpolate import UnivariateSpline
+        >>> from scicore.interpolate import UnivariateSpline
         >>> x = np.linspace(0, 10, 70)
         >>> y = np.sin(x)
         >>> spl = UnivariateSpline(x, y, k=4, s=0)
@@ -973,7 +973,7 @@ class UnivariateSpline:
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from rsscipy.interpolate import UnivariateSpline
+        >>> from scicore.interpolate import UnivariateSpline
         >>> x = np.linspace(0, np.pi/2, 70)
         >>> y = 1 / np.sqrt(1 - 0.8*np.sin(x)**2)
         >>> spl = UnivariateSpline(x, y, s=0)
@@ -993,7 +993,7 @@ class UnivariateSpline:
         This is indeed an approximation to the complete elliptic integral
         :math:`K(m) = \\int_0^{\\pi/2} [1 - m\\sin^2 x]^{-1/2} dx`:
 
-        >>> from rsscipy.special import ellipk
+        >>> from scicore.special import ellipk
         >>> ellipk(0.8)
         2.2572053268208538
 
@@ -1078,7 +1078,7 @@ class InterpolatedUnivariateSpline(UnivariateSpline):
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.interpolate import InterpolatedUnivariateSpline
+    >>> from scicore.interpolate import InterpolatedUnivariateSpline
     >>> rng = np.random.default_rng()
     >>> x = np.linspace(-3, 3, 50)
     >>> y = np.exp(-x**2) + 0.1 * rng.standard_normal(50)
@@ -1209,7 +1209,7 @@ class LSQUnivariateSpline(UnivariateSpline):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.interpolate import LSQUnivariateSpline, UnivariateSpline
+    >>> from scicore.interpolate import LSQUnivariateSpline, UnivariateSpline
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng()
     >>> x = np.linspace(-3, 3, 50)
@@ -1379,7 +1379,7 @@ class _BivariateSplineBase:
         function in 2 dimensions.
 
         >>> import rsnumpy as np
-        >>> from rsscipy.interpolate import RectBivariateSpline
+        >>> from scicore.interpolate import RectBivariateSpline
 
         We sample the function on a coarse grid. Note that the default indexing="xy"
         of meshgrid would result in an unexpected (transposed) result after
@@ -1629,7 +1629,7 @@ class BivariateSpline(_BivariateSplineBase):
         function in 2 dimensions.
 
         >>> import rsnumpy as np
-        >>> from rsscipy.interpolate import RectBivariateSpline
+        >>> from scicore.interpolate import RectBivariateSpline
         >>> def f(x, y):
         ...     return np.exp(-np.sqrt((x / 2) ** 2 + y**2))
 
@@ -2111,7 +2111,7 @@ class SphereBivariateSpline(_BivariateSplineBase):
         colatitudes.
 
         >>> import rsnumpy as np
-        >>> from rsscipy.interpolate import RectSphereBivariateSpline
+        >>> from scicore.interpolate import RectSphereBivariateSpline
         >>> def f(theta, phi):
         ...     return np.sin(theta) * np.cos(phi)
 
@@ -2187,7 +2187,7 @@ class SphereBivariateSpline(_BivariateSplineBase):
         colatitudes.
 
         >>> import rsnumpy as np
-        >>> from rsscipy.interpolate import RectSphereBivariateSpline
+        >>> from scicore.interpolate import RectSphereBivariateSpline
         >>> def f(theta, phi):
         ...     return np.sin(theta) * np.cos(phi)
 
@@ -2294,7 +2294,7 @@ class SmoothSphereBivariateSpline(SphereBivariateSpline):
     We need to set up the interpolator object
 
     >>> lats, lons = np.meshgrid(theta, phi)
-    >>> from rsscipy.interpolate import SmoothSphereBivariateSpline
+    >>> from scicore.interpolate import SmoothSphereBivariateSpline
     >>> lut = SmoothSphereBivariateSpline(lats.ravel(), lons.ravel(),
     ...                                   data.T.ravel(), s=3.5)
 
@@ -2421,7 +2421,7 @@ class LSQSphereBivariateSpline(SphereBivariateSpline):
     Suppose we have global data on a coarse grid (the input data does not
     have to be on a grid):
 
-    >>> from rsscipy.interpolate import LSQSphereBivariateSpline
+    >>> from scicore.interpolate import LSQSphereBivariateSpline
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
 
@@ -2640,7 +2640,7 @@ class RectSphereBivariateSpline(SphereBivariateSpline):
 
     We need to set up the interpolator object
 
-    >>> from rsscipy.interpolate import RectSphereBivariateSpline
+    >>> from scicore.interpolate import RectSphereBivariateSpline
     >>> lut = RectSphereBivariateSpline(lats, lons, data)
 
     Finally we interpolate the data.  The `RectSphereBivariateSpline` object

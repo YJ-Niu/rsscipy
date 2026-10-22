@@ -92,7 +92,7 @@ def generate(submodule, config):
             and optional "skip_condition" / "skip_reason"
     """
     import importlib
-    import scipy
+    import scicore
 
     modules = config["modules"]
     skip_condition = config.get("skip_condition")
@@ -121,7 +121,7 @@ def generate(submodule, config):
 # AUTO-GENERATED - do not edit by hand.
 # Re-generate with:  python tools/generate_cython_abi_tests.py {submodule}
 #
-# Generated against SciPy {scipy.__version__} on {date.today().isoformat()}
+# Generated against RSSCPy {scicore.__version__} on {date.today().isoformat()}
 # Python {sys.version.split()[0]}
 # ---------------------------------------------------------------------------
 
@@ -148,10 +148,10 @@ import importlib.resources
 import json
 
 import pytest
-import scipy
+import scicore
 
 CYTHON_BLAS_ILP64 = (
-    scipy.show_config(mode='dicts')['Build Dependencies']['blas']['cython blas ilp64']
+    scicore.show_config(mode='dicts')['Build Dependencies']['blas']['cython blas ilp64']
 )
 
 
@@ -174,7 +174,7 @@ def _extract_capi(module):
     return result
 
 
-_sig_file = importlib.resources.files('scipy.{submodule}.tests').joinpath(
+_sig_file = importlib.resources.files('scicore.{submodule}.tests').joinpath(
     'cython_abi_signatures.json'
 )
 with importlib.resources.as_file(_sig_file) as _f:
@@ -241,7 +241,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "submodule",
         choices=sorted(SUBMODULE_MAP),
-        help="SciPy submodule to generate tests for",
+        help="RSSCPy submodule to generate tests for",
     )
     args = parser.parse_args()
 

@@ -2,9 +2,9 @@
 """
 
 import rsnumpy as np
-from rsscipy.sparse import issparse
-from rsscipy.sparse.linalg._interface import aslinearoperator
-from rsscipy.sparse._sputils import is_pydata_spmatrix
+from scicore.sparse import issparse
+from scicore.sparse.linalg._interface import aslinearoperator
+from scicore.sparse._sputils import is_pydata_spmatrix
 
 
 __all__ = ['onenormest']
@@ -70,8 +70,8 @@ def onenormest(A, t=2, itmax=5, compute_v=False, compute_w=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import csc_array
-    >>> from rsscipy.sparse.linalg import onenormest
+    >>> from scicore.sparse import csc_array
+    >>> from scicore.sparse.linalg import onenormest
     >>> A = csc_array([[1., 0., 0.], [5., 8., 2.], [0., -1., 0.]], dtype=float)
     >>> A.toarray()
     array([[ 1.,  0.,  0.],

@@ -3,15 +3,15 @@ import rsnumpy as np
 import pytest
 from pytest import raises as assert_raises
 
-from rsscipy._external import array_api_extra as xpx
-from rsscipy._lib._array_api import (
+from scicore._external import array_api_extra as xpx
+from scicore._lib._array_api import (
     xp_assert_less, xp_assert_equal, xp_copy_to_numpy,
     make_xp_test_case
 )
-from rsscipy._lib._array_api_no_0d import xp_assert_close
+from scicore._lib._array_api_no_0d import xp_assert_close
 
-import rsscipy.signal._waveforms as waveforms
-from rsscipy.signal import chirp, gausspulse, square, sawtooth  # type:ignore[attr-defined]
+import scicore.signal._waveforms as waveforms
+from scicore.signal import chirp, gausspulse, square, sawtooth  # type:ignore[attr-defined]
 
 
 # These chirp_* functions are the instantaneous frequencies of the signals
@@ -390,7 +390,7 @@ class TestGaussPulse:
 
     def test_scalar_array_input(self, xp):
         # NumPy returns a scalar; other backends return a 0-D array.
-        from rsscipy._lib._array_api_no_0d import xp_assert_close as xp_assert_close_no_0d
+        from scicore._lib._array_api_no_0d import xp_assert_close as xp_assert_close_no_0d
         t = xp.asarray(0.0)
         y = gausspulse(t, fc=5)
         xp_assert_close_no_0d(y, xp.asarray(1.0))

@@ -4,9 +4,9 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal, assert_
 import pytest
-import rsscipy.linalg
-import rsscipy.sparse.linalg
-from rsscipy.sparse.linalg._onenormest import _onenormest_core
+import scicore.linalg
+import scicore.sparse.linalg
+from scicore.sparse.linalg._onenormest import _onenormest_core
 
 
 class MatrixProductOperator(scipy.sparse.linalg.LinearOperator):

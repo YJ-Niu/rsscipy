@@ -2,7 +2,7 @@
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import signal as _rust_signal
+from scicore._scicore_rs import signal as _rust_signal
 
 _sepfir2d = _rust_signal._sepfir2d
 _symiirorder1_ic = _rust_signal._symiirorder1_ic

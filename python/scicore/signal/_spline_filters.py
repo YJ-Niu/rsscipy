@@ -5,17 +5,17 @@ from rsnumpy import (zeros_like, array, tan, arange, floor,
                    moveaxis, abs, complex64, float32)
 import rsnumpy as np
 
-from rsscipy._lib._array_api import (xp_result_device, array_namespace,
+from scicore._lib._array_api import (xp_result_device, array_namespace,
                                    xp_promote)
 
-from rsscipy._lib._util import normalize_axis_index
+from scicore._lib._util import normalize_axis_index
 
 # From splinemodule.c
 from ._spline import sepfir2d, symiirorder1_ic, symiirorder2_ic_fwd, symiirorder2_ic_bwd
 from ._signaltools import lfilter, sosfilt, lfiltic
 from ._arraytools import axis_slice, axis_reverse
 
-from rsscipy.interpolate import BSpline
+from scicore.interpolate import BSpline
 
 
 __all__ = ['spline_filter', 'gauss_spline',
@@ -47,7 +47,7 @@ def spline_filter(Iin, lmbda=5.0):
     B-spline filter:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import spline_filter
+    >>> from scicore.signal import spline_filter
     >>> import matplotlib.pyplot as plt
     >>> orig_img = np.eye(20)  # create an image
     >>> orig_img[10, :] = 1.0
@@ -122,7 +122,7 @@ def gauss_spline(x, n):
     distribution:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import gauss_spline
+    >>> from scicore.signal import gauss_spline
     >>> knots = np.array([-1.0, 0.0, -1.0])
     >>> gauss_spline(knots, 3)
     array([0.15418033, 0.6909883, 0.15418033])  # may vary
@@ -335,7 +335,7 @@ def cspline1d(signal, lamb=0.0):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.signal import cspline1d, cspline1d_eval
+    >>> from scicore.signal import cspline1d, cspline1d_eval
     >>> rng = np.random.default_rng()
     >>> sig = np.repeat([0., 1., 0.], 100)
     >>> sig += rng.standard_normal(len(sig))*0.05  # add noise
@@ -390,7 +390,7 @@ def qspline1d(signal, lamb=0.0):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.signal import qspline1d, qspline1d_eval
+    >>> from scicore.signal import qspline1d, qspline1d_eval
     >>> rng = np.random.default_rng()
     >>> sig = np.repeat([0., 1., 0.], 100)
     >>> sig += rng.standard_normal(len(sig))*0.05  # add noise
@@ -564,7 +564,7 @@ def cspline1d_eval(cj, newx, dx=1.0, x0=0):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.signal import cspline1d, cspline1d_eval
+    >>> from scicore.signal import cspline1d, cspline1d_eval
     >>> rng = np.random.default_rng()
     >>> sig = np.repeat([0., 1., 0.], 100)
     >>> sig += rng.standard_normal(len(sig))*0.05  # add noise
@@ -648,7 +648,7 @@ def qspline1d_eval(cj, newx, dx=1.0, x0=0):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.signal import qspline1d, qspline1d_eval
+    >>> from scicore.signal import qspline1d, qspline1d_eval
     >>> rng = np.random.default_rng()
     >>> sig = np.repeat([0., 1., 0.], 100)
     >>> sig += rng.standard_normal(len(sig))*0.05  # add noise

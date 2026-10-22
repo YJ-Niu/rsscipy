@@ -8,17 +8,17 @@ from rsnumpy.testing import assert_allclose, assert_equal
 from pytest import raises as assert_raises
 import pytest
 
-from rsscipy._lib._testutils import IS_WASM
+from scicore._lib._testutils import IS_WASM
 
 from rsnumpy import dot, conj
-from rsscipy.linalg import eig, eigh
-from rsscipy.sparse import csc_array, csr_array, diags_array, random_array
-from rsscipy.sparse.linalg import LinearOperator, aslinearoperator
-from rsscipy.sparse.linalg._eigen.arpack import (eigs, eigsh, arpack,
+from scicore.linalg import eig, eigh
+from scicore.sparse import csc_array, csr_array, diags_array, random_array
+from scicore.sparse.linalg import LinearOperator, aslinearoperator
+from scicore.sparse.linalg._eigen.arpack import (eigs, eigsh, arpack,
                                               ArpackNoConvergence)
 
 
-from rsscipy._lib._gcutils import assert_deallocated
+from scicore._lib._gcutils import assert_deallocated
 
 
 # precision for tests

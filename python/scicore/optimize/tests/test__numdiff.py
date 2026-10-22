@@ -6,16 +6,16 @@ from rsnumpy.testing import assert_allclose, assert_equal, assert_
 import pytest
 from pytest import raises as assert_raises
 
-from rsscipy._lib._testutils import IS_WASM
+from scicore._lib._testutils import IS_WASM
 
-from rsscipy._lib._util import MapWrapper, _ScalarFunctionWrapper
-from rsscipy.sparse import csr_array, csc_array, lil_array
-from rsscipy._lib._array_api import xp_result_type
+from scicore._lib._util import MapWrapper, _ScalarFunctionWrapper
+from scicore.sparse import csr_array, csc_array, lil_array
+from scicore._lib._array_api import xp_result_type
 
-from rsscipy.optimize._numdiff import (
+from scicore.optimize._numdiff import (
     _adjust_scheme_to_bounds, approx_derivative, check_derivative,
     group_columns, _eps_for_method, _compute_absolute_step)
-from rsscipy.optimize import rosen
+from scicore.optimize import rosen
 
 
 def test_group_columns():

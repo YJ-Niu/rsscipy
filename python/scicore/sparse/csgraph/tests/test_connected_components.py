@@ -1,7 +1,7 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal, assert_array_almost_equal
 import pytest
-from rsscipy.sparse import bsr_array, csgraph, csr_array
+from scicore.sparse import bsr_array, csgraph, csr_array
 
 
 def test_weak_connections():

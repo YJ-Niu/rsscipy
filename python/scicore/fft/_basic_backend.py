@@ -1,4 +1,4 @@
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     array_namespace, is_numpy, xp_unsupported_param_msg, is_complex, xp_float_to_complex
 )
 from . import _duccfft

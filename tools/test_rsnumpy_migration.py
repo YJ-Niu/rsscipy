@@ -5,7 +5,7 @@ Run it with::
     python -m pytest tools/test_rsnumpy_migration.py -v
 
 It is deliberately self-contained: it loads
-``python/rsscipy/_rsnumpy_compat.py`` by path so it can also be executed before
+``python/scicore/_rsnumpy_compat.py`` by path so it can also be executed before
 the compiled extension modules are built.
 """
 
@@ -18,7 +18,7 @@ import sys
 import pytest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-SOURCE_DIRS = ('python/rsscipy', 'tools', 'benchmarks')
+SOURCE_DIRS = ('python/scicore', 'tools', 'benchmarks')
 
 # `numpy` that is *not* part of a dotted name (jax.numpy), a path
 # (github.com/numpy/numpy, <numpy/arrayobject.h>) or a URL (numpy.org).
@@ -28,7 +28,7 @@ RESIDUAL_NUMPY = re.compile(r'(?<![\w./])numpy(?![\w/])')
 @pytest.fixture(scope='module')
 def compat():
     """Import (and thereby install) the rsnumpy compatibility layer."""
-    path = ROOT / 'python' / 'rsscipy' / '_rsnumpy_compat.py'
+    path = ROOT / 'python' / 'scicore' / '_rsnumpy_compat.py'
     spec = importlib.util.spec_from_file_location('_rsnumpy_compat', path)
     module = importlib.util.module_from_spec(spec)
     sys.modules['_rsnumpy_compat'] = module
@@ -39,7 +39,7 @@ def compat():
 def _iter_python_files():
     """All ported sources.
 
-    ``python/rsscipy/_rsnumpy_compat.py`` is excluded on purpose: it documents
+    ``python/scicore/_rsnumpy_compat.py`` is excluded on purpose: it documents
     the NumPy functions it re-implements, so ``numpy`` legitimately appears in
     its docstrings.  This verification file is excluded for the same reason.
     """
@@ -101,7 +101,7 @@ def test_no_numpy_import_statements():
 
 def test_all_python_sources_compile():
     ok = compileall.compile_dir(
-        str(ROOT / 'python' / 'rsscipy'), quiet=2, force=True,
+        str(ROOT / 'python' / 'scicore'), quiet=2, force=True,
     )
     assert ok, 'some SciPy sources do not byte-compile'
 

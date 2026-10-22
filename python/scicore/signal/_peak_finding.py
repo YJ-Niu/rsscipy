@@ -4,8 +4,8 @@ Functions for identifying peaks in signals.
 import math
 import rsnumpy as np
 
-from rsscipy.signal._wavelets import _cwt, _ricker
-from rsscipy.stats import scoreatpercentile
+from scicore.signal._wavelets import _cwt, _ricker
+from scicore.stats import scoreatpercentile
 
 from ._peak_finding_utils_rs import (
     _local_maxima_1d,
@@ -56,7 +56,7 @@ def _boolrelextrema(data, comparator, axis=0, order=1, mode='clip'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.signal._peak_finding import _boolrelextrema
+    >>> from scicore.signal._peak_finding import _boolrelextrema
     >>> testdata = np.array([1,2,3,2,1])
     >>> _boolrelextrema(testdata, np.greater, axis=0)
     array([False, False,  True, False, False], dtype=bool)
@@ -123,7 +123,7 @@ def argrelmin(data, axis=0, order=1, mode='clip'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import argrelmin
+    >>> from scicore.signal import argrelmin
     >>> x = np.array([2, 1, 2, 3, 2, 0, 1, 0])
     >>> argrelmin(x)
     (array([1, 5]),)
@@ -181,7 +181,7 @@ def argrelmax(data, axis=0, order=1, mode='clip'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import argrelmax
+    >>> from scicore.signal import argrelmax
     >>> x = np.array([2, 1, 2, 3, 2, 0, 1, 0])
     >>> argrelmax(x)
     (array([3, 6]),)
@@ -235,7 +235,7 @@ def argrelextrema(data, comparator, axis=0, order=1, mode='clip'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import argrelextrema
+    >>> from scicore.signal import argrelextrema
     >>> x = np.array([2, 1, 2, 3, 2, 0, 1, 0])
     >>> argrelextrema(x, np.greater)
     (array([3, 6]),)
@@ -409,7 +409,7 @@ def peak_prominences(x, peaks, wlen=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import find_peaks, peak_prominences
+    >>> from scicore.signal import find_peaks, peak_prominences
     >>> import matplotlib.pyplot as plt
 
     Create a test signal with two overlaid harmonics
@@ -554,7 +554,7 @@ def peak_widths(x, peaks, rel_height=0.5, prominence_data=None, wlen=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import chirp, find_peaks, peak_widths
+    >>> from scicore.signal import chirp, find_peaks, peak_widths
     >>> import matplotlib.pyplot as plt
 
     Create a test signal with two overlaid harmonics
@@ -874,8 +874,8 @@ def find_peaks(x, height=None, threshold=None, distance=None,
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.datasets import electrocardiogram
-    >>> from rsscipy.signal import find_peaks
+    >>> from scicore.datasets import electrocardiogram
+    >>> from scicore.signal import find_peaks
     >>> x = electrocardiogram()[2000:4000]
     >>> peaks, _ = find_peaks(x, height=0)
     >>> plt.plot(x)
@@ -1047,7 +1047,7 @@ def _identify_ridge_lines(matr, max_distances, gap_thresh):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.signal._peak_finding import _identify_ridge_lines
+    >>> from scicore.signal._peak_finding import _identify_ridge_lines
     >>> rng = np.random.default_rng()
     >>> data = rng.random((5,5))
     >>> max_dist = 3
@@ -1279,7 +1279,7 @@ def find_peaks_cwt(vector, widths, wavelet=None, max_distances=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> xs = np.arange(0, np.pi, 0.05)
     >>> data = np.sin(xs)
     >>> peakind = signal.find_peaks_cwt(data, np.arange(1,10))

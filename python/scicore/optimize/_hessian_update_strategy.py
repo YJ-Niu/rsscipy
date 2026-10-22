@@ -1,7 +1,7 @@
 """Hessian update strategies for quasi-Newton optimization methods."""
 import rsnumpy as np
 from rsnumpy.linalg import norm
-from rsscipy.linalg import get_blas_funcs, issymmetric
+from scicore.linalg import get_blas_funcs, issymmetric
 from warnings import warn
 
 

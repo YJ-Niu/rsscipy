@@ -14,22 +14,22 @@ from rsnumpy.testing import (assert_almost_equal,
 import pytest
 from pytest import raises as assert_raises
 
-from rsscipy import optimize, stats, special
-from rsscipy.stats._morestats import (_abw_state, _get_As_weibull, _Avals_weibull,
+from scicore import optimize, stats, special
+from scicore.stats._morestats import (_abw_state, _get_As_weibull, _Avals_weibull,
                                     _yeojohnson_transform)
 from .common_tests import check_named_results
 from .._hypotests import _get_wilcoxon_distr, _get_wilcoxon_distr2
-from rsscipy.stats.contingency import _chi2_contingency_2d
-from rsscipy.stats._ansari_swilk_statistics import swilk
-from rsscipy.stats._binomtest import _binary_search_for_binom_tst
-from rsscipy.stats._distr_params import distcont
-from rsscipy.stats._axis_nan_policy import (SmallSampleWarning, too_small_1d_not_omit)
+from scicore.stats.contingency import _chi2_contingency_2d
+from scicore.stats._ansari_swilk_statistics import swilk
+from scicore.stats._binomtest import _binary_search_for_binom_tst
+from scicore.stats._distr_params import distcont
+from scicore.stats._axis_nan_policy import (SmallSampleWarning, too_small_1d_not_omit)
 
-import rsscipy._external.array_api_extra as xpx
-from rsscipy._lib._array_api import (is_torch, make_xp_test_case, eager_warns, xp_ravel,
+import scicore._external.array_api_extra as xpx
+from scicore._lib._array_api import (is_torch, make_xp_test_case, eager_warns, xp_ravel,
                                    is_numpy, is_array_api_strict,
                                    is_jax, is_lazy_array)
-from rsscipy._lib._array_api_no_0d import (
+from scicore._lib._array_api_no_0d import (
     xp_assert_close,
     xp_assert_equal,
     xp_assert_less,

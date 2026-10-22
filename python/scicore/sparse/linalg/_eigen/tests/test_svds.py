@@ -5,12 +5,12 @@ import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal, assert_array_equal
 import pytest
 
-from rsscipy._lib._array_api import SCIPY_ARRAY_API
-from rsscipy.linalg import svd, null_space
-from rsscipy.sparse import csc_array, issparse, dia_array, random_array
-from rsscipy.sparse.linalg import LinearOperator, aslinearoperator
-from rsscipy.sparse.linalg import svds
-from rsscipy.sparse.linalg._eigen.arpack import ArpackNoConvergence
+from scicore._lib._array_api import SCIPY_ARRAY_API
+from scicore.linalg import svd, null_space
+from scicore.sparse import csc_array, issparse, dia_array, random_array
+from scicore.sparse.linalg import LinearOperator, aslinearoperator
+from scicore.sparse.linalg import svds
+from scicore.sparse.linalg._eigen.arpack import ArpackNoConvergence
 
 
 # --- Helper Functions / Classes ---

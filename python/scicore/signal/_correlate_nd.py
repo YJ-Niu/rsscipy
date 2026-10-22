@@ -2,7 +2,7 @@
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import signal as _rust_signal
+from scicore._scicore_rs import signal as _rust_signal
 
 _correlate_float = _rust_signal._correlate_nd_float
 _correlate_signed = _rust_signal._correlate_nd_signed

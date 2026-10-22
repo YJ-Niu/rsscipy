@@ -1,5 +1,5 @@
 import rsnumpy as np
-from rsscipy.ndimage import label
+from scicore.ndimage import label
 
 
 def generate_test_vecs(infile, strelfile, resultfile):

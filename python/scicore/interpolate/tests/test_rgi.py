@@ -5,23 +5,23 @@ import rsnumpy as np
 
 from rsnumpy.exceptions import ComplexWarning
 
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     xp_assert_equal, xp_assert_close, assert_array_almost_equal,
     make_xp_test_case,
 )
 
-from rsscipy.conftest import skip_xp_invalid_arg
+from scicore.conftest import skip_xp_invalid_arg
 
 from pytest import raises as assert_raises
 
-from rsscipy.interpolate import (RegularGridInterpolator, interpn,
+from scicore.interpolate import (RegularGridInterpolator, interpn,
                                RectBivariateSpline,
                                NearestNDInterpolator, LinearNDInterpolator)
-from rsscipy.interpolate._regrid import (_regrid,
+from scicore.interpolate._regrid import (_regrid,
                                               _ndbspline_call_like_bivariate)
 
-from rsscipy.sparse._sputils import matrix
-from rsscipy._lib._testutils import _run_concurrent_barrier, IS_WASM
+from scicore.sparse._sputils import matrix
+from scicore._lib._testutils import _run_concurrent_barrier, IS_WASM
 
 
 parametrize_rgi_interp_methods = pytest.mark.parametrize(

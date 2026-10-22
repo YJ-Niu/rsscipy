@@ -2,8 +2,8 @@ from functools import cached_property
 from types import GenericAlias
 
 import rsnumpy as np
-from rsscipy import linalg
-from rsscipy.stats import _multivariate
+from scicore import linalg
+from scicore.stats import _multivariate
 
 
 __all__ = ["Covariance"]
@@ -35,7 +35,7 @@ class Covariance:
     For instance, the multivariate normal distribution can accept an array
     representing a covariance matrix:
 
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> import rsnumpy as np
     >>> d = [1, 2, 3]
     >>> A = np.diag(d)  # a diagonal covariance matrix
@@ -107,7 +107,7 @@ class Covariance:
         data point ``x``.
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> rng = np.random.default_rng()
         >>> n = 5
         >>> A = np.diag(rng.random(n))
@@ -176,7 +176,7 @@ class Covariance:
         consider the other factory methods of the `Covariance` class.)
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> rng = np.random.default_rng()
         >>> n = 5
         >>> P = rng.random(size=(n, n))
@@ -237,7 +237,7 @@ class Covariance:
         data point ``x``.
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> rng = np.random.default_rng()
         >>> n = 5
         >>> A = rng.random(size=(n, n))
@@ -253,7 +253,7 @@ class Covariance:
         Compare the functionality of the `Covariance` object against
         reference implementation.
 
-        >>> from rsscipy.linalg import solve_triangular
+        >>> from scicore.linalg import solve_triangular
         >>> res = cov.whiten(x)
         >>> ref = solve_triangular(L, x, lower=True)
         >>> np.allclose(res, ref)
@@ -310,7 +310,7 @@ class Covariance:
         data point ``x``.
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> rng = np.random.default_rng()
         >>> n = 5
         >>> A = rng.random(size=(n, n))
@@ -372,7 +372,7 @@ class Covariance:
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> rng = np.random.default_rng()
         >>> n = 3
         >>> A = rng.random(size=(n, n))
@@ -425,7 +425,7 @@ class Covariance:
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> rng = np.random.default_rng(1638083107694713882823079058616272161)
         >>> n = 3
         >>> A = rng.random(size=(n, n))

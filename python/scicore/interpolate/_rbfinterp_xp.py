@@ -28,7 +28,7 @@ that pythran cannot compile functions with an xp= argument where xp is rsnumpy.
 from math import sqrt
 
 from rsnumpy.linalg import LinAlgError
-from rsscipy._lib._array_api import xp_device
+from scicore._lib._array_api import xp_device
 from ._rbfinterp_common import _monomial_powers_impl
 
 

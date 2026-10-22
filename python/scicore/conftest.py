@@ -8,7 +8,7 @@ import tempfile
 from contextlib import contextmanager
 from typing import Literal
 
-from rsscipy import _rsnumpy_compat  # noqa: F401  (registers rsnumpy.testing)
+from scicore import _rsnumpy_compat  # noqa: F401  (registers rsnumpy.testing)
 
 import rsnumpy as np
 import pytest
@@ -18,15 +18,15 @@ try:
 except ImportError:
     hypothesis_available = False
 
-from rsscipy._rsscipy_rs import _lib as _rust_lib
+from scicore._scicore_rs import _lib as _rust_lib
 
 get_fpu_mode = _rust_lib.get_fpu_mode
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     SCIPY_ARRAY_API, SCIPY_DEVICE, array_namespace, default_xp,
     is_cupy, is_dask, is_jax, is_torch, xp_result_device)
-from rsscipy._lib._testutils import IS_WASM, FPUModeChangeWarning
-from rsscipy._external.array_api_extra.testing import patch_lazy_xp_functions
-from rsscipy._external.packaging_version import version
+from scicore._lib._testutils import IS_WASM, FPUModeChangeWarning
+from scicore._external.array_api_extra.testing import patch_lazy_xp_functions
+from scicore._external.packaging_version import version
 
 try:
     from scipy_doctest.conftest import dt_config
@@ -732,7 +732,7 @@ def devices(xp):
 
     Usage
     -----
-    from rsscipy._lib._array_api import xp_device
+    from scicore._lib._array_api import xp_device
 
     def test_device(xp, devices):
         for d in devices:
@@ -830,7 +830,7 @@ if HAVE_SCPDT:
         for name in deprecated:
             known_warnings[name] = dict(category=DeprecationWarning)
 
-        from rsscipy import integrate
+        from scicore import integrate
         # the functions are known to emit IntegrationWarnings
         integration_w = ['scipy.special.ellip_normal',
                          'scipy.special.ellip_harm_2',
@@ -870,7 +870,7 @@ if HAVE_SCPDT:
         # *NOT* reproducible but the new-style `default_rng()` *IS* reproducible.
         # Should these two be either both repro or both not repro?
 
-        from rsscipy._lib._util import _fixed_default_rng
+        from scicore._lib._util import _fixed_default_rng
         import rsnumpy as np
         with _fixed_default_rng():
             np.random.seed(None)

@@ -2,7 +2,7 @@
 
 Provides the HiGHS LP solver interface used by ``scipy.optimize._highspy``.
 This is a stub: real HiGHS bindings should be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

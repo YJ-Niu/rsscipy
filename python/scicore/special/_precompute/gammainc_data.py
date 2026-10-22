@@ -22,7 +22,7 @@ from time import time
 import rsnumpy as np
 from rsnumpy import pi
 
-from rsscipy.special._mptestutils import mpf2float
+from scicore.special._mptestutils import mpf2float
 
 try:
     import mpmath as mp

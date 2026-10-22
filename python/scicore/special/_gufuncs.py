@@ -2,7 +2,7 @@
 
 Provides generalized ufuncs used by ``scipy.special`` and other modules,
 implemented on top of :mod:`rsnumpy`.  This is a stub: real special-function
-implementations should later be ported to Rust under ``rust/rsscipy_rs/``.
+implementations should later be ported to Rust under ``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

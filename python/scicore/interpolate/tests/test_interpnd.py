@@ -5,11 +5,11 @@ import warnings
 import rsnumpy as np
 from pytest import raises as assert_raises
 import pytest
-from rsscipy._lib._array_api import xp_assert_close, assert_almost_equal
+from scicore._lib._array_api import xp_assert_close, assert_almost_equal
 
-from rsscipy._lib._testutils import check_free_memory
-import rsscipy.interpolate._interpnd as interpnd
-import rsscipy.spatial._qhull as qhull
+from scicore._lib._testutils import check_free_memory
+import scicore.interpolate._interpnd as interpnd
+import scicore.spatial._qhull as qhull
 
 import pickle
 import threading

@@ -6,19 +6,19 @@ import warnings
 
 from rsnumpy.testing import assert_equal
 from rsnumpy._core._exceptions import UFuncTypeError
-from rsscipy._external.packaging_version import version
+from scicore._external.packaging_version import version
 # ufunc wrapper with array api dispatch
-from rsscipy.special import mathieu_sem
+from scicore.special import mathieu_sem
 # ufunc using special._ufunc_tools._with_cache_optimization
-from rsscipy.special._mathieu import mathieu_sem as mathieu_sem_wrapper
+from scicore.special._mathieu import mathieu_sem as mathieu_sem_wrapper
 # raw ufunc without cache optimization
-from rsscipy.special._ufuncs import _mathieu_sem
+from scicore.special._ufuncs import _mathieu_sem
 
-from rsscipy.special._spfun_stats import poisson_binom_cdf
-from rsscipy.special._ufuncs import betainc
+from scicore.special._spfun_stats import poisson_binom_cdf
+from scicore.special._ufuncs import betainc
 
-from rsscipy.special._ufunc_tools import _make_ufunc_wrapper
-from rsscipy.special._ufunc_tools import _with_cache_optimization
+from scicore.special._ufunc_tools import _make_ufunc_wrapper
+from scicore.special._ufunc_tools import _with_cache_optimization
 
 
 def _make_passthrough(ufunc):

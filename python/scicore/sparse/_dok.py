@@ -661,7 +661,7 @@ def isspmatrix_dok(x):
 
     Examples
     --------
-    >>> from rsscipy.sparse import dok_array, dok_matrix, coo_matrix, isspmatrix_dok
+    >>> from scicore.sparse import dok_array, dok_matrix, coo_matrix, isspmatrix_dok
     >>> isspmatrix_dok(dok_matrix([[5]]))  # doctest: +SKIP
     True
     >>> isspmatrix_dok(dok_array([[5]]))  # doctest: +SKIP
@@ -734,7 +734,7 @@ class dok_array(_dok_base, sparray):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import dok_array
+    >>> from scicore.sparse import dok_array
     >>> S = dok_array((5, 5), dtype=np.float32)
     >>> for i in range(5):
     ...     for j in range(5):
@@ -802,7 +802,7 @@ class dok_matrix(spmatrix, _dok_base):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import dok_matrix
+    >>> from scicore.sparse import dok_matrix
     >>> S = dok_matrix((5, 5), dtype=np.float32)
     >>> for i in range(5):
     ...     for j in range(5):

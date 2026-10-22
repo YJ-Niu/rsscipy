@@ -5,7 +5,7 @@ from warnings import warn
 from rsnumpy import asarray, asarray_chkfinite
 import rsnumpy as np
 
-from rsscipy._lib._util import _apply_over_batch, _deprecate_dtypes, HAS_ILP64
+from scicore._lib._util import _apply_over_batch, _deprecate_dtypes, HAS_ILP64
 
 # Local imports
 from ._misc import _datacopied, LinAlgWarning
@@ -73,7 +73,7 @@ def lu_factor(a, overwrite_a=False, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import lu_factor
+    >>> from scicore.linalg import lu_factor
     >>> A = np.array([[2, 5, 8, 7], [5, 2, 2, 8], [7, 5, 6, 6], [5, 4, 4, 8]])
     >>> lu, piv = lu_factor(A)
     >>> piv
@@ -182,7 +182,7 @@ def lu_solve(lu_and_piv, b, trans=0, overwrite_b=False, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import lu_factor, lu_solve
+    >>> from scicore.linalg import lu_factor, lu_solve
     >>> A = np.array([[2, 5, 8, 7], [5, 2, 2, 8], [7, 5, 6, 6], [5, 4, 4, 8]])
     >>> b = np.array([1, 1, 1, 1])
     >>> lu, piv = lu_factor(A)
@@ -294,7 +294,7 @@ def lu(a, permute_l=False, overwrite_a=False, check_finite=True,
     --------
 
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import lu
+    >>> from scicore.linalg import lu
     >>> A = np.array([[2, 5, 8, 7], [5, 2, 2, 8], [7, 5, 6, 6], [5, 4, 4, 8]])
     >>> p, l, u = lu(A)
     >>> np.allclose(A, p @ l @ u)

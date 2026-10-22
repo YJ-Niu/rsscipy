@@ -2,7 +2,7 @@ import pytest
 import rsnumpy as np
 from rsnumpy.linalg import norm
 from rsnumpy.testing import (assert_, assert_allclose, assert_equal)
-from rsscipy.linalg import polar, eigh
+from scicore.linalg import polar, eigh
 
 
 diag2 = np.array([[2, 0], [0, 3]])

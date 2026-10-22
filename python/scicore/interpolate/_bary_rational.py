@@ -28,7 +28,7 @@ import operator
 from types import GenericAlias
 
 import rsnumpy as np
-import rsscipy
+import scicore
 
 
 __all__ = ["AAA", "FloaterHormannInterpolator"]
@@ -340,13 +340,13 @@ class AAA(_BarycentricRational):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.interpolate import AAA
+    >>> from scicore.interpolate import AAA
     >>> import warnings
 
     For the first example we approximate the gamma function on ``[-3.5, 4.5]`` by
     extrapolating from 100 samples in ``[-1.5, 1.5]``.
 
-    >>> from rsscipy.special import gamma
+    >>> from scicore.special import gamma
     >>> sample_points = np.linspace(-1.5, 1.5, num=100)
     >>> r = AAA(sample_points, gamma(sample_points))
     >>> z = np.linspace(-3.5, 4.5, num=1000)
@@ -717,7 +717,7 @@ class FloaterHormannInterpolator(_BarycentricRational):
     the polynomial interpolation fails due to Runge's phenomenon.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.interpolate import (FloaterHormannInterpolator,
+    >>> from scicore.interpolate import (FloaterHormannInterpolator,
     ...                                BarycentricInterpolator)
     >>> def f(x):
     ...     return 1/(1 + x**2)

@@ -2,7 +2,7 @@
 
 Provides biased urn distribution samplers used by ``scipy.stats``.
 This is a stub: real samplers should be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

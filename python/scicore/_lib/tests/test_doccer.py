@@ -5,7 +5,7 @@ import warnings
 import pytest
 from rsnumpy.testing import assert_equal
 
-from rsscipy._lib import doccer
+from scicore._lib import doccer
 
 # python -OO strips docstrings
 DOCSTRINGS_STRIPPED = sys.flags.optimize > 1

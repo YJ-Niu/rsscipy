@@ -1,6 +1,6 @@
 import rsnumpy as np
 import pytest
-from rsscipy.optimize import Bounds, LinearConstraint, NonlinearConstraint, rosen
+from scicore.optimize import Bounds, LinearConstraint, NonlinearConstraint, rosen
 from concurrent.futures import ThreadPoolExecutor
 
 from ..models import Interpolation, Quadratic, Models, build_system

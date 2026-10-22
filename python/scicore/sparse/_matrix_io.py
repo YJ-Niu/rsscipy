@@ -1,5 +1,5 @@
 import rsnumpy as np
-import rsscipy as sp
+import scicore as sp
 
 __all__ = ['save_npz', 'load_npz']
 
@@ -35,7 +35,7 @@ def save_npz(file, matrix, compressed=True):
     Store sparse matrix to disk, and load it again:
 
     >>> import rsnumpy as np
-    >>> import rsscipy as sp
+    >>> import scicore as sp
     >>> sparse_array = sp.sparse.csc_array([[0, 0, 3], [4, 0, 0]])
     >>> sparse_array
     <Compressed Sparse Column sparse array of dtype 'int64'
@@ -112,7 +112,7 @@ def load_npz(file):
     Store sparse array/matrix to disk, and load it again:
 
     >>> import rsnumpy as np
-    >>> import rsscipy as sp
+    >>> import scicore as sp
     >>> sparse_array = sp.sparse.csc_array([[0, 0, 3], [4, 0, 0]])
     >>> sparse_array
     <Compressed Sparse Column sparse array of dtype 'int64'

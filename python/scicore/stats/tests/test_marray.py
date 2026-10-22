@@ -1,12 +1,12 @@
 import rsnumpy as np
 import pytest
-from rsscipy import stats
+from scicore import stats
 
-from rsscipy._external.packaging_version import version
-from rsscipy._lib._array_api import xp_assert_close, _count_nonmasked
-from rsscipy._lib._array_api import make_xp_pytest_param, make_xp_test_case
-from rsscipy._lib._array_api import SCIPY_ARRAY_API, is_torch
-from rsscipy.stats._stats_py import _xp_mean, _xp_var
+from scicore._external.packaging_version import version
+from scicore._lib._array_api import xp_assert_close, _count_nonmasked
+from scicore._lib._array_api import make_xp_pytest_param, make_xp_test_case
+from scicore._lib._array_api import SCIPY_ARRAY_API, is_torch
+from scicore.stats._stats_py import _xp_mean, _xp_var
 
 
 marray = pytest.importorskip('marray')

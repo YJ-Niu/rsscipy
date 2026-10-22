@@ -4,7 +4,7 @@ import rsnumpy as np
 from rsnumpy import exp
 from rsnumpy.testing import assert_, assert_equal
 
-from rsscipy.optimize import root
+from scicore.optimize import root
 
 
 def test_performance():

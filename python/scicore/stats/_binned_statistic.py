@@ -4,7 +4,7 @@ import rsnumpy as np
 from operator import index
 from collections import namedtuple
 
-from rsscipy._lib._array_api import xp_capabilities
+from scicore._lib._array_api import xp_capabilities
 
 __all__ = ['binned_statistic',
            'binned_statistic_2d',
@@ -99,7 +99,7 @@ def binned_statistic(x, values, statistic='mean',
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> import matplotlib.pyplot as plt
 
     First some basic examples:
@@ -311,7 +311,7 @@ def binned_statistic_2d(x, y, values, statistic='mean',
 
     Examples
     --------
-    >>> from rsscipy import stats
+    >>> from scicore import stats
 
     Calculate the counts with explicit bin-edges:
 
@@ -493,7 +493,7 @@ def binned_statistic_dd(sample, values, statistic='mean',
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> import matplotlib.pyplot as plt
     >>> from mpl_toolkits.mplot3d import Axes3D
 

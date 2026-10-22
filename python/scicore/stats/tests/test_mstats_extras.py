@@ -4,7 +4,7 @@ import rsnumpy as np
 import rsnumpy.ma as ma
 from rsnumpy.testing import (assert_equal, assert_almost_equal, assert_,
                            assert_allclose)
-from rsscipy import stats
+from scicore import stats
 
 pytestmark = [
     pytest.mark.filterwarnings(r"ignore:^`scipy\.stats\.mstats\.[^`]+` is deprecated:DeprecationWarning"),  # noqa: E501

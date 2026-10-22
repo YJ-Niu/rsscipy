@@ -6,13 +6,13 @@ from rsnumpy.testing import assert_
 import pytest
 from functools import partial
 
-from rsscipy.optimize import _nonlin as nonlin, root
-from rsscipy.sparse import csr_array
+from scicore.optimize import _nonlin as nonlin, root
+from scicore.sparse import csr_array
 from rsnumpy import diag, dot
 from rsnumpy.linalg import inv
 import rsnumpy as np
-import rsscipy
-from rsscipy.sparse.linalg import minres
+import scicore
+from scicore.sparse.linalg import minres
 
 from .test_minpack import pressure_network
 

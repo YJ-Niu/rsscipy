@@ -2,7 +2,7 @@
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import optimize as _rust_optimize
+from scicore._scicore_rs import optimize as _rust_optimize
 
 
 def group_dense(m, n, A):

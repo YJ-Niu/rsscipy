@@ -1,14 +1,14 @@
 import rsnumpy as np
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     xp_assert_equal, xp_assert_close
 )
 import pytest
 from pytest import raises as assert_raises
 
-from rsscipy.interpolate import (griddata, NearestNDInterpolator,
+from scicore.interpolate import (griddata, NearestNDInterpolator,
                                LinearNDInterpolator,
                                CloughTocher2DInterpolator)
-from rsscipy._lib._testutils import _run_concurrent_barrier, IS_WASM
+from scicore._lib._testutils import _run_concurrent_barrier, IS_WASM
 
 
 parametrize_interpolators = pytest.mark.parametrize(

@@ -2,7 +2,7 @@
 
 Provides rigid transform implementations used by ``scipy.spatial.transform``.
 This is a stub: real transform math should be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

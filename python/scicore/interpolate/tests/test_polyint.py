@@ -2,19 +2,19 @@ import warnings
 import io
 import rsnumpy as np
 
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     xp_assert_equal, xp_assert_close, assert_almost_equal, make_xp_test_case
 )
 from pytest import raises as assert_raises
 import pytest
 
-from rsscipy.interpolate import (
+from scicore.interpolate import (
     KroghInterpolator, krogh_interpolate,
     BarycentricInterpolator, barycentric_interpolate,
     approximate_taylor_polynomial, CubicHermiteSpline, pchip,
     PchipInterpolator, pchip_interpolate, Akima1DInterpolator, CubicSpline,
     make_interp_spline)
-from rsscipy._lib._testutils import _run_concurrent_barrier, IS_WASM
+from scicore._lib._testutils import _run_concurrent_barrier, IS_WASM
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 xfail_xp_backends = pytest.mark.xfail_xp_backends

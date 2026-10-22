@@ -2,9 +2,9 @@ import rsnumpy as np
 from rsnumpy.testing import assert_, assert_allclose
 import pytest
 
-from rsscipy.special import _ufuncs, gammasgn
-import rsscipy.special._orthogonal as orth
-from rsscipy.special._testutils import FuncData
+from scicore.special import _ufuncs, gammasgn
+import scicore.special._orthogonal as orth
+from scicore.special._testutils import FuncData
 
 
 def test_eval_chebyt():

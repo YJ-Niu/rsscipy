@@ -8,17 +8,17 @@ import rsnumpy as np
 from rsnumpy.testing import (assert_equal, assert_array_almost_equal,
                            assert_array_almost_equal_nulp)
 import pytest
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     is_numpy,
     make_xp_test_case,
     np_compat,
     xp_assert_close,
     xp_assert_close_nulp,
 )
-from rsscipy._external import array_api_extra as xpx
-import rsscipy.optimize._linesearch as ls
-from rsscipy.optimize._linesearch import line_search_wolfe2
-from rsscipy.optimize._linesearch import LineSearchWarning
+from scicore._external import array_api_extra as xpx
+import scicore.optimize._linesearch as ls
+from scicore.optimize._linesearch import line_search_wolfe2
+from scicore.optimize._linesearch import LineSearchWarning
 
 
 def assert_wolfe(s, phi, derphi, c1=1e-4, c2=0.9, err_msg=""):

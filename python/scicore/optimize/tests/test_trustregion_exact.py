@@ -4,11 +4,11 @@ Unit tests for trust-region iterative subproblem.
 """
 import pytest
 import rsnumpy as np
-from rsscipy.optimize._trustregion_exact import (
+from scicore.optimize._trustregion_exact import (
     estimate_smallest_singular_value,
     singular_leading_submatrix,
     IterativeSubproblem)
-from rsscipy.linalg import (svd, get_lapack_funcs, det, qr, norm)
+from scicore.linalg import (svd, get_lapack_funcs, det, qr, norm)
 from rsnumpy.testing import (assert_allclose, assert_array_equal,
                            assert_equal, assert_array_almost_equal)
 

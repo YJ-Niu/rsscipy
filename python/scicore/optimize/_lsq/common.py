@@ -4,9 +4,9 @@ from math import copysign
 import rsnumpy as np
 from rsnumpy.linalg import norm
 
-from rsscipy.linalg import cho_factor, cho_solve, LinAlgError
-from rsscipy.sparse.linalg import LinearOperator, aslinearoperator
-from rsscipy._lib._sparse import issparse
+from scicore.linalg import cho_factor, cho_solve, LinAlgError
+from scicore.sparse.linalg import LinearOperator, aslinearoperator
+from scicore._lib._sparse import issparse
 
 
 EPS = np.finfo(float).eps

@@ -684,8 +684,8 @@ def read(filename, mmap=False):
     Examples
     --------
     >>> from os.path import dirname, join as pjoin
-    >>> from rsscipy.io import wavfile
-    >>> import rsscipy.io
+    >>> from scicore.io import wavfile
+    >>> import scicore.io
 
     Get the filename for an example .wav file from the tests/data directory.
 
@@ -831,7 +831,7 @@ def write(filename, rate, data):
     Create a 100Hz sine wave, sampled at 44100Hz.
     Write to 16-bit PCM, Mono.
 
-    >>> from rsscipy.io.wavfile import write
+    >>> from scicore.io.wavfile import write
     >>> import rsnumpy as np
     >>> samplerate = 44100; fs = 100
     >>> t = np.linspace(0., 1., samplerate)

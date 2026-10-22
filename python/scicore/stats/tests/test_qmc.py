@@ -4,16 +4,16 @@ from itertools import combinations, product
 
 import pytest
 
-from rsscipy._lib._testutils import IS_WASM
+from scicore._lib._testutils import IS_WASM
 import rsnumpy as np
 from rsnumpy.testing import (assert_allclose, assert_equal, assert_array_equal,
     assert_array_less)
 
-from rsscipy.spatial import distance
-from rsscipy.stats import shapiro
-from rsscipy.stats._sobol import _test_find_index, _test_low_0_bit
-from rsscipy.stats import qmc
-from rsscipy.stats._qmc import (
+from scicore.spatial import distance
+from scicore.stats import shapiro
+from scicore.stats._sobol import _test_find_index, _test_low_0_bit
+from scicore.stats import qmc
+from scicore.stats._qmc import (
     van_der_corput, n_primes, primes_from_2_to,
     update_discrepancy, QMCEngine, _l1_norm,
     _perturb_discrepancy, _lloyd_centroidal_voronoi_tessellation

@@ -2,7 +2,7 @@
 """
 
 import rsnumpy as np
-from rsscipy.linalg import toeplitz, matmul_toeplitz
+from scicore.linalg import toeplitz, matmul_toeplitz
 
 from pytest import raises as assert_raises
 from rsnumpy.testing import assert_allclose

@@ -4,8 +4,8 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose
 
-from rsscipy.special._ufuncs import _sinpi as sinpi
-from rsscipy.special._ufuncs import _cospi as cospi
+from scicore.special._ufuncs import _sinpi as sinpi
+from scicore.special._ufuncs import _cospi as cospi
 
 
 def test_integer_real_part():

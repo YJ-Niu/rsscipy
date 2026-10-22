@@ -191,7 +191,7 @@ class spmatrix(_spbase):
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from rsscipy.sparse import coo_matrix
+        >>> from scicore.sparse import coo_matrix
 
         >>> coo_matrix[np.int8]
         scipy.sparse._coo.coo_matrix[rsnumpy.int8]

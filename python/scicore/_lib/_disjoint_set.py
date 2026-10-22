@@ -1,7 +1,7 @@
 """
 Disjoint set data structure
 """
-from rsscipy._lib._array_api import xp_capabilities
+from scicore._lib._array_api import xp_capabilities
 
 
 @xp_capabilities(out_of_scope=True)
@@ -43,7 +43,7 @@ class DisjointSet:
 
     Examples
     --------
-    >>> from rsscipy.cluster.hierarchy import DisjointSet
+    >>> from scicore.cluster.hierarchy import DisjointSet
 
     Initialize a disjoint set:
 

@@ -58,7 +58,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install build pytest
 
-      # rsscipy's only runtime dependency.  The wheel is installed with
+      # scicore's only runtime dependency.  The wheel is installed with
       # --no-deps below, so the smoke test needs rsnumpy from PyPI (its
       # universal2 macOS wheels cover Intel + Apple Silicon).
       - name: Install rsnumpy
@@ -77,8 +77,8 @@ jobs:
       - name: Smoke test
         shell: bash
         run: |
-          python -c "import rsscipy; print('rsscipy', rsscipy.__version__)"
-          python -c "import rsscipy.linalg, rsscipy.io, rsscipy.signal, rsscipy.stats, rsscipy.spatial, rsscipy.interpolate, rsscipy.optimize, rsscipy.special, rsscipy.integrate, rsscipy.sparse, rsscipy.cluster, rsscipy.fft, rsscipy.ndimage, rsscipy.constants; print('all 14 submodules import OK')"
+          python -c "import scicore; print('scicore', scicore.__version__)"
+          python -c "import scicore.linalg, scicore.io, scicore.signal, scicore.stats, scicore.spatial, scicore.interpolate, scicore.optimize, scicore.special, scicore.integrate, scicore.sparse, scicore.cluster, scicore.fft, scicore.ndimage, scicore.constants; print('all 14 submodules import OK')"
           python -m pytest -q tests/test_rust_migrations.py
 
   lint:

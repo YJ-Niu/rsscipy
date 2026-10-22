@@ -3,12 +3,12 @@ import math
 import warnings
 
 import rsnumpy as np
-import rsscipy.linalg
+import scicore.linalg
 from ._optimize import (_check_unknown_options, _status_message,
                         OptimizeResult, _prepare_scalar_function,
                         _call_callback_maybe_halt)
-from rsscipy.optimize._hessian_update_strategy import HessianUpdateStrategy
-from rsscipy.optimize._differentiable_functions import FD_METHODS
+from scicore.optimize._hessian_update_strategy import HessianUpdateStrategy
+from scicore.optimize._differentiable_functions import FD_METHODS
 __all__ = []
 
 

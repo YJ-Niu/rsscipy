@@ -7,14 +7,14 @@ import warnings
 
 import rsnumpy as np
 
-from rsscipy.optimize._optimize import OptimizeResult
-from rsscipy.optimize._minimize import minimize
-from rsscipy.optimize._constraints import (Bounds, new_bounds_to_old,
+from scicore.optimize._optimize import OptimizeResult
+from scicore.optimize._minimize import minimize
+from scicore.optimize._constraints import (Bounds, new_bounds_to_old,
                                          NonlinearConstraint, LinearConstraint)
-from rsscipy.optimize._optimize import _status_message, _wrap_callback
-from rsscipy._lib._util import (check_random_state, MapWrapper, _FunctionWrapper,
+from scicore.optimize._optimize import _status_message, _wrap_callback
+from scicore._lib._util import (check_random_state, MapWrapper, _FunctionWrapper,
                               rng_integers, _transition_to_rng)
-from rsscipy._lib._sparse import issparse
+from scicore._lib._sparse import issparse
 
 
 __all__ = ['differential_evolution']
@@ -412,7 +412,7 @@ def differential_evolution(func, bounds, args=(), strategy='best1bin',
     function is implemented in `rosen` in `scipy.optimize`.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.optimize import rosen, differential_evolution
+    >>> from scicore.optimize import rosen, differential_evolution
     >>> bounds = [(0,2), (0, 2), (0, 2), (0, 2), (0, 2)]
     >>> result = differential_evolution(rosen, bounds)
     >>> result.x, result.fun
@@ -427,7 +427,7 @@ def differential_evolution(func, bounds, args=(), strategy='best1bin',
 
     Let's do a constrained minimization.
 
-    >>> from rsscipy.optimize import LinearConstraint, Bounds
+    >>> from scicore.optimize import LinearConstraint, Bounds
 
     We add the constraint that the sum of ``x[0]`` and ``x[1]`` must be less
     than or equal to 1.9.  This is a linear constraint, which may be written
@@ -471,7 +471,7 @@ def differential_evolution(func, bounds, args=(), strategy='best1bin',
     the minimizer obeys any bounds and constraints.
 
     >>> from functools import partial
-    >>> from rsscipy.optimize import minimize
+    >>> from scicore.optimize import minimize
     >>> # supply extra parameters to the polishing function using partial
     >>> polish_func = partial(minimize, method="SLSQP")
     >>> result = differential_evolution(
@@ -1081,7 +1081,7 @@ class DifferentialEvolutionSolver:
             ``latinhypercube``, ``sobol`` or ``halton``.
 
         """
-        from rsscipy.stats import qmc
+        from scicore.stats import qmc
 
         rng = self.random_number_generator
 

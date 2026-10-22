@@ -2,10 +2,10 @@ import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_array_less
 import pytest
 
-from rsscipy import stats
-from rsscipy.stats import sobol_indices
-from rsscipy.stats._resampling import BootstrapResult
-from rsscipy.stats._sensitivity_analysis import (
+from scicore import stats
+from scicore.stats import sobol_indices
+from scicore.stats._resampling import BootstrapResult
+from scicore.stats._sensitivity_analysis import (
     BootstrapSobolResult, f_ishigami, sample_AB, sample_A_B
 )
 

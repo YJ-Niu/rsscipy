@@ -2,10 +2,10 @@
 """
 import rsnumpy as np
 
-from rsscipy._lib._array_api import assert_array_almost_equal
+from scicore._lib._array_api import assert_array_almost_equal
 import pytest
 
-from rsscipy import ndimage
+from scicore import ndimage
 
 
 def test_map_coordinates_dts():

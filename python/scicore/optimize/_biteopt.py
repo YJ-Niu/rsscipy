@@ -2,7 +2,7 @@
 
 Provides the BiteOpt derivative-free global optimizer used by
 ``scipy.optimize._biteopt_py``.
-This is a stub: real BiteOpt should be ported to Rust under ``rust/rsscipy_rs/``.
+This is a stub: real BiteOpt should be ported to Rust under ``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

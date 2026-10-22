@@ -8,8 +8,8 @@ from rsnumpy.testing import assert_allclose
 import pytest
 from rsnumpy import sin, cos, sinh, cosh, exp, inf, nan, r_, pi
 
-from rsscipy.special import spherical_jn, spherical_yn, spherical_in, spherical_kn
-from rsscipy.integrate import quad
+from scicore.special import spherical_jn, spherical_yn, spherical_in, spherical_kn
+from scicore.integrate import quad
 
 
 class TestSphericalJn:

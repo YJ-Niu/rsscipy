@@ -4,8 +4,8 @@ import sysconfig
 
 import pytest
 
-from rsscipy._lib._testutils import IS_EDITABLE,_test_cython_extension, cython
-from rsscipy.special import beta, gamma
+from scicore._lib._testutils import IS_EDITABLE,_test_cython_extension, cython
+from scicore.special import beta, gamma
 
 
 @pytest.mark.fail_slow(40)

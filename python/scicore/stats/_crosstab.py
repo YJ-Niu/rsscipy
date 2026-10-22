@@ -1,7 +1,7 @@
 import rsnumpy as np
-from rsscipy._lib._array_api import xp_capabilities
-from rsscipy.sparse import coo_array
-from rsscipy._lib._bunch import _make_tuple_bunch
+from scicore._lib._array_api import xp_capabilities
+from scicore.sparse import coo_array
+from scicore._lib._bunch import _make_tuple_bunch
 
 
 CrosstabResult = _make_tuple_bunch(
@@ -69,7 +69,7 @@ def crosstab(*args, levels=None, sparse=False):
 
     Examples
     --------
-    >>> from rsscipy.stats.contingency import crosstab
+    >>> from scicore.stats.contingency import crosstab
 
     Given the lists `a` and `x`, create a contingency table that counts the
     frequencies of the corresponding pairs.

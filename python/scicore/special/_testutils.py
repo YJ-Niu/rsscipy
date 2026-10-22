@@ -1,13 +1,13 @@
 import os
 import functools
 import operator
-from rsscipy._external.packaging_version import version
+from scicore._external.packaging_version import version
 
 import rsnumpy as np
 from rsnumpy.testing import assert_
 import pytest
 
-import rsscipy.special as sc
+import scicore.special as sc
 
 __all__ = ['with_special_errors', 'assert_func_equal', 'FuncData']
 

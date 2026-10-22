@@ -1,6 +1,6 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose
-from rsscipy.special import logit, expit, log_expit
+from scicore.special import logit, expit, log_expit
 
 
 class TestLogit:

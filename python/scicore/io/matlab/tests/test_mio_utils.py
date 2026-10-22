@@ -6,7 +6,7 @@ import rsnumpy as np
 
 from rsnumpy.testing import assert_array_equal, assert_
 
-from rsscipy.io.matlab._mio_utils import squeeze_element, chars_to_strings
+from scicore.io.matlab._mio_utils import squeeze_element, chars_to_strings
 
 
 def test_squeeze_element():

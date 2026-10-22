@@ -10,14 +10,14 @@ from rsnumpy import ones, r_, diag
 from rsnumpy.testing import (assert_almost_equal, assert_equal,
                            assert_allclose, assert_array_less)
 
-from rsscipy import sparse
-from rsscipy.linalg import (eigh, toeplitz,
+from scicore import sparse
+from scicore.linalg import (eigh, toeplitz,
                           cholesky_banded, cho_solve_banded)
-from rsscipy.sparse import dia_array, eye_array, csr_array
-from rsscipy.sparse.linalg import eigsh, LinearOperator
-from rsscipy.sparse.linalg._eigen.lobpcg import lobpcg
-from rsscipy.sparse.linalg._eigen.lobpcg.lobpcg import _b_orthonormalize
-from rsscipy.sparse.linalg._special_sparse_arrays import (Sakurai,
+from scicore.sparse import dia_array, eye_array, csr_array
+from scicore.sparse.linalg import eigsh, LinearOperator
+from scicore.sparse.linalg._eigen.lobpcg import lobpcg
+from scicore.sparse.linalg._eigen.lobpcg.lobpcg import _b_orthonormalize
+from scicore.sparse.linalg._special_sparse_arrays import (Sakurai,
                                                         MikotaPair)
 
 _IS_32BIT = (sys.maxsize < 2**32)

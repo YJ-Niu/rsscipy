@@ -2,7 +2,7 @@
 
 Provides PROPACK SVD solver wrappers used by ``scipy.sparse.linalg._svdp``.
 This is a stub: real PROPACK bindings should be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

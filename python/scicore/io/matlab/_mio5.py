@@ -81,7 +81,7 @@ import warnings
 
 import rsnumpy as np
 
-import rsscipy.sparse
+import scicore.sparse
 
 from ._byteordercodes import native_code, swapped_code
 
@@ -405,10 +405,10 @@ def varmats_from_mat(file_obj):
 
     Examples
     --------
-    >>> import rsscipy.io
+    >>> import scicore.io
     >>> import rsnumpy as np
     >>> from io import BytesIO
-    >>> from rsscipy.io.matlab._mio5 import varmats_from_mat
+    >>> from scicore.io.matlab._mio5 import varmats_from_mat
     >>> mat_fileobj = BytesIO()
     >>> scipy.io.savemat(mat_fileobj, {'b': np.arange(10), 'a': 'a string'})
     >>> varmats = varmats_from_mat(mat_fileobj)

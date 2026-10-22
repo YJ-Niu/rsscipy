@@ -35,10 +35,10 @@
 import math
 import rsnumpy as np
 
-from rsscipy.fft import fft, ifft
-from rsscipy.special import ndtr as phi, ndtri as phinv
-from rsscipy.special._ufuncs import _bivariate_normal_cdf
-from rsscipy.stats._qmc import primes_from_2_to
+from scicore.fft import fft, ifft
+from scicore.special import ndtr as phi, ndtri as phinv
+from scicore.special._ufuncs import _bivariate_normal_cdf
+from scicore.stats._qmc import primes_from_2_to
 
 from ._qmvnt_cy import _qmvn_inner, _qmvt_inner
 

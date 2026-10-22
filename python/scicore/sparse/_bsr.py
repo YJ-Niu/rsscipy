@@ -644,7 +644,7 @@ def isspmatrix_bsr(x):
 
     Examples
     --------
-    >>> from rsscipy.sparse import bsr_array, bsr_matrix, csr_matrix, isspmatrix_bsr
+    >>> from scicore.sparse import bsr_array, bsr_matrix, csr_matrix, isspmatrix_bsr
     >>> isspmatrix_bsr(bsr_matrix([[5]]))  # doctest: +SKIP
     True
     >>> isspmatrix_bsr(bsr_array([[5]]))  # doctest: +SKIP
@@ -758,7 +758,7 @@ class bsr_array(_bsr_base, sparray):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import bsr_array
+    >>> from scicore.sparse import bsr_array
     >>> bsr_array((3, 4), dtype=np.int8).toarray()
     array([[0, 0, 0, 0],
            [0, 0, 0, 0],
@@ -886,7 +886,7 @@ class bsr_matrix(spmatrix, _bsr_base):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import bsr_matrix
+    >>> from scicore.sparse import bsr_matrix
     >>> bsr_matrix((3, 4), dtype=np.int8).toarray()
     array([[0, 0, 0, 0],
            [0, 0, 0, 0],

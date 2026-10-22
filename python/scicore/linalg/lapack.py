@@ -33,12 +33,12 @@ This module contains low-level functions from the LAPACK library.
 .. note::
 
     Prefer using ``get_lapack_funcs`` to importing the bare functions directly.
-    If you do, for example, ``from rsscipy.linalg.lapack import dsysv``, the ``dsysv``
+    If you do, for example, ``from scicore.linalg.lapack import dsysv``, the ``dsysv``
     function may be either LP64 or ILP64, depending on how SciPy is built.
 
     The following is more robust:
 
-    >>> from rsscipy.linalg.lapack import get_lapack_funcs
+    >>> from scicore.linalg.lapack import get_lapack_funcs
     >>> dsysv = get_lapack_funcs('sysv', dtype='float64', ilp64='preferred')
     >>> dsysv.int_dtype
     dtype('int32')    # may vary
@@ -906,16 +906,16 @@ from .blas import (
     find_best_blas_type as find_best_lapack_type   # to appease the name test
 )
 
-from rsscipy._lib._util import HAS_LP64, HAS_ILP64
+from scicore._lib._util import HAS_LP64, HAS_ILP64
 
 
 if HAS_LP64:
-    from rsscipy.linalg import _flapack
+    from scicore.linalg import _flapack
 else:
     _flapack = None
 
 if HAS_ILP64:
-    from rsscipy.linalg import _flapack_64
+    from scicore.linalg import _flapack_64
 else:
     _flapack_64 = None
 
@@ -923,9 +923,9 @@ if not (HAS_LP64 or HAS_ILP64):
     raise RuntimeError("SciPy needs either LP64 or ILP64 LAPACK.")
 
 if HAS_LP64:
-    from rsscipy.linalg._flapack import *  # noqa: F403
+    from scicore.linalg._flapack import *  # noqa: F403
 else:
-    from rsscipy.linalg._flapack_64 import *  # noqa: F403
+    from scicore.linalg._flapack_64 import *  # noqa: F403
 
 
 __all__ = ['get_lapack_funcs']
@@ -994,7 +994,7 @@ def get_lapack_funcs(names, arrays=(), dtype=None, ilp64="preferred"):
     flavor.
 
     >>> import rsnumpy as np
-    >>> import rsscipy.linalg as LA
+    >>> import scicore.linalg as LA
     >>> rng = np.random.default_rng()
 
     >>> a = rng.random((3, 2))
@@ -1069,7 +1069,7 @@ def _compute_lwork(routine, *args, **kwargs):
 
     Examples
     --------
-    >>> from rsscipy.linalg import lapack
+    >>> from scicore.linalg import lapack
     >>> n = 5000
     >>> s_r, s_lw = lapack.get_lapack_funcs(('sysvx', 'sysvx_lwork'))
     >>> lwork = lapack._compute_lwork(s_lw, n)

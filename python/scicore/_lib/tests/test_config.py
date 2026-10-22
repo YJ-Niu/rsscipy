@@ -1,7 +1,7 @@
 """
 Check the SciPy config is valid.
 """
-import rsscipy
+import scicore
 import pytest
 from unittest.mock import patch
 

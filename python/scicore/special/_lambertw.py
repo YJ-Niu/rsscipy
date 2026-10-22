@@ -74,7 +74,7 @@ def lambertw(z, k=0, tol=1e-8):
     The Lambert W function is the inverse of ``w exp(w)``:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.special import lambertw
+    >>> from scicore.special import lambertw
     >>> w = lambertw(1)
     >>> w
     (0.56714329040978384+0j)

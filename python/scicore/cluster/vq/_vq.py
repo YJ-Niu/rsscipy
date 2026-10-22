@@ -2,7 +2,7 @@
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import cluster as _rust_cluster
+from scicore._scicore_rs import cluster as _rust_cluster
 
 
 def _single_precision(array):

@@ -1,9 +1,9 @@
 import math
 import rsnumpy as np
-from rsscipy import special
-import rsscipy._lib._elementwise_iterative_method as eim
-from rsscipy._lib._util import _RichResult
-from rsscipy._lib._array_api import (array_namespace, xp_copy, xp_ravel,
+from scicore import special
+import scicore._lib._elementwise_iterative_method as eim
+from scicore._lib._util import _RichResult
+from scicore._lib._array_api import (array_namespace, xp_copy, xp_ravel,
                                    xp_promote, xp_capabilities, xp_device)
 
 
@@ -200,7 +200,7 @@ def tanhsinh(f, a, b, *, args=(), kwargs=None, log=False, maxlevel=None, minleve
     Evaluate the Gaussian integral:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.integrate import tanhsinh
+    >>> from scicore.integrate import tanhsinh
     >>> def f(x):
     ...     return np.exp(-x**2)
     >>> res = tanhsinh(f, -np.inf, np.inf)
@@ -246,7 +246,7 @@ def tanhsinh(f, a, b, *, args=(), kwargs=None, log=False, maxlevel=None, minleve
     The limits of integration and elements of `args` may be broadcastable
     arrays, and integration is performed elementwise.
 
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> dist = stats.gausshyper(13.8, 3.12, 2.51, 5.18)
     >>> a, b = dist.support()
     >>> x = np.linspace(a, b, 100)
@@ -1127,7 +1127,7 @@ def nsum(f, a, b, *, step=1, args=(), kwargs=None,
     Compute the infinite sum of the reciprocals of squared integers.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.integrate import nsum
+    >>> from scicore.integrate import nsum
     >>> res = nsum(lambda k: 1/k**2, 1, np.inf)
     >>> ref = np.pi**2/6  # true value
     >>> res.error  # estimated error
@@ -1140,7 +1140,7 @@ def nsum(f, a, b, *, step=1, args=(), kwargs=None,
     Compute the infinite sums of the reciprocals of integers raised to powers ``p``,
     where ``p`` is an array.
 
-    >>> from rsscipy import special
+    >>> from scicore import special
     >>> p = np.arange(3, 10)
     >>> res = nsum(lambda k, p: 1/k**p, 1, np.inf, maxterms=1e3, args=(p,))
     >>> ref = special.zeta(p, 1)

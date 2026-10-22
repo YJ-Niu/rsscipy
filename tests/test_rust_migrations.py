@@ -4,11 +4,11 @@ from pathlib import Path
 
 import pytest
 import rsnumpy as np
-import rsscipy
+import scicore
 
 
 ROOT = Path(__file__).resolve().parents[1]
-PYTHON_DIR = ROOT / "python" / "rsscipy"
+PYTHON_DIR = ROOT / "python" / "scicore"
 
 
 def _load_adapter(name, relative_path):
@@ -20,13 +20,13 @@ def _load_adapter(name, relative_path):
     return module
 
 
-def test_rsscipy_package_import():
-    assert rsscipy.__version__
+def test_scicore_package_import():
+    assert scicore.__version__
 
 
 def test_column_grouping_adapters():
     adapter = _load_adapter(
-        "_rsscipy_test_group_columns", "optimize/_group_columns.py"
+        "_scicore_test_group_columns", "optimize/_group_columns.py"
     )
     dense = np.asarray([
         [1, 1, 0, 0, 0, 0],
@@ -50,7 +50,7 @@ def test_column_grouping_adapters():
 
 def test_givens_elimination_adapter_mutates_arrays():
     adapter = _load_adapter(
-        "_rsscipy_test_givens_elimination",
+        "_scicore_test_givens_elimination",
         "optimize/_lsq/givens_elimination.py",
     )
     matrix = np.asarray([[3.0]])
@@ -62,7 +62,7 @@ def test_givens_elimination_adapter_mutates_arrays():
 
 def test_regular_grid_interpolation_adapter():
     adapter = _load_adapter(
-        "_rsscipy_test_rgi", "interpolate/_rgi_cython.py"
+        "_scicore_test_rgi", "interpolate/_rgi_cython.py"
     )
     xi = np.asarray([[0.25], [0.75]])
     indices, distances = adapter.find_indices(
@@ -81,7 +81,7 @@ def test_regular_grid_interpolation_adapter():
 
 
 def test_ndimage_label_adapter_and_output_overflow():
-    adapter = _load_adapter("_rsscipy_test_ni_label", "ndimage/_ni_label.py")
+    adapter = _load_adapter("_scicore_test_ni_label", "ndimage/_ni_label.py")
     structure = np.asarray([[0, 1, 0], [1, 1, 1], [0, 1, 0]], dtype=bool)
     source = np.asarray([[1, 0, 1, 0, 1]], dtype=np.uint8)
     output = np.zeros(source.shape, dtype=np.int32)
@@ -101,7 +101,7 @@ def test_ndimage_label_adapter_and_output_overflow():
 
 def test_ndimage_rank_filter_adapter():
     adapter = _load_adapter(
-        "_rsscipy_test_rank_filter_1d", "ndimage/_rank_filter_1d.py"
+        "_scicore_test_rank_filter_1d", "ndimage/_rank_filter_1d.py"
     )
     values = np.asarray([3, 2, 5, 1, 4], dtype=np.int64)
     output = np.empty(values.shape, dtype=values.dtype)
@@ -116,7 +116,7 @@ def test_ndimage_rank_filter_adapter():
 
 def test_directed_hausdorff_adapter():
     adapter = _load_adapter(
-        "_rsscipy_test_hausdorff",
+        "_scicore_test_hausdorff",
         "spatial/distance/_hausdorff.py",
     )
 
@@ -141,7 +141,7 @@ def test_directed_hausdorff_adapter():
 @pytest.mark.parametrize("rng_kind", ["generator", "random_state"])
 def test_random_contingency_table_adapter(method, rng_kind):
     adapter = _load_adapter(
-        "_rsscipy_test_rcont", "stats/_rcont/rcont.py"
+        "_scicore_test_rcont", "stats/_rcont/rcont.py"
     )
     row = np.asarray([1, 3], dtype=np.int64)
     col = np.asarray([2, 1, 1], dtype=np.int64)
@@ -163,7 +163,7 @@ def test_random_contingency_table_adapter(method, rng_kind):
 
 def test_random_contingency_table_degenerate_marginals():
     adapter = _load_adapter(
-        "_rsscipy_test_rcont_degenerate", "stats/_rcont/rcont.py"
+        "_scicore_test_rcont_degenerate", "stats/_rcont/rcont.py"
     )
     row = np.asarray([0, 1, 0], dtype=np.int64)
     col = np.asarray([1, 0, 0, 0], dtype=np.int64)
@@ -177,7 +177,7 @@ def test_random_contingency_table_degenerate_marginals():
 
 
 def test_levy_stable_nolan_adapter():
-    from rsscipy._rsscipy_rs import stats as rust_stats
+    from scicore._scicore_rs import stats as rust_stats
 
     alpha_not_one = rust_stats.Nolan(0.5, 1.0, 1.0)
     assert np.isclose(alpha_not_one.zeta, -1.0)
@@ -196,7 +196,7 @@ def test_qmvnt_rust_kernels_for_one_dimension(monkeypatch):
     import math
     import types
 
-    special = types.ModuleType("rsscipy.special")
+    special = types.ModuleType("scicore.special")
 
     def normal_cdf(values):
         return np.asarray([
@@ -207,8 +207,8 @@ def test_qmvnt_rust_kernels_for_one_dimension(monkeypatch):
     special.ndtr = normal_cdf
     special.ndtri = normal_cdf
     special.gammaincinv = lambda shape, values: np.full(len(values), 0.5)
-    monkeypatch.setitem(sys.modules, "rsscipy.special", special)
-    adapter = _load_adapter("_rsscipy_test_qmvnt", "stats/_qmvnt_cy.py")
+    monkeypatch.setitem(sys.modules, "scicore.special", special)
+    adapter = _load_adapter("_scicore_test_qmvnt", "stats/_qmvnt_cy.py")
 
     shifts = np.zeros((2, 1), dtype=np.float64)
     cholesky = np.asarray([[2.0]], dtype=np.float64)
@@ -247,7 +247,7 @@ def test_qmvnt_rust_kernels_for_multiple_dimensions(monkeypatch):
     import math
     import types
 
-    special = types.ModuleType("rsscipy.special")
+    special = types.ModuleType("scicore.special")
 
     def normal_cdf(values):
         return np.asarray([
@@ -258,9 +258,9 @@ def test_qmvnt_rust_kernels_for_multiple_dimensions(monkeypatch):
     special.ndtr = normal_cdf
     special.ndtri = lambda values: np.asarray(values)
     special.gammaincinv = lambda shape, values: np.full(len(values), 0.5)
-    monkeypatch.setitem(sys.modules, "rsscipy.special", special)
+    monkeypatch.setitem(sys.modules, "scicore.special", special)
     adapter = _load_adapter(
-        "_rsscipy_test_qmvnt_multi", "stats/_qmvnt_cy.py"
+        "_scicore_test_qmvnt_multi", "stats/_qmvnt_cy.py"
     )
 
     shifts = np.asarray([[0.1, 0.2], [0.3, 0.4]], dtype=np.float64)
@@ -290,7 +290,7 @@ def test_qmvnt_rust_kernels_for_multiple_dimensions(monkeypatch):
 
 
 def test_qmc_rust_kernels_preserve_python_adapter_behavior():
-    adapter = _load_adapter("_rsscipy_test_qmc_cy", "stats/_qmc_cy.py")
+    adapter = _load_adapter("_scicore_test_qmc_cy", "stats/_qmc_cy.py")
     sample = np.asarray(
         [[0.25, 0.75], [0.5, 0.25], [0.75, 0.5]],
         dtype=np.float64,
@@ -348,7 +348,7 @@ def test_qmc_rust_kernels_preserve_python_adapter_behavior():
 
 @pytest.mark.parametrize("dtype", [np.uint32, np.uint64])
 def test_sobol_rust_adapter_initialization_draw_and_fast_forward(dtype):
-    adapter = _load_adapter("_rsscipy_test_sobol", "stats/_sobol.py")
+    adapter = _load_adapter("_scicore_test_sobol", "stats/_sobol.py")
     direction = np.zeros((2, 4), dtype=dtype)
     adapter._initialize_v(direction, 2, 4)
     assert direction.tolist() == [[8, 4, 2, 1], [8, 12, 10, 15]]
@@ -375,7 +375,7 @@ def test_sobol_rust_adapter_initialization_draw_and_fast_forward(dtype):
 
 def test_sobol_rust_adapter_scramble_and_categorical_kernels():
     adapter = _load_adapter(
-        "_rsscipy_test_sobol_aux", "stats/_sobol.py"
+        "_scicore_test_sobol_aux", "stats/_sobol.py"
     )
     ltm = np.asarray(
         [[[0, 0, 0], [1, 0, 0], [1, 1, 0]]],
@@ -437,7 +437,7 @@ def test_sobol_rust_adapter_scramble_and_categorical_kernels():
 
 def test_spherical_voronoi_rust_region_sorting_mutates_regions():
     adapter = _load_adapter(
-        "_rsscipy_test_spherical_voronoi", "spatial/_voronoi.py"
+        "_scicore_test_spherical_voronoi", "spatial/_voronoi.py"
     )
     simplices = np.asarray(
         [[0, 1, 2], [0, 2, 3], [0, 3, 1], [1, 3, 2]],
@@ -461,7 +461,7 @@ def test_spherical_voronoi_rust_region_sorting_mutates_regions():
 
 def test_spherical_voronoi_rust_region_sorting_validates_shapes():
     adapter = _load_adapter(
-        "_rsscipy_test_spherical_voronoi_invalid",
+        "_scicore_test_spherical_voronoi_invalid",
         "spatial/_voronoi.py",
     )
     with pytest.raises(ValueError, match="three columns"):
@@ -476,7 +476,7 @@ def test_matlab_mio_utils_rust_char_conversion():
     import types
 
     adapter = _load_adapter(
-        "_rsscipy_test_mio_utils", "io/matlab/_mio_utils.py"
+        "_scicore_test_mio_utils", "io/matlab/_mio_utils.py"
     )
     characters = ["a", "β", "🙂", " ", "x", "\x00"]
     encoded = "".join(characters).encode("utf-32-le")
@@ -499,7 +499,7 @@ def test_matlab_mio_utils_rust_char_conversion_empty_and_invalid():
     import types
 
     adapter = _load_adapter(
-        "_rsscipy_test_mio_utils_empty",
+        "_scicore_test_mio_utils_empty",
         "io/matlab/_mio_utils.py",
     )
     empty = types.SimpleNamespace(
@@ -522,7 +522,7 @@ def test_matlab_mio_utils_rust_char_conversion_empty_and_invalid():
 
 def test_matlab_mio_utils_squeeze_adapter():
     adapter = _load_adapter(
-        "_rsscipy_test_mio_utils_squeeze",
+        "_scicore_test_mio_utils_squeeze",
         "io/matlab/_mio_utils.py",
     )
     values = np.zeros((1, 3))

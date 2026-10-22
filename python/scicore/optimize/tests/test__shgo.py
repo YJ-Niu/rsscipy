@@ -7,13 +7,13 @@ from multiprocessing import Pool
 from rsnumpy.testing import assert_allclose
 import pytest
 
-from rsscipy._lib._testutils import IS_WASM
+from scicore._lib._testutils import IS_WASM
 from pytest import raises as assert_raises, warns
-from rsscipy.optimize import (shgo, Bounds, minimize_scalar, minimize, rosen,
+from scicore.optimize import (shgo, Bounds, minimize_scalar, minimize, rosen,
                             rosen_der, rosen_hess, NonlinearConstraint, OptimizeWarning)
-from rsscipy.optimize._constraints import new_constraint_to_old
-from rsscipy.optimize._shgo import SHGO
-from rsscipy.optimize.tests.test_minimize_constrained import MaratosTestArgs
+from scicore.optimize._constraints import new_constraint_to_old
+from scicore.optimize._shgo import SHGO
+from scicore.optimize.tests.test_minimize_constrained import MaratosTestArgs
 
 
 class StructTestFunction:
@@ -1099,7 +1099,7 @@ class TestShgoFailures:
         warns(UserWarning, shgo, *args, **kwargs)
 
     def test(self):
-        from rsscipy.optimize import rosen, shgo
+        from scicore.optimize import rosen, shgo
         bounds = [(0, 2), (0, 2), (0, 2), (0, 2), (0, 2)]
 
         def fun(x):

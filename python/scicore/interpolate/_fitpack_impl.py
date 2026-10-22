@@ -29,7 +29,7 @@ import rsnumpy as np
 from . import _fitpack
 from rsnumpy import (atleast_1d, array, ones, zeros, sqrt, ravel, empty, iinfo, asarray)
 
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     array_namespace, concat_1d, xp_capabilities, xp_device
 )
 

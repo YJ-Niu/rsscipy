@@ -4,14 +4,14 @@ Copied from fftpack.helper by Pearu Peterson, October 2005
 Modified for Array API, 2023
 
 """
-from rsscipy.fft._helper import next_fast_len, prev_fast_len, _init_nd_shape_and_axes
+from scicore.fft._helper import next_fast_len, prev_fast_len, _init_nd_shape_and_axes
 from rsnumpy.testing import assert_equal
 from pytest import raises as assert_raises
 import pytest
 import rsnumpy as np
 import sys
-from rsscipy._lib._array_api import xp_assert_close, xp_device, make_xp_test_case
-from rsscipy import fft
+from scicore._lib._array_api import xp_assert_close, xp_device, make_xp_test_case
+from scicore import fft
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 lazy_xp_modules = [fft]

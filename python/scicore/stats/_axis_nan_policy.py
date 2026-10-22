@@ -8,13 +8,13 @@ import math
 import warnings
 import rsnumpy as np
 from functools import wraps
-from rsscipy._lib._array_api import xp_ravel
-from rsscipy._lib._docscrape import FunctionDoc, Parameter
-from rsscipy._lib._util import _contains_nan, AxisError, _get_nan
-from rsscipy._lib._array_api import (array_namespace, is_numpy, xp_size, xp_copy,
+from scicore._lib._array_api import xp_ravel
+from scicore._lib._docscrape import FunctionDoc, Parameter
+from scicore._lib._util import _contains_nan, AxisError, _get_nan
+from scicore._lib._array_api import (array_namespace, is_numpy, xp_size, xp_copy,
                                    xp_promote, is_dask, is_jax, xp_capabilities,
                                    is_lazy_array, xp_device)
-import rsscipy._external.array_api_extra as xpx
+import scicore._external.array_api_extra as xpx
 
 import inspect
 
@@ -136,7 +136,7 @@ def _broadcast_array_shapes_remove_axis(arrays, axis=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats._axis_nan_policy import _broadcast_array_shapes_remove_axis
+    >>> from scicore.stats._axis_nan_policy import _broadcast_array_shapes_remove_axis
     >>> a = np.zeros((5, 2, 1))
     >>> b = np.zeros((9, 3))
     >>> _broadcast_array_shapes_remove_axis((a, b), 1)

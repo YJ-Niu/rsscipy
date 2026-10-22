@@ -10,8 +10,8 @@ from pytest import raises as assert_raises
 import rsnumpy as np
 from rsnumpy import cos, sin
 
-from rsscipy.optimize import basinhopping, OptimizeResult
-from rsscipy.optimize._basinhopping import (
+from scicore.optimize import basinhopping, OptimizeResult
+from scicore.optimize._basinhopping import (
     Storage, RandomDisplacement, Metropolis, AdaptiveStepsize)
 
 

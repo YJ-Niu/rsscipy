@@ -2,9 +2,9 @@ import rsnumpy as np
 from rsnumpy.testing import assert_array_equal
 import pytest
 
-from rsscipy.sparse import csr_array, csc_array, csr_matrix
-from rsscipy.sparse.csgraph import maximum_flow
-from rsscipy.sparse.csgraph._flow import (
+from scicore.sparse import csr_array, csc_array, csr_matrix
+from scicore.sparse.csgraph import maximum_flow
+from scicore.sparse.csgraph._flow import (
     _add_reverse_edges, _make_edge_pointers, _make_tails
 )
 

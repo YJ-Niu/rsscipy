@@ -6,19 +6,19 @@ import pytest
 from rsnumpy.testing import assert_, assert_equal, assert_allclose
 from pytest import raises as assert_raises
 
-from rsscipy import stats, special
-from rsscipy.stats import distributions
-from rsscipy.stats._hypotests import (epps_singleton_2samp, cramervonmises,
+from scicore import stats, special
+from scicore.stats import distributions
+from scicore.stats._hypotests import (epps_singleton_2samp, cramervonmises,
                                     _cdf_cvm, cramervonmises_2samp,
                                     _pval_cvm_2samp_exact, barnard_exact,
                                     boschloo_exact)
-from rsscipy.stats._mannwhitneyu import mannwhitneyu, _mwu_state, _MWU
-from rsscipy._lib._testutils import _TestPythranFunc
-from rsscipy._external import array_api_extra as xpx
-from rsscipy._lib._array_api import (make_xp_test_case, is_numpy,
+from scicore.stats._mannwhitneyu import mannwhitneyu, _mwu_state, _MWU
+from scicore._lib._testutils import _TestPythranFunc
+from scicore._external import array_api_extra as xpx
+from scicore._lib._array_api import (make_xp_test_case, is_numpy,
                                    eager_warns, xp_ravel, is_jax)
-from rsscipy._lib._array_api_no_0d import xp_assert_equal, xp_assert_close
-from rsscipy.stats._axis_nan_policy import SmallSampleWarning, too_small_1d_not_omit
+from scicore._lib._array_api_no_0d import xp_assert_equal, xp_assert_close
+from scicore.stats._axis_nan_policy import SmallSampleWarning, too_small_1d_not_omit
 
 lazy_xp_modules = [stats]
 skip_xp_backends = pytest.mark.skip_xp_backends

@@ -9,43 +9,43 @@ import warnings
 import sys
 
 import rsnumpy as np
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     xp_assert_equal, xp_assert_close, concat_1d, make_xp_test_case,
     xp_ravel, xp_copy_to_numpy, array_namespace, is_cupy
 )
-from rsscipy._lib._array_api_no_0d import xp_assert_close as xp_assert_close_no_0d
-import rsscipy._external.array_api_extra as xpx
+from scicore._lib._array_api_no_0d import xp_assert_close as xp_assert_close_no_0d
+import scicore._external.array_api_extra as xpx
 from pytest import raises as assert_raises
 import pytest
 
-from rsscipy.interpolate import (
+from scicore.interpolate import (
         BSpline, BPoly, PPoly, make_interp_spline, make_lsq_spline,
         splev, splrep, splprep, splder, splantider, sproot, splint, insert,
         CubicSpline, NdBSpline, make_smoothing_spline, RegularGridInterpolator,
 )
-import rsscipy.linalg as sl
-import rsscipy.sparse.linalg as ssl
+import scicore.linalg as sl
+import scicore.sparse.linalg as ssl
 
-from rsscipy.interpolate._bsplines import (_not_a_knot, _augknt, _compute_b_inv,
+from scicore.interpolate._bsplines import (_not_a_knot, _augknt, _compute_b_inv,
                                         _woodbury_algorithm, _periodic_knots,
                                          _make_interp_per_full_matr,
                                          _penalty_matrix_banded)
-from rsscipy.interpolate._fitpack_repro import Fperiodic, root_rati
+from scicore.interpolate._fitpack_repro import Fperiodic, root_rati
 
-from rsscipy.interpolate import generate_knots, make_splrep, make_splprep
+from scicore.interpolate import generate_knots, make_splrep, make_splprep
 
-import rsscipy.interpolate._fitpack_impl as _impl
-from rsscipy._lib._util import AxisError
-from rsscipy._lib._testutils import _run_concurrent_barrier, IS_WASM
+import scicore.interpolate._fitpack_impl as _impl
+from scicore._lib._util import AxisError
+from scicore._lib._testutils import _run_concurrent_barrier, IS_WASM
 
 # XXX: move to the interpolate namespace
-from rsscipy.interpolate._ndbspline import (
+from scicore.interpolate._ndbspline import (
     _make_lsq_ndbspl, _make_lsq_ndbspl_from_grid, make_ndbspl
 )
 
-from rsscipy.interpolate import _fitpack as dfitpack
-from rsscipy.interpolate import _bsplines as _b
-from rsscipy.interpolate import _dierckx
+from scicore.interpolate import _fitpack as dfitpack
+from scicore.interpolate import _bsplines as _b
+from scicore.interpolate import _dierckx
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 xfail_xp_backends = pytest.mark.xfail_xp_backends
@@ -2336,7 +2336,7 @@ def _qr_reduce_py(a_p, y, startrow=1):
     """This is a python counterpart of the `_qr_reduce` routine,
     declared in interpolate/src/__fitpack.h
     """
-    from rsscipy.linalg.lapack import get_lapack_funcs
+    from scicore.linalg.lapack import get_lapack_funcs
     dlartg = get_lapack_funcs('lartg', dtype=np.float64, ilp64='preferred')
 
     # unpack the packed format
@@ -4203,7 +4203,7 @@ class TestMakeND:
         xp_assert_close(cc, bspl.c, atol=1e-11, rtol=0)
 
         # test against RGI
-        from rsscipy.interpolate import RegularGridInterpolator as RGI
+        from scicore.interpolate import RegularGridInterpolator as RGI
         rgi = RGI((x, y), values, method='linear')
         xp_assert_close(rgi(xi), bspl(xi), atol=1e-14)
 
@@ -4560,7 +4560,7 @@ class TestGenerateKnots:
         spl = make_lsq_spline(x, y, k=k, t=t)
         residuals = (spl(x) - y)**2
 
-        from rsscipy.interpolate import _fitpack_repro as _fr
+        from scicore.interpolate import _fitpack_repro as _fr
         new_t = _fr.add_knot(x, t, k, residuals)
         new_t_py = _add_knot(x, t, k, residuals)
 
@@ -4793,7 +4793,7 @@ class F_dense:
         a_dense = BSpline(t, np.eye(t.shape[0] - k - 1), k, extrapolate=extrapolate)(x)
         self.a_dense = a_dense * self.w[:, None]
 
-        from rsscipy.interpolate import _fitpack_repro as _fr
+        from scicore.interpolate import _fitpack_repro as _fr
         self.b_dense = PackedMatrix(*_fr.disc(t, k)).todense()
 
         # rhs
@@ -4807,7 +4807,7 @@ class F_dense:
         ab = np.vstack((self.a_dense, self.b_dense / p))
 
         # LSQ solution of ab @ c = yy
-        from rsscipy.linalg import qr, solve
+        from scicore.linalg import qr, solve
         q, r = qr(ab, mode='economic')
 
         qy = q.T @ self.yy
@@ -5124,7 +5124,7 @@ class TestMakeSplrep(_TestMakeSplrepBase):
     @pytest.mark.parametrize("k", [1, 2, 3, 4, 5, 6])
     def test_fitpack_F(self, k):
         # test an implementation detail: banded/packed linalg vs full matrices
-        from rsscipy.interpolate._fitpack_repro import F
+        from scicore.interpolate._fitpack_repro import F
 
         x, y, s = self._get_xykt()
         t = np.array([0]*(k+1) + [2.5, 4.0] + [5]*(k+1))
@@ -5136,7 +5136,7 @@ class TestMakeSplrep(_TestMakeSplrepBase):
     @pytest.mark.parametrize("k", [1, 2, 3, 4, 5, 6])
     def test_fitpack_F_with_weights(self, k):
         # repeat test_fitpack_F, with weights
-        from rsscipy.interpolate._fitpack_repro import F
+        from scicore.interpolate._fitpack_repro import F
 
         x, y, s = self._get_xykt()
         t = np.array([0]*(k+1) + [2.5, 4.0] + [5]*(k+1))
@@ -5153,7 +5153,7 @@ class TestMakeSplrep(_TestMakeSplrepBase):
     def test_disc_matrix(self):
         # test an implementation detail: discontinuity matrix
         # (jumps of k-th derivative at knots)
-        import rsscipy.interpolate._fitpack_repro as _fr
+        import scicore.interpolate._fitpack_repro as _fr
 
         rng = np.random.default_rng(12345)
         t = np.r_[0, 0, 0, 0, np.sort(rng.uniform(size=7))*5, 5, 5, 5, 5]

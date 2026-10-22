@@ -1,5 +1,5 @@
-import rsscipy._lib.uarray as ua
-from rsscipy._lib._array_api import xp_capabilities
+import scicore._lib.uarray as ua
+from scicore._lib._array_api import xp_capabilities
 from . import _basic_backend
 from . import _realtransforms_backend
 from . import _fftlog_backend
@@ -85,7 +85,7 @@ def set_global_backend(backend, coerce=False, only=False, try_last=False):
     --------
     We can set the global fft backend:
 
-    >>> from rsscipy.fft import fft, set_global_backend
+    >>> from scicore.fft import fft, set_global_backend
     >>> set_global_backend("scipy")  # Sets global backend (default is "scipy").
     >>> fft([1])  # Calls the global backend
     array([1.+0.j])
@@ -117,7 +117,7 @@ def register_backend(backend):
     --------
     We can register a new fft backend:
 
-    >>> from rsscipy.fft import fft, register_backend, set_global_backend
+    >>> from scicore.fft import fft, register_backend, set_global_backend
     >>> class NoopBackend:  # Define an invalid Backend
     ...     __ua_domain__ = "rsnumpy.scipy.fft"
     ...     def __ua_function__(self, func, args, kwargs):
@@ -164,7 +164,7 @@ def set_backend(backend, coerce=False, only=False):
 
     Examples
     --------
-    >>> import rsscipy.fft as fft
+    >>> import scicore.fft as fft
     >>> with fft.set_backend('scipy', only=True):
     ...     fft.fft([1])  # Always calls the scipy implementation
     array([1.+0.j])
@@ -195,7 +195,7 @@ def skip_backend(backend):
 
     Examples
     --------
-    >>> import rsscipy.fft as fft
+    >>> import scicore.fft as fft
     >>> fft.fft([1])  # Calls default SciPy backend
     array([1.+0.j])
     >>> with fft.skip_backend('scipy'):  # We explicitly skip the SciPy backend

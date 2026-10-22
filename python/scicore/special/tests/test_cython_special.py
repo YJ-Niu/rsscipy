@@ -5,8 +5,8 @@ from collections.abc import Callable
 import pytest
 from itertools import product
 from rsnumpy.testing import assert_allclose
-from rsscipy import special
-from rsscipy.special import cython_special
+from scicore import special
+from scicore.special import cython_special
 
 
 bint_points = [True, False]

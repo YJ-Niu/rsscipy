@@ -5,7 +5,7 @@ from rsnumpy.testing import (assert_, assert_equal, assert_array_almost_equal,
                            assert_allclose)
 import pytest
 from pytest import raises as assert_raises
-from rsscipy.fft._duccfft import (ifft, fft, fftn, ifftn,
+from scicore.fft._duccfft import (ifft, fft, fftn, ifftn,
                                 rfft, irfft, rfftn, irfftn,
                                 hfft, ihfft, hfftn, ihfftn)
 

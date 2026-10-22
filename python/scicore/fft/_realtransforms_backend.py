@@ -1,4 +1,4 @@
-from rsscipy._lib._array_api import xp_result_device, array_namespace
+from scicore._lib._array_api import xp_result_device, array_namespace
 import rsnumpy as np
 from . import _duccfft
 

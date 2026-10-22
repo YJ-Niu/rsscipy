@@ -1,13 +1,13 @@
 # Rust replacement for the Matrix Market I/O C++ extension (`_fmm_core`).
 #
-# Produces the CPython extension `python/rsscipy/io/_fast_matrix_market/_fmm_core.so`,
-# which backs `rsscipy.io.mmread` / `mmwrite` / `mminfo`.
+# Produces the CPython extension `python/scicore/io/_fast_matrix_market/_fmm_core.so`,
+# which backs `scicore.io.mmread` / `mmwrite` / `mminfo`.
 [package]
 name = "fmm-core"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Matrix Market (.mtx) I/O kernels for rsSciPy"
+description = "Matrix Market (.mtx) I/O kernels for SciCore"
 
 [lib]
 name = "_fmm_core"

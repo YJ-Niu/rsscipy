@@ -3,7 +3,7 @@ import rsnumpy as np
 from rsnumpy.testing import assert_equal
 from pytest import raises as assert_raises
 
-from rsscipy.io._harwell_boeing._fortran_format_parser import (
+from scicore.io._harwell_boeing._fortran_format_parser import (
         FortranFormatParser, IntFormat, ExpFormat, BadFortranFormat)
 
 

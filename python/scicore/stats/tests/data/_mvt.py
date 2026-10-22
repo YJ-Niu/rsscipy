@@ -1,7 +1,7 @@
 import math
 import rsnumpy as np
-from rsscipy import special
-from rsscipy.stats._qmc import primes_from_2_to
+from scicore import special
+from scicore.stats._qmc import primes_from_2_to
 
 
 def _primes(n):

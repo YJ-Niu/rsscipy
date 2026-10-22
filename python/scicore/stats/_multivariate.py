@@ -5,15 +5,15 @@ import math
 import threading
 import types
 import rsnumpy as np
-import rsscipy.linalg
-from rsscipy._lib import doccer
-from rsscipy.special import (gammaln, psi, multigammaln, xlogy, entr, betaln,
+import scicore.linalg
+from scicore._lib import doccer
+from scicore.special import (gammaln, psi, multigammaln, xlogy, entr, betaln,
                            ive, loggamma)
-from rsscipy.special._ufuncs import _iv_ratioinv
-from rsscipy import special
-import rsscipy._external.array_api_extra as xpx
-from rsscipy._lib._util import check_random_state
-from rsscipy.linalg.blas import get_blas_funcs
+from scicore.special._ufuncs import _iv_ratioinv
+from scicore import special
+import scicore._external.array_api_extra as xpx
+from scicore._lib._util import check_random_state
+from scicore.linalg.blas import get_blas_funcs
 from ._continuous_distns import norm, invgamma
 from ._discrete_distns import binom
 from . import _covariance, _rcont
@@ -411,7 +411,7 @@ class multivariate_normal_gen(multi_rv_generic):
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.stats import multivariate_normal
+    >>> from scicore.stats import multivariate_normal
 
     >>> x = np.linspace(0, 5, 10, endpoint=False)
     >>> y = multivariate_normal.pdf(x, mean=2.5, cov=0.5); y
@@ -992,7 +992,7 @@ class multivariate_normal_frozen(multi_rv_frozen):
         When called with the default parameters, this will create a 1D random
         variable with mean 0 and covariance 1:
 
-        >>> from rsscipy.stats import multivariate_normal
+        >>> from scicore.stats import multivariate_normal
         >>> r = multivariate_normal()
         >>> r.mean
         array([ 0.])
@@ -1178,7 +1178,7 @@ class matrix_normal_gen(multi_rv_generic):
     --------
 
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import matrix_normal
+    >>> from scicore.stats import matrix_normal
 
     >>> M = np.arange(6).reshape(3,2); M
     array([[0, 1],
@@ -1199,7 +1199,7 @@ class matrix_normal_gen(multi_rv_generic):
     0.023410202050005054
 
     >>> # Equivalent multivariate normal
-    >>> from rsscipy.stats import multivariate_normal
+    >>> from scicore.stats import multivariate_normal
     >>> vectorised_X = X.T.flatten()
     >>> equiv_mean = M.T.flatten()
     >>> equiv_cov = np.kron(V,U)
@@ -1490,7 +1490,7 @@ class matrix_normal_frozen(multi_rv_frozen):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import matrix_normal
+    >>> from scicore.stats import matrix_normal
 
     >>> distn = matrix_normal(mean=np.zeros((3,3)))
     >>> X = distn.rvs(); X
@@ -1697,7 +1697,7 @@ class matrix_t_gen(multi_rv_generic):
     --------
 
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import matrix_t
+    >>> from scicore.stats import matrix_t
     >>> M = np.arange(6).reshape(3,2)
     >>> M
     array([[0, 1],
@@ -1932,7 +1932,7 @@ class matrix_t_gen(multi_rv_generic):
         -------
 
         >>> import rsnumpy as np
-        >>> from rsscipy.stats import matrix_t
+        >>> from scicore.stats import matrix_t
         >>> M = np.arange(6).reshape(3,2); M
         array([[0, 1],
             [2, 3],
@@ -1997,7 +1997,7 @@ class matrix_t_gen(multi_rv_generic):
         --------
 
         >>> import rsnumpy as np
-        >>> from rsscipy.stats import matrix_t
+        >>> from scicore.stats import matrix_t
         >>> M = np.arange(6).reshape(3,2); M
         array([[0, 1],
             [2, 3],
@@ -2329,7 +2329,7 @@ class dirichlet_gen(multi_rv_generic):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import dirichlet
+    >>> from scicore.stats import dirichlet
 
     Generate a dirichlet random variable
 
@@ -2705,7 +2705,7 @@ class wishart_gen(multi_rv_generic):
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.stats import wishart, chi2
+    >>> from scicore.stats import wishart, chi2
     >>> x = np.linspace(1e-5, 8, 100)
     >>> w = wishart.pdf(x, df=3, scale=1); w[:5]
     array([ 0.00126156,  0.10892176,  0.14793434,  0.17400548,  0.1929669 ])
@@ -3390,7 +3390,7 @@ class invwishart_gen(wishart_gen):
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.stats import invwishart, invgamma
+    >>> from scicore.stats import invwishart, invgamma
     >>> x = np.linspace(0.01, 1, 100)
     >>> iw = invwishart.pdf(x, df=6, scale=1)
     >>> iw[:3]
@@ -3930,7 +3930,7 @@ class multinomial_gen(multi_rv_generic):
     Examples
     --------
 
-    >>> from rsscipy.stats import multinomial
+    >>> from scicore.stats import multinomial
     >>> rv = multinomial(8, [0.3, 0.2, 0.5])
     >>> rv.pmf([1, 3, 4])
     0.042000000000000072
@@ -3939,7 +3939,7 @@ class multinomial_gen(multi_rv_generic):
     corresponding binomial distribution (tiny numerical differences
     notwithstanding):
 
-    >>> from rsscipy.stats import binom
+    >>> from scicore.stats import binom
     >>> multinomial.pmf([3, 4], n=7, p=[0.4, 0.6])
     0.29030399999999973
     >>> binom.pmf(3, 7, 0.4)
@@ -4322,7 +4322,7 @@ class special_ortho_group_gen(multi_rv_generic):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import special_ortho_group
+    >>> from scicore.stats import special_ortho_group
     >>> x = special_ortho_group.rvs(3)
 
     >>> np.dot(x, x.T)
@@ -4330,7 +4330,7 @@ class special_ortho_group_gen(multi_rv_generic):
            [  1.13231364e-17,   1.00000000e+00,  -1.46845020e-16],
            [ -2.86852790e-16,  -1.46845020e-16,   1.00000000e+00]])
 
-    >>> import rsscipy.linalg
+    >>> import scicore.linalg
     >>> scipy.linalg.det(x)
     1.0
 
@@ -4411,7 +4411,7 @@ class special_ortho_group_frozen(multi_rv_frozen):
 
         Examples
         --------
-        >>> from rsscipy.stats import special_ortho_group
+        >>> from scicore.stats import special_ortho_group
         >>> g = special_ortho_group(5)
         >>> x = g.rvs()
 
@@ -4468,7 +4468,7 @@ class ortho_group_gen(multi_rv_generic):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import ortho_group
+    >>> from scicore.stats import ortho_group
     >>> x = ortho_group.rvs(3)
 
     >>> np.dot(x, x.T)
@@ -4476,7 +4476,7 @@ class ortho_group_gen(multi_rv_generic):
            [  1.13231364e-17,   1.00000000e+00,  -1.46845020e-16],
            [ -2.86852790e-16,  -1.46845020e-16,   1.00000000e+00]])
 
-    >>> import rsscipy.linalg
+    >>> import scicore.linalg
     >>> np.fabs(scipy.linalg.det(x))
     1.0
 
@@ -4567,7 +4567,7 @@ class ortho_group_frozen(multi_rv_frozen):
 
         Examples
         --------
-        >>> from rsscipy.stats import ortho_group
+        >>> from scicore.stats import ortho_group
         >>> g = ortho_group(5)
         >>> x = g.rvs()
 
@@ -4643,7 +4643,7 @@ class random_correlation_gen(multi_rv_generic):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import random_correlation
+    >>> from scicore.stats import random_correlation
     >>> rng = np.random.default_rng()
     >>> x = random_correlation.rvs((.5, .8, 1.2, 1.5), random_state=rng)
     >>> x
@@ -4651,7 +4651,7 @@ class random_correlation_gen(multi_rv_generic):
            [-0.02423399,  1.        ,  0.20334736,  0.04039817],
            [ 0.03130519,  0.20334736,  1.        ,  0.02694275],
            [ 0.4946965 ,  0.04039817,  0.02694275,  1.        ]])
-    >>> import rsscipy.linalg
+    >>> import scicore.linalg
     >>> e, v = scipy.linalg.eigh(x)
     >>> e
     array([ 0.5,  0.8,  1.2,  1.5])
@@ -4894,7 +4894,7 @@ class unitary_group_gen(multi_rv_generic):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import unitary_group
+    >>> from scicore.stats import unitary_group
     >>> x = unitary_group.rvs(3)
 
     >>> np.dot(x, x.conj().T)
@@ -4988,7 +4988,7 @@ class unitary_group_frozen(multi_rv_frozen):
 
         Examples
         --------
-        >>> from rsscipy.stats import unitary_group
+        >>> from scicore.stats import unitary_group
         >>> x = unitary_group(3)
         >>> x.rvs()
 
@@ -5105,7 +5105,7 @@ class multivariate_t_gen(multi_rv_generic):
     multivariate_t random variable:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import multivariate_t
+    >>> from scicore.stats import multivariate_t
     >>> rv = multivariate_t([1.0, -0.5], [[2.1, 0.3], [0.3, 1.5]], df=2)
     >>> # Frozen object with the same methods but holding the given location,
     >>> # scale, and degrees of freedom fixed.
@@ -5160,7 +5160,7 @@ class multivariate_t_gen(multi_rv_generic):
 
         Examples
         --------
-        >>> from rsscipy.stats import multivariate_t
+        >>> from scicore.stats import multivariate_t
         >>> x = [0.4, 5]
         >>> loc = [0, 1]
         >>> shape = [[1, 0.1], [0.1, 1]]
@@ -5192,7 +5192,7 @@ class multivariate_t_gen(multi_rv_generic):
 
         Examples
         --------
-        >>> from rsscipy.stats import multivariate_t
+        >>> from scicore.stats import multivariate_t
         >>> x = [0.4, 5]
         >>> loc = [0, 1]
         >>> shape = [[1, 0.1], [0.1, 1]]
@@ -5319,7 +5319,7 @@ class multivariate_t_gen(multi_rv_generic):
 
         Examples
         --------
-        >>> from rsscipy.stats import multivariate_t
+        >>> from scicore.stats import multivariate_t
         >>> x = [0.4, 5]
         >>> loc = [0, 1]
         >>> shape = [[1, 0.1], [0.1, 1]]
@@ -5403,7 +5403,7 @@ class multivariate_t_gen(multi_rv_generic):
 
         Examples
         --------
-        >>> from rsscipy.stats import multivariate_t
+        >>> from scicore.stats import multivariate_t
         >>> x = [0.4, 5]
         >>> loc = [0, 1]
         >>> shape = [[1, 0.1], [0.1, 1]]
@@ -5550,7 +5550,7 @@ class multivariate_t_frozen(multi_rv_frozen):
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from rsscipy.stats import multivariate_t
+        >>> from scicore.stats import multivariate_t
         >>> loc = np.zeros(3)
         >>> shape = np.eye(3)
         >>> df = 10
@@ -5713,7 +5713,7 @@ class multivariate_hypergeom_gen(multi_rv_generic):
     :math:`8` objects of the first type and :math:`4` objects of the
     second type, use:
 
-    >>> from rsscipy.stats import multivariate_hypergeom
+    >>> from scicore.stats import multivariate_hypergeom
     >>> multivariate_hypergeom.pmf(x=[8, 4], m=[10, 20], n=12)
     0.0025207176631464523
 
@@ -5723,7 +5723,7 @@ class multivariate_hypergeom_gen(multi_rv_generic):
     are present in the population as in the example above. Consider
     another example for a comparison with the hypergeometric distribution:
 
-    >>> from rsscipy.stats import hypergeom
+    >>> from scicore.stats import hypergeom
     >>> multivariate_hypergeom.pmf(x=[3, 1], m=[10, 5], n=4)
     0.4395604395604395
     >>> hypergeom.pmf(k=3, M=15, n=4, N=10)
@@ -6151,7 +6151,7 @@ class random_table_gen(multi_rv_generic):
 
     Examples
     --------
-    >>> from rsscipy.stats import random_table
+    >>> from scicore.stats import random_table
 
     >>> row = [1, 5]
     >>> col = [2, 3, 1]
@@ -6200,7 +6200,7 @@ class random_table_gen(multi_rv_generic):
 
         Examples
         --------
-        >>> from rsscipy.stats import random_table
+        >>> from scicore.stats import random_table
         >>> import rsnumpy as np
 
         >>> x = [[1, 5, 1], [2, 3, 1]]
@@ -6275,7 +6275,7 @@ class random_table_gen(multi_rv_generic):
 
         Examples
         --------
-        >>> from rsscipy.stats import random_table
+        >>> from scicore.stats import random_table
         >>> import rsnumpy as np
 
         >>> x = [[1, 5, 1], [2, 3, 1]]
@@ -6308,7 +6308,7 @@ class random_table_gen(multi_rv_generic):
 
         Examples
         --------
-        >>> from rsscipy.stats import random_table
+        >>> from scicore.stats import random_table
 
         >>> row = [1, 5]
         >>> col = [2, 3, 1]
@@ -6351,7 +6351,7 @@ class random_table_gen(multi_rv_generic):
 
         Examples
         --------
-        >>> from rsscipy.stats import random_table
+        >>> from scicore.stats import random_table
 
         >>> row = [1, 5]
         >>> col = [2, 3, 1]
@@ -6581,7 +6581,7 @@ class uniform_direction_gen(multi_rv_generic):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import uniform_direction
+    >>> from scicore.stats import uniform_direction
     >>> x = uniform_direction.rvs(3)
     >>> np.linalg.norm(x)
     1.
@@ -6689,7 +6689,7 @@ class uniform_direction_frozen(multi_rv_frozen):
 
         Examples
         --------
-        >>> from rsscipy.stats import uniform_direction
+        >>> from scicore.stats import uniform_direction
         >>> x = uniform_direction(3)
         >>> x.rvs()
 
@@ -6810,7 +6810,7 @@ class dirichlet_multinomial_gen(multi_rv_generic):
 
     Examples
     --------
-    >>> from rsscipy.stats import dirichlet_multinomial
+    >>> from scicore.stats import dirichlet_multinomial
 
     Get the PMF
 
@@ -7135,7 +7135,7 @@ class vonmises_fisher_gen(multi_rv_generic):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.stats import vonmises_fisher
+    >>> from scicore.stats import vonmises_fisher
     >>> from matplotlib.colors import Normalize
     >>> n_grid = 100
     >>> u = np.linspace(0, np.pi, n_grid)
@@ -7795,7 +7795,7 @@ class normal_inverse_gamma_gen(multi_rv_generic):
     normal-inverse-gamma distribution and the inverse gamma distribution.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng(527484872345)
     >>> mu, lmbda, a, b = 0, 1, 20, 20
@@ -7817,8 +7817,8 @@ class normal_inverse_gamma_gen(multi_rv_generic):
     Similarly, we can compare the marginal distribution of `s2` against
     an inverse gamma distribution.
 
-    >>> from rsscipy.integrate import quad_vec
-    >>> from rsscipy import integrate
+    >>> from scicore.integrate import quad_vec
+    >>> from scicore import integrate
     >>> s2 = np.linspace(0.5, 3, 6)
     >>> res = quad_vec(lambda x: norm_inv_gamma.pdf(x, s2), -np.inf, np.inf)[0]
     >>> np.allclose(res, inv_gamma.pdf(s2))

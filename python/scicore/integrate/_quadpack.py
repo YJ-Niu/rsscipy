@@ -2,7 +2,7 @@
 
 Provides quadrature routines used by ``scipy.integrate._quadpack_py``.
 This is a stub: real quadrature should be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

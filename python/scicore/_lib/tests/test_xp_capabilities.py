@@ -1,7 +1,7 @@
 import pytest
 
-from rsscipy._lib._array_api import np_compat as np
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import np_compat as np
+from scicore._lib._array_api import (
     array_namespace, make_xp_pytest_param, xp_assert_close, xp_capabilities,
     xp_result_device
 )

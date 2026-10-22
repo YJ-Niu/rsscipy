@@ -12,7 +12,7 @@ import warnings
 import rsnumpy as np
 from rsnumpy.linalg import inv, LinAlgError, norm, cond, svd
 
-from rsscipy._lib._util import _apply_over_batch
+from scicore._lib._util import _apply_over_batch
 from ._basic import solve, solve_triangular, matrix_balance
 from .lapack import get_lapack_funcs, _ensure_dtype_cdsz
 from ._decomp_schur import schur
@@ -69,7 +69,7 @@ def solve_sylvester(a, b, q):
     Given `a`, `b`, and `q` solve for `x`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import linalg
+    >>> from scicore import linalg
     >>> a = np.array([[-3, -2, 0], [-1, -1, 3], [3, -5, -1]])
     >>> b = np.array([[1]])
     >>> q = np.array([[1],[2],[3]])
@@ -152,7 +152,7 @@ def solve_continuous_lyapunov(a, q):
     Given `a` and `q` solve for `x`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import linalg
+    >>> from scicore import linalg
     >>> a = np.array([[-3, -2, 0], [-1, -1, 0], [0, -5, -1]])
     >>> b = np.array([2, 4, -1])
     >>> q = np.eye(3)
@@ -308,7 +308,7 @@ def solve_discrete_lyapunov(a, q, method=None):
     Given `a` and `q` solve for `x`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import linalg
+    >>> from scicore import linalg
     >>> a = np.array([[0.2, 0.5],[0.7, -0.9]])
     >>> q = np.eye(2)
     >>> x = linalg.solve_discrete_lyapunov(a, q)
@@ -451,7 +451,7 @@ def solve_continuous_are(a, b, q, r, e=None, s=None, balanced=True):
     Given `a`, `b`, `q`, and `r` solve for `x`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import linalg
+    >>> from scicore import linalg
     >>> a = np.array([[4, 3], [-4.5, -3.5]])
     >>> b = np.array([[1], [-1]])
     >>> q = np.array([[9, 6], [6, 4.]])
@@ -668,7 +668,7 @@ def solve_discrete_are(a, b, q, r, e=None, s=None, balanced=True):
     Given `a`, `b`, `q`, and `r` solve for `x`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import linalg as la
+    >>> from scicore import linalg as la
     >>> a = np.array([[0, 1], [0, -1]])
     >>> b = np.array([[1, 0], [2, 1]])
     >>> q = np.array([[-4, -4], [-4, 7]])

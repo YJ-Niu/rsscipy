@@ -29,7 +29,7 @@
 import rsnumpy as np
 from rsnumpy import pi, zeros, sqrt
 
-from rsscipy._lib._array_api import xp_capabilities
+from scicore._lib._array_api import xp_capabilities
 
 
 __all__ = ['lebedev_rule']
@@ -5414,7 +5414,7 @@ def lebedev_rule(n):
 
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
-    >>> from rsscipy.integrate import lebedev_rule
+    >>> from scicore.integrate import lebedev_rule
     >>>
     >>> def f(x):
     ...     return np.exp(x[0])

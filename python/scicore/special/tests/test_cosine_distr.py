@@ -1,7 +1,7 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
 import pytest
-from rsscipy.special._ufuncs import _cosine_cdf, _cosine_invcdf
+from scicore.special._ufuncs import _cosine_cdf, _cosine_invcdf
 
 
 # These values are (x, p) where p is the expected exact value of

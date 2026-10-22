@@ -2,8 +2,8 @@ import pytest
 import itertools
 import warnings
 
-from rsscipy import stats
-from rsscipy.stats import (betabinom, betanbinom, hypergeom, nhypergeom,
+from scicore import stats
+from scicore.stats import (betabinom, betanbinom, hypergeom, nhypergeom,
                          bernoulli, boltzmann, skellam, zipf, zipfian, binom,
                          nbinom, nchypergeom_fisher, nchypergeom_wallenius,
                          randint, poisson_binom)
@@ -12,9 +12,9 @@ import rsnumpy as np
 from rsnumpy.testing import (
     assert_almost_equal, assert_equal, assert_allclose
 )
-from rsscipy.special import binom as special_binom
-from rsscipy.optimize import root_scalar
-from rsscipy.integrate import quad
+from scicore.special import binom as special_binom
+from scicore.optimize import root_scalar
+from scicore.integrate import quad
 
 
 # The expected values were computed with Wolfram Alpha, using

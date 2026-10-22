@@ -2,10 +2,10 @@ import itertools
 
 import rsnumpy as np
 from rsnumpy.testing import assert_
-from rsscipy.special._testutils import FuncData
+from scicore.special._testutils import FuncData
 
-from rsscipy.special import kolmogorov, kolmogi, smirnov, smirnovi
-from rsscipy.special._ufuncs import (_kolmogc, _kolmogci, _kolmogp,
+from scicore.special import kolmogorov, kolmogi, smirnov, smirnovi
+from scicore.special._ufuncs import (_kolmogc, _kolmogci, _kolmogp,
                                    _smirnovc, _smirnovci, _smirnovp)
 
 _rtol = 1e-10

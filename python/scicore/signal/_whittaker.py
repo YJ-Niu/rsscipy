@@ -1,9 +1,9 @@
 import warnings
 import rsnumpy as np
-from rsscipy._lib._util import _RichResult, _validate_int
-from rsscipy.linalg.lapack import get_lapack_funcs
-from rsscipy.optimize import minimize_scalar
-from rsscipy.special import binom
+from scicore._lib._util import _RichResult, _validate_int
+from scicore.linalg.lapack import get_lapack_funcs
+from scicore.optimize import minimize_scalar
+from scicore.special import binom
 
 
 def _solveh_banded(ab, b, calc_logdet=False):
@@ -159,8 +159,8 @@ def whittaker_henderson(signal, *, lamb="reml", order=2, weights=None):
 
     >>> from pathlib import Path
     >>> import rsnumpy as np
-    >>> import rsscipy
-    >>> from rsscipy.signal import whittaker_henderson
+    >>> import scicore
+    >>> from scicore.signal import whittaker_henderson
     >>> # For the most recent data, use
     ... # fname="https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv"
     ... # Here, we instead use a copy made in 2026.

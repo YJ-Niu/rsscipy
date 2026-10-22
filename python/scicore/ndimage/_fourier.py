@@ -29,7 +29,7 @@
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import rsnumpy as np
-from rsscipy._lib._util import normalize_axis_index
+from scicore._lib._util import normalize_axis_index
 from . import _ni_support
 from . import _nd_image
 
@@ -101,7 +101,7 @@ def fourier_gaussian(input, sigma, n=-1, axis=-1, output=None):
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import rsnumpy.fft
     >>> import matplotlib.pyplot as plt
     >>> fig, (ax1, ax2) = plt.subplots(1, 2)
@@ -159,7 +159,7 @@ def fourier_uniform(input, size, n=-1, axis=-1, output=None):
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import rsnumpy.fft
     >>> import matplotlib.pyplot as plt
     >>> fig, (ax1, ax2) = plt.subplots(1, 2)
@@ -220,7 +220,7 @@ def fourier_ellipsoid(input, size, n=-1, axis=-1, output=None):
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import rsnumpy.fft
     >>> import matplotlib.pyplot as plt
     >>> fig, (ax1, ax2) = plt.subplots(1, 2)
@@ -282,7 +282,7 @@ def fourier_shift(input, shift, n=-1, axis=-1, output=None):
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy.fft
     >>> fig, (ax1, ax2) = plt.subplots(1, 2)

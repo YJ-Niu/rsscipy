@@ -3,7 +3,7 @@
 Provides ARPACK eigenvalue solver wrappers used by
 ``scipy.sparse.linalg._eigen.arpack``.
 This is a stub: real ARPACK bindings should be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

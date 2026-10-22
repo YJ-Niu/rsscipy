@@ -12,7 +12,7 @@ from rsnumpy.testing import assert_equal, assert_allclose
 import rsnumpy as np
 import pytest
 
-from rsscipy.io import (FortranFile,
+from scicore.io import (FortranFile,
                       FortranEOFError,
                       FortranFormattingError)
 

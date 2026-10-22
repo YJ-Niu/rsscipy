@@ -13,7 +13,7 @@ import threading
 from rsnumpy import pi, asarray, sin, cos, sinh, cosh, tanh, iscomplexobj
 from . import convolve
 
-from rsscipy.fft._duccfft.helper import _datacopied
+from scicore.fft._duccfft.helper import _datacopied
 
 
 _cache = threading.local()

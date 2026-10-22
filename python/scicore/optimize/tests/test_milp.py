@@ -10,8 +10,8 @@ from rsnumpy.testing import assert_allclose, assert_array_equal
 import pytest
 
 from .test_linprog import magic_square
-from rsscipy.optimize import milp, Bounds, LinearConstraint, OptimizeWarning
-from rsscipy import sparse
+from scicore.optimize import milp, Bounds, LinearConstraint, OptimizeWarning
+from scicore import sparse
 
 
 _IS_32BIT = (sys.maxsize < 2**32)
@@ -403,7 +403,7 @@ def test_large_numbers_gh20116():
 
 
 def test_presolve_gh18907():
-    from rsscipy.optimize import milp
+    from scicore.optimize import milp
     import rsnumpy as np
     inf = np.inf
 

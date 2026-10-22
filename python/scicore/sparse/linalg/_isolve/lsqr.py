@@ -53,8 +53,8 @@ __all__ = ['lsqr']
 
 import rsnumpy as np
 from math import sqrt
-from rsscipy.sparse.linalg._interface import aslinearoperator
-from rsscipy.sparse._sputils import convert_pydata_sparse_to_scipy
+from scicore.sparse.linalg._interface import aslinearoperator
+from scicore.sparse._sputils import convert_pydata_sparse_to_scipy
 
 eps = np.finfo(np.float64).eps
 
@@ -269,8 +269,8 @@ def lsqr(A, b, damp=0.0, atol=1e-6, btol=1e-6, conlim=1e8,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import csc_array
-    >>> from rsscipy.sparse.linalg import lsqr
+    >>> from scicore.sparse import csc_array
+    >>> from scicore.sparse.linalg import lsqr
     >>> A = csc_array([[1., 0.], [1., 1.], [0., 1.]], dtype=float)
 
     The first example has the trivial solution ``[0, 0]``

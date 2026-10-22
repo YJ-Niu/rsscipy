@@ -2,8 +2,8 @@ import rsnumpy as np
 import pytest
 from rsnumpy.testing import assert_allclose, assert_array_equal
 
-from rsscipy.optimize import biteopt, rosen, Bounds, OptimizeResult
-from rsscipy._lib._testutils import _run_concurrent_barrier, IS_WASM
+from scicore.optimize import biteopt, rosen, Bounds, OptimizeResult
+from scicore._lib._testutils import _run_concurrent_barrier, IS_WASM
 
 
 class TestSolver:

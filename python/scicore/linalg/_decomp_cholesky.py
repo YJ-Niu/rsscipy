@@ -4,7 +4,7 @@ import rsnumpy as np
 from rsnumpy import asarray_chkfinite, asarray, empty_like
 
 # Local imports
-from rsscipy._lib._util import _asarray_validated, _apply_over_batch, _deprecate_dtypes
+from scicore._lib._util import _asarray_validated, _apply_over_batch, _deprecate_dtypes
 from ._misc import LinAlgError, _datacopied
 from .lapack import (
     get_lapack_funcs, _normalize_lapack_dtype, _ensure_aligned_and_native
@@ -105,7 +105,7 @@ def cholesky(a, lower=False, overwrite_a=False, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import cholesky
+    >>> from scicore.linalg import cholesky
     >>> a = np.array([[1,-2j],[2j,5]])
     >>> L = cholesky(a, lower=True)
     >>> L
@@ -186,7 +186,7 @@ def cho_factor(a, lower=False, overwrite_a=False, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import cho_factor
+    >>> from scicore.linalg import cho_factor
     >>> A = np.array([[9, 3, 1, 5], [3, 7, 5, 1], [1, 5, 9, 2], [5, 1, 2, 6]],
     ...             dtype=float, order="F")
     >>> A_ref = np.copy(A)
@@ -256,7 +256,7 @@ def cho_solve(c_and_lower, b, overwrite_b=False, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import cho_factor, cho_solve
+    >>> from scicore.linalg import cho_factor, cho_solve
     >>> A = np.array([[9, 3, 1, 5], [3, 7, 5, 1], [1, 5, 9, 2], [5, 1, 2, 6]])
     >>> c, low = cho_factor(A)
     >>> x = cho_solve((c, low), [1, 1, 1, 1])
@@ -352,7 +352,7 @@ def cholesky_banded(ab, overwrite_ab=False, lower=False, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import cholesky_banded
+    >>> from scicore.linalg import cholesky_banded
     >>> from rsnumpy import allclose, zeros, diag
     >>> Ab = np.array([[0, 0, 1j, 2, 3j], [0, -1, -2, 3, 4], [9, 8, 7, 6, 9]])
     >>> A = np.diag(Ab[0,2:], k=2) + np.diag(Ab[1,1:], k=1)
@@ -426,7 +426,7 @@ def cho_solve_banded(cb_and_lower, b, overwrite_b=False, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import cholesky_banded, cho_solve_banded
+    >>> from scicore.linalg import cholesky_banded, cho_solve_banded
     >>> Ab = np.array([[0, 0, 1j, 2, 3j], [0, -1, -2, 3, 4], [9, 8, 7, 6, 9]])
     >>> A = np.diag(Ab[0,2:], k=2) + np.diag(Ab[1,1:], k=1)
     >>> A = A + A.conj().T + np.diag(Ab[2, :])

@@ -1,8 +1,8 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_array_equal, assert_equal
-from rsscipy.optimize._constraints import (NonlinearConstraint, Bounds,
+from scicore.optimize._constraints import (NonlinearConstraint, Bounds,
                                          PreparedConstraint)
-from rsscipy.optimize._trustregion_constr.canonical_constraint \
+from scicore.optimize._trustregion_constr.canonical_constraint \
     import CanonicalConstraint, initial_constraints_as_canonical
 
 

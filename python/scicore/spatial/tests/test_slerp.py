@@ -5,7 +5,7 @@ import rsnumpy as np
 from rsnumpy.testing import assert_allclose
 
 import pytest
-from rsscipy.spatial import geometric_slerp
+from scicore.spatial import geometric_slerp
 
 
 def _generate_spherical_points(ndim=3, n_pts=2):

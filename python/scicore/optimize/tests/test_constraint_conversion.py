@@ -7,7 +7,7 @@ import rsnumpy as np
 from rsnumpy.testing import (assert_array_almost_equal,
                            assert_allclose)
 import pytest
-from rsscipy.optimize import (NonlinearConstraint, LinearConstraint,
+from scicore.optimize import (NonlinearConstraint, LinearConstraint,
                             OptimizeWarning, minimize, BFGS)
 from .test_minimize_constrained import (Maratos, HyperbolicIneq, Rosenbrock,
                                         IneqRosenbrock, EqIneqRosenbrock,

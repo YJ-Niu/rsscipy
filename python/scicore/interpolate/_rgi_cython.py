@@ -2,7 +2,7 @@
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import interpolate as _rust_interpolate
+from scicore._scicore_rs import interpolate as _rust_interpolate
 
 
 def find_indices(grid, xi):

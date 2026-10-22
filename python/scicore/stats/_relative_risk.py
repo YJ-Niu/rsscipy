@@ -1,8 +1,8 @@
 import operator
 from dataclasses import dataclass
 import rsnumpy as np
-from rsscipy._lib._array_api import xp_capabilities
-from rsscipy.special import ndtri
+from scicore._lib._array_api import xp_capabilities
+from scicore.special import ndtri
 from ._common import ConfidenceInterval
 
 
@@ -82,7 +82,7 @@ class RelativeRiskResult:
 
         Examples
         --------
-        >>> from rsscipy.stats.contingency import relative_risk
+        >>> from scicore.stats.contingency import relative_risk
         >>> result = relative_risk(exposed_cases=10, exposed_total=75,
         ...                        control_cases=12, control_total=225)
         >>> result.relative_risk
@@ -198,7 +198,7 @@ def relative_risk(exposed_cases, exposed_total, control_cases, control_total):
 
     Examples
     --------
-    >>> from rsscipy.stats.contingency import relative_risk
+    >>> from scicore.stats.contingency import relative_risk
 
     This example is from Example 3.1 of [2]_.  The results of a heart
     disease study are summarized in the following table::

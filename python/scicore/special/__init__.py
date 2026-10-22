@@ -852,7 +852,7 @@ __all__ += [
     'poisson_binom_cdf',
 ]
 
-from rsscipy._lib._testutils import PytestTester
+from scicore._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester
 del TYPE_CHECKING

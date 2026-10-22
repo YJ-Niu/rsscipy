@@ -12,24 +12,24 @@ from pytest import raises as assert_raises
 import rsnumpy as np
 from rsnumpy.exceptions import ComplexWarning
 
-from rsscipy import fft as sp_fft
-from rsscipy._lib._testutils import IS_WASM
-from rsscipy.ndimage import correlate1d
-from rsscipy.optimize import fmin, linear_sum_assignment
-from rsscipy import signal
-from rsscipy.signal import (
+from scicore import fft as sp_fft
+from scicore._lib._testutils import IS_WASM
+from scicore.ndimage import correlate1d
+from scicore.optimize import fmin, linear_sum_assignment
+from scicore import signal
+from scicore.signal import (
     correlate, correlate2d, correlation_lags, convolve, convolve2d,
     fftconvolve, oaconvolve, choose_conv_method, envelope,
     hilbert, hilbert2, lfilter, lfilter_zi, filtfilt, butter, zpk2tf, zpk2sos,
     invres, invresz, vectorstrength, lfiltic, tf2sos, sosfilt, sosfiltfilt,
     sosfilt_zi, tf2zpk, BadCoefficients, detrend, unique_roots, residue,
     residuez)
-from rsscipy.signal.windows import hann
-from rsscipy.signal._signaltools import _filtfilt_gust, _compute_factors, _group_poles
-from rsscipy.signal._upfirdn import _upfirdn_modes
-from rsscipy._lib import _testutils
-import rsscipy._external.array_api_extra as xpx
-from rsscipy._lib._array_api import (
+from scicore.signal.windows import hann
+from scicore.signal._signaltools import _filtfilt_gust, _compute_factors, _group_poles
+from scicore.signal._upfirdn import _upfirdn_modes
+from scicore._lib import _testutils
+import scicore._external.array_api_extra as xpx
+from scicore._lib._array_api import (
     xp_assert_close, xp_assert_equal, is_numpy, is_torch, is_jax, is_cupy,
     assert_array_almost_equal, assert_almost_equal,
     xp_copy, xp_size, array_namespace, make_xp_test_case,
@@ -399,7 +399,7 @@ class TestConvolve2d:
         # Regression test for gh-12686.
         # Use ndimage.convolve with appropriate arguments to create the
         # expected result.
-        import rsscipy.ndimage as ndi
+        import scicore.ndimage as ndi
         a = xp.reshape(xp.arange(1, 10*3+1, dtype=xp.float64), (10, 3))
         b = xp.reshape(xp.arange(1, 10*10+1, dtype=xp.float64), (10, 10))
         c = convolve2d(a, b, mode='same', boundary='wrap')
@@ -410,7 +410,7 @@ class TestConvolve2d:
         # Regression test for gh-12686.
         # Use ndimage.convolve with appropriate arguments to create the
         # expected result.
-        import rsscipy.ndimage as ndi
+        import scicore.ndimage as ndi
         a = xp.reshape(xp.arange(1, 3*3+1, dtype=xp.float64), (3, 3))
         b = xp.reshape(xp.arange(1, 6*6+1, dtype=xp.float64), (6, 6))
         c = convolve2d(a, b, mode='full', boundary='wrap')

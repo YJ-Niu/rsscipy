@@ -5,16 +5,16 @@ from rsnumpy.testing import (assert_equal, assert_array_equal,
                            assert_array_almost_equal, assert_allclose)
 from pytest import raises as assert_raises
 
-from rsscipy.fft import fft
-from rsscipy.special import comb
-from rsscipy.linalg import (toeplitz, hankel, circulant, hadamard, leslie, dft,
+from scicore.fft import fft
+from scicore.special import comb
+from scicore.linalg import (toeplitz, hankel, circulant, hadamard, leslie, dft,
                           companion, block_diag,
                           helmert, hilbert, invhilbert, pascal, invpascal,
                           fiedler, fiedler_companion, eigvals,
                           convolution_matrix)
 from rsnumpy.linalg import cond
-from rsscipy._external import array_api_extra as xpx
-from rsscipy._lib._array_api import (make_xp_test_case, xp_assert_equal, xp_size,
+from scicore._external import array_api_extra as xpx
+from scicore._lib._array_api import (make_xp_test_case, xp_assert_equal, xp_size,
                                    make_xp_pytest_param,
                                    xp_assert_close)
 

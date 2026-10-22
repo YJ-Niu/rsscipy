@@ -22,7 +22,7 @@ predictably rather than silently.
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import linalg as _rust_linalg
+from scicore._scicore_rs import linalg as _rust_linalg
 gemm_f32 = _rust_linalg.gemm_f32
 gemm_f64 = _rust_linalg.gemm_f64
 

@@ -2,12 +2,12 @@
 import math
 import rsnumpy as np
 import pytest
-from rsscipy._lib._array_api import is_cupy, xp_assert_close, concat_1d
-import rsscipy._external.array_api_extra as xpx
+from scicore._lib._array_api import is_cupy, xp_assert_close, concat_1d
+import scicore._external.array_api_extra as xpx
 
-from rsscipy.signal._spline import (
+from scicore.signal._spline import (
     symiirorder1_ic, symiirorder2_ic_fwd, symiirorder2_ic_bwd)
-from rsscipy.signal import symiirorder1, symiirorder2
+from scicore.signal import symiirorder1, symiirorder2
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 xfail_xp_backends = pytest.mark.xfail_xp_backends
@@ -183,7 +183,7 @@ class TestSymIIR:
         s = xp.asarray(s)
         res = symiirorder1(s, 0.5, 0.1)
 
-        # values from rsscipy 1.9.1
+        # values from scicore 1.9.1
         exp_res = xp.asarray([
             0.14387447, 0.35166047, 0.29735238, 0.46295986, 0.45174927,
             0.19982875, 0.20355805, 0.47378628, 0.57232247, 0.51597393,
@@ -378,7 +378,7 @@ class TestSymIIR:
 
         res = symiirorder2(s, 0.1, 0.1, precision=1e-10)
 
-        # values from rsscipy 1.9.1
+        # values from scicore 1.9.1
         exp_res = xp.asarray(
             [0.26572609, 0.53408018, 0.51032696, 0.72115829, 0.69486885,
              0.3649055 , 0.37349478, 0.74165032, 0.89718521, 0.80582483,

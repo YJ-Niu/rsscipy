@@ -10,9 +10,9 @@ longer guaranteed.
 
 import rsnumpy as np
 import pytest
-import rsscipy.special._ufuncs
-import rsscipy.special._gufuncs
-import rsscipy.special as special
+import scicore.special._ufuncs
+import scicore.special._gufuncs
+import scicore.special as special
 
 from rsnumpy.testing import assert_equal
 

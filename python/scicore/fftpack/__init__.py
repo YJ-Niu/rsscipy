@@ -95,6 +95,6 @@ from ._pseudo_diffs import *
 from ._helper import *
 from ._realtransforms import *
 
-from rsscipy._lib._testutils import PytestTester
+from scicore._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester

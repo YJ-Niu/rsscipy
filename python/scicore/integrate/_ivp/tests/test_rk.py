@@ -1,8 +1,8 @@
 import pytest
 from rsnumpy.testing import assert_allclose, assert_
 import rsnumpy as np
-from rsscipy.integrate import ode, RK23, RK45, DOP853
-from rsscipy.integrate._ivp import dop853_coefficients
+from scicore.integrate import ode, RK23, RK45, DOP853
+from scicore.integrate._ivp import dop853_coefficients
 
 
 @pytest.mark.parametrize("solver", [RK23, RK45, DOP853])

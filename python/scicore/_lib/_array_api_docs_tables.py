@@ -11,8 +11,8 @@ from importlib import import_module
 from types import ModuleType
 from typing import Any
 
-from rsscipy._lib._array_api import xp_capabilities_table
-from rsscipy._lib._array_api import _make_sphinx_capabilities
+from scicore._lib._array_api import xp_capabilities_table
+from scicore._lib._array_api import _make_sphinx_capabilities
 
 # For undocumented aliases of public functions which are kept around for
 # backwards compatibility reasons. These should be excluded from the

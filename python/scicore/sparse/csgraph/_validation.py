@@ -1,7 +1,7 @@
 import rsnumpy as np
-from rsscipy.sparse import issparse
-from rsscipy.sparse._sputils import convert_pydata_sparse_to_scipy
-from rsscipy.sparse.csgraph._tools import (
+from scicore.sparse import issparse
+from scicore.sparse._sputils import convert_pydata_sparse_to_scipy
+from scicore.sparse.csgraph._tools import (
     csgraph_to_dense, csgraph_from_dense,
     csgraph_masked_from_dense, csgraph_from_masked
 )

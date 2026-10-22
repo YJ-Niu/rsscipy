@@ -32,12 +32,12 @@ value of the function, and whose second argument is the gradient of the function
 (as a list of values); or None, to abort the minimization.
 """
 
-from rsscipy.optimize import _moduleTNC as moduleTNC
+from scicore.optimize import _moduleTNC as moduleTNC
 from ._optimize import (MemoizeJac, OptimizeResult, _check_unknown_options,
                        _prepare_scalar_function)
 from ._constraints import old_bound_to_new
-from rsscipy._lib._array_api import array_namespace
-from rsscipy._external import array_api_extra as xpx
+from scicore._lib._array_api import array_namespace
+from scicore._external import array_api_extra as xpx
 
 from rsnumpy import inf, array, zeros
 
@@ -202,7 +202,7 @@ def fmin_tnc(func, x0, fprime=None, args=(), approx_grad=0,
     Notes
     -----
     The underlying algorithm is truncated Newton, also called
-    Newton Conjugate-Gradient. This method differs from rsscipy.optimize.fmin_ncg in that
+    Newton Conjugate-Gradient. This method differs from scicore.optimize.fmin_ncg in that
 
     1. it wraps a C implementation of the algorithm
     2. it allows each variable to be given an upper and lower bound.

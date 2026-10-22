@@ -1,5 +1,5 @@
-import rsscipy
-import rsscipy.special as sc
+import scicore
+import scicore.special as sc
 import sys
 import rsnumpy as np
 import pytest
@@ -59,7 +59,7 @@ def test_riemann_zeta_avoid_overflow():
         ## Test cases taken from mpmath with the script:
 
         # import rsnumpy as np
-        # import rsscipy.stats as stats
+        # import scicore.stats as stats
 
         # from mpmath import mp
 

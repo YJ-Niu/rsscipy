@@ -5,10 +5,10 @@ from ._stats_py import _get_pvalue, _rankdata, _SimpleNormal
 from . import _morestats
 from ._axis_nan_policy import _broadcast_arrays
 from ._hypotests import _get_wilcoxon_distr
-from rsscipy._lib._util import _get_nan
-from rsscipy._lib._array_api import (array_namespace, xp_promote, xp_size, is_jax,
+from scicore._lib._util import _get_nan
+from scicore._lib._array_api import (array_namespace, xp_promote, xp_size, is_jax,
                                    is_marray, _count_nonmasked, xp_device)
-import rsscipy._external.array_api_extra as xpx
+import scicore._external.array_api_extra as xpx
 
 
 class WilcoxonDistribution:

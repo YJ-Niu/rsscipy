@@ -5,17 +5,17 @@ from collections.abc import Callable
 
 import rsnumpy as np
 
-from rsscipy.stats._common import ConfidenceInterval
-from rsscipy.stats._qmc import check_random_state
-from rsscipy.stats._resampling import BootstrapResult, bootstrap
-from rsscipy.stats import qmc
-from rsscipy._lib._array_api import xp_capabilities
-from rsscipy._lib._util import _transition_to_rng
+from scicore.stats._common import ConfidenceInterval
+from scicore.stats._qmc import check_random_state
+from scicore.stats._resampling import BootstrapResult, bootstrap
+from scicore.stats import qmc
+from scicore._lib._array_api import xp_capabilities
+from scicore._lib._util import _transition_to_rng
 
 
 if TYPE_CHECKING:
     import rsnumpy.typing as npt
-    from rsscipy._lib._util import DecimalNumber, IntNumber
+    from scicore._lib._util import DecimalNumber, IntNumber
 
 
 __all__ = [
@@ -453,7 +453,7 @@ def sobol_indices(
     distributed. In this case we use a uniform distribution on each marginals.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import sobol_indices, uniform
+    >>> from scicore.stats import sobol_indices, uniform
     >>> rng = np.random.default_rng()
     >>> def f_ishigami(x):
     ...     f_eval = (
@@ -524,7 +524,7 @@ def sobol_indices(
     function. Let's generate 1024 samples in :math:`[-\pi, \pi]^3` and
     calculate the value of the output.
 
-    >>> from rsscipy.stats import qmc
+    >>> from scicore.stats import qmc
     >>> n_dim = 3
     >>> p_labels = ['$x_1$', '$x_2$', '$x_3$']
     >>> sample = qmc.Sobol(d=n_dim, seed=rng).random(1024)

@@ -1,7 +1,7 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_array_equal, assert_array_almost_equal
 
-import rsscipy.signal._wavelets as wavelets
+import scicore.signal._wavelets as wavelets
 
 
 class TestWavelets:

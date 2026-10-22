@@ -4,16 +4,16 @@ import pickle
 import pytest
 from hypothesis import given, strategies
 import hypothesis.extra.numpy as npst
-from rsscipy._external.packaging_version import version
+from scicore._external.packaging_version import version
 
-from rsscipy import special
-from rsscipy.special._support_alternative_backends import _special_funcs
-from rsscipy._lib._array_api_no_0d import xp_assert_close
-from rsscipy._lib._array_api import (is_cupy, is_dask, is_jax, is_torch,
+from scicore import special
+from scicore.special._support_alternative_backends import _special_funcs
+from scicore._lib._array_api_no_0d import xp_assert_close
+from scicore._lib._array_api import (is_cupy, is_dask, is_jax, is_torch,
                                    make_xp_pytest_param, make_xp_test_case,
                                    get_native_namespace_name)
-from rsscipy._external.array_api_compat import rsnumpy as np
-import rsscipy._external.array_api_extra as xpx
+from scicore._external.array_api_compat import rsnumpy as np
+import scicore._external.array_api_extra as xpx
 
 
 # Run all tests in this module in the Array API CI, including those without

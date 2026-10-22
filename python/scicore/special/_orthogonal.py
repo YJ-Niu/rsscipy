@@ -208,7 +208,7 @@ def _gen_roots_and_weights(n, mu0, an_func, bn_func, f, df, symmetrize, mu):
                         interval
     """
     # lazy import to prevent to prevent linalg dependency for whole module (gh-23420)
-    from rsscipy import linalg
+    from scicore import linalg
     k = np.arange(n, dtype='d')
     c = np.zeros((2, n))
     c[0,1:] = bn_func(k[1:])
@@ -286,7 +286,7 @@ def roots_jacobi(n, alpha, beta, mu=False):
 
     Examples
     --------
-    >>> from rsscipy.special import roots_jacobi
+    >>> from scicore.special import roots_jacobi
     >>> x, w = roots_jacobi(3, 0.5, 0.5)
     >>> x
     array([-0.70710678,  0.        ,  0.70710678])
@@ -400,7 +400,7 @@ def jacobi(n, alpha, beta, monic=False):
     and :math:`n = 1` over the interval :math:`[-1, 1]`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.special import jacobi
+    >>> from scicore.special import jacobi
     >>> x = np.arange(-1.0, 1.0, 0.01)
     >>> np.allclose(jacobi(0, 2, 2)(x),
     ...             jacobi(1, 2, 1)(x) - jacobi(1, 1, 2)(x))
@@ -497,7 +497,7 @@ def roots_sh_jacobi(n, p1, q1, mu=False):
     shifted Jacobi polynomials for :math:`p=0, q=1/2` and :math:`p=2, q=3/2`,
     respectively.
 
-    >>> from rsscipy.special import roots_sh_chebyt, roots_sh_chebyu, roots_sh_jacobi
+    >>> from scicore.special import roots_sh_chebyt, roots_sh_chebyu, roots_sh_jacobi
     >>> roots_sh_jacobi(5, 0, 0.5)  # doctest: +NORMALIZE_WHITESPACE
     (array([0.02447174, 0.20610737, 0.5       , 0.79389263, 0.97552826]),
      array([0.62831853, 0.62831853, 0.62831853, 0.62831853, 0.62831853]))
@@ -519,7 +519,7 @@ def roots_sh_jacobi(n, p1, q1, mu=False):
     Verify that the values in `roots` are roots of the shifted Jacobi
     polynomial :math:`G^{1.5, -0.5}_5(x)`.
 
-    >>> from rsscipy.special import eval_sh_jacobi
+    >>> from scicore.special import eval_sh_jacobi
     >>> eval_sh_jacobi(5, p, q, roots)
     array([-1.10114283e-18, -8.80914265e-20, -3.52365706e-19, -3.52365706e-19,
            -6.34258271e-18])
@@ -557,7 +557,7 @@ def roots_sh_jacobi(n, p1, q1, mu=False):
     >>> import rsnumpy as np
     >>> weights @ np.cos(roots)
     np.float64(1.1421634723142564)
-    >>> from rsscipy.integrate import quad
+    >>> from scicore.integrate import quad
     >>> quad(lambda x: np.cos(x) * (1-x)**(p-q) * x**(q-1), 0, 1)
     (1.1421634722898315, 6.314033740295599e-10)
 
@@ -629,7 +629,7 @@ def sh_jacobi(n, p, q, monic=False):
     :math:`x = 0.5`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.special import binom, jacobi, sh_jacobi
+    >>> from scicore.special import binom, jacobi, sh_jacobi
     >>> np.isclose(sh_jacobi(3, 2, 1)(0.5), -3/280)
     True
 
@@ -718,7 +718,7 @@ def roots_genlaguerre(n, alpha, mu=False):
 
     Examples
     --------
-    >>> from rsscipy.special import roots_genlaguerre
+    >>> from scicore.special import roots_genlaguerre
     >>> roots, weights = roots_genlaguerre(5, 1.5)
     >>> roots
     array([ 0.81763176,  2.47233393,  5.11600612,  9.04414651, 15.04988168])
@@ -729,7 +729,7 @@ def roots_genlaguerre(n, alpha, mu=False):
     Verify that the values in `roots` are roots of the generalized Laguerre
     polynomial :math:`L^{1.5}_5(x)`.
 
-    >>> from rsscipy.special import eval_genlaguerre
+    >>> from scicore.special import eval_genlaguerre
     >>> eval_genlaguerre(5, 1.5, roots)
     array([-3.25585912e-16, -3.25585912e-16,  6.51171825e-16, -1.56281238e-14,
             4.16749968e-14])
@@ -778,7 +778,7 @@ def roots_genlaguerre(n, alpha, mu=False):
 
     Because of the small number of nodes, this result is rather imprecise.
 
-    >>> from rsscipy.integrate import quad
+    >>> from scicore.integrate import quad
     >>> import rsnumpy as np
     >>> quad(lambda x: np.cos(x) * x**1.5 * np.exp(-x), 0, np.inf)
     (-0.2138889584997946, 1.480038372176226e-08)
@@ -880,7 +880,7 @@ def genlaguerre(n, alpha, monic=False):
     interval :math:`[-1, 1]`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.special import binom, genlaguerre, hyp1f1
+    >>> from scicore.special import binom, genlaguerre, hyp1f1
     >>> x = np.arange(-1.0, 1.0, 0.01)
     >>> np.allclose(genlaguerre(3, 3)(x), binom(6, 3) * hyp1f1(-3, 4, x))
     True
@@ -961,7 +961,7 @@ def roots_laguerre(n, mu=False):
 
     Examples
     --------
-    >>> from rsscipy.special import roots_laguerre
+    >>> from scicore.special import roots_laguerre
     >>> roots, weights = roots_laguerre(5)
     >>> roots
     array([ 0.26356032,  1.41340306,  3.59642577,  7.08581001, 12.64080084])
@@ -972,7 +972,7 @@ def roots_laguerre(n, mu=False):
     Verify that the values in `roots` are roots of the Laguerre polynomial
     :math:`L_5(x)`.
 
-    >>> from rsscipy.special import eval_laguerre
+    >>> from scicore.special import eval_laguerre
     >>> eval_laguerre(5, roots)
     array([-5.55111512e-17, -5.55111512e-17,  2.22044605e-16, -1.77635684e-15,
            -5.68434189e-14])
@@ -1062,8 +1062,8 @@ def laguerre(n, monic=False):
     Let's verify it on the interval :math:`[-1, 1]`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.special import genlaguerre
-    >>> from rsscipy.special import laguerre
+    >>> from scicore.special import genlaguerre
+    >>> from scicore.special import laguerre
     >>> x = np.arange(-1.0, 1.0, 0.01)
     >>> np.allclose(genlaguerre(3, 0)(x), laguerre(3)(x))
     True
@@ -1175,7 +1175,7 @@ def roots_hermite(n, mu=False):
 
     Examples
     --------
-    >>> from rsscipy.special import roots_hermite
+    >>> from scicore.special import roots_hermite
     >>> roots, weights = roots_hermite(5)
     >>> roots
     array([-2.02018287, -0.95857246,  0.        ,  0.95857246,  2.02018287])
@@ -1185,7 +1185,7 @@ def roots_hermite(n, mu=False):
     Verify that the values in `roots` are roots of the Hermite polynomial
     :math:`H_5(x)`.
 
-    >>> from rsscipy.special import eval_hermite
+    >>> from scicore.special import eval_hermite
     >>> eval_hermite(5, roots)
     array([ 2.63775533e-13,  5.02429587e-15,  0.00000000e+00, -5.02429587e-15,
            -2.63775533e-13])
@@ -1672,7 +1672,7 @@ def hermite(n, monic=False):
 
     Examples
     --------
-    >>> from rsscipy import special
+    >>> from scicore import special
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
 
@@ -1763,7 +1763,7 @@ def roots_hermitenorm(n, mu=False):
 
     Examples
     --------
-    >>> from rsscipy.special import roots_hermitenorm
+    >>> from scicore.special import roots_hermitenorm
     >>> roots, weights = roots_hermitenorm(5)
     >>> roots
     array([-2.85697001, -1.35562618,  0.        ,  1.35562618,  2.85697001])
@@ -1773,7 +1773,7 @@ def roots_hermitenorm(n, mu=False):
     Verify that the values in `roots` are roots of the Hermite polynomial
     :math:`He_5(x)`.
 
-    >>> from rsscipy.special import eval_hermitenorm
+    >>> from scicore.special import eval_hermitenorm
     >>> eval_hermitenorm(5, roots)
     array([ 1.59872116e-14, -5.32907052e-15,  0.00000000e+00,  5.32907052e-15,
            -1.59872116e-14])
@@ -1888,7 +1888,7 @@ def hermitenorm(n, monic=False):
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.special import hermitenorm
+    >>> from scicore.special import hermitenorm
 
     >>> p_monic = hermitenorm(3)
     >>> p_monic
@@ -1982,7 +1982,7 @@ def roots_gegenbauer(n, alpha, mu=False):
     from `roots_gegenbauer` should agree with those obtained from `roots_chebyt`
     and `roots_chebyu` for the appropriate values of :math:`\alpha`.
 
-    >>> from rsscipy.special import roots_chebyt, roots_chebyu, roots_gegenbauer
+    >>> from scicore.special import roots_chebyt, roots_chebyu, roots_gegenbauer
     >>> roots_gegenbauer(5, 0)  # doctest: +NORMALIZE_WHITESPACE
     (array([-0.95105652, -0.58778525,  0.        ,  0.58778525,  0.95105652]),
      array([0.62831853, 0.62831853, 0.62831853, 0.62831853, 0.62831853]))
@@ -2037,7 +2037,7 @@ def roots_gegenbauer(n, alpha, mu=False):
     >>> import rsnumpy as np
     >>> weights @ np.cos(roots)
     np.float64(1.5395778712347201)
-    >>> from rsscipy.special import jv
+    >>> from scicore.special import jv
     >>> 2**alpha * sqrt(pi) * gamma(alpha+0.5) *jv(alpha, 1)
     np.float64(1.5395778706293377)
 
@@ -2119,7 +2119,7 @@ def gegenbauer(n, alpha, monic=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import special
+    >>> from scicore import special
     >>> import matplotlib.pyplot as plt
 
     We can initialize a variable ``p`` as a Gegenbauer polynomial using the
@@ -2205,7 +2205,7 @@ def roots_chebyt(n, mu=False):
 
     Examples
     --------
-    >>> from rsscipy.special import roots_chebyt
+    >>> from scicore.special import roots_chebyt
     >>> roots, weights = roots_chebyt(5)
     >>> roots
     array([-0.95105652, -0.58778525,  0.        ,  0.58778525,  0.95105652])
@@ -2215,7 +2215,7 @@ def roots_chebyt(n, mu=False):
     Verify that the values in `roots` are roots of the Chebyshev polynomial of
     first kind :math:`T_5(x)`.
 
-    >>> from rsscipy.special import eval_chebyt
+    >>> from scicore.special import eval_chebyt
     >>> eval_chebyt(5, roots)
     array([ 8.8817842e-16,  0.0000000e+00,  0.0000000e+00,  0.0000000e+00,
            -8.8817842e-16])
@@ -2258,7 +2258,7 @@ def roots_chebyt(n, mu=False):
     >>> import rsnumpy as np
     >>> weights @ np.cos(roots)
     np.float64(2.4039394322872774)
-    >>> from rsscipy.special import jv
+    >>> from scicore.special import jv
     >>> pi*jv(0, 1)
     np.float64(2.4039394306344133)
 
@@ -2323,8 +2323,8 @@ def chebyt(n, monic=False):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.linalg import det
-    >>> from rsscipy.special import chebyt
+    >>> from scicore.linalg import det
+    >>> from scicore.special import chebyt
     >>> x = np.arange(-1.0, 1.0, 0.01)
     >>> fig, ax = plt.subplots()
     >>> ax.set_ylim(-2.0, 2.0)
@@ -2345,8 +2345,8 @@ def chebyt(n, monic=False):
 
     Let's verify it for :math:`n = 3`:
 
-    >>> from rsscipy.special import binom
-    >>> from rsscipy.special import jacobi
+    >>> from scicore.special import binom
+    >>> from scicore.special import jacobi
     >>> x = np.arange(-1.0, 1.0, 0.01)
     >>> np.allclose(jacobi(3, -0.5, -0.5)(x),
     ...             1/64 * binom(6, 3) * chebyt(3)(x))
@@ -2424,7 +2424,7 @@ def roots_chebyu(n, mu=False):
 
     Examples
     --------
-    >>> from rsscipy.special import roots_chebyu
+    >>> from scicore.special import roots_chebyu
     >>> roots, weights = roots_chebyu(5)
     >>> roots
     array([-8.66025404e-01, -5.00000000e-01,  6.12323400e-17,  5.00000000e-01,
@@ -2435,7 +2435,7 @@ def roots_chebyu(n, mu=False):
     Verify that the values in `roots` are roots of the Chebyshev polynomial of
     second kind :math:`U_5(x)`.
 
-    >>> from rsscipy.special import eval_chebyu
+    >>> from scicore.special import eval_chebyu
     >>> eval_chebyu(5, roots)
     array([-1.33226763e-15, -1.77635684e-15,  3.67394040e-16, -8.88178420e-16,
             1.33226763e-15])
@@ -2477,7 +2477,7 @@ def roots_chebyu(n, mu=False):
     >>> import rsnumpy as np
     >>> weights @ np.cos(roots)
     np.float64(1.3824596877989561)
-    >>> from rsscipy.special import jv
+    >>> from scicore.special import jv
     >>> pi*jv(1, 1)
     np.float64(1.3824596873841686)
 
@@ -2543,8 +2543,8 @@ def chebyu(n, monic=False):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.linalg import det
-    >>> from rsscipy.special import chebyu
+    >>> from scicore.linalg import det
+    >>> from scicore.special import chebyu
     >>> x = np.arange(-1.0, 1.0, 0.01)
     >>> fig, ax = plt.subplots()
     >>> ax.set_ylim(-2.0, 2.0)
@@ -2565,7 +2565,7 @@ def chebyu(n, monic=False):
     where :math:`T_n` is the Chebyshev polynomial of the first kind.
     Let's verify it for :math:`n = 2`:
 
-    >>> from rsscipy.special import chebyt
+    >>> from scicore.special import chebyt
     >>> x = np.arange(-1.0, 1.0, 0.01)
     >>> np.allclose(chebyu(3)(x), 2 * chebyt(2)(x) * chebyu(1)(x))
     True
@@ -2632,7 +2632,7 @@ def roots_chebyc(n, mu=False):
 
     Examples
     --------
-    >>> from rsscipy.special import roots_chebyc
+    >>> from scicore.special import roots_chebyc
     >>> roots, weights = roots_chebyc(5)
     >>> roots
     array([-1.90211303, -1.1755705 ,  0.        ,  1.1755705 ,  1.90211303])
@@ -2642,7 +2642,7 @@ def roots_chebyc(n, mu=False):
     Verify that the values in `roots` are roots of the Chebyshev polynomial of
     first kind :math:`C_5(x)`.
 
-    >>> from rsscipy.special import eval_chebyc
+    >>> from scicore.special import eval_chebyc
     >>> eval_chebyc(5, roots)
     array([ 1.77635684e-15,  0.00000000e+00,  0.00000000e+00,  0.00000000e+00,
            -1.77635684e-15])
@@ -2685,7 +2685,7 @@ def roots_chebyc(n, mu=False):
     >>> import rsnumpy as np
     >>> weights @ np.cos(roots)
     np.float64(1.4067504148408285)
-    >>> from rsscipy.special import jv
+    >>> from scicore.special import jv
     >>> 2*pi*jv(0, 2)
     np.float64(1.4067472539132013)
 
@@ -2738,7 +2738,7 @@ def chebyc(n, monic=False):
     Evaluate the Chebyshev polynomial :math:`C_3` at :math:`x = 1`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.special import chebyc, chebyt
+    >>> from scicore.special import chebyc, chebyt
     >>> np.isclose(chebyc(3)(1), -2.0)
     True
 
@@ -2823,7 +2823,7 @@ def roots_chebys(n, mu=False):
 
     Examples
     --------
-    >>> from rsscipy.special import roots_chebys
+    >>> from scicore.special import roots_chebys
     >>> roots, weights = roots_chebys(5)
     >>> roots
     array([-1.73205081e+00, -1.00000000e+00,  1.22464680e-16,  1.00000000e+00,
@@ -2834,7 +2834,7 @@ def roots_chebys(n, mu=False):
     Verify that the values in `roots` are roots of the Chebyshev polynomial of
     first kind :math:`S_5(x)`.
 
-    >>> from rsscipy.special import eval_chebys
+    >>> from scicore.special import eval_chebys
     >>> eval_chebys(5, roots)
     array([-1.33226763e-15, -1.77635684e-15,  3.67394040e-16, -8.88178420e-16,
             1.33226763e-15])
@@ -2877,7 +2877,7 @@ def roots_chebys(n, mu=False):
 
     Check against the result of `scipy.integrate.quad`.
 
-    >>> from rsscipy.integrate import quad
+    >>> from scicore.integrate import quad
     >>> result, abserror = quad(lambda x: np.cos(x) * np.sqrt(1-(x/2)**2), -2, 2)
     >>> result
     1.8118344191919165
@@ -2936,7 +2936,7 @@ def chebys(n, monic=False):
     Evaluate the Chebyshev polynomial of the second kind :math:`S_3` at :math:`x = 1`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.special import chebys, chebyu
+    >>> from scicore.special import chebys, chebyu
     >>> np.isclose(chebys(3)(1), -1.0)
     True
 
@@ -3022,7 +3022,7 @@ def roots_sh_chebyt(n, mu=False):
 
     Examples
     --------
-    >>> from rsscipy.special import roots_sh_chebyt
+    >>> from scicore.special import roots_sh_chebyt
     >>> roots, weights = roots_sh_chebyt(5)
     >>> roots
     array([0.02447174, 0.20610737, 0.5       , 0.79389263, 0.97552826])
@@ -3032,7 +3032,7 @@ def roots_sh_chebyt(n, mu=False):
     Verify that the values in `roots` are roots of the shifted Chebyshev
     polynomial of the first kind :math:`T^*_5(x)=T_5(2x-1)`.
 
-    >>> from rsscipy.special import eval_chebyt, eval_sh_chebyt
+    >>> from scicore.special import eval_chebyt, eval_sh_chebyt
     >>> eval_chebyt(5, 2*roots-1)
     array([8.8817842e-16, 0.0000000e+00, 0.0000000e+00, 0.0000000e+00,
            8.8817842e-16])
@@ -3078,7 +3078,7 @@ def roots_sh_chebyt(n, mu=False):
     >>> import rsnumpy as np
     >>> weights @ np.cos(roots)
     np.float64(2.5873677615532227)
-    >>> from rsscipy.special import jv
+    >>> from scicore.special import jv
     >>> pi * cos(0.5) * jv(0, 0.5)
     np.float64(2.587367761551782)
 
@@ -3117,7 +3117,7 @@ def sh_chebyt(n, monic=False):
     :math:`x = 0.75`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.special import chebyt, sh_chebyt
+    >>> from scicore.special import chebyt, sh_chebyt
     >>> np.isclose(sh_chebyt(3)(0.75), -1.0)
     True
 
@@ -3192,7 +3192,7 @@ def roots_sh_chebyu(n, mu=False):
 
     Examples
     --------
-    >>> from rsscipy.special import roots_sh_chebyu
+    >>> from scicore.special import roots_sh_chebyu
     >>> roots, weights = roots_sh_chebyu(5)
     >>> roots
     array([0.0669873, 0.25     , 0.5      , 0.75     , 0.9330127])
@@ -3202,7 +3202,7 @@ def roots_sh_chebyu(n, mu=False):
     Verify that the values in `roots` are roots of the shifted Chebyshev
     polynomial of the second kind :math:`U^*_5(x)=U_5(2x-1)`.
 
-    >>> from rsscipy.special import eval_chebyu, eval_sh_chebyu
+    >>> from scicore.special import eval_chebyu, eval_sh_chebyu
     >>> eval_chebyu(5, 2*roots-1)
     array([-1.33226763e-15, -1.77635684e-15,  0.00000000e+00,  0.00000000e+00,
             3.99680289e-15])
@@ -3248,7 +3248,7 @@ def roots_sh_chebyu(n, mu=False):
     >>> import rsnumpy as np
     >>> weights @ np.cos(roots)
     np.float64(0.33396790828677264)
-    >>> from rsscipy.integrate import quad
+    >>> from scicore.integrate import quad
     >>> quad(lambda x: np.cos(x) * np.sqrt(x-x*x), 0, 1)
     (0.3339679082866854, 1.4951873072988064e-11)
 
@@ -3296,7 +3296,7 @@ def sh_chebyu(n, monic=False):
     :math:`x = 0.75`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.special import chebyu, sh_chebyu
+    >>> from scicore.special import chebyu, sh_chebyu
     >>> np.isclose(sh_chebyu(3)(0.75), -1.0)
     True
 
@@ -3372,7 +3372,7 @@ def roots_legendre(n, mu=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.special import roots_legendre, eval_legendre
+    >>> from scicore.special import roots_legendre, eval_legendre
     >>> roots, weights = roots_legendre(9)
 
     ``roots`` holds the roots, and ``weights`` holds the weights for
@@ -3487,7 +3487,7 @@ def legendre(n, monic=False):
     --------
     Generate the 3rd-order Legendre polynomial 1/2*(5x^3 + 0x^2 - 3x + 0):
 
-    >>> from rsscipy.special import legendre
+    >>> from scicore.special import legendre
     >>> legendre(3)
     poly1d([ 2.5,  0. , -1.5,  0. ])
 
@@ -3553,7 +3553,7 @@ def roots_sh_legendre(n, mu=False):
 
     Compute nodes and weights for a 7th-order shifted Gauss-Legendre quadrature:
 
-    >>> from rsscipy.special import roots_sh_legendre, eval_sh_legendre
+    >>> from scicore.special import roots_sh_legendre, eval_sh_legendre
     >>> x, w = roots_sh_legendre(7)
     >>> x
     array([0.02544604, 0.12923441, 0.29707742, 0.5, 0.70292258, 0.87076559,
@@ -3622,8 +3622,8 @@ def sh_legendre(n, monic=False):
     interval :math:`[0, 1]`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.special import sh_legendre, legendre
-    >>> from rsscipy.integrate import trapezoid
+    >>> from scicore.special import sh_legendre, legendre
+    >>> from scicore.integrate import trapezoid
     >>> x = np.arange(0.0, 1.0, 0.01)
     >>> n = 3
     >>> np.allclose(sh_legendre(n)(x), legendre(n)(2*x - 1))

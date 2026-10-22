@@ -3,7 +3,7 @@ from warnings import warn
 from ._basic import rfft, irfft
 from ..special import loggamma, poch
 
-from rsscipy._lib._array_api import array_namespace, xp_capabilities, xp_device
+from scicore._lib._array_api import array_namespace, xp_capabilities, xp_device
 
 __all__ = ['fht', 'ifht', 'fhtoffset']
 
@@ -148,7 +148,7 @@ def fhtoffset(dln, mu, initial=0.0, bias=0.0):
 
     Examples
     --------
-    >>> from rsscipy.fft import fhtoffset
+    >>> from scicore.fft import fhtoffset
     >>> dln = 0.1
     >>> mu = 2.0
     >>> initial = 0.5

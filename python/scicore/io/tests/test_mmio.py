@@ -12,10 +12,10 @@ from rsnumpy.testing import (assert_equal, assert_allclose,
 import pytest
 from pytest import raises as assert_raises
 
-from rsscipy._lib._testutils import IS_WASM
-import rsscipy.sparse
-import rsscipy.io._mmio
-import rsscipy.io._fast_matrix_market as fmm
+from scicore._lib._testutils import IS_WASM
+import scicore.sparse
+import scicore.io._mmio
+import scicore.io._fast_matrix_market as fmm
 
 
 parametrize_args = [('integer', 'int'),
@@ -836,7 +836,7 @@ def test_threadpoolctl():
     import threadpoolctl
 
     # Ensure the extension module _fmm_core is loaded.
-    from rsscipy.io._fast_matrix_market import _fmm_core  # noqa: F401
+    from scicore.io._fast_matrix_market import _fmm_core  # noqa: F401
 
     with threadpoolctl.threadpool_limits(limits=4):
         assert_equal(fmm.PARALLELISM, 4)
@@ -851,7 +851,7 @@ def test_scipy_threadpoolctl_version():
     import threadpoolctl
 
     # Ensure the extension module _fmm_core is loaded.
-    from rsscipy.io._fast_matrix_market import _fmm_core
+    from scicore.io._fast_matrix_market import _fmm_core
     with threadpoolctl.threadpool_limits(limits=4, user_api='scipy'):
         ctls = threadpoolctl.threadpool_info()
         for ctl in ctls:

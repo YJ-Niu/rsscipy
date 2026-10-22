@@ -4,13 +4,13 @@ from rsnumpy.testing import (assert_equal, assert_array_equal,
                            assert_allclose)
 import pytest
 from pytest import raises as assert_raises
-from rsscipy._external import array_api_extra as xpx
-from rsscipy._lib._array_api import make_xp_test_case
-from rsscipy._lib._array_api_no_0d import xp_assert_close
-from rsscipy._lib._util import _apply_over_batch
-from rsscipy import stats
-from rsscipy.special import xlogy
-from rsscipy.stats.contingency import (margins, expected_freq, _chi2_contingency_2d,
+from scicore._external import array_api_extra as xpx
+from scicore._lib._array_api import make_xp_test_case
+from scicore._lib._array_api_no_0d import xp_assert_close
+from scicore._lib._util import _apply_over_batch
+from scicore import stats
+from scicore.special import xlogy
+from scicore.stats.contingency import (margins, expected_freq, _chi2_contingency_2d,
                                      chi2_contingency, association)
 
 

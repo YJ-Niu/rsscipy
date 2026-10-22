@@ -3,8 +3,8 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_array_equal
 
-import rsscipy.special as sc
-from rsscipy.special._testutils import FuncData
+import scicore.special as sc
+from scicore.special._testutils import FuncData
 
 
 INVALID_POINTS = [

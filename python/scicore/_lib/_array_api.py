@@ -25,7 +25,7 @@ try:
     # Array-API machinery (optional). The vendored ``array_api_compat`` numpy
     # namespace imports ``numpy`` at load time, so it is only available when
     # numpy is installed. rsnumpy is the primary backend and needs none of it.
-    from rsscipy._external.array_api_compat import (
+    from scicore._external.array_api_compat import (
         is_array_api_obj,
         is_lazy_array,
         is_numpy_array,
@@ -44,14 +44,14 @@ try:
         is_dask_namespace as is_dask,
         is_array_api_strict_namespace as is_array_api_strict,
     )
-    from rsscipy._external.array_api_compat.common._helpers import _compat_module_name
-    from rsscipy._external.array_api_extra.testing import lazy_xp_function
-    import rsscipy._external.array_api_extra as xpx
-    import rsscipy._external.array_api_extra.testing as xpt
+    from scicore._external.array_api_compat.common._helpers import _compat_module_name
+    from scicore._external.array_api_extra.testing import lazy_xp_function
+    import scicore._external.array_api_extra as xpx
+    import scicore._external.array_api_extra.testing as xpt
     _ARRAY_API_AVAILABLE = True
 except Exception:  # numpy (and the vendored array-api compat) unavailable
-    # Minimal fallbacks so this module — and therefore rsscipy.signal /
-    # rsscipy.stats — still imports without numpy. rsnumpy is treated as the
+    # Minimal fallbacks so this module — and therefore scicore.signal /
+    # scicore.stats — still imports without numpy. rsnumpy is treated as the
     # "numpy-like" backend; all other (cupy/jax/torch/...) backends are
     # reported as absent.
     def _is_rsnumpy_namespace(xp):
@@ -86,11 +86,11 @@ except Exception:  # numpy (and the vendored array-api compat) unavailable
     xpt = _XPStub()
     _ARRAY_API_AVAILABLE = False
 
-from rsscipy._lib._array_api_override import (
+from scicore._lib._array_api_override import (
     array_namespace, SCIPY_ARRAY_API, SCIPY_DEVICE
 )
 
-from rsscipy._lib._docscrape import FunctionDoc
+from scicore._lib._docscrape import FunctionDoc
 
 
 __all__ = [
@@ -270,7 +270,7 @@ def eager_warns(warning_type, *, match=None, xp):
     Otherwise, context manager that *ignores* specified warning.
     """
     import pytest
-    from rsscipy._lib._util import ignore_warns
+    from scicore._lib._util import ignore_warns
     if is_numpy(xp) or is_array_api_strict(xp) or is_cupy(xp):
         return pytest.warns(warning_type, match=match)
     return ignore_warns(warning_type, match='' if match is None else match)

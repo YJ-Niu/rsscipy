@@ -3,11 +3,11 @@ import rsnumpy as np
 from rsnumpy.random import default_rng
 from rsnumpy.testing import assert_allclose
 
-from rsscipy import linalg
-from rsscipy.__config__ import CONFIG
-from rsscipy.linalg.lapack import _compute_lwork
-from rsscipy.stats import ortho_group, unitary_group
-from rsscipy.linalg import cossin, get_lapack_funcs
+from scicore import linalg
+from scicore.__config__ import CONFIG
+from scicore.linalg.lapack import _compute_lwork
+from scicore.stats import ortho_group, unitary_group
+from scicore.linalg import cossin, get_lapack_funcs
 
 REAL_DTYPES = (np.float32, np.float64)
 COMPLEX_DTYPES = (np.complex64, np.complex128)

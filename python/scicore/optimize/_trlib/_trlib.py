@@ -2,7 +2,7 @@
 
 Provides the TRLIB quadratic subproblem solver used by ``scipy.optimize._trlib``.
 This is a stub: real trust-region subproblem solvers should be ported to Rust
-under ``rust/rsscipy_rs/``.
+under ``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

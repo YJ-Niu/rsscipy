@@ -1,7 +1,7 @@
 import pytest
 from pytest import raises as assert_raises
 import rsnumpy as np
-from rsscipy.cluster.hierarchy import DisjointSet
+from scicore.cluster.hierarchy import DisjointSet
 import string
 
 

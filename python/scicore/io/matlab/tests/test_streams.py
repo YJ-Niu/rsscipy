@@ -20,7 +20,7 @@ from rsnumpy.testing import assert_, assert_equal
 from pytest import raises as assert_raises
 import pytest
 
-from rsscipy.io.matlab._streams import (make_stream,
+from scicore.io.matlab._streams import (make_stream,
     GenericStream, ZlibInputStream,
     _read_into, _read_string, BLOCK_SIZE)
 

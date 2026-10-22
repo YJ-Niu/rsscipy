@@ -109,6 +109,6 @@ __all__ = [
     'get_workers', 'set_workers']
 
 
-from rsscipy._lib._testutils import PytestTester
+from scicore._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester

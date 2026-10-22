@@ -3,7 +3,7 @@ import operator
 import rsnumpy as np
 from rsnumpy.fft import fftshift, ifftshift, fftfreq
 
-import rsscipy.fft._duccfft.helper as _helper
+import scicore.fft._duccfft.helper as _helper
 
 __all__ = ['fftshift', 'ifftshift', 'fftfreq', 'rfftfreq', 'next_fast_len']
 
@@ -33,7 +33,7 @@ def rfftfreq(n, d=1.0):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import fftpack
+    >>> from scicore import fftpack
     >>> sig = np.array([-2, 8, 6, 4, 1, 0, 3, 5], dtype=float)
     >>> sig_fft = fftpack.rfft(sig)
     >>> n = sig_fft.size
@@ -78,7 +78,7 @@ def next_fast_len(target):
     --------
     On a particular machine, an FFT of prime length takes 133 ms:
 
-    >>> from rsscipy import fftpack
+    >>> from scicore import fftpack
     >>> import rsnumpy as np
     >>> rng = np.random.default_rng()
     >>> min_len = 10007  # prime length is worst case for speed

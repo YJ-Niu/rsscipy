@@ -1,7 +1,7 @@
 import rsnumpy as np
 
-import rsscipy.special as sc
-from rsscipy.special._testutils import FuncData
+import scicore.special as sc
+from scicore.special._testutils import FuncData
 
 
 def test_sici_consistency():

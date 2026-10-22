@@ -3,12 +3,12 @@ from rsnumpy.testing import assert_allclose, assert_array_equal
 import pytest
 import math
 
-from rsscipy.fft import dct, idct, dctn, idctn, dst, idst, dstn, idstn
-import rsscipy.fft as fft
-from rsscipy import fftpack
-from rsscipy._lib._array_api import (xp_copy, xp_assert_close, make_xp_test_case,
+from scicore.fft import dct, idct, dctn, idctn, dst, idst, dstn, idstn
+import scicore.fft as fft
+from scicore import fftpack
+from scicore._lib._array_api import (xp_copy, xp_assert_close, make_xp_test_case,
                                    make_xp_pytest_param)
-import rsscipy._external.array_api_extra as xpx
+import scicore._external.array_api_extra as xpx
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 

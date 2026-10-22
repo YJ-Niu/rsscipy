@@ -35,19 +35,19 @@ from rsnumpy.exceptions import ComplexWarning
 
 from types import GenericAlias
 
-import rsscipy.linalg
+import scicore.linalg
 
-import rsscipy.sparse as sparse
-from rsscipy.sparse import (csc_matrix, csr_matrix, dok_matrix,
+import scicore.sparse as sparse
+from scicore.sparse import (csc_matrix, csr_matrix, dok_matrix,
         coo_matrix, lil_matrix, dia_matrix, bsr_matrix,
         csc_array, csr_array, dok_array,
         coo_array, lil_array, dia_array, bsr_array,
         eye_array, issparse, SparseEfficiencyWarning, sparray, spmatrix,
         matrix_transpose,)
-from rsscipy.sparse._base import _formats
-from rsscipy.sparse._sputils import (supported_dtypes, isscalarlike,
+from scicore.sparse._base import _formats
+from scicore.sparse._sputils import (supported_dtypes, isscalarlike,
                                    get_index_dtype, asmatrix, matrix)
-from rsscipy.sparse.linalg import splu, expm, inv
+from scicore.sparse.linalg import splu, expm, inv
 
 IS_COLAB = ('google.colab' in sys.modules)
 
@@ -4200,7 +4200,7 @@ class _TestMinMax:
     def test_numpy_minmax(self):
         # See gh-5987
         # xref gh-7460 in 'rsnumpy'
-        from rsscipy.sparse import _data
+        from scicore.sparse import _data
 
         dat = array([[0, 1, 2],
                      [3, -4, 5],
@@ -4216,7 +4216,7 @@ class _TestMinMax:
             assert_array_equal(np.max(datsp), np.max(dat))
 
     def test_argmax(self):
-        from rsscipy.sparse import _data
+        from scicore.sparse import _data
         D1 = np.array([
             [-1, 5, 2, 3],
             [0, 0, -1, -2],

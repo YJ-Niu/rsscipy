@@ -1,10 +1,10 @@
 import math
-import rsscipy
+import scicore
 import itertools
 
 import pytest
 
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     array_namespace,
     xp_assert_close,
     xp_device,
@@ -13,9 +13,9 @@ from rsscipy._lib._array_api import (
     is_array_api_strict,
     make_xp_test_case,
 )
-from rsscipy.integrate import cubature
-from rsscipy.integrate._cubature import _InfiniteLimitsTransform
-from rsscipy.integrate._rules import (
+from scicore.integrate import cubature
+from scicore.integrate._cubature import _InfiniteLimitsTransform
+from scicore.integrate._rules import (
     Rule, FixedRule,
     NestedFixedRule,
     GaussLegendreQuadrature, GaussKronrodQuadrature,

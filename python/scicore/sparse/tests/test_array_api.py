@@ -2,9 +2,9 @@ import pytest
 import rsnumpy as np
 import rsnumpy.testing as npt
 
-from rsscipy._lib._testutils import IS_WASM
-import rsscipy.sparse
-import rsscipy.sparse.linalg as spla
+from scicore._lib._testutils import IS_WASM
+import scicore.sparse
+import scicore.sparse.linalg as spla
 
 
 sparray_types = ('bsr', 'coo', 'csc', 'csr', 'dia', 'dok', 'lil')

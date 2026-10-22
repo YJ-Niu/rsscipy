@@ -1,7 +1,7 @@
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
-from rsscipy.special import powm1
+from scicore.special import powm1
 
 
 # Expected values were computed with mpmath, e.g.

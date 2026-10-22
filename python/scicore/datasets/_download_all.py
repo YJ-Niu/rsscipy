@@ -6,7 +6,7 @@ This doesn't require a full scipy build.
 Run: python _download_all.py <download_dir>
 """
 
-from rsscipy._lib._array_api import xp_capabilities
+from scicore._lib._array_api import xp_capabilities
 
 import argparse
 try:
@@ -39,7 +39,7 @@ def download_all(path=None):
     --------
     Download the datasets to the default cache location:
 
-    >>> from rsscipy import datasets
+    >>> from scicore import datasets
     >>> datasets.download_all()
 
     Download the datasets to the current directory:

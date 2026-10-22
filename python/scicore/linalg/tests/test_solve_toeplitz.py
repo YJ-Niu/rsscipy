@@ -1,10 +1,10 @@
 """Test functions for linalg._solve_toeplitz module
 """
 import rsnumpy as np
-from rsscipy.linalg._solve_toeplitz import levinson
-from rsscipy.linalg import solve, toeplitz, solve_toeplitz
+from scicore.linalg._solve_toeplitz import levinson
+from scicore.linalg import solve, toeplitz, solve_toeplitz
 from rsnumpy.testing import assert_equal, assert_allclose
-from rsscipy._lib._array_api import xp_assert_close
+from scicore._lib._array_api import xp_assert_close
 
 import pytest
 from pytest import raises as assert_raises

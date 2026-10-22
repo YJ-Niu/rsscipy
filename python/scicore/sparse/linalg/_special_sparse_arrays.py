@@ -1,6 +1,6 @@
 import rsnumpy as np
-from rsscipy.sparse.linalg._interface import LinearOperator
-from rsscipy.sparse import kron, eye_array, dia_array
+from scicore.sparse.linalg._interface import LinearOperator
+from scicore.sparse import kron, eye_array, dia_array
 
 __all__ = ['LaplacianNd']
 # Sakurai and Mikota classes are intended for tests and benchmarks
@@ -68,9 +68,9 @@ of_the_second_derivative
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse.linalg import LaplacianNd
-    >>> from rsscipy.sparse import diags_array, csgraph
-    >>> from rsscipy.linalg import eigvalsh
+    >>> from scicore.sparse.linalg import LaplacianNd
+    >>> from scicore.sparse import diags_array, csgraph
+    >>> from scicore.linalg import eigvalsh
 
     The one-dimensional Laplacian demonstrated below for pure Neumann boundary
     conditions on a regular grid with ``n=6`` grid points is exactly the
@@ -570,8 +570,8 @@ class Sakurai(LinearOperator):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse.linalg._special_sparse_arrays import Sakurai
-    >>> from rsscipy.linalg import eig_banded
+    >>> from scicore.sparse.linalg._special_sparse_arrays import Sakurai
+    >>> from scicore.linalg import eig_banded
     >>> n = 6
     >>> sak = Sakurai(n)
 
@@ -645,7 +645,7 @@ class Sakurai(LinearOperator):
         """
         Construct the Sakurai matrix in a sparse format.
         """
-        from rsscipy.sparse import diags_array
+        from scicore.sparse import diags_array
         d = self.tobanded()
         # the banded format has the main diagonal at the bottom
         # `diags_array` inherits dtype from banded
@@ -724,7 +724,7 @@ class MikotaM(LinearOperator):
         return self._diag()
 
     def tosparse(self):
-        from rsscipy.sparse import diags_array
+        from scicore.sparse import diags_array
         return diags_array([self._diag()], offsets=[0],
                            shape=self.shape, dtype=self.dtype)
 
@@ -794,7 +794,7 @@ class MikotaK(LinearOperator):
         return np.array([np.pad(self._diag1, (1, 0), 'constant'), self._diag0])
 
     def tosparse(self):
-        from rsscipy.sparse import diags_array
+        from scicore.sparse import diags_array
         return diags_array([self._diag1, self._diag0, self._diag1], offsets=[-1, 0, 1],
                            shape=self.shape, dtype=self.dtype)
 
@@ -889,7 +889,7 @@ class MikotaPair:
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse.linalg._special_sparse_arrays import MikotaPair
+    >>> from scicore.sparse.linalg._special_sparse_arrays import MikotaPair
     >>> n = 6
     >>> mik = MikotaPair(n)
     >>> mik_k = mik.k

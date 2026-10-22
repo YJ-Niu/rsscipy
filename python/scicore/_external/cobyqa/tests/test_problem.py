@@ -1,7 +1,7 @@
 import rsnumpy as np
 import pytest
-from rsscipy.optimize import Bounds, LinearConstraint, NonlinearConstraint
-from rsscipy.optimize._minimize import standardize_constraints
+from scicore.optimize import Bounds, LinearConstraint, NonlinearConstraint
+from scicore.optimize._minimize import standardize_constraints
 
 from ..problem import (
     ObjectiveFunction,

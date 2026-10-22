@@ -1,10 +1,10 @@
-# Rust extension layer for rsscipy.
+# Rust extension layer for scicore.
 #
 # All native Rust kernels are built into one CPython extension. The source
-# modules remain separated by domain under `rsscipy_rs/src`.
+# modules remain separated by domain under `scicore_rs/src`.
 [workspace]
 resolver = "2"
-members = ["rsscipy_rs", "fmm_core"]
+members = ["scicore_rs", "fmm_core"]
 
 [workspace.package]
 version = "2.0.0-dev"

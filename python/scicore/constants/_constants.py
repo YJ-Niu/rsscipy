@@ -15,7 +15,7 @@ from ._codata import value as _cd
 if TYPE_CHECKING:
     import rsnumpy.typing as npt
 
-from rsscipy._lib._array_api import array_namespace, _asarray, xp_capabilities
+from scicore._lib._array_api import array_namespace, _asarray, xp_capabilities
 
 
 """
@@ -264,7 +264,7 @@ def convert_temperature(
 
     Examples
     --------
-    >>> from rsscipy.constants import convert_temperature
+    >>> from scicore.constants import convert_temperature
     >>> import rsnumpy as np
     >>> convert_temperature(np.array([-40, 40]), 'Celsius', 'Kelvin')
     array([ 233.15,  313.15])
@@ -327,7 +327,7 @@ def lambda2nu(lambda_: "npt.ArrayLike") -> Any:
 
     Examples
     --------
-    >>> from rsscipy.constants import lambda2nu, speed_of_light
+    >>> from scicore.constants import lambda2nu, speed_of_light
     >>> import rsnumpy as np
     >>> lambda2nu(np.array((1, speed_of_light)))
     array([  2.99792458e+08,   1.00000000e+00])
@@ -359,7 +359,7 @@ def nu2lambda(nu: "npt.ArrayLike") -> Any:
 
     Examples
     --------
-    >>> from rsscipy.constants import nu2lambda, speed_of_light
+    >>> from scicore.constants import nu2lambda, speed_of_light
     >>> import rsnumpy as np
     >>> nu2lambda(np.array((1, speed_of_light)))
     array([  2.99792458e+08,   1.00000000e+00])

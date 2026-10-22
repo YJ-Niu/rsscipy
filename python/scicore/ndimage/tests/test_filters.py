@@ -13,9 +13,9 @@ from hypothesis import strategies as st
 from hypothesis import given, settings
 import hypothesis.extra.numpy as npst
 from pytest import raises as assert_raises
-from rsscipy import ndimage
-from rsscipy._lib._testutils import IS_WASM
-from rsscipy._lib._array_api import (
+from scicore import ndimage
+from scicore._lib._testutils import IS_WASM
+from scicore._lib._array_api import (
     assert_almost_equal,
     assert_array_almost_equal,
     xp_assert_close,
@@ -23,9 +23,9 @@ from rsscipy._lib._array_api import (
     make_xp_test_case,
     make_xp_pytest_param,
 )
-from rsscipy._lib._array_api import (is_cupy, is_torch, is_dask, is_jax, array_namespace,
+from scicore._lib._array_api import (is_cupy, is_torch, is_dask, is_jax, array_namespace,
                                    is_array_api_strict, xp_copy)
-from rsscipy.ndimage._filters import _gaussian_kernel1d
+from scicore.ndimage._filters import _gaussian_kernel1d
 
 from . import types, float_types, complex_types
 

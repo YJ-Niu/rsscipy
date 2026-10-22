@@ -317,7 +317,7 @@ assoc_legendre_p = MultiUFunc(
     Evaluate :math:`P_2^1(z)` on :math:`[-1, 1]`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.special import assoc_legendre_p
+    >>> from scicore.special import assoc_legendre_p
     >>> z = np.linspace(-1, 1, 11)
     >>> expected = -3 * z * np.sqrt(1 - z**2)
     >>> np.allclose(assoc_legendre_p(2, 1, z), expected)
@@ -476,7 +476,7 @@ legendre_p = MultiUFunc(
     Evaluate the Legendre polynomial :math:`P_3` at :math:`z = 0.5`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.special import legendre_p
+    >>> from scicore.special import legendre_p
     >>> np.allclose(legendre_p(3, 0.5), -0.4375)
     True
 

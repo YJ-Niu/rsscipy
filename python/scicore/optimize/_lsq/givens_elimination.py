@@ -2,7 +2,7 @@
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import linalg as _rust_linalg
+from scicore._scicore_rs import linalg as _rust_linalg
 
 
 def givens_elimination(S, v, diag):

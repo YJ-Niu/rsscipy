@@ -12,10 +12,10 @@ Spherical Voronoi Code
 #
 
 import rsnumpy as np
-import rsscipy
+import scicore
 from . import _voronoi
-from rsscipy.spatial._ckdtree import cKDTree
-from rsscipy._lib._array_api import xp_capabilities
+from scicore.spatial._ckdtree import cKDTree
+from scicore._lib._array_api import xp_capabilities
 
 __all__ = ['SphericalVoronoi']
 
@@ -116,7 +116,7 @@ class SphericalVoronoi:
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.spatial import SphericalVoronoi, geometric_slerp
+    >>> from scicore.spatial import SphericalVoronoi, geometric_slerp
     >>> from mpl_toolkits.mplot3d import proj3d
     >>> # set input data
     >>> points = np.array([[0, 0, 1], [0, 0, -1], [1, 0, 0],

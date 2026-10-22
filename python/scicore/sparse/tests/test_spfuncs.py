@@ -1,9 +1,9 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_equal
 
-from rsscipy.sparse import _spfuncs as spfuncs
-from rsscipy.sparse import csr_array, csc_array, bsr_array
-from rsscipy.sparse._sparsetools import (csr_scale_rows, csr_scale_columns,
+from scicore.sparse import _spfuncs as spfuncs
+from scicore.sparse import csr_array, csc_array, bsr_array
+from scicore.sparse._sparsetools import (csr_scale_rows, csr_scale_columns,
                                        bsr_scale_rows, bsr_scale_columns)
 
 

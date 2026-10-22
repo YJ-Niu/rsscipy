@@ -14,15 +14,15 @@ from rsnumpy.testing import (assert_equal, assert_almost_equal, assert_,
 import pytest
 from pytest import raises as assert_raises
 
-from rsscipy.linalg import (solve, inv, det, lstsq, pinv, pinvh, norm,
+from scicore.linalg import (solve, inv, det, lstsq, pinv, pinvh, norm,
                           solve_banded, solveh_banded, solve_triangular,
                           solve_circulant, circulant, LinAlgError, block_diag,
                           matrix_balance, qr, LinAlgWarning)
 
-from rsscipy.linalg._testutils import assert_no_overwrite
-from rsscipy._lib._testutils import check_free_memory, IS_MUSL
-from rsscipy.linalg.blas import HAS_ILP64
-from rsscipy.conftest import skip_xp_invalid_arg
+from scicore.linalg._testutils import assert_no_overwrite
+from scicore._lib._testutils import check_free_memory, IS_MUSL
+from scicore.linalg.blas import HAS_ILP64
+from scicore.conftest import skip_xp_invalid_arg
 
 REAL_DTYPES = (np.float32, np.float64, np.longdouble)
 COMPLEX_DTYPES = (np.complex64, np.complex128, np.clongdouble)

@@ -1,4 +1,4 @@
-"""Build the unified Rust extension for rsscipy.
+"""Build the unified Rust extension for scicore.
 
 The entry in `rust/modules.toml` maps the unified Cargo crate to its CPython
 extension name and destination inside the Python package. The resulting shared
@@ -12,7 +12,7 @@ Usage::
     python tools/build_rust.py --universal2
                                           # macOS: x86_64 + arm64 fat extension
 
-On macOS, `--universal2` (or the `RSSCIPY_UNIVERSAL2=1` environment variable)
+On macOS, `--universal2` (or the `SCICORE_UNIVERSAL2=1` environment variable)
 builds both architecture slices and merges them with `lipo`, producing a
 single fat extension that works on Intel and Apple Silicon.
 
@@ -82,7 +82,7 @@ def _ensure_rustup_targets(targets: tuple[str, ...]) -> None:
     installed = {line.split()[0] for line in result.stdout.splitlines() if line.strip()}
     for target in targets:
         if target not in installed:
-            print(f"[rsscipy] rustup target add {target}")
+            print(f"[scicore] rustup target add {target}")
             subprocess.run([rustup, "target", "add", target], check=True)
 
 
@@ -124,7 +124,7 @@ def build(profile: str, offline: bool, universal2: bool = False) -> list[Path]:
                 cmd.append("--offline")
 
             where = f" ({target})" if target else ""
-            print(f"[rsscipy] cargo build {crate} ({profile}{where})")
+            print(f"[scicore] cargo build {crate} ({profile}{where})")
             # run from `rust/` so that `rust/.cargo/config.toml` is picked up
             subprocess.run(cmd, check=True, cwd=str(RUST_DIR))
 
@@ -149,7 +149,7 @@ def build(profile: str, offline: bool, universal2: bool = False) -> list[Path]:
                 check=True,
             )
         produced.append(target_so)
-        print(f"[rsscipy]   -> {target_so.relative_to(ROOT)}")
+        print(f"[scicore]   -> {target_so.relative_to(ROOT)}")
 
     return produced
 
@@ -159,7 +159,7 @@ def clean() -> None:
         target = ROOT / mod["dest"] / f"{mod['lib']}.so"
         if target.exists():
             target.unlink()
-            print(f"[rsscipy] removed {target.relative_to(ROOT)}")
+            print(f"[scicore] removed {target.relative_to(ROOT)}")
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -174,7 +174,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--universal2", action="store_true",
         help="macOS only: build the x86_64 and arm64 slices and lipo them into "
-             "one fat extension (also enabled by the RSSCIPY_UNIVERSAL2 env var)",
+             "one fat extension (also enabled by the SCICORE_UNIVERSAL2 env var)",
     )
     args = parser.parse_args(argv)
 
@@ -187,8 +187,8 @@ def main(argv: list[str] | None = None) -> int:
     # used to run SciPy does not understand ("unknown slot ID ...").
     os.environ.setdefault("PYO3_PYTHON", sys.executable)
     os.environ.setdefault("CARGO_TARGET_DIR", str(RUST_DIR / "target"))
-    print(f"[rsscipy] PYO3_PYTHON={os.environ['PYO3_PYTHON']}")
-    universal2 = args.universal2 or _env_flag("RSSCIPY_UNIVERSAL2")
+    print(f"[scicore] PYO3_PYTHON={os.environ['PYO3_PYTHON']}")
+    universal2 = args.universal2 or _env_flag("SCICORE_UNIVERSAL2")
     build(
         "debug" if args.debug else "release",
         offline=args.offline,

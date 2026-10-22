@@ -6,7 +6,7 @@ import rsnumpy as np
 from rsnumpy.testing import assert_equal
 from pytest import raises as assert_raises
 
-from rsscipy.io.matlab._miobase import matdims
+from scicore.io.matlab._miobase import matdims
 
 
 def test_matdims():
@@ -27,6 +27,6 @@ def test_matdims():
     # The argument has to make sense though
     assert_raises(ValueError, matdims, np.array([1,2]), 'bizarre')
     # Check empty sparse matrices get their own shape
-    from rsscipy.sparse import csr_array, csc_array
+    from scicore.sparse import csr_array, csc_array
     assert_equal(matdims(csr_array(np.zeros((3, 3)))), (3, 3))
     assert_equal(matdims(csc_array(np.zeros((2, 2)))), (2, 2))

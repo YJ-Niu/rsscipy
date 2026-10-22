@@ -6,7 +6,7 @@ from zipfile import ZipFile
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import stats as _rust_stats
+from scicore._scicore_rs import stats as _rust_stats
 
 
 _MAXDIM = _rust_stats._MAXDIM

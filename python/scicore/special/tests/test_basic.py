@@ -32,22 +32,22 @@ from pytest import raises as assert_raises
 from rsnumpy.testing import (assert_equal, assert_array_equal, assert_,
                            assert_allclose, assert_array_almost_equal_nulp)
 
-from rsscipy import special
-import rsscipy.special._ufuncs as cephes
-from rsscipy.special import (ellipe, ellipk, ellipkm1 ,elliprc, elliprd, elliprf, elliprg,
+from scicore import special
+import scicore.special._ufuncs as cephes
+from scicore.special import (ellipe, ellipk, ellipkm1 ,elliprc, elliprd, elliprf, elliprg,
                            elliprj, softplus, mathieu_cem, mathieu_sem,
                            mathieu_odd_coef, mathieu_even_coef, stirling2, cosdg, sindg,
                            tandg, cotdg)
 
-from rsscipy._lib._array_api import (xp_assert_close, xp_assert_equal, SCIPY_ARRAY_API,
+from scicore._lib._array_api import (xp_assert_close, xp_assert_equal, SCIPY_ARRAY_API,
                                    make_xp_test_case)
 
-from rsscipy.special._basic import (
+from scicore.special._basic import (
     _FACTORIALK_LIMITS_64BITS, _FACTORIALK_LIMITS_32BITS, _is_subdtype
 )
-from rsscipy.special._testutils import with_special_errors, \
+from scicore.special._testutils import with_special_errors, \
      assert_func_equal, FuncData
-from rsscipy.integrate import quad
+from scicore.integrate import quad
 
 import math
 
@@ -703,7 +703,7 @@ class TestCephes:
     @pytest.mark.parametrize("m", [0, 5, 10, 40])
     @pytest.mark.parametrize("q", [1e3, 1e4])
     def test_mathieu_cv_large_q(self, m, q):
-        from rsscipy.linalg import eigh_tridiagonal
+        from scicore.linalg import eigh_tridiagonal
         n = 10*(m + 25) + int(10*np.log10(q))
         j = np.arange(n, dtype=float)
         if m % 2:

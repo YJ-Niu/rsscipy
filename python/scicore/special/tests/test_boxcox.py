@@ -1,6 +1,6 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose
-from rsscipy.special import boxcox, boxcox1p, inv_boxcox, inv_boxcox1p
+from scicore.special import boxcox, boxcox1p, inv_boxcox, inv_boxcox1p
 import pytest
 
 

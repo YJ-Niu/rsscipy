@@ -44,8 +44,8 @@ class GaussKronrodQuadrature(NestedFixedRule):
     estimates will also be arrays, despite the fact that this is a 1D problem.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.integrate import cubature
-    >>> from rsscipy.integrate._rules import GaussKronrodQuadrature
+    >>> from scicore.integrate import cubature
+    >>> from scicore.integrate._rules import GaussKronrodQuadrature
     >>> def f(x):
     ...     return np.cos(x)
     >>> rule = GaussKronrodQuadrature(21) # Use 21-point GaussKronrod
@@ -59,8 +59,8 @@ class GaussKronrodQuadrature(NestedFixedRule):
     estimates will also be floats.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.integrate import cubature
-    >>> from rsscipy.integrate._rules import (
+    >>> from scicore.integrate import cubature
+    >>> from scicore.integrate._rules import (
     ...     ProductNestedFixed, GaussKronrodQuadrature
     ... )
     >>> def f(x):

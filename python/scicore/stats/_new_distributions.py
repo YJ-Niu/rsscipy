@@ -3,10 +3,10 @@ import sys
 import rsnumpy as np
 from rsnumpy import inf
 
-from rsscipy._external import array_api_extra as xpx
-from rsscipy import special
-from rsscipy.special import _ufuncs as scu
-from rsscipy.stats._distribution_infrastructure import (
+from scicore._external import array_api_extra as xpx
+from scicore import special
+from scicore.special import _ufuncs as scu
+from scicore.stats._distribution_infrastructure import (
     ContinuousDistribution, DiscreteDistribution, CircularDistribution,
     _RealInterval, _IntegerInterval, _RealParameter, _Parameterization, _combine_docs)
 

@@ -7,8 +7,8 @@ import rsnumpy as np
 from rsnumpy import (dot, diag, prod, logical_not, ravel, transpose,
                    conjugate, absolute, amax, sign, isfinite, triu)
 
-from rsscipy._lib._util import _apply_over_batch, _deprecate_dtypes
-from rsscipy._lib._array_api import array_namespace, xp_size, xp_capabilities
+from scicore._lib._util import _apply_over_batch, _deprecate_dtypes
+from scicore._lib._array_api import array_namespace, xp_size, xp_capabilities
 
 # Local imports
 from ._misc import LinAlgError, LinAlgWarning, norm
@@ -125,7 +125,7 @@ def fractional_matrix_power(A, t):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import fractional_matrix_power
+    >>> from scicore.linalg import fractional_matrix_power
     >>> a = np.array([[1.0, 3.0], [1.0, 4.0]])
     >>> b = fractional_matrix_power(a, 0.5)
     >>> b
@@ -139,7 +139,7 @@ def fractional_matrix_power(A, t):
     # This fixes some issue with imports;
     # this function calls onenormest which is in scipy.sparse.
     A = _asarray_square(A)
-    import rsscipy.linalg._matfuncs_inv_ssq
+    import scicore.linalg._matfuncs_inv_ssq
     return scipy.linalg._matfuncs_inv_ssq._fractional_matrix_power(A, t)
 
 
@@ -181,7 +181,7 @@ def logm(A):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import logm, expm
+    >>> from scicore.linalg import logm, expm
     >>> a = np.array([[1.0, 3.0], [1.0, 4.0]])
     >>> b = logm(a)
     >>> b
@@ -194,7 +194,7 @@ def logm(A):
     """
     A = np.asarray(A)  # squareness checked in `_logm`
     # Avoid circular import ... this is OK, right?
-    import rsscipy.linalg._matfuncs_inv_ssq
+    import scicore.linalg._matfuncs_inv_ssq
     F = scipy.linalg._matfuncs_inv_ssq._logm(A)
     F = _maybe_real(A, F)
     errtol = 1000*eps
@@ -252,7 +252,7 @@ def expm(A):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import expm, sinm, cosm
+    >>> from scicore.linalg import expm, sinm, cosm
 
     Matrix version of the formula exp(0) = 1:
 
@@ -375,7 +375,7 @@ def sqrtm(A):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import sqrtm
+    >>> from scicore.linalg import sqrtm
     >>> a = np.array([[1.0, 3.0], [1.0, 4.0]])
     >>> r = sqrtm(a)
     >>> r
@@ -454,7 +454,7 @@ def cosm(A):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import expm, sinm, cosm
+    >>> from scicore.linalg import expm, sinm, cosm
 
     Euler's identity (exp(i*theta) = cos(theta) + i*sin(theta))
     applied to a matrix:
@@ -495,7 +495,7 @@ def sinm(A):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import expm, sinm, cosm
+    >>> from scicore.linalg import expm, sinm, cosm
 
     Euler's identity (exp(i*theta) = cos(theta) + i*sin(theta))
     applied to a matrix:
@@ -536,7 +536,7 @@ def tanm(A):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import tanm, sinm, cosm
+    >>> from scicore.linalg import tanm, sinm, cosm
     >>> a = np.array([[1.0, 3.0], [1.0, 4.0]])
     >>> t = tanm(a)
     >>> t
@@ -576,7 +576,7 @@ def coshm(A):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import tanhm, sinhm, coshm
+    >>> from scicore.linalg import tanhm, sinhm, coshm
     >>> a = np.array([[1.0, 3.0], [1.0, 4.0]])
     >>> c = coshm(a)
     >>> c
@@ -616,7 +616,7 @@ def sinhm(A):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import tanhm, sinhm, coshm
+    >>> from scicore.linalg import tanhm, sinhm, coshm
     >>> a = np.array([[1.0, 3.0], [1.0, 4.0]])
     >>> s = sinhm(a)
     >>> s
@@ -656,7 +656,7 @@ def tanhm(A):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import tanhm, sinhm, coshm
+    >>> from scicore.linalg import tanhm, sinhm, coshm
     >>> a = np.array([[1.0, 3.0], [1.0, 4.0]])
     >>> t = tanhm(a)
     >>> t
@@ -718,7 +718,7 @@ def funm(A, func, disp=True):
     eigendecomposition is likely to be faster. For example, if your matrix is
     Hermitian, you can do
 
-    >>> from rsscipy.linalg import eigh
+    >>> from scicore.linalg import eigh
     >>> def funm_herm(a, func, check_finite=False):
     ...     w, v = eigh(a, check_finite=check_finite)
     ...     ## if you further know that your matrix is positive semidefinite,
@@ -734,7 +734,7 @@ def funm(A, func, disp=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import funm
+    >>> from scicore.linalg import funm
     >>> a = np.array([[1.0, 3.0], [1.0, 4.0]])
     >>> funm(a, lambda x: x*x)
     array([[  4.,  15.],
@@ -794,7 +794,7 @@ def signm(A):
 
     Examples
     --------
-    >>> from rsscipy.linalg import signm, eigvals
+    >>> from scicore.linalg import signm, eigvals
     >>> a = [[1,2,3], [1,2,1], [1,1,1]]
     >>> eigvals(a)
     array([ 4.12488542+0.j, -0.76155718+0.j,  0.63667176+0.j])
@@ -881,7 +881,7 @@ def khatri_rao(a, b):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import linalg
+    >>> from scicore import linalg
     >>> a = np.array([[1, 2, 3], [4, 5, 6]])
     >>> b = np.array([[3, 4, 5], [6, 7, 8], [2, 3, 9]])
     >>> linalg.khatri_rao(a, b)

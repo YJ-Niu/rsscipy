@@ -4,7 +4,7 @@ from rsnumpy.testing import (assert_, assert_equal, assert_array_almost_equal,
                            assert_array_almost_equal_nulp, assert_array_less)
 import pytest
 from pytest import raises as assert_raises
-from rsscipy.fftpack import ifft, fft, fftn, ifftn, rfft, irfft, fft2
+from scicore.fftpack import ifft, fft, fftn, ifftn, rfft, irfft, fft2
 
 from rsnumpy import (arange, array, asarray, zeros, dot, exp, pi,
                    swapaxes, double, cdouble)

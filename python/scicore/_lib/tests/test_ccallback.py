@@ -5,10 +5,10 @@ import time
 import pytest
 import ctypes
 import threading
-from rsscipy._lib import _ccallback_c as _test_ccallback_cython
-from rsscipy._lib import _test_ccallback
-from rsscipy._lib._ccallback import LowLevelCallable
-from rsscipy._lib._testutils import IS_WASM
+from scicore._lib import _ccallback_c as _test_ccallback_cython
+from scicore._lib import _test_ccallback
+from scicore._lib._ccallback import LowLevelCallable
+from scicore._lib._testutils import IS_WASM
 
 
 ERROR_VALUE = 2.0

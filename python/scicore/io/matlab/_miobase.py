@@ -9,7 +9,7 @@ MATLAB is a registered trademark of the Mathworks inc.
 from typing import Final
 
 import rsnumpy as np
-from rsscipy._lib import doccer
+from scicore._lib import doccer
 
 from . import _byteordercodes as boc
 
@@ -286,7 +286,7 @@ def matdims(arr, oned_as='column'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.io.matlab._miobase import matdims
+    >>> from scicore.io.matlab._miobase import matdims
     >>> matdims(np.array(1)) # NumPy scalar
     (1, 1)
     >>> matdims(np.array([1])) # 1-D array, 1 element

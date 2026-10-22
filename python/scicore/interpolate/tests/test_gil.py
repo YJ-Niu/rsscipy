@@ -4,7 +4,7 @@ import time
 
 import rsnumpy as np
 import pytest
-import rsscipy.interpolate
+import scicore.interpolate
 
 class TestGIL:
     """Check if the GIL is properly released by scipy.interpolate functions."""

@@ -4,19 +4,19 @@ from types import GenericAlias
 import rsnumpy as np
 import pytest
 from pytest import raises as assert_raises
-from rsscipy._lib._array_api import(
+from scicore._lib._array_api import(
     assert_almost_equal, xp_assert_equal, xp_assert_close, make_xp_test_case,
     xp_result_type
 )
 
-from rsscipy.signal import (ss2tf, tf2ss, lti,
+from scicore.signal import (ss2tf, tf2ss, lti,
                           dlti, bode, freqresp, lsim, impulse, step,
                           abcd_normalize, place_poles,
                           TransferFunction, StateSpace, ZerosPolesGain)
 
-from rsscipy.signal._filter_design import BadCoefficients
-from rsscipy.signal._ltisys import _order_complex_poles
-import rsscipy.linalg as linalg
+from scicore.signal._filter_design import BadCoefficients
+from scicore.signal._ltisys import _order_complex_poles
+import scicore.linalg as linalg
 
 class Test_OrderComplexPoles:
     """Test for `_order_complex_poles` function. """

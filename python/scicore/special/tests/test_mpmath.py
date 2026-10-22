@@ -8,17 +8,17 @@ from rsnumpy import pi
 import pytest
 import itertools
 
-from rsscipy._external.packaging_version import version
+from scicore._external.packaging_version import version
 
-import rsscipy.special as sc
-from rsscipy.special._testutils import (
+import scicore.special as sc
+from scicore.special._testutils import (
     MissingModule, check_version, FuncData,
     assert_func_equal)
-from rsscipy.special._mptestutils import (
+from scicore.special._mptestutils import (
     Arg, FixedArg, ComplexArg, IntArg, assert_mpmath_equal,
     nonfunctional_tooslow, trace_args, time_limited, exception_to_nan,
     inf_to_nan)
-from rsscipy.special._ufuncs import (
+from scicore.special._ufuncs import (
     _sinpi, _cospi, _lgam1p, _log1pmx,
     _igam_fac)
 

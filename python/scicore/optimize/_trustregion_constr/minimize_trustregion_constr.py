@@ -1,6 +1,6 @@
 import time
 import rsnumpy as np
-from rsscipy.sparse.linalg import LinearOperator
+from scicore.sparse.linalg import LinearOperator
 from .._differentiable_functions import VectorFunction
 from .._constraints import (
     NonlinearConstraint, LinearConstraint, PreparedConstraint, Bounds, strict_bounds)

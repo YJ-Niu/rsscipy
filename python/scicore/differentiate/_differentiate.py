@@ -1,11 +1,11 @@
 import warnings
 import rsnumpy as np
-import rsscipy._lib._elementwise_iterative_method as eim
-from rsscipy._lib._util import _RichResult
-from rsscipy._lib._array_api import (xp_result_device, array_namespace,
+import scicore._lib._elementwise_iterative_method as eim
+from scicore._lib._util import _RichResult
+from scicore._lib._array_api import (xp_result_device, array_namespace,
                                    xp_copy, xp_promote,
                                    xp_capabilities, xp_device)
-import rsscipy._external.array_api_extra as xpx
+import scicore._external.array_api_extra as xpx
 
 _EERRORINCREASE = -1  # used in derivative
 
@@ -251,7 +251,7 @@ def derivative(f, x, *, args=(), kwargs=None, tolerances=None, maxiter=10,
     Evaluate the derivative of ``np.exp`` at several points ``x``.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.differentiate import derivative
+    >>> from scicore.differentiate import derivative
     >>> f = np.exp
     >>> df = np.exp  # true derivative
     >>> x = np.linspace(1, 2, 5)
@@ -880,8 +880,8 @@ def jacobian(f, x, *, tolerances=None, maxiter=10, order=8, initial_step=0.5,
     at ``[0.5, 0.5, 0.5]``.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.differentiate import jacobian
-    >>> from rsscipy.optimize import rosen, rosen_der
+    >>> from scicore.differentiate import jacobian
+    >>> from scicore.optimize import rosen, rosen_der
     >>> m = 3
     >>> x = np.full(m, 0.5)
     >>> res = jacobian(rosen, x)
@@ -1087,8 +1087,8 @@ def hessian(f, x, *, tolerances=None, maxiter=10,
     wish to evaluate the Hessian at ``[0.5, 0.5, 0.5]``.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.differentiate import hessian
-    >>> from rsscipy.optimize import rosen, rosen_hess
+    >>> from scicore.differentiate import hessian
+    >>> from scicore.optimize import rosen, rosen_hess
     >>> m = 3
     >>> x = np.full(m, 0.5)
     >>> res = hessian(rosen, x)

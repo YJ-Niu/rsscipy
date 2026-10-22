@@ -5,10 +5,10 @@ import rsnumpy as np
 from rsnumpy import array, sqrt
 from rsnumpy.testing import assert_equal, assert_allclose
 
-from rsscipy import integrate
-import rsscipy.special as sc
-from rsscipy.special import gamma
-import rsscipy.special._orthogonal as orth
+from scicore import integrate
+import scicore.special as sc
+from scicore.special import gamma
+import scicore.special._orthogonal as orth
 
 
 class TestCheby:

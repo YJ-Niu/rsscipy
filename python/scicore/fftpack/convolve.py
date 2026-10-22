@@ -2,8 +2,8 @@
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import fftpack as _rust_fftpack
-from rsscipy.fft._duccfft.pyduccfft import r2r_fftpack
+from scicore._scicore_rs import fftpack as _rust_fftpack
+from scicore.fft._duccfft.pyduccfft import r2r_fftpack
 
 __all__ = [
     'destroy_convolve_cache',

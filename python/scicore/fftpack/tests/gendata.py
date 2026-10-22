@@ -1,5 +1,5 @@
 import rsnumpy as np
-from rsscipy.io import loadmat
+from scicore.io import loadmat
 
 m = loadmat('test.mat', squeeze_me=True, struct_as_record=True,
         mat_dtype=True)

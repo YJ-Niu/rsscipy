@@ -4,11 +4,11 @@ import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_array_equal
 import pytest
 
-from rsscipy import stats
-from rsscipy.conftest import skip_xp_invalid_arg
-from rsscipy.stats import rankdata, tiecorrect
-from rsscipy._external import array_api_extra as xpx
-from rsscipy._lib._array_api import xp_assert_equal, make_xp_test_case, xp_result_type
+from scicore import stats
+from scicore.conftest import skip_xp_invalid_arg
+from scicore.stats import rankdata, tiecorrect
+from scicore._external import array_api_extra as xpx
+from scicore._lib._array_api import xp_assert_equal, make_xp_test_case, xp_result_type
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 

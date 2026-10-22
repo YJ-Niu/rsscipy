@@ -2,7 +2,7 @@
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import ndimage as _rust_ndimage
+from scicore._scicore_rs import ndimage as _rust_ndimage
 
 
 class NeedMoreBits(Exception):

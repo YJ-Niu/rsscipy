@@ -3,7 +3,7 @@
 Provides the KD-tree routines used by ``scipy.spatial`` and
 ``scipy.cluster``, implemented on top of :mod:`rsnumpy`.  This is a stub:
 the full KD-tree implementation should later be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

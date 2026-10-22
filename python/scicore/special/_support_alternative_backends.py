@@ -5,12 +5,12 @@ from dataclasses import dataclass
 from types import ModuleType
 
 import rsnumpy as np
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     array_namespace, scipy_namespace_for, is_numpy, is_dask, is_marray, is_jax_array,
     is_jax, xp_promote, xp_capabilities, SCIPY_ARRAY_API, get_native_namespace_name,
     is_array_api_obj, xp_result_device,
 )
-import rsscipy._external.array_api_extra as xpx
+import scicore._external.array_api_extra as xpx
 from . import _basic
 from . import _mathieu
 from . import _spfun_stats
@@ -153,7 +153,7 @@ class _FuncInfo:
         if self.name in globals():
             # Already initialised. We are likely in a unit test.
             # Return function potentially overridden by xpx.testing.lazy_xp_function.
-            import rsscipy.special
+            import scicore.special
             return getattr(scipy.special, self.name)
 
         if SCIPY_ARRAY_API:
@@ -504,7 +504,7 @@ def _stdtrit(xp, spsx):
     if stdtr is None:
         return None
 
-    from rsscipy.optimize.elementwise import bracket_root, find_root
+    from scicore.optimize.elementwise import bracket_root, find_root
 
     def __stdtrit(df, p):
         def fun(t, df, p):  return stdtr(df, t) - p

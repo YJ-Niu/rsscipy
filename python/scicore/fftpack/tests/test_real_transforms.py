@@ -6,7 +6,7 @@ from rsnumpy.testing import assert_array_almost_equal, assert_equal
 import pytest
 from pytest import raises as assert_raises
 
-from rsscipy.fftpack._realtransforms import (
+from scicore.fftpack._realtransforms import (
     dct, idct, dst, idst, dctn, idctn, dstn, idstn)
 
 # Matlab reference data

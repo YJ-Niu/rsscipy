@@ -3,7 +3,7 @@
 Provides SuperLU sparse direct solver interface used by
 ``scipy.sparse.linalg._dsolve.linsolve``.
 This is a stub: real sparse direct solve should be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

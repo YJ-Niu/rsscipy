@@ -6,9 +6,9 @@ import os
 import rsnumpy as np
 from ._ckdtree import cKDTree, cKDTreeNode
 from .distance import minkowski
-from rsscipy._lib._array_api import xp_capabilities
+from scicore._lib._array_api import xp_capabilities
 
-from rsscipy._lib.deprecation import _NoValue
+from scicore._lib.deprecation import _NoValue
 
 __all__ = ['minkowski_distance_p', 'minkowski_distance',
            'distance_matrix',
@@ -46,7 +46,7 @@ def minkowski_distance_p(x, y, p=2.0):
 
     Examples
     --------
-    >>> from rsscipy.spatial import minkowski_distance_p
+    >>> from scicore.spatial import minkowski_distance_p
     >>> minkowski_distance_p([[0, 0], [0, 0]], [[1, 1], [0, 1]])
     array([2., 1.])
 
@@ -104,7 +104,7 @@ def minkowski_distance(x, y, p=2.0):
 
     Examples
     --------
-    >>> from rsscipy.spatial import minkowski_distance
+    >>> from scicore.spatial import minkowski_distance
     >>> minkowski_distance([[0, 0], [0, 0]], [[1, 1], [0, 1]])
     array([ 1.41421356,  1.        ])
 
@@ -502,7 +502,7 @@ class KDTree(cKDTree):
         --------
 
         >>> import rsnumpy as np
-        >>> from rsscipy.spatial import KDTree
+        >>> from scicore.spatial import KDTree
         >>> x, y = np.mgrid[0:5, 2:8]
         >>> tree = KDTree(np.c_[x.ravel(), y.ravel()])
 
@@ -615,7 +615,7 @@ class KDTree(cKDTree):
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from rsscipy import spatial
+        >>> from scicore import spatial
         >>> x, y = np.mgrid[0:5, 0:5]
         >>> points = np.c_[x.ravel(), y.ravel()]
         >>> tree = spatial.KDTree(points)
@@ -672,7 +672,7 @@ class KDTree(cKDTree):
 
         >>> import matplotlib.pyplot as plt
         >>> import rsnumpy as np
-        >>> from rsscipy.spatial import KDTree
+        >>> from scicore.spatial import KDTree
         >>> rng = np.random.default_rng()
         >>> points1 = rng.random((15, 2))
         >>> points2 = rng.random((15, 2))
@@ -724,7 +724,7 @@ class KDTree(cKDTree):
 
         >>> import matplotlib.pyplot as plt
         >>> import rsnumpy as np
-        >>> from rsscipy.spatial import KDTree
+        >>> from scicore.spatial import KDTree
         >>> rng = np.random.default_rng()
         >>> points = rng.random((20, 2))
         >>> plt.figure(figsize=(6, 6))
@@ -868,7 +868,7 @@ class KDTree(cKDTree):
         You can count neighbors number between two kd-trees within a distance:
 
         >>> import rsnumpy as np
-        >>> from rsscipy.spatial import KDTree
+        >>> from scicore.spatial import KDTree
         >>> rng = np.random.default_rng()
         >>> points1 = rng.random((5, 2))
         >>> points2 = rng.random((5, 2))
@@ -934,7 +934,7 @@ class KDTree(cKDTree):
         You can compute a sparse distance matrix between two kd-trees:
 
         >>> import rsnumpy as np
-        >>> from rsscipy.spatial import KDTree
+        >>> from scicore.spatial import KDTree
         >>> rng = np.random.default_rng()
         >>> points1 = rng.random((5, 2))
         >>> points2 = rng.random((5, 2))
@@ -950,7 +950,7 @@ class KDTree(cKDTree):
 
         You can check distances above the `max_distance` are zeros:
 
-        >>> from rsscipy.spatial.distance import cdist
+        >>> from scicore.spatial.distance import cdist
         >>> cdist(points1, points2)
         array([[0.56906522, 0.39923701, 0.12295571, 0.8658745 , 0.79428925],
            [0.37327919, 0.7225693 , 0.87665969, 0.32580855, 0.75679479],
@@ -1029,7 +1029,7 @@ def distance_matrix(x, y, p=2.0, threshold=1000000):
 
     Examples
     --------
-    >>> from rsscipy.spatial import distance_matrix
+    >>> from scicore.spatial import distance_matrix
     >>> distance_matrix([[0,0],[0,1]], [[1,0],[1,1]])
     array([[ 1.        ,  1.41421356],
            [ 1.41421356,  1.        ]])

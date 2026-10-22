@@ -4,8 +4,8 @@ import warnings
 from typing import TYPE_CHECKING
 
 import rsnumpy as np
-from rsscipy.spatial.distance import euclidean
-from rsscipy._lib._array_api import xp_capabilities
+from scicore.spatial.distance import euclidean
+from scicore._lib._array_api import xp_capabilities
 
 if TYPE_CHECKING:
     import rsnumpy.typing as npt
@@ -106,7 +106,7 @@ def geometric_slerp(
     a circle spanning 90 degrees:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.spatial import geometric_slerp
+    >>> from scicore.spatial import geometric_slerp
     >>> import matplotlib.pyplot as plt
     >>> fig = plt.figure()
     >>> ax = fig.add_subplot(111)

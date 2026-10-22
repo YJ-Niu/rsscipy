@@ -7,7 +7,7 @@ from . import _odepack
 from copy import copy
 import warnings
 
-from rsscipy._lib._array_api import xp_capabilities
+from scicore._lib._array_api import xp_capabilities
 
 
 class ODEintWarning(Warning):
@@ -222,7 +222,7 @@ def odeint(func, y0, t, args=(), Dfun=None, col_deriv=0, full_output=0,
     `b` and `c` to `pend`, we give them to `odeint` using the `args`
     argument.
 
-    >>> from rsscipy.integrate import odeint
+    >>> from scicore.integrate import odeint
     >>> sol = odeint(pend, y0, t, args=(b, c))
 
     The solution is an array with shape (101, 2). The first column

@@ -4,14 +4,14 @@ import warnings
 import rsnumpy as np
 from rsnumpy.testing import assert_array_almost_equal, assert_array_equal, assert_allclose
 from pytest import raises as assert_raises
-from rsscipy.sparse.csgraph import (shortest_path, dijkstra, johnson,
+from scicore.sparse.csgraph import (shortest_path, dijkstra, johnson,
                                   bellman_ford, construct_dist_matrix, yen,
                                   NegativeCycleError)
-import rsscipy.sparse
-from rsscipy.io import mmread
+import scicore.sparse
+from scicore.io import mmread
 import pytest
 
-from rsscipy._lib._testutils import IS_WASM
+from scicore._lib._testutils import IS_WASM
 
 directed_G = np.array([[0, 3, 3, 0, 0],
                        [0, 0, 0, 2, 4],

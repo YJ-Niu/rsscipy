@@ -1,10 +1,10 @@
-"""In-tree PEP 517 build backend for rsscipy.
+"""In-tree PEP 517 build backend for scicore.
 
 Replaces the former meson-python + C/Cython build. On a wheel build it:
 
   1. Builds the unified Rust extension via ``tools/build_rust.py`` (the only
      external tool required is ``cargo`` on PATH).
-  2. Packages the ``python/rsscipy`` tree -- Python sources plus the compiled
+  2. Packages the ``python/scicore`` tree -- Python sources plus the compiled
      ``.so`` kernels -- into a wheel.
 
 The backend deliberately uses only the Python standard library so a wheel can
@@ -28,7 +28,7 @@ from pathlib import Path
 import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
-PKG_DIR = ROOT / "python" / "rsscipy"
+PKG_DIR = ROOT / "python" / "scicore"
 PYPROJECT = ROOT / "pyproject.toml"
 
 _EXCLUDE_DIRS = {"__pycache__", ".git", ".mypy_cache", ".pytest_cache", "target"}
@@ -145,7 +145,7 @@ def build_wheel(wheel_directory, config_settings=None, metadata_directory=None):
     # interpreter is universal2, force the dual-arch build so the wheel tag
     # and the .so inside never disagree.
     if platform.system() == "Darwin" and "universal2" in sysconfig.get_platform():
-        os.environ.setdefault("RSSCIPY_UNIVERSAL2", "1")
+        os.environ.setdefault("SCICORE_UNIVERSAL2", "1")
     # (1) Build the Rust kernels into the package tree.
     _run_build_rust(release=not _is_debug(config_settings))
 

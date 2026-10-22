@@ -693,7 +693,7 @@ def isspmatrix_lil(x):
 
     Examples
     --------
-    >>> from rsscipy.sparse import lil_array, lil_matrix, coo_matrix, isspmatrix_lil
+    >>> from scicore.sparse import lil_array, lil_matrix, coo_matrix, isspmatrix_lil
     >>> isspmatrix_lil(lil_matrix([[5]]))  # doctest: +SKIP
     True
     >>> isspmatrix_lil(lil_array([[5]]))  # doctest: +SKIP

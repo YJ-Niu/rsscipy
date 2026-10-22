@@ -3,14 +3,14 @@ import pytest
 
 import rsnumpy as np
 
-import rsscipy._lib._elementwise_iterative_method as eim
-import rsscipy._external.array_api_extra as xpx
-from rsscipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal, xp_assert_less
-from rsscipy._lib._array_api import is_numpy, is_torch, make_xp_test_case
+import scicore._lib._elementwise_iterative_method as eim
+import scicore._external.array_api_extra as xpx
+from scicore._lib._array_api_no_0d import xp_assert_close, xp_assert_equal, xp_assert_less
+from scicore._lib._array_api import is_numpy, is_torch, make_xp_test_case
 
-from rsscipy import stats, optimize, special
-from rsscipy.differentiate import derivative, jacobian, hessian
-from rsscipy.differentiate._differentiate import _EERRORINCREASE
+from scicore import stats, optimize, special
+from scicore.differentiate import derivative, jacobian, hessian
+from scicore.differentiate._differentiate import _EERRORINCREASE
 
 
 

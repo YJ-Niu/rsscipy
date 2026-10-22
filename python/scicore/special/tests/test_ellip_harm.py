@@ -6,9 +6,9 @@ import warnings
 
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose, assert_
-from rsscipy.special._testutils import assert_func_equal
-from rsscipy.special import ellip_harm, ellip_harm_2, ellip_normal
-from rsscipy.integrate import IntegrationWarning
+from scicore.special._testutils import assert_func_equal
+from scicore.special import ellip_harm, ellip_harm_2, ellip_normal
+from scicore.integrate import IntegrationWarning
 from rsnumpy import sqrt, pi
 
 

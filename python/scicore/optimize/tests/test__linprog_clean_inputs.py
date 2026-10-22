@@ -11,7 +11,7 @@ from rsnumpy.testing import assert_, assert_allclose, assert_equal
 from rsnumpy.exceptions import VisibleDeprecationWarning
 from pytest import raises as assert_raises
 
-from rsscipy.optimize._linprog_util import _clean_inputs, _LPProblem
+from scicore.optimize._linprog_util import _clean_inputs, _LPProblem
 
 
 def test_aliasing():

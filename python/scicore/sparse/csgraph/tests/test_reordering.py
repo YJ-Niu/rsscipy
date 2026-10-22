@@ -1,7 +1,7 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_equal
-from rsscipy.sparse.csgraph import reverse_cuthill_mckee, structural_rank
-from rsscipy.sparse import csc_array, csr_array, coo_array
+from scicore.sparse.csgraph import reverse_cuthill_mckee, structural_rank
+from scicore.sparse import csc_array, csr_array, coo_array
 
 
 def test_graph_reverse_cuthill_mckee():

@@ -1,6 +1,6 @@
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import spatial as _rust_spatial
+from scicore._scicore_rs import spatial as _rust_spatial
 
 __all__ = ["sort_vertices_of_regions"]
 

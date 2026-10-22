@@ -1,9 +1,9 @@
 import warnings
 from collections import namedtuple
 import rsnumpy as np
-from rsscipy import optimize, stats
-from rsscipy._lib._array_api import xp_capabilities
-from rsscipy._lib._util import check_random_state, _transition_to_rng
+from scicore import optimize, stats
+from scicore._lib._array_api import xp_capabilities
+from scicore._lib._util import check_random_state, _transition_to_rng
 
 
 def _combine_bounds(name, user_bounds, shape_domain, integral):
@@ -150,7 +150,7 @@ class FitResult:
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> import matplotlib.pyplot as plt  # matplotlib must be installed
         >>> rng = np.random.default_rng()
         >>> data = stats.nbinom(5, 0.5).rvs(size=1000, random_state=rng)
@@ -467,7 +467,7 @@ def fit(dist, data, bounds=None, *, guess=None, method='mle',
     Suppose we wish to fit a distribution to the following data.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> rng = np.random.default_rng()
     >>> dist = stats.nbinom
     >>> shapes = (5, 0.5)
@@ -530,7 +530,7 @@ def fit(dist, data, bounds=None, *, guess=None, method='mle',
     or even use a different optimizer entirely - using the `optimizer`
     parameter.
 
-    >>> from rsscipy.optimize import differential_evolution
+    >>> from scicore.optimize import differential_evolution
     >>> rng = np.random.default_rng(767585560716548)
     >>> def optimizer(fun, bounds, *, integrality):
     ...     return differential_evolution(fun, bounds, strategy='best2bin',
@@ -967,7 +967,7 @@ def goodness_of_fit(dist, data, *, known_params=None, fit_params=None,
     data:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> rng = np.random.default_rng(1638083107694713882823079058616272161)
     >>> x = stats.uniform.rvs(size=75, random_state=rng)
 

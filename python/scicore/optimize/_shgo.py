@@ -7,16 +7,16 @@ import sys
 
 import rsnumpy as np
 
-from rsscipy import spatial
-from rsscipy.optimize._optimize import OptimizeResult
-from rsscipy.optimize._minimize import minimize
-from rsscipy.optimize._constraints import Bounds
-from rsscipy.optimize._optimize import MemoizeJac
-from rsscipy.optimize._constraints import new_bounds_to_old
-from rsscipy.optimize._minimize import standardize_constraints
-from rsscipy._lib._util import _FunctionWrapper
+from scicore import spatial
+from scicore.optimize._optimize import OptimizeResult
+from scicore.optimize._minimize import minimize
+from scicore.optimize._constraints import Bounds
+from scicore.optimize._optimize import MemoizeJac
+from scicore.optimize._constraints import new_bounds_to_old
+from scicore.optimize._minimize import standardize_constraints
+from scicore._lib._util import _FunctionWrapper
 
-from rsscipy.optimize._shgo_lib._complex import Complex
+from scicore.optimize._shgo_lib._complex import Complex
 
 __all__ = ['shgo']
 
@@ -305,7 +305,7 @@ def shgo(
     --------
     First consider the problem of minimizing the Rosenbrock function, `rosen`:
 
-    >>> from rsscipy.optimize import rosen, shgo
+    >>> from scicore.optimize import rosen, shgo
     >>> bounds = [(0,2), (0, 2), (0, 2), (0, 2), (0, 2)]
     >>> result = shgo(rosen, bounds)
     >>> result.x, result.fun
@@ -491,7 +491,7 @@ class SHGO:
     def __init__(self, func, bounds, args=(), constraints=None, n=None,
                  iters=None, callback=None, minimizer_kwargs=None,
                  options=None, sampling_method='simplicial', workers=1):
-        from rsscipy.stats import qmc
+        from scicore.stats import qmc
         # Input checks
         methods = ['halton', 'sobol', 'simplicial']
         if isinstance(sampling_method, str) and sampling_method not in methods:

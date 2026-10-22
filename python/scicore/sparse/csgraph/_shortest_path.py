@@ -2,7 +2,7 @@
 
 Provides graph shortest-path algorithms used by ``scipy.sparse.csgraph``.
 This is a stub: real graph algorithms should be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

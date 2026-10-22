@@ -1,6 +1,6 @@
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import io as _rust_io
+from scicore._scicore_rs import io as _rust_io
 
 
 def squeeze_element(arr):

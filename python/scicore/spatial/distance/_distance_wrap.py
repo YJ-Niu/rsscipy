@@ -1,7 +1,7 @@
 """Pure-Python replacement for the deleted C ``_distance_wrap`` extension.
 
 Provides the small set of wrappers used by
-``rsscipy.spatial.distance._distance``: cosine double wraps (called with a
+``scicore.spatial.distance._distance``: cosine double wraps (called with a
 pre-allocated ``dm`` to fill) and squareform vector conversions.
 """
 

@@ -2,7 +2,7 @@
 
 Provides multi-dimensional interpolation helpers used by ``scipy.interpolate``.
 This is a stub: real interpolation routines should be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

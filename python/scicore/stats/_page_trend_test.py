@@ -6,7 +6,7 @@ import threading
 import rsnumpy as np
 
 from ._continuous_distns import norm
-from rsscipy._lib._array_api import xp_capabilities
+from scicore._lib._array_api import xp_capabilities
 from ._stats_py import rankdata
 
 
@@ -217,7 +217,7 @@ def page_trend_test(data, ranked=False, predicted_ranks=None, method='auto'):
     Since the columns are already arranged in this order of increasing
     predicted mean, we can pass the table directly into `page_trend_test`.
 
-    >>> from rsscipy.stats import page_trend_test
+    >>> from scicore.stats import page_trend_test
     >>> res = page_trend_test(table)
     >>> res
     PageTrendTestResult(statistic=133.5, pvalue=0.0018191161948127822,
@@ -232,7 +232,7 @@ def page_trend_test(data, ranked=False, predicted_ranks=None, method='auto'):
     we rank the data such that high scores correspond with high ranks, settling
     ties with an average rank:
 
-    >>> from rsscipy.stats import rankdata
+    >>> from scicore.stats import rankdata
     >>> ranks = rankdata(table, axis=1)
     >>> ranks
     array([[1.5, 3. , 1.5],
@@ -260,7 +260,7 @@ def page_trend_test(data, ranked=False, predicted_ranks=None, method='auto'):
     survival function of the normal distribution evaluated at the standardized
     test statistic:
 
-    >>> from rsscipy.stats import norm
+    >>> from scicore.stats import norm
     >>> E0 = (m*n*(n+1)**2)/4
     >>> V0 = (m*n**2*(n+1)*(n**2-1))/144
     >>> Lambda = (L-E0)/np.sqrt(V0)

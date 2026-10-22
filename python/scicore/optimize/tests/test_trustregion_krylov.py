@@ -3,7 +3,7 @@ Unit tests for Krylov space trust-region subproblem solver.
 
 """
 import rsnumpy as np
-from rsscipy.optimize._trlib import (get_trlib_quadratic_subproblem)
+from scicore.optimize._trlib import (get_trlib_quadratic_subproblem)
 from rsnumpy.testing import (assert_,
                            assert_almost_equal,
                            assert_equal, assert_array_almost_equal)

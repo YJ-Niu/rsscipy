@@ -34,8 +34,8 @@ add_newdoc('scipy.sparse.linalg._dsolve._superlu', 'SuperLU',
     The LU decomposition can be used to solve matrix equations. Consider:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import csc_array
-    >>> from rsscipy.sparse.linalg import splu
+    >>> from scicore.sparse import csc_array
+    >>> from scicore.sparse.linalg import splu
     >>> A = csc_array([[1,2,0,4], [1,0,0,1], [1,0,2,1], [2,2,1,0.]])
 
     This can be solved for a given right-hand side:

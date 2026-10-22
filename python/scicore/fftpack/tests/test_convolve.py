@@ -2,7 +2,7 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal
 
-from rsscipy.fftpack import convolve
+from scicore.fftpack import convolve
 
 
 def test_convolve_identity_kernel():

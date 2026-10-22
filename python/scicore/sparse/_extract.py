@@ -30,7 +30,7 @@ def find(A):
 
     Examples
     --------
-    >>> from rsscipy.sparse import csr_array, find
+    >>> from scicore.sparse import csr_array, find
     >>> A = csr_array([[7.0, 8.0, 0],[0, 0, 9.0]])
     >>> find(A)
     (array([0, 0, 1], dtype=int32),
@@ -87,7 +87,7 @@ def tril(A, k=0, format=None):
 
     Examples
     --------
-    >>> from rsscipy.sparse import csr_array, tril
+    >>> from scicore.sparse import csr_array, tril
     >>> A = csr_array([[1, 2, 0, 0, 3], [4, 5, 0, 6, 7], [0, 0, 8, 9, 0]],
     ...               dtype='int32')
     >>> A.toarray()
@@ -188,7 +188,7 @@ def triu(A, k=0, format=None):
 
     Examples
     --------
-    >>> from rsscipy.sparse import csr_array, triu
+    >>> from scicore.sparse import csr_array, triu
     >>> A = csr_array([[1, 2, 0, 0, 3], [4, 5, 0, 6, 7], [0, 0, 8, 9, 0]],
     ...                dtype='int32')
     >>> A.toarray()

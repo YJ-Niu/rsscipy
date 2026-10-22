@@ -5,17 +5,17 @@ from functools import partial
 
 import rsnumpy as np
 
-from rsscipy import optimize
-from rsscipy import integrate
-from rsscipy.integrate._quadrature import _builtincoeffs
-from rsscipy import interpolate
-from rsscipy.interpolate import RectBivariateSpline
-import rsscipy._external.array_api_extra as xpx
-import rsscipy.special as sc
+from scicore import optimize
+from scicore import integrate
+from scicore.integrate._quadrature import _builtincoeffs
+from scicore import interpolate
+from scicore.interpolate import RectBivariateSpline
+import scicore._external.array_api_extra as xpx
+import scicore.special as sc
 from .._distn_infrastructure import rv_continuous, _ShapeInfo, rv_continuous_frozen
 from .._continuous_distns import uniform, expon, _norm_pdf, _norm_cdf
 from .levyst import Nolan
-from rsscipy._lib.doccer import inherit_docstring_from
+from scicore._lib.doccer import inherit_docstring_from
 
 
 __all__ = ["levy_stable", "levy_stable_gen", "pdf_from_cf_with_fft"]

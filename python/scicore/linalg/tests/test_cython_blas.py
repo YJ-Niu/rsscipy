@@ -1,7 +1,7 @@
 import rsnumpy as np
 from rsnumpy.testing import (assert_allclose,
                            assert_equal)
-import rsscipy.linalg.cython_blas as blas
+import scicore.linalg.cython_blas as blas
 
 
 class TestBlasInt:
@@ -9,7 +9,7 @@ class TestBlasInt:
 
     def test_blas_int_size(self):
         """Verify blas_int size matches the build configuration."""
-        from rsscipy.__config__ import CONFIG
+        from scicore.__config__ import CONFIG
         size = blas._blas_int_size()
         cython_blas_ilp64 = CONFIG['Build Dependencies']['blas']['cython blas ilp64']
         if cython_blas_ilp64:

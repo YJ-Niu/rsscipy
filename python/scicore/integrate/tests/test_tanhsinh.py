@@ -5,15 +5,15 @@ import math
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
 
-from rsscipy._external import array_api_extra as xpx
-import rsscipy._lib._elementwise_iterative_method as eim
-from rsscipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
-from rsscipy._lib._array_api import (array_namespace, xp_size, xp_ravel, xp_copy,
+from scicore._external import array_api_extra as xpx
+import scicore._lib._elementwise_iterative_method as eim
+from scicore._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
+from scicore._lib._array_api import (array_namespace, xp_size, xp_ravel, xp_copy,
                                    is_numpy, make_xp_test_case)
-from rsscipy import special, stats
-from rsscipy.integrate import quad_vec, nsum, tanhsinh as _tanhsinh
-from rsscipy.integrate._tanhsinh import _pair_cache
-from rsscipy.special._ufuncs import _gen_harmonic
+from scicore import special, stats
+from scicore.integrate import quad_vec, nsum, tanhsinh as _tanhsinh
+from scicore.integrate._tanhsinh import _pair_cache
+from scicore.special._ufuncs import _gen_harmonic
 
 
 def norm_pdf(x, xp=None):

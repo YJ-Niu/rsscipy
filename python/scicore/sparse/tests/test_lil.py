@@ -3,7 +3,7 @@ import tracemalloc
 import rsnumpy as np
 from rsnumpy.testing import assert_equal
 import pytest
-from rsscipy.sparse import coo_array, lil_array
+from scicore.sparse import coo_array, lil_array
 
 pytestmark = pytest.mark.thread_unsafe
 

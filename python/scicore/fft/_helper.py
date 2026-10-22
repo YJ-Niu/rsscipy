@@ -4,8 +4,8 @@ import inspect
 from ._duccfft import helper as _helper
 
 import rsnumpy as np
-from rsscipy._lib._array_api import array_namespace
-from rsscipy._lib._array_api import xp_capabilities
+from scicore._lib._array_api import array_namespace
+from scicore._lib._array_api import xp_capabilities
 
 
 _init_nd_shape_and_axes = _helper._init_nd_shape_and_axes
@@ -47,7 +47,7 @@ def next_fast_len(target, real=False):
     --------
     On a particular machine, an FFT of prime length takes 11.4 ms:
 
-    >>> from rsscipy import fft
+    >>> from scicore import fft
     >>> import rsnumpy as np
     >>> rng = np.random.default_rng()
     >>> min_len = 93059  # prime length is worst case for speed
@@ -119,7 +119,7 @@ def prev_fast_len(target, real=False):
     --------
     On a particular machine, an FFT of prime length takes 16.2 ms:
 
-    >>> from rsscipy import fft
+    >>> from scicore import fft
     >>> import rsnumpy as np
     >>> rng = np.random.default_rng()
     >>> max_len = 93059  # prime length is worst case for speed
@@ -179,7 +179,7 @@ def fftfreq(n, d=1.0, *, xp=None, device=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> import rsscipy.fft
+    >>> import scicore.fft
     >>> signal = np.array([-2, 8, 6, 4, 1, 0, 3, 5], dtype=float)
     >>> fourier = scipy.fft.fft(signal)
     >>> n = signal.size
@@ -232,7 +232,7 @@ def rfftfreq(n, d=1.0, *, xp=None, device=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> import rsscipy.fft
+    >>> import scicore.fft
     >>> signal = np.array([-2, 8, 6, 4, 1, 0, 3, 5, -3, 4], dtype=float)
     >>> fourier = scipy.fft.rfft(signal)
     >>> n = signal.size

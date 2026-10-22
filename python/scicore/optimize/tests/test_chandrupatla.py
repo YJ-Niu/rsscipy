@@ -3,16 +3,16 @@ import pytest
 import rsnumpy as np
 from copy import deepcopy
 
-from rsscipy import stats, special
-import rsscipy._lib._elementwise_iterative_method as eim
-import rsscipy._external.array_api_extra as xpx
-from rsscipy._lib._array_api import (array_namespace, is_cupy, is_numpy, xp_ravel,
+from scicore import stats, special
+import scicore._lib._elementwise_iterative_method as eim
+import scicore._external.array_api_extra as xpx
+from scicore._lib._array_api import (array_namespace, is_cupy, is_numpy, xp_ravel,
                                    xp_size, make_xp_test_case)
-from rsscipy._lib._array_api_no_0d import (xp_assert_close, xp_assert_equal,
+from scicore._lib._array_api_no_0d import (xp_assert_close, xp_assert_equal,
                                          xp_assert_less)
 
-from rsscipy.optimize.elementwise import find_minimum, find_root
-from rsscipy.optimize._tstutils import _CHANDRUPATLA_TESTS_WITH_ID
+from scicore.optimize.elementwise import find_minimum, find_root
+from scicore.optimize._tstutils import _CHANDRUPATLA_TESTS_WITH_ID
 
 from itertools import permutations
 

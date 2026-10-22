@@ -6,13 +6,13 @@ import warnings
 
 import rsnumpy as np
 
-from rsscipy.linalg._matfuncs_sqrtm import SqrtmError, _sqrtm_triu
-from rsscipy.linalg._decomp_schur import schur, rsf2csf
-from rsscipy.linalg._matfuncs import funm
-from rsscipy.linalg import svdvals, solve_triangular
-from rsscipy.sparse.linalg._interface import LinearOperator
-from rsscipy.sparse.linalg import onenormest
-import rsscipy.special
+from scicore.linalg._matfuncs_sqrtm import SqrtmError, _sqrtm_triu
+from scicore.linalg._decomp_schur import schur, rsf2csf
+from scicore.linalg._matfuncs import funm
+from scicore.linalg import svdvals, solve_triangular
+from scicore.sparse.linalg._interface import LinearOperator
+from scicore.sparse.linalg import onenormest
+import scicore.special
 
 
 class LogmRankWarning(UserWarning):

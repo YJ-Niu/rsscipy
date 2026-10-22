@@ -1,9 +1,9 @@
 import rsnumpy as np
-from rsscipy._lib._array_api import xp_capabilities
-from rsscipy.linalg import lu_factor, lu_solve
-from rsscipy.sparse import issparse, eye_array, safely_cast_index_arrays
-from rsscipy.sparse.linalg import splu
-from rsscipy.optimize._numdiff import group_columns
+from scicore._lib._array_api import xp_capabilities
+from scicore.linalg import lu_factor, lu_solve
+from scicore.sparse import issparse, eye_array, safely_cast_index_arrays
+from scicore.sparse.linalg import splu
+from scicore.optimize._numdiff import group_columns
 from .common import (validate_max_step, validate_tol, select_initial_step,
                      norm, num_jac, EPS, warn_extraneous,
                      validate_first_step)

@@ -1,7 +1,7 @@
 """Docstring components common to several ndimage functions."""
 from typing import Final
 
-from rsscipy._lib import doccer
+from scicore._lib import doccer
 
 __all__ = ['docfiller']
 

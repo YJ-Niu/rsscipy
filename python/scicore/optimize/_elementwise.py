@@ -1,7 +1,7 @@
-from rsscipy.optimize._bracket import _bracket_root, _bracket_minimum
-from rsscipy.optimize._chandrupatla import _chandrupatla, _chandrupatla_minimize
-from rsscipy._lib._util import _RichResult
-from rsscipy._lib._array_api import xp_capabilities
+from scicore.optimize._bracket import _bracket_root, _bracket_minimum
+from scicore.optimize._chandrupatla import _chandrupatla, _chandrupatla_minimize
+from scicore._lib._util import _RichResult
+from scicore._lib._array_api import xp_capabilities
 
 
 @xp_capabilities(
@@ -180,7 +180,7 @@ def find_root(f, init, /, *, args=(), kwargs=None,
     First, we must find a valid bracket. The function is not monotonic,
     but `bracket_root` may be able to provide a bracket.
 
-    >>> from rsscipy.optimize import elementwise
+    >>> from scicore.optimize import elementwise
     >>> res_bracket = elementwise.bracket_root(f, 0)
     >>> res_bracket.success
     True
@@ -422,7 +422,7 @@ def find_minimum(f, init, /, *, args=(), kwargs=None,
     First, we must find a valid bracket. The function is unimodal,
     so `bracket_minimum` will easily find a bracket.
 
-    >>> from rsscipy.optimize import elementwise
+    >>> from scicore.optimize import elementwise
     >>> res_bracket = elementwise.bracket_minimum(f, 0)
     >>> res_bracket.success
     True
@@ -649,7 +649,7 @@ def bracket_root(f, xl0, xr0=None, *, xmin=None, xmax=None, factor=None,
     First, we must find a valid bracket. The function is not monotonic,
     but `bracket_root` may be able to provide a bracket.
 
-    >>> from rsscipy.optimize import elementwise
+    >>> from scicore.optimize import elementwise
     >>> res_bracket = elementwise.bracket_root(f, 0)
     >>> res_bracket.success
     True
@@ -845,7 +845,7 @@ def bracket_minimum(f, xm0, *, xl0=None, xr0=None, xmin=None, xmax=None,
     First, we must find a valid bracket. The function is unimodal,
     so `bracket_minimum` will easily find a bracket.
 
-    >>> from rsscipy.optimize import elementwise
+    >>> from scicore.optimize import elementwise
     >>> res_bracket = elementwise.bracket_minimum(f, 0)
     >>> res_bracket.success
     True

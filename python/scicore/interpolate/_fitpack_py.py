@@ -10,7 +10,7 @@ import rsnumpy as np
 from ._fitpack_impl import bisplrep, bisplev, dblint  # noqa: F401
 from . import _fitpack_impl as _impl
 from ._bsplines import BSpline
-from rsscipy._lib._array_api import xp_capabilities
+from scicore._lib._array_api import xp_capabilities
 
 
 @xp_capabilities(out_of_scope=True)
@@ -142,7 +142,7 @@ def splprep(x, w=None, u=None, ub=None, ue=None, k=3, task=0, s=None, t=None,
 
     And interpolate:
 
-    >>> from rsscipy.interpolate import splprep, splev
+    >>> from scicore.interpolate import splprep, splev
     >>> tck, u = splprep([x, y], s=0)
     >>> new_points = splev(u, tck)
 
@@ -294,7 +294,7 @@ def splrep(x, y, w=None, xb=None, xe=None, k=3, task=0, s=None, t=None,
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.interpolate import splev, splrep
+    >>> from scicore.interpolate import splev, splrep
     >>> x = np.linspace(0, 10, 10)
     >>> y = np.sin(x)
     >>> spl = splrep(x, y)
@@ -534,7 +534,7 @@ def sproot(tck, mest=10):
     >>> y = [-6.365470e-03, -4.790580e-03, -3.204320e-03, -1.607270e-03,
     ...      4.440892e-16,  1.616930e-03,  3.243000e-03,  4.877670e-03,
     ...      6.520430e-03,  8.170770e-03]
-    >>> from rsscipy.interpolate import splrep, sproot, PPoly
+    >>> from scicore.interpolate import splrep, sproot, PPoly
     >>> tck = splrep(x, y, s=0)
     >>> sproot(tck)
     array([], dtype=float64)
@@ -617,7 +617,7 @@ def spalde(x, tck):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.interpolate import BSpline, spalde, splder, splev
+    >>> from scicore.interpolate import BSpline, spalde, splder, splev
 
     >>> # Store characteristic parameters of a B-spline
     >>> tck = ((-2, -2, -2, -2, -1, 0, 1, 2, 2, 2, 2),  # knots
@@ -729,7 +729,7 @@ def insert(x, tck, m=1, per=0):
     --------
     You can insert knots into a B-spline.
 
-    >>> from rsscipy.interpolate import splrep, insert
+    >>> from scicore.interpolate import splrep, insert
     >>> import rsnumpy as np
     >>> x = np.linspace(0, 10, 5)
     >>> y = np.sin(x)
@@ -809,7 +809,7 @@ def splder(tck, n=1):
     --------
     This can be used for finding maxima of a curve:
 
-    >>> from rsscipy.interpolate import splrep, splder, sproot
+    >>> from scicore.interpolate import splrep, splder, sproot
     >>> import rsnumpy as np
     >>> x = np.linspace(0, 10, 70)
     >>> y = np.sin(x)
@@ -876,7 +876,7 @@ def splantider(tck, n=1):
 
     Examples
     --------
-    >>> from rsscipy.interpolate import splrep, splder, splantider, splev
+    >>> from scicore.interpolate import splrep, splder, splantider, splev
     >>> import rsnumpy as np
     >>> x = np.linspace(0, np.pi/2, 70)
     >>> y = 1 / np.sqrt(1 - 0.8*np.sin(x)**2)
@@ -897,7 +897,7 @@ def splantider(tck, n=1):
     This is indeed an approximation to the complete elliptic integral
     :math:`K(m) = \\int_0^{\\pi/2} [1 - m\\sin^2 x]^{-1/2} dx`:
 
-    >>> from rsscipy.special import ellipk
+    >>> from scicore.special import ellipk
     >>> ellipk(0.8)
     2.2572053268208538
 

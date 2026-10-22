@@ -5,7 +5,7 @@ from rsnumpy import (atleast_2d, arange, zeros_like, imag, diag,
                    iscomplexobj, tril, triu, argsort)
 from rsnumpy.exceptions import ComplexWarning
 
-from rsscipy._lib._util import _apply_over_batch, HAS_ILP64
+from scicore._lib._util import _apply_over_batch, HAS_ILP64
 from ._decomp import _asarray_validated
 from .lapack import get_lapack_funcs, _compute_lwork
 
@@ -100,7 +100,7 @@ def ldl(A, lower=True, hermitian=True, overwrite_a=False, check_finite=True):
     array with its entries, obtain ``l``, 'd' and the permutation vector `perm`:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import ldl
+    >>> from scicore.linalg import ldl
     >>> a = np.array([[2, -1, 3], [0, 2, 0], [0, 0, 1]])
     >>> lu, d, perm = ldl(a, lower=0) # Use the upper part
     >>> lu

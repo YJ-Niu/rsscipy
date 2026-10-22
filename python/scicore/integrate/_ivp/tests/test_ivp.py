@@ -7,12 +7,12 @@ from rsnumpy.testing import (assert_, assert_allclose, assert_array_less,
 import pytest
 from pytest import raises as assert_raises
 import rsnumpy as np
-from rsscipy.optimize._numdiff import group_columns
-from rsscipy.integrate import solve_ivp, RK23, RK45, DOP853, Radau, BDF, LSODA
-from rsscipy.integrate import OdeSolution
-from rsscipy.integrate._ivp.common import num_jac, select_initial_step
-from rsscipy.integrate._ivp.base import ConstantDenseOutput
-from rsscipy.sparse import csc_array, coo_array, csc_matrix
+from scicore.optimize._numdiff import group_columns
+from scicore.integrate import solve_ivp, RK23, RK45, DOP853, Radau, BDF, LSODA
+from scicore.integrate import OdeSolution
+from scicore.integrate._ivp.common import num_jac, select_initial_step
+from scicore.integrate._ivp.base import ConstantDenseOutput
+from scicore.sparse import csc_array, coo_array, csc_matrix
 
 
 def fun_zero(t, y):

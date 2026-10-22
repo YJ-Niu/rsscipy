@@ -4,9 +4,9 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_, assert_allclose, assert_equal
 from pytest import raises as assert_raises
-from rsscipy import linalg
-import rsscipy.linalg._decomp_update as _decomp_update
-from rsscipy.linalg._decomp_update import qr_delete, qr_update, qr_insert
+from scicore import linalg
+import scicore.linalg._decomp_update as _decomp_update
+from scicore.linalg._decomp_update import qr_delete, qr_update, qr_insert
 
 def assert_unitary(a, rtol=None, atol=None, assert_sqr=True):
     if rtol is None:

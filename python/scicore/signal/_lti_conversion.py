@@ -6,11 +6,11 @@ from one representation to another.
 import rsnumpy as np
 from rsnumpy import (r_, eye, atleast_2d, poly, dot,
                    asarray, zeros, array, outer)
-from rsscipy import linalg
+from scicore import linalg
 
-from rsscipy._lib._array_api import (array_namespace, xp_size, xp_promote,
+from scicore._lib._array_api import (array_namespace, xp_size, xp_promote,
                                    xp_result_type, xp_device)
-import rsscipy._external.array_api_extra as xpx
+import scicore._external.array_api_extra as xpx
 from ._filter_design import tf2zpk, zpk2tf, normalize
 
 
@@ -54,7 +54,7 @@ def tf2ss(num, den):
         \textbf{y}(t) = \begin{bmatrix} 1 & 2 \end{bmatrix} \textbf{x}(t) +
         \begin{bmatrix} 1 \end{bmatrix} \textbf{u}(t)
 
-    >>> from rsscipy.signal import tf2ss
+    >>> from scicore.signal import tf2ss
     >>> A, B, C, D = tf2ss(num, den)
     >>> A
     array([[-2., -1.],
@@ -173,7 +173,7 @@ def abcd_normalize(A=None, B=None, C=None, D=None):
     The following example demonstrates that the passed lists are converted into
     two-dimensional arrays:
 
-    >>> from rsscipy.signal import abcd_normalize
+    >>> from scicore.signal import abcd_normalize
     >>> AA, BB, CC, DD = abcd_normalize(A=[[1, 2], [3, 4]], B=[[-1], [5]],
     ...                                 C=[[4, 5]], D=2.5)
     >>> AA.shape, BB.shape, CC.shape, DD.shape
@@ -182,7 +182,7 @@ def abcd_normalize(A=None, B=None, C=None, D=None):
     In the following, the missing parameter C is assumed to be an array of zeros
     with shape (1, 2):
 
-    >>> from rsscipy.signal import abcd_normalize
+    >>> from scicore.signal import abcd_normalize
     >>> AA, BB, CC, DD = abcd_normalize(A=[[1, 2], [3, 4]], B=[[-1], [5]], D=2.5)
     >>> AA.shape, BB.shape, CC.shape, DD.shape
     ((2, 2), (2, 1), (1, 2), (1, 1))
@@ -296,7 +296,7 @@ def ss2tf(A, B, C, D, input=0):
 
     .. math:: H(s) = \frac{s^2 + 3s + 3}{s^2 + 2s + 1}
 
-    >>> from rsscipy.signal import ss2tf
+    >>> from scicore.signal import ss2tf
     >>> ss2tf(A, B, C, D)
     (array([[1., 3., 3.]]), array([ 1.,  2.,  1.]))
     """
@@ -457,7 +457,7 @@ def cont2discrete(system, dt, method="zoh", alpha=None):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.signal import cont2discrete, lti, dlti, dstep
+    >>> from scicore.signal import cont2discrete, lti, dlti, dstep
 
     Define a continuous state-space system.
 

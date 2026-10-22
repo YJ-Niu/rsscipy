@@ -1,6 +1,6 @@
 import functools
 import types
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     is_cupy, is_jax, scipy_namespace_for, SCIPY_ARRAY_API, xp_capabilities
 )
 

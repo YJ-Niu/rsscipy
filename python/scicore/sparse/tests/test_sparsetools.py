@@ -5,10 +5,10 @@ import threading
 
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose
-from rsscipy.sparse import (_sparsetools, coo_array, csr_array, csc_array,
+from scicore.sparse import (_sparsetools, coo_array, csr_array, csc_array,
                           bsr_array, dia_array)
-from rsscipy.sparse._sputils import supported_dtypes
-from rsscipy._lib._testutils import check_free_memory, IS_WASM
+from scicore.sparse._sputils import supported_dtypes
+from scicore._lib._testutils import check_free_memory, IS_WASM
 
 import pytest
 from pytest import raises as assert_raises

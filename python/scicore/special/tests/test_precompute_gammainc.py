@@ -1,11 +1,11 @@
 import pytest
 
-from rsscipy.special._testutils import MissingModule, check_version
-from rsscipy.special._mptestutils import (
+from scicore.special._testutils import MissingModule, check_version
+from scicore.special._mptestutils import (
     Arg, IntArg, mp_assert_allclose, assert_mpmath_equal)
-from rsscipy.special._precompute.gammainc_asy import (
+from scicore.special._precompute.gammainc_asy import (
     compute_g, compute_alpha, compute_d)
-from rsscipy.special._precompute.gammainc_data import gammainc, gammaincc
+from scicore.special._precompute.gammainc_data import gammainc, gammaincc
 
 try:
     import sympy

@@ -48,7 +48,7 @@ def nnls(A, b, *, maxiter=None):
      Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.optimize import nnls
+    >>> from scicore.optimize import nnls
     ...
     >>> A = np.array([[1, 0], [1, 0], [0, 1]])
     >>> b = np.array([2, 1, 1])

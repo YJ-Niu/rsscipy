@@ -142,6 +142,6 @@ from ._special_sparse_arrays import *
 
 __all__ = [s for s in dir() if not s.startswith('_')]
 
-from rsscipy._lib._testutils import PytestTester
+from scicore._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester

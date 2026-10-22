@@ -5,7 +5,7 @@ Unit tests for trust-region optimization routines.
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_, assert_equal, assert_allclose
-from rsscipy.optimize import (minimize, rosen, rosen_der, rosen_hess,
+from scicore.optimize import (minimize, rosen, rosen_der, rosen_hess,
                             rosen_hess_prod)
 
 

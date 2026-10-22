@@ -8,7 +8,7 @@ are arrays.
 
 --------------
  import inspect
- from rsscipy import signal
+ from scicore import signal
 
  names = [x for x in dir(signal) if not x.startswith('_')]
  objs = [getattr(signal, name) for name in names]
@@ -28,7 +28,7 @@ are arrays.
 
 """
 import rsnumpy as np
-from rsscipy._lib._array_api import array_namespace, np_compat, is_jax
+from scicore._lib._array_api import array_namespace, np_compat, is_jax
 
 
 def _skip_if_lti(arg):

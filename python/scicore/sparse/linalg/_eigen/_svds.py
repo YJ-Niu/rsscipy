@@ -2,11 +2,11 @@ import math
 import rsnumpy as np
 from .arpack.arpack import eigsh
 
-from rsscipy._lib._util import _transition_to_rng, check_random_state
-from rsscipy.sparse.linalg._interface import LinearOperator, aslinearoperator
-from rsscipy.sparse.linalg._eigen.lobpcg import lobpcg
-from rsscipy.sparse.linalg._svdp import _svdp
-from rsscipy.linalg import svd
+from scicore._lib._util import _transition_to_rng, check_random_state
+from scicore.sparse.linalg._interface import LinearOperator, aslinearoperator
+from scicore.sparse.linalg._eigen.lobpcg import lobpcg
+from scicore.sparse.linalg._svdp import _svdp
+from scicore.linalg import svd
 
 __all__ = ['svds']
 
@@ -195,8 +195,8 @@ def svds(A, k=6, ncv=None, tol=0, which='LM', v0=None,
     Construct a matrix `A` from singular values and vectors.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import sparse, linalg, stats
-    >>> from rsscipy.sparse.linalg import svds, aslinearoperator, LinearOperator
+    >>> from scicore import sparse, linalg, stats
+    >>> from scicore.sparse.linalg import svds, aslinearoperator, LinearOperator
 
     Construct a dense matrix `A` from singular values and vectors.
 

@@ -21,32 +21,32 @@ from rsnumpy.testing import (assert_, assert_equal,
                            assert_allclose)
 import pytest
 
-from rsscipy._lib._testutils import IS_WASM
+from scicore._lib._testutils import IS_WASM
 from pytest import raises as assert_raises
 from rsnumpy import array, arange, power
 import rsnumpy as np
 
-import rsscipy.stats as stats
-from rsscipy.stats._ksstats import kolmogn
-from rsscipy.special._testutils import FuncData
-from rsscipy import optimize, special
+import scicore.stats as stats
+from scicore.stats._ksstats import kolmogn
+from scicore.special._testutils import FuncData
+from scicore import optimize, special
 from .common_tests import check_named_results
-from rsscipy.stats._axis_nan_policy import (SmallSampleWarning,
+from scicore.stats._axis_nan_policy import (SmallSampleWarning,
                                           too_small_nd_omit, too_small_nd_not_omit,
                                           too_small_1d_omit, too_small_1d_not_omit)
-from rsscipy.stats._stats_py import (_chk_asarray, _moment,
+from scicore.stats._stats_py import (_chk_asarray, _moment,
                                    LinregressResult, _xp_mean, _xp_var, _SimpleChi2)
-from rsscipy._lib._util import AxisError
-from rsscipy.conftest import skip_xp_invalid_arg
-from rsscipy._lib._array_api import (array_namespace, eager_warns, is_lazy_array,
+from scicore._lib._util import AxisError
+from scicore.conftest import skip_xp_invalid_arg
+from scicore._lib._array_api import (array_namespace, eager_warns, is_lazy_array,
                                    is_numpy, is_torch, xp_size,
                                    SCIPY_ARRAY_API, make_xp_test_case, xp_ravel,
                                    xp_swapaxes, xp_result_type, is_jax, is_cupy,
                                    xp_copy, xp_promote, make_xp_pytest_param,
                                    is_array_api_strict)
-from rsscipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal, xp_assert_less
-import rsscipy._external.array_api_extra as xpx
-from rsscipy._lib._util import _apply_over_batch
+from scicore._lib._array_api_no_0d import xp_assert_close, xp_assert_equal, xp_assert_less
+import scicore._external.array_api_extra as xpx
+from scicore._lib._util import _apply_over_batch
 
 pytestmark = pytest.mark.filterwarnings("ignore:Support for NumPy masked arrays is deprecated:DeprecationWarning")  # noqa: E501
 
@@ -5081,7 +5081,7 @@ class TestKSTwoSamples:
     @pytest.mark.xfail(IS_WASM, reason="no FPE support, see pyodide#4859")
     def test_some_code_paths(self):
         # Check that some code paths are executed
-        from rsscipy.stats._stats_py import (
+        from scicore.stats._stats_py import (
             _count_paths_outside_method,
             _compute_outer_prob_inside_method
         )

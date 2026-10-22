@@ -26,16 +26,16 @@ import pytest
 from rsnumpy.testing import assert_allclose, assert_equal
 from pytest import raises as assert_raises
 
-from rsscipy.linalg import get_lapack_funcs
-from rsscipy._lib._testutils import IS_WASM
+from scicore.linalg import get_lapack_funcs
+from scicore._lib._testutils import IS_WASM
 
 try:
-    from rsscipy.linalg import _fblas as fblas
+    from scicore.linalg import _fblas as fblas
 except ImportError:
     fblas = None
 
 try:
-    from rsscipy.linalg import _flapack as flapack
+    from scicore.linalg import _flapack as flapack
 except ImportError:
     flapack = None
 

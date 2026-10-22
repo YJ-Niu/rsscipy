@@ -1,6 +1,6 @@
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import stats as _rust_stats
+from scicore._scicore_rs import stats as _rust_stats
 
 
 def _as_bytes(array):
@@ -8,7 +8,7 @@ def _as_bytes(array):
 
 
 def _qmvn_inner(q, rndm, n_qmc_samples, n_batches, cho, lo, hi):
-    from rsscipy.special import ndtr, ndtri
+    from scicore.special import ndtr, ndtri
 
     return _rust_stats.qmvn_inner(
         _as_bytes(q),
@@ -24,7 +24,7 @@ def _qmvn_inner(q, rndm, n_qmc_samples, n_batches, cho, lo, hi):
 
 
 def _qmvt_inner(q, rndm, n_qmc_samples, n_batches, cho, lo, hi, nu):
-    from rsscipy.special import gammaincinv, ndtr, ndtri
+    from scicore.special import gammaincinv, ndtr, ndtri
 
     return _rust_stats.qmvt_inner(
         _as_bytes(q),

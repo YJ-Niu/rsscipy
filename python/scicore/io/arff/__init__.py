@@ -20,6 +20,6 @@ from . import _arffread
 
 __all__ = _arffread.__all__
 
-from rsscipy._lib._testutils import PytestTester
+from scicore._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester

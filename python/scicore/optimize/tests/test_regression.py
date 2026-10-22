@@ -5,7 +5,7 @@ import rsnumpy as np
 from rsnumpy.testing import assert_almost_equal
 from pytest import raises as assert_raises
 
-import rsscipy.optimize
+import scicore.optimize
 
 
 class TestRegression:

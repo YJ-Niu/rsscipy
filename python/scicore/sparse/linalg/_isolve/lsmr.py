@@ -21,9 +21,9 @@ __all__ = ['lsmr']
 from rsnumpy import zeros, inf, atleast_1d, result_type
 from rsnumpy.linalg import norm
 from math import sqrt
-from rsscipy.sparse.linalg._interface import aslinearoperator
+from scicore.sparse.linalg._interface import aslinearoperator
 
-from rsscipy.sparse.linalg._isolve.lsqr import _sym_ortho
+from scicore.sparse.linalg._isolve.lsqr import _sym_ortho
 
 
 def lsmr(A, b, damp=0.0, atol=1e-6, btol=1e-6, conlim=1e8,
@@ -142,8 +142,8 @@ def lsmr(A, b, damp=0.0, atol=1e-6, btol=1e-6, conlim=1e8,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import csc_array
-    >>> from rsscipy.sparse.linalg import lsmr
+    >>> from scicore.sparse import csc_array
+    >>> from scicore.sparse.linalg import lsmr
     >>> A = csc_array([[1., 0.], [1., 1.], [0., 1.]], dtype=float)
 
     The first example has the trivial solution ``[0, 0]``

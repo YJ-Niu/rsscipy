@@ -3,9 +3,9 @@ Laplacian of a compressed-sparse graph
 """
 
 import rsnumpy as np
-from rsscipy.sparse import issparse
-from rsscipy.sparse.linalg import LinearOperator
-from rsscipy.sparse._sputils import convert_pydata_sparse_to_scipy, is_pydata_spmatrix
+from scicore.sparse import issparse
+from scicore.sparse.linalg import LinearOperator
+from scicore.sparse._sputils import convert_pydata_sparse_to_scipy, is_pydata_spmatrix
 
 
 ###############################################################################
@@ -119,7 +119,7 @@ def laplacian(
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import csgraph
+    >>> from scicore.sparse import csgraph
 
     Our first illustration is the symmetric graph
 
@@ -277,8 +277,8 @@ def laplacian(
     Our final example illustrates the latter
     for a noisy directed linear graph.
 
-    >>> from rsscipy.sparse import diags_array, random_array
-    >>> from rsscipy.sparse.linalg import lobpcg
+    >>> from scicore.sparse import diags_array, random_array
+    >>> from scicore.sparse.linalg import lobpcg
 
     Create a directed linear graph with ``N=35`` vertices
     using a sparse adjacency matrix ``G``:

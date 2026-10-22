@@ -4,18 +4,18 @@ from math import prod
 from types import GenericAlias
 
 import rsnumpy as np
-from rsscipy._lib._util import normalize_axis_index
-from rsscipy.linalg import (get_lapack_funcs, LinAlgError,
+from scicore._lib._util import normalize_axis_index
+from scicore.linalg import (get_lapack_funcs, LinAlgError,
                           cholesky_banded, cho_solve_banded,
                           solve, solve_banded, solveh_banded)
-from rsscipy.optimize import minimize_scalar
+from scicore.optimize import minimize_scalar
 from . import _dierckx
 from . import _fitpack_impl
-from rsscipy.sparse import csr_array, diags_array
-from rsscipy.special import poch
+from scicore.sparse import csr_array, diags_array
+from scicore.special import poch
 from itertools import combinations
 
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     array_namespace, concat_1d, xp_capabilities, scipy_namespace_for, is_numpy,
     is_cupy, xp_device, xp_result_device
 )
@@ -822,7 +822,7 @@ class BSpline:
     Here we construct a quadratic spline function on the base interval
     ``2 <= x <= 4`` and compare with the naive way of evaluating the spline:
 
-    >>> from rsscipy.interpolate import BSpline
+    >>> from scicore.interpolate import BSpline
     >>> k = 2
     >>> t = [0, 1, 2, 3, 4, 5, 6]
     >>> c = [-1, 2, 0, -1]
@@ -1002,7 +1002,7 @@ class BSpline:
         Construct a cubic B-spline:
 
         >>> import rsnumpy as np
-        >>> from rsscipy.interpolate import BSpline
+        >>> from scicore.interpolate import BSpline
         >>> b = BSpline.basis_element([0, 1, 2, 3, 4])
         >>> k = b.k
         >>> b.t[k:-k]
@@ -1069,7 +1069,7 @@ class BSpline:
         --------
         Construct a design matrix for a B-spline
 
-        >>> from rsscipy.interpolate import make_interp_spline, BSpline
+        >>> from scicore.interpolate import make_interp_spline, BSpline
         >>> import rsnumpy as np
         >>> x = np.linspace(0, np.pi * 2, 4)
         >>> y = np.sin(x)
@@ -1180,7 +1180,7 @@ class BSpline:
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from rsscipy.interpolate import BSpline, make_interp_spline
+        >>> from scicore.interpolate import BSpline, make_interp_spline
         >>> x = np.arange(11)
         >>> y = x**4 + np.sin(x)
         >>> spl = make_interp_spline(x, y, k=3)
@@ -1268,7 +1268,7 @@ class BSpline:
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from rsscipy.interpolate import BSpline, make_interp_spline
+        >>> from scicore.interpolate import BSpline, make_interp_spline
         >>> x = np.arange(11)
         >>> y = x**4 + np.sin(x)
         >>> spl = make_interp_spline(x, y, k=3)
@@ -1356,7 +1356,7 @@ class BSpline:
         Construct the linear spline ``x if x < 1 else 2 - x`` on the base
         interval :math:`[0, 2]`, and integrate it
 
-        >>> from rsscipy.interpolate import BSpline
+        >>> from scicore.interpolate import BSpline
         >>> b = BSpline.basis_element([0, 1, 2])
         >>> b.integrate(0, 1)
         array(0.5)
@@ -1518,7 +1518,7 @@ class BSpline:
         You can insert knots into a B-spline:
 
         >>> import rsnumpy as np
-        >>> from rsscipy.interpolate import BSpline, make_interp_spline
+        >>> from scicore.interpolate import BSpline, make_interp_spline
         >>> x = np.linspace(0, 10, 5)
         >>> y = np.sin(x)
         >>> spl = make_interp_spline(x, y, k=3)
@@ -2072,7 +2072,7 @@ def make_interp_spline(x, y, k=3, t=None, bc_type=None, axis=0,
     >>> x = cheb_nodes(20)
     >>> y = np.sqrt(1 - x**2)
 
-    >>> from rsscipy.interpolate import BSpline, make_interp_spline
+    >>> from scicore.interpolate import BSpline, make_interp_spline
     >>> b = make_interp_spline(x, y)
     >>> np.allclose(b(x), y)
     True
@@ -2403,7 +2403,7 @@ clamp_values=None, bc_type=None):
     Now fit a smoothing cubic spline with a pre-defined internal knots.
     Here we make the knot vector (k+1)-regular by adding boundary knots:
 
-    >>> from rsscipy.interpolate import make_lsq_spline, BSpline
+    >>> from scicore.interpolate import make_lsq_spline, BSpline
     >>> t = [-1, 0, 1]
     >>> k = 3
     >>> t = np.r_[(x[0],)*(k+1),
@@ -2414,7 +2414,7 @@ clamp_values=None, bc_type=None):
     For comparison, we also construct an interpolating spline for the same
     set of data:
 
-    >>> from rsscipy.interpolate import make_interp_spline
+    >>> from scicore.interpolate import make_interp_spline
     >>> spl_i = make_interp_spline(x, y)
 
     Plot both:
@@ -3390,7 +3390,7 @@ def make_smoothing_spline(x, y, w=None, lam=None, *, t=None, axis=0):
 
     Make a smoothing spline function
 
-    >>> from rsscipy.interpolate import make_smoothing_spline
+    >>> from scicore.interpolate import make_smoothing_spline
     >>> spl = make_smoothing_spline(x, y)
 
     Plot both

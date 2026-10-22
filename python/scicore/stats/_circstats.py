@@ -1,10 +1,10 @@
 import math
 from math import pi
-import rsscipy._external.array_api_extra as xpx
-from rsscipy._lib._array_api import (array_namespace, xp_promote, xp_capabilities, is_jax,
+import scicore._external.array_api_extra as xpx
+from scicore._lib._array_api import (array_namespace, xp_promote, xp_capabilities, is_jax,
                                    xp_vector_norm, is_marray, xp_size, xp_device)
-from rsscipy.stats._axis_nan_policy import _axis_nan_policy_factory, _broadcast_arrays
-from rsscipy.stats._stats_py import _xp_mean
+from scicore.stats._axis_nan_policy import _axis_nan_policy_factory, _broadcast_arrays
+from scicore.stats._stats_py import _xp_mean
 
 
 __all__ = ['circmedian', 'circmean', 'circvar', 'circstd', 'directional_stats']
@@ -61,7 +61,7 @@ def _circmeandev(sample, alpha, *, high=2*math.pi, low=0):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats._circstats import _circmeandev
+    >>> from scicore.stats._circstats import _circmeandev
     >>> import matplotlib.pyplot as plt
     >>> sample = np.array([20, 30, 330])
     >>> dev = _circmeandev(sample, sample, high=360, low=0)
@@ -192,7 +192,7 @@ def circmedian(sample, *, convention='arc-distance', high=2*math.pi, low=0, axis
     Consider Example 1 from [3]_, expressed in degrees for readability.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> sample = np.array([101.25, 101.25, 0, -101.25, -101.25])
 
     The unique arc-distance median is 0 because it minimizes the mean arc distance to
@@ -367,7 +367,7 @@ def circmean(samples, high=2*pi, low=0, axis=None, nan_policy='propagate'):
     For readability, all angles are printed out in degrees.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import circmean
+    >>> from scicore.stats import circmean
     >>> import matplotlib.pyplot as plt
     >>> angles = np.deg2rad(np.array([20, 30, 330]))
     >>> circmean = circmean(angles)
@@ -465,7 +465,7 @@ def circvar(samples, high=2*pi, low=0, axis=None, nan_policy='propagate'):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import circvar
+    >>> from scicore.stats import circvar
     >>> import matplotlib.pyplot as plt
     >>> samples_1 = np.array([0.072, -0.158, 0.077, 0.108, 0.286,
     ...                       0.133, -0.473, -0.001, -0.348, 0.131])
@@ -585,7 +585,7 @@ def circstd(samples, high=2*pi, low=0, axis=None, nan_policy='propagate', *,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import circstd
+    >>> from scicore.stats import circstd
     >>> import matplotlib.pyplot as plt
     >>> samples_1 = np.array([0.072, -0.158, 0.077, 0.108, 0.286,
     ...                       0.133, -0.473, -0.001, -0.348, 0.131])
@@ -717,7 +717,7 @@ def directional_stats(samples, *, axis=0, normalize=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import directional_stats
+    >>> from scicore.stats import directional_stats
     >>> data = np.array([[3, 4],    # first observation, 2D vector space
     ...                  [6, -8]])  # second observation
     >>> dirstats = directional_stats(data)

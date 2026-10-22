@@ -11,8 +11,8 @@ from rsnumpy.testing import (assert_array_almost_equal,
                            assert_array_equal, assert_equal, assert_)
 from pytest import raises as assert_raises
 
-from rsscipy.io.arff import loadarff
-from rsscipy.io.arff._arffread import read_header, ParseArffError
+from scicore.io.arff import loadarff
+from scicore.io.arff._arffread import read_header, ParseArffError
 
 
 data_path = pjoin(os.path.dirname(__file__), 'data')

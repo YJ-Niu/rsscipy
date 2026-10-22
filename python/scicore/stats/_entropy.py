@@ -6,9 +6,9 @@ Created on Fri Apr  2 09:06:05 2021
 
 import math
 import rsnumpy as np
-from rsscipy import special
+from scicore import special
 from ._axis_nan_policy import _axis_nan_policy_factory
-from rsscipy._lib._array_api import (array_namespace, xp_promote, xp_device, is_marray,
+from scicore._lib._array_api import (array_namespace, xp_promote, xp_device, is_marray,
                                    _masked_apply, _share_masks, xp_capabilities)
 
 __all__ = ['entropy', 'differential_entropy']
@@ -104,7 +104,7 @@ def entropy(pk: np.typing.ArrayLike,
     The outcome of a fair coin is the most uncertain:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import entropy
+    >>> from scicore.stats import entropy
     >>> base = 2  # work in units of bits
     >>> pk = np.array([1/2, 1/2])  # fair coin
     >>> H = entropy(pk, base=base)
@@ -272,7 +272,7 @@ def differential_entropy(
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import differential_entropy, norm
+    >>> from scicore.stats import differential_entropy, norm
 
     Entropy of a standard normal distribution:
 
@@ -291,7 +291,7 @@ def differential_entropy(
     compare the root mean squared error (over 1000 trials) between the estimate
     and the true differential entropy of the distribution.
 
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> import matplotlib.pyplot as plt
     >>>
     >>>

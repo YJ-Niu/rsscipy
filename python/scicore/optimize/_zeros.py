@@ -2,7 +2,7 @@
 
 Provides root-finding (zeros) routines used by ``scipy.optimize``.
 This is a stub: real zero-finding should be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

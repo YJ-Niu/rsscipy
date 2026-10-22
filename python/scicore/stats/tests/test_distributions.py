@@ -21,20 +21,20 @@ from pytest import raises as assert_raises
 import rsnumpy as np
 from rsnumpy import typecodes, array
 from rsnumpy.lib.recfunctions import rec_append_fields
-from rsscipy import special
-from rsscipy._lib._util import check_random_state
-from rsscipy.integrate import (IntegrationWarning, quad, trapezoid,
+from scicore import special
+from scicore._lib._util import check_random_state
+from scicore.integrate import (IntegrationWarning, quad, trapezoid,
                              cumulative_trapezoid)
-import rsscipy.stats as stats
-from rsscipy.stats._distn_infrastructure import argsreduce
-from rsscipy.stats._constants import _XMAX
-import rsscipy.stats.distributions
+import scicore.stats as stats
+from scicore.stats._distn_infrastructure import argsreduce
+from scicore.stats._constants import _XMAX
+import scicore.stats.distributions
 
-from rsscipy.special import xlogy, polygamma, entr
-from rsscipy.stats._distr_params import distcont, invdistcont
+from scicore.special import xlogy, polygamma, entr
+from scicore.stats._distr_params import distcont, invdistcont
 from .test_discrete_basic import distdiscrete, invdistdiscrete
-from rsscipy.stats._continuous_distns import FitDataError, _argus_phi
-from rsscipy.optimize import root, fmin, differential_evolution
+from scicore.stats._continuous_distns import FitDataError, _argus_phi
+from scicore.optimize import root, fmin, differential_evolution
 from itertools import product
 
 # python -OO strips docstrings
@@ -4792,7 +4792,7 @@ class TestExponNorm:
 
 class TestGenExpon:
     def test_pdf_unity_area(self):
-        from rsscipy.integrate import simpson
+        from scicore.integrate import simpson
         # PDF should integrate to one
         p = stats.genexpon.pdf(np.arange(0, 10, 0.01), 0.5, 0.5, 2.0)
         assert_almost_equal(simpson(p, dx=0.01), 1, 1)

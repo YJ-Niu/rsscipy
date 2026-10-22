@@ -4,7 +4,7 @@ Unit tests for optimization routines from minpack.py.
 import warnings
 import pytest
 
-from rsscipy._lib._testutils import IS_WASM
+from scicore._lib._testutils import IS_WASM
 import threading
 
 from rsnumpy.testing import (assert_, assert_almost_equal, assert_array_equal,
@@ -14,11 +14,11 @@ import rsnumpy as np
 from rsnumpy import array, float64
 from multiprocessing.pool import ThreadPool
 
-from rsscipy import optimize, linalg
-from rsscipy.special import lambertw
-from rsscipy.optimize._minpack_py import leastsq, curve_fit, fixed_point
-from rsscipy.optimize import OptimizeWarning
-from rsscipy.optimize._minimize import Bounds
+from scicore import optimize, linalg
+from scicore.special import lambertw
+from scicore.optimize._minpack_py import leastsq, curve_fit, fixed_point
+from scicore.optimize import OptimizeWarning
+from scicore.optimize._minimize import Bounds
 
 
 class ReturnShape:

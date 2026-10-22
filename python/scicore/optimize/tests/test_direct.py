@@ -5,7 +5,7 @@ from rsnumpy.testing import (assert_allclose,
                            assert_array_less)
 import pytest
 import rsnumpy as np
-from rsscipy.optimize import direct, Bounds
+from scicore.optimize import direct, Bounds
 import threading
 
 

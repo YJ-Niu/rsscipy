@@ -1,6 +1,6 @@
 """Nearly exact trust-region optimization subproblem."""
 import rsnumpy as np
-from rsscipy.linalg import (norm, get_lapack_funcs, solve_triangular,
+from scicore.linalg import (norm, get_lapack_funcs, solve_triangular,
                           cho_solve)
 from ._trustregion import (_minimize_trust_region, BaseQuadraticSubproblem)
 

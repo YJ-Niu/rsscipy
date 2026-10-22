@@ -10,10 +10,10 @@ import warnings
 
 import pytest
 
-import rsscipy
+import scicore
 
-from rsscipy._lib._public_api import PUBLIC_MODULES
-from rsscipy.conftest import xp_available_backends
+from scicore._lib._public_api import PUBLIC_MODULES
+from scicore.conftest import xp_available_backends
 
 
 def test_dir_testing():

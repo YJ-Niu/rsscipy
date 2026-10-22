@@ -35,8 +35,8 @@ import rsnumpy as np
 import operator
 import math
 
-from rsscipy._lib._util import normalize_axis_index
-from rsscipy._lib._array_api import (xp_result_device, array_namespace, is_cupy,
+from scicore._lib._util import normalize_axis_index
+from scicore._lib._array_api import (xp_result_device, array_namespace, is_cupy,
                                    xp_size, xp_device)
 from . import _ni_support
 from . import _nd_image
@@ -348,8 +348,8 @@ def vectorized_filter(input, function, *, size=None, footprint=None, output=None
     keyword argument ``axis``.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import datasets, ndimage
-    >>> from rsscipy.ndimage import vectorized_filter
+    >>> from scicore import datasets, ndimage
+    >>> from scicore.ndimage import vectorized_filter
     >>> import matplotlib.pyplot as plt
     >>> ascent = ndimage.zoom(datasets.ascent(), 0.5).astype(np.float16)
     >>> ascent[::16, ::16] = np.nan
@@ -409,7 +409,7 @@ def vectorized_filter(input, function, *, size=None, footprint=None, output=None
     frequently occurring value within the window. A simple (but rather slow)
     approach is to use `generic_filter` with `scipy.stats.mode`.
 
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> rng = np.random.default_rng(3195824598724609246)
     >>> input = rng.integers(255, size=(50, 50)).astype(np.uint8)
     >>> def simple_mode(input):
@@ -589,7 +589,7 @@ def correlate1d(input, weights, axis=-1, output=None, mode="reflect",
 
     Examples
     --------
-    >>> from rsscipy.ndimage import correlate1d
+    >>> from scicore.ndimage import correlate1d
     >>> correlate1d([2, 8, 0, 4, 1, 9, 9, 0], weights=[1, 3])
     array([ 8, 26,  8, 12,  7, 28, 36,  9])
     """
@@ -650,7 +650,7 @@ def convolve1d(input, weights, axis=-1, output=None, mode="reflect",
 
     Examples
     --------
-    >>> from rsscipy.ndimage import convolve1d
+    >>> from scicore.ndimage import convolve1d
     >>> convolve1d([2, 8, 0, 4, 1, 9, 9, 0], weights=[1, 3])
     array([14, 24,  4, 13, 12, 36, 27,  0])
     """
@@ -735,7 +735,7 @@ def gaussian_filter1d(input, sigma, axis=-1, order=0, output=None,
 
     Examples
     --------
-    >>> from rsscipy.ndimage import gaussian_filter1d
+    >>> from scicore.ndimage import gaussian_filter1d
     >>> import rsnumpy as np
     >>> gaussian_filter1d([1.0, 2.0, 3.0, 4.0, 5.0], 1)
     array([ 1.42704095,  2.06782203,  3.        ,  3.93217797,  4.57295905])
@@ -824,7 +824,7 @@ def gaussian_filter(input, sigma, order=0, output=None,
 
     Examples
     --------
-    >>> from rsscipy.ndimage import gaussian_filter
+    >>> from scicore.ndimage import gaussian_filter
     >>> import rsnumpy as np
     >>> a = np.arange(50, step=2).reshape((5,5))
     >>> a
@@ -840,7 +840,7 @@ def gaussian_filter(input, sigma, order=0, output=None,
            [29, 31, 33, 34, 36],
            [35, 37, 39, 40, 42]])
 
-    >>> from rsscipy import datasets
+    >>> from scicore import datasets
     >>> import matplotlib.pyplot as plt
     >>> fig = plt.figure()
     >>> plt.gray()  # show the filtered result in grayscale
@@ -903,7 +903,7 @@ def prewitt(input, axis=-1, output=None, mode="reflect", cval=0.0):
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
     >>> ascent = datasets.ascent()
@@ -961,7 +961,7 @@ def sobel(input, axis=-1, output=None, mode="reflect", cval=0.0):
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
     >>> ascent = datasets.ascent().astype('int32')
@@ -1066,7 +1066,7 @@ def laplace(input, output=None, mode="reflect", cval=0.0, *, axes=None):
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import matplotlib.pyplot as plt
     >>> fig = plt.figure()
     >>> plt.gray()  # show the filtered result in grayscale
@@ -1111,7 +1111,7 @@ def gaussian_laplace(input, sigma, output=None, mode="reflect",
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import matplotlib.pyplot as plt
     >>> ascent = datasets.ascent()
 
@@ -1237,7 +1237,7 @@ def gaussian_gradient_magnitude(input, sigma, output=None,
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import matplotlib.pyplot as plt
     >>> fig = plt.figure()
     >>> plt.gray()  # show the filtered result in grayscale
@@ -1360,7 +1360,7 @@ def correlate(input, weights, output=None, mode='reflect', cval=0.0,
     Correlation is the process of moving a filter mask often referred to
     as kernel over the image and computing the sum of products at each location.
 
-    >>> from rsscipy.ndimage import correlate
+    >>> from scicore.ndimage import correlate
     >>> import rsnumpy as np
     >>> input_img = np.arange(25).reshape(5,5)
     >>> print(input_img)
@@ -1454,7 +1454,7 @@ def convolve(input, weights, output=None, mode='reflect', cval=0.0,
     ...               [0, 0, 0, 7],
     ...               [9, 3, 0, 0]])
     >>> k = np.array([[1,1,1],[1,1,0],[1,0,0]])
-    >>> from rsscipy import ndimage
+    >>> from scicore import ndimage
     >>> ndimage.convolve(a, k, mode='constant', cval=0.0)
     array([[11, 10,  7,  4],
            [10,  3, 11, 11],
@@ -1538,7 +1538,7 @@ def uniform_filter1d(input, size, axis=-1, output=None,
 
     Examples
     --------
-    >>> from rsscipy.ndimage import uniform_filter1d
+    >>> from scicore.ndimage import uniform_filter1d
     >>> uniform_filter1d([2, 8, 0, 4, 1, 9, 9, 0], size=3)
     array([4, 3, 4, 1, 4, 6, 6, 3])
     """
@@ -1603,7 +1603,7 @@ def uniform_filter(input, size=3, output=None, mode="reflect",
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import matplotlib.pyplot as plt
     >>> fig = plt.figure()
     >>> plt.gray()  # show the filtered result in grayscale
@@ -1673,7 +1673,7 @@ def minimum_filter1d(input, size, axis=-1, output=None,
 
     Examples
     --------
-    >>> from rsscipy.ndimage import minimum_filter1d
+    >>> from scicore.ndimage import minimum_filter1d
     >>> minimum_filter1d([2, 8, 0, 4, 1, 9, 9, 0], size=3)
     array([2, 0, 0, 0, 1, 1, 0, 0])
     """
@@ -1730,7 +1730,7 @@ def maximum_filter1d(input, size, axis=-1, output=None,
 
     Examples
     --------
-    >>> from rsscipy.ndimage import maximum_filter1d
+    >>> from scicore.ndimage import maximum_filter1d
     >>> maximum_filter1d([2, 8, 0, 4, 1, 9, 9, 0], size=3)
     array([8, 8, 8, 4, 9, 9, 9, 9])
     """
@@ -1872,7 +1872,7 @@ def minimum_filter(input, size=None, footprint=None, output=None,
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import matplotlib.pyplot as plt
     >>> fig = plt.figure()
     >>> plt.gray()  # show the filtered result in grayscale
@@ -1922,7 +1922,7 @@ def maximum_filter(input, size=None, footprint=None, output=None,
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import matplotlib.pyplot as plt
     >>> fig = plt.figure()
     >>> plt.gray()  # show the filtered result in grayscale
@@ -2072,7 +2072,7 @@ def rank_filter(input, rank, size=None, footprint=None, output=None,
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import matplotlib.pyplot as plt
     >>> fig = plt.figure()
     >>> plt.gray()  # show the filtered result in grayscale
@@ -2136,7 +2136,7 @@ def median_filter(input, size=None, footprint=None, output=None,
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import matplotlib.pyplot as plt
     >>> fig = plt.figure()
     >>> plt.gray()  # show the filtered result in grayscale
@@ -2183,7 +2183,7 @@ def percentile_filter(input, percentile, size=None, footprint=None,
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import matplotlib.pyplot as plt
     >>> fig = plt.figure()
     >>> plt.gray()  # show the filtered result in grayscale
@@ -2275,7 +2275,7 @@ def generic_filter1d(input, function, filter_size, axis=-1,
     required in-place modification of the ``output_line`` array.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.ndimage import generic_filter1d
+    >>> from scicore.ndimage import generic_filter1d
     >>> from rsnumpy.lib.stride_tricks import sliding_window_view
 
     >>> def local_range(input_line, output_line):
@@ -2385,8 +2385,8 @@ def generic_filter(input, function, size=None, footprint=None,
     filtering.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import datasets
-    >>> from rsscipy.ndimage import zoom, generic_filter
+    >>> from scicore import datasets
+    >>> from scicore.ndimage import zoom, generic_filter
     >>> import matplotlib.pyplot as plt
     >>> ascent = zoom(datasets.ascent(), 0.5)
 

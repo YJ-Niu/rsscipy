@@ -1,6 +1,6 @@
 import rsnumpy as np
 from rsnumpy import poly1d
-from rsscipy.special import beta
+from scicore.special import beta
 
 
 # The following code was used to generate the Pade coefficients for the

@@ -3,9 +3,9 @@ import warnings
 import rsnumpy as np
 from rsnumpy.testing import assert_array_equal, assert_allclose
 from copy import deepcopy
-from rsscipy.stats.sampling import FastGeneratorInversion
-from rsscipy import stats
-from rsscipy._lib._testutils import IS_MUSL
+from scicore.stats.sampling import FastGeneratorInversion
+from scicore import stats
+from scicore._lib._testutils import IS_MUSL
 
 
 def test_bad_args():

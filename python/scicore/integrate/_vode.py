@@ -2,7 +2,7 @@
 
 Provides the VODE ODE solver interface used by ``scipy.integrate._ode``.
 This is a stub: real ODE solvers should be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

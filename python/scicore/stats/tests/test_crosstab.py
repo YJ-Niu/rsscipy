@@ -1,7 +1,7 @@
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_array_equal, assert_equal
-from rsscipy.stats.contingency import crosstab
+from scicore.stats.contingency import crosstab
 
 
 @pytest.mark.parametrize('sparse', [False, True])

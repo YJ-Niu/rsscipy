@@ -1,6 +1,6 @@
 """Dog-leg trust-region optimization."""
 import rsnumpy as np
-import rsscipy.linalg
+import scicore.linalg
 from ._trustregion import (_minimize_trust_region, BaseQuadraticSubproblem)
 
 __all__ = []

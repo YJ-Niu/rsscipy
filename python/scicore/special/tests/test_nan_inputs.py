@@ -8,7 +8,7 @@ from collections.abc import Callable
 import rsnumpy as np
 from rsnumpy.testing import assert_array_equal, assert_
 import pytest
-import rsscipy.special as sc
+import scicore.special as sc
 
 
 KNOWNFAILURES: dict[str, Callable] = {}

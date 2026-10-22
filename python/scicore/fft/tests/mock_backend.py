@@ -1,5 +1,5 @@
 import rsnumpy as np
-import rsscipy.fft
+import scicore.fft
 import threading
 
 class _MockFunction:

@@ -3,7 +3,7 @@ import pytest
 import threading
 from rsnumpy.testing import assert_allclose, assert_equal
 
-from rsscipy.optimize import (
+from scicore.optimize import (
     Bounds,
     LinearConstraint,
     NonlinearConstraint,

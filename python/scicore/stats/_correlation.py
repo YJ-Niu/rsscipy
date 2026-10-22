@@ -1,14 +1,14 @@
 import rsnumpy as np
 import math
-from rsscipy import stats, special
-from rsscipy._external import array_api_extra as xpx
-from rsscipy._lib._array_api import (xp_capabilities, array_namespace, xp_promote,
+from scicore import stats, special
+from scicore._external import array_api_extra as xpx
+from scicore._lib._array_api import (xp_capabilities, array_namespace, xp_promote,
                                    is_numpy, _share_masks, _count_nonmasked, is_marray,
                                    xp_device)
-from rsscipy.stats._stats_py import (_SimpleNormal, SignificanceResult, _get_pvalue,
+from scicore.stats._stats_py import (_SimpleNormal, SignificanceResult, _get_pvalue,
                                    _rankdata)
-from rsscipy.stats._axis_nan_policy import _axis_nan_policy_factory
-from rsscipy.stats._stats_mstats_common import (TheilslopesResult, _n_samples_optional_x,
+from scicore.stats._axis_nan_policy import _axis_nan_policy_factory
+from scicore.stats._stats_mstats_common import (TheilslopesResult, _n_samples_optional_x,
                                               SiegelslopesResult)
 
 
@@ -163,7 +163,7 @@ def chatterjeexi(x, y, *, axis=0, y_continuous=False, method='asymptotic'):
     nearly 1.0.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> rng = np.random.default_rng(348932549825235)
     >>> x = rng.uniform(0, 10, size=100)
     >>> y = np.sin(x)
@@ -341,7 +341,7 @@ def spearmanrho(x, y, /, *, alternative='two-sided', method=None, axis=0):
     Univariate samples, approximate p-value.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> x = [1, 2, 3, 4, 5]
     >>> y = [5, 6, 7, 8, 7]
     >>> res = stats.spearmanrho(x, y)
@@ -478,7 +478,7 @@ def theilslopes(y, x=None, alpha=0.95, method='separate', *, axis=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> import matplotlib.pyplot as plt
 
     >>> x = np.linspace(-5, 5, num=150)
@@ -594,7 +594,7 @@ def siegelslopes(y, x=None, method='hierarchical', *, axis=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> import matplotlib.pyplot as plt
 
     >>> x = np.linspace(-5, 5, num=150)

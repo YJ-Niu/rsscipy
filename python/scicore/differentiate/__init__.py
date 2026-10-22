@@ -22,6 +22,6 @@ from ._differentiate import *
 
 __all__ = ['derivative', 'jacobian', 'hessian']
 
-from rsscipy._lib._testutils import PytestTester
+from scicore._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester

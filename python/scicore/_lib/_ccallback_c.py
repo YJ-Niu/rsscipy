@@ -7,7 +7,7 @@ while the ``ctypes`` declarations stay in Python because they are pure glue.
 
 import ctypes
 
-from rsscipy._rsscipy_rs import _lib as _rust_lib
+from scicore._scicore_rs import _lib as _rust_lib
 
 check_capsule = _rust_lib.check_capsule
 get_capsule_signature = _rust_lib.get_capsule_signature

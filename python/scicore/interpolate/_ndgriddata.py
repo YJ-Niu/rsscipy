@@ -7,7 +7,7 @@ Convenience interface to N-D interpolation
 import rsnumpy as np
 from ._interpnd import (LinearNDInterpolator, NDInterpolatorBase,
      CloughTocher2DInterpolator, _ndim_coords_from_arrays)
-from rsscipy.spatial import KDTree
+from scicore.spatial import KDTree
 
 __all__ = ['griddata', 'NearestNDInterpolator', 'LinearNDInterpolator',
            'CloughTocher2DInterpolator']
@@ -65,7 +65,7 @@ class NearestNDInterpolator(NDInterpolatorBase):
     --------
     We can interpolate values on a 2D plane:
 
-    >>> from rsscipy.interpolate import NearestNDInterpolator
+    >>> from scicore.interpolate import NearestNDInterpolator
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng()
@@ -275,7 +275,7 @@ def griddata(points, values, xi, method='linear', fill_value=np.nan,
     This can be done with `griddata` -- below we try out all of the
     interpolation methods:
 
-    >>> from rsscipy.interpolate import griddata
+    >>> from scicore.interpolate import griddata
     >>> grid_z0 = griddata(points, values, (grid_x, grid_y), method='nearest')
     >>> grid_z1 = griddata(points, values, (grid_x, grid_y), method='linear')
     >>> grid_z2 = griddata(points, values, (grid_x, grid_y), method='cubic')

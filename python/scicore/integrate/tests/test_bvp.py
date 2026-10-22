@@ -6,9 +6,9 @@ from rsnumpy.testing import (assert_, assert_array_equal, assert_allclose,
                            assert_equal)
 from pytest import raises as assert_raises
 
-from rsscipy.sparse import coo_array
-from rsscipy.special import erf
-from rsscipy.integrate._bvp import (modify_mesh, estimate_fun_jac,
+from scicore.sparse import coo_array
+from scicore.special import erf
+from scicore.integrate._bvp import (modify_mesh, estimate_fun_jac,
                                   estimate_bc_jac, compute_jac_indices,
                                   construct_global_jac, solve_bvp)
 

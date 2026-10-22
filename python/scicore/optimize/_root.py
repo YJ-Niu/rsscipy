@@ -154,7 +154,7 @@ def root(fun, x0, args=(), method='hybr', jac=None, tol=None, callback=None,
 
     A solution can be obtained as follows.
 
-    >>> from rsscipy import optimize
+    >>> from scicore import optimize
     >>> sol = optimize.root(fun, [0, 0], jac=jac, method='hybr')
     >>> sol.x
     array([ 0.8411639,  0.1588361])
@@ -173,7 +173,7 @@ def root(fun, x0, args=(), method='hybr', jac=None, tol=None, callback=None,
 
     The solution can be found using the ``method='krylov'`` solver:
 
-    >>> from rsscipy import optimize
+    >>> from scicore import optimize
     >>> # parameters
     >>> nx, ny = 75, 75
     >>> hx, hy = 1./(nx-1), 1./(ny-1)
@@ -440,7 +440,7 @@ def _root_broyden1_doc():
     >>> def func(x):
     ...     return np.cos(x) + x[::-1] - [1, 2, 3, 4]
     ...
-    >>> from rsscipy import optimize
+    >>> from scicore import optimize
     >>> res = optimize.root(func, [1, 1, 1, 1], method='broyden1', tol=1e-14)
     >>> x = res.x
     >>> x

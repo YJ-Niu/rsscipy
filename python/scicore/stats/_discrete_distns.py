@@ -6,14 +6,14 @@ from functools import partial
 from collections.abc import Callable
 from typing import Any
 
-from rsscipy import special
-from rsscipy.special import entr, logsumexp, betaln, gammaln as gamln
-import rsscipy.special._ufuncs as scu
-from rsscipy.special import poisson_binom_cdf
-from rsscipy.special._spfun_stats import _poisson_binom_pmf
-from rsscipy._lib._util import rng_integers
-import rsscipy._external.array_api_extra as xpx
-from rsscipy.interpolate import interp1d
+from scicore import special
+from scicore.special import entr, logsumexp, betaln, gammaln as gamln
+import scicore.special._ufuncs as scu
+from scicore.special import poisson_binom_cdf
+from scicore.special._spfun_stats import _poisson_binom_pmf
+from scicore._lib._util import rng_integers
+import scicore._external.array_api_extra as xpx
+from scicore.interpolate import interp1d
 
 from rsnumpy import floor, ceil, log, exp, sqrt, log1p, expm1, tanh, cosh, sinh
 
@@ -620,7 +620,7 @@ class hypergeom_gen(rv_discrete):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import hypergeom
+    >>> from scicore.stats import hypergeom
     >>> import matplotlib.pyplot as plt
 
     Suppose we have a collection of 20 animals, of which 7 are dogs.  Then if
@@ -792,7 +792,7 @@ class nhypergeom_gen(rv_discrete):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import nhypergeom
+    >>> from scicore.stats import nhypergeom
     >>> import matplotlib.pyplot as plt
 
     Suppose we have a collection of 20 animals, of which 7 are dogs.
@@ -826,7 +826,7 @@ class nhypergeom_gen(rv_discrete):
 
     To verify the relationship between `hypergeom` and `nhypergeom`, use:
 
-    >>> from rsscipy.stats import hypergeom, nhypergeom
+    >>> from scicore.stats import hypergeom, nhypergeom
     >>> M, n, r = 45, 13, 8
     >>> k = 6
     >>> nhypergeom.pmf(k, M, n, r)
@@ -1203,7 +1203,7 @@ class randint_gen(rv_discrete):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import randint
+    >>> from scicore.stats import randint
     >>> import matplotlib.pyplot as plt
     >>> fig, ax = plt.subplots(1, 1)
 
@@ -1341,7 +1341,7 @@ class zipf_gen(rv_discrete):
     Confirm that `zipf` is the large `n` limit of `zipfian`.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import zipf, zipfian
+    >>> from scicore.stats import zipf, zipfian
     >>> k = np.arange(11)
     >>> np.allclose(zipf.pmf(k, a), zipfian.pmf(k, a, n=10000000))
     True
@@ -1417,7 +1417,7 @@ class zipfian_gen(rv_discrete):
     Confirm that `zipfian` reduces to `zipf` for large `n`, ``a > 1``.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import zipf, zipfian
+    >>> from scicore.stats import zipf, zipfian
     >>> k = np.arange(11)
     >>> np.allclose(zipfian.pmf(k, a=3.5, n=10000000), zipf.pmf(k, a=3.5))
     True

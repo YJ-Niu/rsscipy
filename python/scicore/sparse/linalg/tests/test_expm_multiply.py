@@ -7,12 +7,12 @@ from itertools import product
 import rsnumpy as np
 import pytest
 from rsnumpy.testing import (assert_allclose, assert_, assert_equal)
-from rsscipy.sparse import SparseEfficiencyWarning
-import rsscipy.sparse
-from rsscipy.sparse.linalg import aslinearoperator
-import rsscipy.linalg
-from rsscipy.sparse.linalg import expm as sp_expm
-from rsscipy.sparse.linalg._expm_multiply import (_theta, _compute_p_max,
+from scicore.sparse import SparseEfficiencyWarning
+import scicore.sparse
+from scicore.sparse.linalg import aslinearoperator
+import scicore.linalg
+from scicore.sparse.linalg import expm as sp_expm
+from scicore.sparse.linalg._expm_multiply import (_theta, _compute_p_max,
         _onenormest_matrix_power, expm_multiply, _expm_multiply_simple,
         _expm_multiply_interval)
 

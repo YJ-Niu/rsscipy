@@ -60,7 +60,7 @@ def spherical_jn(n, z, derivative=False):
     The spherical Bessel functions of the first kind :math:`j_n` accept
     both real and complex second argument. They can return a complex type:
 
-    >>> from rsscipy.special import spherical_jn
+    >>> from scicore.special import spherical_jn
     >>> spherical_jn(0, 3+5j)
     (-9.878987731663194-8.021894345786002j)
     >>> type(spherical_jn(0, 3+5j))
@@ -150,7 +150,7 @@ def spherical_yn(n, z, derivative=False):
     The spherical Bessel functions of the second kind :math:`y_n` accept
     both real and complex second argument. They can return a complex type:
 
-    >>> from rsscipy.special import spherical_yn
+    >>> from scicore.special import spherical_yn
     >>> spherical_yn(0, 3+5j)
     (8.022343088587197-9.880052589376795j)
     >>> type(spherical_yn(0, 3+5j))
@@ -239,7 +239,7 @@ def spherical_in(n, z, derivative=False):
     accept both real and complex second argument.
     They can return a complex type:
 
-    >>> from rsscipy.special import spherical_in
+    >>> from scicore.special import spherical_in
     >>> spherical_in(0, 3+5j)
     (-1.1689867793369182-1.2697305267234222j)
     >>> type(spherical_in(0, 3+5j))
@@ -328,7 +328,7 @@ def spherical_kn(n, z, derivative=False):
     accept both real and complex second argument.
     They can return a complex type:
 
-    >>> from rsscipy.special import spherical_kn
+    >>> from scicore.special import spherical_kn
     >>> spherical_kn(0, 3+5j)
     (0.012985785614001561+0.003354691603137546j)
     >>> type(spherical_kn(0, 3+5j))

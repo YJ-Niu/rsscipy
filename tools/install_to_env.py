@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PTH_NAME = "rsscipy.pth"
+PTH_NAME = "scicore.pth"
 
 
 def site_packages(python: str) -> Path:
@@ -36,7 +36,7 @@ def main(argv: list[str] | None = None) -> int:
     # 1. build the Rust extensions against exactly this interpreter
     sys.path.insert(0, str(ROOT / "tools"))
     os.environ["PYO3_PYTHON"] = python
-    print(f"[rsscipy] PYO3_PYTHON={python}")
+    print(f"[scicore] PYO3_PYTHON={python}")
     from build_rust import build
 
     build("release", offline=True)
@@ -47,8 +47,8 @@ def main(argv: list[str] | None = None) -> int:
     pth = target / PTH_NAME
     pth.write_text(f"{ROOT}\n", encoding="utf-8")
 
-    print(f"[rsscipy] wrote {pth} -> {ROOT}")
-    print(f"[rsscipy] `import scipy` now works with {python}")
+    print(f"[scicore] wrote {pth} -> {ROOT}")
+    print(f"[scicore] `import scipy` now works with {python}")
     return 0
 
 

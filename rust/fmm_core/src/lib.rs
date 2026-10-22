@@ -1,7 +1,7 @@
 //! Matrix Market I/O CPython extension.
 //!
 //! Rust replacement for the C++ `_fmm_core` extension; backs
-//! `rsscipy.io.mmread` / `mmwrite` / `mminfo`.
+//! `scicore.io.mmread` / `mmwrite` / `mminfo`.
 
 use std::path::PathBuf;
 

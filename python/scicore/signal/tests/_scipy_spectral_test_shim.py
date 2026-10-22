@@ -21,10 +21,10 @@ especially in the border handling.
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
 
-from rsscipy.signal import ShortTimeFFT
-from rsscipy.signal import get_window, stft, istft
-from rsscipy.signal._arraytools import const_ext, even_ext, odd_ext, zero_ext
-from rsscipy.signal._spectral_py import _triage_segments
+from scicore.signal import ShortTimeFFT
+from scicore.signal import get_window, stft, istft
+from scicore.signal._arraytools import const_ext, even_ext, odd_ext, zero_ext
+from scicore.signal._spectral_py import _triage_segments
 
 
 def _stft_wrapper(x, fs=1.0, window='hann', nperseg=256, noverlap=None,

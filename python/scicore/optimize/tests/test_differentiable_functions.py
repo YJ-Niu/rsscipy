@@ -1,20 +1,20 @@
 import pytest
 import rsnumpy as np
 
-from rsscipy._lib._testutils import IS_WASM
+from scicore._lib._testutils import IS_WASM
 from rsnumpy.testing import (TestCase, assert_array_almost_equal,
                            assert_array_equal, assert_, assert_allclose,
                            assert_equal)
-from rsscipy._lib._gcutils import assert_deallocated
-from rsscipy._lib._util import MapWrapper
-from rsscipy.sparse import csr_array
-from rsscipy.sparse.linalg import LinearOperator
-from rsscipy.optimize._differentiable_functions import (ScalarFunction,
+from scicore._lib._gcutils import assert_deallocated
+from scicore._lib._util import MapWrapper
+from scicore.sparse import csr_array
+from scicore.sparse.linalg import LinearOperator
+from scicore.optimize._differentiable_functions import (ScalarFunction,
                                                       VectorFunction,
                                                       LinearVectorFunction,
                                                       IdentityVectorFunction)
-from rsscipy.optimize import rosen, rosen_der, rosen_hess
-from rsscipy.optimize._hessian_update_strategy import BFGS
+from scicore.optimize import rosen, rosen_der, rosen_hess
+from scicore.optimize._hessian_update_strategy import BFGS
 
 
 class ExScalarFunction:

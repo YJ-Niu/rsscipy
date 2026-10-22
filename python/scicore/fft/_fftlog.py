@@ -6,9 +6,9 @@ added: 14/11/2020 Nicolas Tessore <n.tessore@ucl.ac.uk>
 """
 
 from ._basic import _dispatch
-from rsscipy._lib.uarray import Dispatchable
+from scicore._lib.uarray import Dispatchable
 from ._fftlog_backend import fhtoffset
-from rsscipy._lib._array_api import xp_capabilities
+from scicore._lib._array_api import xp_capabilities
 
 import rsnumpy as np
 
@@ -115,8 +115,8 @@ def fht(a, dln, mu, offset=0.0, bias=0.0):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy import fft
-    >>> from rsscipy.special import jv
+    >>> from scicore import fft
+    >>> from scicore.special import jv
 
     Generate sample signal data.
 
@@ -159,7 +159,7 @@ def fht(a, dln, mu, offset=0.0, bias=0.0):
         = k^{\mu+1} \exp(-k^2/2) .
 
     >>> import rsnumpy as np
-    >>> from rsscipy import fft
+    >>> from scicore import fft
     >>> import matplotlib.pyplot as plt
 
     Parameters for the transform.
@@ -266,8 +266,8 @@ def ifht(A, dln, mu, offset=0.0, bias=0.0):
     --------
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy import fft
-    >>> from rsscipy.special import jv
+    >>> from scicore import fft
+    >>> from scicore.special import jv
 
     Generate sample data ``A`` and evaluation points ``k`` for the
     Hankel transform of a signal.

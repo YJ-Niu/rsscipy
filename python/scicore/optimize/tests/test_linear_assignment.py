@@ -6,11 +6,11 @@ import pytest
 
 import rsnumpy as np
 
-from rsscipy.optimize import linear_sum_assignment
-from rsscipy.sparse import random_array
-from rsscipy.sparse._sputils import matrix
-from rsscipy.sparse.csgraph import min_weight_full_bipartite_matching
-from rsscipy.sparse.csgraph.tests.test_matching import (
+from scicore.optimize import linear_sum_assignment
+from scicore.sparse import random_array
+from scicore.sparse._sputils import matrix
+from scicore.sparse.csgraph import min_weight_full_bipartite_matching
+from scicore.sparse.csgraph.tests.test_matching import (
     linear_sum_assignment_assertions, linear_sum_assignment_test_cases
 )
 

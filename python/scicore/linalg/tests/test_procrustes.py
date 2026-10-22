@@ -5,10 +5,10 @@ import pytest
 from rsnumpy.testing import assert_allclose
 from pytest import raises as assert_raises
 
-from rsscipy.linalg import orthogonal_procrustes
-from rsscipy.sparse._sputils import matrix
-from rsscipy._lib._array_api import make_xp_test_case, xp_assert_close
-from rsscipy.conftest import skip_xp_invalid_arg
+from scicore.linalg import orthogonal_procrustes
+from scicore.sparse._sputils import matrix
+from scicore._lib._array_api import make_xp_test_case, xp_assert_close
+from scicore.conftest import skip_xp_invalid_arg
 
 def _centered(A, xp):
     mu = xp.mean(A, axis=0)

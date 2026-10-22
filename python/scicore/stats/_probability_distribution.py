@@ -91,7 +91,7 @@ class _ProbabilityDistribution(ABC):
         --------
         Instantiate a distribution with the desired parameters:
 
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=-0.5, b=0.5)
 
         Retrieve the support of the distribution:
@@ -168,7 +168,7 @@ class _ProbabilityDistribution(ABC):
         Instantiate a distribution with the desired parameters:
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=0., b=1.)
 
         Generate a pseudorandom sample:
@@ -339,7 +339,7 @@ class _ProbabilityDistribution(ABC):
         --------
         Instantiate a distribution with the desired parameters:
 
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Normal(mu=1., sigma=2.)
 
         Evaluate the first raw moment:
@@ -460,7 +460,7 @@ class _ProbabilityDistribution(ABC):
         Instantiate a distribution with the desired parameters:
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Normal(mu=1., sigma=2.)
 
         Evaluate the first L-moment:
@@ -524,7 +524,7 @@ class _ProbabilityDistribution(ABC):
         --------
         Instantiate a distribution with the desired parameters:
 
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Normal(mu=1., sigma=2.)
 
         Evaluate the variance:
@@ -599,7 +599,7 @@ class _ProbabilityDistribution(ABC):
         --------
         Instantiate a distribution with the desired parameters:
 
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=0., b=10.)
 
         Compute the median:
@@ -682,7 +682,7 @@ class _ProbabilityDistribution(ABC):
         --------
         Instantiate a distribution with the desired parameters:
 
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Normal(mu=1., sigma=2.)
 
         Evaluate the mode:
@@ -748,7 +748,7 @@ class _ProbabilityDistribution(ABC):
         --------
         Instantiate a distribution with the desired parameters:
 
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Normal(mu=1., sigma=2.)
 
         Evaluate the variance:
@@ -801,7 +801,7 @@ class _ProbabilityDistribution(ABC):
         --------
         Instantiate a distribution with the desired parameters:
 
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Normal(mu=1., sigma=2.)
 
         Evaluate the standard deviation:
@@ -856,7 +856,7 @@ class _ProbabilityDistribution(ABC):
         --------
         Instantiate a distribution with the desired parameters:
 
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Normal(mu=1., sigma=2.)
 
         Evaluate the skewness:
@@ -926,7 +926,7 @@ class _ProbabilityDistribution(ABC):
         --------
         Instantiate a distribution with the desired parameters:
 
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Normal(mu=1., sigma=2.)
 
         Evaluate the kurtosis:
@@ -1011,7 +1011,7 @@ class _ProbabilityDistribution(ABC):
         --------
         Instantiate a distribution with the desired parameters:
 
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=-1., b=1.)
 
         Evaluate the PDF at the desired argument:
@@ -1098,7 +1098,7 @@ class _ProbabilityDistribution(ABC):
         Instantiate a distribution with the desired parameters:
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=-1.0, b=1.0)
 
         Evaluate the log-PDF at the desired argument:
@@ -1168,7 +1168,7 @@ class _ProbabilityDistribution(ABC):
         --------
         Instantiate a distribution with the desired parameters:
 
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Binomial(n=10, p=0.5)
 
         Evaluate the PMF at the desired argument:
@@ -1248,7 +1248,7 @@ class _ProbabilityDistribution(ABC):
         Instantiate a distribution with the desired parameters:
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Binomial(n=10, p=0.5)
 
         Evaluate the log-PMF at the desired argument:
@@ -1374,7 +1374,7 @@ class _ProbabilityDistribution(ABC):
         --------
         Instantiate a distribution with the desired parameters:
 
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=-0.5, b=0.5)
 
         Evaluate the CDF at the desired argument:
@@ -1466,7 +1466,7 @@ class _ProbabilityDistribution(ABC):
         Instantiate a distribution with the desired parameters:
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=-0.5, b=0.5)
 
         Evaluate the inverse CDF at the desired argument:
@@ -1594,7 +1594,7 @@ class _ProbabilityDistribution(ABC):
         Instantiate a distribution with the desired parameters:
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=-0.5, b=0.5)
 
         Evaluate the CCDF at the desired argument:
@@ -1680,7 +1680,7 @@ class _ProbabilityDistribution(ABC):
         Instantiate a distribution with the desired parameters:
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=-0.5, b=0.5)
 
         Evaluate the inverse CCDF at the desired argument:
@@ -1802,7 +1802,7 @@ class _ProbabilityDistribution(ABC):
         Instantiate a distribution with the desired parameters:
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=-0.5, b=0.5)
 
         Evaluate the log-CDF at the desired argument:
@@ -1889,7 +1889,7 @@ class _ProbabilityDistribution(ABC):
         Instantiate a distribution with the desired parameters:
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=-0.5, b=0.5)
 
         Evaluate the inverse log-CDF at the desired argument:
@@ -2002,7 +2002,7 @@ class _ProbabilityDistribution(ABC):
         Instantiate a distribution with the desired parameters:
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=-0.5, b=0.5)
 
         Evaluate the log-CCDF at the desired argument:
@@ -2088,7 +2088,7 @@ class _ProbabilityDistribution(ABC):
         Instantiate a distribution with the desired parameters:
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=-0.5, b=0.5)
 
         Evaluate the inverse log-CCDF at the desired argument:
@@ -2164,7 +2164,7 @@ class _ProbabilityDistribution(ABC):
         Instantiate a distribution with the desired parameters:
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=-1., b=1.)
 
         Evaluate the log-entropy:
@@ -2243,7 +2243,7 @@ class _ProbabilityDistribution(ABC):
         --------
         Instantiate a distribution with the desired parameters:
 
-        >>> from rsscipy import stats
+        >>> from scicore import stats
         >>> X = stats.Uniform(a=-1., b=1.)
 
         Evaluate the entropy:

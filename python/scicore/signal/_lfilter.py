@@ -4,7 +4,7 @@ from math import prod
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import signal as _rust_signal
+from scicore._scicore_rs import signal as _rust_signal
 _linear_filter = _rust_signal._linear_filter
 
 

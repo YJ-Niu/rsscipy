@@ -1,10 +1,10 @@
-from rsscipy._lib._util import float_factorial
-from rsscipy._lib._array_api import (array_namespace, xp_compat_namespace,
+from scicore._lib._util import float_factorial
+from scicore._lib._array_api import (array_namespace, xp_compat_namespace,
                                    xp_swapaxes, xp_device)
-import rsscipy._external.array_api_extra as xpx
+import scicore._external.array_api_extra as xpx
 
-from rsscipy.ndimage import convolve1d
-from rsscipy.signal import _polyutils as _pu
+from scicore.ndimage import convolve1d
+from scicore.signal import _polyutils as _pu
 from ._arraytools import axis_slice
 
 
@@ -69,7 +69,7 @@ def savgol_coeffs(window_length, polyorder, deriv=0, delta=1.0, pos=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import savgol_coeffs
+    >>> from scicore.signal import savgol_coeffs
     >>> savgol_coeffs(5, 2)
     array([-0.08571429,  0.34285714,  0.48571429,  0.34285714, -0.08571429])
     >>> savgol_coeffs(5, 2, deriv=1)
@@ -340,7 +340,7 @@ def savgol_filter(x, window_length, polyorder, deriv=0, delta=1.0,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import savgol_filter
+    >>> from scicore.signal import savgol_filter
     >>> np.set_printoptions(precision=2)  # For compact display.
     >>> x = np.array([2, 2, 5, 2, 1, 0, 1, 4, 9])
 

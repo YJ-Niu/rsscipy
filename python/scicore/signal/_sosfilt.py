@@ -2,7 +2,7 @@
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import signal as _rust_signal
+from scicore._scicore_rs import signal as _rust_signal
 _sosfilt_complex = _rust_signal._sosfilt_complex
 _sosfilt_float = _rust_signal._sosfilt_float
 

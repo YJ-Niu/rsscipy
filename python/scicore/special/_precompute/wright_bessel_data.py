@@ -9,7 +9,7 @@ import os
 from time import time
 
 import rsnumpy as np
-from rsscipy.special._mptestutils import mpf2float
+from scicore.special._mptestutils import mpf2float
 
 try:
     import mpmath as mp

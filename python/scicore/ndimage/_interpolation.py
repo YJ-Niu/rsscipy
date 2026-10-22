@@ -32,10 +32,10 @@ import itertools
 import warnings
 
 import rsnumpy as np
-from rsscipy._lib._util import normalize_axis_index
-from rsscipy._external import array_api_extra as xpx
+from scicore._lib._util import normalize_axis_index
+from scicore._external import array_api_extra as xpx
 
-from rsscipy import special
+from scicore import special
 from . import _ni_support
 from . import _nd_image
 from ._ni_docstrings import docfiller
@@ -98,7 +98,7 @@ def spline_filter1d(input, order=3, axis=-1, output=np.float64,
     --------
     We can filter an image using 1-D spline along the given axis:
 
-    >>> from rsscipy.ndimage import spline_filter1d
+    >>> from scicore.ndimage import spline_filter1d
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
     >>> orig_img = np.eye(20)  # create an image
@@ -175,7 +175,7 @@ def spline_filter(input, order=3, output=np.float64, mode='mirror'):
     --------
     We can filter an image using multidimensional splines:
 
-    >>> from rsscipy.ndimage import spline_filter
+    >>> from scicore.ndimage import spline_filter
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
     >>> orig_img = np.eye(20)  # create an image
@@ -309,7 +309,7 @@ def geometric_transform(input, mapping, output_shape=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.ndimage import geometric_transform
+    >>> from scicore.ndimage import geometric_transform
     >>> a = np.arange(12.).reshape((4, 3))
     >>> def shift_func(output_coords):
     ...     return (output_coords[0] - 0.5, output_coords[1] - 0.5)
@@ -420,7 +420,7 @@ def map_coordinates(input, coordinates, output=None, order=3,
 
     Examples
     --------
-    >>> from rsscipy import ndimage
+    >>> from scicore import ndimage
     >>> import rsnumpy as np
     >>> a = np.arange(12.).reshape((4, 3))
     >>> a
@@ -538,8 +538,8 @@ def affine_transform(input, matrix, offset=0.0, output_shape=None,
     --------
     Use `affine_transform` to stretch an image::
 
-    >>> from rsscipy.ndimage import affine_transform
-    >>> from rsscipy.datasets import face
+    >>> from scicore.ndimage import affine_transform
+    >>> from scicore.datasets import face
     >>> from matplotlib import pyplot as plt
     >>> import rsnumpy as np
     >>> im = face(gray=True)
@@ -700,9 +700,9 @@ def shift(input, shift, output=None, order=3, mode='constant', cval=0.0,
     --------
     Import the necessary modules and an exemplary image.
 
-    >>> from rsscipy.ndimage import shift
+    >>> from scicore.ndimage import shift
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy import datasets
+    >>> from scicore import datasets
     >>> image = datasets.ascent()
 
     Shift the image vertically by 20 pixels.
@@ -737,7 +737,7 @@ def shift(input, shift, output=None, order=3, mode='constant', cval=0.0,
     output = _ni_support._get_output(output, input, complex_output=complex_output)
     if complex_output:
         # import under different name to avoid confusion with shift parameter
-        from rsscipy.ndimage._interpolation import shift as _shift
+        from scicore.ndimage._interpolation import shift as _shift
 
         kwargs = dict(order=order, mode=mode, prefilter=prefilter)
         _shift(input.real, shift, output=output.real, cval=np.real(cval), **kwargs)
@@ -813,7 +813,7 @@ def zoom(input, zoom, output=None, order=3, mode='constant', cval=0.0,
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import matplotlib.pyplot as plt
 
     >>> fig = plt.figure()
@@ -850,7 +850,7 @@ def zoom(input, zoom, output=None, order=3, mode='constant', cval=0.0,
         return output
     if complex_output:
         # import under different name to avoid confusion with zoom parameter
-        from rsscipy.ndimage._interpolation import zoom as _zoom
+        from scicore.ndimage._interpolation import zoom as _zoom
 
         kwargs = dict(order=order, mode=mode, prefilter=prefilter)
         _zoom(input.real, zoom, output=output.real, cval=np.real(cval), **kwargs)
@@ -937,7 +937,7 @@ def rotate(input, angle, axes=(1, 0), reshape=True, output=None, order=3,
 
     Examples
     --------
-    >>> from rsscipy import ndimage, datasets
+    >>> from scicore import ndimage, datasets
     >>> import matplotlib.pyplot as plt
     >>> fig = plt.figure(figsize=(10, 3))
     >>> ax1, ax2, ax3 = fig.subplots(1, 3)

@@ -10,7 +10,7 @@ array library.
 
 The import name stays ``scipy``, so it is a drop-in replacement::
 
-    pip install rsscipy
+    pip install scicore
     python -c "import scipy.linalg"
 
 Why
@@ -92,7 +92,7 @@ Development
 
 Clone with submodules; meson hard-errors without them::
 
-    git clone --recursive https://github.com/YJ-Niu/rsscipy.git
+    git clone --recursive https://github.com/YJ-Niu/scicore.git
 
 or, after a plain clone::
 
@@ -112,8 +112,8 @@ the Rust workspace tests cover each migrated kernel.
 Links
 -----
 
-- **Source code:** https://github.com/YJ-Niu/rsscipy
-- **Bug reports:** https://github.com/YJ-Niu/rsscipy/issues
+- **Source code:** https://github.com/YJ-Niu/scicore
+- **Bug reports:** https://github.com/YJ-Niu/scicore/issues
 - **rsnumpy (array backend):** https://github.com/YJ-Niu/rsnumpy
 - **Upstream SciPy:** https://github.com/scipy/scipy
 

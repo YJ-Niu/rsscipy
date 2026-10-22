@@ -11,16 +11,16 @@ Sparse matrix functions
 __all__ = ['expm', 'inv', 'matrix_power']
 
 import rsnumpy as np
-from rsscipy.linalg._basic import solve, solve_triangular
+from scicore.linalg._basic import solve, solve_triangular
 
-from rsscipy.sparse._base import issparse
-from rsscipy.sparse.linalg._dsolve.linsolve import spsolve
-from rsscipy.sparse._sputils import is_pydata_spmatrix, isintlike
+from scicore.sparse._base import issparse
+from scicore.sparse.linalg._dsolve.linsolve import spsolve
+from scicore.sparse._sputils import is_pydata_spmatrix, isintlike
 
-import rsscipy.sparse
-from rsscipy.sparse.linalg._interface import LinearOperator
-from rsscipy.sparse.linalg._onenormest import onenormest
-from rsscipy.sparse._construct import eye_array
+import scicore.sparse
+from scicore.sparse.linalg._interface import LinearOperator
+from scicore.sparse.linalg._onenormest import onenormest
+from scicore.sparse._construct import eye_array
 
 from ._expm_multiply import _ident_like, _exact_1_norm as _onenorm
 
@@ -50,8 +50,8 @@ def inv(A):
 
     Examples
     --------
-    >>> from rsscipy.sparse import csc_array
-    >>> from rsscipy.sparse.linalg import inv
+    >>> from scicore.sparse import csc_array
+    >>> from scicore.sparse.linalg import inv
     >>> A = csc_array([[1., 0.], [1., 2.]])
     >>> Ainv = inv(A)
     >>> Ainv
@@ -571,8 +571,8 @@ def expm(A):
 
     Examples
     --------
-    >>> from rsscipy.sparse import csc_array
-    >>> from rsscipy.sparse.linalg import expm
+    >>> from scicore.sparse import csc_array
+    >>> from scicore.sparse.linalg import expm
     >>> A = csc_array([[1, 0, 0], [0, 2, 0], [0, 0, 3]])
     >>> A.toarray()
     array([[1, 0, 0],
@@ -893,7 +893,7 @@ def matrix_power(A, power):
 
     Examples
     --------
-    >>> from rsscipy import sparse
+    >>> from scicore import sparse
     >>> A = sparse.csc_array([[0,1,0],[1,0,1],[0,1,0]])
     >>> A.todense()
     array([[0, 1, 0],

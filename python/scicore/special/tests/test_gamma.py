@@ -1,6 +1,6 @@
 import rsnumpy as np
 import pytest
-import rsscipy.special as sc
+import scicore.special as sc
 
 
 class TestRgamma:

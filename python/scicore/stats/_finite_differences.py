@@ -1,5 +1,5 @@
 from rsnumpy import arange, newaxis, hstack, prod, array
-from rsscipy import linalg
+from scicore import linalg
 
 
 def _central_diff_weights(Np, ndiv=1):

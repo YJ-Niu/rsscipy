@@ -5,12 +5,12 @@ import pytest
 from pytest import raises as assert_raises
 import rsnumpy as np
 from rsnumpy.testing import assert_, assert_allclose
-from rsscipy._external import array_api_extra as xpx
-from rsscipy._lib._array_api import make_xp_test_case, eager_warns, is_jax
-from rsscipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal, xp_assert_less
-from rsscipy.stats._axis_nan_policy import (SmallSampleWarning, too_small_1d_omit,
+from scicore._external import array_api_extra as xpx
+from scicore._lib._array_api import make_xp_test_case, eager_warns, is_jax
+from scicore._lib._array_api_no_0d import xp_assert_close, xp_assert_equal, xp_assert_less
+from scicore.stats._axis_nan_policy import (SmallSampleWarning, too_small_1d_omit,
                                           too_small_nd_omit, too_small_1d_not_omit)
-from rsscipy import stats
+from scicore import stats
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 lazy_xp_modules = [stats]

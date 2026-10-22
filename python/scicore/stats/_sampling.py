@@ -1,12 +1,12 @@
 import math
 import numbers
 import rsnumpy as np
-from rsscipy import stats
-from rsscipy import special as sc
+from scicore import stats
+from scicore import special as sc
 from ._qmc import (check_random_state as check_random_state_qmc,
                    Halton, QMCEngine)
 from ._unuran.unuran_wrapper import NumericalInversePolynomial
-from rsscipy._lib._util import check_random_state
+from scicore._lib._util import check_random_state
 
 
 __all__ = ['FastGeneratorInversion', 'RatioUniforms']
@@ -550,8 +550,8 @@ class FastGeneratorInversion:
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
-    >>> from rsscipy.stats.sampling import FastGeneratorInversion
+    >>> from scicore import stats
+    >>> from scicore.stats.sampling import FastGeneratorInversion
 
     Let's start with a simple example to illustrate the main features:
 
@@ -990,8 +990,8 @@ class FastGeneratorInversion:
         --------
 
         >>> import rsnumpy as np
-        >>> from rsscipy import stats
-        >>> from rsscipy.stats.sampling import FastGeneratorInversion
+        >>> from scicore import stats
+        >>> from scicore.stats.sampling import FastGeneratorInversion
 
         Create an object for the normal distribution:
 
@@ -1070,8 +1070,8 @@ class FastGeneratorInversion:
         Examples
         --------
 
-        >>> from rsscipy import stats
-        >>> from rsscipy.stats.sampling import FastGeneratorInversion
+        >>> from scicore import stats
+        >>> from scicore.stats.sampling import FastGeneratorInversion
 
         Define a truncated normal distribution:
 
@@ -1220,9 +1220,9 @@ class RatioUniforms:
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
 
-    >>> from rsscipy.stats.sampling import RatioUniforms
+    >>> from scicore.stats.sampling import RatioUniforms
     >>> rng = np.random.default_rng()
 
     Simulate normally distributed random variables. It is easy to compute the

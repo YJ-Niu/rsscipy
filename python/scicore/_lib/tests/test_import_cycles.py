@@ -4,7 +4,7 @@ import sys
 
 import pytest
 
-from rsscipy._lib._testutils import IS_WASM
+from scicore._lib._testutils import IS_WASM
 from .test_public_api import PUBLIC_MODULES
 
 # Regression tests for gh-6793.

@@ -19,10 +19,10 @@ References
 # Author: Matt Haberland
 
 import rsnumpy as np
-import rsscipy as sp
-import rsscipy.sparse as sps
+import scicore as sp
+import scicore.sparse as sps
 from warnings import warn
-from rsscipy.linalg import LinAlgError
+from scicore.linalg import LinAlgError
 from ._optimize import OptimizeWarning, OptimizeResult, _check_unknown_options
 from ._linprog_util import _postsolve
 has_umfpack = True

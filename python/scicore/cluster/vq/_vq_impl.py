@@ -1,15 +1,15 @@
 import warnings
 import rsnumpy as np
 from collections import deque
-from rsscipy._lib._array_api import (_asarray, array_namespace, is_lazy_array,
+from scicore._lib._array_api import (_asarray, array_namespace, is_lazy_array,
                                    xp_capabilities,
                                    xp_device, xp_size,
                                    xp_result_device)
-from rsscipy._lib._util import (check_random_state, rng_integers,
+from scicore._lib._util import (check_random_state, rng_integers,
                               _transition_to_rng)
-from rsscipy._lib.deprecation import _deprecated
-from rsscipy._external import array_api_extra as xpx
-from rsscipy.spatial.distance import cdist
+from scicore._lib.deprecation import _deprecated
+from scicore._external import array_api_extra as xpx
+from scicore.spatial.distance import cdist
 
 from . import _vq  # type:ignore[attr-defined]
 
@@ -61,7 +61,7 @@ def whiten(obs, check_finite=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.cluster.vq import whiten
+    >>> from scicore.cluster.vq import whiten
     >>> features  = np.array([[1.9, 2.3, 1.7],
     ...                       [1.5, 2.5, 2.2],
     ...                       [0.8, 0.6, 1.7,]])
@@ -134,7 +134,7 @@ def vq(obs, code_book, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.cluster.vq import vq
+    >>> from scicore.cluster.vq import vq
     >>> code_book = np.array([[1., 1., 1.],
     ...                       [2., 2., 2.]])
     >>> features  = np.array([[1.9, 2.3, 1.7],
@@ -244,7 +244,7 @@ def _kmeans(obs, guess, thresh=1e-5, xp=None):
     Note: not whitened in this example.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.cluster.vq import _kmeans
+    >>> from scicore.cluster.vq import _kmeans
     >>> features  = np.array([[ 1.9,2.3],
     ...                       [ 1.5,2.5],
     ...                       [ 0.8,0.6],
@@ -371,7 +371,7 @@ def kmeans(obs, k_or_guess, iter=20, thresh=1e-5, check_finite=True,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.cluster.vq import vq, kmeans, whiten
+    >>> from scicore.cluster.vq import vq, kmeans, whiten
     >>> import matplotlib.pyplot as plt
     >>> features  = np.array([[ 1.9,2.3],
     ...                       [ 1.5,2.5],
@@ -680,7 +680,7 @@ def kmeans2(data, k, iter=10, thresh=1e-5, minit='random',
 
     Examples
     --------
-    >>> from rsscipy.cluster.vq import kmeans2
+    >>> from scicore.cluster.vq import kmeans2
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
 

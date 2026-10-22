@@ -78,7 +78,7 @@ mod testutil {
 }
 
 #[pymodule]
-fn _rsscipy_rs(module: &Bound<'_, PyModule>) -> PyResult<()> {
+fn _scicore_rs(module: &Bound<'_, PyModule>) -> PyResult<()> {
     let py = module.py();
 
     let lib = PyModule::new(py, "_lib")?;

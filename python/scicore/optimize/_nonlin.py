@@ -9,12 +9,12 @@ import warnings
 import rsnumpy as np
 from rsnumpy import asarray, dot, vdot
 
-from rsscipy.linalg import norm, solve, inv, qr, svd, LinAlgError
-import rsscipy.sparse.linalg
-import rsscipy.sparse
-from rsscipy.linalg import get_blas_funcs
-from rsscipy._lib._util import _dedent_for_py313
-from rsscipy._lib._util import getfullargspec_no_self as _getfullargspec
+from scicore.linalg import norm, solve, inv, qr, svd, LinAlgError
+import scicore.sparse.linalg
+import scicore.sparse
+from scicore.linalg import get_blas_funcs
+from scicore._lib._util import _dedent_for_py313
+from scicore._lib._util import getfullargspec_no_self as _getfullargspec
 from ._linesearch import scalar_search_wolfe1, scalar_search_armijo
 from inspect import signature
 from difflib import get_close_matches
@@ -909,7 +909,7 @@ class BroydenFirst(GenericBroyden):
 
     A solution can be obtained as follows.
 
-    >>> from rsscipy import optimize
+    >>> from scicore import optimize
     >>> sol = optimize.broyden1(fun, [0, 0])
     >>> sol
     array([0.84116396, 0.15883641])
@@ -1019,7 +1019,7 @@ class BroydenSecond(BroydenFirst):
 
     A solution can be obtained as follows.
 
-    >>> from rsscipy import optimize
+    >>> from scicore import optimize
     >>> sol = optimize.broyden2(fun, [0, 0])
     >>> sol
     array([0.84116365, 0.15883529])
@@ -1078,7 +1078,7 @@ class Anderson(GenericBroyden):
 
     A solution can be obtained as follows.
 
-    >>> from rsscipy import optimize
+    >>> from scicore import optimize
     >>> sol = optimize.anderson(fun, [0, 0])
     >>> sol
     array([0.84116588, 0.15883789])
@@ -1229,7 +1229,7 @@ class DiagBroyden(GenericBroyden):
 
     A solution can be obtained as follows.
 
-    >>> from rsscipy import optimize
+    >>> from scicore import optimize
     >>> sol = optimize.diagbroyden(fun, [0, 0])
     >>> sol
     array([0.84116403, 0.15883384])
@@ -1400,8 +1400,8 @@ class KrylovJacobian(Jacobian):
         Note that you can use also inverse Jacobians as (adaptive)
         preconditioners. For example,
 
-        >>> from rsscipy.optimize import BroydenFirst, KrylovJacobian
-        >>> from rsscipy.optimize import InverseJacobian
+        >>> from scicore.optimize import BroydenFirst, KrylovJacobian
+        >>> from scicore.optimize import InverseJacobian
         >>> jac = BroydenFirst()
         >>> kjac = KrylovJacobian(inner_M=InverseJacobian(jac))
 
@@ -1467,7 +1467,7 @@ class KrylovJacobian(Jacobian):
 
     A solution can be obtained as follows.
 
-    >>> from rsscipy import optimize
+    >>> from scicore import optimize
     >>> sol = optimize.newton_krylov(fun, [0, 0])
     >>> sol
     array([0.66731771, 0.66536458])

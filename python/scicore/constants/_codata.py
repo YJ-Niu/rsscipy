@@ -57,7 +57,7 @@ import math
 from typing import Any
 from collections.abc import Callable
 
-from rsscipy._lib._array_api import xp_capabilities
+from scicore._lib._array_api import xp_capabilities
 
 __all__ = ['physical_constants', 'value', 'unit', 'precision', 'find',
            'ConstantWarning']
@@ -2143,7 +2143,7 @@ def value(key: str) -> float:
 
     Examples
     --------
-    >>> from rsscipy import constants
+    >>> from scicore import constants
     >>> constants.value('elementary charge')
     1.602176634e-19
 
@@ -2169,7 +2169,7 @@ def unit(key: str) -> str:
 
     Examples
     --------
-    >>> from rsscipy import constants
+    >>> from scicore import constants
     >>> constants.unit('proton mass')
     'kg'
 
@@ -2195,7 +2195,7 @@ def precision(key: str) -> float:
 
     Examples
     --------
-    >>> from rsscipy import constants
+    >>> from scicore import constants
     >>> constants.precision('proton mass')
     5.1e-37
 
@@ -2225,7 +2225,7 @@ def find(sub: str | None = None, disp: bool = False) -> Any:
 
     Examples
     --------
-    >>> from rsscipy.constants import find, physical_constants
+    >>> from scicore.constants import find, physical_constants
 
     Which keys in the ``physical_constants`` dictionary contain 'boltzmann'?
 

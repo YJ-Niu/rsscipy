@@ -2,8 +2,8 @@ import warnings
 import rsnumpy as np
 import pytest
 from rsnumpy.testing import assert_array_almost_equal
-from rsscipy.sparse import csr_array, csr_matrix, coo_array, coo_matrix
-from rsscipy.sparse.csgraph import (breadth_first_tree, depth_first_tree,
+from scicore.sparse import csr_array, csr_matrix, coo_array, coo_matrix
+from scicore.sparse.csgraph import (breadth_first_tree, depth_first_tree,
     csgraph_to_dense, csgraph_from_dense, csgraph_masked_from_dense)
 
 

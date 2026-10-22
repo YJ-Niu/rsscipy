@@ -21,30 +21,30 @@ from rsnumpy.testing import (assert_allclose, assert_equal,
                            assert_array_less)
 import pytest
 
-from rsscipy._lib._testutils import IS_WASM
+from scicore._lib._testutils import IS_WASM
 from pytest import raises as assert_raises
 
-from rsscipy._lib._gcutils import assert_deallocated
-from rsscipy import optimize
-from rsscipy.optimize._minimize import Bounds, NonlinearConstraint
-from rsscipy.optimize._minimize import (MINIMIZE_METHODS,
+from scicore._lib._gcutils import assert_deallocated
+from scicore import optimize
+from scicore.optimize._minimize import Bounds, NonlinearConstraint
+from scicore.optimize._minimize import (MINIMIZE_METHODS,
                                       MINIMIZE_METHODS_NEW_CB,
                                       MINIMIZE_SCALAR_METHODS)
-from rsscipy.optimize._linprog import LINPROG_METHODS
-from rsscipy.optimize._root import ROOT_METHODS
-from rsscipy.optimize._root_scalar import ROOT_SCALAR_METHODS
-from rsscipy.optimize._qap import QUADRATIC_ASSIGNMENT_METHODS
-from rsscipy.optimize._differentiable_functions import ScalarFunction, FD_METHODS
-from rsscipy.optimize._optimize import (
+from scicore.optimize._linprog import LINPROG_METHODS
+from scicore.optimize._root import ROOT_METHODS
+from scicore.optimize._root_scalar import ROOT_SCALAR_METHODS
+from scicore.optimize._qap import QUADRATIC_ASSIGNMENT_METHODS
+from scicore.optimize._differentiable_functions import ScalarFunction, FD_METHODS
+from scicore.optimize._optimize import (
     MemoizeJac, show_options, OptimizeResult, _minimize_bfgs
 )
-from rsscipy.optimize import rosen, rosen_der, rosen_hess
+from scicore.optimize import rosen, rosen_der, rosen_hess
 
-from rsscipy.sparse import (coo_matrix, csc_matrix, csr_matrix, coo_array,
+from scicore.sparse import (coo_matrix, csc_matrix, csr_matrix, coo_array,
                           csr_array, csc_array)
-from rsscipy._lib._array_api_no_0d import xp_assert_equal
-from rsscipy._lib._array_api import make_xp_test_case
-from rsscipy._lib._util import MapWrapper
+from scicore._lib._array_api_no_0d import xp_assert_equal
+from scicore._lib._array_api import make_xp_test_case
+from scicore._lib._util import MapWrapper
 
 lazy_xp_modules = [optimize]
 

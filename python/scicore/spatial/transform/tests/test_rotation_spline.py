@@ -2,8 +2,8 @@ from itertools import product
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
 import pytest
-from rsscipy.spatial.transform import Rotation, RotationSpline
-from rsscipy.spatial.transform._rotation_spline import (
+from scicore.spatial.transform import Rotation, RotationSpline
+from scicore.spatial.transform._rotation_spline import (
     _angular_rate_to_rotvec_dot_matrix,
     _rotvec_dot_to_angular_rate_matrix,
     _matrix_vector_product_of_stacks,

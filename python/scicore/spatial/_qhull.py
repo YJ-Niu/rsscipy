@@ -2,7 +2,7 @@
 
 Provides Qhull interface used by ``scipy.spatial``.
 This is a stub: real Qhull integration should be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

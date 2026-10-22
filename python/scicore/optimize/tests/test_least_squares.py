@@ -9,16 +9,16 @@ from rsnumpy.testing import (assert_, assert_allclose,
                            assert_equal)
 import pytest
 
-from rsscipy._lib._testutils import IS_WASM
+from scicore._lib._testutils import IS_WASM
 from pytest import raises as assert_raises
-from rsscipy.sparse import issparse, lil_array
-from rsscipy.sparse.linalg import aslinearoperator
+from scicore.sparse import issparse, lil_array
+from scicore.sparse.linalg import aslinearoperator
 
-from rsscipy.optimize import least_squares, Bounds, minimize
-from rsscipy.optimize._lsq.least_squares import IMPLEMENTED_LOSSES
-from rsscipy.optimize._lsq.common import EPS, make_strictly_feasible, CL_scaling_vector
+from scicore.optimize import least_squares, Bounds, minimize
+from scicore.optimize._lsq.least_squares import IMPLEMENTED_LOSSES
+from scicore.optimize._lsq.common import EPS, make_strictly_feasible, CL_scaling_vector
 
-from rsscipy.optimize import OptimizeResult
+from scicore.optimize import OptimizeResult
 
 def fun_trivial(x, a=0):
     return (x - a)**2 + 5.0

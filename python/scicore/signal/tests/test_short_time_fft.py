@@ -16,14 +16,14 @@ from typing import cast, get_args, Literal
 
 import rsnumpy as np
 import pytest
-from rsscipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
-from rsscipy.fft import fftshift
-from rsscipy.stats import norm as normal_distribution
-from rsscipy.signal import check_COLA, get_window, welch, stft, istft, spectrogram
+from scicore._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
+from scicore.fft import fftshift
+from scicore.stats import norm as normal_distribution
+from scicore.signal import check_COLA, get_window, welch, stft, istft, spectrogram
 
-from rsscipy.signal._short_time_fft import FFT_MODE_TYPE, \
+from scicore.signal._short_time_fft import FFT_MODE_TYPE, \
     _calc_dual_canonical_window, closest_STFT_dual_window, ShortTimeFFT, PAD_TYPE
-from rsscipy.signal.windows import blackman, gaussian, hamming, nuttall, triang
+from scicore.signal.windows import blackman, gaussian, hamming, nuttall, triang
 
 
 def test__calc_dual_canonical_window_roundtrip():

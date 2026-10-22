@@ -9,7 +9,7 @@ Sources:
 
 """
 import os
-from rsscipy.special._precompute.utils import lagrange_inversion
+from scicore.special._precompute.utils import lagrange_inversion
 
 try:
     import mpmath as mp

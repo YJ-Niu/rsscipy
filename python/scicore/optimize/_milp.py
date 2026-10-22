@@ -3,7 +3,7 @@ import warnings
 import rsnumpy as np
 from rsnumpy.exceptions import VisibleDeprecationWarning
 
-from rsscipy.sparse import csc_array, vstack, issparse
+from scicore.sparse import csc_array, vstack, issparse
 from ._highspy._highs_wrapper import _highs_wrapper
 from ._constraints import LinearConstraint, Bounds
 from ._optimize import OptimizeResult
@@ -338,7 +338,7 @@ def milp(c, *, integrality=None, bounds=None, constraints=None, options=None):
 
     These arrays are collected into a single `LinearConstraint` object like:
 
-    >>> from rsscipy.optimize import LinearConstraint
+    >>> from scicore.optimize import LinearConstraint
     >>> constraints = LinearConstraint(A, b_l, b_u)
 
     The non-negativity bounds on the decision variables are enforced by
@@ -350,7 +350,7 @@ def milp(c, *, integrality=None, bounds=None, constraints=None, options=None):
 
     We solve the problem like:
 
-    >>> from rsscipy.optimize import milp
+    >>> from scicore.optimize import milp
     >>> res = milp(c=c, constraints=constraints, integrality=integrality)
     >>> res.x
     array([1., 2.])
@@ -359,7 +359,7 @@ def milp(c, *, integrality=None, bounds=None, constraints=None, options=None):
     constraints):
 
     >>> res = milp(c=c, constraints=constraints)  # OR:
-    >>> # from rsscipy.optimize import linprog; res = linprog(c, A, b_u)
+    >>> # from scicore.optimize import linprog; res = linprog(c, A, b_u)
     >>> res.x
     array([1.8, 2.8])
 

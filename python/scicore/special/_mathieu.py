@@ -1,5 +1,5 @@
-from rsscipy.special._ufuncs import _mathieu_cem, _mathieu_sem
-from rsscipy.special._ufunc_tools import _with_cache_optimization
+from scicore.special._ufuncs import _mathieu_cem, _mathieu_sem
+from scicore.special._ufunc_tools import _with_cache_optimization
 
 __all__ = ["mathieu_cem", "mathieu_sem"]
 
@@ -58,7 +58,7 @@ _mathieu_cem_doc = (
     Plot even Mathieu functions of orders ``2`` and ``4``.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import special
+    >>> from scicore import special
     >>> import matplotlib.pyplot as plt
     >>> m = np.asarray([2, 4])
     >>> q = 50
@@ -141,7 +141,7 @@ _mathieu_sem_doc = (
     Plot odd Mathieu functions of orders ``2`` and ``4``.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import special
+    >>> from scicore import special
     >>> import matplotlib.pyplot as plt
     >>> m = np.asarray([2, 4])
     >>> q = 50

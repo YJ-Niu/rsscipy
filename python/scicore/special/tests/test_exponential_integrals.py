@@ -2,7 +2,7 @@ import pytest
 
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
-import rsscipy.special as sc
+import scicore.special as sc
 
 
 class TestExp1:

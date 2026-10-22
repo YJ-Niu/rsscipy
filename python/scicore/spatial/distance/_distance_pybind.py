@@ -1,9 +1,9 @@
 """Pure-Python replacement for the deleted C ``_distance_pybind`` extension.
 
 Implements the optimized ``cdist_*`` / ``pdist_*`` pairwise distance kernels
-used by ``rsscipy.spatial.distance._distance``.  All metrics are computed with
+used by ``scicore.spatial.distance._distance``.  All metrics are computed with
 rsnumpy broadcasting; hot paths can later be moved to Rust under
-``rust/rsscipy_rs/`` without changing this module's API.
+``rust/scicore_rs/`` without changing this module's API.
 """
 
 from __future__ import annotations

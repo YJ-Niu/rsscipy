@@ -1,7 +1,7 @@
 import math
 import rsnumpy as np
-from rsscipy.special import betainc
-from rsscipy._lib._array_api import (
+from scicore.special import betainc
+from scicore._lib._array_api import (
     xp_capabilities,
     xp_ravel,
     array_namespace,
@@ -12,8 +12,8 @@ from rsscipy._lib._array_api import (
     is_torch,
     is_lazy_array,
 )
-import rsscipy._external.array_api_extra as xpx
-from rsscipy.stats._axis_nan_policy import _broadcast_arrays, _contains_nan
+import scicore._external.array_api_extra as xpx
+from scicore.stats._axis_nan_policy import _broadcast_arrays, _contains_nan
 
 
 def _quantile_iv(x, p, method, axis, nan_policy, keepdims, weights, fun='quantile'):
@@ -343,7 +343,7 @@ def quantile(x, p, *, method='linear', axis=0, nan_policy='propagate', keepdims=
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> x = np.asarray([[10, 8, 7, 5, 4],
     ...                 [0, 1, 2, 3, 5]])
 
@@ -694,7 +694,7 @@ def estimated_cdf(x, y, *, method='linear',
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> x = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
     Estimate the cumulative distribution function of one sample at a single point.

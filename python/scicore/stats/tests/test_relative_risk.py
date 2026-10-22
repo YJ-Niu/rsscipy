@@ -1,7 +1,7 @@
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal
-from rsscipy.stats.contingency import relative_risk
+from scicore.stats.contingency import relative_risk
 
 
 # Test just the calculation of the relative risk, including edge

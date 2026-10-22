@@ -179,7 +179,7 @@ class netcdf_file:
     --------
     To create a NetCDF file:
 
-    >>> from rsscipy.io import netcdf_file
+    >>> from scicore.io import netcdf_file
     >>> import rsnumpy as np
     >>> f = netcdf_file('simple.nc', 'w')
     >>> f.history = 'Created for a test'
@@ -195,7 +195,7 @@ class netcdf_file:
 
     To read the NetCDF file we just created:
 
-    >>> from rsscipy.io import netcdf_file
+    >>> from scicore.io import netcdf_file
     >>> f = netcdf_file('simple.nc', 'r')
     >>> print(f.history)
     b'Created for a test'
@@ -223,7 +223,7 @@ class netcdf_file:
 
     A NetCDF file can also be used as context manager:
 
-    >>> from rsscipy.io import netcdf_file
+    >>> from scicore.io import netcdf_file
     >>> with netcdf_file('simple.nc', 'r') as f:
     ...     print(f.history)
     b'Created for a test'

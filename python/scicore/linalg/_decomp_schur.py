@@ -3,8 +3,8 @@ import rsnumpy as np
 from rsnumpy import asarray_chkfinite, single, asarray, array
 from rsnumpy.linalg import norm
 
-from rsscipy._lib._util import _apply_over_batch
-from rsscipy._lib.deprecation import _NoValue
+from scicore._lib._util import _apply_over_batch
+from scicore._lib.deprecation import _NoValue
 
 import os
 import warnings
@@ -114,7 +114,7 @@ def schur(a, output='real', lwork=_NoValue, overwrite_a=False, sort=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import schur, eigvals
+    >>> from scicore.linalg import schur, eigvals
     >>> A = np.array([[0, 2, 2], [0, 1, 2], [1, 0, 1]])
     >>> T, Z = schur(A)
     >>> T
@@ -309,7 +309,7 @@ def rsf2csf(T, Z, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import schur, rsf2csf
+    >>> from scicore.linalg import schur, rsf2csf
     >>> A = np.array([[0, 2, 2], [0, 1, 2], [1, 0, 1]])
     >>> T, Z = schur(A)
     >>> T

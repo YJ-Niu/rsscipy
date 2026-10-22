@@ -1,9 +1,9 @@
 """Basic linear factorizations needed by the solver."""
 
-from rsscipy.sparse import block_array, csc_array, eye_array, issparse
-from rsscipy.sparse.linalg import LinearOperator
-import rsscipy.linalg
-import rsscipy.sparse.linalg
+from scicore.sparse import block_array, csc_array, eye_array, issparse
+from scicore.sparse.linalg import LinearOperator
+import scicore.linalg
+import scicore.sparse.linalg
 try:
     from sksparse.cholmod import cholesky_AAt, CholmodTypeConversionWarning
     sksparse_available = True

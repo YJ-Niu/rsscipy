@@ -6,8 +6,8 @@ from rsnumpy.testing import (assert_equal, assert_array_equal,
                            assert_, assert_allclose)
 import pytest
 
-from rsscipy.io import readsav
-from rsscipy.io import _idl
+from scicore.io import readsav
+from scicore.io import _idl
 
 DATA_PATH = path.join(path.dirname(__file__), 'data')
 

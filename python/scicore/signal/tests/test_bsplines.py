@@ -2,15 +2,15 @@
 import math
 import rsnumpy as np
 
-from rsscipy._external import array_api_extra as xpx
-from rsscipy._lib._array_api import (
+from scicore._external import array_api_extra as xpx
+from scicore._lib._array_api import (
     assert_almost_equal, xp_assert_close, xp_assert_equal, make_xp_test_case,
     array_namespace, xp_copy_to_numpy
 )
 import pytest
 from pytest import raises
 
-from rsscipy import signal
+from scicore import signal
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 xfail_xp_backends = pytest.mark.xfail_xp_backends

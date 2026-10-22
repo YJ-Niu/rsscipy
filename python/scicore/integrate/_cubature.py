@@ -6,7 +6,7 @@ from dataclasses import dataclass, field
 from types import ModuleType
 from typing import Any
 
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     array_namespace,
     xp_device,
     xp_size,
@@ -14,15 +14,15 @@ from rsscipy._lib._array_api import (
     xp_promote,
     xp_capabilities
 )
-import rsscipy._external.array_api_extra as xpx
-from rsscipy._lib._util import MapWrapper
+import scicore._external.array_api_extra as xpx
+from scicore._lib._util import MapWrapper
 
-from rsscipy.integrate._rules import (
+from scicore.integrate._rules import (
     ProductNestedFixed,
     GaussKronrodQuadrature,
     GenzMalikCubature,
 )
-from rsscipy.integrate._rules._base import _split_subregion
+from scicore.integrate._rules._base import _split_subregion
 
 __all__ = ['cubature']
 
@@ -222,7 +222,7 @@ def cubature(f, a, b, *, rule="gk21", rtol=1e-8, atol=0, max_subdivisions=10000,
     integration with 21 nodes.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.integrate import cubature
+    >>> from scicore.integrate import cubature
     >>> def f(x, n):
     ...    # Make sure x and n are broadcastable
     ...    return x[:, np.newaxis]**n[np.newaxis, :]
@@ -246,7 +246,7 @@ def cubature(f, a, b, *, rule="gk21", rtol=1e-8, atol=0, max_subdivisions=10000,
     avoid constructing a product rule with :math:`21^7 \approx 2 \times 10^9` nodes.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.integrate import cubature
+    >>> from scicore.integrate import cubature
     >>> def f(x, r, alphas):
     ...     # f(x) = cos(2*pi*r + alphas @ x)
     ...     # Need to allow r and alphas to be arbitrary shape

@@ -73,7 +73,7 @@ def ellip_harm(h2, k2, n, p, s, signm=1, signn=1):
 
     Examples
     --------
-    >>> from rsscipy.special import ellip_harm
+    >>> from scicore.special import ellip_harm
     >>> w = ellip_harm(5,8,1,1,2.5)
     >>> w
     2.5
@@ -81,7 +81,7 @@ def ellip_harm(h2, k2, n, p, s, signm=1, signn=1):
     Check that the functions indeed are solutions to the Lamé equation:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.interpolate import UnivariateSpline
+    >>> from scicore.interpolate import UnivariateSpline
     >>> def eigenvalue(f, df, ddf):
     ...     r = (((s**2 - h**2) * (s**2 - k**2) * ddf
     ...           + s * (2*s**2 - h**2 - k**2) * df
@@ -150,7 +150,7 @@ def ellip_harm_2(h2, k2, n, p, s):
 
     Examples
     --------
-    >>> from rsscipy.special import ellip_harm_2
+    >>> from scicore.special import ellip_harm_2
     >>> w = ellip_harm_2(5,8,2,1,10)
     >>> w
     0.00108056853382
@@ -206,7 +206,7 @@ def ellip_normal(h2, k2, n, p):
 
     Examples
     --------
-    >>> from rsscipy.special import ellip_normal
+    >>> from scicore.special import ellip_normal
     >>> w = ellip_normal(5,8,3,7)
     >>> w
     1723.38796997

@@ -5,17 +5,17 @@ from hypothesis import given
 import hypothesis.strategies as st
 import hypothesis.extra.numpy as hyp_num
 
-from rsscipy.integrate import (romb, newton_cotes,
+from scicore.integrate import (romb, newton_cotes,
                              cumulative_trapezoid, trapezoid,
                              quad, simpson, fixed_quad,
                              qmc_quad, cumulative_simpson)
-from rsscipy.integrate._quadrature import _cumulative_simpson_unequal_intervals
+from scicore.integrate._quadrature import _cumulative_simpson_unequal_intervals
 
-from rsscipy import stats, special, integrate
-from rsscipy.conftest import skip_xp_invalid_arg
-from rsscipy._lib._array_api import make_xp_test_case, is_numpy
-from rsscipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
-from rsscipy._external import array_api_extra as xpx
+from scicore import stats, special, integrate
+from scicore.conftest import skip_xp_invalid_arg
+from scicore._lib._array_api import make_xp_test_case, is_numpy
+from scicore._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
+from scicore._external import array_api_extra as xpx
 
 skip_xp_backends = pytest.mark.skip_xp_backends
 

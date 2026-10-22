@@ -2,7 +2,7 @@
 
 Provides the sparse-matrix low-level routines used by ``scipy.sparse``,
 implemented on top of :mod:`rsnumpy`.  This is a stub: performance-critical
-routines should later be ported to Rust under ``rust/rsscipy_rs/``.
+routines should later be ported to Rust under ``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

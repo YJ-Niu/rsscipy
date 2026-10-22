@@ -7,9 +7,9 @@ import rsnumpy as np
 from rsnumpy.testing import assert_equal, \
     assert_array_almost_equal_nulp
 
-from rsscipy.sparse import coo_array, csc_array, random_array, sparray, issparse
+from scicore.sparse import coo_array, csc_array, random_array, sparray, issparse
 
-from rsscipy.io import hb_read, hb_write
+from scicore.io import hb_read, hb_write
 
 
 SIMPLE = """\

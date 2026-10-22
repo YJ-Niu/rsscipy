@@ -4,7 +4,7 @@ Spectral Algorithm for Nonlinear Equations
 import collections
 
 import rsnumpy as np
-from rsscipy.optimize._optimize import OptimizeResult, _check_unknown_options
+from scicore.optimize._optimize import OptimizeResult, _check_unknown_options
 from ._linesearch import _nonmonotone_line_search_cruz, _nonmonotone_line_search_cheng
 
 class _NoConvergence(Exception):

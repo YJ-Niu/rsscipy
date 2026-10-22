@@ -2,7 +2,7 @@
 
 Provides the L-BFGS-B solver interface used by ``scipy.optimize._lbfgsb_py``.
 This is a stub: real L-BFGS-B should be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

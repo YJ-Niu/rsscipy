@@ -4,9 +4,9 @@ from itertools import product
 import pytest
 
 import rsnumpy as np
-from rsscipy.spatial.transform import Rotation, RigidTransform
-from rsscipy.spatial.transform._rigid_transform import normalize_dual_quaternion
-from rsscipy._lib._array_api import (
+from scicore.spatial.transform import Rotation, RigidTransform
+from scicore.spatial.transform._rigid_transform import normalize_dual_quaternion
+from scicore._lib._array_api import (
     is_lazy_array,
     xp_vector_norm,
     is_numpy,
@@ -15,7 +15,7 @@ from rsscipy._lib._array_api import (
     xp_assert_equal,
     xp_promote
 )
-import rsscipy._external.array_api_extra as xpx
+import scicore._external.array_api_extra as xpx
 
 
 def rotation_to_xp(r: Rotation, xp):

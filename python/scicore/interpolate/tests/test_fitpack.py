@@ -2,20 +2,20 @@ import itertools
 import os
 
 import rsnumpy as np
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     xp_assert_equal, xp_assert_close, assert_almost_equal, assert_array_almost_equal
 )
 from pytest import raises as assert_raises
 import pytest
-from rsscipy._lib._testutils import check_free_memory, IS_WASM
+from scicore._lib._testutils import check_free_memory, IS_WASM
 
-from rsscipy.interpolate import RectBivariateSpline
-from rsscipy.interpolate import make_splrep
+from scicore.interpolate import RectBivariateSpline
+from scicore.interpolate import make_splrep
 
-from rsscipy.interpolate._fitpack_py import (splrep, splev, bisplrep, bisplev,
+from scicore.interpolate._fitpack_py import (splrep, splev, bisplrep, bisplev,
      sproot, splprep, splint, spalde, splder, splantider, insert, dblint)
-from rsscipy.interpolate._fitpack2 import _regrid_smth as regrid_smth
-from rsscipy.interpolate._regrid import _regrid
+from scicore.interpolate._fitpack2 import _regrid_smth as regrid_smth
+from scicore.interpolate._regrid import _regrid
 
 dfitpack_int = np.int32
 

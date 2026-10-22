@@ -10,20 +10,20 @@ from math import pi
 import rsnumpy as np
 from rsnumpy.polynomial.polynomial import polyval as npp_polyval
 
-from rsscipy import special, optimize, fft as sp_fft
-from rsscipy.special import comb
-from rsscipy._lib import doccer
-from rsscipy._lib._util import float_factorial
-from rsscipy.signal._arraytools import _validate_fs
-from rsscipy.signal import _polyutils as _pu
+from scicore import special, optimize, fft as sp_fft
+from scicore.special import comb
+from scicore._lib import doccer
+from scicore._lib._util import float_factorial
+from scicore.signal._arraytools import _validate_fs
+from scicore.signal import _polyutils as _pu
 
-import rsscipy._external.array_api_extra as xpx
-from rsscipy._lib._array_api import (
+import scicore._external.array_api_extra as xpx
+from scicore._lib._array_api import (
     array_namespace, xp_promote, xp_size, is_jax, xp_float_to_complex,
     xp_result_type, xp_device, xp_result_device, _xp_result_devices,
 )
 try:
-    from rsscipy._external.array_api_compat import numpy as np_compat
+    from scicore._external.array_api_compat import numpy as np_compat
 except Exception:  # numpy (and the vendored array-api compat) unavailable
     # rsnumpy is the only eager backend in this build.
     np_compat = np
@@ -129,7 +129,7 @@ def findfreqs(num, den, N, kind='ba'):
 
         H(s) = s / (s^2 + 8s + 25)
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> signal.findfreqs([1, 0], [1, 8, 25], N=9)
     array([  1.00000000e-02,   3.16227766e-02,   1.00000000e-01,
              3.16227766e-01,   1.00000000e+00,   3.16227766e+00,
@@ -220,7 +220,7 @@ def freqs(b, a, worN=200, plot=None):
 
     Examples
     --------
-    >>> from rsscipy.signal import freqs, iirfilter
+    >>> from scicore.signal import freqs, iirfilter
     >>> import rsnumpy as np
 
     >>> b, a = iirfilter(4, [1, 10], 1, 60, analog=True, ftype='cheby1')
@@ -298,7 +298,7 @@ def freqs_zpk(z, p, k, worN=200):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import freqs_zpk, iirfilter
+    >>> from scicore.signal import freqs_zpk, iirfilter
 
     >>> z, p, k = iirfilter(4, [1, 10], 1, 60, analog=True, ftype='cheby1',
     ...                     output='zpk')
@@ -431,7 +431,7 @@ def freqz(b, a=1, worN=512, whole=False, plot=None, fs=2*pi,
 
     Examples
     --------
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import rsnumpy as np
     >>> taps, f_c = 80, 1.0  # number of taps and cut-off frequency
     >>> b = signal.firwin(taps, f_c, window=('kaiser', 8), fs=2*np.pi)
@@ -643,7 +643,7 @@ def freqz_zpk(z, p, k, worN=512, whole=False, fs=2*pi):
     system with sample rate of 1000 Hz, and plot the frequency response:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> z, p, k = signal.butter(4, 100, output='zpk', fs=1000)
     >>> w, h = signal.freqz_zpk(z, p, k, fs=1000)
 
@@ -773,7 +773,7 @@ def group_delay(system, w=512, whole=False, fs=2*pi):
 
     Examples
     --------
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> b, a = signal.iirdesign(0.1, 0.3, 5, 50, ftype='cheby1')
     >>> w, gd = signal.group_delay((b, a))
 
@@ -912,7 +912,7 @@ def freqz_sos(sos, worN=512, whole=False, fs=2*pi):
     --------
     Design a 15th-order bandpass filter in SOS format.
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import rsnumpy as np
     >>> sos = signal.ellip(15, 0.5, 60, (0.2, 0.4), btype='bandpass',
     ...                    output='sos')
@@ -1036,7 +1036,7 @@ def _cplxreal(z, tol=None):
 
     Examples
     --------
-    >>> from rsscipy.signal._filter_design import _cplxreal
+    >>> from scicore.signal._filter_design import _cplxreal
     >>> a = [4, 3, 1, 2-2j, 2+2j, 2-1j, 2+1j, 2-1j, 2+1j, 1+1j, 1-1j]
     >>> zc, zr = _cplxreal(a)
     >>> print(zc)
@@ -1144,7 +1144,7 @@ def _cplxpair(z, tol=None):
 
     Examples
     --------
-    >>> from rsscipy.signal._filter_design import _cplxpair
+    >>> from scicore.signal._filter_design import _cplxpair
     >>> a = [4, 3, 1, 2-2j, 2+2j, 2-1j, 2+1j, 2-1j, 2+1j, 1+1j, 1-1j]
     >>> z = _cplxpair(a)
     >>> print(z)
@@ -1237,7 +1237,7 @@ def tf2zpk(b, a):
 
         H(s) = \frac{3s^2}{s^2 + 5s + 13}
 
-    >>> from rsscipy.signal import tf2zpk
+    >>> from scicore.signal import tf2zpk
     >>> tf2zpk([3, 0, 0], [1, 5, 13])
     (   array([ 0.               ,  0.              ]),
         array([ -2.5+2.59807621j ,  -2.5-2.59807621j]),
@@ -1286,7 +1286,7 @@ def zpk2tf(z, p, k):
         { (s - 2)(s - 6) }
         { (s - 1)(s - 8) }
 
-    >>> from rsscipy.signal import zpk2tf
+    >>> from scicore.signal import zpk2tf
     >>> z   = [2,   6]
     >>> p   = [1,   8]
     >>> k   = 5
@@ -1377,7 +1377,7 @@ def tf2sos(b, a, pairing=None, *, analog=False):
 
         H(s) = \frac{s^2 - 3.5s - 2}{s^4 + 3s^3 - 15s^2 - 19s + 30}
 
-    >>> from rsscipy.signal import tf2sos
+    >>> from scicore.signal import tf2sos
     >>> tf2sos([1, -3.5, -2], [1, 3, -15, -19, 30], analog=True)
     array([[  0. ,   0. ,   1. ,   1. ,   2. , -15. ],
            [  1. ,  -3.5,  -2. ,   1. ,   1. ,  -2. ]])
@@ -1412,8 +1412,8 @@ def sos2tf(sos):
     Find the polynomial representation of an elliptic filter
     using its 'sos' (second-order sections) format.
 
-    >>> from rsscipy.signal import sos2tf
-    >>> from rsscipy import signal
+    >>> from scicore.signal import sos2tf
+    >>> from scicore import signal
     >>> sos = signal.ellip(1, 0.001, 50, 0.1, output='sos')
     >>> sos2tf(sos)
     (   array([0.91256522, 0.91256522, 0.        ]),
@@ -1610,7 +1610,7 @@ def zpk2sos(z, p, k, pairing=None, *, analog=False):
     but for this example, we'll use ``output='zpk'``, and then convert
     to SOS format with `zpk2sos`:
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import rsnumpy as np
     >>> z, p, k = signal.ellip(6, 0.087, 90, 1000/(0.5*8000), output='zpk')
 
@@ -1891,7 +1891,7 @@ def normalize(b, a):
 
     Examples
     --------
-    >>> from rsscipy.signal import normalize
+    >>> from scicore.signal import normalize
 
     Normalize the coefficients of the transfer function
     ``(3*s^2 - 2*s + 5) / (2*s^2 + 3*s + 1)``:
@@ -2008,7 +2008,7 @@ def lp2lp(b, a, wo=1.0):
     Examples
     --------
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
 
     >>> lp = signal.lti([1.0], [1.0, 1.0])
@@ -2109,7 +2109,7 @@ def lp2hp(b, a, wo=1.0):
 
     Examples
     --------
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
 
     >>> lp = signal.lti([1.0], [1.0, 1.0])
@@ -2201,7 +2201,7 @@ def lp2bp(b, a, wo=1.0, bw=1.0):
 
     Examples
     --------
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
 
     >>> lp = signal.lti([1.0], [1.0, 1.0])
@@ -2294,7 +2294,7 @@ def lp2bs(b, a, wo=1.0, bw=1.0):
 
     Examples
     --------
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
 
     >>> lp = signal.lti([1.0], [1.0, 1.5])
@@ -2432,7 +2432,7 @@ def bilinear(b, a, fs=1.0):
     The following example shows the frequency response of an analog bandpass filter and
     the corresponding digital filter derived by utilizing the bilinear transform:
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
     ...
@@ -2596,7 +2596,7 @@ def iirdesign(wp, ws, gpass, gstop, analog=False, ftype='ellip', output='ba',
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> import matplotlib.ticker
 
@@ -2788,7 +2788,7 @@ def iirfilter(N, Wn, rp=None, rs=None, btype='bandpass', analog=False,
     200 Hz and plot the frequency response:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
 
     >>> b, a = signal.iirfilter(17, [2*np.pi*50, 2*np.pi*200], rs=60,
@@ -2990,7 +2990,7 @@ def bilinear_zpk(z, p, k, fs):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
 
     >>> fs = 100
@@ -3083,7 +3083,7 @@ def lp2lp_zpk(z, p, k, wo=1.0):
     Use the 'zpk' (Zero-Pole-Gain) representation of a lowpass filter to
     transform it to a new 'zpk' representation associated with a cutoff frequency wo.
 
-    >>> from rsscipy.signal import lp2lp_zpk
+    >>> from scicore.signal import lp2lp_zpk
     >>> z   = [7,   2]
     >>> p   = [5,   13]
     >>> k   = 0.8
@@ -3162,7 +3162,7 @@ def lp2hp_zpk(z, p, k, wo=1.0):
     Use the 'zpk' (Zero-Pole-Gain) representation of a lowpass filter to
     transform it to a highpass filter with a cutoff frequency wo.
 
-    >>> from rsscipy.signal import lp2hp_zpk
+    >>> from scicore.signal import lp2hp_zpk
     >>> z   = [ -2 + 3j ,  -0.5 - 0.8j ]
     >>> p   = [ -1      ,  -4          ]
     >>> k   = 10
@@ -3251,7 +3251,7 @@ def lp2bp_zpk(z, p, k, wo=1.0, bw=1.0):
     transform it to a bandpass filter with a center frequency wo and
     bandwidth bw.
 
-    >>> from rsscipy.signal import lp2bp_zpk
+    >>> from scicore.signal import lp2bp_zpk
     >>> z   = [ 5 + 2j ,  5 - 2j ]
     >>> p   = [ 7      ,  -16    ]
     >>> k   = 0.8
@@ -3352,7 +3352,7 @@ def lp2bs_zpk(z, p, k, wo=1.0, bw=1.0):
     into a bandstop filter represented in 'zpk' form, with a center frequency wo and
     bandwidth bw.
 
-    >>> from rsscipy.signal import lp2bs_zpk
+    >>> from scicore.signal import lp2bs_zpk
     >>> z   = [             ]
     >>> p   = [ 0.7 ,    -1 ]
     >>> k   = 9
@@ -3494,7 +3494,7 @@ def butter(N, Wn, btype='lowpass', analog=False, output='ba', fs=None):
     Design an analog filter and plot its frequency response, showing the
     critical points:
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
 
@@ -3622,7 +3622,7 @@ def cheby1(N, rp, Wn, btype='lowpass', analog=False, output='ba', fs=None):
     Design an analog filter and plot its frequency response, showing the
     critical points:
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
 
@@ -3746,7 +3746,7 @@ def cheby2(N, rs, Wn, btype='lowpass', analog=False, output='ba', fs=None):
     Design an analog filter and plot its frequency response, showing the
     critical points:
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
 
@@ -3880,7 +3880,7 @@ def ellip(N, rp, rs, Wn, btype='lowpass', analog=False, output='ba', fs=None):
     Design an analog filter and plot its frequency response, showing the
     critical points:
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
 
@@ -4033,7 +4033,7 @@ def bessel(N, Wn, btype='lowpass', analog=False, output='ba', norm='phase',
     Plot the phase-normalized frequency response, showing the relationship
     to the Butterworth's cutoff frequency (green):
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
 
@@ -4147,7 +4147,7 @@ def band_stop_obj(wp, ind, passb, stopb, gpass, gstop, type):
     --------
 
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import band_stop_obj
+    >>> from scicore.signal import band_stop_obj
     >>> wp = 2
     >>> ind = 1
     >>> passb = np.array([1, 3])
@@ -4319,7 +4319,7 @@ def buttord(wp, ws, gpass, gstop, analog=False, fs=None):
     Plot its frequency response, showing the passband and stopband
     constraints in gray.
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
 
@@ -4449,7 +4449,7 @@ def cheb1ord(wp, ws, gpass, gstop, analog=False, fs=None):
     to 0.2*(fs/2), while rejecting at least -40 dB above 0.3*(fs/2). Plot its
     frequency response, showing the passband and stopband constraints in gray.
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
 
@@ -4544,7 +4544,7 @@ def cheb2ord(wp, ws, gpass, gstop, analog=False, fs=None):
     0.6*(fs/2). Plot its frequency response, showing the passband and
     stopband constraints in gray.
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
 
@@ -4669,7 +4669,7 @@ def ellipord(wp, ws, gpass, gstop, analog=False, fs=None):
     above 30 rad/s, while rejecting -60 dB at 10 rad/s. Plot its
     frequency response, showing the passband and stopband constraints in gray.
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
 
@@ -4755,7 +4755,7 @@ def buttap(N, *, xp=None, device=None):
     Compute the zeros, poles, and gain of a 2nd-order Butterworth analog
     lowpass prototype with a cutoff frequency of 1 rad/s:
 
-    >>> from rsscipy.signal import buttap
+    >>> from scicore.signal import buttap
     >>> z, p, k = buttap(2)
     >>> z
     array([], dtype=float64)
@@ -4768,7 +4768,7 @@ def buttap(N, *, xp=None, device=None):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.signal import freqs_zpk, buttap
+    >>> from scicore.signal import freqs_zpk, buttap
     ...
     >>> z, p, k = buttap(3)
     >>> f = np.geomspace(1e-1, 1e1, 200)
@@ -4839,7 +4839,7 @@ def cheb1ap(N, rp, *, xp=None, device=None):
     Compute the zeros, poles, and gain of a 3rd-order Chebyshev type I
     analog lowpass prototype with 1 dB of passband ripple:
 
-    >>> from rsscipy.signal import cheb1ap
+    >>> from scicore.signal import cheb1ap
     >>> z, p, k = cheb1ap(3, 1)
     >>> z
     array([], dtype=float64)
@@ -4854,7 +4854,7 @@ def cheb1ap(N, rp, *, xp=None, device=None):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.signal import freqs_zpk, cheb1ap
+    >>> from scicore.signal import freqs_zpk, cheb1ap
     ...
     >>> z, p, k = cheb1ap(3, rp=5)
     >>> f = np.geomspace(1e-1, 1e1, 200)
@@ -4945,7 +4945,7 @@ def cheb2ap(N, rs, *, xp=None, device=None):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.signal import freqs_zpk, cheb2ap
+    >>> from scicore.signal import freqs_zpk, cheb2ap
     ...
     >>> z, p, k = cheb2ap(3, rs=40)
     ...
@@ -5183,7 +5183,7 @@ def ellipap(N, rp, rs, *, xp=None, device=None):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.signal import freqs_zpk, ellipap
+    >>> from scicore.signal import freqs_zpk, ellipap
     ...
     >>> z, p, k = ellipap(3, rp=5, rs=20)
     ...
@@ -5329,7 +5329,7 @@ def _bessel_poly(n, reverse=False):
 
     .. code_block:: python
 
-        from rsscipy.signal._filter_design import _bessel_poly
+        from scicore.signal._filter_design import _bessel_poly
         i = 0
         for n in range(51):
             for x in _bessel_poly(n, reverse=True):
@@ -5567,7 +5567,7 @@ def besselap(N, norm='phase', *, xp=None, device=None):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.signal import freqs_zpk, besselap
+    >>> from scicore.signal import freqs_zpk, besselap
     ...
     >>> f = np.geomspace(1e-1, 1e1, 200)
     >>> _, (ax0, ax1) = plt.subplots(2, 1, sharex='all', constrained_layout=True,
@@ -5683,7 +5683,7 @@ def iirnotch(w0, Q, fs=2.0, *, xp=None, device=None):
     Design and plot filter to remove the 60 Hz component from a
     signal sampled at 200 Hz, using a quality factor Q = 30
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
 
@@ -5767,7 +5767,7 @@ def iirpeak(w0, Q, fs=2.0, *, xp=None, device=None):
     component from a signal sampled at 1000 Hz, using a quality factor Q = 30
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
 
     >>> fs = 1000.0  # Sample frequency (Hz)
@@ -5950,7 +5950,7 @@ def iircomb(w0, Q, ftype='notch', fs=2.0, *, pass_zero=False, xp=None, device=No
     Design and plot notching comb filter at 20 Hz for a
     signal sampled at 200 Hz, using quality factor Q = 30
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
 
@@ -6152,7 +6152,7 @@ def gammatone(freq, ftype, order=None, numtaps=None, fs=None, *, xp=None, device
     --------
     16-sample 4th order FIR Gammatone filter centered at 440 Hz
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> signal.gammatone(440, 'fir', numtaps=16, fs=16000)
     (array([ 0.00000000e+00,  2.22196719e-07,  1.64942101e-06,  4.99298227e-06,
         1.01993969e-05,  1.63125770e-05,  2.14648940e-05,  2.29947263e-05,

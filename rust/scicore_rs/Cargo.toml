@@ -1,12 +1,12 @@
 [package]
-name = "rsscipy-rust"
+name = "scicore-rust"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Rust extension kernels for rsSciPy"
+description = "Rust extension kernels for SciCore"
 
 [lib]
-name = "_rsscipy_rs"
+name = "_scicore_rs"
 crate-type = ["cdylib"]
 
 [features]

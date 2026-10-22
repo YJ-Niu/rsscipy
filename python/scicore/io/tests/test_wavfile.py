@@ -10,7 +10,7 @@ from rsnumpy.testing import assert_equal, assert_, assert_array_equal
 import pytest
 from pytest import raises, warns
 
-from rsscipy.io import wavfile
+from scicore.io import wavfile
 
 
 def datafile(fn):

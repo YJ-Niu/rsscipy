@@ -45,10 +45,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 import rsnumpy as np
 
-from rsscipy import linalg
-from rsscipy.special import xlogy
-from rsscipy.spatial.distance import cdist, pdist, squareform
-from rsscipy._lib._array_api import xp_capabilities
+from scicore import linalg
+from scicore.special import xlogy
+from scicore.spatial.distance import cdist, pdist, squareform
+from scicore._lib._array_api import xp_capabilities
 
 __all__ = ['Rbf']
 
@@ -138,7 +138,7 @@ class Rbf:
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.interpolate import Rbf
+    >>> from scicore.interpolate import Rbf
     >>> rng = np.random.default_rng()
     >>> x, y, z, d = rng.random((4, 50))
     >>> rbfi = Rbf(x, y, z, d)  # radial basis function interpolator instance

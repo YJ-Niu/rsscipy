@@ -45,8 +45,8 @@ from random import random
 
 import rsnumpy as np
 
-from rsscipy.optimize import _zeros_py as cc
-from rsscipy._lib._array_api import array_namespace
+from scicore.optimize import _zeros_py as cc
+from scicore._lib._array_api import array_namespace
 
 # "description" refers to the original functions
 description = """

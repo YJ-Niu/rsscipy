@@ -6,8 +6,8 @@ scikit-bio by Yoshiki Vazquez-Baeza.
 """
 
 
-from rsscipy.linalg import orthogonal_procrustes
-from rsscipy._lib._array_api import array_namespace, xp_capabilities
+from scicore.linalg import orthogonal_procrustes
+from scicore._lib._array_api import array_namespace, xp_capabilities
 
 
 __all__ = ['procrustes']
@@ -90,7 +90,7 @@ def procrustes(data1, data2):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.spatial import procrustes
+    >>> from scicore.spatial import procrustes
 
     The matrix ``b`` is a rotated, shifted, scaled and mirrored version of
     ``a`` here:

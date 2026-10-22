@@ -4,8 +4,8 @@ import rsnumpy as np
 from rsnumpy.testing import assert_equal
 import pytest
 from pytest import raises as assert_raises
-from rsscipy.sparse import _sputils as sputils, csr_array, bsr_array, dia_array, coo_array
-from rsscipy.sparse._sputils import matrix
+from scicore.sparse import _sputils as sputils, csr_array, bsr_array, dia_array, coo_array
+from scicore.sparse._sputils import matrix
 
 
 class TestSparseUtils:

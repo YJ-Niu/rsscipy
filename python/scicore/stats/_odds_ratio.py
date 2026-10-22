@@ -1,8 +1,8 @@
 import rsnumpy as np
 
-from rsscipy._lib._array_api import xp_capabilities
-from rsscipy.special import ndtri
-from rsscipy.optimize import brentq
+from scicore._lib._array_api import xp_capabilities
+from scicore.special import ndtri
+from scicore.optimize import brentq
 from ._discrete_distns import nchypergeom_fisher
 from ._common import ConfidenceInterval
 
@@ -417,7 +417,7 @@ def odds_ratio(table, *, kind='conditional'):
 
     Compute the odds ratio:
 
-    >>> from rsscipy.stats.contingency import odds_ratio
+    >>> from scicore.stats.contingency import odds_ratio
     >>> res = odds_ratio([[7, 15], [58, 472]])
     >>> res.statistic
     3.7836687705553493

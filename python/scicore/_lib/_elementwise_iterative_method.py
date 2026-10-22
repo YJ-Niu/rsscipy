@@ -16,7 +16,7 @@ import math
 import rsnumpy as np
 from ._util import _RichResult, _call_callback_maybe_halt
 from ._array_api import array_namespace, xp_size, xp_result_type, xp_device
-import rsscipy._external.array_api_extra as xpx
+import scicore._external.array_api_extra as xpx
 
 _ESIGNERR = -1
 _ECONVERR = -2

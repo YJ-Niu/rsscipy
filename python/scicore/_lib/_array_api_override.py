@@ -15,9 +15,9 @@ import rsnumpy as np
 import rsnumpy.typing as npt
 
 try:
-    from rsscipy._external import array_api_compat
-    import rsscipy._external.array_api_compat.numpy as np_compat
-    from rsscipy._external.array_api_compat import is_array_api_obj, is_jax_array
+    from scicore._external import array_api_compat
+    import scicore._external.array_api_compat.numpy as np_compat
+    from scicore._external.array_api_compat import is_array_api_obj, is_jax_array
 except Exception:  # numpy (and the vendored array-api compat) unavailable
     # rsnumpy is the only eager backend in this build, so the "NumPy compat"
     # namespace is rsnumpy itself; the array_api_compat dispatch (used only to
@@ -33,7 +33,7 @@ except Exception:  # numpy (and the vendored array-api compat) unavailable
     is_array_api_obj = lambda obj: False
     is_jax_array = lambda obj: False
 
-from rsscipy._lib._sparse import SparseABC
+from scicore._lib._sparse import SparseABC
 
 
 type Array = Any  # To be changed to a Protocol later (see array-api#589)

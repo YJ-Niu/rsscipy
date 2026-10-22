@@ -5,7 +5,7 @@ Discrete Fourier Transforms - _basic.py
 __all__ = ['fft','ifft','fftn','ifftn','rfft','irfft',
            'fft2','ifft2']
 
-from rsscipy.fft import _duccfft
+from scicore.fft import _duccfft
 from ._helper import _good_shape
 
 
@@ -79,7 +79,7 @@ def fft(x, n=None, axis=-1, overwrite_x=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.fftpack import fft, ifft
+    >>> from scicore.fftpack import fft, ifft
     >>> x = np.arange(5)
     >>> np.allclose(fft(ifft(x)), x, atol=1e-15)  # within numerical accuracy.
     True
@@ -134,7 +134,7 @@ def ifft(x, n=None, axis=-1, overwrite_x=False):
 
     Examples
     --------
-    >>> from rsscipy.fftpack import fft, ifft
+    >>> from scicore.fftpack import fft, ifft
     >>> import rsnumpy as np
     >>> x = np.arange(5)
     >>> np.allclose(ifft(fft(x)), x, atol=1e-15)  # within numerical accuracy.
@@ -194,7 +194,7 @@ def rfft(x, n=None, axis=-1, overwrite_x=False):
 
     Examples
     --------
-    >>> from rsscipy.fftpack import fft, rfft
+    >>> from scicore.fftpack import fft, rfft
     >>> a = [9, -9, 1, 3]
     >>> fft(a)
     array([  4. +0.j,   8.+12.j,  16. +0.j,   8.-12.j])
@@ -263,7 +263,7 @@ def irfft(x, n=None, axis=-1, overwrite_x=False):
 
     Examples
     --------
-    >>> from rsscipy.fftpack import rfft, irfft
+    >>> from scicore.fftpack import rfft, irfft
     >>> a = [1.0, 2.0, 3.0, 4.0, 5.0]
     >>> irfft(a)
     array([ 2.6       , -3.16405192,  1.24398433, -1.14955713,  1.46962473])
@@ -327,7 +327,7 @@ def fftn(x, shape=None, axes=None, overwrite_x=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.fftpack import fftn, ifftn
+    >>> from scicore.fftpack import fftn, ifftn
     >>> y = (-np.arange(16), 8 - np.arange(16), np.arange(16))
     >>> np.allclose(y, fftn(ifftn(y)))
     True
@@ -358,7 +358,7 @@ def ifftn(x, shape=None, axes=None, overwrite_x=False):
 
     Examples
     --------
-    >>> from rsscipy.fftpack import fftn, ifftn
+    >>> from scicore.fftpack import fftn, ifftn
     >>> import rsnumpy as np
     >>> y = (-np.arange(16), 8 - np.arange(16), np.arange(16))
     >>> np.allclose(y, ifftn(fftn(y)))
@@ -383,7 +383,7 @@ def fft2(x, shape=None, axes=(-2,-1), overwrite_x=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.fftpack import fft2, ifft2
+    >>> from scicore.fftpack import fft2, ifft2
     >>> y = np.mgrid[:5, :5][0]
     >>> y
     array([[0, 0, 0, 0, 0],
@@ -413,7 +413,7 @@ def ifft2(x, shape=None, axes=(-2,-1), overwrite_x=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.fftpack import fft2, ifft2
+    >>> from scicore.fftpack import fft2, ifft2
     >>> y = np.mgrid[:5, :5][0]
     >>> y
     array([[0, 0, 0, 0, 0],

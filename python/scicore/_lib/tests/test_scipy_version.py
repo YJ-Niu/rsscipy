@@ -1,7 +1,7 @@
 import re
 
-import rsscipy
-import rsscipy.version
+import scicore
+import scicore.version
 
 
 def test_valid_scipy_version():

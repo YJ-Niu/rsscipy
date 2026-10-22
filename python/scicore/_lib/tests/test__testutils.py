@@ -1,5 +1,5 @@
 import sys
-from rsscipy._lib._testutils import _parse_size, _get_mem_available
+from scicore._lib._testutils import _parse_size, _get_mem_available
 import pytest
 
 
@@ -33,7 +33,7 @@ def test__mem_available():
 
 
 def test_pytest_report_header(monkeypatch):
-    from rsscipy._lib._pytest_header import TEST_ENV_VARS, environment_report_header
+    from scicore._lib._pytest_header import TEST_ENV_VARS, environment_report_header
     for name in TEST_ENV_VARS:
         monkeypatch.delenv(name, raising=False)
     monkeypatch.setenv("SCIPY_DEFAULT_DTYPE", "float32")

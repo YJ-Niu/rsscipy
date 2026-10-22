@@ -14,18 +14,18 @@ from types import ModuleType
 from typing import Literal
 
 import rsnumpy as np
-from rsscipy._lib._array_api import (Array, array_namespace, is_lazy_array, is_numpy,
+from scicore._lib._array_api import (Array, array_namespace, is_lazy_array, is_numpy,
                                    is_marray, xp_size, xp_result_device, xp_result_type,
                                    xp_capabilities, xp_isscalar, xp_device)
-from rsscipy._lib._docscrape import FunctionDoc, Parameter
-from rsscipy._lib._sparse import issparse
-from rsscipy.__config__ import CONFIG
+from scicore._lib._docscrape import FunctionDoc, Parameter
+from scicore._lib._sparse import issparse
+from scicore.__config__ import CONFIG
 
 from rsnumpy.exceptions import AxisError
 
 # The upstream code asked *NumPy* about the BLAS backend it was built against.
 # rsnumpy has no such notion, and the backend choice now belongs to the Rust
-# build reported by `scipy.__config__`, so rsscipy reads its own config here.
+# build reported by `scipy.__config__`, so scicore reads its own config here.
 _config = CONFIG
 USING_ACCELERATE = _config['Build Dependencies']['blas']['name'].lower() == 'accelerate'
 

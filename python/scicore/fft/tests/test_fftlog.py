@@ -4,10 +4,10 @@ import math
 import rsnumpy as np
 import pytest
 
-from rsscipy.fft._fftlog import fht, ifht, fhtoffset
-from rsscipy.special import poch
+from scicore.fft._fftlog import fht, ifht, fhtoffset
+from scicore.special import poch
 
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     xp_assert_close, xp_assert_less, make_xp_test_case, make_xp_pytest_param
 )
 

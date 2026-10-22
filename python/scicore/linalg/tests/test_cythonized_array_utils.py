@@ -1,6 +1,6 @@
 import rsnumpy as np
-from rsscipy.linalg import bandwidth, issymmetric, ishermitian
-from rsscipy.conftest import skip_xp_invalid_arg
+from scicore.linalg import bandwidth, issymmetric, ishermitian
+from scicore.conftest import skip_xp_invalid_arg
 import pytest
 from pytest import raises
 from rsnumpy.testing import assert_equal

@@ -9,12 +9,12 @@ from rsnumpy.testing import assert_array_equal
 import pytest
 from pytest import raises as assert_raises
 
-from rsscipy.cluster.vq import ClusterError, kmeans, kmeans2, vq, whiten
-from rsscipy.cluster.vq._vq_impl import _py_vq, _krandinit, _vq
-from rsscipy.sparse._sputils import matrix
+from scicore.cluster.vq import ClusterError, kmeans, kmeans2, vq, whiten
+from scicore.cluster.vq._vq_impl import _py_vq, _krandinit, _vq
+from scicore.sparse._sputils import matrix
 
-from rsscipy._external import array_api_extra as xpx
-from rsscipy._lib._array_api import (
+from scicore._external import array_api_extra as xpx
+from scicore._lib._array_api import (
     SCIPY_ARRAY_API, eager_warns, is_lazy_array, make_xp_test_case,
     xp_copy, xp_assert_close, xp_assert_equal
 )

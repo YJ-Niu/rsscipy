@@ -165,7 +165,7 @@ the matmul operator (i.e., ``@``) which performs a dot product (like the
 ``dot`` method):
 
 >>> import rsnumpy as np
->>> from rsscipy.sparse import csr_array
+>>> from scicore.sparse import csr_array
 >>> A = csr_array([[1, 2, 0], [0, 0, 3], [4, 0, 5]])
 >>> v = np.array([1, 0, -1])
 >>> A @ v
@@ -178,8 +178,8 @@ Example 1
 
 Construct a 1000x1000 `lil_array` and add some values to it:
 
->>> from rsscipy.sparse import lil_array
->>> from rsscipy.sparse.linalg import spsolve
+>>> from scicore.sparse import lil_array
+>>> from scicore.sparse.linalg import spsolve
 >>> from rsnumpy.linalg import solve, norm
 >>> from rsnumpy.random import rand
 
@@ -212,7 +212,7 @@ Example 2
 
 Construct an array in COO format:
 
->>> from rsscipy import sparse
+>>> from scicore import sparse
 >>> from rsnumpy import array
 >>> I = array([0,3,1,0])
 >>> J = array([0,3,1,2])
@@ -285,6 +285,6 @@ def __getattr__(name):
                 f"Module 'scipy.sparse' has no attribute '{name}'"
             )
 
-from rsscipy._lib._testutils import PytestTester
+from scicore._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester

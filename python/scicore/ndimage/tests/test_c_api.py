@@ -1,10 +1,10 @@
 import rsnumpy as np
-from rsscipy._lib._array_api import xp_assert_close
+from scicore._lib._array_api import xp_assert_close
 
-from rsscipy import ndimage
-from rsscipy.ndimage import _ctest
-from rsscipy.ndimage import _cytest
-from rsscipy._lib._ccallback import LowLevelCallable
+from scicore import ndimage
+from scicore.ndimage import _ctest
+from scicore.ndimage import _cytest
+from scicore._lib._ccallback import LowLevelCallable
 
 FILTER1D_FUNCTIONS = [
     lambda filter_size: _ctest.filter1d(filter_size),

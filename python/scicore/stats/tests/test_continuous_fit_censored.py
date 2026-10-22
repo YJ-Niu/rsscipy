@@ -3,8 +3,8 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
 
-from rsscipy.optimize import fmin
-from rsscipy.stats import (CensoredData, beta, cauchy, chi2, expon, gamma,
+from scicore.optimize import fmin
+from scicore.stats import (CensoredData, beta, cauchy, chi2, expon, gamma,
                          gumbel_l, gumbel_r, invgauss, invweibull, laplace,
                          logistic, lognorm, nct, ncx2, norm, weibull_max,
                          weibull_min)

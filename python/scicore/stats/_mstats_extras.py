@@ -22,7 +22,7 @@ from rsnumpy.ma import MaskedArray
 
 from . import _mstats_basic as mstats
 
-from rsscipy.stats.distributions import norm, beta, t, binom
+from scicore.stats.distributions import norm, beta, t, binom
 
 
 def hdquantiles(data, prob=(.25, .5, .75), axis=None, var=False,):
@@ -58,7 +58,7 @@ def hdquantiles(data, prob=(.25, .5, .75), axis=None, var=False,):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats.mstats import hdquantiles
+    >>> from scicore.stats.mstats import hdquantiles
     >>>
     >>> # Sample data
     >>> data = np.array([1.2, 2.5, 3.7, 4.0, 5.1, 6.3, 7.0, 8.2, 9.4])
@@ -425,7 +425,7 @@ def compare_medians_ms(group_1, group_2, axis=None):
     Examples
     --------
 
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> a = [1, 2, 3, 4, 5, 6, 7]
     >>> b = [8, 9, 10, 11, 12, 13, 14]
     >>> stats.mstats.compare_medians_ms(a, b, axis=None)

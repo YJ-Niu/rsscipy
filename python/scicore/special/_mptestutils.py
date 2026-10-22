@@ -7,7 +7,7 @@ import rsnumpy as np
 from rsnumpy.testing import assert_
 import pytest
 
-from rsscipy.special._testutils import assert_func_equal
+from scicore.special._testutils import assert_func_equal
 
 try:
     import mpmath

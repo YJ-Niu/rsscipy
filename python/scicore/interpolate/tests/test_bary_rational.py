@@ -28,8 +28,8 @@ from math import factorial
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal, assert_array_less
 import pytest
-import rsscipy
-from rsscipy.interpolate import AAA, FloaterHormannInterpolator, BarycentricInterpolator
+import scicore
+from scicore.interpolate import AAA, FloaterHormannInterpolator, BarycentricInterpolator
 
 TOL = 1e4 * np.finfo(np.float64).eps
 UNIT_INTERVAL = np.linspace(-1, 1, num=1000)

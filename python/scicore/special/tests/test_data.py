@@ -4,7 +4,7 @@ import warnings
 import rsnumpy as np
 import pytest
 
-from rsscipy.special import (
+from scicore.special import (
     lpmv, lqn, lqmn, eval_legendre, eval_hermite,
     eval_laguerre, eval_genlaguerre, binom, cbrt, expm1, log1p, zeta,
     jn, jv, jvp, yn, yv, yvp, iv, ivp, kn, kv, kvp,
@@ -19,9 +19,9 @@ from rsscipy.special import (
     mathieu_modsem1, mathieu_modcem2, mathieu_modsem2,
     ellip_harm, ellip_harm_2, spherical_jn, spherical_yn, wright_bessel
 )
-from rsscipy.integrate import IntegrationWarning
+from scicore.integrate import IntegrationWarning
 
-from rsscipy.special._testutils import FuncData
+from scicore.special._testutils import FuncData
 
 
 # The npz files are generated, and hence may live in the build dir. We can only

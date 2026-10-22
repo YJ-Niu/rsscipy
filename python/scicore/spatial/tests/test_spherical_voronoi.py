@@ -6,10 +6,10 @@ from rsnumpy.testing import (assert_equal,
                            assert_array_almost_equal)
 import pytest
 from pytest import raises as assert_raises
-from rsscipy.spatial import SphericalVoronoi, distance
-from rsscipy.optimize import linear_sum_assignment
-from rsscipy.constants import golden as phi
-from rsscipy.special import gamma
+from scicore.spatial import SphericalVoronoi, distance
+from scicore.optimize import linear_sum_assignment
+from scicore.constants import golden as phi
+from scicore.special import gamma
 
 
 TOL = 1E-10

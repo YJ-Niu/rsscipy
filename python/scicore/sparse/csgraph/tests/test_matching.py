@@ -4,8 +4,8 @@ import rsnumpy as np
 from rsnumpy.testing import assert_array_equal, assert_equal
 import pytest
 
-from rsscipy.sparse import csr_array, coo_array, diags_array
-from rsscipy.sparse.csgraph import (
+from scicore.sparse import csr_array, coo_array, diags_array
+from scicore.sparse.csgraph import (
     maximum_bipartite_matching, min_weight_full_bipartite_matching
 )
 

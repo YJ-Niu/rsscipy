@@ -11,8 +11,8 @@ from rsnumpy.testing import (
     assert_allclose, assert_array_equal, assert_equal)
 import pytest
 from pytest import raises as assert_raises
-from rsscipy.integrate import odeint, ode, complex_ode
-from rsscipy.linalg import expm
+from scicore.integrate import odeint, ode, complex_ode
+from scicore.linalg import expm
 
 #------------------------------------------------------------------------------
 # Test ODE integrators

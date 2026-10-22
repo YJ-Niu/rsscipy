@@ -1,9 +1,9 @@
 import warnings
 import rsnumpy as np
-from rsscipy.sparse.linalg._interface import LinearOperator
+from scicore.sparse.linalg._interface import LinearOperator
 from .utils import make_system
-from rsscipy.linalg import get_lapack_funcs
-from rsscipy._lib._array_api import xp_capabilities
+from scicore.linalg import get_lapack_funcs
+from scicore._lib._array_api import xp_capabilities
 
 __all__ = ['bicg', 'bicgstab', 'cg', 'cgs', 'gmres', 'qmr']
 
@@ -79,8 +79,8 @@ def bicg(A, b, x0=None, *, rtol=1e-5, atol=0., maxiter=None, M=None, callback=No
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import csc_array
-    >>> from rsscipy.sparse.linalg import bicg
+    >>> from scicore.sparse import csc_array
+    >>> from scicore.sparse.linalg import bicg
     >>> A = csc_array([[3, 2, 0], [1, -1, 0], [0, 5, 1.]])
     >>> b = np.array([2., 4., -1.])
     >>> x, exitCode = bicg(A, b, atol=1e-5)
@@ -215,8 +215,8 @@ def bicgstab(A, b, x0=None, *, rtol=1e-5, atol=0., maxiter=None, M=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import csc_array
-    >>> from rsscipy.sparse.linalg import bicgstab
+    >>> from scicore.sparse import csc_array
+    >>> from scicore.sparse.linalg import bicgstab
     >>> R = np.array([[4, 2, 0, 1],
     ...               [3, 0, 0, 2],
     ...               [0, 1, 1, 1],
@@ -366,8 +366,8 @@ def cg(A, b, x0=None, *, rtol=1e-5, atol=0., maxiter=None, M=None, callback=None
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import csc_array
-    >>> from rsscipy.sparse.linalg import cg
+    >>> from scicore.sparse import csc_array
+    >>> from scicore.sparse.linalg import cg
     >>> P = np.array([[4, 0, 1, 0],
     ...               [0, 5, 0, 0],
     ...               [1, 0, 3, 2],
@@ -487,8 +487,8 @@ def cgs(A, b, x0=None, *, rtol=1e-5, atol=0., maxiter=None, M=None, callback=Non
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import csc_array
-    >>> from rsscipy.sparse.linalg import cgs
+    >>> from scicore.sparse import csc_array
+    >>> from scicore.sparse.linalg import cgs
     >>> R = np.array([[4, 2, 0, 1],
     ...               [3, 0, 0, 2],
     ...               [0, 1, 1, 1],
@@ -662,15 +662,15 @@ def gmres(A, b, x0=None, *, rtol=1e-5, atol=0., restart=None, maxiter=None, M=No
     explicitly.  Rather, use the following template to produce M::
 
       # Construct a linear operator that computes P^-1 @ x.
-      import rsscipy.sparse.linalg as spla
+      import scicore.sparse.linalg as spla
       M_x = lambda x: spla.spsolve(P, x)
       M = spla.LinearOperator((n, n), M_x)
 
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import csc_array
-    >>> from rsscipy.sparse.linalg import gmres
+    >>> from scicore.sparse import csc_array
+    >>> from scicore.sparse.linalg import gmres
     >>> A = csc_array([[3, 2, 0], [1, -1, 0], [0, 5, 1]], dtype=float)
     >>> b = np.array([2, 4, -1], dtype=float)
     >>> x, exitCode = gmres(A, b, atol=1e-5)
@@ -903,8 +903,8 @@ def qmr(A, b, x0=None, *, rtol=1e-5, atol=0., maxiter=None, M1=None, M2=None,
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import csc_array
-    >>> from rsscipy.sparse.linalg import qmr
+    >>> from scicore.sparse import csc_array
+    >>> from scicore.sparse.linalg import qmr
     >>> A = csc_array([[3., 2., 0.], [1., -1., 0.], [0., 5., 1.]])
     >>> b = np.array([2., 4., -1.])
     >>> x, exitCode = qmr(A, b, atol=1e-5)

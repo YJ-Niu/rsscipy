@@ -2,9 +2,9 @@ import pytest
 from pytest import raises as assert_raises
 
 import rsnumpy as np
-from rsscipy.linalg import lu, lu_factor, lu_solve, get_lapack_funcs, solve
+from scicore.linalg import lu, lu_factor, lu_solve, get_lapack_funcs, solve
 from rsnumpy.testing import assert_allclose, assert_array_equal, assert_equal
-from rsscipy._lib._util import HAS_ILP64
+from scicore._lib._util import HAS_ILP64
 
 
 REAL_DTYPES = [np.float32, np.float64]

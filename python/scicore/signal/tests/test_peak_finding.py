@@ -3,9 +3,9 @@ import copy
 import rsnumpy as np
 import pytest
 from pytest import raises, warns
-from rsscipy._lib._array_api import xp_assert_close, xp_assert_equal
+from scicore._lib._array_api import xp_assert_close, xp_assert_equal
 
-from rsscipy.signal._peak_finding import (
+from scicore.signal._peak_finding import (
     argrelmax,
     argrelmin,
     peak_prominences,
@@ -15,8 +15,8 @@ from rsscipy.signal._peak_finding import (
     find_peaks_cwt,
     _identify_ridge_lines
 )
-from rsscipy.signal.windows import gaussian
-from rsscipy.signal._peak_finding_utils_rs import _local_maxima_1d, PeakPropertyWarning
+from scicore.signal.windows import gaussian
+from scicore.signal._peak_finding_utils_rs import _local_maxima_1d, PeakPropertyWarning
 
 
 def _gen_gaussians(center_locs, sigmas, total_length):

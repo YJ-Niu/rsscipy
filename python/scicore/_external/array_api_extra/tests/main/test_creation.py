@@ -126,7 +126,7 @@ class TestCreateDiagonal:
     @pytest.mark.parametrize("n", range(1, 10))
     @pytest.mark.parametrize("offset", range(1, 10))
     def test_1d_from_scipy(self, xp: ArrayNamespace, n: int, offset: int):
-        # from rsscipy._lib tests
+        # from scicore._lib tests
         rng = np.random.default_rng(2347823)
         one = xp.asarray(1.0)
         x = rng.random(n)

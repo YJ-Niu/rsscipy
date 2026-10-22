@@ -8,7 +8,7 @@ import operator
 from ._sputils import (asmatrix, check_shape,
                        get_sum_dtype, isdense, isscalarlike, _todata,
                        matrix, validateaxis, getdtype, is_pydata_spmatrix)
-from rsscipy._lib._sparse import SparseABC, issparse
+from scicore._lib._sparse import SparseABC, issparse
 
 __all__ = ['isspmatrix', 'issparse', 'sparray',
            'SparseWarning', 'SparseEfficiencyWarning']
@@ -327,7 +327,7 @@ class _spbase(SparseABC):
         For the major axis in CSR (rows) and CSC (cols) use `np.diff`:
 
             >>> import rsnumpy as np
-            >>> import rsscipy as sp
+            >>> import scicore as sp
             >>> A = sp.sparse.csr_array([[4, 5, 0], [7, 0, 0]])
             >>> major_axis_stored_values = np.diff(A.indptr)  # -> np.array([2, 1])
 
@@ -661,7 +661,7 @@ class _spbase(SparseABC):
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from rsscipy.sparse import csr_array
+        >>> from scicore.sparse import csr_array
         >>> A = csr_array([[1, 2, 0], [0, 0, 3], [4, 0, 5]])
         >>> v = np.array([1, 0, -1])
         >>> A.dot(v)
@@ -1172,7 +1172,7 @@ class _spbase(SparseABC):
 
         Examples
         --------
-        >>> from rsscipy.sparse import csr_array
+        >>> from scicore.sparse import csr_array
         >>> A = csr_array([[1, 2, 0], [0, 0, 3], [4, 0, 5]])
         >>> A.nonzero()
         (array([0, 0, 1, 2, 2], dtype=int32), array([0, 1, 2, 0, 2], dtype=int32))
@@ -1599,7 +1599,7 @@ class _spbase(SparseABC):
 
         Examples
         --------
-        >>> from rsscipy.sparse import csr_array
+        >>> from scicore.sparse import csr_array
         >>> A = csr_array([[1, 2, 0], [0, 0, 3], [4, 0, 5]])
         >>> A.diagonal()
         array([1, 0, 5])
@@ -1740,7 +1740,7 @@ class sparray(_spbase):  # numpydoc ignore=PR01
         Examples
         --------
         >>> import rsnumpy as np
-        >>> from rsscipy.sparse import coo_array
+        >>> from scicore.sparse import coo_array
 
         >>> coo_array[np.int8, tuple[int]]
         scipy.sparse._coo.coo_array[rsnumpy.int8, tuple[int]]
@@ -1780,7 +1780,7 @@ def isspmatrix(x):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import csr_array, csr_matrix, isspmatrix
+    >>> from scicore.sparse import csr_array, csr_matrix, isspmatrix
     >>> isspmatrix(csr_matrix([[5]]))  # doctest: +SKIP
     True
     >>> isspmatrix(csr_array([[5]]))

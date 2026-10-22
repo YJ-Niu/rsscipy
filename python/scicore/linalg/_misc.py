@@ -3,7 +3,7 @@ from rsnumpy.linalg import LinAlgError
 from .blas import get_blas_funcs
 from .lapack import get_lapack_funcs
 from ._batched_linalg import _bandwidth
-from rsscipy._lib._util import _deprecate_dtypes
+from scicore._lib._util import _deprecate_dtypes
 
 __all__ = ['LinAlgError', 'LinAlgWarning', 'norm', 'bandwidth']
 
@@ -95,7 +95,7 @@ def norm(a, ord=None, axis=None, keepdims=False, check_finite=True):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import norm
+    >>> from scicore.linalg import norm
     >>> a = np.arange(9) - 4.0
     >>> a
     array([-4., -3., -2., -1.,  0.,  1.,  2.,  3.,  4.])
@@ -239,7 +239,7 @@ def bandwidth(a):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.linalg import bandwidth
+    >>> from scicore.linalg import bandwidth
     >>> A = np.array([[3., 0., 0., 0., 0.],
     ...               [0., 4., 0., 0., 0.],
     ...               [0., 0., 5., 1., 0.],

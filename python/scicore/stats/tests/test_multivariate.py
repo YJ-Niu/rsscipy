@@ -15,12 +15,12 @@ from .test_continuous_basic import check_distribution_rvs
 
 import rsnumpy as np
 
-import rsscipy.linalg
+import scicore.linalg
 
-from rsscipy.stats._multivariate import (_PSD,
+from scicore.stats._multivariate import (_PSD,
                                        _lnB,
                                        multivariate_normal_frozen)
-from rsscipy.stats import (multivariate_normal, multivariate_hypergeom,
+from scicore.stats import (multivariate_normal, multivariate_hypergeom,
                          matrix_normal, special_ortho_group, ortho_group,
                          random_correlation, unitary_group, dirichlet,
                          beta, wishart, multinomial, invwishart, chi2,
@@ -29,14 +29,14 @@ from rsscipy.stats import (multivariate_normal, multivariate_hypergeom,
                          random_table, uniform_direction, vonmises_fisher,
                          dirichlet_multinomial, vonmises, matrix_t)
 
-from rsscipy.stats import _covariance, Covariance
-from rsscipy.stats._continuous_distns import _norm_pdf as norm_pdf
-from rsscipy import stats
+from scicore.stats import _covariance, Covariance
+from scicore.stats._continuous_distns import _norm_pdf as norm_pdf
+from scicore import stats
 
-from rsscipy.integrate import tanhsinh, cubature, quad
-from rsscipy.integrate import romb, qmc_quad, dblquad, tplquad
-from rsscipy.special import multigammaln
-import rsscipy.special as special
+from scicore.integrate import tanhsinh, cubature, quad
+from scicore.integrate import romb, qmc_quad, dblquad, tplquad
+from scicore.special import multigammaln
+import scicore.special as special
 
 from .common_tests import check_random_state_property
 from .data._mvt import _qsimvtv
@@ -4350,7 +4350,7 @@ class TestRandomTable:
     def test_rvs_rcont(self, v):
         # This test checks the internal low-level interface.
         # It is implicitly also checked by the other test_rvs* calls.
-        import rsscipy.stats._rcont as _rcont
+        import scicore.stats._rcont as _rcont
 
         row = np.array([1, 3], dtype=np.int64)
         col = np.array([2, 1, 1], dtype=np.int64)

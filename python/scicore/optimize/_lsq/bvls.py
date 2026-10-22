@@ -1,7 +1,7 @@
 """Bounded-variable least-squares algorithm."""
 import rsnumpy as np
 from rsnumpy.linalg import norm, lstsq
-from rsscipy.optimize._optimize import OptimizeResult
+from scicore.optimize._optimize import OptimizeResult
 
 from .common import print_header_linear, print_iteration_linear
 

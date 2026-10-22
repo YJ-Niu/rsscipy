@@ -5,14 +5,14 @@ import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal
 import pytest
 
-from rsscipy._lib._testutils import IS_WASM
-from rsscipy import stats
-from rsscipy.optimize import differential_evolution
+from scicore._lib._testutils import IS_WASM
+from scicore import stats
+from scicore.optimize import differential_evolution
 
 from .test_continuous_basic import distcont
-from rsscipy.stats._distn_infrastructure import FitError
-from rsscipy.stats._distr_params import distdiscrete
-from rsscipy.stats import goodness_of_fit
+from scicore.stats._distn_infrastructure import FitError
+from scicore.stats._distr_params import distdiscrete
+from scicore.stats import goodness_of_fit
 
 
 # this is not a proper statistical test for convergence, but only

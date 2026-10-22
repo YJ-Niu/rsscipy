@@ -10,14 +10,14 @@ from typing import Literal
 
 from rsnumpy._typing import ArrayLike
 
-from rsscipy.spatial import cKDTree
+from scicore.spatial import cKDTree
 from ._ltisys import dlti
 from ._upfirdn import upfirdn, _output_len, _upfirdn_modes
-from rsscipy import linalg, fft as sp_fft
-from rsscipy import ndimage
-from rsscipy.fft._helper import _init_nd_shape_and_axes
+from scicore import linalg, fft as sp_fft
+from scicore import ndimage
+from scicore.fft._helper import _init_nd_shape_and_axes
 import rsnumpy as np
-from rsscipy.special import lambertw
+from scicore.special import lambertw
 from .windows import get_window
 from ._arraytools import axis_slice, axis_reverse, odd_ext, even_ext, const_ext
 from ._filter_design import cheby1, _validate_sos, zpk2sos
@@ -28,11 +28,11 @@ from ._lfilter import _linear_filter_adapter
 from ._convolve2d import _convolve2d
 from ._correlate_nd import _correlate_nd
 
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     xp_result_device, array_namespace, is_torch, is_numpy, xp_copy, xp_size,
     xp_promote, xp_result_type, xp_swapaxes, xp_device,)
-from rsscipy._external.array_api_compat import is_array_api_obj
-import rsscipy._external.array_api_extra as xpx
+from scicore._external.array_api_compat import is_array_api_obj
+import scicore._external.array_api_extra as xpx
 
 
 __all__ = ['correlate', 'correlation_lags', 'correlate2d',
@@ -186,7 +186,7 @@ def correlate(in1, in2, mode='full', method='auto'):
     that has passed through a noisy channel.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng()
 
@@ -342,7 +342,7 @@ def correlation_lags(in1_len, in2_len, mode='full'):
     Cross-correlation of a signal with its time-delayed self.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> rng = np.random.default_rng()
     >>> x = rng.standard_normal(1000)
     >>> y = np.concatenate([rng.standard_normal(100), x])
@@ -626,7 +626,7 @@ def fftconvolve(in1, in2, mode="full", axes=None):
     Autocorrelation of white noise is an impulse.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> rng = np.random.default_rng()
     >>> sig = rng.standard_normal(1000)
     >>> autocorr = signal.fftconvolve(sig, sig[::-1], mode='full')
@@ -645,7 +645,7 @@ def fftconvolve(in1, in2, mode="full", axes=None):
     The `convolve2d` function allows for other types of image boundaries,
     but is far slower.
 
-    >>> from rsscipy import datasets
+    >>> from scicore import datasets
     >>> face = datasets.face(gray=True)
     >>> kernel = np.outer(signal.windows.gaussian(70, 8),
     ...                   signal.windows.gaussian(70, 8))
@@ -896,7 +896,7 @@ def oaconvolve(in1, in2, mode="full", axes=None):
     Convolve a 100,000 sample signal with a 512-sample filter.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> rng = np.random.default_rng()
     >>> sig = rng.standard_normal(100000)
     >>> filt = signal.firwin(512, 0.01)
@@ -1315,7 +1315,7 @@ def choose_conv_method(in1, in2, mode='full', measure=False):
     Estimate the fastest method for a given input:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> rng = np.random.default_rng()
     >>> img = rng.random((32, 32))
     >>> filter = rng.random((8, 8))
@@ -1453,7 +1453,7 @@ def convolve(in1, in2, mode='full', method='auto'):
     Smooth a square pulse using a Hann window:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> sig = np.repeat([0., 1., 0.], 100)
     >>> win = signal.windows.hann(50)
     >>> filtered = signal.convolve(sig, win, mode='same') / sum(win)
@@ -1551,7 +1551,7 @@ def order_filter(a, domain, rank):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> x = np.arange(25).reshape(5, 5)
     >>> domain = np.identity(3)
     >>> x
@@ -1629,7 +1629,7 @@ def medfilt(volume, kernel_size=None):
     Apply a 1-D median filter to an array containing noise spikes.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> x = np.array([1, 2, 100, 2, 1, 1, 35, 30, 1])
 
     Apply a filter with a kernel size of 3:
@@ -1716,8 +1716,8 @@ def wiener(im, mysize=None, noise=None):
 
     Examples
     --------
-    >>> from rsscipy.datasets import face
-    >>> from rsscipy.signal import wiener
+    >>> from scicore.datasets import face
+    >>> from scicore.signal import wiener
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
     >>> rng = np.random.default_rng()
@@ -1813,8 +1813,8 @@ def convolve2d(in1, in2, mode='full', boundary='fill', fillvalue=0):
     boundaries.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
-    >>> from rsscipy import datasets
+    >>> from scicore import signal
+    >>> from scicore import datasets
     >>> ascent = datasets.ascent()
     >>> scharr = np.array([[ -3-3j, 0-10j,  +3 -3j],
     ...                    [-10+0j, 0+ 0j, +10 +0j],
@@ -1911,7 +1911,7 @@ def correlate2d(in1, in2, mode='full', boundary='fill', fillvalue=0):
     image:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal, datasets, ndimage
+    >>> from scicore import signal, datasets, ndimage
     >>> rng = np.random.default_rng()
     >>> face = datasets.face(gray=True) - datasets.face(gray=True).mean()
     >>> face = ndimage.zoom(face[30:500, 400:950], 0.5)  # extract the face
@@ -1999,7 +1999,7 @@ def medfilt2d(input, kernel_size=3):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> x = np.arange(25).reshape(5, 5)
     >>> x
     array([[ 0,  1,  2,  3,  4],
@@ -2157,7 +2157,7 @@ def lfilter(b, a, x, axis=-1, zi=None):
     Generate a noisy signal to be filtered:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng()
     >>> t = np.linspace(-1, 1, 201)
@@ -2412,7 +2412,7 @@ def deconvolve(signal, divisor):
     --------
     Deconvolve a signal that's been filtered:
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> original = [0, 1, 0, 0, 1, 1, 0, 0]
     >>> impulse_response = [2, 1]
     >>> recorded = signal.convolve(impulse_response, original)
@@ -2515,7 +2515,7 @@ def hilbert(x, N=None, axis=-1):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.signal import hilbert, chirp
+    >>> from scicore.signal import hilbert, chirp
     ...
     >>> duration, fs = 1, 400  # 1 s signal with sampling frequency of 400 Hz
     >>> t = np.arange(int(fs*duration)) / fs  # timestamps of samples
@@ -2667,8 +2667,8 @@ def hilbert2(x, N=None, axes=(-2, -1)):
     component at the ``(0,0)`` bin.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.fft import fft2, fftshift, ifftshift
-    >>> from rsscipy.signal import hilbert2
+    >>> from scicore.fft import fft2, fftshift, ifftshift
+    >>> from scicore.signal import hilbert2
     ...
     >>> # Input signal is unit impulse with a constant offset:
     >>> x = np.ones((5, 5)) / 5
@@ -2698,8 +2698,8 @@ def hilbert2(x, N=None, axes=(-2, -1)):
     This second example illustrates a problem with the "single-orthant" convention. A
     purely real signal can produce an analytic signal which is completely zero:
 
-    >>> from rsscipy.fft import fft2, fftshift, ifft2, ifftshift
-    >>> from rsscipy.signal import hilbert2
+    >>> from scicore.fft import fft2, fftshift, ifft2, ifftshift
+    >>> from scicore.signal import hilbert2
     ...
     >>> # Create a real signal by ensuring `Z[-p,-q] == np.conj(Z[p,q])` holds:
     >>> Z = np.array([[0, 0, 0, 0, 0],
@@ -2880,8 +2880,8 @@ def envelope(z, bp_in: tuple[int | None, int | None] = (1, None), *,
 
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
-    >>> from rsscipy.signal.windows import gaussian
-    >>> from rsscipy.signal import envelope
+    >>> from scicore.signal.windows import gaussian
+    >>> from scicore.signal import envelope
     ...
     >>> n, n_out = 500, 40  # number of signal samples and envelope samples
     >>> T = 2 / n  # sampling interval for 2 s duration
@@ -2929,8 +2929,8 @@ def envelope(z, bp_in: tuple[int | None, int | None] = (1, None), *,
 
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
-    >>> from rsscipy.signal.windows import gaussian
-    >>> from rsscipy.signal import envelope
+    >>> from scicore.signal.windows import gaussian
+    >>> from scicore.signal import envelope
     ...
     >>> n, T = 1000, 1/1000  # number of samples and sampling interval
     >>> t = np.arange(n) * T  # time stamps for 1 s duration
@@ -3052,7 +3052,7 @@ def _cmplx_sort(p):
 
     Examples
     --------
-    >>> from rsscipy.signal._signaltools import _cmplx_sort
+    >>> from scicore.signal._signaltools import _cmplx_sort
     >>> vals = [1, 4, 1+1.j, 3]
     >>> p_sorted, indx = _cmplx_sort(vals)
     >>> p_sorted
@@ -3108,7 +3108,7 @@ def unique_roots(p, tol=1e-3, rtype='min'):
 
     Examples
     --------
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> vals = [0, 1.3, 1.31, 2.8, 1.25, 2.2, 10.3]
     >>> uniq, mult = signal.unique_roots(vals, tol=2e-2, rtype='avg')
 
@@ -3456,7 +3456,7 @@ def residuez(b, a, tol=1e-3, rtype='avg'):
     expansion of b(z) / a(z):
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> b = np.array([1, 0.3])
     >>> a = np.array([1, -0.75, 0.125])
     >>> r, p, k = signal.residuez(b, a)
@@ -3625,7 +3625,7 @@ def invresz(r, p, k, tol=1e-3, rtype='avg'):
     partial-fraction expansion:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> r = np.array([-2.2, 3.2])
     >>> p = np.array([0.25, 0.5])
     >>> k = np.array([])
@@ -3761,7 +3761,7 @@ def resample(x, num, t=None, axis=0, window=None, domain='time'):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.signal import resample
+    >>> from scicore.signal import resample
     ...
     >>> n0, n1 = 20, 100  # number of samples
     >>> t0 = np.linspace(0, 10, n0, endpoint=False)  # input time stamps
@@ -3795,8 +3795,8 @@ def resample(x, num, t=None, axis=0, window=None, domain='time'):
 
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
-    >>> from rsscipy.fft import fftshift, fftfreq, fft, rfft, irfft
-    >>> from rsscipy.signal import resample, resample_poly
+    >>> from scicore.fft import fftshift, fftfreq, fft, rfft, irfft
+    >>> from scicore.signal import resample, resample_poly
     ...
     >>> fac, T0, T1 = 8, 1, 1/8  # upsampling factor and sampling intervals
     >>> for n0 in (15, 16):  # number of samples of input signal
@@ -3858,8 +3858,8 @@ def resample(x, num, t=None, axis=0, window=None, domain='time'):
 
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
-    >>> from rsscipy.fft import rfftfreq, rfft
-    >>> from rsscipy.signal import resample, resample_poly
+    >>> from scicore.fft import rfftfreq, rfft
+    >>> from scicore.signal import resample, resample_poly
     ...
     >>> n0 = 19937 # number of input samples - prime
     >>> n1 = 128  # number of output samples - fast FFT length
@@ -4054,7 +4054,7 @@ def resample_poly(x, up, down, axis=0, window=('kaiser', 5.0),
     for the polyphase method:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
 
     >>> x = np.linspace(0, 10, 20, endpoint=False)
@@ -4251,7 +4251,7 @@ def vectorstrength(events, period):
     is π/2, a quarter of the way through the period.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import vectorstrength
+    >>> from scicore.signal import vectorstrength
     ...
     >>> events = np.array([0.25, 1.25, 2.25, 3.25, 4.25])
     >>> vectorstrength(events, period=1.0)
@@ -4283,7 +4283,7 @@ def vectorstrength(events, period):
 
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import vectorstrength
+    >>> from scicore.signal import vectorstrength
     ...
     >>> N, T = 100, 10  # samples and sampling interval in seconds
     >>> events = np.arange(N) * T
@@ -4390,7 +4390,7 @@ def detrend(data: np.ndarray, axis: int = -1,
 
     >>> import matplotlib.pyplot as plt
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import detrend
+    >>> from scicore.signal import detrend
     ...
     >>> t = np.linspace(-0.5, 0.5, 21)
     >>> x = np.sin(np.pi*t) + 1/4
@@ -4544,7 +4544,7 @@ def lfilter_zi(b, a):
     transients at the beginning of the output signal:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import lfilter, lfilter_zi, butter
+    >>> from scicore.signal import lfilter, lfilter_zi, butter
     ...
     >>> b, a = butter(5, 0.25)
     >>> zi = lfilter_zi(b, a)
@@ -4647,7 +4647,7 @@ def sosfilt_zi(sos):
     the use of the `zi` argument of `scipy.signal.sosfilt`.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
 
     >>> sos = signal.butter(9, 0.125, output='sos')
@@ -4952,7 +4952,7 @@ def filtfilt(b, a, x, axis=-1, padtype='odd', padlen=None, method='pad',
     The examples will use several functions from `scipy.signal`.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
 
     First we create a one second signal that is the sum of two pure sine
@@ -5177,7 +5177,7 @@ def sosfilt(sos, x, axis=-1, zi=None):
     outside of the unit circle):
 
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> b, a = signal.ellip(13, 0.009, 80, 0.05, output='ba')
     >>> sos = signal.ellip(13, 0.009, 80, 0.05, output='sos')
     >>> x = signal.unit_impulse(700)
@@ -5297,7 +5297,7 @@ def sosfiltfilt(sos, x, axis=-1, padtype='odd', padlen=None):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import sosfiltfilt, butter
+    >>> from scicore.signal import sosfiltfilt, butter
     >>> import matplotlib.pyplot as plt
     >>> rng = np.random.default_rng()
 
@@ -5315,7 +5315,7 @@ def sosfiltfilt(sos, x, axis=-1, padtype='odd', padlen=None):
     For comparison, apply an 8th order filter using `sosfilt`.  The filter
     is initialized using the mean of the first four values of `x`.
 
-    >>> from rsscipy.signal import sosfilt, sosfilt_zi
+    >>> from scicore.signal import sosfilt, sosfilt_zi
     >>> sos8 = butter(8, 0.125, output='sos')
     >>> zi = x[:4].mean() * sosfilt_zi(sos8)
     >>> y2, zo = sosfilt(sos8, x, zi=zi)
@@ -5417,7 +5417,7 @@ def decimate(x, q, n=None, ftype='iir', axis=-1, zero_phase=True):
     --------
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
 
     Define wave parameters.

@@ -5,10 +5,10 @@ import sysconfig
 import rsnumpy as np
 import pytest
 
-from rsscipy._lib._testutils import IS_EDITABLE, _test_cython_extension, cython
-from rsscipy.linalg.blas import get_blas_funcs
-from rsscipy.linalg.lapack import get_lapack_funcs
-import rsscipy.linalg.cython_blas as cython_blas
+from scicore._lib._testutils import IS_EDITABLE, _test_cython_extension, cython
+from scicore.linalg.blas import get_blas_funcs
+from scicore.linalg.lapack import get_lapack_funcs
+import scicore.linalg.cython_blas as cython_blas
 
 
 @pytest.mark.parallel_threads_limit(4)  # 0.35 GiB per thread RAM usage

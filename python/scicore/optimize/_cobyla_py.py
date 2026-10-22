@@ -11,7 +11,7 @@ Functions
 """
 
 import rsnumpy as np
-from rsscipy._lib._util import wrapped_inspect_signature
+from scicore._lib._util import wrapped_inspect_signature
 from ._optimize import (OptimizeResult, _check_unknown_options,
     _prepare_scalar_function)
 from ._constraints import NonlinearConstraint
@@ -134,7 +134,7 @@ def fmin_cobyla(func, x0, cons, args=(), consargs=None, rhobeg=1.0,
         >>> def constr2(x):
         ...     return x[1]
         ...
-        >>> from rsscipy.optimize import fmin_cobyla
+        >>> from scicore.optimize import fmin_cobyla
         >>> fmin_cobyla(objective, [0.0, 0.1], [constr1, constr2], rhoend=1e-7)
         array([-0.70710685,  0.70710671])
 

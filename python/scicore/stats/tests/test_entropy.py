@@ -4,10 +4,10 @@ from pytest import raises as assert_raises
 
 import rsnumpy as np
 
-from rsscipy import stats
-from rsscipy.stats import norm, expon
-from rsscipy._lib._array_api import make_xp_test_case
-from rsscipy._lib._array_api_no_0d import (xp_assert_close, xp_assert_equal,
+from scicore import stats
+from scicore.stats import norm, expon
+from scicore._lib._array_api import make_xp_test_case
+from scicore._lib._array_api_no_0d import (xp_assert_close, xp_assert_equal,
                                          xp_assert_less)
 
 lazy_xp_modules = [stats]

@@ -2,7 +2,7 @@ import inspect
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
-from rsscipy import linalg, sparse
+from scicore import linalg, sparse
 
 
 real_floating = [np.float32, np.float64]

@@ -72,7 +72,7 @@ class FortranFile:
     --------
     To create an unformatted sequential Fortran file:
 
-    >>> from rsscipy.io import FortranFile
+    >>> from scicore.io import FortranFile
     >>> import rsnumpy as np
     >>> f = FortranFile('test.unf', 'w')
     >>> f.write_record(np.array([1,2,3,4,5], dtype=np.int32))

@@ -640,7 +640,7 @@ from ._quantile import quantile, estimated_cdf
 
 __all__ = [s for s in dir() if not s.startswith("_")]  # Remove dunders.
 
-from rsscipy._lib._testutils import PytestTester
+from scicore._lib._testutils import PytestTester
 test = PytestTester(__name__)
 del PytestTester
 

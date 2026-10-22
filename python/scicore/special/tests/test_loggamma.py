@@ -1,8 +1,8 @@
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_
 
-from rsscipy.special._testutils import FuncData
-from rsscipy.special import gamma, gammaln, loggamma
+from scicore.special._testutils import FuncData
+from scicore.special import gamma, gammaln, loggamma
 
 
 def test_identities1():

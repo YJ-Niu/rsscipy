@@ -15,9 +15,9 @@ import os
 from warnings import warn
 
 import rsnumpy as np
-from rsscipy.sparse import coo_array, issparse, coo_matrix
-from rsscipy.io import _mmio
-from rsscipy._lib.deprecation import _NoValue
+from scicore.sparse import coo_array, issparse, coo_matrix
+from scicore.io import _mmio
+from scicore._lib.deprecation import _NoValue
 
 __all__ = ['mminfo', 'mmread', 'mmwrite']
 
@@ -358,7 +358,7 @@ def mmread(source, *, spmatrix=_NoValue):
     Examples
     --------
     >>> from io import StringIO
-    >>> from rsscipy.io import mmread
+    >>> from scicore.io import mmread
 
     >>> text = '''%%MatrixMarket matrix coordinate real general
     ...  5 5 7
@@ -464,8 +464,8 @@ def mmwrite(target, a, comment=None, field=None, precision=None, symmetry="AUTO"
     --------
     >>> from io import BytesIO
     >>> import rsnumpy as np
-    >>> from rsscipy.sparse import coo_array
-    >>> from rsscipy.io import mmwrite
+    >>> from scicore.sparse import coo_array
+    >>> from scicore.io import mmwrite
 
     Write a small NumPy array to a matrix market file.  The file will be
     written in the ``'array'`` format.
@@ -632,7 +632,7 @@ def mminfo(source):
     Examples
     --------
     >>> from io import StringIO
-    >>> from rsscipy.io import mminfo
+    >>> from scicore.io import mminfo
 
     >>> text = '''%%MatrixMarket matrix coordinate real general
     ...  5 5 7

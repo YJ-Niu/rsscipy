@@ -1,7 +1,7 @@
 import rsnumpy as np
-import rsscipy.linalg
-from rsscipy.sparse import csc_array
-from rsscipy.optimize._trustregion_constr.projections \
+import scicore.linalg
+from scicore.sparse import csc_array
+from scicore.optimize._trustregion_constr.projections \
     import projections, orthogonality
 from rsnumpy.testing import (TestCase, assert_array_almost_equal,
                            assert_equal, assert_allclose)

@@ -1,7 +1,7 @@
 import rsnumpy as np
 
-from rsscipy._lib._array_api import xp_capabilities
-from rsscipy.linalg import solve_banded
+from scicore._lib._array_api import xp_capabilities
+from scicore.linalg import solve_banded
 from ._rotation import Rotation
 
 
@@ -280,7 +280,7 @@ class RotationSpline:
 
     Examples
     --------
-    >>> from rsscipy.spatial.transform import Rotation, RotationSpline
+    >>> from scicore.spatial.transform import Rotation, RotationSpline
     >>> import rsnumpy as np
 
     Define the sequence of times and rotations from the Euler angles:
@@ -365,7 +365,7 @@ class RotationSpline:
         return angular_rates, rotvecs_dot
 
     def __init__(self, times, rotations):
-        from rsscipy.interpolate import PPoly
+        from scicore.interpolate import PPoly
 
         if rotations.single:
             raise ValueError("`rotations` must be a sequence of rotations.")

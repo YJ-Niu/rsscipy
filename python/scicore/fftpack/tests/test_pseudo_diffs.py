@@ -4,14 +4,14 @@ __usage__ = """
 Build fftpack:
   python setup_fftpack.py build
 Run tests if scipy is installed:
-  python -c 'import rsscipy;scipy.fftpack.test(<level>)'
+  python -c 'import scicore;scipy.fftpack.test(<level>)'
 Run tests if fftpack is not installed:
   python tests/test_pseudo_diffs.py [<level>]
 """
 
 from rsnumpy.testing import (assert_equal, assert_almost_equal,
                            assert_array_almost_equal)
-from rsscipy.fftpack import (diff, fft, ifft, tilbert, itilbert, hilbert,
+from scicore.fftpack import (diff, fft, ifft, tilbert, itilbert, hilbert,
                            ihilbert, shift, fftfreq, cs_diff, sc_diff,
                            ss_diff, cc_diff)
 

@@ -22,8 +22,8 @@ import os
 import warnings
 
 import rsnumpy as np
-from rsscipy._lib.deprecation import _NoValue
-from rsscipy.sparse import csc_array, csc_matrix
+from scicore._lib.deprecation import _NoValue
+from scicore.sparse import csc_array, csc_matrix
 from ._fortran_format_parser import FortranFormatParser, IntFormat, ExpFormat
 
 __all__ = ["hb_read", "hb_write"]
@@ -503,8 +503,8 @@ def hb_read(path_or_open_file, *, spmatrix=_NoValue):
     --------
     We can read and write a harwell-boeing format file:
 
-    >>> from rsscipy.io import hb_read, hb_write
-    >>> from rsscipy.sparse import csr_array, eye_array
+    >>> from scicore.io import hb_read, hb_write
+    >>> from scicore.sparse import csr_array, eye_array
     >>> data = csr_array(eye_array(3))  # create a sparse array
     >>> hb_write("data.hb", data)  # write a hb file
     >>> print(hb_read("data.hb", spmatrix=False))  # read a hb file
@@ -578,8 +578,8 @@ def hb_write(path_or_open_file, m, hb_info=None):
     --------
     We can read and write a harwell-boeing format file:
 
-    >>> from rsscipy.io import hb_read, hb_write
-    >>> from rsscipy.sparse import csr_array, eye_array
+    >>> from scicore.io import hb_read, hb_write
+    >>> from scicore.sparse import csr_array, eye_array
     >>> data = csr_array(eye_array(3))  # create a sparse array
     >>> hb_write("data.hb", data)  # write a hb file
     >>> print(hb_read("data.hb", spmatrix=False))  # read a hb file

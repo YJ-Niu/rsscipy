@@ -1,9 +1,9 @@
 import pytest
 
 import rsnumpy as np
-import rsscipy.sparse as sp
-import rsscipy.sparse.csgraph as spgraph
-from rsscipy._external.packaging_version import version
+import scicore.sparse as sp
+import scicore.sparse.csgraph as spgraph
+from scicore._external.packaging_version import version
 
 from rsnumpy.testing import assert_equal
 

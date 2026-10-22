@@ -1,6 +1,6 @@
 import rsnumpy as np
-from rsscipy.optimize import _lbfgsb, minimize
-from rsscipy._lib._util import HAS_ILP64
+from scicore.optimize import _lbfgsb, minimize
+from scicore._lib._util import HAS_ILP64
 
 
 def objfun(x):

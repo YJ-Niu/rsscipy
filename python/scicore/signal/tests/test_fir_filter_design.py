@@ -4,14 +4,14 @@ import rsnumpy as np
 from pytest import raises as assert_raises, warns as assert_warns
 import pytest
 
-import rsscipy._external.array_api_extra as xpx
-import rsscipy.signal as signal
-from rsscipy._lib._array_api import (
+import scicore._external.array_api_extra as xpx
+import scicore.signal as signal
+from scicore._lib._array_api import (
     xp_assert_close, xp_assert_equal, assert_almost_equal, assert_array_almost_equal,
     array_namespace, make_xp_test_case, xp_copy_to_numpy, xp_device
 )
-from rsscipy.fft import fft, fft2, rfft
-from rsscipy.signal import (kaiser_beta, kaiser_atten, kaiserord,
+from scicore.fft import fft, fft2, rfft
+from scicore.signal import (kaiser_beta, kaiser_atten, kaiserord,
     firwin, firwin2, freqz, remez, firls, minimum_phase, convolve2d, firwin_2d
 )
 

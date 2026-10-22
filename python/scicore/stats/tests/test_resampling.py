@@ -5,18 +5,18 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose, assert_equal
 
-from rsscipy._external import array_api_extra as xpx
-from rsscipy._lib._util import rng_integers
-from rsscipy._lib._array_api import (is_numpy, make_xp_test_case,
+from scicore._external import array_api_extra as xpx
+from scicore._lib._util import rng_integers
+from scicore._lib._array_api import (is_numpy, make_xp_test_case,
                                    xp_size, array_namespace, xp_copy_to_numpy,
                                    is_lazy_array, eager_warns)
-from rsscipy._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
-from rsscipy import stats, special
-from rsscipy.fft.tests.test_fftlog import skip_xp_backends
-from rsscipy.optimize import root
+from scicore._lib._array_api_no_0d import xp_assert_close, xp_assert_equal
+from scicore import stats, special
+from scicore.fft.tests.test_fftlog import skip_xp_backends
+from scicore.optimize import root
 
-from rsscipy.stats import bootstrap, monte_carlo_test, permutation_test, power
-import rsscipy.stats._resampling as _resampling
+from scicore.stats import bootstrap, monte_carlo_test, permutation_test, power
+import scicore.stats._resampling as _resampling
 
 
 lazy_xp_modules = [stats]

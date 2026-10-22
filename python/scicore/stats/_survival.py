@@ -3,11 +3,11 @@ from typing import TYPE_CHECKING, Literal
 import warnings
 
 import rsnumpy as np
-from rsscipy import special, interpolate
-from rsscipy._lib._array_api import xp_capabilities
-from rsscipy.stats._censored_data import CensoredData
-from rsscipy.stats._common import ConfidenceInterval
-from rsscipy.stats._stats_py import _SimpleNormal, _get_pvalue
+from scicore import special, interpolate
+from scicore._lib._array_api import xp_capabilities
+from scicore.stats._censored_data import CensoredData
+from scicore.stats._common import ConfidenceInterval
+from scicore.stats._stats_py import _SimpleNormal, _get_pvalue
 
 if TYPE_CHECKING:
     import rsnumpy.typing as npt
@@ -345,7 +345,7 @@ def ecdf(sample: "npt.ArrayLike | CensoredData") -> ECDFResult:
     function of one-mile run times of the population from which the boys were
     sampled, is calculated as follows.
 
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> res = stats.ecdf(sample)
     >>> res.cdf.quantiles
     array([5.2 , 5.58, 6.23, 6.42, 7.06])
@@ -594,7 +594,7 @@ def logrank(
     whereas the censored observations correspond with the patient leaving the
     study for another reason.
 
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> x = stats.CensoredData(
     ...     uncensored=[6, 13, 21, 30, 37, 38, 49, 50,
     ...                 63, 79, 86, 98, 202, 219],

@@ -5,19 +5,19 @@
 """
 Unit tests for the dual annealing global optimizer
 """
-from rsscipy.optimize import dual_annealing, Bounds
+from scicore.optimize import dual_annealing, Bounds
 
-from rsscipy.optimize._dual_annealing import EnergyState
-from rsscipy.optimize._dual_annealing import LocalSearchWrapper
-from rsscipy.optimize._dual_annealing import ObjectiveFunWrapper
-from rsscipy.optimize._dual_annealing import StrategyChain
-from rsscipy.optimize._dual_annealing import VisitingDistribution
-from rsscipy.optimize import rosen, rosen_der
+from scicore.optimize._dual_annealing import EnergyState
+from scicore.optimize._dual_annealing import LocalSearchWrapper
+from scicore.optimize._dual_annealing import ObjectiveFunWrapper
+from scicore.optimize._dual_annealing import StrategyChain
+from scicore.optimize._dual_annealing import VisitingDistribution
+from scicore.optimize import rosen, rosen_der
 import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_equal, assert_allclose, assert_array_less
 from pytest import raises as assert_raises
-from rsscipy._lib._util import check_random_state
+from scicore._lib._util import check_random_state
 
 import threading
 

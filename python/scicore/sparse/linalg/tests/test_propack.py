@@ -4,8 +4,8 @@ import pytest
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
 from pytest import raises as assert_raises
-from rsscipy.sparse.linalg._svdp import _svdp
-from rsscipy.sparse import csr_array, csc_array
+from scicore.sparse.linalg._svdp import _svdp
+from scicore.sparse import csr_array, csc_array
 
 
 # dtype_flavour to tolerance

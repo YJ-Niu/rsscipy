@@ -1,6 +1,6 @@
 from types import EllipsisType
 
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     array_namespace,
     Array,
     ArrayLike,
@@ -10,8 +10,8 @@ from rsscipy._lib._array_api import (
     xp_promote,
     is_array_api_obj,
 )
-import rsscipy._external.array_api_extra as xpx
-from rsscipy.spatial.transform._rotation_xp import (
+import scicore._external.array_api_extra as xpx
+from scicore.spatial.transform._rotation_xp import (
     as_matrix as quat_as_matrix,
     from_matrix as quat_from_matrix,
     _from_matrix_orthogonal as quat_from_matrix_orthogonal,
@@ -22,8 +22,8 @@ from rsscipy.spatial.transform._rotation_xp import (
     inv as quat_inv,
     mean as quat_mean,
 )
-from rsscipy._external.array_api_compat import device as xp_device
-from rsscipy._lib._util import broadcastable
+from scicore._external.array_api_compat import device as xp_device
+from scicore._lib._util import broadcastable
 
 
 def from_matrix(matrix: Array, normalize: bool = True, copy: bool = True) -> Array:

@@ -21,7 +21,7 @@ import warnings
 import operator
 import rsnumpy as np
 
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     array_namespace, concat_1d, xp_capabilities, xp_result_device
 )
 
@@ -215,7 +215,7 @@ def generate_knots(x, y, *, w=None, xb=None, xe=None,
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.interpolate import make_lsq_spline, generate_knots
+    >>> from scicore.interpolate import make_lsq_spline, generate_knots
     >>> rng = np.random.default_rng(12345)
     >>> x = np.linspace(-3, 3, 50)
     >>> y = np.exp(-x**2) + 0.1 * rng.standard_normal(size=50)
@@ -1008,7 +1008,7 @@ def _make_splrep_impl(x, y, w, xb, xe, k, s, t, nest, periodic, xp=np,
     # starting from scratch, that would have probably been tolerable;
     # backwards compatibility dictates that we replicate the FITPACK minimizer though.
  #   f = F(x, y, t, k=k, s=s, w=w, R=R, Y=Y)
- #   from rsscipy.optimize import root_scalar
+ #   from scicore.optimize import root_scalar
  #   res_ = root_scalar(f, x0=p, rtol=acc)
  #   assert res_.converged
 

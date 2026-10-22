@@ -13,7 +13,7 @@ The Cython API for the root finding functions is similar except there is no
 ``disp`` argument. Import the root finding functions using ``cimport`` from
 `scipy.optimize.cython_optimize`. ::
 
-    from rsscipy.optimize.cython_optimize cimport bisect, ridder, brentq, brenth
+    from scicore.optimize.cython_optimize cimport bisect, ridder, brentq, brenth
 
 
 Callback signature
@@ -39,7 +39,7 @@ These are the basic steps:
    passing the callback, any extra arguments, and the other solver
    parameters. ::
 
-       from rsscipy.optimize.cython_optimize cimport brentq
+       from scicore.optimize.cython_optimize cimport brentq
 
        # import math from Cython
        from libc cimport math
@@ -104,7 +104,7 @@ The root is copied by `~scipy.optimize.cython_optimize` to the full output
 ``struct``. An error number of -1 means a sign error, -2 means a convergence
 error, and 0 means the solver converged. Continuing from the previous example::
 
-    from rsscipy.optimize.cython_optimize cimport zeros_full_output
+    from scicore.optimize.cython_optimize cimport zeros_full_output
 
 
     # cython brentq solver with full output

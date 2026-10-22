@@ -11,19 +11,19 @@ from rsnumpy.testing import (
 import pytest
 from pytest import raises as assert_raises, warns as assert_warns
 
-import rsscipy.linalg
-from rsscipy.linalg import norm, inv
-from rsscipy.sparse import (issparse, SparseEfficiencyWarning,
+import scicore.linalg
+from scicore.linalg import norm, inv
+from scicore.sparse import (issparse, SparseEfficiencyWarning,
                           csc_array, csr_array, coo_array, dia_array,
                           dok_array, lil_array, bsr_array,
                           eye_array, random_array, tril, triu, kron)
-from rsscipy.sparse.linalg import SuperLU
-from rsscipy.sparse.linalg._dsolve import (spsolve, use_solver, splu, spilu,
+from scicore.sparse.linalg import SuperLU
+from scicore.sparse.linalg._dsolve import (spsolve, use_solver, splu, spilu,
         MatrixRankWarning, _superlu, spsolve_triangular, factorized,
         is_sptriangular, spbandwidth)
-import rsscipy.sparse
+import scicore.sparse
 
-from rsscipy._lib._testutils import check_free_memory, IS_WASM
+from scicore._lib._testutils import check_free_memory, IS_WASM
 
 
 # scikits.umfpack is not a SciPy dependency but it is optionally used in

@@ -2,7 +2,7 @@
 
 Provides basic statistical functions used by ``scipy.stats._stats_py``.
 This is a stub: real statistical routines should be ported to Rust under
-``rust/rsscipy_rs/``.
+``rust/scicore_rs/``.
 """
 
 from __future__ import annotations

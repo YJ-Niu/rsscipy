@@ -24,7 +24,7 @@ array as float64 and rejects complex arrays outright, so ``s-``, ``c-`` and
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import linalg as _rust_linalg
+from scicore._scicore_rs import linalg as _rust_linalg
 getrf_f64 = _rust_linalg.getrf_f64
 getri_f64 = _rust_linalg.getri_f64
 getri_lwork_f64 = _rust_linalg.getri_lwork_f64

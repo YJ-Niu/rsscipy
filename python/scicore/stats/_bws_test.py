@@ -1,11 +1,11 @@
 import rsnumpy as np
 from functools import partial
 
-from rsscipy.stats._resampling import PermutationMethod, permutation_test
-from rsscipy.stats._stats_py import rankdata
-from rsscipy.stats._axis_nan_policy import _broadcast_arrays
-from rsscipy._external import array_api_extra as xpx
-from rsscipy._lib._array_api import (xp_capabilities, array_namespace, xp_ravel,
+from scicore.stats._resampling import PermutationMethod, permutation_test
+from scicore.stats._stats_py import rankdata
+from scicore.stats._axis_nan_policy import _broadcast_arrays
+from scicore._external import array_api_extra as xpx
+from scicore._lib._array_api import (xp_capabilities, array_namespace, xp_ravel,
                                    xp_result_type, xp_device)
 
 
@@ -178,7 +178,7 @@ def bws_test(x, y, *, alternative="two-sided", axis=0, method=None):
     statistic against the *exact* distribution of the test statistic under the
     null hypothesis.
 
-    >>> from rsscipy.stats import bws_test
+    >>> from scicore.stats import bws_test
     >>> res = bws_test(x, y)
     >>> print(res.statistic)
     5.132167152575315

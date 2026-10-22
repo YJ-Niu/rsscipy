@@ -4,17 +4,17 @@ from typing import Literal
 
 import rsnumpy as np
 
-from rsscipy.linalg import solve, solve_banded
-from rsscipy._lib._array_api import (
+from scicore.linalg import solve, solve_banded
+from scicore._lib._array_api import (
     array_namespace, xp_size, xp_capabilities, is_cupy, scipy_namespace_for,
     xp_device, xp_result_device
 )
 try:
-    from rsscipy._external.array_api_compat import numpy as np_compat
+    from scicore._external.array_api_compat import numpy as np_compat
 except Exception:  # numpy (and the vendored array-api compat) unavailable
     # rsnumpy is the only eager backend in this build.
     np_compat = np
-import rsscipy._external.array_api_extra as xpx
+import scicore._external.array_api_extra as xpx
 
 from ._interpolate import PPoly
 from ._polyint import _isscalar
@@ -396,7 +396,7 @@ def pchip_interpolate(xi, yi, x, der=0, axis=0):
 
     >>> import rsnumpy as np
     >>> import matplotlib.pyplot as plt
-    >>> from rsscipy.interpolate import pchip_interpolate
+    >>> from scicore.interpolate import pchip_interpolate
     >>> x_observed = np.linspace(0.0, 10.0, 11)
     >>> y_observed = np.sin(x_observed)
     >>> x = np.linspace(min(x_observed), max(x_observed), num=100)
@@ -512,7 +512,7 @@ class Akima1DInterpolator(CubicHermiteSpline):
     Comparison of ``method="akima"`` and ``method="makima"``:
 
     >>> import rsnumpy as np
-    >>> from rsscipy.interpolate import Akima1DInterpolator
+    >>> from scicore.interpolate import Akima1DInterpolator
     >>> import matplotlib.pyplot as plt
     >>> x = np.linspace(1, 7, 7)
     >>> y = np.array([-1, -1, -1, 0, 1, 1, 1])
@@ -759,7 +759,7 @@ class CubicSpline(CubicHermiteSpline):
     second derivatives and violates only for the third derivative.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.interpolate import CubicSpline
+    >>> from scicore.interpolate import CubicSpline
     >>> import matplotlib.pyplot as plt
     >>> x = np.arange(10)
     >>> y = np.sin(x)

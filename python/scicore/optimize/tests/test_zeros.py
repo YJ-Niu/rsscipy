@@ -11,14 +11,14 @@ from rsnumpy.testing import (assert_,
 import rsnumpy as np
 from rsnumpy import finfo, power, nan, isclose, sqrt, exp, sin, cos
 
-from rsscipy import optimize
-from rsscipy.optimize import (_zeros_py as zeros, newton, root_scalar,
+from scicore import optimize
+from scicore.optimize import (_zeros_py as zeros, newton, root_scalar,
                             OptimizeResult)
 
-from rsscipy._lib._util import getfullargspec_no_self as _getfullargspec
+from scicore._lib._util import getfullargspec_no_self as _getfullargspec
 
 # Import testing parameters
-from rsscipy.optimize._tstutils import get_tests, functions as tstutils_functions
+from scicore.optimize._tstutils import get_tests, functions as tstutils_functions
 
 TOL = 4*np.finfo(float).eps  # tolerance
 

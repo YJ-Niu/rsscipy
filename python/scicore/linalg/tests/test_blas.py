@@ -13,21 +13,21 @@ from pytest import raises as assert_raises
 from rsnumpy import (arange, triu, tril, zeros, tril_indices, ones,
                    diag, append, eye, nonzero)
 
-import rsscipy
-from rsscipy.linalg import get_blas_funcs, toeplitz, solve
-from rsscipy.linalg.blas import HAS_ILP64
+import scicore
+from scicore.linalg import get_blas_funcs, toeplitz, solve
+from scicore.linalg.blas import HAS_ILP64
 
 FBLAS_ERROR: type[Exception] = ValueError
 
 try:
-    from rsscipy.linalg import _fblas as fblas
+    from scicore.linalg import _fblas as fblas
     HAS_LP64_FBLAS = True
 except ImportError:
     fblas = None
     HAS_LP64_FBLAS = False
 
 try:
-    from rsscipy.linalg import _fblas_64 as fblas_64
+    from scicore.linalg import _fblas_64 as fblas_64
 except ImportError:
     fblas_64 = None
 

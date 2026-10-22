@@ -2,7 +2,7 @@
 
 import rsnumpy as np
 from rsnumpy.testing import assert_allclose
-import rsscipy.linalg.cython_blas as cython_blas
+import scicore.linalg.cython_blas as cython_blas
 
 from ilp64_test_package._consumer import (
     consumer_ddot,

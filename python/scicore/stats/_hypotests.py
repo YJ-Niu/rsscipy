@@ -4,24 +4,24 @@ import math
 import rsnumpy as np
 import warnings
 from itertools import combinations
-from rsscipy.optimize import shgo
+from scicore.optimize import shgo
 from . import distributions
 from ._common import ConfidenceInterval
 from ._crosstab import crosstab
 from ._continuous_distns import norm
-from rsscipy._lib._array_api import (xp_capabilities, array_namespace, xp_size,
+from scicore._lib._array_api import (xp_capabilities, array_namespace, xp_size,
                                    xp_promote, xp_result_type, xp_copy, is_numpy,
                                    is_lazy_array, _count_nonmasked, is_marray,
                                    _masked_apply, xp_device, xp_result_device)
-import rsscipy._external.array_api_extra as xpx
-from rsscipy.special import gamma, kv, gammaln
-from rsscipy.fft import ifft
+import scicore._external.array_api_extra as xpx
+from scicore.special import gamma, kv, gammaln
+from scicore.fft import ifft
 from ._stats_pythran import _a_ij_Aij_Dij2
 from ._stats_pythran import (
     _concordant_pairs as _P, _discordant_pairs as _Q
 )
 from ._axis_nan_policy import _axis_nan_policy_factory
-from rsscipy.stats import _stats_py
+from scicore.stats import _stats_py
 
 __all__ = ['epps_singleton_2samp', 'cramervonmises', 'somersd',
            'barnard_exact', 'boschloo_exact', 'cramervonmises_2samp',
@@ -109,7 +109,7 @@ def epps_singleton_2samp(x, y, t=(0.4, 0.8), *, axis=0):
     Generate random samples ``x`` and ``y``.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> rng = np.random.default_rng(66326777)
     >>> x = rng.normal(0, 1, size=100)
     >>> y = rng.normal(5, 3, size=100)
@@ -159,7 +159,7 @@ def epps_singleton_2samp(x, y, t=(0.4, 0.8), *, axis=0):
 
     # rescale t with semi-iqr as proposed in [1]; import iqr here to avoid
     # circular import
-    from rsscipy.stats import iqr
+    from scicore.stats import iqr
     sigma = iqr(xp.concat((x, y), axis=-1), axis=-1, keepdims=True) / 2
     ts = xp.reshape(t, (-1,) + (1,)*x.ndim) / sigma
 
@@ -296,7 +296,7 @@ def poisson_means_test(k1, n1, k2, n2, *, diff=0, alternative='two-sided'):
     The gardener selects a significance level of 5% to reject the null
     hypothesis in favor of the alternative [2]_.
 
-    >>> import rsscipy.stats as stats
+    >>> import scicore.stats as stats
     >>> res = stats.poisson_means_test(0, 100, 3, 100)
     >>> res.statistic, res.pvalue
     (-1.7320508075688772, 0.08837900929018157)
@@ -636,7 +636,7 @@ def cramervonmises(rvs, cdf, args=(), *, axis=0):
     significance level of ``alpha=0.05``.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> rng = np.random.default_rng(165417232101553420507139617764912913465)
     >>> x = stats.norm.rvs(size=500, random_state=rng)
     >>> res = stats.cramervonmises(x, 'norm')
@@ -943,7 +943,7 @@ def somersd(x, y=None, alternative='two-sided'):
     "below average (1)" and a corresponding satisfaction of "very
     dissatisfied (1)". We perform the analysis as follows.
 
-    >>> from rsscipy.stats import somersd
+    >>> from scicore.stats import somersd
     >>> table = [[27, 25, 14, 7, 0], [7, 14, 18, 35, 12], [1, 3, 2, 7, 17]]
     >>> res = somersd(table)
     >>> res.statistic
@@ -1185,7 +1185,7 @@ def barnard_exact(table, alternative="two-sided", pooled=True, n=32):
     :math:`p_2` of catching the virus without the vaccine.  Therefore, we call
     `barnard_exact` with the ``alternative="less"`` option:
 
-    >>> import rsscipy.stats as stats
+    >>> import scicore.stats as stats
     >>> res = stats.barnard_exact([[7, 12], [8, 3]], alternative="less")
     >>> res.statistic
     -1.894
@@ -1410,7 +1410,7 @@ def boschloo_exact(table, alternative="two-sided", n=32):
     greater than :math:`p_2`, the proportion of very satisfied scientists.
     We thus call `boschloo_exact` with the ``alternative="greater"`` option:
 
-    >>> import rsscipy.stats as stats
+    >>> import scicore.stats as stats
     >>> res = stats.boschloo_exact([[74, 31], [43, 32]], alternative="greater")
     >>> res.statistic
     0.0483
@@ -1763,7 +1763,7 @@ def cramervonmises_2samp(x, y, method='auto', *, axis=0):
     significance level of alpha=0.05.
 
     >>> import rsnumpy as np
-    >>> from rsscipy import stats
+    >>> from scicore import stats
     >>> rng = np.random.default_rng()
     >>> x = stats.norm.rvs(size=100, random_state=rng)
     >>> y = stats.norm.rvs(size=70, random_state=rng)
@@ -1941,7 +1941,7 @@ class TukeyHSDResult:
 
         Examples
         --------
-        >>> from rsscipy.stats import tukey_hsd
+        >>> from scicore.stats import tukey_hsd
         >>> group0 = [24.5, 23.5, 26.4, 27.1, 29.9]
         >>> group1 = [28.4, 34.2, 29.5, 32.2, 30.1]
         >>> group2 = [26.1, 28.3, 24.3, 26.2, 27.8]
@@ -2100,7 +2100,7 @@ def tukey_hsd(*samples, equal_var=True):
     headache medicine, reported in minutes. Data adapted from [3]_.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import tukey_hsd
+    >>> from scicore.stats import tukey_hsd
     >>> group0 = [24.5, 23.5, 26.4, 27.1, 29.9]
     >>> group1 = [28.4, 34.2, 29.5, 32.2, 30.1]
     >>> group2 = [26.1, 28.3, 24.3, 26.2, 27.8]

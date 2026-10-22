@@ -8,8 +8,8 @@ import math
 import rsnumpy as np
 from rsnumpy import zeros, pi, sqrt, cos, polyval, polyint
 
-from rsscipy._lib._array_api import array_namespace, xp_device, xp_promote
-import rsscipy._external.array_api_extra as xpx
+from scicore._lib._array_api import array_namespace, xp_device, xp_promote
+import scicore._external.array_api_extra as xpx
 
 
 __all__ = ['sawtooth', 'square', 'gausspulse', 'chirp', 'sweep_poly',
@@ -49,7 +49,7 @@ def sawtooth(t, width=1.):
     A 5 Hz waveform sampled at 500 Hz for 1 second:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> t = np.linspace(0, 1, 500)
     >>> plt.plot(t, signal.sawtooth(2 * np.pi * 5 * t))
@@ -111,7 +111,7 @@ def square(t, duty=0.5):
     A 5 Hz waveform sampled at 500 Hz for 1 second:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> t = np.linspace(0, 1, 500, endpoint=False)
     >>> plt.plot(t, signal.square(2 * np.pi * 5 * t))
@@ -200,7 +200,7 @@ def gausspulse(t, fc=1000, bw=0.5, bwr=-6, tpr=-60, retquad=False,
     sampled at 100 Hz for 2 seconds:
 
     >>> import rsnumpy as np
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> import matplotlib.pyplot as plt
     >>> t = np.linspace(-1, 1, 2 * 100, endpoint=False)
     >>> i, q, e = signal.gausspulse(t, fc=5, retquad=True, retenv=True)
@@ -356,8 +356,8 @@ def chirp(t, f0, t1, f1, method='linear', phi=0, vertex_zero=True, *,
 
     >>> import rsnumpy as np
     >>> from matplotlib.pyplot import tight_layout
-    >>> from rsscipy.signal import chirp, square, ShortTimeFFT
-    >>> from rsscipy.signal.windows import gaussian
+    >>> from scicore.signal import chirp, square, ShortTimeFFT
+    >>> from scicore.signal.windows import gaussian
     >>> import matplotlib.pyplot as plt
     ...
     >>> N, T = 1000, 0.01  # number of samples and sampling interval for 10 s signal
@@ -549,7 +549,7 @@ def sweep_poly(t, poly, phi=0):
     over the interval 0 <= t <= 10.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.signal import sweep_poly
+    >>> from scicore.signal import sweep_poly
     >>> p = np.poly1d([0.025, -0.36, 1.25, 2.0])
     >>> t = np.linspace(0, 10, 5001)
     >>> w = sweep_poly(t, p)
@@ -639,7 +639,7 @@ def unit_impulse(shape, idx=None, dtype=float):
     --------
     An impulse at the 0th element (:math:`\\delta[n]`):
 
-    >>> from rsscipy import signal
+    >>> from scicore import signal
     >>> signal.unit_impulse(8)
     array([ 1.,  0.,  0.,  0.,  0.,  0.,  0.,  0.])
 

@@ -4,14 +4,14 @@ import pytest
 
 import rsnumpy as np
 from rsnumpy.testing import assert_equal
-from rsscipy.spatial.transform import Rotation, Slerp
-import rsscipy.spatial.transform._rotation_cy as cython_backend
-import rsscipy.spatial.transform._rotation_xp as xp_backend
-from rsscipy.stats import special_ortho_group
+from scicore.spatial.transform import Rotation, Slerp
+import scicore.spatial.transform._rotation_cy as cython_backend
+import scicore.spatial.transform._rotation_xp as xp_backend
+from scicore.stats import special_ortho_group
 from itertools import permutations, product
 from contextlib import contextmanager
 import warnings
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     xp_assert_equal,
     array_namespace,
     is_numpy,
@@ -23,7 +23,7 @@ from rsscipy._lib._array_api import (
     make_xp_pytest_marks,
     xp_device_type,
 )
-import rsscipy._external.array_api_extra as xpx
+import scicore._external.array_api_extra as xpx
 
 import pickle
 import copy

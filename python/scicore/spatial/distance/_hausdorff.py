@@ -2,7 +2,7 @@
 
 Implements the early-break directed Hausdorff algorithm of Taha & Hanbury.
 The hot inner loop lives in the Rust core
-(``rsscipy._rsscipy_rs.spatial.directed_hausdorff_core``); this module only
+(``scicore._scicore_rs.spatial.directed_hausdorff_core``); this module only
 handles validation, the (optional) random permutation of the input points and
 the index mapping back to the original arrays.
 """
@@ -11,7 +11,7 @@ from __future__ import annotations
 
 import rsnumpy as np
 
-from rsscipy._rsscipy_rs import spatial as _rust_spatial
+from scicore._scicore_rs import spatial as _rust_spatial
 
 __all__ = ['directed_hausdorff', 'hausdorff_distance']
 

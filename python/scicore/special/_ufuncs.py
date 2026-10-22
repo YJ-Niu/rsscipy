@@ -7,7 +7,7 @@ delegate to a pure-Python/rsnumpy fallback (or raise ``NotImplementedError``
 for truly missing special functions).
 
 The module is intentionally a stub: as Rust kernels are added under
-``rust/rsscipy_rs/``, individual functions can be migrated to real
+``rust/scicore_rs/``, individual functions can be migrated to real
 implementations.
 """
 

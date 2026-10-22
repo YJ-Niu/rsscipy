@@ -1,14 +1,14 @@
 import warnings
 import rsnumpy as np
 
-from rsscipy._lib._array_api import (
+from scicore._lib._array_api import (
     array_namespace,
     xp_capabilities,
     xp_device,
     _count_nonmasked,
     xp_promote,
 )
-import rsscipy._external.array_api_extra as xpx
+import scicore._external.array_api_extra as xpx
 
 from ._axis_nan_policy import _axis_nan_policy_factory
 
@@ -88,7 +88,7 @@ def variation(a, axis=0, nan_policy='propagate', ddof=0, *, keepdims=False):
     Examples
     --------
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import variation
+    >>> from scicore.stats import variation
     >>> variation([1, 2, 3, 4, 5], ddof=1)
     0.5270462766947299
 

@@ -1,17 +1,17 @@
 import threading
 import rsnumpy as np
 
-from rsscipy._lib._array_api import (array_namespace, xp_capabilities, xp_size,
+from scicore._lib._array_api import (array_namespace, xp_capabilities, xp_size,
                                    xp_device,
                                    xp_promote, is_lazy_array, is_jax, is_marray,
                                    _count_nonmasked)
-from rsscipy._lib._bunch import _make_tuple_bunch
-import rsscipy._external.array_api_extra as xpx
-from rsscipy import special
-from rsscipy.stats._resampling import PermutationMethod, permutation_test
-from rsscipy.stats._stats_py import _rankdata, _get_pvalue, _SimpleNormal
-from rsscipy.stats._morestats import wilcoxon_result_unpacker, wilcoxon_outputs
-from rsscipy.stats._wilcoxon import _correction_sign
+from scicore._lib._bunch import _make_tuple_bunch
+import scicore._external.array_api_extra as xpx
+from scicore import special
+from scicore.stats._resampling import PermutationMethod, permutation_test
+from scicore.stats._stats_py import _rankdata, _get_pvalue, _SimpleNormal
+from scicore.stats._morestats import wilcoxon_result_unpacker, wilcoxon_outputs
+from scicore.stats._wilcoxon import _correction_sign
 from ._axis_nan_policy import _axis_nan_policy_factory
 
 class _MWU:
@@ -385,7 +385,7 @@ def mannwhitneyu(x, y, use_continuity=True, alternative="two-sided",
     data, we can compare the observed test statistic against the *exact*
     distribution of the test statistic under the null hypothesis.
 
-    >>> from rsscipy.stats import mannwhitneyu
+    >>> from scicore.stats import mannwhitneyu
     >>> U1, p = mannwhitneyu(males, females, method="exact")
     >>> print(U1)
     17.0
@@ -425,7 +425,7 @@ def mannwhitneyu(x, y, use_continuity=True, alternative="two-sided",
     the distance by adding 0.5 in the numerator.
 
     >>> import rsnumpy as np
-    >>> from rsscipy.stats import norm
+    >>> from scicore.stats import norm
     >>> U = min(U1, U2)
     >>> N = nx + ny
     >>> z = (U - nx*ny/2 + 0.5) / np.sqrt(nx*ny * (N + 1)/ 12)
@@ -465,7 +465,7 @@ def mannwhitneyu(x, y, use_continuity=True, alternative="two-sided",
     populations are normally distributed, we could have used a t-test to
     perform the analysis.
 
-    >>> from rsscipy.stats import ttest_ind
+    >>> from scicore.stats import ttest_ind
     >>> res = ttest_ind(females, males, alternative="less")
     >>> print(res)
     TtestResult(statistic=-2.239334696520584,

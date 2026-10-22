@@ -1,7 +1,7 @@
 import rsnumpy as np
-import rsscipy._lib._elementwise_iterative_method as eim
-from rsscipy._lib._util import _RichResult
-from rsscipy._lib._array_api import array_namespace, xp_device, xp_ravel, xp_promote
+import scicore._lib._elementwise_iterative_method as eim
+from scicore._lib._util import _RichResult
+from scicore._lib._array_api import array_namespace, xp_device, xp_ravel, xp_promote
 
 _ELIMITS = -1  # used in _bracket_root
 _ESTOPONESIDE = 2  # used in _bracket_root
