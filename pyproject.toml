@@ -12,7 +12,7 @@ requires = []
 # The distribution is `scicore`; the *import* package stays `scicore` so this
 # remains a drop-in replacement -- `pip install scicore`, then `import scicore`.
 name = "scicore"
-version = "0.1.1"
+version = "0.1.2"
 license = { file = "LICENSE.txt" }
 description = "Fundamental algorithms for scientific computing in Python, built on rsnumpy"
 authors = [
