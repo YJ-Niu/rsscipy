@@ -24,7 +24,6 @@ build*/
 .skip-subprojects*
 subprojects/packagecache/
 install/
-
 # --- Rust -----------------------------------------------------------------
 rust/target/
 target/
@@ -43,6 +42,8 @@ doc/_build/
 .vscode/
 *.swp
 *~
+wheelhouse/
+
 
 # --- 基准 / 性能数据 ------------------------------------------------------
 benchmarks/.asv/
