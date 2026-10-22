@@ -413,6 +413,7 @@ pub(super) fn register(m: &Bound<'_, PyModule>) -> PyResult<()> {
 
 #[cfg(test)]
 mod tests {
+    #[cfg(target_os = "macos")]
     use super::*;
     use crate::testutil::{max_abs, max_abs_diff, Rng};
 
