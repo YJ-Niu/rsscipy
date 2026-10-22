@@ -12,7 +12,7 @@ requires = []
 # The distribution is `rsscipy`; the *import* package stays `scipy` so this
 # remains a drop-in replacement -- `pip install rsscipy`, then `import scipy`.
 name = "rsscipy"
-version = "0.1.0"
+version = "0.1.1"
 license = { file = "LICENSE.txt" }
 description = "Fundamental algorithms for scientific computing in Python, built on rsnumpy"
 authors = [
