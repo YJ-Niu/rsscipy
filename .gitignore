@@ -4,6 +4,7 @@ __pycache__/
 *.egg-info/
 .eggs/
 build/
+wheelhouse/
 dist/
 .installed.cfg
 *.egg
@@ -42,8 +43,6 @@ doc/_build/
 .vscode/
 *.swp
 *~
-wheelhouse/
-
 
 # --- 基准 / 性能数据 ------------------------------------------------------
 benchmarks/.asv/
