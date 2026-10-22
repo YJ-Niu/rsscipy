@@ -559,9 +559,9 @@ pub(super) fn register(m: &Bound<'_, PyModule>) -> PyResult<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::testutil::{max_abs, Rng};
     #[cfg(target_os = "macos")]
     use crate::testutil::max_abs_diff;
+    use crate::testutil::{max_abs, Rng};
 
     fn random_matrix(rng: &mut Rng, rows: usize, cols: usize) -> Vec<f64> {
         (0..rows * cols).map(|_| rng.f64()).collect()
