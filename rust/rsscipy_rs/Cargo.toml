@@ -13,4 +13,5 @@ crate-type = ["cdylib"]
 extension-module = ["pyo3/extension-module"]
 
 [dependencies]
+matrixmultiply = "0.3.11"
 pyo3.workspace = true
