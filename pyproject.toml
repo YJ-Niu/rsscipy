@@ -30,7 +30,7 @@ keywords = [
 ]
 requires-python = ">=3.12"
 dependencies = [
-    "rsnumpy>=1.2.4",
+    "rsnumpy>=1.2.5",
 ]
 readme = "README.rst"
 classifiers = [

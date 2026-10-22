@@ -17,6 +17,7 @@ import base64
 import csv
 import hashlib
 import io
+import platform
 import subprocess
 import sys
 import sysconfig
@@ -59,8 +60,23 @@ def _sha256_urlsafe(data: bytes) -> str:
 
 
 def _wheel_tags() -> tuple[str, str, str]:
+    """Return the (py, abi, platform) wheel tags for the current interpreter.
+
+    The extension is an ABI-specific CPython module (built by pyo3 against the
+    running interpreter), so the py and abi tags are both ``cpXY``. The platform
+    tag is derived per OS: ``win_amd64``/``win_arm64`` on Windows,
+    ``linux_<arch>`` on Linux (auditwheel retags to manylinux at release time),
+    and the interpreter's own platform string on macOS (single-arch or
+    universal2, e.g. ``macosx_14_0_arm64``).
+    """
     py = f"cp{sys.version_info.major}{sys.version_info.minor}"
-    plat = sysconfig.get_platform().replace("-", "_").replace(".", "_")
+    system = platform.system()
+    if system == "Windows":
+        plat = "win_arm64" if platform.machine() == "ARM64" else "win_amd64"
+    elif system == "Darwin":
+        plat = sysconfig.get_platform().replace("-", "_").replace(".", "_")
+    else:  # Linux (and other POSIX)
+        plat = f"linux_{platform.machine()}"
     return py, py, plat
 
 

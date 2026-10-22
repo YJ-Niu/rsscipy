@@ -25,13 +25,13 @@ VERSION=$(grep -m1 '^version = ' pyproject.toml | sed -E 's/version = "(.*)"/\1/
 
 echo "Project: $NAME, Version: $VERSION"
 
-# ========== Keep scipy/version.py in sync with pyproject.toml ==========
-# `scipy/__init__.py` reports this at runtime, so a stale copy silently
+# ========== Keep rsscipy/version.py in sync with pyproject.toml ==========
+# `rsscipy/__init__.py` reports this at runtime, so a stale copy silently
 # mislabels the installed package.
-if [[ -f scipy/version.py ]]; then
-  sed -i.bak "s/^version = \".*\"/version = \"$VERSION\"/" scipy/version.py
-  rm -f scipy/version.py.bak
-  echo "  -> scipy/version.py updated to $VERSION"
+if [[ -f rsscipy/version.py ]]; then
+  sed -i.bak "s/^version = \".*\"/version = \"$VERSION\"/" rsscipy/version.py
+  rm -f rsscipy/version.py.bak
+  echo "  -> rsscipy/version.py updated to $VERSION"
 fi
 
 # ========== cargo is required for the Rust extension modules ==========
@@ -43,6 +43,7 @@ if ! command -v cargo; then
 fi
 
 RELEASE=true
+SKIP_LINT=false
 OUT_DIR="wheelhouse"
 
 # Default python executable; may be overridden by --python or a positional arg
@@ -65,6 +66,7 @@ while [[ $# -gt 0 ]]; do
   case $1 in
     --release) RELEASE=true; shift ;;
     --debug) RELEASE=false; shift ;;
+    --skip-lint) SKIP_LINT=true; shift ;;
     --out-dir) OUT_DIR="$2"; shift 2 ;;
     --python) PYTHON_EXEC="$2"; PYTHON_EXEC_SET=1; shift 2 ;;
     *) PYTHON_EXEC="$1"; PYTHON_EXEC_SET=1; shift ;;
@@ -82,21 +84,24 @@ if ! command -v "$PYTHON_EXEC" && [[ ! -x "$PYTHON_EXEC" && ! -f "$PYTHON_EXEC" 
 fi
 
 # ========== Rust lint gates ==========
-# Enforced before building so that a wheel is never produced from code that
-# would fail `cargo clippy` in CI.
-echo "Running fmt checks (cargo fmt --all -- --check) ..."
-if ! (cd rust && cargo fmt --all -- --check); then
-  echo "Error: fmt checks failed. Fix the warnings above before building." >&2
-  exit 1
-fi
-echo "  -> fmt checks passed."
+# Enforced before building (locally) so that a wheel is never produced from code
+# that would fail `cargo clippy`. CI has a dedicated lint job, so it passes
+# `--skip-lint` to avoid duplicating the work on every matrix cell.
+if ! $SKIP_LINT; then
+  echo "Running fmt checks (cargo fmt --all -- --check) ..."
+  if ! (cd rust && cargo fmt --all -- --check); then
+    echo "Error: fmt checks failed. Fix the warnings above before building." >&2
+    exit 1
+  fi
+  echo "  -> fmt checks passed."
 
-echo "Running clippy checks (cargo clippy --all-targets -- -D warnings) ..."
-if ! (cd rust && cargo clippy --all-targets -- -D warnings); then
-  echo "Error: clippy checks failed. Fix the warnings above before building." >&2
-  exit 1
+  echo "Running clippy checks (cargo clippy --all-targets -- -D warnings) ..."
+  if ! (cd rust && cargo clippy --all-targets -- -D warnings); then
+    echo "Error: clippy checks failed. Fix the warnings above before building." >&2
+    exit 1
+  fi
+  echo "  -> clippy checks passed."
 fi
-echo "  -> clippy checks passed."
 
 # ========== Stage 1: Rust extension modules ==========
 echo "Building Rust extension modules (release=$RELEASE) ..."
