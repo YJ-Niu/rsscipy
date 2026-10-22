@@ -2,7 +2,7 @@
 
 Provides the DOP853 ODE solver interface used by ``scipy.integrate._ivp``.
 This is a stub: real ODE solvers should be ported to Rust under
-``rust/scicore_rs/``.
+``rust/src/``.
 """
 
 from __future__ import annotations

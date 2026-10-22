@@ -425,8 +425,7 @@ fn write_body_coo(
 // Module
 // ---------------------------------------------------------------------------
 
-#[pymodule]
-fn _fmm_core(m: &Bound<'_, PyModule>) -> PyResult<()> {
+pub fn register(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add("__version__", VERSION)?;
     m.add_class::<ReadCursor>()?;
     m.add_class::<WriteCursor>()?;

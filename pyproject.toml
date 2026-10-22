@@ -1,12 +1,19 @@
 [build-system]
-# The build is driven by the in-tree ``rsbuild`` PEP 517 backend (see
-# ``tools/rsbuild.py``), located via ``backend-path``. It builds the unified
-# Rust extension (``tools/build_rust.py``) and packages ``python/`` into a
-# wheel. The backend is stdlib-only, so no build-time packages are required and
-# a wheel can be built fully offline -- the only external tool is ``cargo``.
-build-backend = "rsbuild"
-backend-path = ["tools"]
-requires = []
+# The build is driven by ``maturin``: it compiles the pyo3 crate
+# (``rust/scicore_rs``) into the ``scicore._scicore_rs`` extension and packages
+# the ``python/`` tree into a wheel. The only external tool required is
+# ``cargo``; maturin itself is provided by the build frontend.
+requires = ["maturin>=1.5,<2.0"]
+build-backend = "maturin"
+
+[tool.maturin]
+# pyo3 bindings; the Python package lives under `python/` and the pyo3 crate is
+# the `scicore_rs` workspace member. The extension is placed at
+# `scicore._scicore_rs` (i.e. `python/scicore/_scicore_rs`).
+bindings = "pyo3"
+python-source = "python"
+manifest-dir = "rust"
+module-name = "scicore._scicore_rs"
 
 [project]
 # The distribution is `scicore`; the *import* package stays `scicore` so this

@@ -1,7 +1,7 @@
 """Stub replacement for the deleted C ``pyduccfft`` extension.
 
 Provides a minimal FFT backend interface used by ``scipy.fft._duccfft``.
-This is a stub: real FFT should be ported to Rust under ``rust/scicore_rs/``.
+This is a stub: real FFT should be ported to Rust under ``rust/src/``.
 """
 
 from __future__ import annotations

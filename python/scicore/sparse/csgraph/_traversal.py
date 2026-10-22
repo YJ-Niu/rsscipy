@@ -2,7 +2,7 @@
 
 Provides graph traversal algorithms used by ``scipy.sparse.csgraph``.
 This is a stub: real graph algorithms should be ported to Rust under
-``rust/scicore_rs/``.
+``rust/src/``.
 """
 
 from __future__ import annotations

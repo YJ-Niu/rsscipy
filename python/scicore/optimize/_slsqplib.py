@@ -1,7 +1,7 @@
 """Stub replacement for the deleted C ``_slsqplib`` extension.
 
 Provides the SLSQP solver interface used by ``scipy.optimize._slsqp``.
-This is a stub: real SLSQP should be ported to Rust under ``rust/scicore_rs/``.
+This is a stub: real SLSQP should be ported to Rust under ``rust/src/``.
 """
 
 from __future__ import annotations

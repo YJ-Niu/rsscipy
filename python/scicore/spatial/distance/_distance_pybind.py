@@ -3,7 +3,7 @@
 Implements the optimized ``cdist_*`` / ``pdist_*`` pairwise distance kernels
 used by ``scicore.spatial.distance._distance``.  All metrics are computed with
 rsnumpy broadcasting; hot paths can later be moved to Rust under
-``rust/scicore_rs/`` without changing this module's API.
+``rust/src/`` without changing this module's API.
 """
 
 from __future__ import annotations

@@ -2,7 +2,7 @@
 
 Provides FITPACK/Dierckx spline routines used by ``scipy.interpolate``.
 This is a stub: real spline routines should be ported to Rust under
-``rust/scicore_rs/``.
+``rust/src/``.
 """
 
 from __future__ import annotations

@@ -1,23 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Build scicore into a wheel and install it into the local .venv.
+# Build scicore with maturin and install it into the local .venv.
 #
-# Usage: ./build_wheel.sh [--release|--debug] [--universal2] [--out-dir DIR] [--python PYTHON_EXEC]
+# Usage: ./build_wheel.sh [--release|--debug] [--universal2] [--out-dir DIR]
+#                         [--skip-lint] [--python PYTHON_EXEC]
 #
-# On macOS, --universal2 produces a fat (x86_64 + arm64) wheel.  It exports
-# SCICORE_UNIVERSAL2 so both build stages agree on the dual-arch extension.
-#
-# The build has two stages, and the order matters:
-#
-#   1. `tools/build_rust.py` builds the unified Rust crate listed in
-#      `rust/modules.toml` and places its extension in the Python package.
-#   2. `python -m build --wheel` runs the in-tree `rsbuild` backend
-#      (`tools/rsbuild.py`), which packages the Python sources and compiled
-#      `.so` kernels into a wheel.
-#
-# Skipping (1) produces a wheel that builds cleanly but fails when importing
-# functionality backed by Rust because the unified extension is missing.
+# maturin (the PEP 517 backend declared in pyproject.toml) compiles the pyo3
+# crate `rust/scicore_rs` into the `scicore._scicore_rs` extension and packages
+# the `python/` tree into a wheel. The only external tool required is `cargo`.
+# (On Windows maturin produces a `.pyd` automatically -- no special-casing.)
 #
 # Cross-platform: run directly on macOS / Linux; on Windows use Git Bash or WSL
 # (the venv layout switches to Scripts/python.exe automatically).
@@ -37,7 +29,7 @@ if [[ -f python/scicore/version.py ]]; then
   echo "  -> python/scicore/version.py updated to $VERSION"
 fi
 
-# ========== cargo is required for the Rust extension modules ==========
+# ========== cargo is required for the Rust extension module ==========
 if ! command -v cargo; then
   echo "Error: 'cargo' not found in PATH." >&2
   echo "Please install Rust and Cargo from https://rustup.rs/" >&2
@@ -67,13 +59,13 @@ fi
 
 while [[ $# -gt 0 ]]; do
   case $1 in
-    --release) RELEASE=true; shift ;;
-    --debug) RELEASE=false; shift ;;
+    --release)   RELEASE=true; shift ;;
+    --debug)     RELEASE=false; shift ;;
     --skip-lint) SKIP_LINT=true; shift ;;
-    --universal2) export SCICORE_UNIVERSAL2=1; shift ;;
-    --out-dir) OUT_DIR="$2"; shift 2 ;;
-    --python) PYTHON_EXEC="$2"; PYTHON_EXEC_SET=1; shift 2 ;;
-    *) PYTHON_EXEC="$1"; PYTHON_EXEC_SET=1; shift ;;
+    --universal2) export SCICORE_UNIVERSAL2=1; shift ;;  # accepted for back-compat; maturin builds the host arch
+    --out-dir)   OUT_DIR="$2"; shift 2 ;;
+    --python)    PYTHON_EXEC="$2"; PYTHON_EXEC_SET=1; shift 2 ;;
+    *)           PYTHON_EXEC="$1"; PYTHON_EXEC_SET=1; shift ;;
   esac
 done
 
@@ -86,6 +78,20 @@ if ! command -v "$PYTHON_EXEC" && [[ ! -x "$PYTHON_EXEC" && ! -f "$PYTHON_EXEC" 
   echo "Error: Python executable '$PYTHON_EXEC' not found or not executable." >&2
   exit 1
 fi
+
+# ========== Locate maturin (prefer the venv copy, then PATH) ==========
+if [[ -x "$VENV_BIN/maturin" ]]; then
+  MATURIN=("$VENV_BIN/maturin")
+elif command -v maturin >/dev/null 2>&1; then
+  MATURIN=(maturin)
+elif "$PYTHON_EXEC" -m maturin --version >/dev/null 2>&1; then
+  MATURIN=("$PYTHON_EXEC" -m maturin)
+else
+  echo "Error: 'maturin' not found. Install it with: pip install maturin" >&2
+  exit 1
+fi
+echo "Using maturin: $(${MATURIN[@]} --version)"
+echo "Using Python:  $PYTHON_EXEC ($("$PYTHON_EXEC" --version 2>&1))"
 
 # ========== Rust lint gates ==========
 # Enforced before building (locally) so that a wheel is never produced from code
@@ -107,34 +113,15 @@ if ! $SKIP_LINT; then
   echo "  -> clippy checks passed."
 fi
 
-# ========== Stage 1: Rust extension modules ==========
-echo "Building Rust extension modules (release=$RELEASE) ..."
-if $RELEASE; then
-  "$PYTHON_EXEC" tools/build_rust.py
-else
-  "$PYTHON_EXEC" tools/build_rust.py --debug
-fi
-echo "  -> Rust extension modules built."
-
-# ========== Stage 2: PEP 517 wheel (in-tree rsbuild backend) ==========
-# `build` is the PEP 517 frontend.  This repo's .venv is created with uv and has
-# no pip inside, so prefer uv and only fall back to pip.
-if ! "$PYTHON_EXEC" -c "import build" 2>/dev/null; then
-  echo "Installing 'build' ..."
-  if command -v uv; then
-    uv pip install --python "$PYTHON_EXEC" build
-  elif "$PYTHON_EXEC" -m pip --version >/dev/null 2>&1; then
-    "$PYTHON_EXEC" -m pip install --quiet --upgrade build
-  else
-    echo "Error: neither uv nor pip is available to install 'build'." >&2
-    exit 1
-  fi
-fi
-
+# ========== Stage: build the wheel with maturin ==========
 rm -rf "$OUT_DIR"
 mkdir -p "$OUT_DIR"
-echo "Building wheel into $OUT_DIR using $PYTHON_EXEC (release=$RELEASE)"
-"$PYTHON_EXEC" -m build --wheel --outdir "$OUT_DIR"
+echo "Building wheel into $OUT_DIR with maturin (release=$RELEASE) ..."
+if $RELEASE; then
+  "${MATURIN[@]}" build --release -i "$PYTHON_EXEC" -o "$OUT_DIR"
+else
+  "${MATURIN[@]}" build -i "$PYTHON_EXEC" -o "$OUT_DIR"
+fi
 
 # ========== Install into the local venv ==========
 WHEEL=$(ls -t "$OUT_DIR"/*.whl 2>/dev/null | head -n1 || true)

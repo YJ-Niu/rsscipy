@@ -1,7 +1,7 @@
 """Stub replacement for the deleted C ``_lsap`` extension.
 
 Provides linear sum assignment (LSAP) solver used by ``scipy.optimize``.
-This is a stub: real LSAP should be ported to Rust under ``rust/scicore_rs/``.
+This is a stub: real LSAP should be ported to Rust under ``rust/src/``.
 """
 
 from __future__ import annotations

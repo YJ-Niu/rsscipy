@@ -2,7 +2,7 @@
 
 Provides interpolative decomposition routines used by ``scipy.linalg``.
 This is a stub: real interpolative decomposition should be ported to Rust
-under ``rust/scicore_rs/``.
+under ``rust/src/``.
 """
 
 from __future__ import annotations

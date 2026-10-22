@@ -1,15 +1,23 @@
 # Rust extension layer for scicore.
 #
-# All native Rust kernels are built into one CPython extension. The source
-# modules remain separated by domain under `scicore_rs/src`.
-[workspace]
-resolver = "2"
-members = ["scicore_rs", "fmm_core"]
-
-[workspace.package]
+# All native Rust kernels are built into one CPython extension
+# (`scicore._scicore_rs`). The source modules remain separated by domain under
+# `src/`. `rust/` is the crate root and the maturin build target (see
+# `[tool.maturin]` in pyproject.toml).
+[package]
+name = "scicore-rust"
 version = "2.0.0-dev"
 edition = "2021"
 license = "BSD-3-Clause"
+description = "Rust extension kernels for SciCore"
 
-[workspace.dependencies]
+[lib]
+name = "_scicore_rs"
+crate-type = ["cdylib"]
+
+[features]
+extension-module = ["pyo3/extension-module"]
+
+[dependencies]
+matrixmultiply = "0.3.11"
 pyo3 = { version = "0.29", features = ["macros"] }

@@ -2,7 +2,7 @@
 
 Provides the Truncated Newton (TNC) solver interface used by
 ``scipy.optimize._tnc``.
-This is a stub: real TNC should be ported to Rust under ``rust/scicore_rs/``.
+This is a stub: real TNC should be ported to Rust under ``rust/src/``.
 """
 
 from __future__ import annotations

@@ -2,7 +2,7 @@
 
 Provides BGLU (blocked Gaussian elimination) dense factorization used by
 ``scipy.optimize._linprog_rs``.
-This is a stub: real BGLU should be ported to Rust under ``rust/scicore_rs/``.
+This is a stub: real BGLU should be ported to Rust under ``rust/src/``.
 """
 
 from __future__ import annotations

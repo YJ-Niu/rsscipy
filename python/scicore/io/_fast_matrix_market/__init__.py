@@ -65,7 +65,7 @@ def _resolve_field(field, arr):
 
 
 def _fmm_version():
-    from . import _fmm_core
+    from scicore._scicore_rs import fmm as _fmm_core
     return _fmm_core.__version__
 
 
@@ -147,7 +147,7 @@ def _read_body_array(cursor):
     """
     Read MatrixMarket array body
     """
-    from . import _fmm_core
+    from scicore._scicore_rs import fmm as _fmm_core
 
     flat = _fmm_core.read_body_array(cursor)
     vals = np.array(flat, dtype=_field_to_dtype.get(cursor.header.field))
@@ -158,7 +158,7 @@ def _read_body_coo(cursor, generalize_symmetry=True):
     """
     Read MatrixMarket coordinate body
     """
-    from . import _fmm_core
+    from scicore._scicore_rs import fmm as _fmm_core
 
     index_dtype = "int32"
     if cursor.header.nrows >= 2**31 or cursor.header.ncols >= 2**31:
@@ -196,7 +196,7 @@ def _get_read_cursor(source, parallelism=None):
     """
     Open file for reading.
     """
-    from . import _fmm_core
+    from scicore._scicore_rs import fmm as _fmm_core
 
     ret_stream_to_close = None
     if parallelism is None:
@@ -238,7 +238,7 @@ def _get_write_cursor(target, h=None, comment=None, parallelism=None,
     """
     Open file for writing.
     """
-    from . import _fmm_core
+    from scicore._scicore_rs import fmm as _fmm_core
 
     if parallelism is None:
         parallelism = PARALLELISM
@@ -553,7 +553,7 @@ def mmwrite(target, a, comment=None, field=None, precision=None, symmetry="AUTO"
     ...     mmwrite(target, a)
 
     """
-    from . import _fmm_core
+    from scicore._scicore_rs import fmm as _fmm_core
 
     if isinstance(a, list) or isinstance(a, tuple) or hasattr(a, "__array__"):
         a = np.asarray(a)

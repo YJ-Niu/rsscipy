@@ -2,7 +2,7 @@
 
 Provides Ansari-Bradley statistic helpers used by ``scipy.stats``.
 This is a stub: real implementations should be ported to Rust under
-``rust/scicore_rs/``.
+``rust/src/``.
 """
 
 from __future__ import annotations

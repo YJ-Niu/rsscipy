@@ -2,7 +2,7 @@
 
 Provides the ODEPACK solver interface used by ``scipy.integrate._odepack_py``.
 This is a stub: real ODE solvers should be ported to Rust under
-``rust/scicore_rs/``.
+``rust/src/``.
 """
 
 from __future__ import annotations

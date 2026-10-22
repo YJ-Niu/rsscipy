@@ -1,6 +1,8 @@
 """ Utility functions for sparse matrix module
 """
 
+from __future__ import annotations
+
 import sys
 from typing import Any, Literal
 import operator

@@ -2,7 +2,7 @@
 
 Provides the MINPACK least-squares solver interface used by
 ``scipy.optimize._minpack_py``.
-This is a stub: real MINPACK should be ported to Rust under ``rust/scicore_rs/``.
+This is a stub: real MINPACK should be ported to Rust under ``rust/src/``.
 """
 
 from __future__ import annotations

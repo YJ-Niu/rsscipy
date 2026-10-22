@@ -10,6 +10,7 @@ mod correlate_nd;
 mod fblas;
 mod fftpack_convolve;
 mod flapack;
+mod fmm;
 mod fpumode;
 mod givens_elimination;
 mod graph_tools;
@@ -148,6 +149,10 @@ fn _scicore_rs(module: &Bound<'_, PyModule>) -> PyResult<()> {
     let io = PyModule::new(py, "io")?;
     mio_utils::register(&io)?;
     module.add("io", io)?;
+
+    let fmm_mod = PyModule::new(py, "fmm")?;
+    fmm::register(&fmm_mod)?;
+    module.add("fmm", fmm_mod)?;
 
     Ok(())
 }
