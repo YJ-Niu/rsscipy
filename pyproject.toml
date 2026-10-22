@@ -13,8 +13,6 @@ requires = []
 # remains a drop-in replacement -- `pip install rsscipy`, then `import scipy`.
 name = "rsscipy"
 version = "0.1.0"
-# TODO: add `license-files` once PEP 639 is accepted (see meson-python#88)
-#       at that point, no longer include them in `py3.install_sources()`
 license = { file = "LICENSE.txt" }
 description = "Fundamental algorithms for scientific computing in Python, built on rsnumpy"
 authors = [
@@ -30,13 +28,10 @@ keywords = [
     "rsnumpy",
     "rust",
 ]
-# Note: Python and NumPy upper version bounds should be set correctly in
-# release branches, see:
-#     https://scipy.github.io/devdocs/dev/core-dev/index.html#version-ranges-for-numpy-and-other-dependencies
-requires-python = ">=3.12"  # keep in sync with `min_python_version` in meson.build
+requires-python = ">=3.12"
 dependencies = [
     "rsnumpy>=1.2.4",
-] # keep in sync with `min_numpy_version` in meson.build
+]
 readme = "README.rst"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -84,17 +79,8 @@ optional-runtime-deps = [
     # "scikit-umfpack",  # optimize, sparse.linalg
 ]
 
-build = [
-    "meson-python>=0.15.0",
-    "Cython>=3.2.0",
-    "pybind11>=2.13.2",
-    "pythran>=0.18.1",
-    "numpy>=2.0.0",
-    "ninja>=1.8.2",
-]
-
 test-core = [
-    "pytest>=8.0.0",
+    "pytest>=9.1.1",
     "hypothesis>=6.30",
     "pooch",
     "pytest-xdist",  # not required, but used widely, belongs in -core
@@ -104,11 +90,6 @@ test-mp = [
     "mpmath",
     # for PyPI: 'gmpy2; sys_platform != "win32" or platform_machine != "ARM64"'
     "gmpy2",
-]
-test-extending-cython = [  # {special, linalg, optimize}.tests.test_extending
-    "Cython",
-    "meson",
-    'ninja; sys_platform != "emscripten"',
 ]
 test-parallel = [
     { include-group = "test-core" },
@@ -130,7 +111,6 @@ test = [
     { include-group = "optional-runtime-deps" },
     { include-group = "test-core" },
     { include-group = "test-mp" },
-    { include-group = "test-extending-cython" },
     { include-group = "test-parallel" },
     { include-group = "test-docs" },
     { include-group = "test-array-types" },
@@ -145,25 +125,7 @@ coverage = [
     { include-group = "test" },  # includes all optional test and runtime deps for maximum coverage
     "pytest-cov",
 ]
-openblas32 = [
-    "scipy-openblas32==0.3.34.237.2",
-    'pkgconf==2.5.1.post1; sys_platform == "win32"',
-]
-openblas64 = [
-    "scipy-openblas64==0.3.34.237.0",
-    'pkgconf==2.5.1.post1; sys_platform == "win32"',
-]
-
-
-
-
-
 dev = [
-    { include-group = "build" },
     { include-group = "test" },
     "scipy-stubs",
-
 ]
-
-[tool.meson-python.args]
-install = ['--skip-subprojects']

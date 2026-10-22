@@ -46,7 +46,11 @@ fn fix_exponent(s: &str) -> String {
 
 /// Format a complex value as `"<re> <im>"`.
 pub fn format_complex(re: f64, im: f64, precision: i32) -> String {
-    format!("{} {}", format_value(re, precision), format_value(im, precision))
+    format!(
+        "{} {}",
+        format_value(re, precision),
+        format_value(im, precision)
+    )
 }
 
 #[cfg(test)]

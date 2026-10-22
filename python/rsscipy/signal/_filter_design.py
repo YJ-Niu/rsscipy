@@ -22,7 +22,11 @@ from rsscipy._lib._array_api import (
     array_namespace, xp_promote, xp_size, is_jax, xp_float_to_complex,
     xp_result_type, xp_device, xp_result_device, _xp_result_devices,
 )
-from rsscipy._external.array_api_compat import numpy as np_compat
+try:
+    from rsscipy._external.array_api_compat import numpy as np_compat
+except Exception:  # numpy (and the vendored array-api compat) unavailable
+    # rsnumpy is the only eager backend in this build.
+    np_compat = np
 
 
 __all__ = ['findfreqs', 'freqs', 'freqz', 'tf2zpk', 'zpk2tf', 'normalize',

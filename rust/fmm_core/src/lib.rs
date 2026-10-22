@@ -21,6 +21,7 @@ const VERSION: &str = "1.2.4";
 // ---------------------------------------------------------------------------
 
 impl Val {
+    #[allow(clippy::wrong_self_convention)]
     fn to_py(&self, py: Python<'_>) -> PyResult<Py<PyAny>> {
         Ok(match self {
             Val::Real(x) => (*x).into_pyobject(py)?.into_any().unbind(),
@@ -115,7 +116,7 @@ struct ReadCursor {
 impl ReadCursor {
     #[getter]
     fn header(&self, py: Python<'_>) -> PyResult<Py<PyHeader>> {
-        Ok(Py::new(
+        Py::new(
             py,
             PyHeader {
                 comment: self.comment.clone(),
@@ -126,7 +127,7 @@ impl ReadCursor {
                 ncols: self.ncols,
                 nnz: self.nnz,
             },
-        )?)
+        )
     }
 
     fn close(&mut self) {
@@ -165,10 +166,7 @@ fn open_read_file(path: &str, _parallelism: Option<i64>) -> PyResult<ReadCursor>
 }
 
 #[pyfunction]
-fn open_read_stream(
-    source: &Bound<'_, PyAny>,
-    _parallelism: Option<i64>,
-) -> PyResult<ReadCursor> {
+fn open_read_stream(source: &Bound<'_, PyAny>, _parallelism: Option<i64>) -> PyResult<ReadCursor> {
     let read = source.getattr("read")?;
     let mut chunks: Vec<u8> = Vec::new();
     loop {
@@ -207,8 +205,8 @@ fn read_body_array(cursor: &ReadCursor, py: Python<'_>) -> PyResult<Py<PyList>> 
 
 #[pyfunction]
 fn read_body_coo(cursor: &ReadCursor, py: Python<'_>) -> PyResult<Py<PyTuple>> {
-    let (rows, cols, data) = parse_coo_body(&cursor.body, &cursor.field, cursor.nnz)
-        .map_err(PyValueError::new_err)?;
+    let (rows, cols, data) =
+        parse_coo_body(&cursor.body, &cursor.field, cursor.nnz).map_err(PyValueError::new_err)?;
     let mut i_objs: Vec<Py<PyAny>> = Vec::with_capacity(rows.len());
     for &r in rows.iter() {
         i_objs.push(r.into_pyobject(py)?.into_any().unbind());
@@ -291,7 +289,11 @@ fn open_write_stream(
 /// becomes a no-op when the lines are joined; each non-empty comment line is
 /// prefixed with `%`.
 fn comment_block(comment: &str) -> String {
-    comment.split('\n').map(|line| format!("%{line}")).collect::<Vec<_>>().join("\n")
+    comment
+        .split('\n')
+        .map(|line| format!("%{line}"))
+        .collect::<Vec<_>>()
+        .join("\n")
 }
 
 fn format_py_value(v: &Bound<'_, PyAny>, field: &str, precision: i32) -> PyResult<String> {
@@ -354,9 +356,7 @@ fn write_body_array(
     }
     let symmetry = cursor.symmetry.clone();
     let mut lines: Vec<String> = Vec::new();
-    lines.push(format!(
-        "%%MatrixMarket matrix array {field} {symmetry}"
-    ));
+    lines.push(format!("%%MatrixMarket matrix array {field} {symmetry}"));
     lines.push(comment_block(&cursor.comment));
     lines.push(format!("{nrows} {ncols}"));
     // Matrix Market array format stores values in column-major order.

@@ -58,8 +58,8 @@ pub fn parse_header(text: &str) -> Result<(ParsedHeader, String), String> {
             break;
         }
     }
-    let dim_idx = dim_idx
-        .ok_or_else(|| "Invalid MatrixMarket header: Premature EOF".to_string())?;
+    let dim_idx =
+        dim_idx.ok_or_else(|| "Invalid MatrixMarket header: Premature EOF".to_string())?;
     let comment = comment_lines.join("\n");
 
     let dim_tokens: Vec<&str> = lines[dim_idx].split_whitespace().collect();
@@ -75,7 +75,7 @@ pub fn parse_header(text: &str) -> Result<(ParsedHeader, String), String> {
     };
 
     if header.object == "vector" {
-        if dim_tokens.len() < 1 {
+        if dim_tokens.is_empty() {
             return Err("Header dimension line not of length 1".to_string());
         }
         let vlen: i64 = dim_tokens[0]
@@ -87,10 +87,7 @@ pub fn parse_header(text: &str) -> Result<(ParsedHeader, String), String> {
         header.nrows = vlen;
         header.ncols = 1;
         header.nnz = if header.format == "coordinate" {
-            dim_tokens
-                .get(1)
-                .and_then(|t| t.parse().ok())
-                .unwrap_or(0)
+            dim_tokens.get(1).and_then(|t| t.parse().ok()).unwrap_or(0)
         } else {
             vlen
         };
@@ -108,10 +105,7 @@ pub fn parse_header(text: &str) -> Result<(ParsedHeader, String), String> {
             return Err("Matrix dimensions can't be negative.".to_string());
         }
         header.nnz = if header.format == "coordinate" {
-            dim_tokens
-                .get(2)
-                .and_then(|t| t.parse().ok())
-                .unwrap_or(0)
+            dim_tokens.get(2).and_then(|t| t.parse().ok()).unwrap_or(0)
         } else {
             header.nrows * header.ncols
         };
@@ -243,6 +237,7 @@ pub fn parse_array_body(
     Ok(mat)
 }
 
+#[allow(clippy::too_many_arguments)]
 fn place_value(
     mat: &mut Vec<Val>,
     r: i64,
@@ -280,15 +275,14 @@ fn place_value(
     }
 }
 
+/// A coordinate triplet: (rows, cols, data).
+pub type CooTriplets = (Vec<i64>, Vec<i64>, Vec<Val>);
+
 /// Parse a coordinate body into the *stored* (0-based) triplets.
 ///
 /// Symmetry generalization is intentionally NOT applied here — the Python
 /// layer performs it (matching the original `_read_body_coo` contract).
-pub fn parse_coo_body(
-    body: &str,
-    field: &str,
-    nnz: i64,
-) -> Result<(Vec<i64>, Vec<i64>, Vec<Val>), String> {
+pub fn parse_coo_body(body: &str, field: &str, nnz: i64) -> Result<CooTriplets, String> {
     let tokens: Vec<&str> = body.split_whitespace().collect();
     let mut rows = Vec::with_capacity(nnz as usize);
     let mut cols = Vec::with_capacity(nnz as usize);
@@ -298,8 +292,12 @@ pub fn parse_coo_body(
         let r_t = tokens.get(idx).ok_or("unexpected end of body")?;
         let c_t = tokens.get(idx + 1).ok_or("unexpected end of body")?;
         idx += 2;
-        let r: i64 = r_t.parse().map_err(|_| format!("invalid row index: {r_t}"))?;
-        let c: i64 = c_t.parse().map_err(|_| format!("invalid column index: {c_t}"))?;
+        let r: i64 = r_t
+            .parse()
+            .map_err(|_| format!("invalid row index: {r_t}"))?;
+        let c: i64 = c_t
+            .parse()
+            .map_err(|_| format!("invalid column index: {c_t}"))?;
         rows.push(r - 1);
         cols.push(c - 1);
         if field != "pattern" {
@@ -327,7 +325,8 @@ mod tests {
 
     #[test]
     fn parses_comment_lines() {
-        let text = "%%MatrixMarket matrix array real general\n%\n% hello\n2 4\n1 0 0 2.5 0 0 0 6.25\n";
+        let text =
+            "%%MatrixMarket matrix array real general\n%\n% hello\n2 4\n1 0 0 2.5 0 0 0 6.25\n";
         let (h, body) = parse_header(text).unwrap();
         assert_eq!(h.comment, "\n hello");
         assert_eq!(h.nrows, 2);
@@ -350,7 +349,15 @@ mod tests {
         // symmetric 2x2: stores (0,0)=1, (1,0)=2, (1,1)=3
         let body = "1.0\n2.0\n3.0\n";
         let mat = parse_array_body(body, "real", "symmetric", 2, 2).unwrap();
-        assert_eq!(mat, vec![Val::Real(1.0), Val::Real(2.0), Val::Real(2.0), Val::Real(3.0)]);
+        assert_eq!(
+            mat,
+            vec![
+                Val::Real(1.0),
+                Val::Real(2.0),
+                Val::Real(2.0),
+                Val::Real(3.0)
+            ]
+        );
     }
 
     #[test]
@@ -376,7 +383,12 @@ mod tests {
         let mat = parse_array_body(body, "real", "skew-symmetric", 2, 2).unwrap();
         assert_eq!(
             mat,
-            vec![Val::Real(0.0), Val::Real(-2.0), Val::Real(2.0), Val::Real(0.0)]
+            vec![
+                Val::Real(0.0),
+                Val::Real(-2.0),
+                Val::Real(2.0),
+                Val::Real(0.0)
+            ]
         );
     }
 }

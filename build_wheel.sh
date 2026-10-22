@@ -9,8 +9,9 @@ set -euo pipefail
 #
 #   1. `tools/build_rust.py` builds the unified Rust crate listed in
 #      `rust/modules.toml` and places its extension in the Python package.
-#   2. `python -m build --wheel` runs meson-python, which packages those .so
-#      files together with the Python sources.
+#   2. `python -m build --wheel` runs the in-tree `rsbuild` backend
+#      (`tools/rsbuild.py`), which packages the Python sources and compiled
+#      `.so` kernels into a wheel.
 #
 # Skipping (1) produces a wheel that builds cleanly but fails when importing
 # functionality backed by Rust because the unified extension is missing.
