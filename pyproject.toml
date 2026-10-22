@@ -9,8 +9,8 @@ backend-path = ["tools"]
 requires = []
 
 [project]
-# The distribution is `scicore`; the *import* package stays `scipy` so this
-# remains a drop-in replacement -- `pip install scicore`, then `import scipy`.
+# The distribution is `scicore`; the *import* package stays `scicore` so this
+# remains a drop-in replacement -- `pip install scicore`, then `import scicore`.
 name = "scicore"
 version = "0.1.1"
 license = { file = "LICENSE.txt" }

@@ -29,9 +29,9 @@ install/
 rust/target/
 target/
 # 由 tools/build_rust.py 生成，随 meson 安装进 wheel，不入库
-python/rsscipy/**/*.so
-python/rsscipy/**/*.dylib
-python/rsscipy/**/*.pyd
+python/scicore/**/*.so
+python/scicore/**/*.dylib
+python/scicore/**/*.pyd
 
 # --- 文档构建 -------------------------------------------------------------
 doc/build/

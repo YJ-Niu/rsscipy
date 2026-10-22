@@ -1,22 +1,22 @@
-rsSciPy
+SciCore
 =======
 
 .. image:: https://img.shields.io/badge/powered%20by-rsnumpy-blue.svg
   :target: https://github.com/YJ-Niu/rsnumpy
 
-**rsSciPy** is a port of `SciPy <https://github.com/scipy/scipy>`__ onto
+**SciCore** is a port of `SciPy <https://github.com/scipy/scipy>`__ onto
 `rsnumpy <https://github.com/YJ-Niu/rsnumpy>`__ — a Rust-backed, NumPy-compatible
 array library.
 
-The import name stays ``scipy``, so it is a drop-in replacement::
+The import name stays ``scicore``, so it is a drop-in replacement::
 
     pip install scicore
-    python -c "import scipy.linalg"
+    python -c "import scicore.linalg"
 
 Why
 ---
 
-SciPy's compiled kernels are C, C++, Cython and Fortran. rsSciPy keeps the
+SciCore's compiled kernels are C, C++, Cython and Fortran. SciCore keeps the
 algorithms, migrates compiled kernels to Rust incrementally, and swaps the array
 backend from NumPy to rsnumpy. Until that migration is complete, some native
 extensions still use the upstream implementations. Two consequences worth
@@ -43,7 +43,7 @@ knowing up front:
   Patefield random contingency-table sampling and the Nolan stable-distribution
   integration kernel also run in Rust.
 - **Recomputation over incremental update.** Where upstream keeps a factorisation
-  up to date with Givens rotations (``scipy.linalg.qr_update`` and friends), this
+  up to date with Givens rotations (``scicore.linalg.qr_update`` and friends), this
   port recomputes the factorisation. The results match, but the complexity is
   ``O(m n²)`` rather than ``O(m n)``. Each affected function says so in its
   docstring.
@@ -103,9 +103,9 @@ Run the Rust unit tests from the workspace root::
     cd rust
     cargo test --workspace
 
-The repository's rsSciPy-owned Python tests live in ``tests/`` and
+The repository's SciCore-owned Python tests live in ``tests/`` and
 ``tools/``. ``pytest.ini`` limits ``python -m pytest`` to those tests so the
-vendored upstream SciPy test corpus is not run as if it were an rsSciPy suite.
+vendored upstream SciCore test corpus is not run as if it were an SciCore suite.
 The Python tests cover the rsnumpy migration and Rust-backed Python adapters;
 the Rust workspace tests cover each migrated kernel.
 
@@ -115,9 +115,9 @@ Links
 - **Source code:** https://github.com/YJ-Niu/scicore
 - **Bug reports:** https://github.com/YJ-Niu/scicore/issues
 - **rsnumpy (array backend):** https://github.com/YJ-Niu/rsnumpy
-- **Upstream SciPy:** https://github.com/scipy/scipy
+- **Upstream SciCore:** https://github.com/scicore-dev/scicore
 
 License
 -------
 
-BSD 3-Clause, matching upstream SciPy. See ``LICENSE.txt``.
+BSD 3-Clause, matching upstream SciCore. See ``LICENSE.txt``.
