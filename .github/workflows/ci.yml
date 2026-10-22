@@ -58,6 +58,12 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install build pytest
 
+      # rsscipy's only runtime dependency.  The wheel is installed with
+      # --no-deps below, so the smoke test needs rsnumpy from PyPI (its
+      # universal2 macOS wheels cover Intel + Apple Silicon).
+      - name: Install rsnumpy
+        run: python -m pip install rsnumpy
+
       # --skip-lint: the dedicated `lint` job already runs rustfmt + clippy, so
       # the per-cell build skips the (cached) gates to stay fast.
       - name: Build the wheel

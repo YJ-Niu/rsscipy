@@ -2,9 +2,8 @@
 
 Replaces the former meson-python + C/Cython build. On a wheel build it:
 
-  1. Builds the unified Rust extension via ``tools/build_rust.py`` (offline by
-     default, against the local crate cache; the only external tool required is
-     ``cargo`` on PATH).
+  1. Builds the unified Rust extension via ``tools/build_rust.py`` (the only
+     external tool required is ``cargo`` on PATH).
   2. Packages the ``python/rsscipy`` tree -- Python sources plus the compiled
      ``.so`` kernels -- into a wheel.
 
@@ -17,6 +16,7 @@ import base64
 import csv
 import hashlib
 import io
+import os
 import platform
 import subprocess
 import sys
@@ -31,7 +31,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PKG_DIR = ROOT / "python" / "rsscipy"
 PYPROJECT = ROOT / "pyproject.toml"
 
-_EXCLUDE_DIRS = {"__pycache__", ".git", ".mypy_cache", ".pytest_cache"}
+_EXCLUDE_DIRS = {"__pycache__", ".git", ".mypy_cache", ".pytest_cache", "target"}
 # Build inputs & dead C/Cython artifacts are not shipped in the wheel: only the
 # Python sources and the compiled ``.so`` kernels are. ``.in`` covers the
 # Cython/header templates (``*.pyx.in``, ``*.h.in``); ``.pxi``/``.pxd`` are
@@ -141,6 +141,11 @@ def _metadata_text(project: dict) -> str:
 def build_wheel(wheel_directory, config_settings=None, metadata_directory=None):
     project = _project()
     name, version = project["name"], project["version"]
+    # A wheel tagged universal2 must carry a fat extension.  When the running
+    # interpreter is universal2, force the dual-arch build so the wheel tag
+    # and the .so inside never disagree.
+    if platform.system() == "Darwin" and "universal2" in sysconfig.get_platform():
+        os.environ.setdefault("RSSCIPY_UNIVERSAL2", "1")
     # (1) Build the Rust kernels into the package tree.
     _run_build_rust(release=not _is_debug(config_settings))
 
@@ -182,6 +187,9 @@ def build_wheel(wheel_directory, config_settings=None, metadata_directory=None):
 def _sdist_filter(info: tarfile.TarInfo):
     name = Path(info.name).name
     if name in _EXCLUDE_DIRS or name.endswith(tuple(_EXCLUDE_SUFFIXES)):
+        return None
+    # Keep the sdist as clean as the wheel: no OS junk, no dot-prefixed files.
+    if name in _EXCLUDE_NAMES or name.startswith("."):
         return None
     return info
 

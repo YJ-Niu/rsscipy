@@ -1,8 +1,8 @@
 name: Build and Publish Wheels
 
-# Triggered by pushing a `v*` tag (e.g. v0.1.0) or by publishing a GitHub
-# Release.  `workflow_dispatch` builds only -- it never publishes, so it is safe
-# to run by hand to check that the wheel still builds.
+# 触发方式：推送 v* 标签（如 v0.1.0）或在 GitHub 上 Publish 一个 Release。
+# 也可在 Actions 页手动触发（workflow_dispatch）——手动触发只构建、不发布，
+# 适合先验证 wheel 能否在各平台构建。
 on:
   push:
     tags:
@@ -15,49 +15,18 @@ permissions:
   contents: read
 
 jobs:
-  # ---------------- Source distribution ----------------
-  # When no prebuilt wheel exists for a platform/Python version, pip falls back
-  # to this and builds from source (needs a Rust toolchain on the target machine).
-  sdist:
-    name: sdist
+  # ---------------- Linux: x86_64，按 Python 版本矩阵 ----------------
+  # 宿主机直接构建；auditwheel 把 `linux_x86_64` 重标记为 manylinux
+  # （PyPI 拒收普通 `linux_*` 平台标签）。
+  linux-x86_64:
+    name: wheel (linux-x86_64, py${{ matrix.python-version }})
     runs-on: ubuntu-latest
-    steps:
-      # `subprojects/` are git submodules; meson hard-errors without them.
-      - uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
-
-      - name: Build sdist
-        run: |
-          python -m pip install --upgrade build
-          python -m build --sdist --outdir dist
-
-      # Named `wheels-*` so the publish job's `pattern: wheels-*` picks it up.
-      - uses: actions/upload-artifact@v4
-        with:
-          name: wheels-sdist
-          path: dist/*.tar.gz
-
-  # ---------------- Binary wheels ----------------
-  wheels:
-    name: wheel (${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        # macos-13 (Intel) is retired upstream; macos-latest is arm64.
-        include:
-          - os: ubuntu-latest
-          - os: macos-latest
-          - os: windows-latest
+        python-version: ["3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: recursive
 
       - uses: actions/cache@v4
         with:
@@ -65,62 +34,201 @@ jobs:
             ~/.cargo/registry
             ~/.cargo/git
             rust/target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('rust/Cargo.lock') }}
+          key: ${{ runner.os }}-cargo-x86_64-${{ hashFiles('rust/Cargo.lock') }}
           restore-keys: |
-            ${{ runner.os }}-cargo-
+            ${{ runner.os }}-cargo-x86_64-
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: ${{ matrix.python-version }}
 
-      - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
-
-      # Needed by the still-unported C/Cython extensions; see ci.yml.
-      - name: Install BLAS/LAPACK and pkg-config (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libopenblas-dev pkg-config
-
-      - name: Install BLAS/LAPACK and pkg-config (macOS)
-        if: runner.os == 'macOS'
-        run: brew install openblas pkg-config
+      - uses: dtolnay/rust-toolchain@stable
 
       - name: Build the wheel
         shell: bash
-        run: |
-          python -m pip install --upgrade pip build
-          ./build_wheel.sh --out-dir dist --python python
+        run: ./build_wheel.sh --out-dir dist --skip-lint
 
-      # PyPI rejects `linux_x86_64`; auditwheel retags it as manylinux.
-      # macOS/Windows wheels need no repair.
-      - name: Repair wheel (Linux only)
-        if: runner.os == 'Linux'
+      - name: Repair wheel (manylinux)
         run: |
-          python -m pip install auditwheel
-          python -m auditwheel repair dist/*.whl --wheel-dir wheelhouse
-
-      - name: Collect wheel
-        shell: bash
-        run: |
-          mkdir -p dist-final
-          if [ -d wheelhouse ]; then
-            cp wheelhouse/*.whl dist-final/
-          else
-            cp dist/*.whl dist-final/
-          fi
+          sudo apt-get update
+          sudo apt-get install -y patchelf
+          python -m pip install --upgrade auditwheel
+          python -m auditwheel repair dist/*.whl --wheel-dir dist-repaired
 
       - uses: actions/upload-artifact@v4
         with:
-          name: wheels-${{ matrix.os }}
+          name: wheels-linux-x86_64-py${{ matrix.python-version }}
+          path: dist-repaired/*.whl
+
+  # ---------------- Linux: aarch64 ----------------
+  # manylinux aarch64 容器在 x86_64 runner 上以 qemu 运行（与 maturin-action
+  # 相同的做法）。一次容器运行构建全部支持的 CPython 版本：每个版本都要
+  # 重编译 pyo3（ABI 绑定解释器版本），qemu 下逐版本单独拉容器太慢。
+  linux-aarch64:
+    name: wheel (linux-aarch64)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build wheels in the manylinux aarch64 container
+        run: |
+          docker run --rm --platform linux/arm64 \
+            -v "$PWD":/io -w /io \
+            quay.io/pypa/manylinux_2_28_aarch64 \
+            /bin/bash -lc '
+              set -euo pipefail
+              curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | \
+                sh -s -- -y --profile minimal
+              . "$HOME/.cargo/env"
+              chmod +x ./build_wheel.sh
+              audit_py=/opt/python/cpython-3.12-aarch64-gnu/bin/python
+              $audit_py -m pip install --quiet auditwheel
+              for ver in 3.12 3.13 3.14; do
+                py="/opt/python/cpython-${ver}-aarch64-gnu/bin/python"
+                if [ ! -x "$py" ]; then
+                  echo "no CPython ${ver} for aarch64 in this image; skipping" >&2
+                  continue
+                fi
+                echo "=== building py${ver} (aarch64) ==="
+                ./build_wheel.sh --out-dir "dist-${ver}" --skip-lint --python "$py"
+                $audit_py -m auditwheel repair "dist-${ver}"/*.whl --wheel-dir "dist-repaired-${ver}"
+              done
+              mkdir -p dist-final
+              for ver in 3.12 3.13 3.14; do
+                if [ -d "dist-repaired-${ver}" ]; then
+                  cp "dist-repaired-${ver}"/*.whl dist-final/
+                fi
+              done
+              ls -la dist-final/
+            '
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-linux-aarch64
           path: dist-final/*.whl
 
-  # ---------------- Publish to PyPI (tags / Release only) ----------------
+  # ---------------- Windows: x64，按 Python 版本矩阵 ----------------
+  windows:
+    name: wheel (windows-x64, py${{ matrix.python-version }})
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            rust/target
+          key: ${{ runner.os }}-cargo-x64-${{ hashFiles('rust/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-x64-
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - name: Build the wheel
+        shell: bash
+        run: ./build_wheel.sh --out-dir dist --skip-lint
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-windows-py${{ matrix.python-version }}
+          path: dist/*.whl
+
+  # ---------------- macOS: universal2（Intel + Apple Silicon）----------------
+  # macos-latest 是 arm64：x86_64 切片交叉编译（pyo3 支持），两个切片用
+  # lipo 合并进一个 universal2 wheel，无需 Intel 机器。
+  macos:
+    name: wheel (macos-universal2, py${{ matrix.python-version }})
+    runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            rust/target
+          key: ${{ runner.os }}-cargo-universal2-${{ hashFiles('rust/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-universal2-
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-apple-darwin,aarch64-apple-darwin
+
+      - name: Build the universal2 wheel
+        shell: bash
+        run: ./build_wheel.sh --out-dir dist --skip-lint --universal2
+
+      # 防止打出"假 universal2"：wheel tag 是 universal2 时，里面的 .so
+      # 必须同时包含 x86_64 与 arm64 切片。
+      - name: Verify the wheel is universal2
+        shell: bash
+        run: |
+          wheel=$(ls dist/*.whl)
+          echo "checking $wheel"
+          for so in $(unzip -Z1 "$wheel" | grep '\.so$'); do
+            unzip -p "$wheel" "$so" > /tmp/check.so
+            archs=$(lipo -archs /tmp/check.so)
+            echo "$so: $archs"
+            echo "$archs" | grep -qw x86_64 || { echo "missing x86_64 in $so" >&2; exit 1; }
+            echo "$archs" | grep -qw arm64 || { echo "missing arm64 in $so" >&2; exit 1; }
+          done
+          echo "wheel is a real universal2"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-macos-py${{ matrix.python-version }}
+          path: dist/*.whl
+
+  # ---------------- 源码分发（sdist）----------------
+  # 当某平台/版本无预编译 wheel 时，pip 可用 sdist 从源码构建
+  # （需目标机器有 Rust 工具链）。
+  sdist:
+    name: sdist
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build sdist
+        run: |
+          python -m pip install --upgrade build
+          python -m build --sdist --outdir dist
+
+      # 命名 `wheels-*` 以便 publish 作业统一下载。
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-sdist
+          path: dist/*.tar.gz
+
+  # ---------------- 发布到 PyPI（仅标签 / Release 触发）----------------
   publish:
     name: Publish to PyPI
     runs-on: ubuntu-latest
-    needs: [sdist, wheels]
+    needs: [linux-x86_64, linux-aarch64, windows, macos, sdist]
     if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'release'
     steps:
       - name: Download all artifacts
@@ -130,12 +238,16 @@ jobs:
           path: dist
           merge-multiple: true
 
-      - name: Publish
-        uses: PyO3/maturin-action@v1
-        env:
-          # Settings → Secrets and variables → Actions. Value is a PyPI token
-          # (starts with `pypi-`).
-          MATURIN_PYPI_TOKEN: ${{ secrets.YJ_NIU }}
+      - uses: actions/setup-python@v5
         with:
-          command: upload
-          args: --non-interactive --skip-existing dist/*
+          python-version: "3.12"
+
+      - name: Publish
+        run: |
+          python -m pip install --upgrade twine
+          python -m twine upload --non-interactive --skip-existing dist/*
+        env:
+          # 仓库 Settings → Secrets and variables → Actions 中的 secret
+          # （值为 PyPI token，以 pypi- 开头）。
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.YJ_NIU }}

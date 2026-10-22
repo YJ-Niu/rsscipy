@@ -3,7 +3,10 @@ set -euo pipefail
 
 # Build rsscipy into a wheel and install it into the local .venv.
 #
-# Usage: ./build_wheel.sh [--release|--debug] [--out-dir DIR] [--python PYTHON_EXEC]
+# Usage: ./build_wheel.sh [--release|--debug] [--universal2] [--out-dir DIR] [--python PYTHON_EXEC]
+#
+# On macOS, --universal2 produces a fat (x86_64 + arm64) wheel.  It exports
+# RSSCIPY_UNIVERSAL2 so both build stages agree on the dual-arch extension.
 #
 # The build has two stages, and the order matters:
 #
@@ -25,13 +28,13 @@ VERSION=$(grep -m1 '^version = ' pyproject.toml | sed -E 's/version = "(.*)"/\1/
 
 echo "Project: $NAME, Version: $VERSION"
 
-# ========== Keep rsscipy/version.py in sync with pyproject.toml ==========
+# ========== Keep python/rsscipy/version.py in sync with pyproject.toml ==========
 # `rsscipy/__init__.py` reports this at runtime, so a stale copy silently
 # mislabels the installed package.
-if [[ -f rsscipy/version.py ]]; then
-  sed -i.bak "s/^version = \".*\"/version = \"$VERSION\"/" rsscipy/version.py
-  rm -f rsscipy/version.py.bak
-  echo "  -> rsscipy/version.py updated to $VERSION"
+if [[ -f python/rsscipy/version.py ]]; then
+  sed -i.bak "s/^version = \".*\"/version = \"$VERSION\"/" python/rsscipy/version.py
+  rm -f python/rsscipy/version.py.bak
+  echo "  -> python/rsscipy/version.py updated to $VERSION"
 fi
 
 # ========== cargo is required for the Rust extension modules ==========
@@ -67,6 +70,7 @@ while [[ $# -gt 0 ]]; do
     --release) RELEASE=true; shift ;;
     --debug) RELEASE=false; shift ;;
     --skip-lint) SKIP_LINT=true; shift ;;
+    --universal2) export RSSCIPY_UNIVERSAL2=1; shift ;;
     --out-dir) OUT_DIR="$2"; shift 2 ;;
     --python) PYTHON_EXEC="$2"; PYTHON_EXEC_SET=1; shift 2 ;;
     *) PYTHON_EXEC="$1"; PYTHON_EXEC_SET=1; shift ;;
@@ -112,7 +116,7 @@ else
 fi
 echo "  -> Rust extension modules built."
 
-# ========== Stage 2: meson-python wheel ==========
+# ========== Stage 2: PEP 517 wheel (in-tree rsbuild backend) ==========
 # `build` is the PEP 517 frontend.  This repo's .venv is created with uv and has
 # no pip inside, so prefer uv and only fall back to pip.
 if ! "$PYTHON_EXEC" -c "import build" 2>/dev/null; then
