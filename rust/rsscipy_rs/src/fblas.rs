@@ -86,34 +86,42 @@ trait Blas: Sized + Copy {
     );
 }
 
+// The three dtype-agnostic helpers shared by every `Blas` impl (the macro
+// takes only the element size; `Self` binds to the impl's type).
+macro_rules! blas_impl_helpers {
+    ($size:expr) => {
+        const ZERO: Self = 0.0 as _;
+
+        fn transpose_in_place_copy(src: &[Self], rows: usize, cols: usize) -> Vec<Self> {
+            let mut out = Vec::with_capacity(rows * cols);
+            for col in 0..cols {
+                for row in 0..rows {
+                    out.push(src[row * cols + col]);
+                }
+            }
+            out
+        }
+
+        fn slice_from_bytes(buf: &[u8]) -> Vec<Self> {
+            buf.chunks_exact($size)
+                .map(|c| {
+                    let mut arr = [0u8; $size];
+                    arr.copy_from_slice(c);
+                    Self::from_le_bytes(arr)
+                })
+                .collect()
+        }
+
+        fn bytes_from_slice(v: &[Self]) -> Vec<u8> {
+            v.iter().flat_map(|x| x.to_le_bytes()).collect()
+        }
+    };
+}
+
 macro_rules! impl_blas {
     ($T:ty, $gemm:ident, $size:expr) => {
         impl Blas for $T {
-            const ZERO: Self = 0.0 as _;
-
-            fn transpose_in_place_copy(src: &[Self], rows: usize, cols: usize) -> Vec<Self> {
-                let mut out = Vec::with_capacity(rows * cols);
-                for col in 0..cols {
-                    for row in 0..rows {
-                        out.push(src[row * cols + col]);
-                    }
-                }
-                out
-            }
-
-            fn slice_from_bytes(buf: &[u8]) -> Vec<Self> {
-                buf.chunks_exact($size)
-                    .map(|c| {
-                        let mut arr = [0u8; $size];
-                        arr.copy_from_slice(c);
-                        Self::from_le_bytes(arr)
-                    })
-                    .collect()
-            }
-
-            fn bytes_from_slice(v: &[Self]) -> Vec<u8> {
-                v.iter().flat_map(|x| x.to_le_bytes()).collect()
-            }
+            blas_impl_helpers!($size);
 
             unsafe fn gemm_nn(
                 m: i32,
@@ -144,8 +152,89 @@ impl_blas!(f32, sgemm_, 4);
 #[cfg(target_os = "macos")]
 impl_blas!(f64, dgemm_, 8);
 
+// Non-macOS platforms use a pure-Rust GEMM (via `matrixmultiply`) so no
+// system BLAS is required.  The shims keep the Fortran `xgemm` call
+// convention (all pointers, the transpose markers unused) so `impl_blas!`
+// wires them up exactly like the Accelerate symbols.  The column-major
+// layout maps to a row stride of 1 and a column stride of `ld`.
 #[cfg(not(target_os = "macos"))]
-compile_error!("define a BLAS backend for this platform (see the `link` block above)");
+#[allow(clippy::too_many_arguments)]
+unsafe fn sgemm_rust(
+    _transa: *const u8,
+    _transb: *const u8,
+    m: *const i32,
+    n: *const i32,
+    k: *const i32,
+    alpha: *const f32,
+    a: *const f32,
+    lda: *const i32,
+    b: *const f32,
+    ldb: *const i32,
+    beta: *const f32,
+    c: *mut f32,
+    ldc: *const i32,
+) {
+    unsafe {
+        matrixmultiply::sgemm(
+            *m as usize,
+            *k as usize,
+            *n as usize,
+            *alpha,
+            a,
+            1,
+            *lda as isize,
+            b,
+            1,
+            *ldb as isize,
+            *beta,
+            c,
+            1,
+            *ldc as isize,
+        );
+    }
+}
+
+#[cfg(not(target_os = "macos"))]
+#[allow(clippy::too_many_arguments)]
+unsafe fn dgemm_rust(
+    _transa: *const u8,
+    _transb: *const u8,
+    m: *const i32,
+    n: *const i32,
+    k: *const i32,
+    alpha: *const f64,
+    a: *const f64,
+    lda: *const i32,
+    b: *const f64,
+    ldb: *const i32,
+    beta: *const f64,
+    c: *mut f64,
+    ldc: *const i32,
+) {
+    unsafe {
+        matrixmultiply::dgemm(
+            *m as usize,
+            *k as usize,
+            *n as usize,
+            *alpha,
+            a,
+            1,
+            *lda as isize,
+            b,
+            1,
+            *ldb as isize,
+            *beta,
+            c,
+            1,
+            *ldc as isize,
+        );
+    }
+}
+
+#[cfg(not(target_os = "macos"))]
+impl_blas!(f32, sgemm_rust, 4);
+#[cfg(not(target_os = "macos"))]
+impl_blas!(f64, dgemm_rust, 8);
 
 /// gemm_core(a_bytes, a_shape, trans_a, b_bytes, b_shape, trans_b, alpha, beta,
 ///           c_bytes, c_shape) -> bytes
@@ -320,4 +409,297 @@ pub(super) fn register(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(gemm_f32, m)?)?;
     m.add_function(wrap_pyfunction!(gemm_f64, m)?)?;
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::testutil::{max_abs, max_abs_diff, Rng};
+
+    const SHAPES: [(usize, usize, usize); 10] = [
+        (1, 1, 1),
+        (3, 5, 2),
+        (7, 1, 9),
+        (2, 6, 4),
+        (5, 5, 5),
+        (1, 7, 1),
+        (4, 3, 10),
+        (0, 3, 4),
+        (2, 0, 3),
+        (3, 4, 0),
+    ];
+    const ALPHA_BETAS: [(f64, f64); 6] = [
+        (1.0, 0.0),
+        (2.5, -1.0),
+        (-0.5, 3.0),
+        (1.0, 1.0),
+        (0.0, 1.0),
+        (0.0, 0.0),
+    ];
+
+    /// Column-major reference GEMM following the backend stride convention:
+    /// `c(i, j) = alpha * sum_t a(i, t) * b(t, j) + beta * c(i, j)` with a
+    /// (m, k) column-major (stride `lda`), b (k, n) column-major (stride
+    /// `ldb`) and c (m, n) column-major (stride `ldc`).
+    #[allow(clippy::too_many_arguments)]
+    fn naive_gemm_cm(
+        a: &[f64],
+        m: usize,
+        k: usize,
+        b: &[f64],
+        n: usize,
+        alpha: f64,
+        beta: f64,
+        c: &mut [f64],
+        lda: usize,
+        ldb: usize,
+        ldc: usize,
+    ) {
+        for i in 0..m {
+            for j in 0..n {
+                let mut s = 0.0;
+                for t in 0..k {
+                    s += a[i + t * lda] * b[t + j * ldb];
+                }
+                c[i + j * ldc] = alpha * s + beta * c[i + j * ldc];
+            }
+        }
+    }
+
+    /// Column stride for a dense column-major operand: `max(dim, 1)` so a
+    /// zero-sized dimension still yields a BLAS-valid leading dimension.
+    fn ld(dim: usize) -> isize {
+        dim.max(1) as isize
+    }
+
+    /// The pure-Rust fallback GEMM — the exact `matrixmultiply` call the
+    /// non-macOS `Blas` impl makes — with explicit column strides.
+    #[allow(clippy::too_many_arguments)]
+    fn fallback_gemm_f64(
+        a: &[f64],
+        m: usize,
+        k: usize,
+        b: &[f64],
+        n: usize,
+        alpha: f64,
+        beta: f64,
+        c: &mut [f64],
+        lda: isize,
+        ldb: isize,
+        ldc: isize,
+    ) {
+        unsafe {
+            matrixmultiply::dgemm(
+                m,
+                k,
+                n,
+                alpha,
+                a.as_ptr(),
+                1,
+                lda,
+                b.as_ptr(),
+                1,
+                ldb,
+                beta,
+                c.as_mut_ptr(),
+                1,
+                ldc,
+            );
+        }
+    }
+
+    #[allow(clippy::too_many_arguments)]
+    fn fallback_gemm_f32(
+        a: &[f32],
+        m: usize,
+        k: usize,
+        b: &[f32],
+        n: usize,
+        alpha: f32,
+        beta: f32,
+        c: &mut [f32],
+        lda: isize,
+        ldb: isize,
+        ldc: isize,
+    ) {
+        unsafe {
+            matrixmultiply::sgemm(
+                m,
+                k,
+                n,
+                alpha,
+                a.as_ptr(),
+                1,
+                lda,
+                b.as_ptr(),
+                1,
+                ldb,
+                beta,
+                c.as_mut_ptr(),
+                1,
+                ldc,
+            );
+        }
+    }
+
+    // All platforms: the pure-Rust fallback must match a naive reference
+    // under the same column-major contract the `Blas` impl passes it.
+    #[test]
+    fn gemm_fallback_f64_matches_naive() {
+        let mut rng = Rng::new(0xC0FFEE);
+        for (m, n, k) in SHAPES {
+            let a: Vec<f64> = (0..m * k).map(|_| rng.f64()).collect();
+            let b: Vec<f64> = (0..k * n).map(|_| rng.f64()).collect();
+            let c0: Vec<f64> = (0..m * n).map(|_| rng.f64()).collect();
+            for (alpha, beta) in ALPHA_BETAS {
+                let mut c_fb = c0.clone();
+                let mut c_ref = c0.clone();
+                fallback_gemm_f64(&a, m, k, &b, n, alpha, beta, &mut c_fb, ld(m), ld(k), ld(m));
+                #[allow(clippy::unnecessary_cast)]
+                naive_gemm_cm(
+                    &a,
+                    m,
+                    k,
+                    &b,
+                    n,
+                    alpha,
+                    beta,
+                    &mut c_ref,
+                    m.max(1) as usize,
+                    k.max(1) as usize,
+                    m.max(1),
+                );
+                let scale = max_abs(&c_ref).max(1.0);
+                let diff = max_abs_diff(&c_fb, &c_ref);
+                assert!(
+                    diff <= 1e-12 * scale,
+                    "m={m} n={n} k={k} alpha={alpha} beta={beta}: diff={diff}"
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn gemm_fallback_f32_matches_naive() {
+        let mut rng = Rng::new(0xC0FFEE);
+        for (m, n, k) in SHAPES {
+            let a: Vec<f32> = (0..m * k).map(|_| rng.f32()).collect();
+            let b: Vec<f32> = (0..k * n).map(|_| rng.f32()).collect();
+            let c0: Vec<f32> = (0..m * n).map(|_| rng.f32()).collect();
+            for (alpha, beta) in ALPHA_BETAS {
+                let (alpha, beta) = (alpha as f32, beta as f32);
+                let mut c_fb = c0.clone();
+                let mut c_ref = c0.clone();
+                fallback_gemm_f32(&a, m, k, &b, n, alpha, beta, &mut c_fb, ld(m), ld(k), ld(m));
+                let (lda, ldb, ldc) = (m.max(1), k.max(1), m.max(1));
+                #[allow(clippy::unnecessary_cast)]
+                for i in 0..m {
+                    for j in 0..n {
+                        let mut s = 0.0f32;
+                        for t in 0..k {
+                            s += a[i + t * lda] * b[t + j * ldb];
+                        }
+                        c_ref[i + j * ldc] = alpha * s + beta * c_ref[i + j * ldc];
+                    }
+                }
+                let scale = c_ref.iter().fold(0.0f32, |s, v| s.max(v.abs())).max(1.0);
+                let diff = c_fb
+                    .iter()
+                    .zip(&c_ref)
+                    .map(|(u, v)| (u - v).abs())
+                    .fold(0.0f32, f32::max);
+                assert!(
+                    diff <= 1e-4 * scale,
+                    "m={m} n={n} k={k} alpha={alpha} beta={beta}: diff={diff}"
+                );
+            }
+        }
+    }
+
+    // macOS only: the fallback call must agree with Accelerate's `dgemm_`
+    // (the reference implementation) under the same column-major contract.
+    #[cfg(target_os = "macos")]
+    #[test]
+    fn gemm_fallback_f64_matches_accelerate() {
+        let mut rng = Rng::new(0xBEEF);
+        for (m, n, k) in SHAPES {
+            let a: Vec<f64> = (0..m * k).map(|_| rng.f64()).collect();
+            let b: Vec<f64> = (0..k * n).map(|_| rng.f64()).collect();
+            let c0: Vec<f64> = (0..m * n).map(|_| rng.f64()).collect();
+            for (alpha, beta) in ALPHA_BETAS {
+                let mut c_fb = c0.clone();
+                let mut c_acc = c0.clone();
+                fallback_gemm_f64(&a, m, k, &b, n, alpha, beta, &mut c_fb, ld(m), ld(k), ld(m));
+                unsafe {
+                    let nt = b'N';
+                    dgemm_(
+                        &nt,
+                        &nt,
+                        &(m as i32),
+                        &(n as i32),
+                        &(k as i32),
+                        &alpha,
+                        a.as_ptr(),
+                        &(ld(m) as i32),
+                        b.as_ptr(),
+                        &(ld(k) as i32),
+                        &beta,
+                        c_acc.as_mut_ptr(),
+                        &(ld(m) as i32),
+                    );
+                }
+                let scale = max_abs(&c_acc).max(1.0);
+                let diff = max_abs_diff(&c_fb, &c_acc);
+                assert!(
+                    diff <= 1e-12 * scale,
+                    "m={m} n={n} k={k} alpha={alpha} beta={beta}: diff={diff}"
+                );
+            }
+        }
+    }
+
+    #[cfg(target_os = "macos")]
+    #[test]
+    fn gemm_fallback_f32_matches_accelerate() {
+        let mut rng = Rng::new(0xBEEF);
+        for (m, n, k) in SHAPES {
+            let a: Vec<f32> = (0..m * k).map(|_| rng.f32()).collect();
+            let b: Vec<f32> = (0..k * n).map(|_| rng.f32()).collect();
+            let c0: Vec<f32> = (0..m * n).map(|_| rng.f32()).collect();
+            for (alpha, beta) in ALPHA_BETAS {
+                let (alpha, beta) = (alpha as f32, beta as f32);
+                let mut c_fb = c0.clone();
+                let mut c_acc = c0.clone();
+                fallback_gemm_f32(&a, m, k, &b, n, alpha, beta, &mut c_fb, ld(m), ld(k), ld(m));
+                unsafe {
+                    let nt = b'N';
+                    sgemm_(
+                        &nt,
+                        &nt,
+                        &(m as i32),
+                        &(n as i32),
+                        &(k as i32),
+                        &alpha,
+                        a.as_ptr(),
+                        &(ld(m) as i32),
+                        b.as_ptr(),
+                        &(ld(k) as i32),
+                        &beta,
+                        c_acc.as_mut_ptr(),
+                        &(ld(m) as i32),
+                    );
+                }
+                let scale = c_acc.iter().fold(0.0f32, |s, v| s.max(v.abs())).max(1.0);
+                let diff = c_fb
+                    .iter()
+                    .zip(&c_acc)
+                    .map(|(u, v)| (u - v).abs())
+                    .fold(0.0f32, f32::max);
+                assert!(
+                    diff <= 1e-4 * scale,
+                    "m={m} n={n} k={k} alpha={alpha} beta={beta}: diff={diff}"
+                );
+            }
+        }
+    }
 }

@@ -97,8 +97,10 @@ def dgetri(lu, piv, lwork=None, overwrite_lu=0):
     pivots = _pivots(piv, n)
 
     if lwork is None:
-        # SciPy's wrapper asks for 3*n unless the caller overrides it.
-        lwork = max(3 * n, n)
+        # The inverse needs an n-by-n workspace; ask the backend for the
+        # optimal size rather than guessing (SciPy's own wrapper queries
+        # dgetri_lwork the same way).
+        lwork = int(dgetri_lwork(n)[0])
     else:
         lwork = int(lwork)
 

@@ -35,6 +35,48 @@ mod spline;
 mod upfirdn_apply;
 mod vq;
 
+#[cfg(test)]
+mod testutil {
+    /// Deterministic dependency-free PRNG (SplitMix64) for the unit tests.
+    pub struct Rng(u64);
+
+    impl Rng {
+        pub fn new(seed: u64) -> Self {
+            Self(seed)
+        }
+
+        fn next_u64(&mut self) -> u64 {
+            self.0 = self.0.wrapping_add(0x9E37_79B9_7F4A_7C15);
+            let mut z = self.0;
+            z = (z ^ (z >> 30)).wrapping_mul(0xBF58_476D_1CE4_E5B9);
+            z = (z ^ (z >> 27)).wrapping_mul(0x94D0_49BB_1331_11EB);
+            z ^ (z >> 31)
+        }
+
+        /// Uniform in [-1, 1).
+        pub fn f64(&mut self) -> f64 {
+            (self.next_u64() >> 11) as f64 * (2.0 / (1u64 << 53) as f64) - 1.0
+        }
+
+        pub fn f32(&mut self) -> f32 {
+            self.f64() as f32
+        }
+    }
+
+    /// Max-norm of the elementwise difference of two equal-length vectors.
+    pub fn max_abs_diff(x: &[f64], y: &[f64]) -> f64 {
+        x.iter()
+            .zip(y)
+            .map(|(u, v)| (u - v).abs())
+            .fold(0.0f64, f64::max)
+    }
+
+    /// Max absolute value.
+    pub fn max_abs(v: &[f64]) -> f64 {
+        v.iter().fold(0.0f64, |s, x| s.max(x.abs()))
+    }
+}
+
 #[pymodule]
 fn _rsscipy_rs(module: &Bound<'_, PyModule>) -> PyResult<()> {
     let py = module.py();
