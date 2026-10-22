@@ -79,7 +79,7 @@ jobs:
         run: |
           python -c "import scicore; print('scicore', scicore.__version__)"
           python -c "import scicore.linalg, scicore.io, scicore.signal, scicore.stats, scicore.spatial, scicore.interpolate, scicore.optimize, scicore.special, scicore.integrate, scicore.sparse, scicore.cluster, scicore.fft, scicore.ndimage, scicore.constants; print('all 14 submodules import OK')"
-          python -m pytest -q tests/test_rust_migrations.py
+          python -m pytest -q test/test_rust_migrations.py
 
   lint:
     name: Lint (rustfmt + clippy)
