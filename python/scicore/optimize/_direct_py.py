@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import (  # noqa: UP035
     Any, Callable, Iterable
 )
