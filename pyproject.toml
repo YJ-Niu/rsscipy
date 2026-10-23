@@ -16,9 +16,9 @@ manifest-dir = "rust"
 module-name = "scicore._scicore_rs"
 
 [project]
-# The distribution is `scicore`; the *import* package stays `scicore` so this
-# remains a drop-in replacement -- `pip install scicore`, then `import scicore`.
-name = "scicore"
+# The distribution is `scirs`; the *import* package stays `scicore` so this
+# remains a drop-in replacement -- `pip install scirs`, then `import scicore`.
+name = "scirs"
 version = "0.1.2"
 license = { file = "LICENSE.txt" }
 description = "Fundamental algorithms for scientific computing in Python, built on rsnumpy"
@@ -68,7 +68,7 @@ classifiers = [
 homepage = "https://github.com/YJ-Niu/scicore"
 documentation = "https://github.com/YJ-Niu/scicore#readme"
 source = "https://github.com/YJ-Niu/scicore"
-download = "https://pypi.org/project/scicore/"
+download = "https://pypi.org/project/scirs/"
 tracker = "https://github.com/YJ-Niu/scicore/issues"
 
 # NOTE: when updating this table, also update `dependency-groups.optional-runtime-deps`
