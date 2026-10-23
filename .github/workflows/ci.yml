@@ -56,7 +56,16 @@ jobs:
       - name: Install build dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install build pytest
+          python -m pip install build pytest maturin
+
+      # Verify the build toolchain is fully in place before building: maturin
+      # (the PEP 517 backend that build_wheel.sh invokes) must be importable and
+      # cargo must be on PATH. Fails fast with a clear error if a build dep is
+      # missing, instead of deep inside the maturin build step.
+      - name: Verify build dependencies
+        run: |
+          python -m maturin --version
+          cargo --version
 
       # scicore's only runtime dependency.  The wheel is installed with
       # --no-deps below, so the smoke test needs rsnumpy from PyPI (its
