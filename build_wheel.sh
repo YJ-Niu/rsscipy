@@ -4,7 +4,7 @@ set -euo pipefail
 # Build scicore with maturin and install it into the local .venv.
 #
 # Usage: ./build_wheel.sh [--release|--debug] [--universal2] [--out-dir DIR]
-#                         [--skip-lint] [--python PYTHON_EXEC]
+#                         [--skip-lint] [--skip-test] [--python PYTHON_EXEC]
 #
 # maturin (the PEP 517 backend declared in pyproject.toml) compiles the pyo3
 # crate `rust/scicore_rs` into the `scicore._scicore_rs` extension and packages
@@ -39,6 +39,7 @@ fi
 
 RELEASE=true
 SKIP_LINT=false
+SKIP_TEST=false
 OUT_DIR="wheelhouse"
 
 # Default python executable; may be overridden by --python or a positional arg
@@ -62,6 +63,7 @@ while [[ $# -gt 0 ]]; do
     --release)   RELEASE=true; shift ;;
     --debug)     RELEASE=false; shift ;;
     --skip-lint) SKIP_LINT=true; shift ;;
+    --skip-test) SKIP_TEST=true; shift ;;
     --universal2) export SCICORE_UNIVERSAL2=1; shift ;;  # accepted for back-compat; maturin builds the host arch
     --out-dir)   OUT_DIR="$2"; shift 2 ;;
     --python)    PYTHON_EXEC="$2"; PYTHON_EXEC_SET=1; shift 2 ;;
@@ -142,6 +144,29 @@ if [[ -n "$WHEEL" && -f "$WHEEL" ]]; then
   fi
 else
   echo "Warning: no .whl file found in $OUT_DIR; skip install." >&2
+fi
+
+# ========== Test: validate the freshly installed wheel ==========
+# Runs the ported verification suites against the wheel just installed into
+# .venv, so a local build is validated immediately (the same suites CI runs).
+# Skip with --skip-test for a wheel-only build.
+if [[ ! -f "$VENV_PY" ]]; then
+  echo "Warning: .venv not found; skipping test suite." >&2
+elif [[ -z "${WHEEL:-}" ]]; then
+  echo "Warning: no wheel was installed; skipping test suite." >&2
+elif $SKIP_TEST; then
+  echo "Skipping test suite (--skip-test)."
+else
+  echo "Running test suite against the installed wheel ..."
+  if ! "$VENV_PY" -m pytest --version >/dev/null 2>&1; then
+    echo "Error: pytest not found in .venv. Install it with: uv pip install pytest" >&2
+    exit 1
+  fi
+  if ! "$VENV_PY" -m pytest -q test/test_rust_migrations.py test/test_scirs; then
+    echo "Error: test suite failed - the built wheel has a regression." >&2
+    exit 1
+  fi
+  echo "  -> test suite passed."
 fi
 
 echo "Done."
