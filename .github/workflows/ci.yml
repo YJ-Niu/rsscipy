@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main, master, dev, main-dev]
 
-# 同一分支/PR 的新推送会取消仍在进行的旧运行，节省 CI 时间。
+# A new push to the same branch/PR cancels the still-running older job.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -25,23 +25,20 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ["3.10", "3.13", "3.14"]
-        include:
-          - os: ubuntu-latest
-            python-version: "3.10"
-          - os: windows-latest
-            python-version: "3.10"
+        # `requires-python = ">=3.12"` in pyproject.toml is the floor here.
+        python-version: ["3.12", "3.13", "3.14"]
     steps:
+      # No git submodules remain: the former `subprojects/` C/C++ submodules were
+      # removed together with the meson build.
       - uses: actions/checkout@v4
 
-      - name: Cache Rust build artifacts
-        uses: actions/cache@v4
+      - uses: actions/cache@v4
         with:
           path: |
             ~/.cargo/registry
             ~/.cargo/git
-            target
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+            rust/target
+          key: ${{ runner.os }}-cargo-${{ hashFiles('rust/Cargo.lock') }}
           restore-keys: |
             ${{ runner.os }}-cargo-
 
@@ -49,21 +46,49 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Build wheel
-        uses: PyO3/maturin-action@v1
-        with:
-          command: build
-          # -i python 绑定到当前矩阵版本；container:'off' 让 Linux 也直接在宿主机构建，
-          # 从而与 setup-python 的版本一致（CI 只需能导入运行，无需 manylinux 合规）。
-          args: --release --out dist -i python
-          container: "off"
-          sccache: "true"
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Test Rust kernels
+        run: cargo test --workspace
+        working-directory: rust
+
+      - name: Install build dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install build pytest maturin
+
+      # Verify the build toolchain is fully in place before building: maturin
+      # (the PEP 517 backend that build_wheel.sh invokes) must be importable and
+      # cargo must be on PATH. Fails fast with a clear error if a build dep is
+      # missing, instead of deep inside the maturin build step.
+      - name: Verify build dependencies
+        run: |
+          python -m maturin --version
+          cargo --version
+
+      # scicore's only runtime dependency.  The wheel is installed with
+      # --no-deps below, so the smoke test needs rsnumpy from PyPI (its
+      # universal2 macOS wheels cover Intel + Apple Silicon).
+      - name: Install rsnumpy
+        run: python -m pip install rsnumpy
+
+      # --skip-lint: the dedicated `lint` job already runs rustfmt + clippy, so
+      # the per-cell build skips the (cached) gates to stay fast.
+      - name: Build the wheel
+        shell: bash
+        run: ./build_wheel.sh --out-dir dist --skip-lint
 
       - name: Install built wheel
-        run: python -m pip install --no-index --find-links dist rsnumpy
+        shell: bash
+        run: python -m pip install --no-deps --force-reinstall dist/*.whl
 
-      - name: Run smoke test
-        run: python test/run_test.py
+      - name: Smoke test
+        shell: bash
+        run: |
+          python -c "import scicore; print('scicore', scicore.__version__)"
+          python -c "import scicore.linalg, scicore.io, scicore.signal, scicore.stats, scicore.spatial, scicore.interpolate, scicore.optimize, scicore.special, scicore.integrate, scicore.sparse, scicore.cluster, scicore.fft, scicore.ndimage, scicore.constants; print('all 14 submodules import OK')"
+          python -m pytest -q test/test_rust_migrations.py
 
   lint:
     name: Lint (rustfmt + clippy)
@@ -71,19 +96,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # pyo3 的 build script 需要一个 Python 解释器来探测 ABI。
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
-
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
 
       - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: rust
 
       - name: Check formatting
         run: cargo fmt --all -- --check
+        working-directory: rust
 
       - name: Run clippy
-        run: cargo clippy -- -D warnings
+        run: cargo clippy --all-targets -- -D warnings
+        working-directory: rust

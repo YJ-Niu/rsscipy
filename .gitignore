@@ -4,6 +4,7 @@ __pycache__/
 *.egg-info/
 .eggs/
 build/
+wheelhouse/
 dist/
 .installed.cfg
 *.egg
@@ -24,14 +25,13 @@ build*/
 .skip-subprojects*
 subprojects/packagecache/
 install/
-
 # --- Rust -----------------------------------------------------------------
 rust/target/
 target/
 # 由 tools/build_rust.py 生成，随 meson 安装进 wheel，不入库
-scipy/**/*.so
-scipy/**/*.dylib
-scipy/**/*.pyd
+python/scicore/**/*.so
+python/scicore/**/*.dylib
+python/scicore/**/*.pyd
 
 # --- 文档构建 -------------------------------------------------------------
 doc/build/
@@ -43,7 +43,11 @@ doc/_build/
 .vscode/
 *.swp
 *~
+*.log
 
 # --- 基准 / 性能数据 ------------------------------------------------------
 benchmarks/.asv/
 .asv/
+
+# --- 构建产物 -------------------------------------------------------------
+wheelhouse/

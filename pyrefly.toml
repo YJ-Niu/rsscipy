@@ -19,7 +19,7 @@ ignore-missing-imports = [
     "convert",
     "tempita",
     # extension modules with no stubs
-    "scipy._lib._fpumode",
+    "scipy._scicore_rs",
     "scipy._lib._uarray._uarray",
     "scipy.fft._duccfft.pyduccfft",
     "scipy.integrate._dop",

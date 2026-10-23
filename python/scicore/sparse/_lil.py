@@ -1,0 +1,869 @@
+"""List of Lists sparse matrix class
+"""
+
+__docformat__ = "restructuredtext en"
+
+__all__ = ['lil_array', 'lil_matrix', 'isspmatrix_lil']
+
+from bisect import bisect_left
+
+import rsnumpy as np
+import os
+from warnings import warn
+
+from ._matrix import spmatrix
+from ._base import _spbase, sparray, issparse
+from ._index import IndexMixin, INT_TYPES, _broadcast_arrays, _validate_indices
+from ._sputils import (getdtype, isshape, isscalarlike, upcast_scalar,
+                       check_shape)
+from . import _csparsetools
+
+
+class _lil_base(_spbase, IndexMixin):
+    _format = 'lil'
+
+    def __init__(self, arg1, shape=None, dtype=None, copy=False, *, maxprint=None):
+        _spbase.__init__(self, arg1, maxprint=maxprint)
+        self.dtype = getdtype(dtype, arg1, default=float)
+
+        # First get the shape
+        if issparse(arg1):
+            if arg1.format == "lil" and copy:
+                A = arg1.copy()
+            else:
+                A = arg1.tolil()
+
+            if dtype is not None:
+                newdtype = getdtype(dtype)
+                A = A.astype(newdtype, copy=False)
+
+            self._shape = check_shape(A.shape)
+            self.dtype = A.dtype
+            self.rows = A.rows
+            self.data = A.data
+        elif isinstance(arg1,tuple):
+            if isshape(arg1):
+                if shape is not None:
+                    raise ValueError('invalid use of shape parameter')
+                M, N = arg1
+                self._shape = check_shape((M, N))
+                self.rows = np.empty((M,), dtype=object)
+                self.data = np.empty((M,), dtype=object)
+                for i in range(M):
+                    self.rows[i] = []
+                    self.data[i] = []
+            else:
+                raise TypeError('unrecognized lil_array constructor usage')
+        else:
+            # assume A is dense
+            try:
+                A = self._ascontainer(arg1)
+            except TypeError as e:
+                raise TypeError('unsupported matrix type') from e
+            if isinstance(self, sparray) and A.ndim != 2:
+                raise ValueError(f"LIL arrays don't support {A.ndim}D input. Use 2D")
+            A = self._csr_container(A, dtype=dtype).tolil()
+
+            self._shape = check_shape(A.shape)
+            self.dtype = getdtype(A.dtype)
+            self.rows = A.rows
+            self.data = A.data
+
+    def __iadd__(self,other):
+        self[:,:] = self + other
+        return self
+
+    def __isub__(self,other):
+        self[:,:] = self - other
+        return self
+
+    def __imul__(self,other):
+        if isscalarlike(other):
+            self[:,:] = self * other
+            return self
+        else:
+            return NotImplemented
+
+    def __itruediv__(self,other):
+        if isscalarlike(other):
+            self[:,:] = self / other
+            return self
+        else:
+            return NotImplemented
+
+    # Whenever the dimensions change, empty lists should be created for each
+    # row
+
+    def _getnnz(self, axis=None):
+        if axis is None:
+            return sum([len(rowvals) for rowvals in self.data])
+        if axis < 0:
+            axis += 2
+        if axis == 0:
+            out = np.zeros(self.shape[1], dtype=np.intp)
+            for row in self.rows:
+                out[row] += 1
+            return out
+        elif axis == 1:
+            return np.array([len(rowvals) for rowvals in self.data], dtype=np.intp)
+        else:
+            raise ValueError('axis out of bounds')
+
+    _getnnz.__doc__ = _spbase._getnnz.__doc__
+
+    def count_nonzero(self, axis=None):
+        if axis is None:
+            return sum(np.count_nonzero(rowvals) for rowvals in self.data)
+
+        if axis < 0:
+            axis += 2
+        if axis == 0:
+            out = np.zeros(self.shape[1], dtype=np.intp)
+            for row, data in zip(self.rows, self.data):
+                mask = [c for c, d in zip(row, data) if d != 0]
+                out[mask] += 1
+            return out
+        elif axis == 1:
+            return np.array(
+                [np.count_nonzero(rowvals) for rowvals in self.data], dtype=np.intp,
+            )
+        else:
+            raise ValueError('axis out of bounds')
+
+    count_nonzero.__doc__ = _spbase.count_nonzero.__doc__
+
+    def getrowview(self, i):
+        """Returns a view of the 'i'th row (without copying).
+
+        Parameters
+        ----------
+        i : int
+            Row to return view of.
+
+        Returns
+        -------
+        lil_array or lil_matrix
+            A view of the 'i'th row.
+        """
+        new = self._lil_container((1, self.shape[1]), dtype=self.dtype)
+        new.rows[0] = self.rows[i]
+        new.data[0] = self.data[i]
+        return new
+
+    def getrow(self, i):
+        """Returns a copy of the 'i'th row.
+
+        Parameters
+        ----------
+        i : int
+            Row to return a copy of.
+
+        Returns
+        -------
+        lil_array or lil_matrix
+            A copy of the 'i'th row.
+        """
+        M, N = self.shape
+        if i < 0:
+            i += M
+        if i < 0 or i >= M:
+            raise IndexError('row index out of bounds')
+        new = self._lil_container((1, N), dtype=self.dtype)
+        new.rows[0] = self.rows[i][:]
+        new.data[0] = self.data[i][:]
+        return new
+
+    def __getitem__(self, key):
+        # Fast path for simple (int, int) indexing.
+        if (isinstance(key, tuple) and len(key) == 2 and
+                isinstance(key[0], INT_TYPES) and
+                isinstance(key[1], INT_TYPES)):
+            # lil_get1 handles validation for us.
+            return self._get_intXint(*key)
+        # Everything else takes the normal path.
+        return IndexMixin.__getitem__(self, key)
+
+    def _get_intXint(self, row, col):
+        v = _csparsetools.lil_get1(self.shape[0], self.shape[1], self.rows,
+                                   self.data, row, col)
+        return self.dtype.type(v)
+
+    def _get_sliceXint(self, row, col):
+        row = range(*row.indices(self.shape[0]))
+        return self._get_row_ranges(row, slice(col, col+1))
+
+    def _get_arrayXint(self, row, col):
+        res = self._get_row_ranges(row.ravel(), slice(col, col+1))
+        if row.ndim > 1:
+            return res.reshape(row.shape)
+        return res
+
+    def _get_intXslice(self, row, col):
+        return self._get_row_ranges((row,), col)
+
+    def _get_sliceXslice(self, row, col):
+        row = range(*row.indices(self.shape[0]))
+        return self._get_row_ranges(row, col)
+
+    def _get_arrayXslice(self, row, col):
+        return self._get_row_ranges(row, col)
+
+    def _get_intXarray(self, row, col):
+        row = np.array(row, dtype=col.dtype, ndmin=1)
+        return self._get_columnXarray(row, col)
+
+    def _get_sliceXarray(self, row, col):
+        row = np.arange(*row.indices(self.shape[0]))
+        return self._get_columnXarray(row, col)
+
+    def _get_columnXarray(self, row, col):
+        # outer indexing
+        row, col = _broadcast_arrays(row[:,None], col)
+        return self._get_arrayXarray(row, col)
+
+    def _get_arrayXarray(self, row, col):
+        # inner indexing
+        i, j = map(np.atleast_2d, _prepare_index_for_memoryview(row, col))
+        new = self._lil_container(i.shape, dtype=self.dtype)
+        _csparsetools.lil_fancy_get(self.shape[0], self.shape[1],
+                                    self.rows, self.data,
+                                    new.rows, new.data,
+                                    i, j)
+        return new
+
+    def _get_row_ranges(self, rows, col_slice):
+        """
+        Fast path for indexing in the case where column index is slice.
+
+        This gains performance improvement over brute force by more
+        efficient skipping of zeros, by accessing the elements
+        column-wise in order.
+
+        Parameters
+        ----------
+        rows : sequence or range
+            Rows indexed. If range, must be within valid bounds.
+        col_slice : slice
+            Columns indexed
+
+        """
+        j_start, j_stop, j_stride = col_slice.indices(self.shape[1])
+        col_range = range(j_start, j_stop, j_stride)
+        nj = len(col_range)
+        new = self._lil_container((len(rows), nj), dtype=self.dtype)
+
+        _csparsetools.lil_get_row_ranges(self.shape[0], self.shape[1],
+                                         self.rows, self.data,
+                                         new.rows, new.data,
+                                         rows,
+                                         j_start, j_stop, j_stride, nj)
+
+        return new
+
+    def _set_intXint(self, row, col, x):
+        _csparsetools.lil_insert(self.shape[0], self.shape[1], self.rows,
+                                 self.data, row, col, x)
+
+    def _set_intXslice_sparse(self, row, col, x):
+        self._set_row_ranges_sparse(range(row, row + 1), col, x)
+
+    def _set_sliceXint_sparse(self, row, col, x):
+        row = range(*row.indices(self.shape[0]))
+        self._set_row_ranges_sparse(row, slice(col, col + 1), x)
+
+    def _set_sliceXslice_sparse(self, row, col, x):
+        # Fast path for full-matrix sparse assignment.
+        if row == slice(None) and col == slice(None) and x.shape == self.shape:
+            x = self._lil_container(x, dtype=self.dtype)
+            self.rows = x.rows
+            self.data = x.data
+            return
+        row = range(*row.indices(self.shape[0]))
+        self._set_row_ranges_sparse(row, col, x)
+
+    def _set_arrayXint_sparse(self, row, col, x):
+        self._set_row_ranges_sparse(row.ravel(), slice(col, col + 1), x)
+
+    def _set_intXarray_sparse(self, row, col, x):
+        row = np.array(row, dtype=col.dtype, ndmin=1)
+        self._set_columnXarray_sparse(row, col.ravel(), x)
+
+    def _set_arrayXslice_sparse(self, row, col, x):
+        self._set_row_ranges_sparse(row.ravel(), col, x)
+
+    def _set_sliceXarray_sparse(self, row, col, x):
+        row = np.arange(*row.indices(self.shape[0]), dtype=np.intp)
+        self._set_columnXarray_sparse(row, col.ravel(), x)
+
+    def _set_arrayXarray(self, row, col, x):
+        i, j, x = map(np.atleast_2d, _prepare_index_for_memoryview(row, col, x))
+        _csparsetools.lil_fancy_set(self.shape[0], self.shape[1],
+                                    self.rows, self.data,
+                                    i, j, x)
+
+    def _set_arrayXarray_sparse(self, row, col, x):
+        # inner indexing
+        rhs_row, rhs_col, rhs_data = _prepare_sparse_rhs(
+            x, row.shape[0], row.shape[1], self.dtype
+        )
+        zero = np.broadcast_to(np.zeros((1,1), dtype=self.dtype), row.shape)
+        zero.flags.writeable = True  # Make compatible with Cython memoryview.
+        self._set_arrayXarray(row, col, zero)
+        if rhs_data.size > 0:
+            self._set_arrayXarray(row[rhs_row, rhs_col], col[rhs_row, rhs_col],
+                                  rhs_data)
+
+    def _clear_sparsity_slice(self, row_idxs, col_start, col_stop, col_stride):
+        # Clear the sparsity pattern row by row, for the given column slice.
+        if col_stride > 0:
+            col_lo, col_hi = col_start, col_stop
+        else:
+            col_lo, col_hi = col_stop + 1, col_start + 1
+        unit_stride = col_stride in (1, -1)
+        # row_idxs is an arbitrary iterable, so avoid materializing nonempty_rows.
+        for r in row_idxs:
+            if (curr_row := self.rows[r]):
+                lo = bisect_left(curr_row, col_lo)
+                hi = bisect_left(curr_row, col_hi, lo)
+                if lo == hi:
+                    continue
+                curr_data = self.data[r]
+                if unit_stride:
+                    del curr_row[lo:hi]
+                    del curr_data[lo:hi]
+                else:
+                    for k in reversed(range(lo, hi)):
+                        if (curr_row[k] - col_start) % col_stride == 0:
+                            del curr_row[k]
+                            del curr_data[k]
+
+    def _clear_sparsity_outer(self, row_idxs, col_idxs):
+        # Clear the sparsity pattern row by row, for all columns.
+        nonempty_row_idxs = [r for r in row_idxs if self.rows[r]]
+        if not nonempty_row_idxs:
+          return
+
+        # If we have many more column indices to clear than actual columns,
+        # avoid creating a set of unique column indices to check against.
+        if (len(col_idxs) > 1024 and
+                sum(len(self.rows[r]) for r in nonempty_row_idxs) < 32):
+            def should_delete(row_k):
+                return (col_idxs == row_k).any()
+        else:
+            uniq_cols = set(col_idxs.tolist())
+            def should_delete(row_k):
+                return row_k in uniq_cols
+
+        for r in nonempty_row_idxs:
+            curr_row = self.rows[r]
+            curr_data = self.data[r]
+            for k in reversed(range(len(curr_row))):
+                if should_delete(curr_row[k]):
+                    del curr_row[k]
+                    del curr_data[k]
+
+    def _set_columnXarray_sparse(self, row, col, x):
+        # outer indexing
+        rhs_row, rhs_col, rhs_data = _prepare_sparse_rhs(
+            x, row.shape[0], col.shape[0], self.dtype
+        )
+        self._clear_sparsity_outer(row, col)
+        if rhs_data.size > 0:
+            self._set_arrayXarray(row[rhs_row], col[rhs_col], rhs_data)
+
+    def _set_row_ranges_sparse(self, rows, col_slice, x):
+        j_start, j_stop, j_stride = col_slice.indices(self.shape[1])
+        ncols = len(range(j_start, j_stop, j_stride))
+        nrows = len(rows)
+        if nrows == 0 or ncols == 0:
+            return
+        rhs_row, rhs_col, rhs_data = _prepare_sparse_rhs(
+            x, nrows, ncols, self.dtype
+        )
+        self._clear_sparsity_slice(rows, j_start, j_stop, j_stride)
+        if rhs_data.size > 0:
+            if isinstance(rows, range):
+                target_rows = rows.start + rows.step * rhs_row
+            else:
+                target_rows = rows[rhs_row]
+            target_cols = j_start + j_stride * rhs_col
+            self._set_arrayXarray(target_rows, target_cols, rhs_data)
+
+    def __setitem__(self, key, x):
+        # Fast path for simple (int, int) indexing.
+        if isinstance(key, tuple) and len(key) == 2:
+            row, col = key
+            if isinstance(row, INT_TYPES) and isinstance(col, INT_TYPES):
+                if issparse(x):
+                    x = x.toarray()
+                if isinstance(x, np.ndarray):
+                    x = x.item()
+                x = self.dtype.type(x)
+                if x.size > 1:
+                    raise ValueError("Trying to assign a sequence to an item")
+                return self._set_intXint(row, col, x)
+        # Sparse assignment handled separately.
+        if issparse(x):
+            index, _, _, _ = _validate_indices(key, self.shape, self.format)
+            if 0 in x.shape:
+                return
+            row, col = index
+            return self._set_sparse(row, col, x)
+        # Everything else takes the normal path.
+        IndexMixin.__setitem__(self, key, x)
+
+    def _set_sparse(self, row, col, x):
+        """Dispatch to one of the _set_<type>X<type>_sparse methods."""
+        if isinstance(row, INT_TYPES):
+            if isinstance(col, INT_TYPES):
+                if x.shape[0] * x.shape[1] != 1:
+                    raise ValueError("Trying to assign a sequence to an item")
+                val = self.dtype.type(x.toarray().item())
+                return self._set_intXint(row, col, val)
+            elif isinstance(col, slice):
+                return self._set_intXslice_sparse(row, col, x)
+            else:
+                return self._set_intXarray_sparse(row, col, x)
+        elif isinstance(row, slice):
+            if isinstance(col, INT_TYPES):
+                return self._set_sliceXint_sparse(row, col, x)
+            elif isinstance(col, slice):
+                return self._set_sliceXslice_sparse(row, col, x)
+            else:
+                return self._set_sliceXarray_sparse(row, col, x)
+        # row must be an array.
+        if isinstance(col, INT_TYPES):
+            return self._set_arrayXint_sparse(row, col, x)
+        elif isinstance(col, slice):
+            return self._set_arrayXslice_sparse(row, col, x)
+        # col must be an array.
+        if row.ndim == 2 and row.shape[1] == 1 and (col.ndim == 1 or col.shape[0] == 1):
+            return self._set_columnXarray_sparse(row[:, 0], col.reshape(-1), x)
+        if col.ndim == 2 and col.shape[1] == 1 and (row.ndim == 1 or row.shape[0] == 1):
+            return self._set_columnXarray_sparse(row.reshape(-1), col[:, 0], x.T)
+        row, col = _broadcast_arrays(row, col)
+        if row.shape != col.shape:
+            raise IndexError("row and column index arrays mismatch")
+        if row.ndim == 1:
+            row = row[None]
+            col = col[None]
+        return self._set_arrayXarray_sparse(row, col, x)
+
+    def _mul_scalar(self, other):
+        if other == 0:
+            # Multiply by zero: return the zero matrix
+            new = self._lil_container(self.shape, dtype=self.dtype)
+        else:
+            res_dtype = upcast_scalar(self.dtype, other)
+
+            new = self.astype(res_dtype)  # sure to make a copy
+            # Multiply this scalar by every element.
+            for j, rowvals in enumerate(new.data):
+                new.data[j] = [val*other for val in rowvals]
+        return new
+
+    def __truediv__(self, other):           # self / other
+        if isscalarlike(other):
+            new = self.copy()
+            new.dtype = np.result_type(self, other)
+            # Divide every element by this scalar
+            for j, rowvals in enumerate(new.data):
+                new.data[j] = [val/other for val in rowvals]
+            return new
+        else:
+            return self.tocsr() / other
+
+    def copy(self):
+        M, N = self.shape
+        new = self._lil_container(self.shape, dtype=self.dtype)
+        # This is ~14x faster than calling deepcopy() on rows and data.
+        _csparsetools.lil_get_row_ranges(M, N, self.rows, self.data,
+                                         new.rows, new.data, range(M),
+                                         0, N, 1, N)
+        return new
+
+    copy.__doc__ = _spbase.copy.__doc__
+
+    def reshape(self, *shape, order="C", copy=False):
+        shape = check_shape(shape, self.shape)
+
+        # Return early if reshape is not required
+        if shape == self.shape:
+            if copy:
+                return self.copy()
+            else:
+                return self
+
+        new = self._lil_container(shape, dtype=self.dtype)
+
+        if order == 'C':
+            ncols = self.shape[1]
+            for i, row in enumerate(self.rows):
+                for col, j in enumerate(row):
+                    new_r, new_c = np.unravel_index(i * ncols + j, shape)
+                    new[new_r, new_c] = self[i, j]
+        elif order == 'F':
+            nrows = self.shape[0]
+            for i, row in enumerate(self.rows):
+                for col, j in enumerate(row):
+                    new_r, new_c = np.unravel_index(i + j * nrows, shape, order)
+                    new[new_r, new_c] = self[i, j]
+        else:
+            raise ValueError("'order' must be 'C' or 'F'")
+
+        return new
+
+    reshape.__doc__ = _spbase.reshape.__doc__
+
+    def resize(self, *shape):
+        shape = check_shape(shape)
+        new_M, new_N = shape
+        M, N = self.shape
+
+        if new_M < M:
+            self.rows = self.rows[:new_M]
+            self.data = self.data[:new_M]
+        elif new_M > M:
+            self.rows = np.resize(self.rows, new_M)
+            self.data = np.resize(self.data, new_M)
+            for i in range(M, new_M):
+                self.rows[i] = []
+                self.data[i] = []
+
+        if new_N < N:
+            for row, data in zip(self.rows, self.data):
+                trunc = bisect_left(row, new_N)
+                del row[trunc:]
+                del data[trunc:]
+
+        self._shape = shape
+
+    resize.__doc__ = _spbase.resize.__doc__
+
+    def toarray(self, order=None, out=None):
+        d = self._process_toarray_args(order, out)
+        for i, row in enumerate(self.rows):
+            for pos, j in enumerate(row):
+                d[i, j] = self.data[i][pos]
+        return d
+
+    toarray.__doc__ = _spbase.toarray.__doc__
+
+    def transpose(self, axes=None, copy=False):
+        return self.tocsr(copy=copy).transpose(axes=axes, copy=False).tolil(copy=False)
+
+    transpose.__doc__ = _spbase.transpose.__doc__
+
+    def tolil(self, copy=False):
+        if copy:
+            return self.copy()
+        else:
+            return self
+
+    tolil.__doc__ = _spbase.tolil.__doc__
+
+    def tocsr(self, copy=False):
+        M, N = self.shape
+        if M == 0 or N == 0:
+            return self._csr_container((M, N), dtype=self.dtype)
+
+        # construct indptr array
+        if M*N <= np.iinfo(np.int32).max:
+            # fast path: it is known that 64-bit indexing will not be needed.
+            idx_dtype = np.int32
+            indptr = np.empty(M + 1, dtype=idx_dtype)
+            indptr[0] = 0
+            _csparsetools.lil_get_lengths(self.rows, indptr[1:])
+            np.cumsum(indptr, out=indptr)
+            nnz = indptr[-1]
+        else:
+            idx_dtype = self._get_index_dtype(maxval=N)
+            lengths = np.empty(M, dtype=idx_dtype)
+            _csparsetools.lil_get_lengths(self.rows, lengths)
+            nnz = lengths.sum(dtype=np.int64)
+            idx_dtype = self._get_index_dtype(maxval=max(N, nnz))
+            indptr = np.empty(M + 1, dtype=idx_dtype)
+            indptr[0] = 0
+            np.cumsum(lengths, dtype=idx_dtype, out=indptr[1:])
+
+        indices = np.empty(nnz, dtype=idx_dtype)
+        data = np.empty(nnz, dtype=self.dtype)
+        _csparsetools.lil_flatten_to_array(self.rows, indices)
+        _csparsetools.lil_flatten_to_array(self.data, data)
+
+        # init csr matrix
+        return self._csr_container((data, indices, indptr), shape=self.shape)
+
+    tocsr.__doc__ = _spbase.tocsr.__doc__
+
+
+def _prepare_index_for_memoryview(i, j, x=None):
+    """
+    Convert index and data arrays to form suitable for passing to the
+    Cython fancy getset routines.
+
+    The conversions are necessary since to (i) ensure the integer
+    index arrays are in one of the accepted types, and (ii) to ensure
+    the arrays are writable so that Cython memoryview support doesn't
+    choke on them.
+
+    Parameters
+    ----------
+    i, j
+        Index arrays
+    x : optional
+        Data arrays
+
+    Returns
+    -------
+    i, j, x
+        Re-formatted arrays (x is omitted, if input was None)
+
+    """
+    if i.dtype > j.dtype:
+        j = j.astype(i.dtype)
+    elif i.dtype < j.dtype:
+        i = i.astype(j.dtype)
+
+    if not i.flags.writeable or i.dtype not in (np.int32, np.int64):
+        i = i.astype(np.intp)
+    if not j.flags.writeable or j.dtype not in (np.int32, np.int64):
+        j = j.astype(np.intp)
+
+    if x is not None:
+        if not x.flags.writeable:
+            x = x.copy()
+        return i, j, x
+    else:
+        return i, j
+
+
+def _prepare_sparse_rhs(x, nrows, ncols, dtype):
+    """Convert sparse `x` into broadcasted (i, j, data) for assignment."""
+    x = x.tocoo(copy=False).reshape(x._shape_as_2d, copy=False)
+    if ncols == 1 and x.shape == (1, nrows):
+        x = x.T
+    broadcast_row = x.shape[0] == 1 and nrows != 1
+    broadcast_col = x.shape[1] == 1 and ncols != 1
+    if not ((broadcast_row or x.shape[0] == nrows) and
+            (broadcast_col or x.shape[1] == ncols)):
+        raise ValueError(f"shape mismatch in assignment: {x.shape} vs {(nrows,ncols)}")
+    if not x.has_canonical_format:
+        x = x.copy()
+        x.sum_duplicates()
+    if x.data.size == 0 or nrows == 0 or ncols == 0:
+        idx = np.empty(0, dtype=np.intp)
+        data = np.empty(0, dtype=dtype)
+        return idx, idx, data
+    row = x.row
+    col = x.col
+    data = x.data.astype(dtype, copy=False)
+    if broadcast_row:
+        row = np.repeat(np.arange(nrows, dtype=np.intp), len(row))
+        col = np.tile(col, nrows)
+        data = np.tile(data, nrows)
+    if broadcast_col:
+        row = np.repeat(row, ncols)
+        col = np.tile(np.arange(ncols, dtype=np.intp), len(col))
+        data = np.repeat(data, ncols)
+    return row, col, data
+
+
+def isspmatrix_lil(x):
+    """Is `x` of lil_matrix type?
+
+    .. warning::
+
+       SciPy sparse is shifting from a sparse matrix interface to a sparse
+       array interface. In the next few releases we expect to deprecate the
+       sparse matrix interface. For documentation of the matrix
+       interface, see the :ref:`spmatrix interface docs <spmatrix_api>`.
+       For guidance on converting existing code to sparse arrays, see
+       :ref:`Migration from spmatrix to sparray <migration_to_sparray>`.
+
+    Parameters
+    ----------
+    x
+        object to check for being a lil matrix
+
+    Returns
+    -------
+    bool
+        True if `x` is a lil matrix, False otherwise
+
+    Examples
+    --------
+    >>> from scicore.sparse import lil_array, lil_matrix, coo_matrix, isspmatrix_lil
+    >>> isspmatrix_lil(lil_matrix([[5]]))  # doctest: +SKIP
+    True
+    >>> isspmatrix_lil(lil_array([[5]]))  # doctest: +SKIP
+    False
+    >>> isspmatrix_lil(coo_matrix([[5]]))  # doctest: +SKIP
+    False
+    """
+    msg = """`isspmatrix_lil` is being replaced by `self.format == "lil" and issparse`.
+
+        All sparse matrix classes (*_matrix) are being deprecated in favor of
+        sparse arrays (*_array), which have a NumPy-compatible API, e.g. `*`
+        is elementwise multiplication. See the spmatrix to sparray migration guide
+        https://docs.scipy.org/doc/scipy/reference/sparse.migration_to_sparray.html
+
+        The isspmatrix_lil function will be removed no earlier than v2.2.
+        """
+    prefixes = (os.path.dirname(__file__),)
+    warn(msg, category=DeprecationWarning, skip_file_prefixes=prefixes)
+    return isinstance(x, lil_matrix)
+
+
+# This namespace class separates array from matrix with isinstance
+class lil_array(_lil_base, sparray):
+    """
+    Row-based LIst of Lists sparse array.
+
+    This is a structure for constructing sparse arrays incrementally.
+    Note that inserting a single item can take linear time in the worst case;
+    to construct the array efficiently, make sure the items are pre-sorted by
+    index, per row.
+
+    This can be instantiated in several ways:
+        lil_array(D)
+            where D is a 2-D ndarray
+
+        lil_array(S)
+            with another sparse array or matrix S (equivalent to S.tolil())
+
+        lil_array((M, N), [dtype])
+            to construct an empty array with shape (M, N)
+            dtype is optional, defaulting to dtype='d'.
+
+    Attributes
+    ----------
+    data : ndarray
+        LIL format data array of the array
+    rows : ndarray
+        LIL format row index array of the array
+    dtype : dtype
+        Data type of the array
+    shape : 2-tuple
+        Shape of the array
+    ndim : int
+        Number of dimensions (this is always 2)
+    format : str
+        Three letter code for the format of the array storage, e.g. 'lil'
+    nnz : int
+        Number of values stored in the array
+    size : int
+        Number of values stored in the array
+    T : lil_array
+        The transpose of the array
+    mT : lil_array
+        The matrix transpose of the array
+
+    Notes
+    -----
+    Sparse arrays can be used in arithmetic operations: they support
+    addition, subtraction, multiplication, division, and matrix power.
+
+    Advantages of the LIL format
+        - supports flexible slicing
+        - changes to the array sparsity structure are efficient
+
+    Disadvantages of the LIL format
+        - arithmetic operations LIL + LIL are slow (consider CSR or CSC)
+        - slow column slicing (consider CSC)
+        - slow matrix vector products (consider CSR or CSC)
+
+    Intended Usage
+        - LIL is a convenient format for constructing sparse arrays
+        - once an array has been constructed, convert to CSR or
+          CSC format for fast arithmetic and matrix vector operations
+        - consider using the COO format when constructing large arrays
+
+    Data Structure
+        - An array (``self.rows``) of rows, each of which is a sorted
+          list of column indices of non-zero elements.
+        - The corresponding nonzero values are stored in similar
+          fashion in ``self.data``.
+
+    """  # numpydoc ignore=PR01
+
+
+class lil_matrix(spmatrix, _lil_base):
+    """
+    Row-based LIst of Lists sparse matrix.
+
+    This is a structure for constructing sparse matrices incrementally.
+    Note that inserting a single item can take linear time in the worst case;
+    to construct the matrix efficiently, make sure the items are pre-sorted by
+    index, per row.
+
+    .. warning::
+
+       SciPy sparse is shifting from a sparse matrix interface to a sparse
+       array interface. In the next few releases we expect to deprecate the
+       sparse matrix interface. For documentation of the matrix
+       interface, see the :ref:`spmatrix interface docs <spmatrix_api>`.
+       For guidance on converting existing code to sparse arrays, see
+       :ref:`Migration from spmatrix to sparray <migration_to_sparray>`.
+
+    This can be instantiated in several ways:
+        lil_matrix(D)
+            where D is a 2-D ndarray
+
+        lil_matrix(S)
+            with another sparse array or matrix S (equivalent to S.tolil())
+
+        lil_matrix((M, N), [dtype])
+            to construct an empty matrix with shape (M, N)
+            dtype is optional, defaulting to dtype='d'.
+
+    Attributes
+    ----------
+    data : ndarray
+        LIL format data array of the matrix
+    rows : ndarray
+        LIL format row index array of the matrix
+    dtype : dtype
+        Data type of the matrix
+    shape : 2-tuple
+        Shape of the matrix
+    ndim : int
+        Number of dimensions (this is always 2)
+    format : str
+        Three letter code for the format of the matrix storage, e.g. 'lil'
+    nnz : int
+        Number of values stored in the matrix
+    size : int
+        Number of values stored in the matrix
+    T : lil_matrix
+        The transpose of the matrix
+    mT : lil_array
+        The transpose of the matrix
+
+    Notes
+    -----
+    Sparse matrices can be used in arithmetic operations: they support
+    addition, subtraction, multiplication, division, and matrix power.
+
+    Advantages of the LIL format
+        - supports flexible slicing
+        - changes to the matrix sparsity structure are efficient
+
+    Disadvantages of the LIL format
+        - arithmetic operations LIL + LIL are slow (consider CSR or CSC)
+        - slow column slicing (consider CSC)
+        - slow matrix vector products (consider CSR or CSC)
+
+    Intended Usage
+        - LIL is a convenient format for constructing sparse matrices
+        - once a matrix has been constructed, convert to CSR or
+          CSC format for fast arithmetic and matrix vector operations
+        - consider using the COO format when constructing large matrices
+
+    Data Structure
+        - An array (``self.rows``) of rows, each of which is a sorted
+          list of column indices of non-zero elements.
+        - The corresponding nonzero values are stored in similar
+          fashion in ``self.data``.
+
+    """
