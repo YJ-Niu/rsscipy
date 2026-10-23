@@ -3,15 +3,57 @@ SciCore
 
 .. image:: https://img.shields.io/badge/powered%20by-rsnumpy-blue.svg
   :target: https://github.com/YJ-Niu/rsnumpy
+.. image:: https://img.shields.io/pypi/v/scirs
+  :target: https://pypi.org/project/scirs/
+.. image:: https://img.shields.io/badge/python-3.12%2B-blue
+.. image:: https://img.shields.io/badge/built%20with-Rust-orange
+  :target: https://www.rust-lang.org/
 
 **SciCore** is a port of `SciPy <https://github.com/scipy/scipy>`__ onto
 `rsnumpy <https://github.com/YJ-Niu/rsnumpy>`__ — a Rust-backed, NumPy-compatible
-array library.
+array library. It keeps SciPy's algorithms and API, migrates compiled kernels to
+Rust incrementally, and swaps the array backend from NumPy to rsnumpy.
 
 The import name stays ``scicore``, so it is a drop-in replacement::
 
     pip install scirs
     python -c "import scicore.linalg"
+
+Quick Start
+-----------
+
+Install from PyPI::
+
+    pip install scirs
+
+Use any SciCore module the same way you would use its SciPy counterpart::
+
+    import scicore.linalg as la
+    import scicore.optimize as opt
+    import scicore.signal as sig
+    import scicore.stats as stats
+
+Modules
+-------
+
+SciCore mirrors SciPy's module structure:
+
+- ``scicore.linalg`` — linear algebra (BLAS/LAPACK)
+- ``scicore.optimize`` — optimization and root finding
+- ``scicore.signal`` — signal processing
+- ``scicore.stats`` — statistics
+- ``scicore.integrate`` — integration and ODEs
+- ``scicore.interpolate`` — interpolation
+- ``scicore.fft`` / ``scicore.fftpack`` — Fourier transforms
+- ``scicore.sparse`` — sparse matrices
+- ``scicore.spatial`` — spatial structures and distances
+- ``scicore.special`` — special functions
+- ``scicore.ndimage`` — n-dimensional image processing
+- ``scicore.cluster`` — clustering
+- ``scicore.io`` — I/O utilities
+- ``scicore.datasets`` — sample datasets
+- ``scicore.constants`` — physical constants
+- ``scicore.differentiate`` — differentiation
 
 Why
 ---
@@ -25,28 +67,20 @@ knowing up front:
 - **No Python NumPy dependency at runtime.** Arrays are rsnumpy arrays. NumPy
   remains a build-time dependency for the C/Cython extensions that have not yet
   been ported.
-- **Native-kernel migration is ongoing.** Signal filtering kernels including
-  ``lfilter``, ``sosfilt``, ``upfirdn``, direct N-D ``correlate``,
-  ``convolve2d``/``correlate2d``, ``remez`` FIR design, spline filtering, and
-  2-D median filtering now run in Rust. FFTPACK's packed-spectrum convolution
-  kernels and convolution-kernel generation, as well as cluster VQ assignment
-  and cluster-mean updates, also run in Rust; other C, C++, Cython, and Fortran
-  production extensions are still being replaced. Regular-grid interpolation's
-  interval search and 2-D linear interpolation kernels, as well as reverse
-  Cuthill-McKee graph ordering and sparse-to-dense/distance-matrix graph
-  kernels, as well as least-squares Givens elimination, also run in Rust.
-  Sparse graph conversion adapters and sparse finite-difference column
-  grouping kernels are Rust-backed with Python adapters. Multidimensional
-  connected-component labeling and the one-dimensional rank-filter kernel
-  also run in Rust. The directed Hausdorff distance search kernel is Rust-backed
-  with its existing Python random-number and array API preserved. Boyett and
-  Patefield random contingency-table sampling and the Nolan stable-distribution
-  integration kernel also run in Rust.
-- **Recomputation over incremental update.** Where upstream keeps a factorisation
-  up to date with Givens rotations (``scicore.linalg.qr_update`` and friends), this
-  port recomputes the factorisation. The results match, but the complexity is
-  ``O(m n²)`` rather than ``O(m n)``. Each affected function says so in its
-  docstring.
+- **Native-kernel migration is ongoing.** A growing list of kernels now run in
+  Rust — signal filtering (``lfilter``, ``sosfilt``, ``upfirdn``, N-D
+  ``correlate``, ``convolve2d``/``correlate2d``, ``remez`` FIR design, spline
+  filtering, 2-D median filtering), FFTPACK packed-spectrum convolution,
+  cluster VQ assignment, graph ordering (reverse Cuthill-McKee),
+  least-squares Givens elimination, connected-component labeling, Hausdorff
+  distance search, Boyett/Patefield contingency-table sampling, and more.
+  Other C, C++, Cython, and Fortran production extensions are still being
+  replaced.
+- **Recomputation over incremental update.** Where upstream keeps a
+  factorisation up to date with Givens rotations (``scicore.linalg.qr_update``
+  and friends), this port recomputes the factorisation. The results match, but
+  the complexity is ``O(m n²)`` rather than ``O(m n)``. Each affected function
+  says so in its docstring.
 
 Status
 ------
