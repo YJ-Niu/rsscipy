@@ -15,7 +15,12 @@ def _two_blobs():
 # ---------------- working ----------------
 
 def test_kmeans2_two_blobs():
-    centroids, inertia = svq.kmeans2(_two_blobs(), 2, missing="raise")
+    # Seeded RNG: kmeans2's default init samples from OS entropy; without a
+    # seed it occasionally raises ClusterError on an empty cluster (flaky in
+    # CI — e.g. seed 7 fails, seed 42 is stable).
+    centroids, _ = svq.kmeans2(
+        _two_blobs(), 2, missing="raise", rng=np.random.default_rng(42)
+    )
     c = sorted(map(tuple, np.round(centroids, 1).tolist()))
     assert c == [(0.1, 0.0), (10.1, 10.0)] or c == [(0.0, 0.0), (10.0, 10.0)]
 
