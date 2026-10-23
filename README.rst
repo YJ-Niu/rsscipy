@@ -10,7 +10,7 @@ array library.
 
 The import name stays ``scicore``, so it is a drop-in replacement::
 
-    pip install scicore
+    pip install scirs
     python -c "import scicore.linalg"
 
 Why
@@ -51,18 +51,17 @@ knowing up front:
 Status
 ------
 
-This is a work in progress. Native kernels and the wheel build are still being
-migrated; Meson remains temporarily because many upstream native extensions
-have not yet been replaced. Treat the API as experimental and pin the version
-if you depend on it.
+This is a work in progress. Native kernels are still being migrated to Rust;
+until that is complete, some native extensions still use the upstream
+implementations. Treat the API as experimental and pin the version if you
+depend on it.
 
 Building from source
 --------------------
 
-The build is **meson-python plus Rust**: meson builds the Python package, and
-``tools/build_rust.py`` builds the unified Rust crate declared in
-``rust/modules.toml`` into one CPython extension. Its internal Rust modules
-remain organized by package domain.
+The build is driven by **maturin**: it compiles the pyo3 crate in ``rust/``
+into the ``scicore._scicore_rs`` extension and packages the ``python/`` tree
+into a wheel.
 
 There is a helper that does the whole thing and installs the result into
 ``.venv``::
@@ -77,35 +76,33 @@ Useful flags::
 
 To do it by hand::
 
-    python tools/build_rust.py      # build the unified Rust extension
-    python -m build --wheel         # build the wheel
+    pip install maturin
+    maturin build --release -i python -o dist
     pip install dist/*.whl
 
 ``build_wheel.sh`` also runs ``cargo fmt --check`` and ``cargo clippy`` before
 building, so a failing lint stops the build rather than shipping a wheel.
 
-Requirements: a Rust toolchain (see ``rust-toolchain.toml``), Python >= 3.12,
-and — on Linux — an OpenBLAS for the BLAS/LAPACK parts.
+Requirements: a Rust toolchain, Python >= 3.12.
 
 Development
 -----------
 
-Clone with submodules; meson hard-errors without them::
+Clone the repository::
 
     git clone --recursive https://github.com/YJ-Niu/scicore.git
 
-or, after a plain clone::
-
-    git submodule update --init --recursive
+The ``--recursive`` flag initializes the doc submodule (scipy-mathjax for
+formula rendering in the docs).
 
 Run the Rust unit tests from the workspace root::
 
     cd rust
     cargo test --workspace
 
-The repository's SciCore-owned Python tests live in ``tests/`` and
+The repository's SciCore-owned Python tests live in ``test/`` and
 ``tools/``. ``pytest.ini`` limits ``python -m pytest`` to those tests so the
-vendored upstream SciCore test corpus is not run as if it were an SciCore suite.
+vendored upstream SciCore test corpus is not run as if it were a SciCore suite.
 The Python tests cover the rsnumpy migration and Rust-backed Python adapters;
 the Rust workspace tests cover each migrated kernel.
 

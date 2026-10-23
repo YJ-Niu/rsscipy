@@ -18,17 +18,11 @@ env/
 .mypy_cache/
 .tox/
 .nox/
-.spin/
 
-# --- Meson / ninja --------------------------------------------------------
-build*/
-.skip-subprojects*
-subprojects/packagecache/
-install/
 # --- Rust -----------------------------------------------------------------
 rust/target/
 target/
-# 由 tools/build_rust.py 生成，随 meson 安装进 wheel，不入库
+# 由 maturin 构建生成的扩展模块，不入库
 python/scicore/**/*.so
 python/scicore/**/*.dylib
 python/scicore/**/*.pyd
@@ -48,6 +42,3 @@ doc/_build/
 # --- 基准 / 性能数据 ------------------------------------------------------
 benchmarks/.asv/
 .asv/
-
-# --- 构建产物 -------------------------------------------------------------
-wheelhouse/
