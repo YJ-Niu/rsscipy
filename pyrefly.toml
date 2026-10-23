@@ -1,15 +1,15 @@
-project-includes = ["scipy"]
-project-excludes = ["scipy/*/tests/**"]
+project-includes = ["scicore"]
+project-excludes = ["scicore/*/tests/**"]
 
 ignore-missing-imports = [
     # pyrefly can't find these on some machines
-    "scipy.__config__",
-    "scipy.version",
+    "scicore.__config__",
+    "scicore.version",
     # vendoring
-    "scipy._external.*",
+    "scicore._external.*",
     # deps with no types
     "pytest_run_parallel",
-    "scipy_doctest.*",
+    "scicore_doctest.*",
     "sksparse.*",
     # missing deps
     "cupyx.*",
@@ -19,54 +19,54 @@ ignore-missing-imports = [
     "convert",
     "tempita",
     # extension modules with no stubs
-    "scipy._scicore_rs",
-    "scipy._lib._uarray._uarray",
-    "scipy.fft._duccfft.pyduccfft",
-    "scipy.integrate._dop",
-    "scipy.integrate._odepack",
-    "scipy.integrate._quadpack",
-    "scipy.integrate._vode",
-    "scipy.interpolate._dierckx",
-    "scipy.interpolate._fitpack",
-    "scipy.linalg._batched_linalg",
-    "scipy.linalg._decomp_update",
-    "scipy.linalg._fblas",
-    "scipy.linalg._fblas_64",
-    "scipy.linalg._flapack",
-    "scipy.linalg._flapack_64",
-    "scipy.linalg._internal_matfuncs",
-    "scipy.optimize._highspy._core",
-    "scipy.optimize._lbfgsb",
-    "scipy.optimize._lsap",
-    "scipy.optimize._minpack",
-    "scipy.optimize._moduleTNC",
-    "scipy.optimize._pava_pybind",
-    "scipy.optimize._slsqplib",
-    "scipy.optimize._zeros",
-    "scipy.ndimage._nd_image",
-    "scipy.ndimage._ni_label",
-    "scipy.ndimage._rank_filter_1d",
-    "scipy.signal._sigtools",
-    "scipy.sparse._sparsetools",
-    "scipy.sparse.linalg._dsolve._superlu",
-    "scipy.sparse.linalg._eigen.arpack._arpacklib",
-    "scipy.spatial.distance._distance_pybind",
-    "scipy.spatial.distance._distance_wrap",
-    "scipy.spatial.cKDTree", # TODO(lucascolley): figure out why this is needed, I can't reproduce locally
-    "scipy.special._gufuncs",
-    "scipy.special._special_ufuncs",
+    "scicore._scicore_rs",
+    "scicore._lib._uarray._uarray",
+    "scicore.fft._duccfft.pyduccfft",
+    "scicore.integrate._dop",
+    "scicore.integrate._odepack",
+    "scicore.integrate._quadpack",
+    "scicore.integrate._vode",
+    "scicore.interpolate._dierckx",
+    "scicore.interpolate._fitpack",
+    "scicore.linalg._batched_linalg",
+    "scicore.linalg._decomp_update",
+    "scicore.linalg._fblas",
+    "scicore.linalg._fblas_64",
+    "scicore.linalg._flapack",
+    "scicore.linalg._flapack_64",
+    "scicore.linalg._internal_matfuncs",
+    "scicore.optimize._highspy._core",
+    "scicore.optimize._lbfgsb",
+    "scicore.optimize._lsap",
+    "scicore.optimize._minpack",
+    "scicore.optimize._moduleTNC",
+    "scicore.optimize._pava_pybind",
+    "scicore.optimize._slsqplib",
+    "scicore.optimize._zeros",
+    "scicore.ndimage._nd_image",
+    "scicore.ndimage._ni_label",
+    "scicore.ndimage._rank_filter_1d",
+    "scicore.signal._sigtools",
+    "scicore.sparse._sparsetools",
+    "scicore.sparse.linalg._dsolve._superlu",
+    "scicore.sparse.linalg._eigen.arpack._arpacklib",
+    "scicore.spatial.distance._distance_pybind",
+    "scicore.spatial.distance._distance_wrap",
+    "scicore.spatial.cKDTree", # TODO(lucascolley): figure out why this is needed, I can't reproduce locally
+    "scicore.special._gufuncs",
+    "scicore.special._special_ufuncs",
 ]
 replace-imports-with-any = [
     # missing attributes from modules
-    "scipy.linalg.blas.dtrsm",
-    "scipy.sparse.linalg._propack.*",
+    "scicore.linalg.blas.dtrsm",
+    "scicore.sparse.linalg._propack.*",
 ]
 
 check-unannotated-defs = false
 errors = { "redundant-cast" = "error" }
 
-# there are currently 960 `bad-override` errors in `scipy/stats/**`, most of which
+# there are currently 960 `bad-override` errors in `scicore/stats/**`, most of which
 # are caused by violations of Liskov's substitution principle in the distributions
 [[sub-config]]
-matches = "scipy/stats/**/*.py"
+matches = "scicore/stats/**/*.py"
 errors = { "bad-override" = "ignore" }
