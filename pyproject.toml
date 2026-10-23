@@ -19,7 +19,7 @@ module-name = "scicore._scicore_rs"
 # The distribution is `scirs`; the *import* package stays `scicore` so this
 # remains a drop-in replacement -- `pip install scirs`, then `import scicore`.
 name = "scirs"
-version = "0.1.2"
+version = "0.1.3"
 license = { file = "LICENSE.txt" }
 description = "Fundamental algorithms for scientific computing in Python, built on rsnumpy"
 authors = [
