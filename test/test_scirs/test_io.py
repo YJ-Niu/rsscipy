@@ -24,7 +24,6 @@ def test_matlab_roundtrip():
         assert np.allclose(d["a"], [1.0, 2.0])
 
 
-@pytest.mark.xfail(reason="AttributeError: 'ndarray' object has no attribute 'data' (wavfile.write 依赖 ndarray.data)")
 def test_wavfile_roundtrip():
     import scicore.io.wavfile as swav
 
