@@ -940,5 +940,6 @@ def write(filename, rate, data):
 
 
 def _array_tofile(fid, data):
-    # ravel gives a c-contiguous buffer
-    fid.write(data.ravel().view('b').data)
+    # ravel gives a c-contiguous buffer. rsnumpy's ndarray has no `.data`
+    # (memoryview) attribute, so write the raw bytes via tobytes() instead.
+    fid.write(data.ravel().tobytes())

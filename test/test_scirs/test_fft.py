@@ -54,10 +54,15 @@ def test_fftfreq():
     assert np.allclose(f, [0, 1 / 8, 2 / 8, 3 / 8, -4 / 8, -3 / 8, -2 / 8, -1 / 8])
 
 
-@pytest.mark.xfail(reason="returns input unchanged (100); scipy returns 128")
 def test_next_fast_len():
-    assert sfft.next_fast_len(100) == 128
+    # 100 = 2^2 * 5^2 and 256 = 2^8 are already "fast" lengths (all prime
+    # factors in {2, 3, 5, 7, 11}), so they map to themselves.
+    assert sfft.next_fast_len(100) == 100
     assert sfft.next_fast_len(256) == 256
+    # prime 101 rounds up to the next fast length 105 = 3 * 5 * 7
+    assert sfft.next_fast_len(101) == 105
+    # documented example: real transforms use radices {2, 3, 5}
+    assert sfft.next_fast_len(93059, real=True) == 93312
 
 
 @pytest.mark.xfail(reason="good_size() takes 1 positional argument but 2 were given")
