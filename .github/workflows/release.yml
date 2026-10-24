@@ -177,6 +177,13 @@ jobs:
           name: wheels-linux-x86_64
           path: dist
 
+      # scicore's only runtime dependency: the wheel below is installed with
+      # --no-deps, so the verification suite needs rsnumpy from PyPI — same
+      # pin as ci.yml's "Install rsnumpy" step (the suite relies on the 1.2.6
+      # fixes; see pyproject.toml).
+      - name: Install rsnumpy
+        run: pip install "rsnumpy>=1.2.6"
+
       - name: Install built wheel + pytest
         run: |
           WHEEL=$(ls dist/*cp312*.whl 2>/dev/null | head -n1 || true)
