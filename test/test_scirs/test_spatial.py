@@ -33,14 +33,16 @@ def test_mahalanobis():
     assert np.isclose(d, np.sqrt(2.0), rtol=1e-12)
 
 
-# ---------------- not yet ported / broken ----------------
-
-@pytest.mark.xfail(reason="cKDTree.__init__() takes 2-3 positional arguments but 7 were given")
 def test_kdtree_query():
+    # Rust-backed kd-tree: nearest neighbor of [1,1] in [[0,0],[3,4]] is [0,0].
+    # A single-point k=1 query returns scalars (matching scipy's cKDTree/KDTree).
     tree = sspa.KDTree(np.array([[0.0, 0.0], [3.0, 4.0]]))
     dist, idx = tree.query(np.array([1.0, 1.0]))
-    assert np.isclose(dist[0], np.sqrt(2.0))
-    assert list(idx) == [0]
+    assert np.isclose(dist, np.sqrt(2.0), rtol=1e-12)
+    assert int(idx) == 0
+
+
+# ---------------- not yet ported / broken ----------------
 
 
 @pytest.mark.xfail(reason="Delaunay not yet ported to Rust/rsnumpy")
