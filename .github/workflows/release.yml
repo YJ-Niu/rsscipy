@@ -1,8 +1,7 @@
 name: Build and Publish Wheels
 
-# 触发方式：推送 v* 标签（如 v0.1.2）或在 GitHub 上 Publish 一个 Release。
-# 也可在 Actions 页手动触发（workflow_dispatch）——手动触发只构建、不发布，
-# 适合先验证 wheel 能否在各平台构建。
+# 触发方式：推送 v* 标签（如 v0.1.5）或在 GitHub 上 Publish 一个 Release。
+# 也可在 Actions 页手动触发（workflow_dispatch）——手动触发只构建、不发布。
 on:
   push:
     tags:
@@ -16,16 +15,18 @@ permissions:
 
 jobs:
   # ---------------- Linux: x86_64 + aarch64 ----------------
-  # manylinux 容器内含全部 CPython，--find-interpreter 自动为每个版本各产出一个
-  # wheel，auditwheel 重标记为 manylinux（PyPI 拒收普通 linux_* 平台标签）。
+  # manylinux 容器内含全部 CPython，--find-interpreter 自动为每个版本各产出一个 wheel。
+  # crate 根在 rust/Cargo.toml：由 pyproject.toml 的 [tool.maturin] 声明，maturin 自动发现
+  # （manifest-path 不是该 action 的合法输入，传了只会告警）。
+  # runner 固定 ubuntu-24.04：ubuntu-latest 自 2026-10 起迁移到 Ubuntu 26，构建环境不再漂移。
   linux:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
         target: [x86_64, aarch64]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Sync version.py with pyproject.toml
         shell: bash
@@ -42,27 +43,25 @@ jobs:
         with:
           target: ${{ matrix.target }}
           manylinux: auto
-          manifest-path: rust/Cargo.toml
           args: --release --out dist --find-interpreter
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: wheels-linux-${{ matrix.target }}
           path: dist
 
   # ---------------- Windows: x64，按 Python 版本矩阵 ----------------
+  # 与 requires-python = ">=3.12" 对齐：cp39–cp311 wheel pip 装不上，不再构建。
   windows:
     runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
-        # 与 rsnumpy 对齐：覆盖 3.9-3.15，每个 CPython 版本一个 wheel
-        # （pyo3 扩展 ABI 绑定解释器版本，逐版本构建）。
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14", "3.15"]
+        python-version: ["3.12", "3.13", "3.14", "3.15"]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
@@ -80,28 +79,28 @@ jobs:
       - name: Build wheel (py${{ matrix.python-version }})
         uses: PyO3/maturin-action@v1
         with:
-          manifest-path: rust/Cargo.toml
+          # -i python 指向 setup-python 激活的解释器，确保为当前矩阵版本构建。
           args: --release --out dist -i python
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: wheels-windows-${{ matrix.python-version }}
           path: dist
 
   # ---------------- macOS: universal2（Intel + Apple Silicon），按版本矩阵 ----------------
-  # macos-latest 是 arm64：x86_64 切片交叉编译（pyo3 支持），两个切片用
-  # lipo 合并进一个 universal2 wheel，无需 Intel 机器。
+  # macos-13(Intel) runner 已退役，改在 arm64 runner 上交叉编译 universal2，
+  # 一个 wheel 同时兼容 x86_64 与 arm64，无需 Intel 机器。
   macos:
     runs-on: macos-latest
     strategy:
       fail-fast: false
       matrix:
-        # 与 rsnumpy 对齐：覆盖 3.9-3.15，每个 CPython 版本一个 universal2 wheel。
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13", "3.14", "3.15"]
+        # 与 requires-python = ">=3.12" 对齐：cp39–cp311 wheel pip 装不上，不再构建。
+        python-version: ["3.12", "3.13", "3.14", "3.15"]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -119,10 +118,9 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           target: universal2-apple-darwin
-          manifest-path: rust/Cargo.toml
           args: --release --out dist -i python
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: wheels-macos-${{ matrix.python-version }}
           path: dist
@@ -130,9 +128,9 @@ jobs:
   # ---------------- 源码分发（sdist）----------------
   # 当某平台/版本无预编译 wheel 时，pip 可用 sdist 从源码构建（需目标机器有 Rust）。
   sdist:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Sync version.py with pyproject.toml
         shell: bash
@@ -148,10 +146,9 @@ jobs:
         uses: PyO3/maturin-action@v1
         with:
           command: sdist
-          manifest-path: rust/Cargo.toml
           args: --out dist
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: wheels-sdist
           path: dist
@@ -162,25 +159,24 @@ jobs:
   # 正好用来先验证各平台 wheel 的构建结果。
   test:
     name: Verify release artifact
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [linux, windows, macos, sdist]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
       - name: Download linux x86_64 wheels
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: wheels-linux-x86_64
           path: dist
 
-      # scicore's only runtime dependency: the wheel below is installed with
-      # --no-deps, so the verification suite needs rsnumpy from PyPI — same
-      # pin as ci.yml's "Install rsnumpy" step (the suite relies on the 1.2.6
-      # fixes; see pyproject.toml).
+      # scicore 唯一的运行时依赖：wheel 用 --no-deps 安装，需要从 PyPI 装
+      # rsnumpy —— 与 ci.yml 的 "Install rsnumpy" 步骤同 pin（测试套件依赖
+      # 1.2.6 的修复；见 pyproject.toml）。
       - name: Install rsnumpy
         run: pip install "rsnumpy>=1.2.6"
 
@@ -199,25 +195,28 @@ jobs:
         run: python -m pytest -q test/test_rust_migrations.py test/test_scirs
 
   # ---------------- 发布到 PyPI（仅标签 / Release 触发）----------------
+  # maturin upload 已被官方弃用（PyO3/maturin#2334），改用 twine。
+  # 注意：twine 没有 --skip-existing，重复上传已存在的文件会直接报错——
+  # 对发布流水线这是期望行为（同版本内容应一致，真不一致就该查）。
   publish:
     name: Publish to PyPI
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [linux, windows, macos, sdist, test]
     if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'release'
     steps:
       - name: Download all artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: wheels-*
           path: dist
           merge-multiple: true
 
       - name: Publish
-        uses: PyO3/maturin-action@v1
         env:
           # 仓库 Settings → Secrets and variables → Actions 中的 secret
           # （值为 PyPI token，以 pypi- 开头）。
-          MATURIN_PYPI_TOKEN: ${{ secrets.YJ_NIU }}
-        with:
-          command: upload
-          args: --non-interactive --skip-existing dist/*
+          TWINE_USERNAME: "__token__"
+          TWINE_PASSWORD: ${{ secrets.YJ_NIU }}
+        run: |
+          python -m pip install twine
+          python -m twine upload --non-interactive dist/*
