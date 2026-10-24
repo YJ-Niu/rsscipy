@@ -73,6 +73,7 @@ import math
 import os
 import time
 import sys
+import struct
 import zlib
 
 from io import BytesIO
@@ -653,7 +654,7 @@ class VarWriter5:
         # store position, so we can update the matrix tag
         mat_tag_pos = self.file_stream.tell()
         # First check if these are sparse
-        if scipy.sparse.issparse(arr):
+        if scicore.sparse.issparse(arr):
             self.write_sparse(arr)
             self.update_matrix_tag(mat_tag_pos)
             return
@@ -862,15 +863,19 @@ class MatFile5Writer:
         self._matrix_writer = None
 
     def write_file_header(self):
-        # write header
-        hdr = np.zeros((), NDT_FILE_HDR)
-        hdr['description'] = (f'MATLAB 5.0 MAT-file Platform: {os.name}, '
-                              f'Created on: {time.asctime()}')
-        hdr['version'] = 0x0100
-        hdr['endian_test'] = np.ndarray(shape=(),
-                                      dtype='S2',
-                                      buffer=np.uint16(0x4d49))
-        self.file_stream.write(hdr.tobytes())
+        # Build the 128-byte MAT v5 file header in pure Python: rsnumpy's
+        # ndarray.tobytes() does not support void/structured dtypes.
+        # Layout (native byte order): description S116, subsystem_offset i8,
+        # version u2, endian_test S2.
+        description = (f'MATLAB 5.0 MAT-file Platform: {os.name}, '
+                       f'Created on: {time.asctime()}')
+        desc = description.encode('latin-1')[:116].ljust(116, b'\x00')
+        endian = 'little' if native_code == '<' else 'big'
+        header = (desc
+                  + struct.pack(native_code + 'q', 0)       # subsystem_offset
+                  + struct.pack(native_code + 'H', 0x0100)  # version
+                  + (0x4d49).to_bytes(2, endian))          # endian_test
+        self.file_stream.write(header)
 
     def put_variables(self, mdict, write_header=None):
         ''' Write variables in `mdict` to stream

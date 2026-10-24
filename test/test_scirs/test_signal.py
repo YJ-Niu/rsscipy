@@ -14,7 +14,6 @@ def test_lfilter_accumulator():
     assert np.allclose(ssig.lfilter([1.0, 1.0], [1.0], [1.0, 0.0, 0.0]), [1.0, 1.0, 0.0])
 
 
-@pytest.mark.xfail(reason="DC gain = sum(b)/sum(a) = 4.5; scipy normalizes lowpass to exactly 1")
 def test_butter_lowpass_dc_gain():
     b, a = ssig.butter(4, 0.1, btype="low")
     assert len(b) == 5

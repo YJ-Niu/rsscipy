@@ -15,6 +15,7 @@ mod fpumode;
 mod givens_elimination;
 mod graph_tools;
 mod hausdorff;
+mod kdtree;
 mod levy_stable;
 mod lfilter;
 mod max_len_seq_inner;
@@ -126,6 +127,7 @@ fn _scicore_rs(module: &Bound<'_, PyModule>) -> PyResult<()> {
 
     let spatial = PyModule::new(py, "spatial")?;
     hausdorff::register(&spatial)?;
+    kdtree::register(&spatial)?;
     spherical_voronoi::register(&spatial)?;
     module.add("spatial", spatial)?;
 

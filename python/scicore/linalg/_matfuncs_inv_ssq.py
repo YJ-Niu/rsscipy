@@ -780,7 +780,7 @@ def _logm_triu(T):
     # corresponding to degree-m Gauss-Legendre quadrature.
     # These quadrature arrays need to be transformed from the [-1, 1] interval
     # to the [0, 1] interval.
-    nodes, weights = scipy.special.p_roots(m)
+    nodes, weights = scicore.special.p_roots(m)
     nodes = nodes.real
     if nodes.shape != (m,) or weights.shape != (m,):
         raise Exception('internal error')

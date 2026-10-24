@@ -140,7 +140,7 @@ def fractional_matrix_power(A, t):
     # this function calls onenormest which is in scipy.sparse.
     A = _asarray_square(A)
     import scicore.linalg._matfuncs_inv_ssq
-    return scipy.linalg._matfuncs_inv_ssq._fractional_matrix_power(A, t)
+    return scicore.linalg._matfuncs_inv_ssq._fractional_matrix_power(A, t)
 
 
 @_apply_over_batch(('A', 2), signature='(i,i)->(i,i)')
@@ -195,7 +195,7 @@ def logm(A):
     A = np.asarray(A)  # squareness checked in `_logm`
     # Avoid circular import ... this is OK, right?
     import scicore.linalg._matfuncs_inv_ssq
-    F = scipy.linalg._matfuncs_inv_ssq._logm(A)
+    F = scicore.linalg._matfuncs_inv_ssq._logm(A)
     F = _maybe_real(A, F)
     errtol = 1000*eps
     # TODO use a better error approximation

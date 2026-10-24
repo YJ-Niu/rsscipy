@@ -127,12 +127,18 @@ def test_toeplitz():
     assert np.allclose(t, np.array([[1.0, 2.0, 3.0], [2.0, 1.0, 2.0], [3.0, 2.0, 1.0]]))
 
 
-@pytest.mark.xfail(
-    reason="wrong result [[1,2,3],[2,3,0],[3,0,0]]; scipy returns [[1,1,1],[1,2,2],[2,3,3]]"
-)
 def test_hankel():
+    # scipy.linalg.hankel: c is the first COLUMN, r the last ROW
+    # (default r = zeros). Documented: hankel([1,17,99]) ->
+    # [[1,17,99],[17,99,0],[99,0,0]]
     h = sla.hankel(np.array([1.0, 2.0, 3.0]))
-    assert np.allclose(h, np.array([[1.0, 1.0, 1.0], [1.0, 2.0, 2.0], [2.0, 3.0, 3.0]]))
+    assert np.allclose(h, np.array([[1.0, 2.0, 3.0], [2.0, 3.0, 0.0], [3.0, 0.0, 0.0]]))
+    # documented example with an explicit last row
+    h2 = sla.hankel([1, 2, 3, 4], [4, 7, 7, 8, 9])
+    assert np.allclose(h2, np.array([[1, 2, 3, 4, 7],
+                                     [2, 3, 4, 7, 7],
+                                     [3, 4, 7, 7, 8],
+                                     [4, 7, 7, 8, 9]]))
 
 
 @pytest.mark.xfail(reason="NameError: name 'scipy' is not defined (leftover upstream import)")
